@@ -1,4 +1,4 @@
-# AVO GIRTH · montaje del sistema en la cincha (cápsula REV 6.4: aro de luz, estanca y con cierre magnético de balancín empotrado; funda de piel y electrodos ECG)
+# AVO GIRTH · montaje del sistema en la cincha (cápsula REV 6.5: aro de luz, estanca y con cierre magnético de balancín empotrado y portaimanes; funda de piel y electrodos ECG)
 
 > **Estado: diseño · NO VERIFICADO en caballo real.** No se ha impreso, cosido ni montado nada. Los STEP no se han
 > abierto en FreeCAD dentro de este entorno (no está instalado). Solo pasaron la comprobación automática de
@@ -50,20 +50,34 @@ estanqueidad, funda, pogo, tacos y cordón) no cambia.
   suelta a unos 4° (0,5 mm de pulsador) y hace tope a unos 12°. **Cerrar:** bajar la cápsula (bisel).
 - Llave de posición: balancín de 14 mm en +X y de 12 mm en −X. Soporte de 94,5 × 84,6 mm. Ver §3.6.
 
+**REV 6.5 (17/11/2026, captura del usuario): portaimanes.** Cambia solo el alojamiento de los imanes de la pared;
+el resto de la REV 6.4 no cambia (comprobado: mismo ángulo de suelta, 4°, y de tope, 12°).
+- Antes, los 2 imanes de la pared entraban sueltos en un pozo justo (2,1 × 5,15 mm) y se tapaban con un tapón.
+- Ahora la abertura de la cara inferior es de **2,8 × 6,6 × 7,0 mm** (planta trapezoidal). Dentro entra el
+  **portaimanes** PETG de **2,6 × 6,4 × 6,9 mm**, con los 2 imanes Ø5 × 1 ya metidos en su cuna. Holgura de 0,1 mm por lado, se pega
+  a ras del fondo y **los imanes quedan ocultos**.
+- Cuna de 2,0 × 5,2 × 5,2, abierta solo hacia el balancín: los imanes apoyan en la misma piel de 0,65 mm, así que la
+  distancia al balancín y la fuerza no cambian.
+- Las 2 esquinas interiores van achaflanadas 1 mm: solo entra en una posición (cuna hacia el balancín) y los de +X y
+  −X son la misma pieza.
+- Pared entre la abertura y el interior: 0,95 mm (antes 1,65); queda fuera de la junta y por debajo de los insertos
+  (z 7,0 < 8,0).
+- Desaparecen los 2 tapones de `tapas_imanes` (quedan las 2 tapas de los balancines).
+
 ## 1. Qué hay en esta carpeta
 
 | Ruta | Contenido |
 |---|---|
 | `out/STEP/AVO_CINCHA_MONTAJE_CONJUNTO_CURVADO.step` | **Conjunto completo** curvado sobre el tórax: cincha, funda, soporte con pestillos y seguros, cápsula, PCB, celda, antena, pogos, tornillería, electrodos, espuma y cables (92 sólidos en 8 subconjuntos) |
 | `out/STEP/AVO_CINCHA_MONTAJE_CONJUNTO_RECTO.step` | El mismo conjunto con la cincha recta (tumbada, con la cara interior abajo) |
-| `out/STEP/AVO_CINCHA_R6_3_CAPSULA_CONJUNTO.step`, `..._SOPORTE_CONJUNTO.step` | Subconjuntos de la cápsula y del soporte, en coordenadas locales |
+| `out/STEP/AVO_CINCHA_R6_5_CAPSULA_CONJUNTO.step`, `..._SOPORTE_CONJUNTO.step` | Subconjuntos de la cápsula y del soporte, en coordenadas locales |
 | `out/STEP/REF_torax_caballo_seccion.step` | Sección del tórax de referencia (300 mm de largo) |
 | `out/STEP/piezas/*.step` | Un STEP por pieza: impresas, PCB, celda, antena, electrodo, funda, cincha Decathlon y Horze (recta y curvada) |
 | `out/STL/*.stl` | Piezas impresas, ya colocadas para imprimir |
 | `out/PATRON/AVO_CINCHA_funda_piel_patron.{svg,dxf}` | Patrón plano 1:1 de la funda, en mm, con capas de corte, pliegue, costura, agujeros cada 4 mm, rebaje, taladros y marcas |
 | `out/informe.json` | Medidas, volúmenes, longitudes de cable y comprobaciones |
 | `out/AVO_CINCHA_MONTAJE.zip` | Todo lo anterior junto, para descargar |
-| `renders/*.png` | Renders de comprobación (01–14; 12 = corte por los LED, 13 = corte por un diente del balancín, 13b = corte por los imanes, 14 = balancín entre sus aletas) |
+| `renders/*.png` | Renders de comprobación (01–14; 12 = corte por los LED, 13 = corte por un diente del balancín, 13b = corte por los imanes, 14 = balancín entre sus aletas, 15 = portaimanes desde abajo, 15b = corte por el portaimanes) |
 | `fuente/` | Scripts que lo generan todo (ver §9) |
 
 **Coordenadas.** En la cincha:
@@ -301,14 +315,15 @@ Las longitudes son las del modelo, todas < 40 cm. Se recomienda añadir 30 mm de
 - **Variante:** chapa inox 316 de 0,3 mm pegada con silicona conductora por detrás.
 - El montaje en la funda es el mismo (ventana, rebaje, EVA).
 
-### 3.6 Cierre magnético de balancín empotrado (REV 6.4)
+### 3.6 Cierre magnético de balancín empotrado (REV 6.4; portaimanes REV 6.5)
 
 Piezas:
-- `AVO_CINCHA_R6_4_balancin_Xpos_PETG` y `..._Xneg_PETG`;
+- `AVO_CINCHA_R6_5_balancin_Xpos_PETG` y `..._Xneg_PETG`;
 - cojinetes en el mismo STL que la base;
-- `AVO_CINCHA_R6_4_tapa_PETG_opaco` (con las 4 lengüetas);
-- `AVO_CINCHA_R6_4_soporte_PETG`;
-- `AVO_CINCHA_R6_4_tapas_imanes_PETG`.
+- `AVO_CINCHA_R6_5_tapa_PETG_opaco` (con las 4 lengüetas);
+- `AVO_CINCHA_R6_5_soporte_PETG`;
+- `AVO_CINCHA_R6_5_tapas_imanes_PETG` (2 tapas de los balancines);
+- `AVO_CINCHA_R6_5_portaimanes_PETG_x2` (REV 6.5).
 
 Cotas en `BAL` y `END_T` de `fuente/avo_cincha_montaje.py`.
 
@@ -319,6 +334,7 @@ Cotas en `BAL` y `END_T` de `fuente/avo_cincha_montaje.py`.
 | Eje | x = ±31,6, z = 8,0. Pasador Ø2 × 20 / Ø2 × 18 a presión en el balancín (Ø1,95 en gota). Gira en las ranuras de los cojinetes (2,05), cerradas por las lengüetas de la tapa |
 | Diente | Recto, 2 por balancín, por debajo de la cápsula. Entra 1,0 mm en ventanas de la cama del soporte; cara de carga a z −1,9 |
 | Imanes | 2 + 2 Ø5 × 1 por lado en atracción (balancín ↔ pared), separados 1,5 mm |
+| Portaimanes (REV 6.5) | PETG 2,6 × 6,4 × 6,9, planta trapezoidal (chaflanes de 1,0 en las esquinas interiores). Cuna 2,0 × 5,2 × 5,2 abierta hacia la piel; pared 0,6, techo 0,6. Abertura 2,8 × 6,6 × 7,0 (0,1 por lado). Comprobado por vóxeles (`fuente/verificar_portaimanes.py`): 0 mm³ con la base y con los imanes |
 | Tope al empujar | Fondo del rebaje de la cama, a 0,25 mm (pogo a 1,05 de 1,1) |
 
 **Comprobado por vóxeles** (`fuente/verificar_cierre.py`):
@@ -386,7 +402,8 @@ Herramientas que no entran en el total:
 | Tapa | PETG opaco (rojo) | **Boca abajo** (cara superior sobre la cama) | §7.3. Columnas y lengüeta hacia arriba |
 | Soporte (REV 6.3) | PETG opaco | Ala sobre la cama | 0,2 mm, 4 perímetros. Sin soportes: las ventanas de los dientes son puentes de ≤ 3,6 mm |
 | Balancines (×2, REV 6.4) | PETG | **Cara exterior sobre la cama** | 0,15 mm, 100 %. Sin soportes; el agujero del pasador, en gota |
-| Tapas de los imanes (2 tapas + 2 tapones) | PETG | Planas | 0,1 mm. Se pegan a ras con cianoacrilato |
+| Tapas de los imanes (2 tapas de balancín) | PETG | Planas | 0,1 mm. Se pegan a ras con cianoacrilato |
+| Portaimanes (×2, REV 6.5) | PETG | **Fondo sobre la cama** | 0,1 mm, 100 %. Sin soportes: el techo de la cuna es un puente de 5,2 mm |
 | Tacos (×4) | TPU 85A | De pie | 100 %. Se meten a presión en sus alojamientos |
 | Junta | TPU 85A | Plana | 0,2 mm, 100 %, ≤ 20 mm/s, sin retracciones largas. 3 líneas de 0,4 mm |
 | Separador | TPU 85A | Plano | 0,2 mm, 100 % |
@@ -466,8 +483,10 @@ Holguras:
 23. Meter la cincha en la funda, con la anilla D por su ventana. Cerrar el velcro y pasar las trabillas.
 24. Atar el **cordón de seguridad**: oreja de la tapa → anclaje del ala del soporte, con un largo libre de unos 40 mm.
 25. **REV 6.3, cierre:**
-    - **REV 6.4:** pegar los imanes respetando la polaridad: el del balancín y el de la pared **se atraen**. El de la
-      pared entra por el pozo de la cara inferior; pegar el tapón y la tapa a ras;
+    - **REV 6.5:** pegar los imanes respetando la polaridad: el del balancín y el de la pared **se atraen**. El del
+      balancín se tapa con su tapa a ras. Los 2 de la pared se meten en la cuna del **portaimanes** (una gota de
+      cianoacrilato), con la cara que debe atraer mirando fuera de la cuna. El portaimanes entra por la abertura de
+      la cara inferior con la cuna hacia el balancín (por los chaflanes, solo entra así) y se pega a ras;
     - meter a presión el pasador en el balancín (que sobresalga igual por los dos lados) y dejarlo caer en las
       ranuras de los cojinetes;
     - atornillar la tapa: sus lengüetas dejan el pasador cautivo.
@@ -732,7 +751,9 @@ El cordón de seguridad se puede dejar atado mientras se carga, o soltar el casq
     - sin imprimir ni probar;
     - la fuerza de los imanes Ø5 × 1 apilados a 1,15 mm y el rozamiento PETG–PETG son estimados;
     - el diente recto depende del rozamiento para el bloqueo con carga;
-    - los escalones de 0,05 mm entre zonas del balancín son del núcleo poliédrico (no afectan a la impresión).
+    - los escalones de 0,05 mm entre zonas del balancín son del núcleo poliédrico (no afectan a la impresión);
+    - REV 6.5: el ajuste del portaimanes (0,1 mm por lado) hay que probarlo en una probeta; si entra duro, bajar
+      `pi_clear` o lijar. La pared de 0,95 mm hacia el interior debe salir con 2 perímetros de 0,4 mm.
 
 ## 11. Cómo regenerar
 
@@ -743,5 +764,6 @@ python3 patron_funda.py            # patrón SVG/DXF
 python3 render.py                  # renders PNG (≈ 2,5 min)
 python3 verificar_step.py ../out/STEP/*.step ../out/STEP/piezas/*.step
 python3 verificar_cierre.py        # REV 6.3: interferencias y apertura del balancín por vóxeles
+python3 verificar_portaimanes.py   # REV 6.5: encaje del portaimanes y de los imanes por vóxeles
 ```
 Solo necesitan Python 3 con numpy, OpenCV (`cv2`) y Pillow.

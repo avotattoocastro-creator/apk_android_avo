@@ -1,0 +1,38 @@
+{
+ "rejilla_mm": 0.05,
+ "+X": {
+  "portaiman_en_base_mm3": 0.0,
+  "imanes_en_base_mm3": 0.0,
+  "imanes_en_portaiman_mm3": 0.0
+ },
+ "-X": {
+  "portaiman_en_base_mm3": 0.0,
+  "imanes_en_base_mm3": 0.0,
+  "imanes_en_portaiman_mm3": 0.0
+ },
+ "cotas_mm": {
+  "portaiman_XxYxZ": [
+   2.6,
+   6.4,
+   6.9
+  ],
+  "abertura_XxYxZ": [
+   2.8,
+   6.6,
+   7.0
+  ],
+  "cuna_XxYxZ": [
+   2.0,
+   5.2,
+   5.2
+  ],
+  "holgura_por_lado": 0.1,
+  "pared_portaiman": 0.6,
+  "techo_portaiman": 0.6,
+  "pared_abertura_a_interior": 0.95,
+  "piel_iman_a_hueco_balancin": 0.65,
+  "llave_chaflan": 1.0,
+  "techo_abertura_z": 7.0,
+  "insertos_M2_desde_z": 8.0
+ }
+}

@@ -24,6 +24,27 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-17 — Cincha CAD REV 6.5 — portaimanes para los imanes de la pared
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-5-portaimanes` (sobre el PR #60)
+**Qué cambia (captura del usuario):**
+- el pozo justo de los 2 imanes Ø5 × 1 de la pared (con tapón) pasa a ser una abertura de 2,8 × 6,6 × 7,0 mm en la
+  cara inferior; dentro entra un **portaimanes** PETG de 2,6 × 6,4 × 6,9 mm con los imanes en su cuna, a ras del fondo
+  y con los imanes ocultos;
+- cuna abierta solo hacia el balancín: misma piel de 0,65 mm y misma distancia entre imanes que en la REV 6.4;
+- planta trapezoidal (chaflanes de 1 mm): una sola posición de montaje; los de +X y −X son la misma pieza;
+- fuera los 2 tapones de `tapas_imanes`; nueva pieza `AVO_CINCHA_R6_5_portaimanes_PETG_x2`; todos los archivos pasan
+  de `R6_4` a `R6_5`.
+**Archivos:** `hardware/girth/CINCHA_MONTAJE/fuente/{avo_cincha_montaje.py, render.py, verificar_cierre.py,
+verificar_portaimanes.py}`, `out/STEP`, `out/STL`, `out/informe.json`, `out/verificacion_*.json`, `renders/` (15 y
+15b nuevos), `DOCS/MONTAJE_CINCHA.md`.
+**Validación:** IMPLEMENTADO · `verificar_step.py` OK (0 aristas mal cosidas) · `verificar_portaimanes.py`: 0 mm³
+portaimanes/base e imanes/base/portaimanes · `verificar_cierre.py`: sin cambios (suelta a 4°, tope a 12°) ·
+**NO VERIFICADO** (nada impreso).
+**Pendiente:** probeta del ajuste (0,1 mm por lado) y de la pared de 0,95 mm; la fila de la tabla «Vigente» se
+actualiza a REV 6.5 al integrar el PR #60 en `develop`.
+
+---
+
 ## 2026-11-17 — Cincha CAD REV 6.4 — balancín magnético empotrado a ras en la pared
 **Autor:** Claude · **Rama:** `cad/cincha-rev6-3-balancin-magnetico` (PR #60)
 **Qué cambia (captura del usuario):**

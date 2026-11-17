@@ -179,10 +179,10 @@ def main():
                   "Imanes Ø5 × 1 (2 + 2 por lado) entre balancín y pared; oreja de la tapa con cordón de seguridad al ala del soporte."])
     # explosionado
     ex = []
-    off = {"AVO_CINCHA_R6_4_tapa": 34, "Tornillo_ISO7380_M2x6_inox_x6": 56, "Arandela_DIN433_M2_inox_x6": 50,
-           "Antena_Molex_146153-0050": 34, "Coaxial_1.13_50mm": 26, "AVO_CINCHA_R6_4_junta_TPU85A": 18,
+    off = {"AVO_CINCHA_R6_5_tapa": 34, "Tornillo_ISO7380_M2x6_inox_x6": 56, "Arandela_DIN433_M2_inox_x6": 50,
+           "Antena_Molex_146153-0050": 34, "Coaxial_1.13_50mm": 26, "AVO_CINCHA_R6_5_junta_TPU85A": 18,
            "PCB_REV_D_46x30": 24, "PCB_componentes": 24, "PCB_pasivos": 24, "UFL_conector": 24, "LED_SK6812SIDE-A_x4": 24,
-           "Tornillo_ISO7380_M2x5_inox_x4_PCB": 24, "AVO_CINCHA_R6_4_separador_TPU85A": 12, "Hilos_AWG28_pogo": 8,
+           "Tornillo_ISO7380_M2x5_inox_x4_PCB": 24, "AVO_CINCHA_R6_5_separador_TPU85A": 12, "Hilos_AWG28_pogo": 8,
            "Hilos_bateria": 8, "U4_ESP32-C6-MINI-1U": 24, "LiPo_603450_1000mAh": 4}
     for m in caps:
         mm = m.copy()
@@ -191,7 +191,7 @@ def main():
     for m in soporte:
         mm = m.copy(); mm.transform(A.T_translate(0, 0, -16)); ex.append(mm)
     render(ex, os.path.join(OUTR, "07_capsula_explosionada.png"), az=-55, el=22, size=(1400, 1600),
-           title="Cápsula REV 6.4 explosionada",
+           title="Cápsula REV 6.5 explosionada",
            notes=["De arriba abajo: tornillos M2×6 + arandela, tapa opaca con antena Molex 146153, junta TPU 85A en ranura,",
                   "PCB REV D (46 × 30) con 4 LED laterales, colgada de la tapa con 4 M2×5, separador TPU, celda 603450,",
                   "base translúcida (aro de luz) con la ranura de la junta y 2 placas pogo selladas con epoxi,",
@@ -215,14 +215,14 @@ def main():
     for e_ in (M.pieza_cojinetes(1), M.pieza_cojinetes(-1)):
         bse.merge(e_)
     for m in [bse, M.pieza_tapa(), M.pieza_junta(False), M.pieza_separador(), M.pieza_soporte(),
-              M.pieza_balancin(1, True), M.pieza_balancin(-1, True), M.pieza_tapas_imanes(), M.pieza_tacos(True)]:
+              M.pieza_balancin(1, True), M.pieza_balancin(-1, True), M.pieza_tapas_imanes(), M.pieza_portaimanes_x2(), M.pieza_tacos(True)]:
         mm = M.stl_print(m, m.name, m.name.endswith("tapa"))
         lo, hi = mm.bbox()
         mm.transform(A.T_translate(x - lo[0], 0, 0)); x += (hi[0] - lo[0]) + 12
         pz.append(mm)
     render(pz, os.path.join(OUTR, "09_piezas_impresas.png"), az=-70, el=40, size=(1800, 800),
            title="Piezas impresas en posición de impresión (Elegoo Centauri Carbon)",
-           notes=["Base PETG natural con cojinetes (aro de luz) · tapa PETG opaco (boca abajo) · junta y separador TPU 85A · soporte PETG · 2 balancines PETG (cara exterior abajo) · 4 tapones · 4 tacos TPU 85A."])
+           notes=["Base PETG natural con cojinetes (aro de luz) · tapa PETG opaco (boca abajo) · junta y separador TPU 85A · soporte PETG · 2 balancines PETG (cara exterior abajo) · 2 tapas de imán · 2 portaimanes PETG · 4 tacos TPU 85A."])
     render(flat({"F": gC["Funda"], "E": gC["Electrodos"], "C": gC["Cables"]}) + soporte_world(gC) + gC["Capsula_impresa"],
            os.path.join(OUTR, "10_funda_detalle.png"), az=75, el=-30, size=(1600, 1000),
            title="Funda de piel con el sistema (sin la cincha)",
@@ -249,8 +249,8 @@ def extra(caps, soporte):
     xi, xl, yc = K["px"], K["xl"], K["yc"]
     zc0 = -M.SOP["precarga"]
     for (yy, fn, tt) in ((yc + (M.BAL["ty0"] + M.BAL["w"][1] / 2 - M.BAL["tyend"]) / 2, "13_corte_por_diente.png",
-                          "Corte por un diente del balancín +X (REV 6.4, empotrado)"),
-                         (yc, "13b_corte_por_imanes.png", "Corte por los imanes del balancín +X (atracción)")):
+                          "Corte por un diente del balancín +X (REV 6.5, empotrado)"),
+                         (yc, "13b_corte_por_imanes.png", "Corte por los imanes del balancín +X (atracción; portaimanes REV 6.5)")):
         sec = []
         for m in caps + soporte:
             V = m.np()
@@ -260,12 +260,44 @@ def extra(caps, soporte):
         render(sec, os.path.join(OUTR, fn), az=-90, el=2, size=(1500, 1000), title=tt,
                notes=["Balancín empotrado a ras en la pared; eje Ø2 en (%.1f; %.1f) de la cápsula; diente recto en la cama del soporte." % (
                    xi, M.BAL["pz_c"]),
-                      "Imanes 2 + 2 Ø5 × 1 entre el balancín y la pared. Abrir: empujar hacia abajo y apretar arriba (suelta a ~4°)."],
+                      "Imanes 2 + 2 Ø5 × 1: en el balancín (con tapa) y en el portaimanes de la pared (entra por abajo, a ras). Abrir: empujar hacia abajo y apretar arriba (suelta a ~4°)."],
                labels=[((xl - 0.5, yy, M.BAL["top_c"]), "diente"), ((xi, yy, M.BAL["pz_c"]), "eje"),
                        ((xl + 1.5, yy, M.BAL["mag_c"]), "imán")])
     render(caps + soporte, os.path.join(OUTR, "14_capsula_en_soporte_vista_balancin.png"), az=-20, el=25,
-           size=(1500, 1000), title="REV 6.4: balancín +X empotrado a ras en la pared",
+           size=(1500, 1000), title="REV 6.5: balancín +X empotrado a ras en la pared",
            notes=["Pared del extremo plana (5 mm más larga) con el balancín empotrado; nada sobresale."])
+    # REV 6.5: portaimanes. Cápsula vista desde abajo: lado +X montado y lado −X con el portaimanes y sus imanes fuera
+    G = M.portaiman_geo()
+    vis = []
+    for m in caps:
+        mm = m.copy()
+        if m.name in ("AVO_CINCHA_R6_5_portaiman_Xneg",):
+            mm.transform(A.T_translate(0, 0, -12))
+        vis.append(mm)
+    mg = A.Mesh("Imanes_sueltos_Xneg", M.C_IMAN)
+    for k in range(2):
+        x = -(G["xs0"] + 0.04 + k * 1.0)
+        mg.merge(A.tube([(x, G["yc"], M.BAL["mag_c"] - 12), (x - 1.0, G["yc"], M.BAL["mag_c"] - 12)], 2.5, 20))
+    M.fix_orient(mg)
+    vis = [m for m in vis if m.name != "Imanes_5x1_x8_cierre"] + [mg]
+    render(vis, os.path.join(OUTR, "15_portaimanes_desde_abajo.png"), az=-120, el=-35, size=(1500, 1000),
+           title="REV 6.5: portaimanes (abajo, +X montado a ras; −X fuera con sus 2 imanes)",
+           notes=["Portaimanes PETG %.1f × %.1f × %.1f mm, cuna de 2 imanes Ø5 × 1 abierta solo hacia el balancín." % (
+               G["xc1"] - G["xc0"], 2 * G["hy_c"], G["zc1"]),
+                  "Entra por la cara inferior en una abertura con 0,1 mm por lado; esquinas interiores achaflanadas (una sola posición). Se pega a ras."],
+           labels=[((-(G["xc0"] + G["xc1"]) / 2, G["yc"], -12 + G["zc1"]), "portaimanes −X"),
+                   (((G["xc0"] + G["xc1"]) / 2, G["yc"], 0.0), "portaimanes +X (a ras)")])
+    # corte por el eje Y de los imanes, solo cápsula, de cerca
+    sec = []
+    for m in caps:
+        V = m.np()
+        F = [f for f in m.F if V[f[0]][:, 1].min() >= G["yc"] - 0.01]
+        if F:
+            mm = A.Mesh(m.name, m.color); mm.V = m.V; mm.F = F; sec.append(mm)
+    render(sec, os.path.join(OUTR, "15b_corte_portaimanes.png"), az=-90, el=2, size=(1500, 1000),
+           title="REV 6.5: corte por el portaimanes +X y los imanes",
+           notes=["De izquierda a derecha: interior · pared 0,95 · portaimanes (pared 0,6) · 2 imanes · piel 0,65 · balancín con sus 2 imanes y tapa."],
+           labels=[(((G["xc0"] + G["xc1"]) / 2, G["yc"], G["zc1"]), "portaimanes"), ((G["xs0"] + 1.0, G["yc"], M.BAL["mag_c"]), "imanes")])
 
 
 def soporte_world(g):
