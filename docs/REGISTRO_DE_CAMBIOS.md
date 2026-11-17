@@ -24,6 +24,15 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-17 — Cincha CAD REV 6.9 — soporte continuo (cuerpo a ras y cerco sin corte)
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-9-soporte-continuo` (sobre el PR #70)
+**Qué cambia (captura del usuario):** cuerpo del soporte a ras del cerco; el cerco no se corta en ±X (rebaje interior
+con piel de 1,15 mm para el balancín); `pock_out` 1,95; canto exterior del cerco R0,5. Archivos `R6_8` → `R6_9`.
+**Validación:** IMPLEMENTADO · `verificar_step.py` 26/26 · vóxeles: 0 mm³ cápsula/soporte; suelta a 4°, tope contra
+el soporte a ~10° · **NO VERIFICADO** (nada impreso).
+
+---
+
 ## 2026-11-17 — Cincha CAD REV 6.8 — cápsula rectangular con aristas redondeadas (acabado comercial)
 **Autor:** Claude · **Rama:** `cad/cincha-rev6-8-acabado-comercial` (sobre el PR #69)
 **Qué cambia (petición del usuario):** cápsula rectangular (parte baja 69,0 × 60,2 R8 con las columnas de los

@@ -51,7 +51,7 @@ def puntos_imanes(sg):
 
 def main():
     M.pieza_base()
-    base = V.Capas(V.CAPT["AVO_CINCHA_R6_8_base_aro_luz"])
+    base = V.Capas(V.CAPT["AVO_CINCHA_R6_9_base_aro_luz"])
     G = M.portaiman_geo()
     vox = RES ** 3
     rep = {"rejilla_mm": RES}
