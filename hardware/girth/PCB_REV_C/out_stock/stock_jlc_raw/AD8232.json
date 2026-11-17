@@ -1,0 +1,603 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 3,
+   "list": [
+    {
+     "componentId": 44207,
+     "componentLibraryType": "expand",
+     "stockCount": 1759,
+     "componentTypeEn": "Analog Front End (AFE)",
+     "erpComponentName": "\u5355\u5bfc\u8054\u5fc3\u7387\u76d1\u6d4b\u524d\u7aef",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-to-digital-converters-adc_analog-devices-ad8232acpz-r7_C43216.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 6.7131
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 5.877
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 5.3665
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 4.5828
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 4.5828
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 4.5828
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 6.4667
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 5.6613
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 5.1696
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 4.4146
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 4.4146
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 4.4146
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "e569dd32437c42eca43d5a4f58e31976",
+     "canPresaleNumber": 1701,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "AnalogDevices-AD8232ACPZR7/C43216",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1500,
+     "shopCostPrice": 22.16257,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 1,
+     "initialPrice": 6.7131,
+     "componentCode": "C43216",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "AD8232ACPZ-R7",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583007246489948160-C43216/C43216-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261115T085659Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5rnetvSvJxK1IG6WE%2FXr3IMf751iqTjlzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfce1hc0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDYGVlpdeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5X9K1B75ch3ARqAATdzlQJDr%2FpL%2B5m%2FAly2W5mkW%2F975aAon%2FE1Y90EVg9efuXoPkLSZnyhz%2B8xEDcRCE9tIUr2BA2Hyx1jbOwwsySj%2BnZA9Rk8XIjdQNi0sNDj5Hvg09RJfV2%2Fiu0Pqv8V5o4QaaQLQLT%2FkRX0%2BjNDCrCMYZy9zssDCdLxTKHNyHapIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYR1afQCkcCQZifKrYs1YeaHu%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=96905ef8c8a2ff2758d77a4899b99b105ef4e0011625351eec93bab010bb52d8",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810181421_Analog-Devices-AD8232ACPZ-R7_C43216.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588881946008539136-C43216.pdf?response-content-disposition=attachment%3B%20filename%3DC43216.pdf%3B%20filename%2A%3DUTF-8%27%27C43216.pdf&x-oss-date=20261115T085659Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rjH8z1vqVZ%2F7CFW2TUnFVnQbx6nI382zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcEm7xQ0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqqo0tBnLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIVMzgKqKWD5sagAF19n9HO4brk7A0GiLpZMubsdkoTQipDST2QS%2Flnf6cU3Le6ds4y1i77z2PpOEeeEjN%2FsWY9jn8hrwJdu0qoXOFiPH0gEA9LZy%2Ft8Mgy8Z%2B2Kc6Mtq6Uafp0HMFRoTIQiJN7qookwloPwGIJVExlXiXNb7dugxNZLARtvKwPLhsnCAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYVTvASzxHrnYBexU2M3VsHW9%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=156861726158c84308f82abfd3122b954111f8e71b8863426618c560a9f87cec",
+     "dataManualOfficialLink": "",
+     "componentName": "ADI AD8232ACPZ-R7",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583007247471415296-C43216/C43216-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261115T085659Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5rnetvSvJxK1IG6WE%2FXr3IMf751iqTjlzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfce1hc0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDYGVlpdeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5X9K1B75ch3ARqAATdzlQJDr%2FpL%2B5m%2FAly2W5mkW%2F975aAon%2FE1Y90EVg9efuXoPkLSZnyhz%2B8xEDcRCE9tIUr2BA2Hyx1jbOwwsySj%2BnZA9Rk8XIjdQNi0sNDj5Hvg09RJfV2%2Fiu0Pqv8V5o4QaaQLQLT%2FkRX0%2BjNDCrCMYZy9zssDCdLxTKHNyHapIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYR1afQCkcCQZifKrYs1YeaHu%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=976296903a68ef0696e10d1dbd4f899a1a9160b22147968d93b6574c78c18793",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LFCSP-20(4x4)",
+     "describe": "-40\u2103~+85\u2103 12ppm/\u2103 170uA 2V~3.5V LFCSP-20(4x4) Analog Front End (AFE) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage Reference Value",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "S/N Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Data rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "2V~3.5V"
+      },
+      {
+       "attribute_name_en": "Resolution(Bits)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "170uA"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Internal reference source\u3001Fault detection\u3001ESD Protection"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "-"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog Front End (AFE)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>AD8232</span>ACPZ-R7",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 682126,
+     "componentLibraryType": "expand",
+     "stockCount": 9,
+     "componentTypeEn": "Analog Front End (AFE)",
+     "erpComponentName": "\u5355\u5bfc\u8054\u5fc3\u7387\u76d1\u62a4\u524d\u7aefAD8232",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-front-end-afe_analog-devices-ad8232acpz-rl_C652575.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 6.4218
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 6.2762
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 6.178
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 5.7821
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 5.7821
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 5.7821
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 5.9513
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 5.5699
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 6.1862
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 6.0459
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 5.5699
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 5.5699
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "d329d3b3c33141418f29bbf81f8ab5c1",
+     "canPresaleNumber": 5,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "AnalogDevices-AD8232ACPZRL/C652575",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 31.0,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 1,
+     "initialPrice": 6.4218,
+     "componentCode": "C652575",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "AD8232ACPZ-RL",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583050563969814528-C652575/C652575-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261115T085659Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5rnetvSvJxK1IG6WE%2FXr3IMf751iqTjlzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfce1hc0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDYGVlpdeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5X9K1B75ch3ARqAATdzlQJDr%2FpL%2B5m%2FAly2W5mkW%2F975aAon%2FE1Y90EVg9efuXoPkLSZnyhz%2B8xEDcRCE9tIUr2BA2Hyx1jbOwwsySj%2BnZA9Rk8XIjdQNi0sNDj5Hvg09RJfV2%2Fiu0Pqv8V5o4QaaQLQLT%2FkRX0%2BjNDCrCMYZy9zssDCdLxTKHNyHapIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYR1afQCkcCQZifKrYs1YeaHu%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=4ef779a2af45da034e70f3d56b1e68f1d7517092731e0ad5dc3c6ba4ef328c43",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2008191809_Analog-Devices-AD8232ACPZ-RL_C652575.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588886018334601217-C652575.pdf?response-content-disposition=attachment%3B%20filename%3DC652575.pdf%3B%20filename%2A%3DUTF-8%27%27C652575.pdf&x-oss-date=20261115T085659Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rjH8z1vqVZ%2F7CFW2TUnFVnQbx6nI382zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcEm7xQ0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqqo0tBnLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIVMzgKqKWD5sagAF19n9HO4brk7A0GiLpZMubsdkoTQipDST2QS%2Flnf6cU3Le6ds4y1i77z2PpOEeeEjN%2FsWY9jn8hrwJdu0qoXOFiPH0gEA9LZy%2Ft8Mgy8Z%2B2Kc6Mtq6Uafp0HMFRoTIQiJN7qookwloPwGIJVExlXiXNb7dugxNZLARtvKwPLhsnCAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYVTvASzxHrnYBexU2M3VsHW9%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=6d2b6f1301f8c69cf7391f401d994cda7635ac879052948820540adf24f4f606",
+     "dataManualOfficialLink": "",
+     "componentName": "ADI AD8232ACPZ-RL",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583050564871860224-C652575/C652575-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261115T085659Z&x-oss-expires=1799&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5rnetvSvJxK1IG6WE%2FXr3IMf751iqTjlzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfce1hc0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDYGVlpdeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5X9K1B75ch3ARqAATdzlQJDr%2FpL%2B5m%2FAly2W5mkW%2F975aAon%2FE1Y90EVg9efuXoPkLSZnyhz%2B8xEDcRCE9tIUr2BA2Hyx1jbOwwsySj%2BnZA9Rk8XIjdQNi0sNDj5Hvg09RJfV2%2Fiu0Pqv8V5o4QaaQLQLT%2FkRX0%2BjNDCrCMYZy9zssDCdLxTKHNyHapIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYR1afQCkcCQZifKrYs1YeaHu%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=4e357a58eebe80d4f78562cdab8114e5114c055a1d91946995079d50f9723bfd",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LFCSP-20(4x4)",
+     "describe": "-40\u2103~+85\u2103 1.5V 170uA 2V~3.5V 86dB Programmable gain\u3001Output buffer\u3001Internal reference source\u3001Fault detection\u3001ESD protection LFCSP-20(4x4) Analog Front End (AFE) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage Reference Value",
+       "attribute_value_name": "1.5V"
+      },
+      {
+       "attribute_name_en": "S/N Ratio",
+       "attribute_value_name": "86dB"
+      },
+      {
+       "attribute_name_en": "Data rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "2V~3.5V"
+      },
+      {
+       "attribute_name_en": "Resolution(Bits)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "170uA"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Programmable gain\u3001Output buffer\u3001Internal reference source\u3001Fault detection\u3001ESD Protection"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "-"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog Front End (AFE)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>AD8232</span>ACPZ-RL",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 1610317,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog Front End (AFE)",
+     "erpComponentName": "\u5355\u5bfc\u8054\u5fc3\u7387\u76d1\u6d4b\u524d\u7aef",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-front-end-afe_analog-devices-ad8232acpz-wp_C1519519.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 6.1437
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 63,
+       "productPrice": 5.3125
+      },
+      {
+       "startNumber": 64,
+       "endNumber": 127,
+       "productPrice": 4.5076
+      },
+      {
+       "startNumber": 128,
+       "endNumber": 511,
+       "productPrice": 4.0069
+      },
+      {
+       "startNumber": 512,
+       "endNumber": 1023,
+       "productPrice": 3.7762
+      },
+      {
+       "startNumber": 1024,
+       "endNumber": -1,
+       "productPrice": 3.6715
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 512,
+       "endNumber": 1023,
+       "productPrice": 3.6376
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 63,
+       "productPrice": 5.1176
+      },
+      {
+       "startNumber": 128,
+       "endNumber": 511,
+       "productPrice": 3.8599
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.9182
+      },
+      {
+       "startNumber": 1024,
+       "endNumber": -1,
+       "productPrice": 3.5368
+      },
+      {
+       "startNumber": 64,
+       "endNumber": 127,
+       "productPrice": 4.3421
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "d329d3b3c33141418f29bbf81f8ab5c1",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "AnalogDevices-AD8232ACPZWP/C1519519",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 64,
+     "shopCostPrice": 29.89,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 6.1437,
+     "componentCode": "C1519519",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "AD8232ACPZ-WP",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583653700225683456-C1519519/C1519519-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261115T085659Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5rnetvSvJxK1IG6WE%2FXr3IMf751iqTjlzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfce1hc0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDYGVlpdeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5X9K1B75ch3ARqAATdzlQJDr%2FpL%2B5m%2FAly2W5mkW%2F975aAon%2FE1Y90EVg9efuXoPkLSZnyhz%2B8xEDcRCE9tIUr2BA2Hyx1jbOwwsySj%2BnZA9Rk8XIjdQNi0sNDj5Hvg09RJfV2%2Fiu0Pqv8V5o4QaaQLQLT%2FkRX0%2BjNDCrCMYZy9zssDCdLxTKHNyHapIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYR1afQCkcCQZifKrYs1YeaHu%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=ae13829a7a552b82d3fa3a37e429ba4f9cf04e4ab27e1159f7e5bdf3448bf0ec",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2201180500_Analog-Devices-AD8232ACPZ-WP_C1519519.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589032655656521728-C1519519.pdf?response-content-disposition=attachment%3B%20filename%3DC1519519.pdf%3B%20filename%2A%3DUTF-8%27%27C1519519.pdf&x-oss-date=20261115T085659Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rjH8z1vqVZ%2F7CFW2TUnFVnQbx6nI382zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcEm7xQ0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqqo0tBnLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIVMzgKqKWD5sagAF19n9HO4brk7A0GiLpZMubsdkoTQipDST2QS%2Flnf6cU3Le6ds4y1i77z2PpOEeeEjN%2FsWY9jn8hrwJdu0qoXOFiPH0gEA9LZy%2Ft8Mgy8Z%2B2Kc6Mtq6Uafp0HMFRoTIQiJN7qookwloPwGIJVExlXiXNb7dugxNZLARtvKwPLhsnCAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYVTvASzxHrnYBexU2M3VsHW9%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a4160abf30e0c98da539a5ccb915fdb99eed8ac267710119df8d33783fa04ace",
+     "dataManualOfficialLink": "",
+     "componentName": "ADI AD8232ACPZ-WP",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583653701105541120-C1519519/C1519519-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261115T085659Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5rnetvSvJxK1IG6WE%2FXr3IMf751iqTjlzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfce1hc0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDYGVlpdeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5X9K1B75ch3ARqAATdzlQJDr%2FpL%2B5m%2FAly2W5mkW%2F975aAon%2FE1Y90EVg9efuXoPkLSZnyhz%2B8xEDcRCE9tIUr2BA2Hyx1jbOwwsySj%2BnZA9Rk8XIjdQNi0sNDj5Hvg09RJfV2%2Fiu0Pqv8V5o4QaaQLQLT%2FkRX0%2BjNDCrCMYZy9zssDCdLxTKHNyHapIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYR1afQCkcCQZifKrYs1YeaHu%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3af166cd66191e195a7a54c31a4de125c0541f005cfd8b25f43d5627c8186b3d",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LFCSP-20(4x4)",
+     "describe": "-40\u2103~+85\u2103 2V~3.5V 86dB Programmable gain\u3001Internal reference source\u3001Fault detection\u3001ESD Protection LFCSP-20(4x4) Analog Front End (AFE) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "S/N Ratio",
+       "attribute_value_name": "86dB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "2V~3.5V"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Programmable gain\u3001Internal reference source\u3001Fault detection\u3001ESD Protection"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog Front End (AFE)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>AD8232</span>ACPZ-WP",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "AD8232"
+ },
+ "message": null
+}
