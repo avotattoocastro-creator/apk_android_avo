@@ -1,12 +1,27 @@
-# AVO Performance Horse — desarrollo unificado (22/10/2026)
+# AVO Performance Horse — desarrollo unificado
 
-Repositorio conjunto para la aplicación Android, el firmware de pecho y la herramienta de firma OTA.
+Repositorio único de AVO Performance Horse: apps (Android, Windows, iPad), motor C++17, firmware (pecho, espalda,
+cincha) y hardware (CAD y PCB). **Asistentes: empezad por [`AGENTS.md`](AGENTS.md).**
 
 ## Rama activa
 
-**`develop/avo-performance-horse`** es la rama de integración compartida entre los chats de Android y firmware. La rama `main` y las ramas históricas no representan el estado más reciente. No modificar una rama histórica esperando que sus cambios aparezcan automáticamente en la rama unificada.
+**`develop/avo-performance-horse`** es la única rama de integración. `main` y las ramas históricas no representan el
+estado actual.
 
-## Versiones de los componentes
+## Versiones vigentes y descargas
+
+- **Tabla única de versiones:** [`docs/ESTADO_DESARROLLO_Y_VERSIONES.md`](docs/ESTADO_DESARROLLO_Y_VERSIONES.md).
+- **Descarga directa de lo último:** release [`descargas`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/tag/descargas)
+  ([`VERSIONES.txt`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/VERSIONES.txt)).
+- **PROTOTIPO** = placas de desarrollo sin PCB propia (pecho Waveshare, espalda Heltec, cincha XIAO).
+  **BETA** = PCB propia (cincha PCB REV D, casco V5, DOCK V1, espalda V4).
+
+Resumen (17/11/2026): pecho PROTOTIPO 3.7.10 · espalda PROTOTIPO 3.14.3 · cincha PROTOTIPO 0.4.3 / 0.5.0 (ECG) ·
+cincha BETA 0.6.0 · Android 2.9 (vc 42) · Tarjetas 1.4 · AVO Update 2.3.1 · Windows V2 PRO · iPad 1.0 (TestFlight) ·
+motor 2.0.0-dev1. Todo **compilado en CI**; nada de lo integrado desde el 12/11 está **verificado en hardware**.
+
+<details><summary>Tabla antigua (22/10–09/11/2026, superada)</summary>
+
 
 | Componente | Versión en código | Estado comprobado |
 | --- | --- | --- |
@@ -29,6 +44,8 @@ Repositorio conjunto para la aplicación Android, el firmware de pecho y la herr
 | AVO Windows **V1.1** (`windows/`) | Detecta el reloj por USB, compara y descarga al PC los entrenamientos que faltan | Autopruebas en CI con el firmware real (transcripción) y reloj simulado; **no probado en PC real** |
 | Firmware espalda **3.13.12** (vigilancia de NAV-SAT/SIG y de reinicios del receptor, rama `fix/back-3-13-12-nav-sig-watchdog`) / **3.13.11** (apagado del GPS con USB, rama `fix/back-3-13-11-usb-pololu-off`) / **3.13.10** (diagnóstico USB) / **3.13.9** (`firmware/back/V3_8_0`) | Heltec + ZED-F9P (UART1 RX=35/TX=33, Pololu: GPIO34 alta impedancia / LOW), GPS apagado con USB | Rama `fix/back-3-13-9-usb-gps-off`; **detección USB sin señal física** |
 | Programador USB **2.1.0** (`usb-updater/`) | Instalación en pecho y espalda + lectura, identificación y copia completa de cualquier ESP32-S3 | CI correcto [40009097029](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40009097029); **no verificado con el pecho ni la espalda** |
+
+</details>
 
 ## Documentación compartida (Claude y ChatGPT)
 

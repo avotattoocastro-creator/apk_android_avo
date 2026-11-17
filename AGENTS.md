@@ -3,6 +3,28 @@
 Este repositorio se desarrolla con varios asistentes en conversaciones distintas. GitHub es la **única fuente
 compartida**: lo que no esté en la rama no existe para el siguiente asistente. Responde y documenta en **español**.
 
+## Empieza aquí (todas las conversaciones)
+1. Trabaja desde **`develop/avo-performance-horse`** actualizada (`git pull`); nunca desde `main` ni ramas viejas.
+2. Lee **`docs/ESTADO_DESARROLLO_Y_VERSIONES.md`** (tabla única de lo vigente) y las últimas entradas de
+   `docs/REGISTRO_DE_CAMBIOS.md`.
+3. Haz el cambio en una rama corta (`claude/<tema>`), con PR a `develop` y *merge commit*.
+4. Al terminar: entrada en el registro **y** fila actualizada en la tabla del estado. Si no está en GitHub, no existe.
+5. Descargas de lo último publicado: release `descargas` (ver «Descargas directas»).
+
+## Nombres: PROTOTIPO y BETA (decisión del usuario, 17/11/2026)
+- **PROTOTIPO** = todo lo que funciona sobre **placas de desarrollo, sin PCB propia** (Waveshare del pecho, Heltec de la
+  espalda, XIAO de la cincha), y sus cajas, carcasas y firmware.
+- **BETA** = todo lo que lleva **PCB propia** (cincha PCB REV D, casco BACK V5, DOCK V1, espalda V4), y sus cajas,
+  carcasas y firmware.
+- Los nombres nuevos de archivos, artefactos, descargas y documentos llevan `PROTOTIPO` o `BETA`
+  (p. ej. `AVO_CINCHA_BETA_FW.zip`, `CAD_PECHO_PROTOTIPO_REV_D.zip`). Las apps no llevan etiqueta.
+- **Pruebas de campo (decisión del usuario, 17/11/2026):** hasta que estén construidas **todas** las PCB del sistema,
+  las pruebas de campo que corroboran el funcionamiento se hacen **solo con PROTOTIPOS**. Lo validado ahí se porta
+  después a las BETA. Con todas las PCB construidas empiezan las pruebas de campo con las BETA. Por eso una función
+  nueva se valida primero en el firmware PROTOTIPO, y el firmware BETA la recibe ya probada (mismos contratos binarios).
+- Las carpetas y workflows existentes **no se renombran** de golpe (romperían rutas de CI, enlaces e historial): la
+  etiqueta se aplica en documentación y descargas, y en cada carpeta nueva.
+
 ## Reglas
 1. Rama de integración: **`develop/avo-performance-horse`**. No trabajar sobre `main` ni sobre ramas históricas.
 2. **Cada cambio se documenta en `docs/REGISTRO_DE_CAMBIOS.md`** (entrada arriba, con plantilla), en el mismo
@@ -22,9 +44,9 @@ compartida**: lo que no esté en la rama no existe para el siguiente asistente. 
   No abrir líneas paralelas de una misma app o firmware: una sola versión de Android, del pecho, de la espalda, etc.
 - Se integra **siempre por PR** con *merge commit* (no *squash* ni *rebase*, para no perder historial) y con el CI
   en verde en `develop` antes de abrir el siguiente.
-- **Prohibido borrar ramas antiguas** mientras no existan en GitHub las **53 etiquetas `backup/2026-11-12/<rama>`**
-  (script `crear_tags_backup.sh`, en `docs/`). Comprobar con
-  `git ls-remote --tags origin 'backup/2026-11-12/*' | grep -vc '\^{}'` → debe dar 53.
+- **Etiquetas de respaldo creadas (17/11/2026):** 52 `backup/2026-11-12/*` y 108 `backup/2026-11-17/*` (una por
+  rama). Una rama ya contenida en `develop` se puede borrar: se recupera desde su etiqueta. Antes de borrar una rama
+  creada después del 17/11, crear su etiqueta.
 - Fuera de `develop` a propósito: `main` (histórica), `feature/avo-measurement-engine-v4`, `fix/chest-v373-readfile`,
   `fix/back-3-13-8-gps-uart` y las ramas de evidencias `ci/*` (las escriben los workflows; no se fusionan).
 
@@ -38,24 +60,35 @@ compartida**: lo que no esté en la rama no existe para el siguiente asistente. 
 - Firma de APK (`AVO_UPDATER_KEYSTORE_*`, clave estable de la app) y App Store Connect (`ASC_*`, `APPLE_TEAM_ID`):
   solo como GitHub Secrets. No cambiarlos ni moverlos sin avisar al usuario.
 
-## Hardware actual (no mezclar con prototipos en papel)
-- **Pecho:** Waveshare ESP32-S3-Touch-AMOLED-2.06" (AXP2101, microSD SDMMC 1 bit). Los pads IO14/IO15 son el **bus
-  I²C**: no son GPIO libres. Caja vigente REV D.
-- **Espalda:** Heltec Wireless Stick Lite V3 + u-blox ZED-F9P (URTK1.2) + Pololu S7V8F3 (SHDN = GPIO34, VIN al 3V3 de
-  la Heltec). UART del ZED: RX = GPIO35, TX = GPIO33. Firmware en `firmware/back/V3_8_0` (línea 3.13.x / 3.14.x).
+## Hardware (no mezclar líneas)
+### PROTOTIPO (placas de desarrollo; es lo que existe y se prueba hoy)
+- **Pecho PROTOTIPO:** Waveshare ESP32-S3-Touch-AMOLED-2.06" (AXP2101, microSD SDMMC 1 bit). Los pads IO14/IO15 son el
+  **bus I²C**: no son GPIO libres. Caja REV D. Firmware 3.7.x.
+- **Espalda PROTOTIPO:** Heltec Wireless Stick Lite V3 + u-blox ZED-F9P (URTK1.2) + Pololu S7V8F3 (SHDN = GPIO34, VIN
+  al 3V3 de la Heltec). UART del ZED: RX = GPIO35, TX = GPIO33. Firmware `firmware/back/V3_8_0` (3.13.x / 3.14.x).
   Carcasa V2.2H Rev E.5.
-- **Cincha:** Seeed XIAO ESP32-C6 + BNO085 (I²C 0x4A) + pogo magnético de 3 pines. Cápsula REV 5.9.1 (REV 5.10 añade
-  el ECG MAX30003).
-- **Espalda V4 (`firmware/back/V4_0_0`, 4.0.0-dev2) y PCB de la cincha REV B (ESP32-C3):** diseñadas, **no fabricadas**.
-  Nunca instalar la 4.0.0-dev en el hardware actual (no tiene batería, modo carga, calidad GNSS ni `GirthHub`).
-  Antes de generar o pedir placas de la cincha, confirmar con el usuario la arquitectura: pogo + BNO085 + ECG
-  (prototipo actual) o Qi + LSM6/MMC (PCB REV B).
+- **Cincha PROTOTIPO:** Seeed XIAO ESP32-C6 + BNO085 (I²C 0x4A) + pogo magnético de 3 pines. Cápsula REV 5.9.1
+  (REV 5.10 añade el ECG MAX30003). Firmware 0.4.x (IMU) y 0.5.x (IMU + ECG).
+
+### BETA (PCB propia; diseñada, **no fabricada** salvo que el registro diga lo contrario)
+- **Cincha BETA:** PCB REV D (ESP32-C6-MINI-1U + LSM6DSV16X + MMC5983MA + ADS1292), arquitectura confirmada por el
+  usuario el 15/11/2026. Cápsula REV 6.x (`hardware/girth/CINCHA_MONTAJE`). Firmware 0.6.x.
+- **Casco BETA (BACK V5):** PCB + CAD en `feature/back-v5-casco` (sin integrar). Sin firmware todavía.
+- **DOCK BETA V1** (soporte de pared cargador): PCB REV A + caja, PR #45.
+- **Espalda BETA V4** (`firmware/back/V4_0_0`, 4.0.0-dev2; `hardware/back/V4`). **Nunca** instalar la 4.0.0-dev en la
+  Heltec (no tiene batería, modo carga, calidad GNSS ni `GirthHub`).
+- Las PCB REV B (ESP32-C3) y REV C de la cincha quedan como historia. Antes de pedir placas, confirmar con el usuario.
 
 ## Contratos binarios (cambiar a la vez en firmware y en todas las apps)
 `BackStatus` v3 (108 B) · lotes de la cincha por ESP-NOW (220 B) · `TELEMETRY` v3 por BLE (116 B) · USB `AVO1`
 (bloques de 4 KB con CRC-32 y SHA-256) · RTCM3 con CRC-24Q · RAW `.avr` · configuración TLV `AVOC` · licencias
 `.avolic`. **OTA firmada del pecho:** la versión instalada debe ser `X.Y.Z` sin sufijo (`-rc`, `-usb`…), o el reloj
 rechaza el paquete.
+
+## Descargas directas
+Release fija `descargas`: `https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/<ARCHIVO>`.
+La publica `publicar-descargas.yml` en cada push a `develop`; qué entra y con qué nombre, en
+`scripts/descargas/descargas.json`. Explicación: `docs/DESCARGAS_DIRECTAS.md`.
 
 ## CI (GitHub Actions)
 - Los workflows se disparan con **push a `develop`** filtrados por carpeta (`paths:`). No se ejecutan en los PR.
@@ -89,10 +122,9 @@ rechaza el paquete.
 | `firmware/chest/V3_*` | Firmware del reloj de pecho por versiones (ZIP base + parches) | `build-chest-v*.yml` |
 | `firmware/back/V3_8_0` | Firmware de la espalda (Heltec), línea 3.14.x | `build-back-v380.yml` |
 | `firmware/girth/` | Firmware de la cincha (C6; y C3 de la PCB) | `build-girth*.yml` |
-| `firmware/back/V4_0_0`, `hardware/back/V4` | Espalda V4 (sin fabricar) | `build-back-v4-*.yml` |
+| `firmware/back/V4_0_0`, `hardware/back/V4` | Espalda BETA V4 (sin fabricar) | `build-back-v4-*.yml` |
 | `hardware/` | CAD (FreeCAD 1.0.2) y PCB (KiCad 9) | varios |
 
 ## Estado actual
-Versiones en `develop` y estado de verificación: `README.md`, `docs/ESTADO_DESARROLLO_Y_VERSIONES.md` y la entrada
-«Integración en develop» de `docs/REGISTRO_DE_CAMBIOS.md` (12/11/2026). El traspaso antiguo
-`docs/TRASPASO_ASISTENTES_2026-10-23.md` se conserva como historia: sus versiones están superadas.
+**Fuente única:** la tabla «Vigente» al principio de `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`. Quien cambie una versión
+la actualiza en el mismo PR. El traspaso antiguo `docs/TRASPASO_ASISTENTES_2026-10-23.md` es historia.
