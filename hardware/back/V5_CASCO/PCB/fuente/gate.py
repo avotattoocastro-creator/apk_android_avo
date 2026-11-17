@@ -55,7 +55,7 @@ name = "AVO_BACK_V5_PCB_REPORTE.md" if ok else "AVO_BACK_V5_PCB_DIAGNOSTICO_REPO
 state = ("**DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**"
          if ok else "**DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar")
 L = []
-L.append("# AVO BACK V5 CASCO · placa de la espalda para el casco · REV A (ESP32-S3 + ZED-F9P soldado) — informe %s" % ("de fabricación" if ok else "de diagnóstico"))
+L.append("# AVO BACK V5 CASCO · placa de la espalda para el casco · REV B (ESP32-S3-WROOM-1U-N16R8 + ZED-F9P soldado) — informe %s" % ("de fabricación" if ok else "de diagnóstico"))
 L.append("")
 L.append("- Estado: %s" % state)
 L.append("- Commit: `%s` · ejecución de CI: %s" % (sha, run))
@@ -106,7 +106,7 @@ if os.path.exists(mp):
     falta = [x[6:] for x in ml if x.startswith("FALTA ")]
     L.append("- Modelos de la librería de KiCad 9.0.0 descargados: %d; sin descargar: %s"
              % (len([x for x in ml if x.startswith("OK ")]), ", ".join(falta) or "ninguno"))
-L.append("- ESP32-S3-MINI-1U: modelo de Espressif (`fuente/3d`). Pads de hilo/prueba: sin modelo 3D.")
+L.append("- ESP32-S3-WROOM-1U: modelo de Espressif (`fuente/3d`). Piezas de EasyEDA y pads de hilo/prueba: sin modelo 3D.")
 # REV B: elección del microcontrolador, diferencias, firmware y riesgos (texto fijo del diseño)
 inf = os.path.join("..", "DOCS", "INFORME_PCB_REV_B.md")
 if os.path.exists(inf):
@@ -143,6 +143,10 @@ for t in ("Línea de 50 Ω de la antena (J5 → R71 0 Ω → RF_IN, ESD D4): mic
           "Firmware: poner GPIO6, GPIO8 y GPIO9 como entradas antes de bajar ZED_EN (el ZED apagado no debe recibir tensión por sus E/S).",
           "Pines 9/10 de la microSD Hirose DM3AT según la huella de KiCad: comprobar con la hoja.",
           "Pogo de 5 contactos y batería por hilos: el modelo real del pogo está pendiente (STEP).",
+          "REV B: WROOM-1U de 3,2 mm → cápsula 0,6 mm más alta (Z_MAX_F 3,2). Comprobar la holgura con la batería real.",
+          "REV B: táctil TTP223-BA6-TD (TDSEMIC) con Cs sin montar: ajustar la sensibilidad con la pared adelgazada y probar con agua.",
+          "REV B: firmware nuevo (BACK 5.x): POWER_HOLD (GPIO46) al arrancar, pulsación larga, LED_PWR (GPIO48), I²C (MAX17048 + LSM6DSV16X).",
+          "REV B: con el anillo apagado, GPIO47 a 0 (no alimentar los LED por DIN).",
           "Nada de esto se ha fabricado ni medido: no es un prototipo validado."):
     L.append("- " + t)
 open(os.path.join(OUT, name), "w", encoding="utf-8").write("\n".join(L) + "\n")

@@ -15,8 +15,21 @@ Decisión del usuario (14/11/2026): UN SOLO ESP32-S3 (BLE con el móvil + ESP-NO
 Bloques: cargador BQ24072 (USB por el pogo) · batería con PTC · 3,3 V TLV75733P · 3,3 V del ZED RT9080 con EN ·
   ZED-F9P soldado (UART1 + UART2 + PPS + RESET, antena activa por VCC_RF) · ESP32-S3-MINI-1U-N8 (antena FPC 2,4 GHz
   en el conector del módulo) · USB nativo del S3 por el pogo con ESD · microSD SDMMC 4 bits conmutada · Hall DRV5032.
+REV B (17/11/2026, decisiones del usuario tras la auditoría BETA y la revisión electrónica):
+  - ESP32-S3-WROOM-1U-N16R8 (16 MB de flash, 8 MB de PSRAM octal) en lugar del MINI-1U-N8: 3,2 mm de alto, la
+    cápsula sube 0,6 mm (Z_MAX_F 2,6 → 3,2); la planta de 51 × 51 no cambia.
+  - Encendido y apagado total: táctil TTP223 siempre alimentado + enclavamiento (OR de diodos) en el EN del 3,3 V
+    principal: táctil, POWER_HOLD del micro (GPIO46) y VBUS del pogo. Hall y VBUS_DET siguen despertando del reposo.
+  - LDO de µA siempre encendido (XC6206, +3V3_AON) desde la batería: V_BCKP del ZED (arranque en caliente también
+    con el casco apagado) y alimentación del táctil.
+  - Anillo de LED a 4,3 V con elevador TPS61023 (corte real de la carga con EN = 0): el anillo ya no consume en
+    reposo (0,6 mA por LED) y funciona con la batería por debajo de 3,7 V. DIN a 3,3 V válido (VIH = 0,65 × 4,3 V).
+  - Cargador: temporizador de seguridad con R_TMR 68 kΩ (≈ 8,5 h; antes 5 h por defecto).
+  - Protección de polaridad de la batería (PMOS, como la V4).
+  - Medidor de batería MAX17048 (I²C) e IMU LSM6DSV16X (I²C, INT1 despierta), sin agrandar la placa.
 Uso:  python avo_back_v5_pcb.py --place   (comprueba la colocación)
 """
+import glob
 import json
 import math
 import os
@@ -25,19 +38,19 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
-from custom_fp import test_pad, wire_pad   # noqa: E402
+from custom_fp import lga14_st, test_pad, wire_pad   # noqa: E402
 from fplib import Footprint, Pad, circle, load, rect_lines   # noqa: E402
 from sexpr import Sym   # noqa: E402
 
 OUT = os.path.join(HERE, "..", "kicad")
 os.makedirs(OUT, exist_ok=True)
 NAME = "AVO_BACK_V5_PCB"
-REV, DATE = "A", "2026-11-14"
+REV, DATE = "B", "2026-11-17"
 THICK = 1.6
 SIZE, CORNER_R = 51.0, 3.0
 HOLE_XY, HOLE_D, HOLE_KEEP = 22.0, 2.8, 3.0          # 4 taladros de los tornillos de la caja (M2,5)
 ANT = (0.0, 0.0, 25.0)                                # antena GNSS en la cara B: centro y lado
-Z_MAX_F = 2.6                                         # altura máxima de componente en F (hueco hasta la batería)
+Z_MAX_F = 3.2                                         # altura máxima en F (REV B: WROOM-1U de 3,2; antes 2,6)
 
 
 def K(X, Y):
@@ -122,9 +135,47 @@ def npth_hole(d, keep, label):
                      label, 0.0)
 
 
-S3 = load("ESP32-S3-MINI-1U.kicad_mod", "${KIPRJMOD}/../fuente/3d/ESP32-S3-MINI-1U.STEP", 2.6)
-S3.graphics = [g for g in S3.graphics if not (len(g) > 1 and any(isinstance(x, list) and x[0] == "layer" and "CrtYd" in str(x[1]) for x in g))]
-S3.graphics += rect_lines(-7.85, -7.85, 7.85, 7.85, "F.CrtYd", 0.05)
+def _sin_patio(fp):
+    fp.graphics = [g for g in fp.graphics if not (len(g) > 1 and any(isinstance(x, list) and x[0] == "layer" and "CrtYd" in str(x[1]) for x in g))]
+    return fp
+
+
+# REV B: ESP32-S3-WROOM-1U (Espressif kicad-libraries): cuerpo 18,0 × 19,2 × 3,2, de y −9,45 a +9,75 (U.FL junto al
+# borde de y −9,45). Patio ajustado al cuerpo + 0,1 (el de la librería añade 0,8 por arriba).
+S3 = _sin_patio(load("ESP32-S3-WROOM-1U.kicad_mod", "${KIPRJMOD}/../fuente/3d/ESP32-S3-WROOM-1U.STEP", 3.2))
+S3.graphics += rect_lines(-9.1, -9.55, 9.1, 9.85, "F.CrtYd", 0.05)
+
+
+def easyeda(code, height, prov):
+    """Huella de EasyEDA/LCSC descargada en el CI (lib_easyeda/<código>.pretty). Mientras no exista se usa una
+    provisional del mismo tamaño (solo para la colocación local; el CI no rutea con la provisional)."""
+    f = sorted(glob.glob(os.path.join(HERE, "lib_easyeda", code + ".pretty", "*.kicad_mod")))
+    if not f:
+        return prov
+    fp = _sin_patio(load(f[0], None, height))
+    # EasyEDA no trae patio (F.CrtYd): rectángulo que envuelve los pads (girados) + 0,25 mm
+    xs, ys = [], []
+    for p in fp.pads:
+        w, h = (p.h, p.w) if round(p.rot) % 180 == 90 else (p.w, p.h)
+        xs += [p.x - w / 2, p.x + w / 2]; ys += [p.y - h / 2, p.y + h / 2]
+    fp.graphics += rect_lines(min(xs) - 0.25, min(ys) - 0.25, max(xs) + 0.25, max(ys) + 0.25, "F.CrtYd", 0.05)
+    return fp
+
+
+def _prov(name, pads, cx, cy, h):
+    g = rect_lines(-cx, -cy, cx, cy, "F.CrtYd", 0.05)
+    return Footprint(name + "_PROVISIONAL", [Pad(str(n), "smd", "rect", x, y, w, hh) for n, x, y, w, hh in pads], g,
+                     "smd", None, "provisional", h)
+
+
+# TPS61023 SOT-563 (DRL): 1 FB · 2 EN · 3 VIN | 4 GND · 5 SW · 6 VOUT
+SOT563 = easyeda("C919459", 0.6, _prov("SOT563", [(1, -0.7, -0.5, .6, .3), (2, -0.7, 0, .6, .3), (3, -0.7, .5, .6, .3),
+                                                   (4, .7, .5, .6, .3), (5, .7, 0, .6, .3), (6, .7, -.5, .6, .3)], 1.15, 1.0, 0.6))
+# MAX17048 TDFN-8 2 × 2 (T822): 1 CTG · 2 CELL · 3 VDD · 4 GND | 5 ALRT · 6 QSTRT · 7 SCL · 8 SDA · 9 EP
+TDFN8 = easyeda("C2682616", 0.8, _prov("TDFN8", [(n, -0.95 if n <= 4 else 0.95, (-0.75 + 0.5 * (n - 1)) if n <= 4 else
+                                                   (0.75 - 0.5 * (n - 5)), .6, .28) for n in range(1, 9)] +
+                                        [(9, 0, 0, .7, 1.3)], 1.35, 1.25, 0.8))
+L0806 = easyeda("C97016", 1.0, _prov("L0806", [(1, -0.85, 0, .8, 1.7), (2, .85, 0, .8, 1.7)], 1.5, 1.1, 1.0))
 FP = {
     "R0402": load("R_0402_1005Metric.kicad_mod", M3 + "Resistor_SMD.3dshapes/R_0402_1005Metric.step", 0.4),
     "L0402": load("R_0402_1005Metric.kicad_mod", M3 + "Inductor_SMD.3dshapes/L_0402_1005Metric.step", 0.6),
@@ -144,7 +195,11 @@ FP = {
     "ZED": load("ublox_ZED.kicad_mod", M3 + "RF_GPS.3dshapes/ublox_ZED.step", 2.4),
     "UFL": load("U.FL_Hirose_U.FL-R-SMT-1_Vertical.kicad_mod",
                 M3 + "Connector_Coaxial.3dshapes/U.FL_Hirose_U.FL-R-SMT-1_Vertical.step", 1.25),
-    "MINI1U": S3,
+    "WROOM1U": S3,
+    "SOT563": SOT563,
+    "TDFN8": TDFN8,
+    "L0806": L0806,
+    "LGA14": lga14_st(),
     "LEDSIDE": sk6812_side(),
     "TP": test_pad(1.0),
     "WIRE": wire_pad("(hilo)", drill=0.9, d=1.7),
@@ -177,6 +232,10 @@ LC = {
     "NTC10k": "C77131", "AO3401A": "C15127", "USBLC6": "C7519",
     "RT9080": "C841192", "TLV75733P": "C485517", "BQ24072": "C140288", "MINI1U": "C2980299",
     "MICROSD": "C114218", "PTC": "C20802", "SK6812SIDE": "C5378721", "DRV5032FA": "C140921", "TVS": "C2827694",
+    # REV B (17/11/2026; existencias consultadas en el CI: out_stock/stock_jlc.json)
+    "WROOM1U": "C3013946", "TPS61023": "C919459", "MAX17048": "C2682616", "1uH 0806": "C97016", "TTP223": "C42422127",
+    "XC6206": "C5446", "BAT54C": "C2135", "LSM6DSV16X": "C5267406", "68k": "C36871", "2k2": "C25879", "22p": "C1555",
+    "620k": "C137952",
 }
 
 
@@ -223,7 +282,7 @@ R("R23", "100k", "VBUS_DET", GND, block="Pogo")
 # ---------------------------------------------------------------------------------------- cargador (U2)
 part("U2", "RGT16", "BQ24072RGTR", (0, 0), 0,
      {1: "CHG_TS", 2: VBAT, 3: VBAT, 4: GND, 5: "CHG_EN2", 6: GND, 7: "CHG_PG", 8: GND, 9: "CHG_STAT",
-      10: VSYS, 11: VSYS, 12: "CHG_ILIM", 13: VBUS, 14: None, 15: GND, 16: "CHG_ISET", 17: GND},
+      10: VSYS, 11: VSYS, 12: "CHG_ILIM", 13: VBUS, 14: "CHG_TMR", 15: GND, 16: "CHG_ISET", 17: GND},
      LC["BQ24072"], "BQ24072RGTR", "Cargador",
      sym=dict(L=[(13, "IN"), (4, "CE"), (6, "EN1"), (5, "EN2"), (16, "ISET"), (12, "ILIM"), (14, "TMR"),
                  (15, "TD"), (1, "TS")],
@@ -236,6 +295,9 @@ R("R6", "1k5", "CHG_ISET", GND, block="Cargador", note="I_carga = 890/1k5 ≈ 59
 R("R7", "2k", "CHG_ILIM", GND, block="Cargador", note="I_entrada = K_ILIM/R_ILIM ≈ 1600/2k ≈ 800 mA (BQ24072T, SLUS937)")
 part("RT2", "R0402", "NTC 10k B3380", (0, 0), 0, {1: "CHG_TS", 2: GND}, LC["NTC10k"], "NCP15XH103F03RC", "Cargador", sym="R",
      note="NTC junto a la batería (cara F, encima de la celda)")
+R("R12", "68k", "CHG_TMR", GND, block="Cargador",
+  note="REV B: temporizador de seguridad t_MAXCH = 10 × K_TMR × R_TMR ≈ 10 × 45 × 68k ≈ 8,5 h (35–55 s/kΩ: 6,6–10,4 h; "
+       "SLUS937). Al aire eran 4–6 h y podía cortar la carga con el casco encendido en el DOCK")
 R("R8", "100k", "CHG_EN2", VSYS, block="Cargador", note="EN2 = 1, EN1 = 0: límite por ILIM")
 R("R9", "100k", "CHG_PG", V3, block="Cargador")
 R("R10", "100k", "CHG_STAT", V3, block="Cargador")
@@ -244,16 +306,52 @@ R("R10", "100k", "CHG_STAT", V3, block="Cargador")
 part("J2", "WIRE", "BAT +", (0, 0), 0, {1: "BAT_IN"}, block="Batería", sym="TP", no_assembly=True,
      note="hilo + de la celda (≥ 2000 mAh): soldado, sin conector (más plano y sin holgura al galope)")
 part("J6", "WIRE", "BAT −", (0, 0), 0, {1: GND}, block="Batería", sym="TP", no_assembly=True, note="hilo − de la celda")
-part("F1", "F1206", "PTC 1,5 A", (0, 0), 0, {1: "BAT_IN", 2: VBAT}, LC["PTC"], "SMD1206P150TF", "Batería", sym="R",
+part("F1", "F1206", "PTC 1,5 A", (0, 0), 0, {1: "BAT_IN", 2: "BAT_F"}, LC["PTC"], "SMD1206P150TF", "Batería", sym="R",
      note="fusible rearmable entre la celda y el cargador (la celda lleva además su PCM)")
+part("Q7", "SOT23", "AO3401A", (0, 0), 0, {1: "BAT_G", 2: VBAT, 3: "BAT_F"}, LC["AO3401A"], block="Batería",
+     sym=dict(L=[(1, "G")], R=[(2, "S"), (3, "D")]),
+     note="REV B: polaridad de la celda (como Q3 de la V4). D a la celda, S al sistema, G a GND: con la celda al revés "
+          "queda cortado; en uso conduce en los dos sentidos (carga y descarga), ≈ 60 mΩ")
+R("R13", "100k", "BAT_G", GND, block="Batería", note="puerta de Q7 a GND")
 R("R32", "1M", VBAT, "BAT_ADC", block="Batería", note="divisor 1:2 → GPIO2 (ADC1_CH1)")
 R("R33", "1M", "BAT_ADC", GND, block="Batería")
 C("C34", "100n", "BAT_ADC", GND, block="Batería")
 
 # ---------------------------------------------------------------------------------------- 3,3 V principal (U3) y del ZED (U7)
-part("U3", "SOT23-5", "TLV75733PDBVR", (0, 0), 0, {1: VSYS, 2: GND, 3: VSYS, 4: None, 5: V3}, LC["TLV75733P"],
+part("U3", "SOT23-5", "TLV75733PDBVR", (0, 0), 0, {1: VSYS, 2: GND, 3: "EN_3V3", 4: None, 5: V3}, LC["TLV75733P"],
      "TLV75733PDBVR", "3V3", sym=dict(L=[(1, "IN"), (3, "EN"), (2, "GND")], R=[(5, "OUT"), (4, "NC")]),
-     note="1 A: ESP32-S3 (picos de radio ≈ 0,35 A) + microSD + V_BCKP del ZED")
+     note="1 A: ESP32-S3 (picos de radio ≈ 0,35 A) + microSD + IMU. REV B: EN = OR(táctil, POWER_HOLD, VBUS)")
+# --- REV B: enclavamiento de alimentación (apagado total). Encender: pulsación larga en el táctil (el TTP223 sube
+# TOUCH_OUT, EN_3V3 sube, el S3 arranca y mantiene POWER_HOLD) o conectar el cable / DOCK (VBUS). Apagar: el firmware
+# confirma con el anillo, cierra la sesión y la microSD y suelta POWER_HOLD.
+part("D5", "SOT23", "BAT54C", (0, 0), 0, {1: "TOUCH_OUT", 2: "PWR_HOLD", 3: "EN_3V3"}, LC["BAT54C"], "BAT54C", "Encendido",
+     sym=dict(L=[(1, "A1"), (2, "A2")], R=[(3, "K")]), note="OR del táctil y de POWER_HOLD al EN del 3,3 V")
+part("D6", "SOT23", "BAT54C", (0, 0), 0, {1: VBUS, 2: None, 3: "EN_3V3"}, LC["BAT54C"], "BAT54C", "Encendido",
+     sym=dict(L=[(1, "A1"), (2, "A2")], R=[(3, "K")]),
+     note="VBUS del pogo (cargador o DOCK) al EN: una cápsula apagada se enciende al cargar (decisión D1 de la auditoría)")
+R("R14", "1M", "EN_3V3", GND, block="Encendido", note="EN a 0 sin ninguna fuente: apagado (fuga ≈ 0)")
+R("R15", "100k", "PWR_HOLD", GND, block="Encendido",
+  note="GPIO46 (de arranque: bajo por defecto) — el firmware lo sube nada más arrancar y lo retiene en el sueño")
+# --- REV B: 3,3 V siempre encendido (µA) desde la batería: V_BCKP del ZED + táctil
+part("U9", "SOT23", "XC6206P332MR", (0, 0), 0, {1: GND, 2: "+3V3_AON", 3: VBAT}, LC["XC6206"], "XC6206P332MR-G (Torex)",
+     "Siempre", sym=dict(L=[(3, "VIN"), (1, "VSS")], R=[(2, "VOUT")]),
+     note="LDO de ≈ 1 µA: mantiene V_BCKP del ZED (efemérides) con el casco apagado y alimenta el táctil")
+C("C66", "1u", VBAT, GND, block="Siempre")
+C("C67", "1u", "+3V3_AON", GND, block="Siempre")
+# --- REV B: táctil sellado (electrodo de lámina de cobre por dentro de la pared adelgazada, unido a TP_TOUCH)
+part("U10", "SOT23-6", "TTP223-BA6-TD", (0, 0), 0,
+     {1: "TOUCH_OUT", 2: GND, 3: "TOUCH_I", 4: GND, 5: "+3V3_AON", 6: GND}, LC["TTP223"], "TTP223-BA6-TD (TDSEMIC)", "Táctil",
+     sym=dict(L=[(5, "VDD"), (3, "I"), (4, "AHLB"), (6, "TOG")], R=[(1, "Q"), (2, "VSS")]),
+     note="AHLB = 0 (activo alto), TOG = 0 (directo): Q = 1 mientras se toca. Modo de bajo consumo (≈ 1,5 µA a 3 V). "
+          "TDSEMIC TTP223-BA6-TD (C42422127): mismo patillaje que el TTP223-BA6 de Tontek, sin existencias en JLC")
+C("C68", "100n", "+3V3_AON", GND, block="Táctil", note="obligatorio y pegado a VDD/VSS (hoja del TTP223)")
+C("C69", "22p", "TOUCH_I", GND, block="Táctil", dnp=True,
+  note="Cs de sensibilidad (0–50 pF): sin montar; se ajusta tras la prueba con la pared de 1,2–1,5 mm y agua")
+R("R16", "1k", "TOUCH_E", "TOUCH_I", block="Táctil", note="serie del electrodo (ESD)")
+part("J7", "WIRE", "TÁCTIL", (0, 0), 0, {1: "TOUCH_E"}, block="Táctil", sym="TP", no_assembly=True,
+     note="hilo o muelle a la lámina de cobre del electrodo (pared interior adelgazada, sin agujero)")
+R("R17", "10k", "TOUCH_OUT", "TOUCH_SENSE", block="Táctil",
+  note="→ GPIO11 (RTC: despierta del sueño y mide la pulsación larga); limita la corriente si el S3 está sin tensión")
 C("C21", "10u 25V", VSYS, GND, block="3V3", fp="C0603")
 C("C22", "22u 10V", V3, GND, block="3V3", fp="C0805")
 part("U7", "SOT23-5", "RT9080-33GJ5", (0, 0), 0, {1: VSYS, 2: GND, 3: "ZED_EN", 4: None, 5: VZED}, LC["RT9080"],
@@ -267,18 +365,19 @@ R("R60", "100k", "ZED_EN", GND, block="ZED", note="ZED apagado mientras arranca 
 # Pines según la hoja de datos del ZED-F9P (UBX-17051259 / UBX-21023276). Sin usar: ANT_DETECT/ANT_OFF/ANT_SHORT_N,
 # I2C, TX_READY, EXTINT, GEOFENCE_STAT, RTK_STAT, USB del ZED (V_USB a GND, como pide la hoja si no se usa), reservados.
 zed = {n: GND for n in (1, 3, 12, 14, 32, 37, 41, 48, 55)}
-zed.update({2: "RF_ZED", 7: "VCC_RF", 26: "ZED_RX2", 27: "ZED_TX2_C", 33: VZED, 34: VZED, 36: V3, 38: GND,
+zed.update({2: "RF_ZED", 7: "VCC_RF", 26: "ZED_RX2", 27: "ZED_TX2_C", 33: VZED, 34: VZED, 36: "+3V3_AON", 38: GND,
             42: "ZED_TX1_C", 43: "ZED_RX1", 49: "ZED_RST", 50: "ZED_SAFEBOOT", 53: "ZED_PPS_C"})
 part("U1", "ZED", "ZED-F9P-04B", (0, 0), 0, zed, "C5120257", "ZED-F9P-04B (u-blox)", "ZED",
      sym=dict(L=[(2, "RF_IN"), (7, "VCC_RF"), (33, "VCC"), (34, "VCC"), (36, "V_BCKP"), (38, "V_USB"),
                  (49, "RESET_N"), (50, "SAFEBOOT_N"), (53, "TIMEPULSE")],
               R=[(42, "TXD"), (43, "RXD"), (27, "TXD2"), (26, "RXD2")] +
                 [(n, "GND") for n in (1, 3, 12, 14, 32, 37, 41, 48, 55)]),
-     note="ZED-F9P soldado (LGA 17 × 22). V_BCKP desde el 3,3 V principal (siempre encendido): arranque en caliente")
+     note="ZED-F9P soldado (LGA 17 × 22). REV B: V_BCKP desde +3V3_AON (LDO de µA desde la batería): arranque en caliente "
+          "también tras el apagado total")
 C("C62", "47u 6V3", VZED, GND, block="ZED", fp="C0805")
 C("C63", "100n", VZED, GND, block="ZED")
 C("C65", "1u", VZED, GND, block="ZED", note="pegado a los pines VCC 33/34")
-C("C64", "100n", V3, GND, block="ZED", note="V_BCKP")
+C("C64", "100n", "+3V3_AON", GND, block="ZED", note="V_BCKP")
 # antena activa: VCC_RF → 10 Ω → 47 nH → línea de RF (lado de la antena); bloqueo de continua hacia RF_IN
 R("R70", "22R 1206", "VCC_RF", "VCC_RF_F", block="ZED", fp="R1206",
   note="revisión independiente: limita un corto del coaxial a ≈ 150 mA (bobina de 300 mA); cae ≈ 0,4 V a 20 mA de LNA")
@@ -301,26 +400,31 @@ R("R54", "330R", "ZED_TX2_C", "ZED_TX2", block="ZED")
 R("R55", "330R", "ZED_PPS_C", "ZED_PPS", block="ZED", note="PPS → GPIO4")
 
 # ---------------------------------------------------------------------------------------- ESP32-S3 (U4)
+# REV B: ESP32-S3-WROOM-1U-N16R8 (pines del módulo según su hoja de datos y el símbolo de Espressif). Con la PSRAM octal
+# (R8) los GPIO35–37 son del módulo: sin conectar. Los GPIO de la REV A se conservan (el firmware no cambia de pines).
+# Nuevos: IO3 = IMU_INT1 (RTC: despierta por movimiento) · IO11 = TOUCH_SENSE (RTC) · IO41/IO42 = I²C (medidor + IMU)
+# · IO46 = POWER_HOLD (de arranque, bajo por defecto) · IO48 = LED_PWR (EN del elevador del anillo).
 GPIO = {  # pad del módulo: (GPIO, red)
-    4: ("IO0", "BOOT"), 5: ("IO1", "HALL"), 6: ("IO2", "BAT_ADC"), 7: ("IO3", None),
-    8: ("IO4", "ZED_PPS"), 9: ("IO5", "ZED_TX1"), 10: ("IO6", "S3_TX1"), 11: ("IO7", "ZED_TX2"), 12: ("IO8", "S3_TX2"),
-    13: ("IO9", "S3_ZRST"), 14: ("IO10", "ZED_EN"), 15: ("IO11", None),
-    16: ("IO12", "SD_CLK0"), 17: ("IO13", "SD_CMD"), 18: ("IO14", "SD_D0"), 19: ("IO15", "SD_D1"), 20: ("IO16", "SD_D2"),
-    21: ("IO17", "SD_D3"), 22: ("IO18", "VBUS_DET"), 23: ("IO19 D-", "USB_DM"), 24: ("IO20 D+", "USB_DP"),
-    25: ("IO21", "SD_PWR_N"),
-    26: ("IO26", None), 27: ("IO47", "LED_DIN_S3"), 28: ("IO33", None), 29: ("IO34", None), 30: ("IO48", "GPIO48"),
-    31: ("IO35", None), 32: ("IO36", None), 33: ("IO37", None), 34: ("IO38", "CHG_PG"), 35: ("IO39", "CHG_STAT"),
-    36: ("IO40", "POGO_AUX"), 37: ("IO41", "GPIO41"), 38: ("IO42", None), 39: ("TXD0", "U0TX"), 40: ("RXD0", "U0RX"),
-    41: ("IO45", None), 44: ("IO46", None), 45: ("EN", "EN"), 3: ("3V3", V3),
+    2: ("3V3", V3), 3: ("EN", "EN"),
+    4: ("IO4", "ZED_PPS"), 5: ("IO5", "ZED_TX1"), 6: ("IO6", "S3_TX1"), 7: ("IO7", "ZED_TX2"),
+    8: ("IO15", "SD_D1"), 9: ("IO16", "SD_D2"), 10: ("IO17", "SD_D3"), 11: ("IO18", "VBUS_DET"), 12: ("IO8", "S3_TX2"),
+    13: ("IO19 D-", "USB_DM"), 14: ("IO20 D+", "USB_DP"), 15: ("IO3", "IMU_INT1"), 16: ("IO46", "PWR_HOLD"),
+    17: ("IO9", "S3_ZRST"), 18: ("IO10", "ZED_EN"), 19: ("IO11", "TOUCH_SENSE"), 20: ("IO12", "SD_CLK0"),
+    21: ("IO13", "SD_CMD"), 22: ("IO14", "SD_D0"), 23: ("IO21", "SD_PWR_N"), 24: ("IO47", "LED_DIN_S3"),
+    25: ("IO48", "LED_PWR"), 26: ("IO45", None), 27: ("IO0", "BOOT"), 28: ("IO35 (PSRAM)", None),
+    29: ("IO36 (PSRAM)", None), 30: ("IO37 (PSRAM)", None), 31: ("IO38", "CHG_PG"), 32: ("IO39", "CHG_STAT"),
+    33: ("IO40", "POGO_AUX"), 34: ("IO41", "I2C_SCL"), 35: ("IO42", "I2C_SDA"), 36: ("RXD0", "U0RX"),
+    37: ("TXD0", "U0TX"), 38: ("IO2", "BAT_ADC"), 39: ("IO1", "HALL"),
 }
-GND_PADS = (1, 2, 42, 43) + tuple(range(46, 66))
+GND_PADS = (1, 40, 41)
 u4nets = {n: GND for n in GND_PADS}
 u4nets.update({k: v[1] for k, v in GPIO.items()})
-part("U4", "MINI1U", "ESP32-S3-MINI-1U-N8", (0, 0), 0, u4nets, LC["MINI1U"], "ESP32-S3-MINI-1U-N8", "ESP32-S3",
-     sym=dict(L=[(k, v[0] + (" " + v[1] if v[1] and v[1] not in (V3,) else "")) for k, v in sorted(GPIO.items()) if k <= 25 or k == 3],
-              R=[(k, v[0] + (" " + v[1] if v[1] else "")) for k, v in sorted(GPIO.items()) if 25 < k] +
+part("U4", "WROOM1U", "ESP32-S3-WROOM-1U-N16R8", (0, 0), 0, u4nets, LC["WROOM1U"], "ESP32-S3-WROOM-1U-N16R8", "ESP32-S3",
+     sym=dict(L=[(k, v[0] + (" " + v[1] if v[1] and v[1] not in (V3,) else "")) for k, v in sorted(GPIO.items()) if k <= 20],
+              R=[(k, v[0] + (" " + v[1] if v[1] else "")) for k, v in sorted(GPIO.items()) if 20 < k] +
                 [(n, "GND") for n in GND_PADS]),
-     note="antena FPC de 2,4 GHz en el conector del módulo, pegada a la pared de la cápsula (lejos de la GNSS)")
+     note="16 MB de flash + 8 MB de PSRAM octal (3,2 mm de alto). Antena FPC de 2,4 GHz en el U.FL del módulo, pegada "
+          "a la pared de la cápsula (lejos de la GNSS)")
 C("C24", "22u 10V", V3, GND, block="ESP32-S3", fp="C0805")
 C("C25", "100n", V3, GND, block="ESP32-S3")
 C("C26", "1u", V3, GND, block="ESP32-S3")
@@ -331,15 +435,29 @@ C("C27", "1u", "EN", GND, block="ESP32-S3", note="EN: RC 10 k / 1 µF (guía de 
 # Petición del usuario (14/11/2026): anillo translúcido de resina en la unión base–tapa, iluminado desde dentro. 8 SK6812SIDE-A
 # (2 por lado, ≈ 27 mm entre LED a lo largo del anillo) en los cantos de la placa (cara F), con la lente hacia la pared, en
 # cadena: arriba izq. → arriba der. → derecha arriba → derecha abajo → abajo der. → abajo izq. → izquierda abajo → izquierda arriba.
-# VDD = VSYS (la hoja pide 3,7–5,5 V: con la celda por debajo de ~3,6 V pueden fallar); DIN a 3,3 V (VIH = 0,65 VDD ≤ 2,73 V).
+# REV B: VDD = VLED (4,3 V del elevador TPS61023). La hoja pide 3,7–5,5 V (pág. 6) y cada LED gasta 0,6 mA en reposo:
+# con EN = 0 el TPS61023 desconecta la salida de la entrada («true disconnection», 0,1 µA), así que el anillo no
+# consume con el casco dormido ni apagado. DIN a 3,3 V: VIH = 0,65 × 4,3 ≈ 2,8 V (por encima de 4,3 V de VSYS, al
+# cargar, el elevador pasa la entrada: VIH ≈ 2,9 V). El firmware deja GPIO47 a 0 con el anillo apagado.
 R("R24", "33R", "LED_DIN_S3", "LED_D1", block="Anillo", note="serie de la línea de datos (GPIO47)")
 LEDS = ["D%d" % (10 + k) for k in range(8)]
 for i, ref in enumerate(LEDS):
     part(ref, "LEDSIDE", "SK6812SIDE-A", (0, 0), 0,
-         {1: "LED_D%d" % (i + 1), 2: VSYS, 3: ("LED_D%d" % (i + 2)) if i < len(LEDS) - 1 else None, 4: GND},
+         {1: "LED_D%d" % (i + 1), 2: "VLED", 3: ("LED_D%d" % (i + 2)) if i < len(LEDS) - 1 else None, 4: GND},
          LC["SK6812SIDE"], "SK6812SIDE-A (OPSCO)", "Anillo",
          sym=dict(L=[(1, "DIN"), (2, "VDD")], R=[(3, "DOUT"), (4, "GND")]), note="RGB direccionable, emisión lateral")
-    C("C%d" % (90 + i), "100n", VSYS, GND, block="Anillo")
+    C("C%d" % (90 + i), "100n", "VLED", GND, block="Anillo")
+part("U11", "SOT563", "TPS61023DRLR", (0, 0), 0, {1: "VLED_FB", 2: "LED_PWR", 3: VSYS, 4: GND, 5: "VLED_SW", 6: "VLED"},
+     LC["TPS61023"], "TPS61023DRLR (TI)", "Anillo",
+     sym=dict(L=[(3, "VIN"), (2, "EN"), (1, "FB")], R=[(6, "VOUT"), (5, "SW"), (4, "GND")]),
+     note="elevador síncrono 3,7 A, 1 MHz; V_REF 0,595 V; pasa la entrada si VIN > VOUT; salida desconectada con EN = 0")
+part("L71", "L0806", "1 µH", (0, 0), 0, {1: VSYS, 2: "VLED_SW"}, LC["1uH 0806"], "WPN201610U1R0MT (Sunlord)", "Anillo",
+     sym="R", note="1 µH, I_sat 3 A, 50 mΩ (≈ 0,45 A de pico con los 8 LED a tope desde 3 V)")
+C("C98", "10u 25V", VSYS, GND, block="Anillo", fp="C0603", note="entrada del elevador")
+C("C99", "22u 10V", "VLED", GND, block="Anillo", fp="C0805", note="salida del elevador (≥ 10 µF efectivos)")
+R("R25", "620k", "VLED", "VLED_FB", block="Anillo", note="V_OUT = 0,595 × (1 + 620k/100k) ≈ 4,28 V")
+R("R26", "100k", "VLED_FB", GND, block="Anillo")
+R("R27", "100k", "LED_PWR", GND, block="Anillo", note="elevador apagado por defecto (arranque y casco apagado)")
 
 # ---------------------------------------------------------------------------------------- Hall (encendido en la base)
 part("U8", "SOT23", "DRV5032FA", (0, 0), 0, {1: V3, 2: "HALL", 3: GND}, LC["DRV5032FA"], "DRV5032FADBZR", "Hall",
@@ -363,11 +481,35 @@ for i, n in enumerate(("SD_CMD", "SD_D0", "SD_D1", "SD_D2", "SD_D3")):
     R("R%d" % (41 + i), "10k", n, VSD, block="microSD")
 R("R46", "22R", "SD_CLK0", "SD_CLK", block="microSD", note="serie del reloj (amortigua el flanco)")
 
+# ---------------------------------------------------------------------------------------- REV B: bus I²C (medidor + IMU)
+# I²C a 400 kHz en GPIO41 (SCL) / GPIO42 (SDA): MAX17048 en 0x36, LSM6DSV16X en 0x6A (SA0 = 0). Pull-ups al 3,3 V
+# principal: con el casco apagado el bus queda a 0 y el MAX17048 sigue midiendo (sin EnSleep no entra en reposo por el
+# bus; SDA/SCL aguantan 5,5 V con independencia de VDD).
+R("R28", "2k2", "I2C_SCL", V3, block="I2C", note="pull-up I²C (400 kHz)")
+R("R29", "2k2", "I2C_SDA", V3, block="I2C")
+part("U12", "TDFN8", "MAX17048G+T10", (0, 0), 0,
+     {1: GND, 2: VBAT, 3: VBAT, 4: GND, 5: None, 6: GND, 7: "I2C_SCL", 8: "I2C_SDA", 9: GND},
+     LC["MAX17048"], "MAX17048G+T10 (Analog Devices)", "Medidor",
+     sym=dict(L=[(3, "VDD"), (2, "CELL"), (1, "CTG"), (6, "QSTRT")], R=[(7, "SCL"), (8, "SDA"), (5, "ALRT"), (4, "GND"), (9, "EP")]),
+     note="medidor ModelGauge (% de batería sin resistencia de medida): VDD y CELL a la celda (tras Q7), CTG y QSTRT a GND, "
+          "ALRT sin usar (se lee por I²C). ≈ 3 µA en hibernación: sigue contando con el casco apagado")
+C("C36", "1u", VBAT, GND, block="Medidor", note="VDD del MAX17048, pegado al pin 3")
+part("U13", "LGA14", "LSM6DSV16X", (0, 0), 0,
+     {1: GND, 2: GND, 3: GND, 4: "IMU_INT1", 5: V3, 6: GND, 7: GND, 8: V3, 9: None, 10: None, 11: None, 12: V3,
+      13: "I2C_SCL", 14: "I2C_SDA"},
+     LC["LSM6DSV16X"], "LSM6DSV16XTR (ST)", "IMU",
+     sym=dict(L=[(8, "VDD"), (5, "VDDIO"), (12, "CS"), (1, "SDO/SA0"), (2, "SDx"), (3, "SCx"), (6, "GND"), (7, "GND")],
+              R=[(13, "SCL"), (14, "SDA"), (4, "INT1"), (9, "INT2"), (10, "OCS_Aux"), (11, "SDO_Aux")]),
+     note="IMU del casco (la misma que la cincha REV D): movimiento de la cabeza frente al tronco, reposo automático y "
+          "caídas. INT1 → GPIO3 (RTC: despierta del sueño por movimiento)")
+C("C37", "100n", V3, GND, block="IMU", note="VDD del LSM6")
+C("C38", "100n", V3, GND, block="IMU", note="VDDIO del LSM6")
+
 # ---------------------------------------------------------------------------------------- pruebas y mecánica
 TP("TP1", "EN", "EN"); TP("TP2", "BOOT", "BOOT", "GPIO0 a GND al arrancar = descarga (también por USB nativo)")
 TP("TP3", "GND", GND); TP("TP4", "TXD0", "U0TX"); TP("TP5", "RXD0", "U0RX"); TP("TP6", "3V3", V3)
-TP("TP7", "VBAT", VBAT); TP("TP8", "VSYS", VSYS); TP("TP9", "3V3_ZED", VZED); TP("TP10", "GPIO41", "GPIO41")
-TP("TP12", "GPIO48", "GPIO48", "libre (futuro)")
+TP("TP7", "VBAT", VBAT); TP("TP8", "VSYS", VSYS); TP("TP9", "3V3_ZED", VZED); TP("TP10", "3V3_AON", "+3V3_AON")
+TP("TP12", "VLED", "VLED", "4,3 V del anillo (solo con LED_PWR = 1)")
 TP("TP13", "SAFEBOOT", "ZED_SAFEBOOT", "SAFEBOOT_N del ZED: solo para recuperar su firmware")
 for i, (sx, sy) in enumerate(((1, 1), (-1, 1), (-1, -1), (1, -1)), 1):
     part("H%d" % i, "HOLE", "TALADRO M2,5", (sx * HOLE_XY, sy * HOLE_XY), 0, {}, block="Mecánica", sym=None,

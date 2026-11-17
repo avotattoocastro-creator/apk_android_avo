@@ -494,6 +494,18 @@
       {
         "netclass": "Potencia",
         "pattern": "+3V3"
+      },
+      {
+        "netclass": "Potencia",
+        "pattern": "BAT_F"
+      },
+      {
+        "netclass": "Potencia",
+        "pattern": "VLED"
+      },
+      {
+        "netclass": "Potencia",
+        "pattern": "VLED_SW"
       }
     ]
   },

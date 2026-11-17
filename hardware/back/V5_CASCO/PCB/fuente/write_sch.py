@@ -10,12 +10,18 @@ BLOCKS = {   # name: (x0, y0, x1, y1, title)
     "Pogo": (0, 0, 0, 0, "POGO MAGNÉTICO DE 5 CONTACTOS (por hilos): VBUS · D− · D+ · GND · AUX — carga y USB con el PC · ESD"),
     "Cargador": (0, 0, 0, 0, "CARGADOR CON CAMINO DE POTENCIA (BQ24072) · batería 1S ≥ 2000 mAh"),
     "Batería": (0, 0, 0, 0, "BATERÍA (hilos soldados) · PTC · medida por ADC"),
-    "3V3": (0, 0, 0, 0, "3,3 V PRINCIPAL (TLV75733P, 1 A)"),
+    "3V3": (0, 0, 0, 0, "3,3 V PRINCIPAL (TLV75733P, 1 A) · EN = OR(táctil, POWER_HOLD, VBUS)"),
+    "Encendido": (0, 0, 0, 0, "ENCENDIDO Y APAGADO TOTAL: OR de diodos al EN del 3,3 V (táctil · POWER_HOLD GPIO46 · VBUS)"),
+    "Siempre": (0, 0, 0, 0, "3,3 V SIEMPRE ENCENDIDO (XC6206, ≈ 1 µA): V_BCKP del ZED y táctil"),
+    "Táctil": (0, 0, 0, 0, "TÁCTIL SELLADO (TTP223, activo alto, directo) · electrodo por hilo · lectura en GPIO11"),
     "ZED": (0, 0, 0, 0, "ZED-F9P SOLDADO: 3,3 V propio con EN (RT9080) · antena activa por VCC_RF · UART1 · UART2 · PPS · RESET"),
-    "ESP32-S3": (0, 0, 0, 0, "ESP32-S3-MINI-1U-N8 (BLE móvil + ESP-NOW pecho/cinchas) · arranque"),
-    "Anillo": (0, 0, 0, 0, "ANILLO DE LUZ: 8 × SK6812SIDE-A (2 por lado) de emisión lateral en los cantos (GPIO47, VSYS)"),
+    "ESP32-S3": (0, 0, 0, 0, "ESP32-S3-WROOM-1U-N16R8 (16 MB + PSRAM 8 MB) · BLE móvil + ESP-NOW cinchas · arranque"),
+    "Anillo": (0, 0, 0, 0, "ANILLO DE LUZ: 8 × SK6812SIDE-A (GPIO47) a 4,3 V con elevador TPS61023 (EN = GPIO48, salida desconectada con EN = 0)"),
     "Hall": (0, 0, 0, 0, "SENSOR HALL DRV5032 · encendido al poner la cápsula en la base del casco"),
     "microSD": (0, 0, 0, 0, "microSD (SDMMC 4 bits) · alimentación conmutada"),
+    "I2C": (0, 0, 0, 0, "BUS I²C (GPIO41 SCL · GPIO42 SDA, 400 kHz)"),
+    "Medidor": (0, 0, 0, 0, "MEDIDOR DE BATERÍA MAX17048 (0x36, ModelGauge, ≈ 3 µA)"),
+    "IMU": (0, 0, 0, 0, "IMU LSM6DSV16X (0x6A) · INT1 → GPIO3 (despierta por movimiento)"),
     "Pruebas": (0, 0, 0, 0, "PUNTOS DE PRUEBA"),
 }
 BLOCK_OF = {}
@@ -137,7 +143,8 @@ def write(path_sch, path_pro, path_parts):
                         priority=0)],
                   [("RF_*", "RF_50"), ("VBUS", "Potencia"), ("POGO_VBUS", "Potencia"),
                    ("VSYS", "Potencia"), ("VBAT", "Potencia"), ("BAT_IN", "Potencia"),
-                   ("+3V3_ZED", "Potencia"), ("+3V3", "Potencia")])
+                   ("+3V3_ZED", "Potencia"), ("+3V3", "Potencia"),
+                   ("BAT_F", "Potencia"), ("VLED", "Potencia"), ("VLED_SW", "Potencia")])
 
     rows = []
     for p in D.PARTS:

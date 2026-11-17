@@ -26,7 +26,7 @@ VIA = (0.5, 0.3)
 
 # widths per net (mm)
 WIDTH = {D.VBUS: 0.4, "POGO_VBUS": 0.4, D.VSYS: 0.5, D.VBAT: 0.5, "BAT_IN": 0.5, D.VZED: 0.4, D.V3: 0.4, D.VSD: 0.3,
-         "RF_ANT": 0.36, "RF_ZED": 0.36, "VCC_RF": 0.3, "VCC_RF_F": 0.3}
+         "BAT_F": 0.5, "VLED": 0.3, "VLED_SW": 0.3, "RF_ANT": 0.36, "RF_ZED": 0.36, "VCC_RF": 0.3, "VCC_RF_F": 0.3}
 ORDER = ["RF_ZED", "RF_ANT", "VCC_RF", "VCC_RF_F", "POGO_VBUS", D.VBUS, D.VBAT, "BAT_IN", "CHG_ISET", "CHG_ILIM", "CHG_TS",
          "CHG_EN2", D.VSYS, D.VZED, D.V3, D.VSD, "USB_DP_C", "USB_DM_C", "USB_DP", "USB_DM",
          "SD_CLK0", "SD_CLK", "SD_CMD", "SD_D0", "SD_D1", "SD_D2", "SD_D3", "SD_PWR_N",

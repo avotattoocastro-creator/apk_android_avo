@@ -7,13 +7,16 @@ Ejes: origen en el centro, z = 0 en la cara inferior de la cápsula, z hacia el 
 La PCB (pcb_mecanica.json, coordenadas vistas desde su cara F) va con la cara F hacia abajo: (X, Y)_PCB → (−X, Y)_CAD.
 
 Apilado (de abajo arriba):
-  suelo 1,4 · batería ≤ 50 × 37 × 8,5 (E) · 0,4 · componentes de la cara F (≤ 2,6) · PCB 1,6 · antena 25 × 25 × 8,1 (E)
+  suelo 1,4 · batería ≤ 50 × 37 × 8,5 (E) · 0,4 · componentes de la cara F (≤ 3,2 desde la REV B: WROOM-1U) · PCB 1,6
+  · antena 25 × 25 × 8,1 (E)
   · 0,3 · techo 1,2.
 Cierre: 4 × M2,5 × 16 desde abajo por los taladros de la PCB (±22, ±22) con junta tórica 2,5 × 1 bajo la cabeza;
   insertos M2,5 (Ø3,5 × 4) en los postes de la tapa; la PCB queda pinzada entre las columnas de la base y los postes.
   Anillo de resina translúcida de UNA pieza, 3,0 mm de alto, centrado en la luz de los 8 LED laterales de la PCB
   (z 10,4–13,4). SIN juntas TPU: las 2 uniones del anillo se sellan con pegamento (tipo B-7000/T-7000).
 Pogo de 5 contactos (ESTIMADO a partir del STEP del de 3 contactos, paso 2,3): en el fondo, franja −Y, cara a ras.
+Táctil (REV B): la pared de la base se adelgaza POR DENTRO a 1,4 mm frente al hilo J7 de la PCB (lámina de cobre pegada
+  en el rebaje y unida a J7 con un hilo): sin agujero, la estanqueidad no cambia. Por fuera, un punto en relieve.
 Base del casco: anillo de PETG con 4 imanes Ø6 × 2 (frente a los 4 de la cápsula), imán Ø8 × 3 del Hall y alojamiento
   con paredes a 45° de 1,2 mm de alto (se suelta con un golpe lateral); cara inferior cóncava R = 110 (ajustable).
 """
@@ -58,6 +61,8 @@ MAG = dict(d=6.0, t=2.0, skin=0.3, pos=[(-15.5, -22.5), (15.5, -22.5), (-15.0, 2
 U8 = next(e for e in MEC["envolventes"] if e[0] == "U8")
 HALL_XY = (-(U8[1] + U8[3]) / 2, (U8[2] + U8[4]) / 2)
 CHAMF = 1.2                                # chaflán inferior de la cápsula = alojamiento de la base del casco
+J7 = MEC["hilos"]["J7"]["pos"]           # hilo del electrodo táctil en la PCB (REV B)
+TOUCH = dict(x=-J7[0], y=J7[1], len=9.0, wall=1.4, z0=FLOOR + 2.6, dot_d=5.0, dot_h=0.4)
 HB = dict(t=3.5, ring=9.5, rim=1.8, recess=1.2, helmet_r=110.0, sag=8.0, hall_mag=(8.0, 3.0))
 
 
@@ -95,6 +100,14 @@ def base():
     stad = lambda l, w, h, z0: rrect(l, w, w / 2 - 0.01, h, z0).translate((0, py, 0))
     b = b.cut(stad(fl, fw, POGO["cup_z"] + 1 - zf, zf))                                   # reborde + copa
     b = b.cut(stad(POGO["face_l"] + 2 * cl, POGO["face_w"] + 2 * cl, zf + 1.01, -1))      # cara a ras del fondo
+    # táctil (REV B): rebaje interior de la pared hasta 1,4 mm frente a J7 (lámina de cobre) y punto en relieve fuera
+    sx = 1 if TOUCH["x"] > 0 else -1
+    d_cut = WALL - TOUCH["wall"]
+    z1 = Z_RING0 - 1.5
+    b = b.cut(box(sx * (IN / 2 + d_cut / 2 - 0.05), TOUCH["y"], TOUCH["z0"], d_cut + 0.1, TOUCH["len"], z1 - TOUCH["z0"]))
+    b = b.union(cq.Workplane("YZ").circle(TOUCH["dot_d"] / 2).extrude(TOUCH["dot_h"] + 0.1)
+                .translate((sx * (OUTS / 2 - 0.1) if sx > 0 else -(OUTS / 2 + TOUCH["dot_h"]), TOUCH["y"],
+                            (TOUCH["z0"] + z1) / 2)))
     # cuna de la batería: topes bajos en las 4 esquinas de la celda
     for sx in (-1, 1):
         for sy in (-1, 1):
@@ -235,7 +248,9 @@ def main():
                           bateria_max_mm=[BAT["x"], BAT["y"], BAT["t"]], base_casco=kind,
                           altura_total_sobre_casco_mm=round(H + HB["t"], 2),
                           tornillos="4 × M2,5 × 16 (cabeza cilíndrica) + junta tórica 2,5 × 1 + inserto M2,5 Ø3,5 × 4",
-                          hall_xy=[round(HALL_XY[0], 2), round(HALL_XY[1], 2)])
+                          hall_xy=[round(HALL_XY[0], 2), round(HALL_XY[1], 2)],
+                          tactil=dict(xy=[round(TOUCH["x"], 2), round(TOUCH["y"], 2)], pared_mm=TOUCH["wall"],
+                                      z=[round(TOUCH["z0"], 2), round(Z_RING0 - 1.5, 2)], largo_mm=TOUCH["len"]))
     asm = cq.Assembly(name="AVO_CASCO_V5")
     col = {"base": (0.12, 0.12, 0.14), "tapa": (0.85, 0.85, 0.88), "junta": (0.2, 0.2, 0.2), "base_casco": (0.8, 0.1, 0.1),
            "anillo": (0.75, 0.9, 1.0)}
