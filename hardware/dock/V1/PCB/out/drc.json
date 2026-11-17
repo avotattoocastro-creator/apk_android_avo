@@ -1,0 +1,443 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-16T02:00:56+0000",
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "AVO_DOCK_V1_PCB.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 35.0,
+                        "y": 65.0
+                    },
+                    "uuid": "7a7d2668-0510-5d64-a78f-32bf89a5d375"
+                },
+                {
+                    "description": "Segment on F.Silkscreen",
+                    "pos": {
+                        "x": 35.0,
+                        "y": 112.0
+                    },
+                    "uuid": "f6894710-fad2-5dbe-8fb1-7eb6ce3a278d"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 35.0,
+                        "y": 65.0
+                    },
+                    "uuid": "7a7d2668-0510-5d64-a78f-32bf89a5d375"
+                },
+                {
+                    "description": "Segment on F.Silkscreen",
+                    "pos": {
+                        "x": 35.0,
+                        "y": 118.5
+                    },
+                    "uuid": "daf5d494-34c1-50f5-a06a-2083ec63d5b2"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 62.0
+                    },
+                    "uuid": "83c14db4-17e5-55ee-9632-d1c51e83285c"
+                },
+                {
+                    "description": "Segment on F.Silkscreen",
+                    "pos": {
+                        "x": 54.0,
+                        "y": 62.0
+                    },
+                    "uuid": "c62a22a7-bdf5-5b1a-bd98-332009aeb8ea"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 62.0
+                    },
+                    "uuid": "83c14db4-17e5-55ee-9632-d1c51e83285c"
+                },
+                {
+                    "description": "Segment on F.Silkscreen",
+                    "pos": {
+                        "x": 54.0,
+                        "y": 112.0
+                    },
+                    "uuid": "1c4bc2e7-848d-58a0-adb1-9c985a0c0d72"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 62.0
+                    },
+                    "uuid": "83c14db4-17e5-55ee-9632-d1c51e83285c"
+                },
+                {
+                    "description": "Segment on F.Silkscreen",
+                    "pos": {
+                        "x": 60.5,
+                        "y": 62.0
+                    },
+                    "uuid": "4854a85a-20f2-58d6-825e-6eba88f74f69"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 35.0,
+                        "y": 65.0
+                    },
+                    "uuid": "7a7d2668-0510-5d64-a78f-32bf89a5d375"
+                },
+                {
+                    "description": "Segment on F.Silkscreen",
+                    "pos": {
+                        "x": 60.5,
+                        "y": 118.5
+                    },
+                    "uuid": "58764d44-5886-58e9-ab58-95e33ca38a64"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 165.0,
+                        "y": 135.0
+                    },
+                    "uuid": "c7052f90-70e2-5f95-9196-d74eb9a808f8"
+                },
+                {
+                    "description": "Segment of J3 on F.Silkscreen",
+                    "pos": {
+                        "x": 163.5,
+                        "y": 119.3
+                    },
+                    "uuid": "def6374a-0e8d-558e-9ca9-4d1c529a4ded"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 165.0,
+                        "y": 135.0
+                    },
+                    "uuid": "c7052f90-70e2-5f95-9196-d74eb9a808f8"
+                },
+                {
+                    "description": "Segment of J3 on F.Silkscreen",
+                    "pos": {
+                        "x": 163.5,
+                        "y": 128.7
+                    },
+                    "uuid": "0af5590c-532b-543b-941e-f11673e51e3a"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'PULSADOR' on F.Silkscreen",
+                    "pos": {
+                        "x": 66.0,
+                        "y": 80.0
+                    },
+                    "uuid": "e380a13f-65ab-579b-a21a-25ab8bc846ad"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'VBUS' on F.Silkscreen",
+                    "pos": {
+                        "x": 71.0,
+                        "y": 69.0
+                    },
+                    "uuid": "1775c70c-6dc1-55e8-9504-a0c9818c30b9"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'D-' on F.Silkscreen",
+                    "pos": {
+                        "x": 73.54,
+                        "y": 69.0
+                    },
+                    "uuid": "bb9d608f-2fda-547a-81b6-f3c60bbfb667"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'VBUS' on F.Silkscreen",
+                    "pos": {
+                        "x": 86.0,
+                        "y": 69.0
+                    },
+                    "uuid": "51a0d84a-7913-5313-a26a-de602016ee04"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'D-' on F.Silkscreen",
+                    "pos": {
+                        "x": 88.54,
+                        "y": 69.0
+                    },
+                    "uuid": "8044b2b6-1c44-5038-acd4-6c94756e4a96"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text '+5V' on F.Silkscreen",
+                    "pos": {
+                        "x": 104.0,
+                        "y": 69.0
+                    },
+                    "uuid": "4d97a74b-a0d4-5b09-aee2-9858771da8ff"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text '+5V' on F.Silkscreen",
+                    "pos": {
+                        "x": 115.0,
+                        "y": 69.0
+                    },
+                    "uuid": "52bf4d3a-82ad-5a02-96ef-27362cf58a72"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "Segment of PS1 on F.Silkscreen",
+                    "pos": {
+                        "x": 38.48,
+                        "y": 84.68
+                    },
+                    "uuid": "d2dcf1d5-04fb-5c84-b179-9c68c2b76201"
+                },
+                {
+                    "description": "Segment on F.Silkscreen",
+                    "pos": {
+                        "x": 35.0,
+                        "y": 112.0
+                    },
+                    "uuid": "f6894710-fad2-5dbe-8fb1-7eb6ce3a278d"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "Segment of PS1 on F.Silkscreen",
+                    "pos": {
+                        "x": 38.48,
+                        "y": 112.12
+                    },
+                    "uuid": "ecd60e17-1e3c-5f1b-8409-34eab5c97033"
+                },
+                {
+                    "description": "Segment on F.Silkscreen",
+                    "pos": {
+                        "x": 35.0,
+                        "y": 112.0
+                    },
+                    "uuid": "f6894710-fad2-5dbe-8fb1-7eb6ce3a278d"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "Segment on F.Silkscreen",
+                    "pos": {
+                        "x": 54.0,
+                        "y": 112.0
+                    },
+                    "uuid": "1c4bc2e7-848d-58a0-adb1-9c985a0c0d72"
+                },
+                {
+                    "description": "Segment of PS1 on F.Silkscreen",
+                    "pos": {
+                        "x": 38.48,
+                        "y": 84.68
+                    },
+                    "uuid": "ed1a48ce-5989-5adc-8307-40dc42787b4d"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "Segment on F.Silkscreen",
+                    "pos": {
+                        "x": 54.0,
+                        "y": 112.0
+                    },
+                    "uuid": "1c4bc2e7-848d-58a0-adb1-9c985a0c0d72"
+                },
+                {
+                    "description": "Segment of PS1 on F.Silkscreen",
+                    "pos": {
+                        "x": 38.48,
+                        "y": 112.12
+                    },
+                    "uuid": "ecd60e17-1e3c-5f1b-8409-34eab5c97033"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "Segment on F.Silkscreen",
+                    "pos": {
+                        "x": 60.5,
+                        "y": 62.0
+                    },
+                    "uuid": "4854a85a-20f2-58d6-825e-6eba88f74f69"
+                },
+                {
+                    "description": "Segment of PS1 on F.Silkscreen",
+                    "pos": {
+                        "x": 38.48,
+                        "y": 84.68
+                    },
+                    "uuid": "ed1a48ce-5989-5adc-8307-40dc42787b4d"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "Segment on F.Silkscreen",
+                    "pos": {
+                        "x": 60.5,
+                        "y": 62.0
+                    },
+                    "uuid": "4854a85a-20f2-58d6-825e-6eba88f74f69"
+                },
+                {
+                    "description": "Segment of PS1 on F.Silkscreen",
+                    "pos": {
+                        "x": 38.48,
+                        "y": 112.12
+                    },
+                    "uuid": "ecd60e17-1e3c-5f1b-8409-34eab5c97033"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        }
+    ]
+}

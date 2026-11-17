@@ -1,0 +1,57 @@
+# AVO DOCK V1 · soporte de pared cargador (2 cascos + 2 cinchas) · REV A — informe de fabricación
+
+- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
+- Commit: `9987bbc033e48db4c2a66e9767ef5a4d27fb8341` · ejecución de CI: 43789462892
+- Ruteado: placa ruteada de la fuente: Freerouting 1.9.0 de la ejecución 43788505774, sin reparar
+- Placa: 130 × 76 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu plano GND · In2.Cu plano +3V3 · B.Cu señal + relleno GND), 1,6 mm, ENIG, cobre exterior 1 oz · zona de red 230 V con foso de 6,5 mm
+- Componentes: 156 en total, 127 para montar, 0 sin montar (DNP: —), 29 a mano (pads de hilo y de prueba)
+- Pistas: 1449 · vías: 304 · ruteado completo (0 conexiones incompletas)
+
+## Comprobaciones bloqueantes
+| Comprobación | Resultado | Cantidad |
+|---|---|---|
+| DRC: errores | correcto | 0 |
+| DRC: conexiones incompletas | correcto | 0 |
+| DRC: cortocircuitos | correcto | 0 |
+| DRC: paridad esquema ↔ placa | correcto | 0 |
+| ERC: errores | correcto | 0 |
+| ERC: advertencias | correcto | 0 |
+
+
+## Advertencias de DRC (no bloqueantes)
+- silk_edge_clearance: 8
+- silk_over_copper: 7
+- silk_overlap: 6
+
+## Lista de materiales y posiciones
+- Piezas montadas sin número LCSC: F1, RV1, PS1, C4, U4, U5, Y1, U10, R40, R48, U14, U11, R41, R49, U15, U12, R42, R50, U16, U13, R43, R51, U17, J4
+- Los ficheros BOM y CPL se generan desde la misma lista que el esquema y la placa (`kicad/piezas.json`).
+- Revisar el giro de cada pieza en la vista previa de JLCPCB: el CPL sale de KiCad sin correcciones.
+
+## Modelo 3D (STEP y renders, no afecta a la fabricación)
+- Modelos de la librería de KiCad 9.0.0 descargados: 18; sin descargar: Connector_USB.3dshapes/USB_C_Receptacle_HRO_TYPE-C-31-M-12.step, Fuse.3dshapes/Fuse_Littelfuse_372_D8.50mm.step
+- ESP32-S3-MINI-1U: modelo de Espressif (`fuente/3d`). Pads de hilo/prueba: sin modelo 3D.
+
+## Diseño de la REV A (texto fijo)
+- Arquitectura, conexiones del ESP32-S3, puertos y seguridad eléctrica: `hardware/dock/V1/DOCS/ARQUITECTURA.md`.
+- **Selector de alimentación:**
+  - con red: Q1 y Q1B (AO3401A en paralelo) conducen y Q2 queda apagado;
+  - sin red: conduce Q2 desde el USB-C;
+  - el diodo interno de cada PMOS impide alimentar el IRM al revés y devolver corriente al PC.
+- **Puertos:** TPS2553 con el EN en el S3 (100 k a GND: apagados al arrancar) → shunt de 50 mΩ → contacto, con INA180A2 (× 50; 1 A = 2,5 V).
+- **Hub USB2514B** configurado por patillas: CFG_SEL = 00, LOCAL_PWR = 1, NON_REM = 00, puerto 4 desactivado. La potencia de los puertos la manda el S3, no PRTPWR.
+
+## Estado de fabricación
+- Diseño verificado por software (KiCad 9 en el CI): **sí**
+- Apto para solicitar prototipos: **sí, pendiente de validación física**
+- Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
+
+## Limitaciones pendientes (ver README)
+- Red 230 V: IRM-20-5, fusible, varistor y bornes de hilo se montan a mano (sin LCSC). Foso de 6,5 mm sin cobre en las 4 capas entre la zona de red y la MBTS: comprobar las distancias en el visor de Gerber antes de pedir.
+- El aislamiento reforzado lo da el IRM-20-5 certificado (3000 VAC); la caja debe ser de clase II (sin partes metálicas accesibles) y el cable de red con brida dentro de la caja.
+- Piezas sin código LCSC en esta revisión (TPS2553, INA180A2, TS3USB221, cristal de 24 MHz, JST-GH, shunts de 50 mΩ): buscarlas con el workflow de existencias antes de pedir.
+- Patillaje del USB2514B-I/M2 (QFN-36 heredado, almohadilla 3,7 mm) según DS00001692: revisar con la hoja de la versión SQFN si se compra esa.
+- USB entre el hub y los cascos a velocidad completa (12 Mbit/s, USB nativo del ESP32-S3): sin control de impedancia.
+- Pogo de 5 contactos del casco: el modelo real sigue pendiente (STEP).
+- Nada de esto se ha fabricado ni medido: no es un prototipo validado.
+::notice title=Puerta de fabricación::SUPERADA
