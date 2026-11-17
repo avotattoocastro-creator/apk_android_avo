@@ -52,6 +52,14 @@ los seguros de TPU de la REV 6.2. Lo demás (aro de luz, estanqueidad, funda, po
 - El cerco pasa de 2,0 a 3,0 mm, y el soporte crece a 99,6 × 84,6 mm.
 - Ver §3.6. Comprobación: `fuente/verificar_cierre.py` → `out/verificacion_cierre.json`.
 
+**REV 6.3.1 (17/11/2026, marcado del usuario: «integrado»):**
+- Las aletas del eje pasan de estar junto al balancín a estar **pegadas a las columnas de las esquinas**. El balancín
+  (14 / 12 mm) lleva una **barra** de columna a columna a la altura del eje, con los pasadores Ø2 × 6 en sus extremos.
+  Las aletas de +X van a ±20,5 de su centro y las de −X a ±19,5: la cápsula solo entra en una orientación.
+- Un **labio** en lo alto del balancín tapa el hueco con la tapa. Al apretar entra en un **rebaje** del borde de la
+  tapa, cuyo fondo queda a 0,5 mm del interior.
+- El diente queda libre a unos 9,5° (1,4 mm de pulsador) y el labio hace tope en el fondo del rebaje a unos 14,5°.
+
 ## 1. Qué hay en esta carpeta
 
 | Ruta | Contenido |
@@ -312,8 +320,10 @@ Piezas: `AVO_CINCHA_R6_3_balancin_Xpos_PETG`, `..._Xneg_PETG`, aletas en el mism
 | Elemento | Valor (cápsula: z = 0 en el fondo) |
 |---|---|
 | Balancín | PETG, 3,1 mm de grueso, de z −2,5 a 15,5 (a ras de la tapa). 14 mm en +X y 12 mm en −X |
-| Eje | En x = ±33,0, z = 7,0. 2 pasadores ISO 2338 Ø2 × 6 por balancín: a presión en la aleta (Ø1,95 en gota) y 3 mm dentro del balancín (Ø2,4 en gota) |
-| Aletas | 2 por lado, de 2,75 mm, de la pared de la base (entran 0,5) hasta el eje con cabeza redonda R2,6. Pasan por ranuras del cerco (0,25 de holgura) |
+| Eje | En x = ±33,0, z = 7,0. 2 pasadores ISO 2338 Ø2 × 6 por lado: a presión en la aleta (Ø1,95 en gota) y 3 mm dentro de la barra del balancín (Ø2,4 en gota) |
+| Aletas (6.3.1) | 2 por lado, de 2,75 mm, **pegadas a las columnas de las esquinas** (centros a ±20,5 en +X y ±19,5 en −X del centro del lado), de la pared de la base (entran 0,5) hasta el eje con cabeza R2,6. Pasan por ranuras del cerco (0,25 de holgura) |
+| Barra del eje (6.3.1) | Parte del balancín: de aleta a aleta a la altura del eje, Ø5,2 + placa hasta la cara exterior |
+| Labio (6.3.1) | En lo alto del balancín, 0,8 mm, hasta x = ±29,0. Tapa el hueco con la tapa. Rebaje en el borde de la tapa: fondo a z 13,5, hasta x = ±26,8 |
 | Dientes | Rectos, 2 por balancín, en los lados. Entran 1,0 mm; cara de carga a z 2,5; bisel de entrada de z 1,1 a 2,0 |
 | Ventanas del cerco | Techo a 0,05 mm del diente (los tacos lo cargan). Fondo abierto hasta la cama |
 | Imanes | 2 + 2 Ø5 × 1 por lado, en atracción, en el centro (balancín, entra por abajo; cerco, entra por arriba). Separación de 1,15 mm. 4 tapones de 2,05 × 5,05 × 0,5 pegados a ras |
@@ -323,8 +333,8 @@ Piezas: `AVO_CINCHA_R6_3_balancin_Xpos_PETG`, `..._Xneg_PETG`, aletas en el mism
 **Comprobado por vóxeles** (`fuente/verificar_cierre.py`):
 - cerrado, el balancín no toca el soporte, la base ni la tapa;
 - al abrir (parte alta hacia dentro, con la cápsula apoyada) no toca el soporte en ningún ángulo;
-- el diente sale del cerco a unos **10°**, con **1,5 mm** de recorrido del pulsador;
-- el balancín toca la cápsula (tope) a unos **26°**;
+- el diente sale del cerco a unos **9,5°**, con **1,4 mm** de recorrido del pulsador;
+- el labio toca el fondo del rebaje de la tapa (tope) a unos **14,5°**;
 - si la cápsula sube 0,3 mm, el diente choca con el techo; si baja 0,3, no choca.
 
 **Bloqueo con carga:**

@@ -129,7 +129,7 @@ def main():
         sw = {}
         suelto, tope = None, None
         teeth = (P[:, 0] * sg < xi) & (P[:, 2] < M.BAL["top_c"] + 0.01) & (P[:, 2] > M.BAL["root_b_c"] - 0.01)
-        for ang in [0, -2, -4, -6, -8, -10, -12, -14, -16, -18, -20, -22, -24, -26, -28]:
+        for ang in [0, -2, -4, -6, -8, -9, -9.5, -10, -11, -12, -13, -14, -14.5, -15, -16, -18, -20]:
             Q = rot_y(P, sg * xi, pz, ang * sg)
             v_s = float(sop.inside(Q).sum() * vox)
             v_c = float((base.inside(Q) | tapa.inside(Q)).sum() * vox)

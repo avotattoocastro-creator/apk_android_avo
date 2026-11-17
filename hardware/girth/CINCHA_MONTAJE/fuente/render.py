@@ -248,8 +248,8 @@ def extra(caps, soporte):
     xw, x_rim, xi, xo, yc = M.bal_x()
     zc0 = -M.SOP["precarga"]
     for (yy, fn, tt) in ((yc + (M.BAL["ty0"] + M.BAL["w"][1] / 2 - M.BAL["tyend"]) / 2, "13_corte_por_diente.png",
-                          "Corte por un diente del balancín +X: diente recto en la ventana del cerco, eje sobre la aleta"),
-                         (yc, "13b_corte_por_imanes.png", "Corte por los imanes del balancín +X (atracción balancín ↔ cerco)")):
+                          "Corte por un diente del balancín +X (REV 6.3.1)"),
+                         (yc, "13b_corte_por_imanes.png", "Corte por los imanes del balancín +X (atracción)")):
         sec = []
         for m in caps + soporte:
             V = m.np()
@@ -259,12 +259,12 @@ def extra(caps, soporte):
         render(sec, os.path.join(OUTR, fn), az=-90, el=2, size=(1500, 1000), title=tt,
                notes=["Balancín a ras de la tapa, eje Ø2 en (%.1f; %.1f) de la cápsula; diente recto de 1,0 mm; 2 + 2 imanes Ø5 × 1." % (
                    xi, M.BAL["pz_c"]),
-                      "Abrir: empujar la cápsula hacia abajo y apretar los 2 balancines por arriba hacia dentro (sueltan a ~10°)."],
+                      "Abrir: empujar la cápsula hacia abajo y apretar los 2 balancines por arriba (sueltan a ~9,5°; tope a ~14,5°)."],
                labels=[((xi - 0.5, yy, M.BAL["top_c"]), "diente"), ((xi, yy, M.BAL["pz_c"]), "eje"),
                        ((xi + 1.5, yy, M.BAL["mag_c"]), "imán")])
     render(caps + soporte, os.path.join(OUTR, "14_capsula_en_soporte_vista_balancin.png"), az=-20, el=25,
-           size=(1500, 1000), title="Balancín +X (rojo) entre sus aletas, a ras de la tapa",
-           notes=["Nada sobresale por encima de la tapa; las aletas protegen el balancín por los lados."])
+           size=(1500, 1000), title="REV 6.3.1: balancín +X a ras de la tapa, labio en su rebaje",
+           notes=["Nada sobresale por encima de la tapa; el eje apoya en 2 aletas pegadas a las columnas de las esquinas."])
 
 
 def soporte_world(g):

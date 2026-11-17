@@ -165,7 +165,13 @@ BAL = dict(gap=0.25, t=3.1, pz_c=7.0, boss_r=2.6, hole=2.4, pin_hole=1.95, pin_l
            w={1: 14.0, -1: 12.0}, fin_t=2.75, fin_clear=0.25, fin_emb=0.5,
            e=1.0, top_c=2.5, root_b_c=1.1, tip_b_c=2.0, ty0=3.5, tyend=0.6, roof_gap=0.05, win_deep=0.5, win_w=0.3,
            mag=5.1, mag_t=2.1, mag_c=0.7, skin=0.45, cb=0.55, cap_lip=0.25, cap_t=0.5,
-           bot_c=-2.5, pock_out=4.2, pock_clear=0.25)   # el fondo del rebaje hace de tope al empujar (pogo a 1,05 de 1,1)
+           bot_c=-2.5, pock_out=4.2, pock_clear=0.25,
+           # REV 6.3.1 (marcado del usuario, «integrado»): el eje se apoya junto a las COLUMNAS de las esquinas (aletas
+           # pegadas a ellas, no junto al balancín) y el balancín lleva una BARRA de columna a columna a la altura del
+           # eje. Las aletas de +X y −X van a distinta distancia (llave de posición).
+           col_off={1: 20.5, -1: 19.5},
+           # labio superior que tapa el hueco entre el balancín y la tapa; al apretar entra en un rebaje de la tapa
+           lip_x=29.0, lip_t=0.8, rec_floor=13.5, rec_x=26.8, rec_cy=0.2)   # fondo a 0,5 del interior   # el fondo del rebaje hace de tope al empujar (pogo a 1,05 de 1,1)
 TACOS = [(-27.3, 6.0), (27.3, 6.0), (-27.3, -15.0), (27.3, -15.0)]
 REPORT = {"parametros": {}, "piezas": {}, "comprobaciones": []}
 
@@ -299,6 +305,7 @@ def cap_contours():
         Rl.add(A.circle(x, y, CAP["boss_r"], 40))
     Rl.add(A.rrect(0.0, OREJA["y"] - 0.5, 12.0, 7.0, 3.0, 6))            # oreja del cordón de seguridad
     C["O_tapa"] = Rl.contour(0.03)
+    C["_rasterL"] = Rl
     for nm, (o0, o1) in (("g", (CAP["ranura"]["off0"], CAP["ranura"]["off1"])),
                          ("j", (CAP["junta"]["off0"], CAP["junta"]["off1"]))):
         C[nm + "I"] = A.rrect(cx, cy, w + 2 * o0, h + 2 * o0, I["r"] + o0, 6)
@@ -350,10 +357,10 @@ def pieza_aletas(sg):
     k = rh * 0.7071
     hole = A.polygon([(xi + rh * math.cos(t), pz + rh * math.sin(t)) for t in np.linspace(-math.pi * 0.75, math.pi * 0.25,
                                                                                             19)] + [(xi, pz + rh * 1.4142)])
-    w = BAL["w"][sg]
+    co = BAL["col_off"][sg]
     out = A.Mesh("AVO_CINCHA_R6_3_aletas_%s" % ("Xpos" if sg > 0 else "Xneg"), C_PETG_TRANS)
     for sy in (1, -1):
-        ya, yb = sorted((yc + sy * (w / 2 + BAL["fin_clear"]), yc + sy * (w / 2 + BAL["fin_clear"] + BAL["fin_t"])))
+        ya, yb = sorted((yc + sy * (co - BAL["fin_t"] / 2), yc + sy * (co + BAL["fin_t"] / 2)))
         m = A.layered([(ya, yb, [outl, hole])])
         m.transform(np.array([[sg, 0, 0, 0], [0, 0, 1, 0], [0, 1, 0, 0], [0, 0, 0, 1.0]]))   # (x, z, y) → (±x, y, z)
         out.merge(fix_orient(m))
@@ -410,12 +417,24 @@ def pieza_tapa():
     ant = A.rrect(ANT["cx"], ANT["cy"], ANT["L"] + 0.6, ANT["W"] + 0.4, 0.5, 2)
     z_l = ZT0 - CAP["lengueta_alto"]
     z_ant, z_pil, z_cb = ZT0 + 0.3, ZT0 + 1.0, ZT1 - 1.4
+    # REV 6.3.1: rebaje en el borde ±X para el labio del balancín (al apretar entra en él). Por encima de su fondo, el
+    # contorno va 0,05 mm más adentro (el núcleo exige contornos anidados en cada cambio de capa)
+    zr = BAL["rec_floor"]
+    assert z_ant < zr < z_pil
+    Rr = C["_rasterL"].offset(-0.05)
+    xw, x_rim, xi, xo, yc = bal_x()
+    for sg in (1, -1):
+        hw = BAL["w"][sg] / 2 + BAL["rec_cy"]
+        xa, xb = sorted((sg * BAL["rec_x"], sg * (xw + 2.0)))
+        Rr.sub(A.rrect((xa + xb) / 2, yc, xb - xa, 2 * hw, 0, 1))
+    Orec = Rr.contour(0.03)
     L = [(ZP1, z_l, boss + pil),
          (z_l, ZT0, [l0, l1] + boss + pil),
          (ZT0, z_ant, [O, ant] + sh + pil),
-         (z_ant, z_pil, [O] + sh + pil),
-         (z_pil, z_cb, [O] + sh),
-         (z_cb, ZT1, [O] + cb + [sh[-1]])]
+         (z_ant, zr, [O] + sh + pil),
+         (zr, z_pil, [Orec] + sh + pil),
+         (z_pil, z_cb, [Orec] + sh),
+         (z_cb, ZT1, [Orec] + cb + [sh[-1]])]
     return A.layered(L, "AVO_CINCHA_R6_3_tapa", C_PETG_TAPA)
 
 
@@ -587,7 +606,8 @@ def bal_sop_cuts(sg):
     def bx(x0, x1, y0, y1, z0, z1):
         xa, xb = sorted((sg * x0, sg * x1))
         return (xa, xb, y0, y1, z0, z1)
-    f0, f1 = w / 2, w / 2 + 2 * BAL["fin_clear"] + BAL["fin_t"]
+    co = BAL["col_off"][sg]
+    f0, f1 = co - BAL["fin_t"] / 2 - BAL["fin_clear"], co + BAL["fin_t"] / 2 + BAL["fin_clear"]
     for sy in (1, -1):
         ya, yb = sorted((yc + sy * f0, yc + sy * f1))
         out["slots"].append(bx(xw - 0.1, x_rim + 0.1, ya, yb, SOP["cama"], cer + 0.1))
@@ -701,24 +721,33 @@ def pieza_soporte():
 
 
 def balancin_capas(sg):
-    """REV 6.3: capas del balancín (lado +X; el de −X se refleja). Perfil en el plano XZ (z de la cápsula, 0 = fondo),
-    capas a lo largo de Y. Zonas (en |y − yc|): centro con el alojamiento del imán (entra por abajo, con tapón),
-    dientes en los lados y agujeros de los pasadores en los extremos. Los perfiles de zonas vecinas van anidados con
-    0,05 mm de diferencia (lo exige el núcleo poliédrico: contornos que no se tocan en cada cambio de capa)."""
+    """REV 6.3.1: capas del balancín (lado +X; el de −X se refleja). Perfil en el plano XZ (z de la cápsula, 0 = fondo),
+    capas a lo largo de Y. Zonas (en |y − yc|): centro con el alojamiento del imán (entra por abajo, con tapón), dientes
+    en los lados, placa con el labio superior hasta w/2 y, de ahí a las aletas de las columnas, la barra del eje con los
+    agujeros de los pasadores en sus extremos. Los perfiles de zonas vecinas van anidados con 0,05 mm de diferencia
+    (lo exige el núcleo poliédrico: contornos que no se tocan en cada cambio de capa)."""
     xw, x_rim, xi, xo, yc = bal_x()
     w = BAL["w"][sg]
     r, pz = BAL["boss_r"], BAL["pz_c"]
     zb, zt = BAL["bot_c"], H_CAP
     e = BAL["e"]
-    Rp = A.Raster(xi - r - 1.5, zb - 1, xo + 1, zt + 1, 0.02)
+
+    def raster():
+        return A.Raster(BAL["lip_x"] - 1.5, zb - 1, xo + 1, zt + 1, 0.02)
+    Rp = raster()
     Rp.add(A.rrect((xi + xo) / 2, (zb + zt) / 2, xo - xi, zt - zb, 0, 1))             # placa
     Rp.add(A.circle(xi, pz, r, 64))                                                    # ojo del eje
-    P_t = A.Raster(Rp.x0, Rp.y0, Rp.x0 + Rp.W * Rp.res, Rp.y0 + Rp.H * Rp.res, Rp.res)
+    Rp.add(A.rrect((BAL["lip_x"] + xi + 0.05) / 2, zt - BAL["lip_t"] / 2, xi + 0.05 - BAL["lip_x"], BAL["lip_t"], 0, 1))
+    Rb = raster()                                                                      # barra del eje
+    Rb.add(A.circle(xi, pz, r, 64))
+    Rb.add(A.rrect((xi + xo) / 2, pz, xo - xi, 2 * r, 0, 1))
+    P_t = raster()
     P_t.m = Rp.m.copy()
     P_t.add(A.polygon([(xi + 0.05, BAL["root_b_c"]), (xi - e, BAL["tip_b_c"]), (xi - e, BAL["top_c"]),
                        (xi + 0.05, BAL["top_c"])]))                                    # diente recto, bisel abajo
     c_t = P_t.contour(0.02)
     c_a = Rp.offset(-0.05).contour(0.02)
+    c_b = Rb.offset(-0.10).contour(0.02)
     Rm = Rp.offset(-0.10)
     xm0 = xi + BAL["skin"]
     Rm.sub(A.rrect(xm0 + BAL["mag_t"] / 2, (zb - 1 + BAL["mag_c"] + BAL["mag"] / 2) / 2, BAL["mag_t"],
@@ -730,9 +759,9 @@ def balancin_capas(sg):
                      + [(xi - rh * 1.4142, pz)])                                       # en gota hacia −X (arriba al imprimir)
     hm = BAL["mag"] / 2
     ty0, ty1 = BAL["ty0"], w / 2 - BAL["tyend"]
-    yh = w / 2 - BAL["pin_in"] - 0.2
-    br = sorted({0.0, hm, ty0, ty1, yh, w / 2})
-    br = [b_ for b_ in br if b_ <= w / 2]
+    yend = BAL["col_off"][sg] - BAL["fin_t"] / 2 - BAL["fin_clear"]                     # extremo de la barra
+    yh = yend - BAL["pin_in"] - 0.2
+    br = sorted({0.0, hm, ty0, ty1, w / 2, yh, yend})
     edges = sorted({-b_ for b_ in br} | set(br))
     L = []
     for ya, yb in zip(edges[:-1], edges[1:]):
@@ -741,8 +770,10 @@ def balancin_capas(sg):
             cs = [c_m]
         elif ty0 < d < ty1:
             cs = [c_t]
-        else:
+        elif d < w / 2:
             cs = [c_a]
+        else:
+            cs = [c_b]
         if d > yh:
             cs = cs + [hole]
         L.append((yc + ya, yc + yb, cs))
@@ -767,9 +798,8 @@ def compra_cierre():
     pins = A.Mesh("Pasador_ISO2338_2x6_acero_x4", C_METAL)
     mags = A.Mesh("Imanes_5x1_x8_cierre", C_IMAN)
     for sg in (1, -1):
-        w = BAL["w"][sg]
         for sy in (1, -1):
-            y_out = yc + sy * (w / 2 + BAL["fin_clear"] + BAL["fin_t"])
+            y_out = yc + sy * (BAL["col_off"][sg] + BAL["fin_t"] / 2)
             y_in = y_out - sy * BAL["pin_len"]
             pts = np.array([[sg * xi, min(y_in, y_out), pz], [sg * xi, max(y_in, y_out), pz]])
             pins.merge(A.tube([tuple(p) for p in pts], 1.0, 16))

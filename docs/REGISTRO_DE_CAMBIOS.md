@@ -24,6 +24,18 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-17 — Cincha CAD REV 6.3.1 — eje en las columnas y labio sobre la tapa
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-3-balancin-magnetico` (PR #60)
+**Qué cambia (marcado del usuario, «integrado»):**
+- las aletas del eje pasan junto a las columnas de las esquinas (±20,5 en +X, ±19,5 en −X: llave de posición);
+- el balancín (14 / 12 mm) lleva una barra de columna a columna con los pasadores Ø2 × 6 en sus extremos;
+- labio superior que tapa el hueco y entra en un rebaje del borde de la tapa (fondo a 0,5 mm del interior).
+**Comprobado (script local):**
+- piezas cerradas; conjuntos de 96 sólidos con 0 aristas abiertas; `verificar_step.py` 25/25 OK;
+- `verificar_cierre.py`: 0 mm³ de interferencia cerrado y sin choques con el soporte al abrir;
+- diente libre a unos 9,5° (1,4 mm de pulsador); tope del labio a unos 14,5°.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+
 ## 2026-11-17 — Cincha CAD REV 6.3 (con funda) — cierre magnético de balancín
 **Autor:** Claude · **Rama:** `cad/cincha-rev6-3-balancin-magnetico`
 **Qué cambia:** en `hardware/girth/CINCHA_MONTAJE` los pestillos elásticos y los seguros TPU de la REV 6.2 se sustituyen por un **balancín magnético en cada lado corto**:
