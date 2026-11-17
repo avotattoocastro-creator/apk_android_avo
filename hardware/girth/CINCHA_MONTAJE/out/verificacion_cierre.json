@@ -73,22 +73,22 @@
    },
    "-12": {
     "soporte_mm3": 0.0,
-    "capsula_mm3": 0.18,
+    "capsula_mm3": 0.03,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-13": {
     "soporte_mm3": 0.113,
-    "capsula_mm3": 1.069,
+    "capsula_mm3": 0.105,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-14": {
     "soporte_mm3": 1.688,
-    "capsula_mm3": 2.809,
+    "capsula_mm3": 0.985,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-16": {
     "soporte_mm3": 10.883,
-    "capsula_mm3": 8.368,
+    "capsula_mm3": 6.178,
     "puntos_del_diente_en_el_cerco": 0
    }
   },
@@ -165,27 +165,27 @@
    },
    "-12": {
     "soporte_mm3": 0.0,
-    "capsula_mm3": 0.03,
+    "capsula_mm3": 0.0,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-13": {
     "soporte_mm3": 0.154,
-    "capsula_mm3": 0.393,
+    "capsula_mm3": 0.0,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-14": {
     "soporte_mm3": 1.651,
-    "capsula_mm3": 1.468,
+    "capsula_mm3": 0.27,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-16": {
     "soporte_mm3": 9.467,
-    "capsula_mm3": 5.586,
+    "capsula_mm3": 3.893,
     "puntos_del_diente_en_el_cerco": 0
    }
   },
   "angulo_diente_fuera_grados": -4,
-  "angulo_tope_contra_la_capsula_grados": -12,
+  "angulo_tope_contra_la_capsula_grados": -14,
   "recorrido_pulsador_al_soltar_mm": 0.52
  },
  "balancin": {

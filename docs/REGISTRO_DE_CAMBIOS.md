@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-17 — Cincha CAD REV 6.7 — extremos a ras del soporte y tapa redondeada
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-7-extremos-redondeo` (sobre el PR #68)
+**Qué cambia (capturas del usuario):** los extremos ±X también quedan a ras del cerco (parte alta 75,5 × 66,6 mm,
+esquinas iguales a las del cerco); el balancín engorda 3,25 mm por encima del escalón para seguir a ras; borde
+superior de la tapa y del balancín redondeado R1,5; oreja del cordón +1 mm. Propuesta documentada: base en una pieza
+con franja translúcida (z 8,0–12,0) por cambio de filamento. Archivos `R6_6` → `R6_7`.
+**Validación:** IMPLEMENTADO · `verificar_step.py` 26/26 OK · vóxeles: 0 mm³ cápsula/soporte, suelta a 4°, tope a 12°
+(+X) / 13° (−X), portaimanes sin cambios · **NO VERIFICADO** (nada impreso).
+
+---
+
 ## 2026-11-17 — Cincha CAD REV 6.6 — pared de la cápsula a ras del soporte
 **Autor:** Claude · **Rama:** `cad/cincha-rev6-6-pared-a-ras` (sobre el PR #67)
 **Qué cambia (capturas del usuario):** por encima del cerco la base engorda hasta la cara exterior del cerco, que pasa

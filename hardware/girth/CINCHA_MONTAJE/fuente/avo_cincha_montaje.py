@@ -122,7 +122,7 @@ CAP = dict(
     tornillo_off=5.2,              # centro de los tornillos a 5,2 mm del hueco (fuera de la ranura)
     boss_r=3.0,
 )
-OREJA = dict(y=27.3, r_agujero=1.6)   # oreja maciza en la tapa, agujero vertical Ø3,2 para el cordón
+OREJA = dict(y=27.3, r_agujero=1.6, alto=8.0)   # REV 6.7: oreja 1 mm más alta (el redondeo no llega al agujero)   # oreja maciza en la tapa, agujero vertical Ø3,2 para el cordón
 LEDS = [("D10", -15.0, 13.30, +1), ("D11", 14.0, 13.30, +1), ("D12", 14.0, -13.30, -1), ("D13", -15.0, -13.30, -1)]
 LED_LENTE_Y = 14.66                # cara de la lente (a 0,34 mm del canto de la PCB)
 
@@ -193,7 +193,10 @@ BAL = dict(t=3.1, t_low=4.3, w={1: 14.0, -1: 12.0}, side=0.25, back_low=0.3, bac
 # de los tornillos + holgura + cerco): cápsula y soporte quedan a ras, sin entrantes entre columnas. Por debajo (lo
 # que entra en el cerco) la base no cambia. Los extremos ±X (balancín empotrado) no cambian. La tapa sigue la misma
 # envolvente (más la oreja del cordón).
-RAS = dict(junta_z=0.45)      # rendija entre el canto del cerco y el escalón de la base (0,25 de recorrido + 0,2)
+RAS = dict(junta_z=0.45, r_tapa=1.5, n_r=6)
+# REV 6.7 (17/11/2026, capturas del usuario): los extremos ±X también a ras del cerco (la parte alta del balancín
+# engorda lo mismo para seguir a ras) y todo el borde superior de la tapa redondeado R1,5 (y el del balancín).
+# r_tapa: radio del redondeo; n_r: tramos del loft que lo aproximan.      # rendija entre el canto del cerco y el escalón de la base (0,25 de recorrido + 0,2)
 TACOS = [(-27.3, 6.0), (27.3, 6.0), (-27.3, -15.0), (27.3, -15.0)]
 REPORT = {"parametros": {}, "piezas": {}, "comprobaciones": []}
 
@@ -315,7 +318,7 @@ def bal_x():
     xo = I["x1"] + CAP["pared"] + END_T
     xi = xo - BAL["t"]
     xl = xo - BAL["t_low"]
-    return dict(xw=xo, xo=xo, xi=xi, xl=xl, xb=xi - BAL["back_up"], px=xl + 1.2 + BAL["dx_eje"],
+    return dict(xw=xo + SOP["holgura"] + SOP["cerco"], xo=xo, xi=xi, xl=xl, xb=xi - BAL["back_up"], px=xl + 1.2 + BAL["dx_eje"],
                 yc=(I["y0"] + I["y1"]) / 2)
 
 
@@ -349,6 +352,23 @@ def _trap(sg, x0, x1, yc, hy, k):
     return A.polygon(pts if sg > 0 else pts[::-1])
 
 
+def offset_in(c, d):
+    """REV 6.7: contorno desplazado d hacia dentro, vértice a vértice (mismo nº de vértices, para lofts)"""
+    if d <= 1e-9:
+        return A.polygon(c.p.copy())
+    P = c.p
+    area = 0.5 * np.sum(P[:, 0] * np.roll(P[:, 1], -1) - np.roll(P[:, 0], -1) * P[:, 1])
+    s_ = 1.0 if area > 0 else -1.0                                   # CCW: dentro = izquierda
+    e = np.roll(P, -1, axis=0) - P
+    e /= np.linalg.norm(e, axis=1)[:, None]
+    nrm = s_ * np.c_[-e[:, 1], e[:, 0]]                               # normal hacia dentro de cada arista
+    n0, n1 = np.roll(nrm, 1, axis=0), nrm
+    bis = n0 + n1
+    bis /= np.linalg.norm(bis, axis=1)[:, None]
+    cosh = np.clip(np.sum(bis * n1, axis=1), 0.35, 1.0)
+    return A.polygon(P + bis * (d / cosh)[:, None])
+
+
 def cap_contours():
     I = CAP["I"]
     cx, cy = (I["x0"] + I["x1"]) / 2, (I["y0"] + I["y1"]) / 2
@@ -377,7 +397,7 @@ def cap_contours():
     Rl.add(C["O0"])
     for (x, y) in CAP["tornillos"]:
         Rl.add(A.circle(x, y, CAP["boss_r"], 40))
-    Rl.add(A.rrect(0.0, OREJA["y"] - 0.5, 12.0, 7.0, 3.0, 6))            # oreja del cordón de seguridad
+    Rl.add(A.rrect(0.0, OREJA["y"], 12.0, OREJA["alto"], 3.0, 6))            # oreja del cordón de seguridad
     for sg in (1, -1):                                                 # REV 6.4: hueco del balancín (arriba)
         hw = BAL["w"][sg] / 2 + BAL["side"]
         Rl.sub(_rrx(sg, xb, xo + 2.0, yc - hw, yc + hw))
@@ -391,16 +411,18 @@ def cap_contours():
     P = Ro.contour(0.03).p.astype(np.float32)
     hull = A.polygon(cv2.convexHull(P).reshape(-1, 2).astype(float)[::-1])
     C["U_sop"] = hull
-    for nm, extra in (("U", []), ("U_tapa", [A.rrect(0.0, OREJA["y"] - 0.5, 12.0, 7.0, 3.0, 6)])):
+    xw = K["xw"]
+    for nm, extra in (("U", []), ("U_tapa", [A.rrect(0.0, OREJA["y"], 12.0, OREJA["alto"], 3.0, 6)])):
         Ru = A.Raster(-50, -48, 50, 40, 0.02)
-        Ru.add(hull)
-        Ru.sub(A.rrect(xo + 20.0, 0.0, 40.0, 200.0, 0, 1))
-        Ru.sub(A.rrect(-xo - 20.0, 0.0, 40.0, 200.0, 0, 1))
+        Ru.add(hull)                                                  # REV 6.7: sin recortar los extremos ±X
         for e_ in extra:
             Ru.add(e_)
         for sg in (1, -1):
-            hw = BAL["w"][sg] / 2 + BAL["side"] + (BAL["blk"] - BAL["blk_emb"] if nm == "U" else 0.0)
-            Ru.sub(_rrx(sg, xb, xo + 2.0, yc - hw, yc + hw))
+            hb = BAL["w"][sg] / 2 + BAL["side"]
+            Ru.sub(_rrx(sg, xb, xw + 2.0, yc - hb, yc + hb))           # paso del balancín
+            if nm == "U":
+                hw = hb + BAL["blk"] - BAL["blk_emb"]
+                Ru.sub(_rrx(sg, xb, xo, yc - hw, yc + hw))             # cojinetes (por fuera, la pared los tapa)
         C[nm] = Ru.contour(0.03)
     lg = CAP["lengueta"]
     C["I_l0"] = A.rrect(cx, cy, w - 0.4, h - 0.4, I["r"] - 0.2, 6)            # cara exterior de la lengüeta
@@ -459,7 +481,7 @@ def pieza_base():
         if zm < zp:
             cs = cs + pozo
         L.append((z0, z1, cs))
-    return A.layered(L, "AVO_CINCHA_R6_6_base_aro_luz", C_PETG_TRANS)
+    return A.layered(L, "AVO_CINCHA_R6_7_base_aro_luz", C_PETG_TRANS)
 
 
 def pieza_cojinetes(sg):
@@ -476,7 +498,7 @@ def pieza_cojinetes(sg):
     pts += [(px - r, ZT0), (xb - b["blk_emb"], ZT0)]
     prof = A.polygon(pts)
     w = b["w"][sg]
-    out = A.Mesh("AVO_CINCHA_R6_6_cojinetes_%s" % ("Xpos" if sg > 0 else "Xneg"), C_PETG_TRANS)
+    out = A.Mesh("AVO_CINCHA_R6_7_cojinetes_%s" % ("Xpos" if sg > 0 else "Xneg"), C_PETG_TRANS)
     for sy in (1, -1):
         ya, yb = sorted((yc + sy * (w / 2 + b["side"]), yc + sy * (w / 2 + b["side"] + b["blk"])))
         m = A.layered([(ya, yb, [prof])])
@@ -490,7 +512,7 @@ def pieza_junta(comprimida=True):
     En el conjunto se dibuja comprimida (1,2 de alto); el STL sale libre (1,6)."""
     C = cap_contours()
     h = CAP["ranura"]["prof"] if comprimida else CAP["junta"]["alto"]
-    return A.layered([(ZJ0, ZJ0 + h, [C["jO"], C["jI"]])], "AVO_CINCHA_R6_6_junta_TPU85A", C_TPU_ROJO)
+    return A.layered([(ZJ0, ZJ0 + h, [C["jO"], C["jI"]])], "AVO_CINCHA_R6_7_junta_TPU85A", C_TPU_ROJO)
 
 
 PCB_HOLES = [(sx * 20.8, sy * 12.8) for sx in (1, -1) for sy in (1, -1)]
@@ -524,14 +546,30 @@ def pieza_tapa():
             ya, yb = sorted((yc + sy * (hw + b["tongue_clear"]), yc + sy * (hw + b["blk"] - b["blk_emb"] - b["tongue_clear"])))
             tg.append(_rrx(sg, px - b["slot_w"] / 2 + 0.05, px + b["slot_w"] / 2 - 0.05, ya, yb))
     assert z_tg < ZP1
+    R_ = RAS["r_tapa"]
+    z_f = ZT1 - R_
+    assert z_pil <= z_f + 1e-9 and z_f < z_cb
     L = [(z_tg, ZP1, tg),
          (ZP1, z_l, boss + pil + tg),
          (z_l, ZT0, [l0, l1] + boss + pil + tg),
          (ZT0, z_ant, [O, ant] + sh + pil),
          (z_ant, z_pil, [O] + sh + pil),
-         (z_pil, z_cb, [O] + sh),
-         (z_cb, ZT1, [O] + cb + [sh[-1]])]
-    return A.layered(L, "AVO_CINCHA_R6_6_tapa", C_PETG_TAPA)
+         (z_pil, z_f, [O] + sh)]
+    if z_f - z_pil < 1e-6:
+        L.pop()
+    # REV 6.7: redondeo R1,5 de todo el borde superior (loft de contornos desplazados hacia dentro, mismo nº de vértices)
+    n = RAS["n_r"]
+    zk = [z_f + R_ * (1 - math.cos(math.pi / 2 * k / n)) for k in range(n + 1)]
+    zk = sorted(set(zk) | {z_cb})
+    prev = O
+    for za, zb_ in zip(zk[:-1], zk[1:]):
+        t = zb_ - z_f
+        d = R_ - math.sqrt(max(R_ * R_ - t * t, 0.0))
+        cur = offset_in(O, d)
+        holes = (cb + [sh[-1]]) if (za + zb_) / 2 > z_cb else sh
+        L.append((za, zb_, [prev] + holes, [cur] + holes))
+        prev = cur
+    return A.layered(L, "AVO_CINCHA_R6_7_tapa", C_PETG_TAPA)
 
 
 def pieza_separador():
@@ -539,7 +577,7 @@ def pieza_separador():
     R.add(A.rrect(0, 0, 45.0, 29.0, 2.0, 4))
     for (x, y) in PCB_HOLES:
         R.sub(A.circle(x, y, 2.3, 32))           # paso de las cabezas de los tornillos de la PCB
-    return A.layered([(ZB1, ZP0, [R.contour(0.03)])], "AVO_CINCHA_R6_6_separador_TPU85A", C_TPU)
+    return A.layered([(ZB1, ZP0, [R.contour(0.03)])], "AVO_CINCHA_R6_7_separador_TPU85A", C_TPU)
 
 
 # ---------------------------------------------------------------------------------------------- compra: cápsula
@@ -800,7 +838,7 @@ def pieza_soporte():
             cs += S["cerco"]
         if cs:
             L.append((z0, z1, cs))
-    return A.layered(L, "AVO_CINCHA_R6_6_soporte_PETG", C_PETG)
+    return A.layered(L, "AVO_CINCHA_R6_7_soporte_PETG", C_PETG)
 
 
 def balancin_capas(sg):
@@ -815,9 +853,15 @@ def balancin_capas(sg):
     zb, zt, e = b["bot_c"], H_CAP, b["e"]
 
     def raster():
-        return A.Raster(xl - e - 1.5, zb - 1, xo + 1, zt + 1, 0.02)
+        return A.Raster(xl - e - 1.5, zb - 1, K["xw"] + 1, zt + 1, 0.02)
     Rp = raster()
     Rp.add(A.rrect((xi + xo) / 2, (zb + zt) / 2, xo - xi, zt - zb, 0, 1))
+    # REV 6.7: por encima del escalón de la base, la cara exterior llega a la de la pared (xw) y redondeo arriba
+    xw, z_r, rr = K["xw"], SOP["cama"] + SOP["cerco_h"] - Z0_CAP + RAS["junta_z"], RAS["r_tapa"]
+    Rp.add(A.rrect((xo - 0.05 + xw) / 2, (z_r + zt) / 2, xw - xo + 0.05, zt - z_r, 0, 1))
+    Rp.sub(A.rrect(xw - rr / 2 + 0.01, zt - rr / 2 + 0.01, rr + 0.02, rr + 0.02, 0, 1))
+    Rp.add(A.circle(xw - rr, zt - rr, rr, 48))
+    Rp.add(A.rrect(xw - rr - 0.01, zt - rr / 2, 0.04, rr, 0, 1))
     Rp.add(A.rrect((xl + xi + 0.05) / 2, (zb + b["z_grueso"]) / 2, xi + 0.05 - xl, b["z_grueso"] - zb, 0, 1))
     P_t = raster(); P_t.m = Rp.m.copy()
     P_t.add(A.polygon([(xl + 0.05, b["root_b_c"]), (xl - e, b["tip_b_c"]), (xl - e, b["top_c"]), (xl + 0.05, b["top_c"])]))
@@ -846,7 +890,7 @@ def balancin_capas(sg):
 
 def pieza_balancin(sg, impresion=False):
     """balancín en su sitio (cápsula, z = 0 fondo) o, con impresion=True, con la cara exterior en la cama"""
-    m = A.layered(balancin_capas(sg), "AVO_CINCHA_R6_6_balancin_%s" % ("Xpos" if sg > 0 else "Xneg"), C_TPU_ROJO)
+    m = A.layered(balancin_capas(sg), "AVO_CINCHA_R6_7_balancin_%s" % ("Xpos" if sg > 0 else "Xneg"), C_TPU_ROJO)
     m.transform(np.array([[sg, 0, 0, 0], [0, 0, 1, 0], [0, 1, 0, 0], [0, 0, 0, 1.0]]))   # (x, z, y) → (±x, y, z)
     fix_orient(m)
     if impresion:
@@ -886,7 +930,7 @@ def pieza_portaiman(sg, impresion=False):
     narrow = A.rrect(yc, zc / 2, 2 * (hc - k), zc, 0)
     slot = A.rrect(yc, (G["zs0"] + G["zs1"]) / 2, 2 * hs, G["zs1"] - G["zs0"], 0)
     L = [(x0, x0 + k, [narrow], [full]), (x0 + k, xs, [full]), (xs, x1, [full, slot])]
-    m = A.layered(L, "AVO_CINCHA_R6_6_portaiman_%s" % ("Xpos" if sg > 0 else "Xneg"), C_PETG)
+    m = A.layered(L, "AVO_CINCHA_R6_7_portaiman_%s" % ("Xpos" if sg > 0 else "Xneg"), C_PETG)
     m.transform(np.array([[0, 0, sg, 0], [1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 1.0]]))
     fix_orient(m)
     if impresion:
@@ -897,7 +941,7 @@ def pieza_portaiman(sg, impresion=False):
 
 def pieza_portaimanes_x2():
     """REV 6.5: juego de 2 portaimanes para imprimir (son iguales: el de −X es el de +X girado 180°)"""
-    m = A.Mesh("AVO_CINCHA_R6_6_portaimanes_PETG_x2", C_PETG)
+    m = A.Mesh("AVO_CINCHA_R6_7_portaimanes_PETG_x2", C_PETG)
     for k in range(2):
         p = pieza_portaiman(1, True)
         p.transform(A.T_translate(k * 6.0 - 3.0, 0, 0))
@@ -911,7 +955,7 @@ def pieza_tapas_imanes():
     b = BAL
     a = b["mag"] + 2 * b["cap_lip"] - 0.1
     hp = b["mag_c"] - b["mag"] / 2 - 0.05
-    m = A.Mesh("AVO_CINCHA_R6_6_tapas_imanes_PETG", C_PETG)
+    m = A.Mesh("AVO_CINCHA_R6_7_tapas_imanes_PETG", C_PETG)
     for k in range(2):
         m.merge(A.box(k * 7.0, 0, 0, k * 7.0 + a, a, b["cap_t"]))
     return m
@@ -920,7 +964,7 @@ def pieza_tapas_imanes():
 def pieza_tacos(libre=False):
     zb = SOP["cama"] - 1.0
     h = 1.85 if libre else 1.0 + SOP["precarga"]
-    m = A.Mesh("AVO_CINCHA_R6_6_tacos_precarga_TPU85A_x4", C_TPU)
+    m = A.Mesh("AVO_CINCHA_R6_7_tacos_precarga_TPU85A_x4", C_TPU)
     for x, y in TACOS:
         m.merge(A.cylinder_z(x, y, 1.45, zb, zb + h, "", C_TPU, 20))
     return m
@@ -1356,26 +1400,26 @@ def main():
             u, x, z, math.degrees(math.atan2(tz, tx)), TX.radius(u)))
     # ------------------------------------------------------------------ piezas impresas: STL + STEP por pieza
     C = cap_contours()
-    note("cápsula REV 6.6: %.1f × %.1f × %.1f mm (exterior, con los extremos alargados)" % (
+    note("cápsula REV 6.7: %.1f × %.1f × %.1f mm (exterior, con los extremos alargados)" % (
         np.ptp(C["U"].p[:, 0]), np.ptp(C["U"].p[:, 1]), H_CAP))
-    note("REV 6.6: parte baja (en el cerco) %.1f × %.1f mm; escalón a ras del cerco a z = %.2f" % (
+    note("REV 6.7: parte baja (en el cerco) %.1f × %.1f mm; escalón a ras del cerco a z = %.2f" % (
         np.ptp(C["O"].p[:, 0]), np.ptp(C["O"].p[:, 1]), SOP["cama"] + SOP["cerco_h"] - Z0_CAP + RAS["junta_z"]))
     S = sop_contours()
     note("soporte: %.1f × %.1f × %.1f mm" % (S["fx"][1] - S["fx"][0], S["fy"][1] - S["fy"][0],
                                              SOP["cama"] + SOP["cerco_h"]))
     impresas = [
-        (pieza_base(), "AVO_CINCHA_R6_6_base_aro_luz_PETG_translucido", False, "PETG translúcido natural"),
-        (pieza_tapa(), "AVO_CINCHA_R6_6_tapa_PETG_opaco", True, "PETG opaco"),
-        (pieza_junta(False), "AVO_CINCHA_R6_6_junta_TPU85A", False, "TPU 85A"),
-        (pieza_separador(), "AVO_CINCHA_R6_6_separador_TPU85A", False, "TPU 85A"),
-        (pieza_soporte(), "AVO_CINCHA_R6_6_soporte_PETG", False, "PETG opaco"),
-        (pieza_balancin(1, True), "AVO_CINCHA_R6_6_balancin_Xpos_PETG", False, "PETG (cara exterior en la cama)"),
-        (pieza_balancin(-1, True), "AVO_CINCHA_R6_6_balancin_Xneg_PETG", False, "PETG (cara exterior en la cama)"),
-        (pieza_tapas_imanes(), "AVO_CINCHA_R6_6_tapas_imanes_PETG", False, "PETG"),
-        (pieza_portaimanes_x2(), "AVO_CINCHA_R6_6_portaimanes_PETG_x2", False, "PETG (fondo en la cama)"),
-        (pieza_tacos(True), "AVO_CINCHA_R6_6_tacos_precarga_TPU85A_x4", False, "TPU 85A"),
+        (pieza_base(), "AVO_CINCHA_R6_7_base_aro_luz_PETG_translucido", False, "PETG translúcido natural"),
+        (pieza_tapa(), "AVO_CINCHA_R6_7_tapa_PETG_opaco", True, "PETG opaco"),
+        (pieza_junta(False), "AVO_CINCHA_R6_7_junta_TPU85A", False, "TPU 85A"),
+        (pieza_separador(), "AVO_CINCHA_R6_7_separador_TPU85A", False, "TPU 85A"),
+        (pieza_soporte(), "AVO_CINCHA_R6_7_soporte_PETG", False, "PETG opaco"),
+        (pieza_balancin(1, True), "AVO_CINCHA_R6_7_balancin_Xpos_PETG", False, "PETG (cara exterior en la cama)"),
+        (pieza_balancin(-1, True), "AVO_CINCHA_R6_7_balancin_Xneg_PETG", False, "PETG (cara exterior en la cama)"),
+        (pieza_tapas_imanes(), "AVO_CINCHA_R6_7_tapas_imanes_PETG", False, "PETG"),
+        (pieza_portaimanes_x2(), "AVO_CINCHA_R6_7_portaimanes_PETG_x2", False, "PETG (fondo en la cama)"),
+        (pieza_tacos(True), "AVO_CINCHA_R6_7_tacos_precarga_TPU85A_x4", False, "TPU 85A"),
     ]
-    extras = {"AVO_CINCHA_R6_6_base_aro_luz_PETG_translucido": [pieza_cojinetes(1), pieza_cojinetes(-1)]}
+    extras = {"AVO_CINCHA_R6_7_base_aro_luz_PETG_translucido": [pieza_cojinetes(1), pieza_cojinetes(-1)]}
     for m, nm, flip, mat in impresas:
         b = m.check_closed()
         assert b == 0, (nm, b)
@@ -1396,10 +1440,10 @@ def main():
     imp, com = capsula_local()
     groups = {"Capsula_impresa": imp, "Capsula_electronica": com}
     check_all(groups)
-    export_step(os.path.join(OUT, "STEP", "AVO_CINCHA_R6_6_CAPSULA_CONJUNTO.step"), groups, "AVO_CINCHA_R6_6_CAPSULA")
+    export_step(os.path.join(OUT, "STEP", "AVO_CINCHA_R6_7_CAPSULA_CONJUNTO.step"), groups, "AVO_CINCHA_R6_7_CAPSULA")
     imp2, com2 = soporte_local()
-    export_step(os.path.join(OUT, "STEP", "AVO_CINCHA_R6_6_SOPORTE_CONJUNTO.step"),
-                {"Soporte_impreso": imp2, "Soporte_compra": com2}, "AVO_CINCHA_R6_6_SOPORTE")
+    export_step(os.path.join(OUT, "STEP", "AVO_CINCHA_R6_7_SOPORTE_CONJUNTO.step"),
+                {"Soporte_impreso": imp2, "Soporte_compra": com2}, "AVO_CINCHA_R6_7_SOPORTE")
     # compra sueltas (STEP por pieza)
     for m in compra_pcb()[:1] + compra_bateria() + compra_antena()[:1]:
         A.write_step(os.path.join(OUT, "STEP", "piezas", "REF_" + m.name + ".step"), [(m.name, [m])], m.name)
