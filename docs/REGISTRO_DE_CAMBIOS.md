@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-17 — Cincha CAD REV 6.8 — cápsula rectangular con aristas redondeadas (acabado comercial)
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-8-acabado-comercial` (sobre el PR #69)
+**Qué cambia (petición del usuario):** cápsula rectangular (parte baja 69,0 × 60,2 R8 con las columnas de los
+tornillos dentro; parte alta y cerco 75,5 × 66,7 R11,25, a ras); redondeos: tapa R1,5, arista del escalón R1,0,
+canto del cerco R1,0 (dentro, fuera y paso del balancín), balancines a juego. Archivos `R6_7` → `R6_8`.
+**Validación:** IMPLEMENTADO · `verificar_step.py` 26/26 · vóxeles: 0 mm³ cápsula/soporte, cierre 4° / 12°,
+portaimanes sin cambios · **NO VERIFICADO** (nada impreso).
+**Pendiente:** decidir la oreja del cordón (única pieza que sobresale).
+
+---
+
 ## 2026-11-17 — Cincha CAD REV 6.7 — extremos a ras del soporte y tapa redondeada
 **Autor:** Claude · **Rama:** `cad/cincha-rev6-7-extremos-redondeo` (sobre el PR #68)
 **Qué cambia (capturas del usuario):** los extremos ±X también quedan a ras del cerco (parte alta 75,5 × 66,6 mm,
