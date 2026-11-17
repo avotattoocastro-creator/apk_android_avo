@@ -1,0 +1,45 @@
+name: Huellas EasyEDA/LCSC (espalda V5 casco)
+
+# Descarga la huella KiCad y el modelo 3D de las piezas LCSC indicadas (easyeda2kicad) y la hoja de datos de LCSC,
+# con las páginas en PNG para revisarlas. Solo en la rama de la espalda del casco.
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/back-v5-casco]
+    paths:
+      - 'hardware/back/V5_CASCO/PCB/fuente/lcsc_huellas.txt'
+      - '.github/workflows/easyeda-fp-back-v5.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fp:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Descarga
+        working-directory: hardware/back/V5_CASCO/PCB/fuente
+        run: |
+          pip install -q easyeda2kicad
+          sudo apt-get install -y -qq poppler-utils >/dev/null
+          mkdir -p lib_easyeda hojas
+          while read -r code url; do
+            [ -z "$code" ] && continue; case "$code" in \#*) continue;; esac
+            easyeda2kicad --full --lcsc_id="$code" --output "lib_easyeda/$code" --overwrite > "lib_easyeda/$code.log" 2>&1 || echo "falló $code" >> lib_easyeda/$code.log
+            if [ -n "$url" ]; then
+              curl -sSL -A "Mozilla/5.0" -o "hojas/$code.pdf" "$url" || true
+              [ -s "hojas/$code.pdf" ] && pdftoppm -png -r 110 "hojas/$code.pdf" "hojas/$code" || true
+            fi
+          done < lcsc_huellas.txt
+          find lib_easyeda hojas -type f | sort
+      - name: Guardar en la rama
+        run: |
+          git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
+          git add hardware/back/V5_CASCO/PCB/fuente/lib_easyeda hardware/back/V5_CASCO/PCB/fuente/hojas
+          git commit -m "Espalda V5 casco: huellas EasyEDA y hojas de datos [skip ci]" || echo "sin cambios"
+          git pull --rebase -q origin ${{ github.ref_name }} && git push origin HEAD:${{ github.ref_name }}

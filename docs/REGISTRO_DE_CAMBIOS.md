@@ -1287,6 +1287,96 @@ Equimetre. El pulso solo procederá de la cincha propia (no se usará el Polar H
 build 84 subido; tests fallaron por el nombre del módulo, corregido) · iPad run 43335103721 (éxito: tests + capturas
 `04_Calendar`, `09_KeyData`). **NO VERIFICADO** en iPad ni en PC reales.
 **Pendiente:** tabla de análisis, Comparar, Historia y Track Work en Windows; sesión de referencia; ficha de sesión.
+## 2026-11-14 — Espalda V5 CASCO: anillo de luz (8 LED laterales) y caja sin juntas
+**Autor:** Claude · Rama `feature/back-v5-casco`
+**Qué cambia:**
+- **PCB:**
+  - 8 × SK6812SIDE-A (C5378721), 2 por lado, en los cantos de la cara F, en cadena desde el GPIO47 (33 Ω, C25105) y alimentados de VSYS;
+  - pads de la batería movidos a (−17,3 / −14,5; −23);
+  - una vía de LED_D4 alejada del canto.
+  - Puerta superada: DRC 0, 0 conexiones incompletas, paridad 0, ERC 0/0 y todas las piezas con código LCSC.
+- **CAD:**
+  - anillo de resina translúcida de **una pieza**, de 3,0 mm, centrado en los LED (z 10,4–13,4);
+  - **sin juntas TPU**: las uniones del anillo van pegadas;
+  - la tapa baja por fuera del canto de la PCB;
+  - el imán del Hall de la base del casco ya no queda cortado por la ventana central.
+- **Workflows nuevos** (solo en esta rama): `easyeda-fp-back-v5.yml` (huellas y hojas de LCSC) y `jlc-stock-back-v5.yml`.
+
+**Por qué:** peticiones del usuario del 14/11, de 16:53 a 17:22.
+**Validación:** CI de la PCB y del CAD. **Nada impreso ni fabricado.**
+
+---
+
+## 2026-11-14 — Espalda V5 CASCO: CAD REV A de la cápsula estanca y de la base del casco
+**Autor:** Claude · Rama `feature/back-v5-casco`
+**Qué cambia:**
+- `hardware/back/V5_CASCO/CAD/avo_casco_v5.py` (CadQuery) y workflow **nuevo** `build-back-v5-cad.yml`, solo para esta rama.
+- **Cápsula** de 56,4 × 56,4 × 24,1:
+  - base y tapa de PETG y junta de TPU;
+  - 4 × M2,5 a través de la PCB;
+  - pogo de 5 contactos estimado e imanes de sujeción.
+- **Base del casco:** anillo con alojamiento a 45°, imanes enfrentados, imán del Hall y cara inferior cóncava de R110.
+
+**Por qué:** petición del usuario: «realizar primero los step de la base y la tapa para después ver dónde se colocan led, pogo, etc.».
+**Validación:** CI con 1 sólido por pieza y 0 interferencias con la PCB, los componentes, la batería, la antena, el pogo y los imanes. **No impreso.**
+**Pendiente:** STEP real del pogo de 5 contactos, batería real y posición del LED.
+
+---
+
+## 2026-11-14 — Espalda V5 CASCO: PCB REV A (un ESP32-S3), puerta de fabricación superada
+**Autor:** Claude · Rama `feature/back-v5-casco`
+**Qué cambia:**
+- `hardware/back/V5_CASCO/PCB/`: cadena de la V4 adaptada (generador, colocación, Freerouting en el CI y reparación).
+- Workflow **nuevo** `.github/workflows/build-back-v5-pcb.yml`: copia del de la V4 que solo se ejecuta en esta rama; no toca firmas ni TestFlight.
+- **Placa:** 51 × 51, 4 capas, 1,6 mm.
+  - Componentes en la cara F; B.Cu es la masa maciza de la antena GNSS.
+  - ESP32-S3 + ZED-F9P soldado + antena activa por VCC_RF.
+  - Pogo USB de 5 contactos, BQ24072, Hall y microSD.
+- Correcciones de una revisión independiente del esquema:
+  - ESD en la entrada de RF;
+  - 22 Ω en 1206 en la alimentación de la antena (aguanta un corto del coaxial);
+  - 0 Ω en RF_IN;
+  - 1 µF en VCC del ZED;
+  - nota de ILIM corregida.
+
+**Por qué:** petición del usuario («Dale ya a la pcb con 51x51», «Sigue con un solo esp32»).
+**Validación:**
+- CI run 43597476741: DRC 0, 0 conexiones incompletas, paridad 0 y ERC 0/0. Puerta superada; ficheros en `out/FINAL/`.
+- Ruteado: Freerouting 1.9.0 + 1 conexión de VSYS reparada con `repair.py`.
+- **NO fabricada ni verificada en hardware.**
+
+---
+
+## 2026-11-14 — Espalda V5 CASCO: dos ESP32 (decisión del usuario)
+**Autor:** Claude · Rama `feature/back-v5-casco`
+**Qué cambia:** `ARQUITECTURA.md` pasa a dos chips (solo documentación):
+- **ESP32-C6**: ESP-NOW con la cincha, el pecho y futuros equipos;
+- **ESP32-S3**: ZED, microSD, NTRIP con el móvil y USB por el pogo.
+
+**Enlace entre los dos:** UART COBS + CRC con RTS/CTS, PPS compartido, EN y BOOT del C6 controlados por el S3 (un solo USB para programar los dos) y línea de coordinación de radio.
+**Consumo:** ≈ 300–320 mA (E). Con 2000 mAh, unas 6 h; para 8 h hacen falta unos 2700 mAh (+2,5 mm, +12 g).
+**Por qué:** petición del usuario.
+**Validación:** ninguna (estimaciones).
+
+---
+
+## 2026-11-14 — Espalda V5 CASCO: propuesta de arquitectura (sin PCB ni firmware)
+**Autor:** Claude · Rama `feature/back-v5-casco` (desde `develop/avo-performance-horse`)
+**Qué cambia:** solo documentación, en `hardware/back/V5_CASCO/DOCS/`:
+- `ARQUITECTURA.md`;
+- plano de concepto `AVO_BACK_V5_CASCO_concepto.png` y su fuente `concepto_plano.py`.
+
+**Propuesta:**
+- cápsula estanca de 55 × 55 × 22,6 mm (E), unos 105 g, y base magnética desprendible de unos 10 g;
+- ZED-F9P y ESP32-S3 en una PCB de 51 × 51, con antena plana activa L1/L2 de 25 × 25 encima;
+- batería de ≥ 2000 mAh;
+- pogo de 5 contactos (VBUS, D−, D+, GND y uno libre) para cargar y para el USB con el PC;
+- encendido por sensor Hall.
+
+**Por qué:** petición del usuario: rediseñar la espalda para el casco del jockey (solo entrenamientos), lo más compacta y ligera posible sin perder prestaciones.
+**Validación:** ninguna. Todo son estimaciones. No hay nada compilado ni verificado en hardware.
+
+---
 
 ## 2026-11-13 — AVO-ASSIGN-1 — asignación de caballo y jinete en todas las apps y en el motor
 **Autor:** Claude · Rama `claude/asignacion-caballo` · Contrato: `docs/ASIGNACION_CABALLO.md`
