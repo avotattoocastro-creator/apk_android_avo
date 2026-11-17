@@ -1,0 +1,99 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-14T16:31:27+0000",
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "AVO_BACK_V5_PCB.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'D−' on F.Silkscreen",
+                    "pos": {
+                        "x": 97.46,
+                        "y": 121.1
+                    },
+                    "uuid": "19d928e1-1099-5cc0-929c-0e2a192d1a3b"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'D+' on F.Silkscreen",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 121.1
+                    },
+                    "uuid": "82385aa1-6b79-5fc8-91d7-7a17c3ef1d64"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'GND' on F.Silkscreen",
+                    "pos": {
+                        "x": 102.54,
+                        "y": 121.1
+                    },
+                    "uuid": "004466bf-616b-53d4-a7aa-482cb3987576"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'AUX' on F.Silkscreen",
+                    "pos": {
+                        "x": 105.08,
+                        "y": 121.1
+                    },
+                    "uuid": "8a668f5b-a3f6-5e30-ba43-62698dd101e8"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "PCB text 'AUX' on F.Silkscreen",
+                    "pos": {
+                        "x": 105.08,
+                        "y": 121.1
+                    },
+                    "uuid": "8a668f5b-a3f6-5e30-ba43-62698dd101e8"
+                },
+                {
+                    "description": "Segment of D3 on F.Silkscreen",
+                    "pos": {
+                        "x": 104.32,
+                        "y": 119.87
+                    },
+                    "uuid": "af90999f-7827-5078-aeca-0ca60fb3a5e4"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        }
+    ]
+}
