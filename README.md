@@ -1,73 +1,274 @@
-# AVO Performance Horse — desarrollo unificado (22/10/2026)
+AVO Performance —Horse Edition—
 
-Repositorio conjunto para la aplicación Android, el firmware de pecho y la herramienta de firma OTA.
+Sistema de telemetría ecuestre para entrenamiento de caballos de carreras, salto y trabajo en pista. Combina GNSS RTK centimétrico, IMU en la cincha y análisis en móvil, tableta y PC.
 
-## Rama activa
+Repositorio: avotattoocastro-creator/apk_android_avo · Rama de trabajo: develop/avo-performance-horse
 
-**`develop/avo-performance-horse`** es la rama de integración compartida entre los chats de Android y firmware. La rama `main` y las ramas históricas no representan el estado más reciente. No modificar una rama histórica esperando que sus cambios aparezcan automáticamente en la rama unificada.
+⚠️ Repositorio público. No subir claves, certificados, keystores, credenciales NTRIP ni datos reales de clientes. Ver AVO Performance Seguridad —Horse Edition—.
 
-## Versiones de los componentes
+Índice
 
-| Componente | Versión en código | Estado comprobado |
-| --- | --- | --- |
-| App Android **2.5-roles-dev2** + AVO Tarjetas **1.4-nfc-movil-dev1** (rama `feature/avo-license-nfc`, 09/11/2026) | Licencia de la app en la tarjeta NFC de usuario (firma ECDSA P-256 ligada al UID), por archivo cifrado o **activando el móvil con AVO Tarjetas por NFC (licencia ligada a ese móvil)**, con roles (jinete, entrenador, desarrollador, propietario, veterinario) que deciden las funciones; modo consulta al caducar | Ver [`docs/LICENCIAS_AVO.md`](docs/LICENCIAS_AVO.md); **no verificado en móvil** |
-| App Android **2.7-borrado-reloj-dev1** (rama `feature/avo-ntrip-auto`, 03/11/2026) | Borrar entrenamientos del reloj con contraseña «AVO» (uno a uno o todos los ya guardados en el móvil) | **no verificado con el reloj** |
-| App Android **2.6-ntrip-auto-dev3** (rama `feature/avo-ntrip-auto`, 02/11/2026) | «Calidad GNSS»: estado de los mensajes de calidad en la espalda y contadores de la espalda 3.13.12 (resumen pedido de nuevo, reinicios del receptor). dev2: mountpoint automático por posición; espera creciente entre reconexiones si el caster corta enseguida; edad de la corrección medida con el contador RTCM de la espalda; aviso de señal débil o reflejada en «Calidad GNSS» | dev2 vista en el móvil 02/11/2026 (edad de la corrección «hace 0,4 s», 1 reconexión); **dev3 no verificada** |
-| App Android **2.5-roles-dev1** + AVO Tarjetas **1.3-registro-dev1** (rama `feature/avo-license-nfc`, 27/10/2026) | Licencia de la app en la tarjeta NFC de usuario (firma ECDSA P-256 ligada al UID) o por archivo cifrado, con roles (jinete, entrenador, desarrollador, propietario, veterinario) que deciden las funciones; modo consulta al caducar | Ver [`docs/LICENCIAS_AVO.md`](docs/LICENCIAS_AVO.md); **no verificado en móvil** |
-| App Android AVO Performance Horse | **2.0** (`versionCode=12`) | Rediseño, mareas IHM y análisis; CI correcto [39998714393](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39998714393) (commit `049abc7`); **no verificado en móvil** |
-| Motor de análisis AVO (Equine Intelligence Engine) | **1.1.0-dev1** en rama `feature/avo-equine-intelligence-engine` | Integrado en Android 2.1-motor y Windows; CI en verde (motor 40041495035, Android 40041494960, Windows 40041494972); **no verificado físicamente** |
-| Módulo de mareas | Android 2.0 | Predicción oficial del IHM, coeficiente, sol y luna, Open-Meteo; lectura real no verificada en móvil |
-| Metadatos marítimos de entrenamientos | Android 2.0 (IHM + Open-Meteo, cualquier fecha) | Persistencia y enriquecimiento de sesiones recientes incorporados; falta ensayo con sesión real |
-| Firmware CHEST Waveshare ESP32-S3 | **V3.5.6** (última fuente/parche integrada) | Fuentes V3.5.4 y parches V3.5.5/V3.5.6 disponibles; no se afirma prueba de firma en hardware |
-| Firmware CHEST V3.5.7 | **No integrado ni validado** | Pendiente de firmware receptor con validación ES256, control de versión y recuperación |
-| AVO Signer Android | **V0.1 prototipo** | Código y vectores de prueba ES256 integrados; no es firma de producción |
-| OTA desde la app Android | **Retirada en 2.0** | El firmware se instala con el programador USB |
-| Firmware espalda y cincha | No integrados en esta rama | Pendientes de importar desde fuentes verificadas |
-| Firmware CHEST pantalla **V3.7.2-rc1** (23/10/2026) | Siete franjas legibles sin LVGL, pantallas de carga y apagado | CI correcto [39965639870](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39965639870); **no verificado en el reloj** |
-| Firmware espalda **3.10.2** (`firmware/back/V3_8_0`) | Heltec + ZED-F9P, RTK 8 Hz 4 constelaciones, perfil de precisión, batería, modo carga, cincha, ahorro de batería (3.10.2) | 3.10.1 en uso en la espalda; 3.10.2 **no verificada en la espalda** |
-| Firmware CHEST **3.7.5-usb1** (`firmware/chest/V3_7_5_USB`, rama `feature/chest-usb-pc-sync`) | 3.7.5-rc5 + descarga de entrenamientos al PC por cable USB (protocolo AVO1, solo lectura) | CI de la rama; **no verificado en el reloj** |
-| AVO Windows **V1.1** (`windows/`) | Detecta el reloj por USB, compara y descarga al PC los entrenamientos que faltan | Autopruebas en CI con el firmware real (transcripción) y reloj simulado; **no probado en PC real** |
-| Firmware espalda **3.13.12** (vigilancia de NAV-SAT/SIG y de reinicios del receptor, rama `fix/back-3-13-12-nav-sig-watchdog`) / **3.13.11** (apagado del GPS con USB, rama `fix/back-3-13-11-usb-pololu-off`) / **3.13.10** (diagnóstico USB) / **3.13.9** (`firmware/back/V3_8_0`) | Heltec + ZED-F9P (UART1 RX=35/TX=33, Pololu: GPIO34 alta impedancia / LOW), GPS apagado con USB | Rama `fix/back-3-13-9-usb-gps-off`; **detección USB sin señal física** |
-| Programador USB **2.1.0** (`usb-updater/`) | Instalación en pecho y espalda + lectura, identificación y copia completa de cualquier ESP32-S3 | CI correcto [40009097029](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40009097029); **no verificado con el pecho ni la espalda** |
+Aplicaciones
 
-## Documentación compartida (Claude y ChatGPT)
+	•	AVO Performance Android —Horse Edition—
+	•	AVO Performance iOS —Horse Edition—
+	•	AVO Performance Windows —Horse Edition—
+	•	AVO Performance Motor —Horse Edition—
 
-- [`AGENTS.md`](AGENTS.md): reglas para cualquier asistente (rama, documentación, restricciones del reloj como **no usar LVGL**).
-- [`docs/REGISTRO_DE_CAMBIOS.md`](docs/REGISTRO_DE_CAMBIOS.md): **registro de todos los cambios**, con commits, CI y nivel de validación. Obligatorio en cada cambio.
-- [`docs/ESTADO_DESARROLLO_Y_VERSIONES.md`](docs/ESTADO_DESARROLLO_Y_VERSIONES.md): matriz de versiones y niveles de validación.
+Hardware
 
-## Estructura
+	•	AVO Performance Reloj —Horse Edition—
+	•	AVO Performance GPS —Horse Edition—
+	•	AVO Performance Cincha —Horse Edition—
+	•	AVO Performance Sinc —Horse Edition—
+	•	AVO Performance Base de carga —Horse Edition—
 
-- `app/`: aplicación Android Kotlin/Jetpack Compose, BLE, GNSS, entrenamientos y mareas.
-- `core/`: protocolo compartido y pruebas JVM.
-- `firmware/chest/V3_5_4/`: ZIP de fuentes del firmware base.
-- `firmware/chest/V3_5_5/` y `V3_5_6/`: scripts de parche sucesivos.
-- `firmware/chest/V3_7_2_UI/`: nueva pantalla del reloj (renderizador propio, sin LVGL) y parche mínimo de fases de apagado.
-- `usb-updater/`: app Android independiente para programar el reloj por USB (ROM del ESP32-S3).
-- `avo-signer/`: aplicación independiente para firmar paquetes OTA y documentación de seguridad.
-- `docs/`: requisitos y estado de validación.
-- `.github/workflows/`: compilaciones Android, CHEST y Signer.
+Común
 
-## Compilación
+	•	AVO Performance Arquitectura —Horse Edition—
+	•	AVO Performance Contratos de datos —Horse Edition—
+	•	AVO Performance Compilación —Horse Edition—
+	•	AVO Performance Reglas de desarrollo —Horse Edition—
+	•	AVO Performance Seguridad —Horse Edition—
 
-La app Android usa `./gradlew --no-daemon :core:test :app:assembleDebug`. El flujo de CI Android incluye pruebas adicionales; los artefactos de GitHub Actions son APK de **depuración**, no publicaciones de producción. El último CI Android confirmado antes de fusionar las ramas es el del commit `3b05022b`; **la rama unificada necesita una ejecución de integración propia**.
+Estado general (17/11/2026)
 
-[Acciones de GitHub](https://github.com/avotattoocastro-creator/apk_android_avo/actions)
+Producto	Versión vigente	Compilado en CI	Verificado en hardware
+AVO Performance Android —Horse Edition—	2.9-integrada-dev1 (vc 42)	✅	Pendiente
+AVO Performance iOS —Horse Edition—	TestFlight desde develop	✅	Pendiente
+AVO Performance Windows —Horse Edition—	V2 PRO	✅	Pendiente
+AVO Performance Motor —Horse Edition—	Equine 1.1 · Training Analytics 1.0 · Track Work 1.0	✅ (tests)	—
+AVO Performance Reloj —Horse Edition—	Firmware 3.7.10 · caja REV D	✅	Parcial
+AVO Performance GPS —Horse Edition—	Firmware 3.14.3 · carcasa V2.2H Rev E.5	✅	Parcial
+AVO Performance Cincha —Horse Edition—	Firmware 0.4.3 · cápsula REV 5.9.1	✅	Parcial
+AVO Performance Sinc —Horse Edition—	V0.1 (propuesta)	—	No
+AVO Performance Base de carga —Horse Edition—	V1 · PCB REV A	✅ (DRC/ERC)	No fabricada
 
-## Seguridad OTA: límite actual
+«Compilado en CI» significa que GitHub Actions lo compila y pasa los tests. No significa que se haya probado montado en un caballo.
 
-La verificación de firma en Android no sustituye la verificación en el dispositivo. **No desbloquear la instalación OTA firmada** hasta demostrar en el reloj la autenticación del manifiesto, integridad del BIN, coincidencia del hardware, anti-rollback, selección de partición y persistencia tras apagado/reinicio. El gestor Android mantiene `safeInstallationAvailable=false`. La herramienta Signer no debe incorporar claves privadas al repositorio.
+Aplicaciones
 
-## Funciones Android existentes
+AVO Performance Android —Horse Edition—
 
-BLE/NTRIP, RTK/GNSS, sesiones SD, geocercas, visualización de entrenamientos, mapas, importación/exportación .avo, selección caballo/jinete, favoritos, DND y módulo de mareas. La presencia de código no implica que todas las funciones hayan pasado pruebas reales. La subida automática al servidor sigue requiriendo verificar el contrato HTTP configurado; no afirmar sincronización real si el servidor está `NotConfiguredServer`.
+App principal de campo. El teléfono va con el jinete o el entrenador, conectado al AVO Performance Reloj.
 
-## Próximos criterios de aceptación
+	•	Tecnología: Kotlin 2.0.21, Jetpack Compose, Room, osmdroid, HCE NFC. Usa el AVO Performance Motor por JNI (3 ABI).
+	•	Versión: 2.9-integrada-dev1 (versionCode 42). Los versionCode siempre crecen.
+	•	Funciones:
+	•	BLE permanente con el AVO Performance Reloj (TELEMETRY v3) y descarga por BLE o Wi-Fi (AVO_CHEST_xxxx).
+	•	NTRIP automático: recibe las correcciones RTCM3 del caster y las reenvía al AVO Performance Reloj, que las pasa al AVO Performance GPS.
+	•	Sesiones, geocercas, mapas de pista y análisis del entrenamiento.
+	•	Licencias con roles (cuadra, entrenador, jinete) y sincronización con Firebase.
+	•	Apps auxiliares:
+	•	AVO Performance Tarjetas 1.4-nfc-movil-dev1: emite licencias NFC (NTAG213/215/216, .avolic) y las activa de un móvil a otro por NFC.
+	•	AVO Performance Update: flasheo de firmware por USB-C.
+	•	Compilación: build-android.yml en Actions. Genera una APK con su SHA-256.
 
-1. CI de integración de la rama unificada sin fallos.
-2. Validación de tabla oficial de mareas con datos actuales y origen visible; no confundir referencia Santander con medición en El Regatón.
-3. Prueba Android ↔ reloj físico: BLE, NTRIP, SD, entrenamiento, geocerca y reinicio.
-4. Firmware V3.5.7 con verificación de firmas en el receptor, pruebas de rechazo y recuperación.
-5. APK de distribución firmada con clave de publicación controlada, distinta de la APK debug.
+AVO Performance iOS —Horse Edition—
 
-No almacenar credenciales NTRIP, secretos de servidor, tokens ni claves privadas en GitHub.
+App de análisis para iPad, pensada para revisar el entrenamiento en la cuadra o en la pista.
+
+	•	Tecnología: SwiftUI, iPadOS 17+, Xcode 26. Llama al AVO Performance Motor desde Swift.
+	•	Distribución: TestFlight, que sale de develop cuando cambian ipad/**, equine-intelligence/**, avo_core/** o el workflow. El build number es automático.
+	•	Funciones:
+	•	Análisis avanzado: velocidad RTK, parciales, zancada, aire y pulso.
+	•	Descarga de sesiones por BLE.
+	•	Trabajo en pista (Track Work 1.0).
+	•	Previsto: página Vídeo sincronizada con hora GPS mediante AVO Performance Sinc —Horse Edition—.
+	•	⚠️ No tocar certificados, perfiles, Bundle Identifier ni el build number. Si cambia el uso de BLE o de la localización, revisar Info.plist (NSBluetoothAlwaysUsageDescription, etc.).
+
+AVO Performance Windows —Horse Edition—
+
+Estación de análisis y gestión en el PC de la cuadra.
+
+	•	Tecnología: C# WPF .NET 10, MVVM, WinRT BLE y winscard.dll. Usa el AVO Performance Motor como DLL por P/Invoke.
+	•	Versión: V2 PRO.
+	•	Funciones:
+	•	Análisis avanzado y comparación de sesiones.
+	•	Descarga por USB del AVO Performance Reloj con el protocolo AVO1: bloques de 4 KB con CRC-32 y SHA-256. Requiere firmware ≥ 3.7.5.
+	•	Geocercas y gestión de pistas.
+	•	Lector NFC ACS ACR122U para las licencias.
+
+AVO Performance Motor —Horse Edition—
+
+Núcleo de cálculo compartido en C++17 (MotorAVO Equine). Las tres apps lo usan, así que las métricas salen idénticas en Android, iOS y Windows.
+
+	•	Módulos: Equine 1.1, Training Analytics 1.0 y Track Work 1.0.
+	•	Integración: JNI en AVO Performance Android, P/Invoke en AVO Performance Windows y Swift en AVO Performance iOS.
+	•	Cualquier cambio debe pasar los tests unitarios y la compilación cruzada de las tres plataformas.
+
+Hardware
+
+AVO Performance Reloj —Horse Edition—
+
+El cerebro del sistema: va en el pecho, graba la sesión y hace de puente con las apps.
+
+	•	Placa: Waveshare ESP32-S3-Touch-AMOLED-2.06" (panel CO5300 410×502, PMIC AXP2101, flash de 32 MB usada como 16 MB, microSD SDMMC 1-bit).
+	•	⚠️ Los pads IO14 / IO15 del reverso son el bus I²C. No usarlos como GPIO libres.
+	•	Funciones:
+	•	Graba las sesiones RAW .avr en la microSD.
+	•	Pantalla de 7 franjas, con la tarjeta «Calidad GNSS».
+	•	Puente BLE, Wi-Fi AP y USB con las apps.
+	•	Reenvía el RTCM3 al AVO Performance GPS por ESP-NOW.
+	•	Firmware: 3.7.10. Para OTA firmada, solo versiones X.Y.Z sin sufijos: un -rc2 o -usb1 hace que el reloj rechace el paquete.
+	•	Caja: REV D, 42 × 73,5 × 22,4 mm, interruptor KAN-28 bajo la barbilla y 4×M3 con insertos.
+
+AVO Performance GPS —Horse Edition—
+
+Unidad GNSS RTK centimétrica en la espalda del jinete. También recoge los datos de la AVO Performance Cincha.
+
+Unidad vigente (espalda, prototipo Heltec)
+
+	•	Placas: Heltec Wireless Stick Lite V3 (ESP32-S3) + u-blox ZED-F9P (placa URTK1.2) + antena multibanda Q39.
+	•	Energía: LiPo 654060 de 2000 mAh y regulador Pololu S7V8F3 (SHDN = GPIO34, VIN al 3V3 de la Heltec).
+	•	UART del ZED-F9P: RX = GPIO35, TX = GPIO33, 460 800 baudios.
+	•	Funciones:
+	•	RTK a 8 Hz, con las correcciones que llegan de AVO Performance Android a través del AVO Performance Reloj.
+	•	GirthHub: recibe los lotes de la AVO Performance Cincha.
+	•	Envía BackStatus v3 (108 B) al AVO Performance Reloj.
+	•	Firmware: 3.14.3, que incluye la vigilancia GNSS de la 3.13.12 (firmware/back/V3_8_0).
+	•	Carcasa: V2.2H Rev E.5. Las Rev E.6 y E.7.3, con conectores magnéticos pogo, son de prueba.
+
+En desarrollo
+
+	•	AVO Performance GPS Casco (BACK V5): la misma función en una cápsula de 55 × 55 × 22,6 mm para el casco, con base magnética.
+	•	ZED-F9P soldado, antena plana L1/L2 y un solo ESP32-S3.
+	•	Pogo de 5 contactos con USB, encendido por sensor Hall y caja totalmente estanca.
+	•	PCB REV A diseñada, no fabricada. Solo para entrenamiento.
+	•	AVO Performance GPS V4 (PCB propia, firmware/back/V4_0_0, 4.0.0-dev2): en papel/KiCad.
+	•	⚠️ No instalar en el hardware actual. No tiene batería, modo carga, calidad GNSS ni GirthHub.
+
+AVO Performance Cincha —Horse Edition—
+
+Sensor de movimiento en la cincha: aporta cadencia, zancada, apoyos y, con ECG, el pulso.
+
+	•	Placa: Seeed XIAO ESP32-C6 + BNO085 (I²C 0x4A, rango ±8 g; pendiente evaluar ±16 g para los saltos).
+	•	Energía: LiPo EEMB LP403048 de 500 mAh. Carga por pogo magnético de 3 pines (1 = +5 V · 2 = GND · 3 = MTCK).
+	•	Funciones: IMU de 9 ejes y cuaternión a ~125 Hz, enviados al AVO Performance GPS por ESP-NOW en lotes de 220 B. Requiere AVO Performance GPS ≥ 3.10.0.
+	•	Firmware: GIRTH 0.4.3.
+	•	Cápsula:
+	•	REV 5.9.1 (vigente).
+	•	En develop: REV 5.9.2 (pogo empotrado) y REV 5.10 (ECG CJMCU-30003 / MAX30003).
+	•	PCB propia: antes de fabricarla hay que elegir arquitectura:
+	•	(a) prototipo validado: pogo + BNO085 + ECG MAX30003, o
+	•	(b) diseño en papel: Qi + reed + LSM6DS3TR-C / MMC5983MA.
+
+AVO Performance Sinc —Horse Edition—
+
+Accesorio para grabar vídeo del entrenamiento con hora GPS exacta en cada fotograma. Después, la app superpone en el vídeo la velocidad, la zancada y el pulso.
+
+	•	Estado: propuesta V0.1. No hay PCB, CAD, firmware ni código de la app.
+	•	Funciona a cualquier distancia. El caballo y AVO Performance Sinc toman la hora de los satélites por separado, y los datos se juntan después.
+	•	Hardware propuesto:
+	•	Seeed XIAO ESP32-C3.
+	•	GPS con pin PPS: u-blox MAX-M10S o ATGM336H.
+	•	LiPo de 400–500 mAh.
+	•	LED blanco codificado, para GoPro o dron.
+	•	Pulsador de marcas y caja de PETG/TPU.
+	•	Coste estimado: 17–32 €.
+	•	Precisión esperada (sin medir):
+	•	1–5 ms con AVO Performance iOS por BLE.
+	•	±½ fotograma con el LED en cámaras externas.
+	•	Protocolo: BLE AVO SYNC v1, un servicio GATT propio. No modifica ningún contrato existente.
+	•	Firmware previsto en firmware/sync/V0_1.
+
+AVO Performance Base de carga —Horse Edition—
+
+Soporte de pared (DOCK V1) que carga 2 AVO Performance GPS Casco y 2 AVO Performance Cincha a la vez y descarga los entrenamientos.
+
+	•	Estado: PCB REV A y caja diseñadas y verificadas en el CI (DRC 0, ERC 0/0, 0 interferencias). No fabricada.
+	•	Rama claude/dock-cargador-v1, PR #45.
+	•	Carpeta hardware/dock/V1.
+	•	Alimentación: red de 230 V con módulo Mean Well IRM-20-5, o USB-C de 5 V. La red tiene prioridad.
+	•	Electrónica:
+	•	ESP32-S3-MINI-1U.
+	•	Hub USB2514B con dos modos: modo PC (el ordenador ve los cascos) y modo autónomo (la base sirve los entrenamientos por Wi-Fi).
+	•	Cada puerto mide su carga (TPS2553 + INA180A2), y la pantalla IPS de 2,0" muestra «cargando / completa / sin cápsula».
+	•	Conexiones: pogo de 5 contactos para los cascos y de 3 para las cinchas (REV 5.9.1 y REV 5.10).
+	•	Caja: PETG, 200 × 190 × 55 mm, con alojamientos imantados.
+	•	Previsto:
+	•	Lector de QR para actualizar la licencia de todos los cascos mientras cargan.
+	•	Contrato nuevo DockStatus v1 en las tres apps.
+	•	⚠️ No es un producto certificado: necesita ensayo CE antes de venderse.
+
+Común
+
+AVO Performance Arquitectura —Horse Edition—
+
+                 Caster NTRIP (RTCM3)
+                         │
+          AVO Performance Android ── BLE / Wi-Fi ──┐
+                         │ RTCM3 (BLE, CRC-24Q)     │
+                         ▼                          │
+   ┌──────── AVO Performance Reloj ◄────────────────┘
+   │   graba .avr en microSD · pantalla · BLE/Wi-Fi/USB
+   │        ▲ BackStatus v3 (108 B)     │ RTCM3
+   │        │ ESP-NOW                   ▼
+   │   AVO Performance GPS (RTK 8 Hz + GirthHub)
+   │        ▲
+   │        │ lotes IMU 220 B (ESP-NOW)
+   │   AVO Performance Cincha (~125 Hz)
+   │
+   ├── USB AVO1 ──► AVO Performance Windows
+   └── BLE ───────► AVO Performance iOS ◄── BLE ── AVO Performance Sinc
+
+   AVO Performance Base de carga ── pogo ──► GPS Casco y Cincha
+                                 ── USB / Wi-Fi ──► PC
+
+AVO Performance Contratos de datos —Horse Edition—
+
+Si cambia un formato, hay que actualizar a la vez el firmware y todas las apps que lo leen.
+
+Enlace	Formato	Tamaño / integridad	Requisito mínimo
+GPS → Reloj (ESP-NOW)	BackStatus v3	108 B	GPS ≥ 3.9.0, Reloj ≥ 3.7.6
+Cincha → GPS (ESP-NOW)	Lote IMU	220 B	GPS ≥ 3.10.0
+Reloj → Apps (BLE GATT)	TELEMETRY v3	116 B	—
+Reloj → Windows (USB)	AVO1	Bloques de 4 KB, CRC-32 + SHA-256	Reloj ≥ 3.7.5, Windows ≥ V1.1
+Android → Reloj → GPS	RTCM3	CRC-24Q	—
+Sinc → iOS (BLE)	AVO SYNC v1	16 / 32 B	Propuesta
+Base de carga → Apps	DockStatus v1	Por definir	Propuesta
+Sesiones	.avr (RAW)	—	—
+Configuración	TLV AVOC	—	—
+Licencias	.avolic	Firma ECDSA P-256	—
+
+AVO Performance Compilación —Horse Edition—
+
+Todos los binarios se generan en GitHub Actions. Los workflows se disparan con push a develop, filtrados por paths:; no se ejecutan en los PR.
+
+	•	Firmware del AVO Performance Reloj, GPS y Cincha (.bin).
+	•	AVO Performance Android: build-android.yml (APK).
+	•	AVO Performance Windows: instalador / .exe.
+	•	AVO Performance iOS: TestFlight.
+	•	KiCad: PCB de AVO Performance Cincha, GPS y Base de carga.
+	•	Archivo: archivar-artefactos.yml guarda la última versión de cada artefacto en archivo/binarios/.
+
+Descarga: Actions → el run correspondiente → Artifacts. Cada artefacto incluye su SHA-256.
+
+No modificar workflows, rutas de artefactos, firmas (AVO_UPDATER_KEYSTORE_*), Info.plist, perfiles ni el build number de TestFlight sin avisar y sin confirmación.
+
+AVO Performance Reglas de desarrollo —Horse Edition—
+
+	1.	Una sola develop. Cada tarea va en una rama corta que sale de develop y vuelve por PR con merge commit y el CI en verde.
+	2.	Nada de líneas paralelas de una misma app o firmware.
+	3.	Antes de borrar ramas antiguas, comprobar que existe su etiqueta backup/2026-11-12/* o backup/2026-11-17/*.
+	4.	OTA del AVO Performance Reloj: solo versiones X.Y.Z sin sufijos.
+	5.	Tiempo real: nada de delay() en los bucles IMU (125 Hz) ni GNSS (8 Hz). Usar FreeRTOS, colas e interrupciones.
+	6.	AVO Performance GPS: respetar la secuencia de encendido del Pololu (GPIO34) y la lógica de BACK_SLEEP para evitar brownouts.
+	7.	Commits en Conventional Commits con el módulo: feat(pecho), fix(espalda), feat(cincha), fix(android), feat(ipad), feat(windows), feat(motor), cad(carcasa).
+	8.	CAD: FreeCAD 1.0.2 y Shapr3D. Se imprime en Elegoo Centauri Carbon: PETG para la estructura y TPU 85A/95A para juntas y tapones. Tolerancia de encaje 0,2–0,3 mm. Objetivo IP67.
+	9.	PCB: KiCad 9.
+	10.	Documentación en español. Cada entrega indica qué está compilado en CI y qué está verificado en hardware real.
+
+AVO Performance Seguridad —Horse Edition—
+
+	•	Prohibido subir .jks, .keystore, .p12, .pfx, .p8, .mobileprovision, .env, google-services.json con claves restringidas, credenciales NTRIP o claves ECDSA privadas.
+	•	La clave privada de licencias vive solo en AVO Performance Tarjetas (y en su copia cifrada). En GitHub solo está la pública (AVO_LICENSE_PUBLIC_KEYS).
+	•	Firmas de APK y de App Store Connect: solo como GitHub Secrets.
+	•	Las credenciales NTRIP las introduce cada usuario en los ajustes de la app.
+
+AVO Performance Documentación —Horse Edition—
+
+	•	CLAUDE.md y AGENTS.md: reglas para agentes. Si algo choca, manda el repositorio.
+	•	claude/ y docs/: un documento por versión de firmware, carcasa, PCB y app.
+
+© AVO Performance. Todos los derechos reservados.
