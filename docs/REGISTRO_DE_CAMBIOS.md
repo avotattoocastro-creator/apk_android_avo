@@ -64,6 +64,299 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 - firmware DOCK 0.1.0 y el contrato `DockStatus v1` en todas las apps a la vez;
 - % de batería por USB en la BACK 5.x;
 - protocolo por MTCK y divisor de batería en la GIRTH.
+## 2026-11-17 — Cincha CAD REV 6.4 — balancín magnético empotrado a ras en la pared
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-3-balancin-magnetico` (PR #60)
+**Qué cambia (captura del usuario):**
+- extremos de la cápsula +5 mm (69,0 mm) con el balancín empotrado a ras en un hueco de la pared, fuera de la línea de la junta;
+- eje: pasador de acero Ø2 × 20 / Ø2 × 18 a presión en el balancín, que gira en cojinetes impresos con la base; lo cierran lengüetas de la tapa;
+- imanes 2 + 2 Ø5 × 1 entre el balancín y la pared (pozo desde abajo con tapón);
+- diente recto en la cama del soporte;
+- se quitan las aletas, la barra y el labio de la 6.3.1;
+- soporte de 94,5 × 84,6; patrón de la funda regenerado.
+**Comprobado (script local):**
+- piezas cerradas; conjuntos de 96 sólidos con 0 aristas abiertas; `verificar_step.py` 25/25 OK;
+- `verificar_cierre.py`: 0 mm³ cerrado; diente libre a unos 4° (0,5 mm de pulsador); tope a unos 12°; sin choques con el soporte antes del tope.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+**Pendiente:** rozamiento real (μ ≥ 0,17–0,24 con diente recto), fuerza de los imanes y probeta del extremo.
+
+## 2026-11-17 — Cincha CAD REV 6.3.1 — eje en las columnas y labio sobre la tapa
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-3-balancin-magnetico` (PR #60)
+**Qué cambia (marcado del usuario, «integrado»):**
+- las aletas del eje pasan junto a las columnas de las esquinas (±20,5 en +X, ±19,5 en −X: llave de posición);
+- el balancín (14 / 12 mm) lleva una barra de columna a columna con los pasadores Ø2 × 6 en sus extremos;
+- labio superior que tapa el hueco y entra en un rebaje del borde de la tapa (fondo a 0,5 mm del interior).
+**Comprobado (script local):**
+- piezas cerradas; conjuntos de 96 sólidos con 0 aristas abiertas; `verificar_step.py` 25/25 OK;
+- `verificar_cierre.py`: 0 mm³ de interferencia cerrado y sin choques con el soporte al abrir;
+- diente libre a unos 9,5° (1,4 mm de pulsador); tope del labio a unos 14,5°.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+
+## 2026-11-17 — Cincha CAD REV 6.3 (con funda) — cierre magnético de balancín
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-3-balancin-magnetico`
+**Qué cambia:** en `hardware/girth/CINCHA_MONTAJE` los pestillos elásticos y los seguros TPU de la REV 6.2 se sustituyen por un **balancín magnético en cada lado corto**:
+- balancín a ras de la tapa, con 2 pasadores de acero Ø2 × 6 en aletas de la base;
+- dientes rectos en ventanas del cerco;
+- 2 + 2 imanes Ø5 × 1 en atracción (balancín ↔ cerco), con orificio y tapón;
+- cerco de 3,0;
+- soporte de 99,6 × 84,6;
+- piezas renombradas a `R6_3`;
+- `fuente/verificar_cierre.py` nuevo (comprobación por vóxeles);
+- renders 13, 13b y 14 nuevos;
+- patrón de la funda regenerado (los tornillos de Chicago cambian de sitio).
+**Por qué:** decisión del usuario, que aplica a la cincha vigente (con funda) el diseño que se había acordado sobre la REV5 (PR #46, que se cierra sin fusionar). Sin imanes de repulsión arriba: no caben por la ranura de la junta y la tapa de 2,5 mm.
+**Comprobado (script local, no hay workflow para esta carpeta):**
+- `avo_cincha_montaje.py`: todas las piezas cerradas; conjuntos de 96 sólidos con 0 aristas abiertas;
+- `verificar_step.py`: 25/25 OK;
+- `verificar_cierre.py`: 0 mm³ de interferencia cerrado, sin choques al abrir, dientes libres a unos 10° (1,5 mm de pulsador), tope a unos 26°.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO** (ni impreso ni probado).
+**Pendiente:** fuerza real de los imanes apilados y del rozamiento, probeta del cierre, ensayo de tirón (§8.4).
+
+
+
+
+
+
+
+
+## 2026-11-17 — Docs/CI — Nombres PROTOTIPO / BETA y estado vigente único
+**Autor:** Claude · Rama `claude/nombres-prototipo-beta`
+**Qué cambia:** regla del usuario: sin PCB propia = **PROTOTIPO** (Waveshare, Heltec, XIAO); con PCB propia = **BETA**
+(cincha PCB REV D, casco V5, DOCK V1, espalda V4). Descargas renombradas (`AVO_PECHO_PROTOTIPO_FW.zip`,
+`CAD_CINCHA_BETA_REV6_MONTAJE.zip`…), nueva `AVO_CINCHA_BETA_FW.zip` (0.6.x) y entrada para la espalda BETA V4; los
+nombres antiguos se retiran de la release. `AGENTS.md`: bloque «Empieza aquí», regla de nombres, hardware por líneas,
+etiquetas de respaldo ya creadas, descargas y **plan de pruebas**: campo solo con PROTOTIPOS hasta tener todas las PCB
+construidas; después se porta a las BETA y se prueban. `ESTADO_DESARROLLO_Y_VERSIONES.md`: tabla única vigente arriba; lo del
+22/10 queda como histórico.
+**No se ha tocado:** carpetas, workflows de compilación ni nombres de artefactos existentes (renombrarlos rompería CI e
+historial; la etiqueta se aplica en docs, descargas y carpetas nuevas).
+**Validación:** publicación simulada en local con los artefactos reales · se publica al fusionar.
+
+## 2026-11-17 — CI — Descargas directas (release fija `descargas`)
+**Autor:** Claude · Rama `claude/descargas-directas` · **CI:** se ejecuta por primera vez al integrar en `develop`
+**Qué cambia:** workflow nuevo `publicar-descargas.yml` + `scripts/descargas/publicar.py` + `descargas.json`. Publica en
+la release `descargas`, con nombres fijos, la última versión de firmware (pecho, espalda, cincha, cincha ECG), apps
+(Android, Tarjetas, AVO Update, Windows) y ZIP de CAD (cincha REV5, montaje, casco V5, DOCK V1, espalda V4), más
+`VERSIONES.txt` y `manifiesto.json`. Espera a que terminen las compilaciones del commit y solo sube lo que cambia.
+**Por qué:** el usuario pide descarga directa de lo último de todo; los artefactos caducan y piden iniciar sesión.
+**No se ha tocado:** ningún workflow de compilación, firmas, `Info.plist` ni TestFlight. iOS sigue solo por TestFlight.
+**Validación:** IMPLEMENTADO · simulado en local con `gh` falso y los 988 artefactos reales de la API (17 entradas:
+12 publicables, 5 pendientes) · **sin ejecutar aún en Actions**. Detalle: `docs/DESCARGAS_DIRECTAS.md`.
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — licencias por QR en la base de carga
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §16 en `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: la app muestra un QR con la licencia de cuadra (una firma
+para todos los cascos) y la elección de caballos; la base de carga lo lee con un lector UART y lo instala en todos los
+cascos que cargan.
+**Por qué:** idea del usuario (16/11/2026 21:56).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, PCB del DOCK, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — plazas de caballo compartidas por todos los cascos de la cuadra
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §15 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: las plazas son de la cuadra; cualquier casco alquilado por la
+cuadra graba con cualquiera de sus caballos activados; el comprobante de activación se reparte entre cascos y, si hay dos,
+gana el más antiguo.
+**Por qué:** indicación del usuario (16/11/2026 21:52).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — renovación con los caballos anteriores marcados
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §15 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: al renovar, la selección aparece con los caballos que ya
+tenían plaza marcados; el cliente confirma o cambia.
+**Por qué:** indicación del usuario (16/11/2026 21:49).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — activación de caballos al recibir la licencia
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §15 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: caballos ilimitados en la app; al recibir la licencia se
+eligen los de las plazas contratadas y quedan bloqueados (nombre e id); el casco ata la elección por nº de licencia y emite un
+comprobante firmado por su ATECC608B. Resuelta la decisión pendiente de §11.
+**Por qué:** flujo definido por el usuario (16/11/2026 21:48).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — cupo de caballos por licencia de cuadra
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §15 en `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: la licencia de cuadra lleva plazas de caballo firmadas; no se
+cambia de caballo hasta renovar o contratar otra plaza; el caballo sustituido queda bloqueado para el casco (sus datos se
+siguen viendo). Nueva decisión pendiente sobre quién rellena una plaza vacía.
+**Por qué:** regla del usuario (16/11/2026 21:43).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — licencias hijas sin caducidad propia
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §14 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: las licencias de entrenador, jockeys y caballos no tienen
+fecha de fin; dependen solo de la de la cuadra. Con la cuadra caducada las apps permiten ver en solo lectura todo lo
+generado durante la licencia activa; nada nuevo. Resuelta la decisión pendiente de §11.
+**Por qué:** aclaración del usuario (16/11/2026 21:39).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — jerarquía de licencias (la cuadra manda)
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §14 en `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: con la licencia de cuadra caducada no funcionan las licencias
+de entrenador, jockeys, caballos ni cascos de esa cuadra; las licencias hijas nunca duran más que la cuadra; personas con
+varias cuadras solo pierden la caducada; se mantiene la descarga de lo grabado (§12). Nueva decisión pendiente: consulta en
+solo lectura con la cuadra caducada.
+**Por qué:** regla del usuario (16/11/2026 21:35).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
+## 2026-11-16 — AVO-LOCK-1: alquiler mensual y cambio de cuadra del casco
+**Autor:** Claude · **Rama:** `docs/avo-lock-1-alquiler` · solo documento.
+**Qué cambia:** nueva §13 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`:
+- licencia mensual del casco;
+- en la devolución, la app comprueba que todo esté descargado;
+- solo AVO lo pasa a otra cuadra, con una licencia y una llave pública nuevas firmadas;
+- el casco borra la SD y la configuración, y rechaza el cambio si hay sesiones sin descargar, salvo con la marca `BORRAR_PENDIENTES`;
+- el casco y AVO Tarjetas guardan el historial del casco.
+
+**Estado:** DISEÑO.
+
+## 2026-11-16 — AVO-LOCK-1: decisiones confirmadas
+**Autor:** Claude · **Rama:** `docs/avo-lock-1-decisiones` · solo documento.
+**Qué cambia:** en la §12 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md` el usuario confirma:
+- aviso desde 7 días antes y bloqueo de la grabación el día de fin;
+- con la licencia caducada se pueden descargar los datos ya grabados;
+- hacen falta dos licencias, la del casco (cuadra) y la de la persona.
+
+**Estado:** DISEÑO.
+
+## 2026-11-16 — Diseño AVO-LOCK-1: el casco solo funciona dentro del sistema y de su licencia
+**Autor:** Claude · **Rama:** `docs/avo-lock-1` · solo documento.
+**Qué cambia:** nueva §12 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`:
+- **Identidad:** ATECC608B con certificado de casco firmado por AVO Tarjetas.
+- **Licencia:** licencia propia del casco, comprobada con la hora GNSS.
+- **Conexión:** reto y respuesta mutuos entre la app (llave de cuadra) y el casco, con el canal cifrado.
+- **Firmware:** arranque seguro y cifrado de flash en serie.
+- **Estados:** licencia válida, aviso, caducada (sin grabar, pero se puede descargar) y sin licencia.
+
+**Estado:** DISEÑO · decisiones pendientes en §12.
+
+## 2026-11-16 — AVO-ENC-1: solo el casco cifra; pecho y espalda siguen como banco de pruebas
+**Autor:** Claude · **Rama:** `docs/avo-enc-1-casco` · solo documento.
+**Qué cambia:** decisión del usuario en `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`:
+- el cifrado es solo para el casco (PCB propia);
+- el pecho y la espalda actuales son el banco de pruebas y siguen grabando `.avr` sin cifrar;
+- en la placa de serie del casco se recomienda arranque seguro y cifrado de flash, y el elemento seguro opcional queda como decisión pendiente.
+
+**Estado:** DISEÑO.
+
+## 2026-11-16 — Diseño AVO-ENC-1: RAW comprimido y cifrado en el casco + llavero de cuadras
+**Autor:** Claude · **Rama:** `docs/avo-enc-1` · solo documento.
+**Qué cambia:** nuevo `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, con el diseño aprobado por el usuario:
+- **Formato en la SD:** el casco escribe `.avoe` por bloques (deflate + AES-256-GCM, ECDH P-256 para envolver la llave de sesión).
+- **Llaves:** una llave por cuadra y una llave personal por persona.
+- **Llavero `.avokeys`:** cifrado con la clave secreta de la tarjeta NFC; un propietario o veterinario con varias cuadras usa una sola tarjeta.
+- **Copias por destinatario:** al asignar el caballo se añade una para su propietario.
+- **Casco:** solo acepta llaves públicas de cuadra firmadas por AVO Tarjetas.
+
+**No se ha tocado:** firmware, apps, workflows ni firmas.
+**Estado:** DISEÑO · sin implementar.
+
+## 2026-11-16 — iPad — «Análisis visual» de la carrera a pantalla completa
+**Autor:** Claude · **Rama:** `feature/ipad-carrera-analisis-profundo`
+**Qué cambia:** en la ficha de la carrera hay un botón nuevo, **«Análisis visual»** (icono de gráficas, a la izquierda de «Informe PDF»). Abre una ventana a pantalla completa.
+- **Panel izquierdo:** se elige qué se muestra:
+  - cualquier caballo de la carrera, con atajos «Mío + ganador», «Top 3», «Todos» y «Ninguno»;
+  - los entrenamientos con parciales de los 60 días anteriores, en línea discontinua y alineados desde la meta;
+  - las otras carreras del mismo caballo, en línea punteada y alineadas por la distancia a la meta.
+- **8 medidas:** velocidad, % de su mejor tramo, tiempo del tramo, posición, distancia al primero, diferencia con mi caballo, zancada y foulées.
+- **Gráfica grande:** al tocar o arrastrar se elige un tramo y aparece un ranking de ese tramo de mejor a peor. Debajo, una tabla con todos los tramos en la que el mejor de cada tramo sale en verde y el peor en rojo.
+- **Por defecto** se muestran mi caballo, el ganador y el entrenamiento elegido en la ficha.
+
+**Por qué:** boceto del entrenador sobre la build 165 (16/11/2026 11:25): «ventana a pantalla completa donde hacer un análisis visual profundo de la carrera, poder seleccionar qué caballos mostrar, comparar con mi carrera y mis entrenos».
+**Archivos:** `Views/RaceDeepAnalysisView.swift` (nuevo), `Views/RaceDetailView.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
+## 2026-11-16 — Logotipo de los informes: «PERFORMANCE» un poco más abajo y sin el trazo rojo bajo «PE»
+**Autor:** Claude · **Rama:** `feature/logo-ajuste`
+**Qué cambia:** en `report_text.jpg` (iPad y Windows):
+- «PERFORMANCE» baja 7 px respecto a la línea roja de «AVO»;
+- se borra la cola roja que quedaba bajo «PE», un resto de la línea roja de «AVO» que se había movido con la banda de «HORSE EDITION»;
+- se añade un margen inferior a «HORSE EDITION».
+
+El tamaño queda en 670 × 293 px.
+**Por qué:** boceto del entrenador sobre un PDF de tramo (16/11/2026 01:05): «un pelín más bajo».
+**Estado:** imagen cambiada · NO VERIFICADO en los PDF generados.
+
+## 2026-11-16 — iPad — Flechas de «% carrera» vistas desde la carrera
+**Autor:** Claude · **Rama:** `feature/ipad-flechas-carrera`
+**Qué cambia:** las flechas de «Entrenamiento vs carrera» (app y PDF) se leen ahora desde la carrera:
+- ▲ verde si en ese tramo la carrera fue **más rápida** que el entrenamiento (% carrera < 100 %);
+- ▼ roja si la carrera fue igual o más lenta.
+
+Antes era al revés.
+**Por qué:** boceto del entrenador sobre la build 159 (16/11/2026 00:47): «está al revés».
+**Archivos:** `Views/RaceTrainingSplitsView.swift`, `Core/RaceComparisonPdf.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
+## 2026-11-16 — Imagen de marca (`avo_brand_hero`): «PERFORMANCE» arriba y «HORSE EDITION» debajo
+**Autor:** Claude · **Rama:** `feature/hero-performance-arriba`
+**Qué cambia:** igual que en el logotipo de los informes, en la imagen grande de marca se intercambian las bandas «HORSE EDITION» y «PERFORMANCE». Se hace solo en la zona del texto y con los bordes fundidos, para no cortar las rayas rojas del fondo. Misma resolución (941 × 869). Cambia en todas las apps que usan la imagen:
+- iPad: Dashboard e Inicio;
+- Windows: `Assets/avo_brand_hero.jpg`;
+- Android: `app`, `cards` y `usb-updater` (`drawable-nodpi/avo_brand_hero.webp`).
+
+**Por qué:** boceto del entrenador sobre el Dashboard del iPad (16/11/2026 01:02).
+**Estado:** imagen cambiada · NO VERIFICADO en los dispositivos.
+
+## 2026-11-16 — Logotipo de los informes: «PERFORMANCE» arriba y «HORSE EDITION» debajo
+**Autor:** Claude · **Rama:** `feature/logo-performance-arriba`
+**Qué cambia:** en el logotipo de la cabecera de los informes (`report_text.jpg`) se intercambian las dos bandas: «PERFORMANCE» pasa justo bajo «AVO» y «HORSE EDITION» va debajo. Mismo tamaño (670 × 282 px). Se cambia en el iPad (`Assets.xcassets/report_text.imageset`) y en Windows (`AVO.Windows.Core/Reports`), que comparten el mismo archivo.
+**Por qué:** petición del entrenador (16/11/2026).
+**Estado:** imagen cambiada · NO VERIFICADO en los PDF generados en el iPad.
+
+## 2026-11-16 — iPad — Cuadra: número de carreras de cada caballo
+**Autor:** Claude · **Rama:** `feature/ipad-cuadra-carreras`
+**Qué cambia:** en la lista de la Cuadra cada caballo muestra su número de carreras importadas («1 carrera», «0 carreras»), antes del número de entrenamientos.
+**Por qué:** boceto del entrenador sobre la build 155 (16/11/2026 00:17).
+**Archivos:** `Views/StableView.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
+## 2026-11-16 — iPad — Carreras: «mediana del campo» pasa a llamarse «caballo medio»
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-saltos`
+**Qué cambia:** en todo lo que tiene que ver con carreras, «mediana del campo» pasa a ser **«caballo medio»** y «mediana de sus trabajos» pasa a ser «valor medio». Afecta a la ficha de la carrera, las gráficas, el análisis, las observaciones, el método y el Informe PDF. El cálculo no cambia: sigue siendo la mediana de los demás participantes, sin contar el nuestro, y la explicación lo dice con palabras sencillas.
+**Por qué:** petición del entrenador (16/11/2026): «algo que sea entendible por cualquiera», «en todas partes».
+**Archivos:** `Views/RaceDetailView.swift`, `Core/RaceAnalysis.swift`, `Core/RaceComparisonPdf.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
+## 2026-11-16 — iPad — Informe PDF de la carrera: ningún título queda solo al final de una página
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-saltos`
+**Qué cambia:** cada título y subtítulo del PDF se mantiene en la misma página que su primer bloque. Si no caben juntos, el título pasa a la página siguiente. Antes quedaban sueltos al pie de la página 1 y 2:
+- «Entrenamiento vs carrera»: el título va con sus datos, las cifras y la primera gráfica;
+- «Análisis según los entrenamientos»: el título va con el primer bloque, y «Lo que dice la carrera» con sus 6 filas;
+- lo mismo para entrenamientos, forma, estimación y observaciones.
+
+**Por qué:** bocetos del entrenador sobre la build de TestFlight (15/11/2026 23:58, «siguiente página»).
+**Archivos:** `Core/RaceComparisonPdf.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
+## 2026-11-15 — iPad — Flechas en «% carrera», «mediana del campo» explicada, visor PDF a pantalla completa y símbolos del PDF
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-fila`
+**Qué cambia (bocetos del entrenador 15/11/2026, build 151):**
+- **Flechas en «% carrera»** (app y PDF) de «Entrenamiento vs carrera»: ▲ verde si en ese tramo el entrenamiento fue igual o más rápido que la carrera (≥ 100 %) y ▼ roja si fue más lento.
+- **«Mediana del campo» explicada** (app y PDF), bajo «Lo que dice la carrera»: es el «caballo típico» de la carrera, es decir, el valor del caballo que queda en medio de los demás participantes, sin el nuestro.
+- **Visor de PDF a pantalla completa** (antes era una hoja pequeña centrada).
+- **Símbolos del PDF:** ≈, ≥, ≤ y → salían como «?» porque las fuentes estándar del PDF no los tienen. Ahora se escriben ~, >=, <= y ->.
+
+**Archivos:** `Core/PdfDocument.swift` (`safe`, `fillPolygon`, `arrow`), `Core/RaceComparisonPdf.swift`, `Views/RaceTrainingSplitsView.swift`, `Views/RaceDetailView.swift`, `App/RootView.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
+## 2026-11-15 — iPad — Informe PDF de la carrera: las 8 cifras del resultado en una sola línea
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-fila`
+**Qué cambia:** las 8 cifras del resultado van ahora en una sola línea:
+- puesto, tiempo oficial y distancia al ganador;
+- velocidad máxima y velocidad media;
+- mejor 200 m, últimos 600 m y recorrido vs 1.º.
+
+Todas las cifras de una línea comparten tamaño, que se reduce para que quepa la más ancha, y los nombres y textos pequeños se ajustan al recuadro.
+**Por qué:** boceto del entrenador sobre el PDF (15/11/2026, build 151): «Todos en misma línea».
+**Archivos:** `Core/RaceComparisonPdf.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
 
 ## 2026-11-15 — iPad — Casilla «PDF» en cada grupo de datos de la carrera
 **Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-checks` · **CI:** ver PR

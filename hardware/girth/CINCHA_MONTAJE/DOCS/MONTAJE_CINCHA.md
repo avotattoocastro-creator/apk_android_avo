@@ -1,4 +1,4 @@
-# AVO GIRTH · montaje del sistema en la cincha (cápsula REV 6.2: aro de luz, estanca y con pestillos; funda de piel y electrodos ECG)
+# AVO GIRTH · montaje del sistema en la cincha (cápsula REV 6.4: aro de luz, estanca y con cierre magnético de balancín empotrado; funda de piel y electrodos ECG)
 
 > **Estado: diseño · NO VERIFICADO en caballo real.** No se ha impreso, cosido ni montado nada. Los STEP no se han
 > abierto en FreeCAD dentro de este entorno (no está instalado). Solo pasaron la comprobación automática de
@@ -31,20 +31,39 @@ mucho movimiento y vibración, y queda sujeta al soporte **solo por medios mecá
 
 Ver §3.2 y la sección **«Retención»** (§8).
 
+**REV 6.4 (17/11/2026, captura del usuario): balancín magnético EMPOTRADO a ras en la pared.** Sustituye a los
+pestillos y seguros de la REV 6.2 y a los balancines exteriores de la REV 6.3/6.3.1 (PR #60). Lo demás (aro de luz,
+estanqueidad, funda, pogo, tacos y cordón) no cambia.
+- Cada extremo ±X de la cápsula crece **5 mm** hacia fuera (69,0 × 60,1 × 15,5 mm). La pared del extremo queda plana
+  y el balancín va **empotrado a ras** en un hueco. El hueco queda fuera de la línea de la junta (su fondo, a 1,45 mm
+  de la ranura).
+- **Eje:** pasador de acero ISO 2338 **Ø2 × 20** (+X) / **Ø2 × 18** (−X), a presión en el balancín. Gira en 2
+  **cojinetes** a los lados, que se imprimen con la base. La ranura de cada cojinete está abierta por arriba y la
+  cierra una **lengüeta de la tapa**: al atornillar la tapa, el pasador queda cautivo. Sin aletas ni piezas por fuera.
+- **Imanes:** 2 + 2 Ø5 × 1 por lado, en atracción, entre la parte baja del balancín (más gruesa) y la pared del
+  hueco. Tiran del balancín contra el tope del hueco (queda a ras) y mantienen el diente dentro. El del balancín se
+  tapa con una tapa de 5,5 × 5,5 × 0,5; el de la pared entra por un pozo desde la cara inferior y se tapa con un
+  tapón.
+- **Diente recto:** la parte baja del balancín baja 4 mm por debajo de la cápsula y su diente engancha en una
+  ventana de la **cama del soporte**. Los tacos de TPU y los pogo lo cargan hacia arriba.
+- **Abrir:** empujar la cápsula hacia abajo y apretar arriba los dos balancines hacia dentro, con una mano. El diente
+  suelta a unos 4° (0,5 mm de pulsador) y hace tope a unos 12°. **Cerrar:** bajar la cápsula (bisel).
+- Llave de posición: balancín de 14 mm en +X y de 12 mm en −X. Soporte de 94,5 × 84,6 mm. Ver §3.6.
+
 ## 1. Qué hay en esta carpeta
 
 | Ruta | Contenido |
 |---|---|
 | `out/STEP/AVO_CINCHA_MONTAJE_CONJUNTO_CURVADO.step` | **Conjunto completo** curvado sobre el tórax: cincha, funda, soporte con pestillos y seguros, cápsula, PCB, celda, antena, pogos, tornillería, electrodos, espuma y cables (92 sólidos en 8 subconjuntos) |
 | `out/STEP/AVO_CINCHA_MONTAJE_CONJUNTO_RECTO.step` | El mismo conjunto con la cincha recta (tumbada, con la cara interior abajo) |
-| `out/STEP/AVO_CINCHA_R6_2_CAPSULA_CONJUNTO.step`, `..._SOPORTE_CONJUNTO.step` | Subconjuntos de la cápsula y del soporte, en coordenadas locales |
+| `out/STEP/AVO_CINCHA_R6_3_CAPSULA_CONJUNTO.step`, `..._SOPORTE_CONJUNTO.step` | Subconjuntos de la cápsula y del soporte, en coordenadas locales |
 | `out/STEP/REF_torax_caballo_seccion.step` | Sección del tórax de referencia (300 mm de largo) |
 | `out/STEP/piezas/*.step` | Un STEP por pieza: impresas, PCB, celda, antena, electrodo, funda, cincha Decathlon y Horze (recta y curvada) |
 | `out/STL/*.stl` | Piezas impresas, ya colocadas para imprimir |
 | `out/PATRON/AVO_CINCHA_funda_piel_patron.{svg,dxf}` | Patrón plano 1:1 de la funda, en mm, con capas de corte, pliegue, costura, agujeros cada 4 mm, rebaje, taladros y marcas |
 | `out/informe.json` | Medidas, volúmenes, longitudes de cable y comprobaciones |
 | `out/AVO_CINCHA_MONTAJE.zip` | Todo lo anterior junto, para descargar |
-| `renders/*.png` | Renders de comprobación (01–14; 12 = corte por los LED, 13 = corte por un pestillo, 14 = pestillo y seguro) |
+| `renders/*.png` | Renders de comprobación (01–14; 12 = corte por los LED, 13 = corte por un diente del balancín, 13b = corte por los imanes, 14 = balancín entre sus aletas) |
 | `fuente/` | Scripts que lo generan todo (ver §9) |
 
 **Coordenadas.** En la cincha:
@@ -78,7 +97,7 @@ En el conjunto curvado: X+ = izquierda del caballo, Y+ = hacia la cabeza, Z+ = a
 
 ## 3. Diseño
 
-### 3.1 Cápsula REV 6.2 (`AVO_CINCHA_R6_2_*`)
+### 3.1 Cápsula REV 6.2 (`AVO_CINCHA_R6_3_*`)
 
 **Medidas.** Exterior de 62,9 × 60,1 × 15,5 mm, con las orejas de los 6 tornillos, y 64,7 mm de fondo en la tapa con
 la oreja del cordón. Interior de 51 × 43,75 mm.
@@ -156,7 +175,7 @@ Carbon tiene una sola extrusora, así que no puede hacer una pieza bicolor con l
 
 Si se quiere más difusión, se puede lijar la cara interior de la pared o pintarla con barniz mate translúcido.
 
-### 3.2 Soporte REV 6.2 (`AVO_CINCHA_R6_2_soporte_pestillos_PETG`, PETG opaco)
+### 3.2 Soporte REV 6.2 (`AVO_CINCHA_R6_2_soporte_pestillos_PETG`, PETG opaco) — **sustituido en la REV 6.3 (§3.6)**
 
 **Medidas.** 89,6 × 82,6 mm; ala de 2,5 mm; cama a z = 8; cerco hasta z = 12,5; contrafuertes hasta z = 19. Todo
 queda por debajo de la tapa de la cápsula, que llega a z = 24,2.
@@ -282,6 +301,39 @@ Las longitudes son las del modelo, todas < 40 cm. Se recomienda añadir 30 mm de
 - **Variante:** chapa inox 316 de 0,3 mm pegada con silicona conductora por detrás.
 - El montaje en la funda es el mismo (ventana, rebaje, EVA).
 
+### 3.6 Cierre magnético de balancín empotrado (REV 6.4)
+
+Piezas:
+- `AVO_CINCHA_R6_4_balancin_Xpos_PETG` y `..._Xneg_PETG`;
+- cojinetes en el mismo STL que la base;
+- `AVO_CINCHA_R6_4_tapa_PETG_opaco` (con las 4 lengüetas);
+- `AVO_CINCHA_R6_4_soporte_PETG`;
+- `AVO_CINCHA_R6_4_tapas_imanes_PETG`.
+
+Cotas en `BAL` y `END_T` de `fuente/avo_cincha_montaje.py`.
+
+| Elemento | Valor (cápsula: z = 0 en el fondo) |
+|---|---|
+| Extremos | +5 mm por lado. Hueco constante en altura: fondo a x = ±29,9 (1,45 de la ranura de la junta), ancho del balancín + 2 × 0,25 (más los cojinetes) |
+| Balancín | PETG, cara exterior a ras (x = ±34,5). 3,1 mm por encima del eje y 4,3 por debajo (llega al tope del hueco, a 0,3). De z −4,0 a 15,5 (a ras de la tapa). 14 / 12 mm de ancho |
+| Eje | x = ±31,6, z = 8,0. Pasador Ø2 × 20 / Ø2 × 18 a presión en el balancín (Ø1,95 en gota). Gira en las ranuras de los cojinetes (2,05), cerradas por las lengüetas de la tapa |
+| Diente | Recto, 2 por balancín, por debajo de la cápsula. Entra 1,0 mm en ventanas de la cama del soporte; cara de carga a z −1,9 |
+| Imanes | 2 + 2 Ø5 × 1 por lado en atracción (balancín ↔ pared), separados 1,5 mm |
+| Tope al empujar | Fondo del rebaje de la cama, a 0,25 mm (pogo a 1,05 de 1,1) |
+
+**Comprobado por vóxeles** (`fuente/verificar_cierre.py`):
+- cerrado, 0 mm³ contra el soporte, la base y la tapa;
+- el diente sale de la cama a unos **4°**, con **0,5 mm** de recorrido del pulsador;
+- el balancín hace tope contra el fondo del hueco a unos **12°**;
+- sin choques con el soporte antes del tope.
+
+**Bloqueo con carga:**
+- con el diente recto hace falta un rozamiento μ ≥ 0,17–0,24 (según dónde apoye); PETG–PETG ≈ 0,25–0,35;
+- los imanes suman unos 3 N × 4,3 mm (E) de par de cierre;
+- si la probeta resbala, una contrasalida de 5–8° en el diente lo resuelve.
+
+**Pendiente:** fuerza real de los imanes, rozamiento, probeta del extremo y ensayo de tirón (§8.4).
+
 ## 4. Lista de materiales (BOM) — precios aproximados, IVA incluido salvo indicación
 
 | # | Pieza | Ref. / proveedor | Cant. | Precio aprox. |
@@ -308,7 +360,9 @@ Las longitudes son las del modelo, todas < 40 cm. Se recomienda añadir 30 mm de
 | 16 | Tornillos de Chicago Ø5 (juego de 30, 5 × 15 mm) | [ManoMano](https://www.manomano.es/p/30-juegos-de-tornillos-de-encuadernacion-chicago-tornillos-de-encuadernacion-niquelados-5-mm-x-15-mm-tono-plateado-84620168) | 4 | ≈ 8 € |
 | 17 | (eliminado en REV 6.2: broche del bolsillo) | — | — | — |
 | 17b | **Cordón Dyneema / UHMWPE Ø1,5 mm** (≥ 100 kg) + 2 casquillos de crimpar de aluminio | pesca / náutica | 0,3 m | ≈ 4 € |
-| 17c | **Filamento TPU 95A** (2 seguros) y TPU 85A (tacos, junta, separador) | — | ≈ 3 g | ≈ 0,2 € |
+| 17c | Filamento TPU 85A (tacos, junta, separador). (REV 6.3: sin seguros de TPU 95A) | — | ≈ 3 g | ≈ 0,2 € |
+| 17d | **Pasadores de acero ISO 2338 Ø2 × 20 y Ø2 × 18** (REV 6.4) | ferretería / Amazon | 1 + 1 | ≈ 3 € |
+| 17e | **Imanes de neodimio Ø5 × 1** (los de la espalda y la cincha anterior; REV 6.4) | — | 8 | ≈ 2 € |
 | 18 | Hilo encerado de poliéster de 0,8 mm + 2 agujas de guarnicionero | — | 1 | ≈ 7 € |
 | 19 | Espuma EVA o neopreno de 2–3 mm (A4) | — | 1 | ≈ 3 € |
 | 20 | Papel indicador de agua (o pañuelo de papel) y bomba de vacío manual con recipiente (ensayo, §7) | — | 1 | ≈ 15 € (opcional) |
@@ -330,8 +384,9 @@ Herramientas que no entran en el total:
 |---|---|---|---|
 | **Base (aro de luz)** | **PETG translúcido natural** | Fondo sobre la cama | Ver «Impresión estanca» (§7.3) |
 | Tapa | PETG opaco (rojo) | **Boca abajo** (cara superior sobre la cama) | §7.3. Columnas y lengüeta hacia arriba |
-| Soporte con pestillos | PETG opaco | Ala sobre la cama | **0,15 mm**, 5 perímetros, 100 % en un radio de 6 mm alrededor de los pestillos (modificador). 250–255 °C y ventilador ≤ 30 % para que las capas peguen bien (la viga trabaja a flexión entre capas). Sin soportes: los ganchos salen 1,3 mm en voladizo con rampa |
-| Seguros (×2) | TPU 95A | Planos | 0,15 mm, 100 %, lento. Comprobar que el resalte sale redondo |
+| Soporte (REV 6.3) | PETG opaco | Ala sobre la cama | 0,2 mm, 4 perímetros. Sin soportes: las ventanas de los dientes son puentes de ≤ 3,6 mm |
+| Balancines (×2, REV 6.4) | PETG | **Cara exterior sobre la cama** | 0,15 mm, 100 %. Sin soportes; el agujero del pasador, en gota |
+| Tapas de los imanes (2 tapas + 2 tapones) | PETG | Planas | 0,1 mm. Se pegan a ras con cianoacrilato |
 | Tacos (×4) | TPU 85A | De pie | 100 %. Se meten a presión en sus alojamientos |
 | Junta | TPU 85A | Plana | 0,2 mm, 100 %, ≤ 20 mm/s, sin retracciones largas. 3 líneas de 0,4 mm |
 | Separador | TPU 85A | Plano | 0,2 mm, 100 % |
@@ -410,7 +465,15 @@ Holguras:
 
 23. Meter la cincha en la funda, con la anilla D por su ventana. Cerrar el velcro y pasar las trabillas.
 24. Atar el **cordón de seguridad**: oreja de la tapa → anclaje del ala del soporte, con un largo libre de unos 40 mm.
-25. **Poner la cápsula** (§8.3): apretar hasta oír los dos clics y meter los dos seguros hasta su clic.
+25. **REV 6.3, cierre:**
+    - **REV 6.4:** pegar los imanes respetando la polaridad: el del balancín y el de la pared **se atraen**. El de la
+      pared entra por el pozo de la cara inferior; pegar el tapón y la tapa a ras;
+    - meter a presión el pasador en el balancín (que sobresalga igual por los dos lados) y dejarlo caer en las
+      ranuras de los cojinetes;
+    - atornillar la tapa: sus lengüetas dejan el pasador cautivo.
+
+    **Poner la cápsula:** bajarla hasta oír los dos clics. **Quitarla:** empujar hacia abajo y apretar los dos
+    balancines por arriba con una mano.
 
 **Comprobaciones antes del caballo** (todas **pendientes**)
 - Continuidad electrodo → contacto del pogo de la cápsula (< 2 kΩ con el caucho húmedo).
@@ -507,7 +570,7 @@ Holguras:
    - no usar disolventes;
    - guardar la cápsula seca.
 
-## 8. Retención de la cápsula (REV 6.2)
+## 8. Retención de la cápsula (REV 6.2) — **cierre sustituido en la REV 6.3 (§3.6)**; los ensayos de §8.4 siguen valiendo
 
 > **Cálculo de diseño, NO VERIFICADO.** Hipótesis:
 > - PETG impreso: E ≈ 2,0 GPa; resistencia en el plano de capa ≈ 40 MPa; **entre capas ≈ 25 MPa** (bien impreso);
@@ -665,6 +728,12 @@ El cordón de seguridad se puede dejar atado mientras se carga, o soltar el casq
 15. **Oreja del cordón:** sobresale 4,6 mm del contorno de la base, en la parte alta del lado +Y. Tiene radio R3, pero
     hay que vigilar que no se enganche.
 
+16. **REV 6.4, cierre magnético empotrado** (antes, REV 6.3):
+    - sin imprimir ni probar;
+    - la fuerza de los imanes Ø5 × 1 apilados a 1,15 mm y el rozamiento PETG–PETG son estimados;
+    - el diente recto depende del rozamiento para el bloqueo con carga;
+    - los escalones de 0,05 mm entre zonas del balancín son del núcleo poliédrico (no afectan a la impresión).
+
 ## 11. Cómo regenerar
 
 ```bash
@@ -673,5 +742,6 @@ python3 avo_cincha_montaje.py      # STEP + STL + informe (≈ 1 min)
 python3 patron_funda.py            # patrón SVG/DXF
 python3 render.py                  # renders PNG (≈ 2,5 min)
 python3 verificar_step.py ../out/STEP/*.step ../out/STEP/piezas/*.step
+python3 verificar_cierre.py        # REV 6.3: interferencias y apertura del balancín por vóxeles
 ```
 Solo necesitan Python 3 con numpy, OpenCV (`cv2`) y Pillow.

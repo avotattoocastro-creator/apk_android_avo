@@ -9,6 +9,7 @@ struct RaceDetailView: View {
     let race: Race
     @State private var notes: String = ""
     @State private var askDelete: Bool = false
+    @State private var showDeep: Bool = false
     @State private var sectorRunner: String = ""
 
     var body: some View {
@@ -49,6 +50,11 @@ struct RaceDetailView: View {
         .background(Avo.bg)
         .onAppear { load() }
         .onChange(of: race.id) { (_: String, _: String) in load() }
+        .fullScreenCover(isPresented: $showDeep) {
+            RaceDeepAnalysisView(race: race)
+                .environment(app)
+                .avoColorScheme()
+        }
         .alert("Eliminar carrera", isPresented: $askDelete) {
             Button("Cancelar", role: .cancel) {}
             Button("Eliminar", role: .destructive) { model.delete(race.id) }
@@ -77,6 +83,14 @@ struct RaceDetailView: View {
                 Text("\(race.horseName ?? "—") · \(race.ourRunnerName ?? "—")").font(.footnote).foregroundStyle(Avo.textDim).lineLimit(1)
             }
             Spacer(minLength: 8)
+            // trainer's sketch 16/11/2026: «Análisis profundo» (full-screen visual analysis), charts icon, left of «Informe PDF»
+            Button {
+                showDeep = true
+            } label: {
+                Label("Análisis visual", systemImage: "chart.xyaxis.line")
+            }
+            .buttonStyle(.avoSecondary)
+            .accessibilityIdentifier("race.deepAnalysis")
             if race.ourRunner != nil {
                 // trainer 15/11/2026: PDF report of the race vs the training to send (the app only showed it)
                 Button {
@@ -303,7 +317,7 @@ private struct RaceChartsSection: View {
         let ourName: String = us?.name ?? "Nuestro caballo"
         let showWinner: Bool = win != nil && win?.name != us?.name
         let winName: String = "Ganador (\(win?.name ?? "—"))"
-        let medName: String = "Mediana del campo"
+        let medName: String = "Caballo medio"
         VStack(alignment: .leading, spacing: 14) {
             Text("GRÁFICAS POR TRAMO").font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
             if let u = us {
@@ -367,7 +381,7 @@ private struct RaceChartsSection: View {
         pts += medianSpeeds(medName)
         names.append(medName)
         colors.append(Avo.silver)
-        return AvoCard(title: "Velocidad por tramo", subtitle: "km/h · nuestro caballo, ganador y mediana del campo") {
+        return AvoCard(title: "Velocidad por tramo", subtitle: "km/h · nuestro caballo, ganador y caballo medio") {
             RaceLineChart(points: pts, names: names, colors: colors, reversed: false, unit: "km/h")
         }
         .racePdfCheck(.speedChart)
@@ -563,11 +577,13 @@ private struct RaceAnalysisSection: View {
     private func raceCard(_ rep: RaceReport) -> some View {
         AvoCard(title: "Lo que dice la carrera", subtitle: "Solo datos del PDF") {
             ShellKeyValue(key: "Caída en el final (conserva)", value: "\(RaceFormat.percent(rep.ourFade)) · \(RaceFormat.kmh(rep.ourBestSpeedKmh)) → \(RaceFormat.kmh(rep.ourLastSpeedKmh))")
-            ShellKeyValue(key: "Mediana del campo (conserva)", value: RaceFormat.percent(rep.fieldMedianFade))
-            ShellKeyValue(key: "Perdido en el final vs mediana", value: RaceFormat.seconds(rep.finalLossFieldS))
+            ShellKeyValue(key: "Caballo medio (conserva)", value: RaceFormat.percent(rep.fieldMedianFade))
+            ShellKeyValue(key: "Perdido en el final vs caballo medio", value: RaceFormat.seconds(rep.finalLossFieldS))
             ShellKeyValue(key: "Perdido por terreno de más", value: groundText(rep))
-            ShellKeyValue(key: "Salida vs mediana del campo", value: RaceFormat.signedSeconds(rep.startLossS))
+            ShellKeyValue(key: "Salida vs caballo medio", value: RaceFormat.signedSeconds(rep.startLossS))
             ShellKeyValue(key: "Últimos 600 m vs su mejor tramo", value: RaceFormat.percent(rep.raceSustain))
+            Text("Caballo medio = el caballo que queda en medio de los otros \(max(race.fieldSize - 1, 0)) participantes (sin el nuestro); la mitad lo hizo mejor y la otra mitad peor.")
+                .font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
         }
     }
 
@@ -580,7 +596,7 @@ private struct RaceAnalysisSection: View {
     private func trainingCard(_ rep: RaceReport) -> some View {
         AvoCard(title: "Lo que dicen sus entrenamientos", subtitle: "Entrenamientos de \(race.horseName ?? "—") en este iPad anteriores a la carrera") {
             if rep.trainingSessions == 0 {
-                Text("Sin entrenamientos de \(race.horseName ?? "este caballo") anteriores al \(race.dateText) en este iPad: el análisis usa solo la carrera (la mediana del campo como referencia).")
+                Text("Sin entrenamientos de \(race.horseName ?? "este caballo") anteriores al \(race.dateText) en este iPad: el análisis usa solo la carrera (el caballo medio como referencia).")
                     .font(.footnote).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
             } else {
                 ShellKeyValue(key: "Entrenamientos", value: "\(rep.trainingSessions) · \(AvoTime.text(rep.trainingFrom, "dd/MM/yyyy")) – \(AvoTime.text(rep.trainingTo, "dd/MM/yyyy"))")
@@ -588,7 +604,7 @@ private struct RaceAnalysisSection: View {
                 ShellKeyValue(key: "Mejor 200 / 400 / 600 m sostenido",
                               value: "\(RaceFormat.kmh(rep.best200Kmh)) / \(RaceFormat.kmh(rep.best400Kmh)) / \(RaceFormat.kmh(rep.best600Kmh))")
                 ShellKeyValue(key: "600 m sostenido / mejor 200 m", value: RaceFormat.percent(rep.trainingSustain))
-                ShellKeyValue(key: "Caída en sus trabajos (conserva, mediana)",
+                ShellKeyValue(key: "Caída en sus trabajos (conserva, valor medio)",
                               value: rep.worksWithFade > 0 ? "\(RaceFormat.percent(rep.trainingFade)) en \(rep.worksWithFade) trabajo(s) ≥ 400 m" : "Sin trabajos ≥ 400 m")
                 if !rep.trendText.isEmpty {
                     Text(rep.trendText).font(.caption).foregroundStyle(Avo.silver).fixedSize(horizontal: false, vertical: true)
@@ -604,7 +620,7 @@ private struct RaceAnalysisSection: View {
 
     private func estimateCard(_ rep: RaceReport) -> some View {
         AvoCard(title: "Estimación", subtitle: rep.referenceIsTraining ? "Final con la caída de sus entrenamientos y sin el terreno de más"
-                                                                      : "Final con la caída de la mediana del campo y sin el terreno de más") {
+                                                                      : "Final con la caída del caballo medio y sin el terreno de más") {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 10)], spacing: 10) {
                 AvoMetric(label: "Tiempo oficial", value: RaceFormat.official(us.officialTimeS))
                 AvoMetric(label: "Tiempo corregido", value: RaceFormat.official(rep.correctedTimeS),
@@ -614,7 +630,7 @@ private struct RaceAnalysisSection: View {
                           caption: rangeText(rep),
                           accent: rep.gainedPositions > 0 ? Avo.warn : Avo.text)
                 AvoMetric(label: "Perdido en el final", value: RaceFormat.seconds(rep.referenceIsTraining ? rep.finalLossTrainingS : rep.finalLossFieldS),
-                          caption: rep.referenceIsTraining ? "vs sus entrenamientos" : "vs mediana del campo")
+                          caption: rep.referenceIsTraining ? "vs sus entrenamientos" : "vs caballo medio")
             }
         }
     }
