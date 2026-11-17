@@ -1,4 +1,4 @@
-"""REV 6.3 · comprobación del cierre magnético de balancín (lado +X) por vóxeles.
+"""REV 6.4 · comprobación del cierre magnético de balancín (lado +X) por vóxeles.
 
 El núcleo `avo_cad` no hace operaciones booleanas, así que las interferencias se miden muestreando el volumen del
 balancín (rejilla de 0,05 mm en su perfil XZ y cada 0,25 mm en Y) y preguntando si cada punto cae dentro del soporte,
@@ -113,10 +113,13 @@ def rot_y(P, cx, cz, deg):
 def main():
     M.pieza_soporte(); M.pieza_base(); M.pieza_tapa()
     z0 = M.Z0_CAP
-    sop = Capas(CAPT["AVO_CINCHA_R6_3_soporte_PETG"], dz=-z0)      # en z de la cápsula
-    base = Capas(CAPT["AVO_CINCHA_R6_3_base_aro_luz"])
-    tapa = Capas(CAPT["AVO_CINCHA_R6_3_tapa"])
-    xw, x_rim, xi, xo, yc = M.bal_x()
+    sop = Capas(CAPT["AVO_CINCHA_R6_4_soporte_PETG"], dz=-z0)      # en z de la cápsula
+    base = Capas(CAPT["AVO_CINCHA_R6_4_base_aro_luz"])
+    tapa = Capas(CAPT["AVO_CINCHA_R6_4_tapa"])
+    K = M.bal_x()
+    xl, px, yc = K["xl"], K["px"], K["yc"]
+    x_rim = xl - M.BAL["back_low"]                  # pared del rebaje de la cama (el diente está dentro si x < x_rim)
+    xi = px                                          # eje de giro
     pz = M.BAL["pz_c"]
     vox = RES * RES * 0.25
     rep = {"rejilla_mm": [RES, RES, 0.25]}
@@ -128,8 +131,8 @@ def main():
                                                                                     ("tapa", tapa))}
         sw = {}
         suelto, tope = None, None
-        teeth = (P[:, 0] * sg < xi) & (P[:, 2] < M.BAL["top_c"] + 0.01) & (P[:, 2] > M.BAL["root_b_c"] - 0.01)
-        for ang in [0, -2, -4, -6, -8, -9, -9.5, -10, -11, -12, -13, -14, -14.5, -15, -16, -18, -20]:
+        teeth = (P[:, 0] * sg < xl) & (P[:, 2] < M.BAL["top_c"] + 0.01) & (P[:, 2] > M.BAL["root_b_c"] - 0.01)
+        for ang in [0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14, -16]:
             Q = rot_y(P, sg * xi, pz, ang * sg)
             v_s = float(sop.inside(Q).sum() * vox)
             v_c = float((base.inside(Q) | tapa.inside(Q)).sum() * vox)
@@ -147,15 +150,17 @@ def main():
     # palanca, imanes, rozamiento
     b = M.BAL
     rep["balancin"] = {
-        "eje_capsula_xz_mm": [round(xi, 2), pz],
+        "eje_capsula_xz_mm": [round(px, 2), pz],
         "brazo_pulsador_mm": round(M.H_CAP - pz, 2),
         "brazo_iman_mm": round(pz - b["mag_c"], 2),
         "brazo_diente_mm": round(pz - b["top_c"], 2),
-        "separacion_imanes_mm": round((xi + b["skin"]) - (x_rim - b["skin"]), 2),
-        "diente": "recto, entra %.1f mm; bisel de entrada abajo" % b["e"],
-        "rozamiento_minimo_para_bloquear_con_carga": round(b["e"] / (pz - b["top_c"]), 3),
-        "imanes": "2 + 2 Ø5 × 1 apilados por lado (balancín y cerco), en atracción: 8 en total",
-        "pasadores": "4 × ISO 2338 Ø2 × 6 (2 por balancín, a presión en las aletas)",
+        "separacion_imanes_mm": round((xl + b["cb"]) - (K["xb"] - b["skin_w"]), 2),
+        "diente": "recto, entra %.1f mm; bisel de entrada abajo; engancha en la cama del soporte" % b["e"],
+        "rozamiento_minimo_para_bloquear_con_carga": {
+            "contacto_en_la_punta": round((px - (xl - b["e"])) / (pz - b["top_c"]), 3),
+            "contacto_en_el_borde_de_la_ventana": round((px - (xl - b["back_low"])) / (pz - b["top_c"]), 3)},
+        "imanes": "2 + 2 Ø5 × 1 apilados por lado (balancín ↔ pared de la cápsula), en atracción: 8 en total",
+        "pasadores": "ISO 2338 Ø2 × 20 (+X) y Ø2 × 18 (−X), a presión en el balancín; giran en los cojinetes",
     }
     out = os.path.normpath(os.path.join(HERE, "..", "out", "verificacion_cierre.json"))
     json.dump(rep, open(out, "w"), indent=1, ensure_ascii=False)

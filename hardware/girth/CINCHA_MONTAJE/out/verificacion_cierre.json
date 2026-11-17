@@ -14,34 +14,49 @@
    "0": {
     "soporte_mm3": 0.0,
     "capsula_mm3": 0.0,
-    "puntos_del_diente_en_el_cerco": 5736
+    "puntos_del_diente_en_el_cerco": 5208
+   },
+   "-1": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 3768
    },
    "-2": {
     "soporte_mm3": 0.0,
     "capsula_mm3": 0.0,
-    "puntos_del_diente_en_el_cerco": 4200
+    "puntos_del_diente_en_el_cerco": 2112
+   },
+   "-3": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 960
    },
    "-4": {
     "soporte_mm3": 0.0,
     "capsula_mm3": 0.0,
-    "puntos_del_diente_en_el_cerco": 2664
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-5": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 0
    },
    "-6": {
     "soporte_mm3": 0.0,
     "capsula_mm3": 0.0,
-    "puntos_del_diente_en_el_cerco": 1464
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-7": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 0
    },
    "-8": {
     "soporte_mm3": 0.0,
     "capsula_mm3": 0.0,
-    "puntos_del_diente_en_el_cerco": 432
+    "puntos_del_diente_en_el_cerco": 0
    },
    "-9": {
-    "soporte_mm3": 0.0,
-    "capsula_mm3": 0.0,
-    "puntos_del_diente_en_el_cerco": 72
-   },
-   "-9.5": {
     "soporte_mm3": 0.0,
     "capsula_mm3": 0.0,
     "puntos_del_diente_en_el_cerco": 0
@@ -58,48 +73,28 @@
    },
    "-12": {
     "soporte_mm3": 0.0,
-    "capsula_mm3": 0.0,
+    "capsula_mm3": 0.18,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-13": {
-    "soporte_mm3": 0.0,
-    "capsula_mm3": 0.0,
+    "soporte_mm3": 0.113,
+    "capsula_mm3": 1.069,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-14": {
-    "soporte_mm3": 0.0,
-    "capsula_mm3": 0.0,
-    "puntos_del_diente_en_el_cerco": 0
-   },
-   "-14.5": {
-    "soporte_mm3": 0.0,
-    "capsula_mm3": 0.045,
-    "puntos_del_diente_en_el_cerco": 0
-   },
-   "-15": {
-    "soporte_mm3": 0.0,
-    "capsula_mm3": 0.176,
+    "soporte_mm3": 1.688,
+    "capsula_mm3": 2.809,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-16": {
-    "soporte_mm3": 0.0,
-    "capsula_mm3": 0.835,
-    "puntos_del_diente_en_el_cerco": 0
-   },
-   "-18": {
-    "soporte_mm3": 0.0,
-    "capsula_mm3": 4.51,
-    "puntos_del_diente_en_el_cerco": 0
-   },
-   "-20": {
-    "soporte_mm3": 0.0,
-    "capsula_mm3": 9.1,
+    "soporte_mm3": 10.883,
+    "capsula_mm3": 8.368,
     "puntos_del_diente_en_el_cerco": 0
    }
   },
-  "angulo_diente_fuera_grados": -9.5,
-  "angulo_tope_contra_la_capsula_grados": -14.5,
-  "recorrido_pulsador_al_soltar_mm": 1.4
+  "angulo_diente_fuera_grados": -4,
+  "angulo_tope_contra_la_capsula_grados": -12,
+  "recorrido_pulsador_al_soltar_mm": 0.52
  },
  "-X": {
   "cerrado_mm3": {
@@ -111,34 +106,49 @@
    "0": {
     "soporte_mm3": 0.0,
     "capsula_mm3": 0.0,
-    "puntos_del_diente_en_el_cerco": 3824
+    "puntos_del_diente_en_el_cerco": 3472
+   },
+   "-1": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 2512
    },
    "-2": {
     "soporte_mm3": 0.0,
     "capsula_mm3": 0.0,
-    "puntos_del_diente_en_el_cerco": 2800
+    "puntos_del_diente_en_el_cerco": 1408
+   },
+   "-3": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 640
    },
    "-4": {
     "soporte_mm3": 0.0,
     "capsula_mm3": 0.0,
-    "puntos_del_diente_en_el_cerco": 1776
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-5": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 0
    },
    "-6": {
     "soporte_mm3": 0.0,
     "capsula_mm3": 0.0,
-    "puntos_del_diente_en_el_cerco": 976
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-7": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 0
    },
    "-8": {
     "soporte_mm3": 0.0,
     "capsula_mm3": 0.0,
-    "puntos_del_diente_en_el_cerco": 288
+    "puntos_del_diente_en_el_cerco": 0
    },
    "-9": {
-    "soporte_mm3": 0.0,
-    "capsula_mm3": 0.0,
-    "puntos_del_diente_en_el_cerco": 48
-   },
-   "-9.5": {
     "soporte_mm3": 0.0,
     "capsula_mm3": 0.0,
     "puntos_del_diente_en_el_cerco": 0
@@ -155,61 +165,44 @@
    },
    "-12": {
     "soporte_mm3": 0.0,
-    "capsula_mm3": 0.0,
-    "puntos_del_diente_en_el_cerco": 0
-   },
-   "-13": {
-    "soporte_mm3": 0.0,
-    "capsula_mm3": 0.0,
-    "puntos_del_diente_en_el_cerco": 0
-   },
-   "-14": {
-    "soporte_mm3": 0.0,
-    "capsula_mm3": 0.0,
-    "puntos_del_diente_en_el_cerco": 0
-   },
-   "-14.5": {
-    "soporte_mm3": 0.0,
     "capsula_mm3": 0.03,
     "puntos_del_diente_en_el_cerco": 0
    },
-   "-15": {
-    "soporte_mm3": 0.0,
-    "capsula_mm3": 0.126,
+   "-13": {
+    "soporte_mm3": 0.154,
+    "capsula_mm3": 0.393,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-14": {
+    "soporte_mm3": 1.651,
+    "capsula_mm3": 1.468,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-16": {
-    "soporte_mm3": 0.0,
-    "capsula_mm3": 0.64,
-    "puntos_del_diente_en_el_cerco": 0
-   },
-   "-18": {
-    "soporte_mm3": 0.0,
-    "capsula_mm3": 3.456,
-    "puntos_del_diente_en_el_cerco": 0
-   },
-   "-20": {
-    "soporte_mm3": 0.0,
-    "capsula_mm3": 7.456,
+    "soporte_mm3": 9.467,
+    "capsula_mm3": 5.586,
     "puntos_del_diente_en_el_cerco": 0
    }
   },
-  "angulo_diente_fuera_grados": -9.5,
-  "angulo_tope_contra_la_capsula_grados": -14.5,
-  "recorrido_pulsador_al_soltar_mm": 1.4
+  "angulo_diente_fuera_grados": -4,
+  "angulo_tope_contra_la_capsula_grados": -12,
+  "recorrido_pulsador_al_soltar_mm": 0.52
  },
  "balancin": {
   "eje_capsula_xz_mm": [
-   33.0,
-   7.0
+   31.6,
+   8.0
   ],
-  "brazo_pulsador_mm": 8.5,
-  "brazo_iman_mm": 6.3,
-  "brazo_diente_mm": 4.5,
-  "separacion_imanes_mm": 1.15,
-  "diente": "recto, entra 1.0 mm; bisel de entrada abajo",
-  "rozamiento_minimo_para_bloquear_con_carga": 0.222,
-  "imanes": "2 + 2 Ø5 × 1 apilados por lado (balancín y cerco), en atracción: 8 en total",
-  "pasadores": "4 × ISO 2338 Ø2 × 6 (2 por balancín, a presión en las aletas)"
+  "brazo_pulsador_mm": 7.5,
+  "brazo_iman_mm": 4.3,
+  "brazo_diente_mm": 9.9,
+  "separacion_imanes_mm": 1.5,
+  "diente": "recto, entra 1.0 mm; bisel de entrada abajo; engancha en la cama del soporte",
+  "rozamiento_minimo_para_bloquear_con_carga": {
+   "contacto_en_la_punta": 0.242,
+   "contacto_en_el_borde_de_la_ventana": 0.172
+  },
+  "imanes": "2 + 2 Ø5 × 1 apilados por lado (balancín ↔ pared de la cápsula), en atracción: 8 en total",
+  "pasadores": "ISO 2338 Ø2 × 20 (+X) y Ø2 × 18 (−X), a presión en el balancín; giran en los cojinetes"
  }
 }

@@ -24,6 +24,21 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-17 — Cincha CAD REV 6.4 — balancín magnético empotrado a ras en la pared
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-3-balancin-magnetico` (PR #60)
+**Qué cambia (captura del usuario):**
+- extremos de la cápsula +5 mm (69,0 mm) con el balancín empotrado a ras en un hueco de la pared, fuera de la línea de la junta;
+- eje: pasador de acero Ø2 × 20 / Ø2 × 18 a presión en el balancín, que gira en cojinetes impresos con la base; lo cierran lengüetas de la tapa;
+- imanes 2 + 2 Ø5 × 1 entre el balancín y la pared (pozo desde abajo con tapón);
+- diente recto en la cama del soporte;
+- se quitan las aletas, la barra y el labio de la 6.3.1;
+- soporte de 94,5 × 84,6; patrón de la funda regenerado.
+**Comprobado (script local):**
+- piezas cerradas; conjuntos de 96 sólidos con 0 aristas abiertas; `verificar_step.py` 25/25 OK;
+- `verificar_cierre.py`: 0 mm³ cerrado; diente libre a unos 4° (0,5 mm de pulsador); tope a unos 12°; sin choques con el soporte antes del tope.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+**Pendiente:** rozamiento real (μ ≥ 0,17–0,24 con diente recto), fuerza de los imanes y probeta del extremo.
+
 ## 2026-11-17 — Cincha CAD REV 6.3.1 — eje en las columnas y labio sobre la tapa
 **Autor:** Claude · **Rama:** `cad/cincha-rev6-3-balancin-magnetico` (PR #60)
 **Qué cambia (marcado del usuario, «integrado»):**
