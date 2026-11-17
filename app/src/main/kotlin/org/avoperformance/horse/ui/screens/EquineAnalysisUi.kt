@@ -31,7 +31,7 @@ import org.avoperformance.horse.ui.theme.AvoColors
 import java.util.Locale
 import kotlin.math.roundToInt
 
-// Engine (AVO Equine Intelligence Engine) views added to the existing training screens.
+// Engine (AVO Performance Equine) views added to the existing training screens.
 // Every value comes from the engine result; missing values are shown as "—", never estimated here.
 
 private val esE = Locale.forLanguageTag("es-ES")

@@ -12,7 +12,8 @@ struct MapPageView: View {
     @State private var command: RouteMapCommand = RouteMapCommand()
     @State private var showLayers: Bool = false
     /// Recorrido en horizontal (por defecto) o norte arriba; se recuerda entre sesiones.
-    @AppStorage("map.alignRoute") private var alignRoute: Bool = true
+    // route aligned (horizontal) and framed whole every time the map opens: the default view the trainer chose (14/11/2026)
+    @State private var alignRoute: Bool = true
     var mapOnly: Bool = false
 
     var body: some View {
@@ -41,7 +42,6 @@ struct MapPageView: View {
                                 .frame(height: max(380, geo.size.height * 0.58))
                             MapProfilePanel()
                                 .frame(height: 150)
-                            ZoneToolbar()
                             ChartsNavigator(charts: app.charts)
                             ChartsStack(charts: app.charts, skipSpeed: true)
                             MapInfoCards(wide: geo.size.width >= 900)
@@ -173,6 +173,9 @@ struct MapPageView: View {
         }
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
+        // the panels over the map are dark in both modes: their text and icons keep the dark-mode colours (in light mode
+        // the figures and the buttons were invisible, trainer 14/11/2026)
+        .environment(\.colorScheme, .dark)
     }
 
     private func mapButton(_ icon: String, _ label: String, _ action: @escaping () -> Void) -> some View {
@@ -664,7 +667,7 @@ private struct MapMetricPanel: View {
                         .accessibilityIdentifier("map.zoomReset")
                 }
             }
-            ZoneToolbar(embedded: true)
+            // the «Zonas» buttons and their legend are no longer shown here (trainer's sketch 14/11/2026)
         }
         .padding(.horizontal, 10).padding(.vertical, 8)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

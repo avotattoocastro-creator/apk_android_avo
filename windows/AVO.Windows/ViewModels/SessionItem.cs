@@ -31,6 +31,7 @@ public sealed class SessionItem : ObservableObject
             var cut = SessionWindow.Apply(Session, FullTimeline.Itow0Ms, WindowStart.Value, WindowEnd.Value);
             Timeline = SessionTimeline.Build(cut, p, FullTimeline.Itow0Ms);
             Imu = ImuTimeline.Build(cut, Timeline, WindowStart.Value, WindowEnd.Value);
+            AdoptEngineKinematics();
         }
         else
         {
@@ -46,7 +47,25 @@ public sealed class SessionItem : ObservableObject
     public ObservableCollection<SegmentDefinition> SegmentDefs { get; } = [];
 
     private EquineAnalysis? _engine;
-    public EquineAnalysis? Engine { get => _engine; set { if (Set(ref _engine, value)) RaiseMany(nameof(EngineOffsetS), nameof(GirthText), nameof(GaitByIndex)); } }
+    public EquineAnalysis? Engine
+    {
+        get => _engine;
+        set
+        {
+            if (!Set(ref _engine, value)) return;
+            AdoptEngineKinematics();
+            RaiseMany(nameof(EngineOffsetS), nameof(GirthText), nameof(GaitByIndex), nameof(MaxSpeedKmh), nameof(MaxSpeedText), nameof(Summary));
+        }
+    }
+
+    /// <summary>AVO Performance Equine 2.0 (F1b): speed and acceleration of the timeline(s) from the engine series.</summary>
+    public void AdoptEngineKinematics()
+    {
+        if (Engine is not { T.Length: > 0 } e) return;
+        double off = EngineOffsetS;
+        FullTimeline.AdoptEngineKinematics(e.T, e.Speed, e.SpeedSigma, e.Accel, e.AccelSigma, off);
+        if (!ReferenceEquals(Timeline, FullTimeline)) Timeline.AdoptEngineKinematics(e.T, e.Speed, e.SpeedSigma, e.Accel, e.AccelSigma, off);
+    }
     /// <summary>engine time = timeline time + offset.</summary>
     public double EngineOffsetS => Engine?.Itow0Ms is long e0 ? SessionTimeline.WeekDiffMs(Timeline.Itow0Ms, e0) / 1000.0 : 0;
 

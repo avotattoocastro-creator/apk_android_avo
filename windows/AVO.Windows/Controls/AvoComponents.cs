@@ -31,6 +31,28 @@ public class AvoMetricTile : ContentControl
     public double ValueSize { get => (double)GetValue(ValueSizeProperty); set => SetValue(ValueSizeProperty, value); }
 }
 
+/// <summary>Segoe MDL2 glyph from the name of a figure (same families as the iPad AvoMetric.autoIcon) for the «Datos clave»
+/// style of every figure box (trainer 14/11/2026).</summary>
+public sealed class LabelGlyphConverter : System.Windows.Data.IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
+        string l = (value as string ?? "").ToLowerInvariant();
+        if (l.Contains("pulso") || l.Contains("lpm")) return "\uEB51";
+        if (l.Contains("velocidad") || l.Contains("v. m") || l.Contains("vel.") || l.Contains("mejor")) return "\uEC4A";
+        if (l.Contains("distancia") || l.Contains("km")) return "\uE707";
+        if (l.Contains("tiempo") || l.Contains("duración")) return "\uE121";
+        if (l.Contains("tranco") || l.Contains("zancada")) return "\uED5E";
+        if (l.Contains("frecuencia")) return "\uE895";
+        if (l.Contains("entrenamiento") || l.Contains("sesion") || l.Contains("sesión")) return "\uE8FD";
+        if (l.Contains("último") || l.Contains("fecha") || l.Contains("semana")) return "\uE787";
+        if (l.Contains("rtk") || l.Contains("fix") || l.Contains("gnss")) return "\uE81D";
+        if (l.Contains("aceleración") || l.Contains("carga")) return "\uE945";
+        return "";
+    }
+    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) => throw new NotSupportedException();
+}
+
 public enum AvoState { Ok, Warning, Error, Info, Unknown }
 
 /// <summary>Coloured dot + text, colours of Android (Ok #52DD40, Warn #FFC42C, Bad #FF3945, Info #3D9BFF, Unknown #93949B).</summary>

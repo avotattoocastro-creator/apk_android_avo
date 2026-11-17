@@ -13,7 +13,8 @@ final class SessionItem: Identifiable {
     private(set) var imu: ImuTimeline
     private(set) var windowStart: Double? = nil
     private(set) var windowEnd: Double? = nil
-    private let fullImu: ImuTimeline
+    /// IMU of the whole file (also read by «Cámara» to put the girth data on the video).
+    let fullImu: ImuTimeline
 
     var segmentDefs: [SegmentDefinition] = []
     var engine: EquineAnalysis? = nil
@@ -64,11 +65,24 @@ final class SessionItem: Identifiable {
             windowEnd = we
             timeline = tl
             imu = im
+            adoptEngineKinematics()
         } else {
             windowStart = nil
             windowEnd = nil
             timeline = fullTimeline
             imu = fullImu
+        }
+    }
+
+    /// AVO Performance Equine 2.0 (F1b): speed and acceleration of the timeline(s) from the engine series.
+    func adoptEngineKinematics() {
+        guard let e = engine, !e.t.isEmpty else { return }
+        let off: Double = engineOffsetS
+        fullTimeline.adoptEngineKinematics(engineT: e.t, speed: e.speed, speedSigma: e.speedSigma, accel: e.accel,
+                                           accelSigma: e.accelSigma, offsetS: off)
+        if timeline !== fullTimeline {
+            timeline.adoptEngineKinematics(engineT: e.t, speed: e.speed, speedSigma: e.speedSigma, accel: e.accel,
+                                           accelSigma: e.accelSigma, offsetS: off)
         }
     }
 

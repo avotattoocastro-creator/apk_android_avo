@@ -2,26 +2,25 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:v="clr-namespace:Avo.Windows.Views">
-    <!-- Start screen reproducing AVO_WINDOWS_CONCEPTO_02, screen 1: full-window hero photo with the AVO logo on the left and the
-         five main actions in a column on the right. The photo comes from the user's reference image; logo and texts are vectors (HeroArt). -->
+    <!-- Pantalla de inicio (boceto del entrenador 13/11/2026, igual que el iPad StartView.swift): foto a pantalla completa con
+         el logotipo AVO; sin panel lateral; el lema centrado abajo y un único botón «INICIAR» encima, que abre el Dashboard
+         (la barra lateral vuelve en todas las páginas salvo Inicio). El lema son los mismos contornos Montserrat que antes
+         estaban en HeroArt (windows/tools/hero-art/text.py, «motto»). -->
     <UserControl.Resources>
-        <SolidColorBrush x:Key="StartIconFill" Color="#1F3A5C"/>
-        <SolidColorBrush x:Key="StartIcon" Color="#A9C9F2"/>
-        <SolidColorBrush x:Key="StartSub" Color="#8F9BAD"/>
-        <SolidColorBrush x:Key="StartLine" Color="#33415466"/>
-        <Style x:Key="StartAction" TargetType="Button">
-            <Setter Property="Foreground" Value="#F2F4F7"/>
+        <Style x:Key="StartButton" TargetType="Button">
+            <Setter Property="Foreground" Value="#F7F7F5"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="Bd" Background="Transparent" BorderBrush="#3A4A60" BorderThickness="0,0,0,1" Padding="10,0,6,0">
-                            <ContentPresenter VerticalAlignment="Center"/>
+                        <Border x:Name="Bd" CornerRadius="6" BorderBrush="#D9F7F7F5" BorderThickness="1.5" Background="#8C12192A" Padding="64,18">
+                            <Border.Effect><DropShadowEffect Color="Black" Direction="270" ShadowDepth="2" BlurRadius="16" Opacity="0.35"/></Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Bd" Property="Background" Value="#14FFFFFF"/></Trigger>
-                            <Trigger Property="IsPressed" Value="True"><Setter TargetName="Bd" Property="Background" Value="#22FFFFFF"/></Trigger>
+                            <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Bd" Property="Background" Value="#B312192A"/></Trigger>
+                            <Trigger Property="IsPressed" Value="True"><Setter TargetName="Bd" Property="Opacity" Value="0.75"/></Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -29,80 +28,24 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.729*"/>
-            <ColumnDefinition Width="0.271*"/>
-        </Grid.ColumnDefinitions>
-        <!-- photo + vector logo and lettering (sharp at any size); spans both columns like the original background -->
-        <Grid Grid.ColumnSpan="2" ClipToBounds="True" Background="#0B1020">
+        <!-- photo + vector logo and lettering (sharp at any size) -->
+        <Grid ClipToBounds="True" Background="#0B1020">
             <v:HeroArt/>
         </Grid>
-        <!-- right column: translucent navy panel over the photo, as in the reference -->
-        <Border Grid.Column="1">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#A6202B3B" Offset="0"/>
-                    <GradientStop Color="#B8172130" Offset="0.55"/>
-                    <GradientStop Color="#C812192A" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-            <Grid Margin="10,0,24,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.6*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="0.6*"/>
-                </Grid.RowDefinitions>
-                <Border Grid.Row="0" BorderBrush="#3A4A60" BorderThickness="0,0,0,1" Margin="10,0,6,0"/>
-                <Button Grid.Row="1" Style="{StaticResource StartAction}" Command="{Binding ImportCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <Border Width="44" Height="44" CornerRadius="22" Background="{StaticResource StartIconFill}"><Path Data="{StaticResource IconOpen}" Stroke="{StaticResource StartIcon}" Style="{StaticResource AvoIcon}" Width="20" Height="20"/></Border>
-                        <StackPanel Margin="18,0,0,0" VerticalAlignment="Center">
-                            <TextBlock Text="Abrir entrenamiento" FontSize="17" FontWeight="SemiBold"/>
-                            <TextBlock Text="Archivos .avo / .avr" FontSize="13" Foreground="{StaticResource StartSub}" Margin="0,3,0,0"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Row="2" Style="{StaticResource StartAction}" Command="{Binding NavigateCommand}" CommandParameter="Sessions">
-                    <StackPanel Orientation="Horizontal">
-                        <Border Width="44" Height="44" CornerRadius="22" Background="{StaticResource StartIconFill}"><Path Data="{StaticResource IconHistory}" Stroke="{StaticResource StartIcon}" Style="{StaticResource AvoIcon}" Width="20" Height="20"/></Border>
-                        <StackPanel Margin="18,0,0,0" VerticalAlignment="Center">
-                            <TextBlock Text="Sesiones recientes" FontSize="17" FontWeight="SemiBold"/>
-                            <TextBlock Text="Historial y favoritos" FontSize="13" Foreground="{StaticResource StartSub}" Margin="0,3,0,0"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Row="3" Style="{StaticResource StartAction}" Command="{Binding NavigateCommand}" CommandParameter="Server">
-                    <StackPanel Orientation="Horizontal">
-                        <Border Width="44" Height="44" CornerRadius="22" Background="{StaticResource StartIconFill}"><Path Data="{StaticResource IconServer}" Stroke="{StaticResource StartIcon}" Style="{StaticResource AvoIcon}" Width="20" Height="20"/></Border>
-                        <StackPanel Margin="18,0,0,0" VerticalAlignment="Center">
-                            <TextBlock Text="Servidor AVO" FontSize="17" FontWeight="SemiBold"/>
-                            <TextBlock Text="Descargar sesiones" FontSize="13" Foreground="{StaticResource StartSub}" Margin="0,3,0,0"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Row="4" Style="{StaticResource StartAction}" Command="{Binding NavigateCommand}" CommandParameter="Compare">
-                    <StackPanel Orientation="Horizontal">
-                        <Border Width="44" Height="44" CornerRadius="22" Background="{StaticResource StartIconFill}"><Path Data="{StaticResource IconCompare}" Stroke="{StaticResource StartIcon}" Style="{StaticResource AvoIcon}" Width="20" Height="20"/></Border>
-                        <StackPanel Margin="18,0,0,0" VerticalAlignment="Center">
-                            <TextBlock Text="Comparar entrenamientos" FontSize="17" FontWeight="SemiBold"/>
-                            <TextBlock Text="Análisis avanzado" FontSize="13" Foreground="{StaticResource StartSub}" Margin="0,3,0,0"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Row="5" Style="{StaticResource StartAction}" Command="{Binding NavigateCommand}" CommandParameter="Reports">
-                    <StackPanel Orientation="Horizontal">
-                        <Border Width="44" Height="44" CornerRadius="22" Background="{StaticResource StartIconFill}"><Path Data="{StaticResource IconReports}" Stroke="{StaticResource StartIcon}" Style="{StaticResource AvoIcon}" Width="20" Height="20"/></Border>
-                        <StackPanel Margin="18,0,0,0" VerticalAlignment="Center">
-                            <TextBlock Text="Informes" FontSize="17" FontWeight="SemiBold"/>
-                            <TextBlock Text="Exportar y compartir" FontSize="13" Foreground="{StaticResource StartSub}" Margin="0,3,0,0"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Button>
+        <!-- «INICIAR» + lema, centrados abajo, en las mismas coordenadas de diseño 2004×1098 que la foto -->
+        <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Grid Width="2004" Height="1098">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,68">
+                    <Button Style="{StaticResource StartButton}" HorizontalAlignment="Center" Command="{Binding NavigateCommand}" CommandParameter="Sessions"
+                            AutomationProperties.AutomationId="start.iniciar" AutomationProperties.Name="Iniciar">
+                        <TextBlock Text="I&#x2009;&#x2009;N&#x2009;&#x2009;I&#x2009;&#x2009;C&#x2009;&#x2009;I&#x2009;&#x2009;A&#x2009;&#x2009;R" FontSize="26" FontWeight="SemiBold"/>
+                    </Button>
+                    <Path Margin="0,34,0,0" Width="830" Stretch="Uniform" HorizontalAlignment="Center" Fill="#F7F7F5"
+                          Data="F1 M90.29 1027.83Q87.66 1027.83 85.41 1026.96Q83.16 1026.09 81.50 1024.49Q79.84 1022.90 78.92 1020.73Q78.00 1018.56 78.00 1016.00Q78.00 1013.44 78.92 1011.27Q79.84 1009.10 81.50 1007.51Q83.16 1005.91 85.41 1005.04Q87.66 1004.17 90.32 1004.17Q93.15 1004.17 95.48 1005.16Q97.81 1006.14 99.42 1008.02L96.66 1010.61Q94.17 1007.92 90.52 1007.92Q88.12 1007.92 86.26 1008.95Q84.41 1009.99 83.36 1011.81Q82.30 1013.63 82.30 1016.00Q82.30 1018.37 83.36 1020.19Q84.41 1022.01 86.26 1023.05Q88.12 1024.08 90.52 1024.08Q94.20 1024.08 96.66 1021.36L99.42 1023.98Q97.81 1025.86 95.48 1026.84Q93.15 1027.83 90.29 1027.83ZM106.60 1027.50V1004.50H110.87V1027.50ZM120.45 1027.50V1004.50H137.24V1008.08H124.72V1014.06H135.83V1017.58H124.72V1023.92H137.70V1027.50ZM145.83 1027.50V1004.50H149.35L162.03 1020.07V1004.50H166.27V1027.50H162.76L150.07 1011.93V1027.50ZM186.46 1027.83Q183.83 1027.83 181.58 1026.96Q179.33 1026.09 177.67 1024.49Q176.01 1022.90 175.09 1020.73Q174.17 1018.56 174.17 1016.00Q174.17 1013.44 175.09 1011.27Q176.01 1009.10 177.67 1007.51Q179.33 1005.91 181.58 1005.04Q183.83 1004.17 186.50 1004.17Q189.32 1004.17 191.65 1005.16Q193.99 1006.14 195.60 1008.02L192.84 1010.61Q190.34 1007.92 186.69 1007.92Q184.29 1007.92 182.44 1008.95Q180.58 1009.99 179.53 1011.81Q178.48 1013.63 178.48 1016.00Q178.48 1018.37 179.53 1020.19Q180.58 1022.01 182.44 1023.05Q184.29 1024.08 186.69 1024.08Q190.37 1024.08 192.84 1021.36L195.60 1023.98Q193.99 1025.86 191.65 1026.84Q189.32 1027.83 186.46 1027.83ZM202.78 1027.50V1004.50H207.05V1027.50ZM213.37 1027.50 223.72 1004.50H227.93L238.31 1027.50H233.84L231.54 1022.18H220.04L217.78 1027.50ZM221.49 1018.83H230.10L225.79 1008.77ZM271.06 1021.09Q269.91 1021.09 269.13 1020.34Q268.36 1019.58 268.36 1018.33Q268.36 1017.12 269.13 1016.36Q269.91 1015.61 271.06 1015.61Q272.21 1015.61 272.98 1016.36Q273.75 1017.12 273.75 1018.33Q273.75 1019.58 272.98 1020.34Q272.21 1021.09 271.06 1021.09ZM311.72 1027.50V1008.11H304.09V1004.50H323.61V1008.11H315.99V1027.50ZM330.20 1027.50V1004.50H346.99V1008.08H334.47V1014.06H345.58V1017.58H334.47V1023.92H347.45V1027.50ZM366.23 1027.83Q363.60 1027.83 361.35 1026.96Q359.10 1026.09 357.44 1024.49Q355.78 1022.90 354.86 1020.73Q353.94 1018.56 353.94 1016.00Q353.94 1013.44 354.86 1011.27Q355.78 1009.10 357.44 1007.51Q359.10 1005.91 361.35 1005.04Q363.60 1004.17 366.26 1004.17Q369.09 1004.17 371.42 1005.16Q373.75 1006.14 375.36 1008.02L372.60 1010.61Q370.10 1007.92 366.46 1007.92Q364.06 1007.92 362.20 1008.95Q360.35 1009.99 359.29 1011.81Q358.24 1013.63 358.24 1016.00Q358.24 1018.37 359.29 1020.19Q360.35 1022.01 362.20 1023.05Q364.06 1024.08 366.46 1024.08Q370.14 1024.08 372.60 1021.36L375.36 1023.98Q373.75 1025.86 371.42 1026.84Q369.09 1027.83 366.23 1027.83ZM382.54 1027.50V1004.50H386.06L398.74 1020.07V1004.50H402.98V1027.50H399.46L386.78 1011.93V1027.50ZM423.27 1027.83Q420.61 1027.83 418.34 1026.94Q416.07 1026.05 414.40 1024.46Q412.72 1022.87 411.80 1020.72Q410.88 1018.56 410.88 1016.00Q410.88 1013.44 411.80 1011.28Q412.72 1009.13 414.40 1007.54Q416.07 1005.95 418.34 1005.06Q420.61 1004.17 423.27 1004.17Q425.96 1004.17 428.21 1005.06Q430.46 1005.95 432.14 1007.54Q433.82 1009.13 434.74 1011.28Q435.66 1013.44 435.66 1016.00Q435.66 1018.56 434.74 1020.72Q433.82 1022.87 432.14 1024.46Q430.46 1026.05 428.21 1026.94Q425.96 1027.83 423.27 1027.83ZM423.27 1024.08Q425.60 1024.08 427.42 1023.05Q429.25 1022.01 430.30 1020.17Q431.35 1018.33 431.35 1016.00Q431.35 1013.67 430.30 1011.83Q429.25 1009.99 427.42 1008.95Q425.60 1007.92 423.27 1007.92Q420.94 1007.92 419.11 1008.95Q417.29 1009.99 416.24 1011.83Q415.19 1013.67 415.19 1016.00Q415.19 1018.33 416.24 1020.17Q417.29 1022.01 419.11 1023.05Q420.94 1024.08 423.27 1024.08ZM443.56 1027.50V1004.50H447.83V1023.89H459.85V1027.50ZM477.35 1027.83Q474.69 1027.83 472.42 1026.94Q470.16 1026.05 468.48 1024.46Q466.80 1022.87 465.88 1020.72Q464.96 1018.56 464.96 1016.00Q464.96 1013.44 465.88 1011.28Q466.80 1009.13 468.48 1007.54Q470.16 1005.95 472.42 1005.06Q474.69 1004.17 477.35 1004.17Q480.05 1004.17 482.30 1005.06Q484.55 1005.95 486.22 1007.54Q487.90 1009.13 488.82 1011.28Q489.74 1013.44 489.74 1016.00Q489.74 1018.56 488.82 1020.72Q487.90 1022.87 486.22 1024.46Q484.55 1026.05 482.30 1026.94Q480.05 1027.83 477.35 1027.83ZM477.35 1024.08Q479.68 1024.08 481.51 1023.05Q483.33 1022.01 484.38 1020.17Q485.43 1018.33 485.43 1016.00Q485.43 1013.67 484.38 1011.83Q483.33 1009.99 481.51 1008.95Q479.68 1007.92 477.35 1007.92Q475.02 1007.92 473.20 1008.95Q471.37 1009.99 470.32 1011.83Q469.27 1013.67 469.27 1016.00Q469.27 1018.33 470.32 1020.17Q471.37 1022.01 473.20 1023.05Q475.02 1024.08 477.35 1024.08ZM508.39 1027.83Q505.69 1027.83 503.44 1026.96Q501.19 1026.09 499.51 1024.49Q497.84 1022.90 496.92 1020.73Q496.00 1018.56 496.00 1016.00Q496.00 1013.44 496.92 1011.27Q497.84 1009.10 499.51 1007.51Q501.19 1005.91 503.47 1005.04Q505.76 1004.17 508.45 1004.17Q511.34 1004.17 513.71 1005.12Q516.07 1006.08 517.68 1007.92L514.99 1010.55Q513.64 1009.20 512.07 1008.56Q510.49 1007.92 508.65 1007.92Q506.22 1007.92 504.33 1008.95Q502.44 1009.99 501.37 1011.81Q500.30 1013.63 500.30 1016.00Q500.30 1018.33 501.37 1020.17Q502.44 1022.01 504.31 1023.05Q506.18 1024.08 508.62 1024.08Q509.86 1024.08 511.05 1023.80Q512.23 1023.52 513.35 1022.90V1015.74H517.39V1024.90Q515.58 1026.35 513.20 1027.09Q510.82 1027.83 508.39 1027.83ZM526.38 1027.50V1004.50H530.65V1027.50ZM525.75 1002.63 530.19 998.13H535.02L529.30 1002.63ZM536.97 1027.50 547.32 1004.50H551.53L561.91 1027.50H557.44L555.14 1022.18H543.64L541.37 1027.50ZM545.09 1018.83H553.70L549.39 1008.77ZM594.65 1021.09Q593.50 1021.09 592.73 1020.34Q591.96 1019.58 591.96 1018.33Q591.96 1017.12 592.73 1016.36Q593.50 1015.61 594.65 1015.61Q595.80 1015.61 596.58 1016.36Q597.35 1017.12 597.35 1018.33Q597.35 1019.58 596.58 1020.34Q595.80 1021.09 594.65 1021.09ZM630.65 1027.50V1004.50H640.08Q644.68 1004.50 647.29 1006.68Q649.90 1008.87 649.90 1012.68Q649.90 1015.31 648.62 1017.17Q647.34 1019.02 645.01 1019.98L650.30 1027.50H645.70L641.00 1020.76Q640.57 1020.80 640.11 1020.80H634.92V1027.50ZM634.92 1017.28H639.92Q642.74 1017.28 644.17 1016.07Q645.60 1014.85 645.60 1012.68Q645.60 1010.51 644.17 1009.31Q642.74 1008.11 639.92 1008.11H634.92ZM658.04 1027.50V1004.50H674.83V1008.08H662.31V1014.06H673.41V1017.58H662.31V1023.92H675.29V1027.50ZM683.42 1027.50V1004.50H686.93L699.62 1020.07V1004.50H703.86V1027.50H700.34L687.66 1011.93V1027.50ZM713.40 1027.50V1004.50H723.46Q727.20 1004.50 730.03 1005.93Q732.85 1007.36 734.43 1009.95Q736.01 1012.55 736.01 1016.00Q736.01 1019.45 734.43 1022.05Q732.85 1024.64 730.03 1026.07Q727.20 1027.50 723.46 1027.50ZM717.67 1023.89H723.26Q725.82 1023.89 727.73 1022.92Q729.63 1021.95 730.67 1020.17Q731.70 1018.40 731.70 1016.00Q731.70 1013.60 730.67 1011.83Q729.63 1010.05 727.73 1009.08Q725.82 1008.11 723.26 1008.11H717.67ZM743.91 1027.50V1004.50H748.18V1027.50ZM757.76 1027.50V1004.50H761.27L770.41 1019.71L779.38 1004.50H782.89L782.93 1027.50H778.89L778.85 1012.29L771.30 1024.87H769.39L761.83 1012.45V1027.50ZM792.51 1027.50V1004.50H796.78V1027.50ZM806.36 1027.50V1004.50H823.15V1008.08H810.63V1014.06H821.73V1017.58H810.63V1023.92H823.61V1027.50ZM831.74 1027.50V1004.50H835.25L847.94 1020.07V1004.50H852.18V1027.50H848.66L835.98 1011.93V1027.50ZM866.39 1027.50V1008.11H858.76V1004.50H878.28V1008.11H870.66V1027.50ZM895.61 1027.83Q892.95 1027.83 890.68 1026.94Q888.42 1026.05 886.74 1024.46Q885.07 1022.87 884.15 1020.72Q883.23 1018.56 883.23 1016.00Q883.23 1013.44 884.15 1011.28Q885.07 1009.13 886.74 1007.54Q888.42 1005.95 890.68 1005.06Q892.95 1004.17 895.61 1004.17Q898.31 1004.17 900.56 1005.06Q902.81 1005.95 904.48 1007.54Q906.16 1009.13 907.08 1011.28Q908.00 1013.44 908.00 1016.00Q908.00 1018.56 907.08 1020.72Q906.16 1022.87 904.48 1024.46Q902.81 1026.05 900.56 1026.94Q898.31 1027.83 895.61 1027.83ZM895.61 1024.08Q897.95 1024.08 899.77 1023.05Q901.59 1022.01 902.64 1020.17Q903.70 1018.33 903.70 1016.00Q903.70 1013.67 902.64 1011.83Q901.59 1009.99 899.77 1008.95Q897.95 1007.92 895.61 1007.92Q893.28 1007.92 891.46 1008.95Q889.63 1009.99 888.58 1011.83Q887.53 1013.67 887.53 1016.00Q887.53 1018.33 888.58 1020.17Q889.63 1022.01 891.46 1023.05Q893.28 1024.08 895.61 1024.08Z">
+                        <Path.Effect><DropShadowEffect Color="Black" Direction="270" ShadowDepth="1.2" BlurRadius="5" Opacity="0.45"/></Path.Effect>
+                    </Path>
+                </StackPanel>
             </Grid>
-        </Border>
+        </Viewbox>
     </Grid>
 </UserControl>

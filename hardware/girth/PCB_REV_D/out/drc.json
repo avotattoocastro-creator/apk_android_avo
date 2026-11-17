@@ -1,0 +1,228 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-15T17:00:13+0000",
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "AVO_GIRTH_REVD_PCB.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0875 mm) (In1.Cu)",
+            "items": [
+                {
+                    "description": "Zone [GND] on In1.Cu, priority 0",
+                    "pos": {
+                        "x": 123.0,
+                        "y": 113.0
+                    },
+                    "uuid": "c8cc020a-5053-5288-bd97-101dc7688f0f"
+                }
+            ],
+            "severity": "warning",
+            "type": "connection_width"
+        },
+        {
+            "description": "Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0875 mm) (B.Cu)",
+            "items": [
+                {
+                    "description": "Zone [GND] on B.Cu, priority 0",
+                    "pos": {
+                        "x": 123.0,
+                        "y": 113.0
+                    },
+                    "uuid": "bb1aebb5-2ed0-5d87-93af-1809eb24eee5"
+                }
+            ],
+            "severity": "warning",
+            "type": "connection_width"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text '+' on F.Silkscreen",
+                    "pos": {
+                        "x": 80.4,
+                        "y": 97.46
+                    },
+                    "uuid": "9ac2b138-3665-5681-b7d2-bfcd5dc23e7c"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'REF' on F.Silkscreen",
+                    "pos": {
+                        "x": 80.4,
+                        "y": 100.0
+                    },
+                    "uuid": "d585d3c7-08f3-5209-ab4d-5b2c5e9493dc"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text '-' on F.Silkscreen",
+                    "pos": {
+                        "x": 80.4,
+                        "y": 102.54
+                    },
+                    "uuid": "d4f2abfc-9728-5a98-8753-f122cc395c6d"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'DET' on F.Silkscreen",
+                    "pos": {
+                        "x": 97.8,
+                        "y": 112.0
+                    },
+                    "uuid": "f8bb2195-302a-5d0d-8703-630aac03aab4"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'B+' on F.Silkscreen",
+                    "pos": {
+                        "x": 102.6,
+                        "y": 112.0
+                    },
+                    "uuid": "2b819d19-4adc-5774-8884-5a777cb49148"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'B-' on F.Silkscreen",
+                    "pos": {
+                        "x": 105.0,
+                        "y": 112.0
+                    },
+                    "uuid": "f39875a7-81de-5a81-a050-eb8d5f9568db"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "Segment of R40 on F.Silkscreen",
+                    "pos": {
+                        "x": 80.58,
+                        "y": 97.6136
+                    },
+                    "uuid": "4ac34a20-83ca-50d0-a58f-020ff76f81ba"
+                },
+                {
+                    "description": "PCB text '+' on F.Silkscreen",
+                    "pos": {
+                        "x": 80.4,
+                        "y": 97.46
+                    },
+                    "uuid": "9ac2b138-3665-5681-b7d2-bfcd5dc23e7c"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "Segment of C54 on F.Silkscreen",
+                    "pos": {
+                        "x": 80.54,
+                        "y": 99.7478
+                    },
+                    "uuid": "7d14f394-c1db-5509-9404-3d68f9f124c7"
+                },
+                {
+                    "description": "PCB text 'REF' on F.Silkscreen",
+                    "pos": {
+                        "x": 80.4,
+                        "y": 100.0
+                    },
+                    "uuid": "d585d3c7-08f3-5209-ab4d-5b2c5e9493dc"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "Segment of C54 on F.Silkscreen",
+                    "pos": {
+                        "x": 79.82,
+                        "y": 99.7478
+                    },
+                    "uuid": "b65a9ae3-fa60-51f5-9bed-c2aba3e54566"
+                },
+                {
+                    "description": "PCB text 'REF' on F.Silkscreen",
+                    "pos": {
+                        "x": 80.4,
+                        "y": 100.0
+                    },
+                    "uuid": "d585d3c7-08f3-5209-ab4d-5b2c5e9493dc"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "Segment of D3 on F.Silkscreen",
+                    "pos": {
+                        "x": 96.75,
+                        "y": 112.3
+                    },
+                    "uuid": "ea193151-8ed7-5296-84f0-97619b1ab8ae"
+                },
+                {
+                    "description": "PCB text 'DET' on F.Silkscreen",
+                    "pos": {
+                        "x": 97.8,
+                        "y": 112.0
+                    },
+                    "uuid": "f8bb2195-302a-5d0d-8703-630aac03aab4"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        }
+    ]
+}

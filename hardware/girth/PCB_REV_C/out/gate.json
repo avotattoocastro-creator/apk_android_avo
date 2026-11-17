@@ -1,0 +1,42 @@
+{
+ "ok": true,
+ "checks": [
+  {
+   "name": "DRC: errores",
+   "ok": true,
+   "n": 0
+  },
+  {
+   "name": "DRC: conexiones incompletas",
+   "ok": true,
+   "n": 0
+  },
+  {
+   "name": "DRC: cortocircuitos",
+   "ok": true,
+   "n": 0
+  },
+  {
+   "name": "DRC: paridad esquema \u2194 placa",
+   "ok": true,
+   "n": 0
+  },
+  {
+   "name": "ERC: errores",
+   "ok": true,
+   "n": 0
+  },
+  {
+   "name": "ERC: advertencias",
+   "ok": true,
+   "n": 0
+  }
+ ],
+ "drc_errors": {},
+ "drc_warnings": {
+  "track_dangling": 1,
+  "via_dangling": 1,
+  "silk_over_copper": 6,
+  "silk_overlap": 3
+ }
+}

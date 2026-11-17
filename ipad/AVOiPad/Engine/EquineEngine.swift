@@ -18,7 +18,7 @@ final class EngineCancelFlag: @unchecked Sendable {
     var isCancelled: Bool { pointer.pointee != 0 }
 }
 
-/// Access to the AVO Equine Intelligence Engine (same C++17 code as Android, Windows and Python), linked statically
+/// Access to the AVO Performance Equine (same C++17 code as Android, Windows and Python), linked statically
 /// into the app and reached through the C API (avo_eq_c.h, bridging header). Strings are UTF-8. The native calls are
 /// blocking: the async functions run them off the caller's thread. Cancellation sets a flag polled by the engine.
 enum EquineEngine {
@@ -350,7 +350,9 @@ final class EquineAnalysis {
     private(set) var fusionSummary: String = ""
     private(set) var t: [Double] = []
     private(set) var speed: [Double] = []
+    private(set) var speedSigma: [Double] = []
     private(set) var accel: [Double] = []
+    private(set) var accelSigma: [Double] = []
     private(set) var latAccel: [Double] = []
     private(set) var gaitCode: [Int] = []
     private(set) var girthImu: [Int] = []
@@ -496,7 +498,9 @@ final class EquineAnalysis {
         if let se = J.obj(r, "series") {
             a.t = J.doubles(se, "t")
             a.speed = J.doubles(se, "velocidad")
+            a.speedSigma = J.doubles(se, "sigma_velocidad")
             a.accel = J.doubles(se, "aceleracion")
+            a.accelSigma = J.doubles(se, "sigma_aceleracion")
             a.latAccel = J.doubles(se, "aceleracion_lateral")
             a.gaitCode = J.doubles(se, "aire").map { $0.isFinite ? J.int($0) : -1 }
         }

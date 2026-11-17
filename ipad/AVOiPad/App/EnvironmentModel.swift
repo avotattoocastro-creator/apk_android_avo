@@ -41,6 +41,9 @@ final class EnvironmentModel {
     var weatherHours: [WeatherHourRow] = []
     var tideHeadline: String = "Sin datos"
     var tideTrend: String = "No disponible"
+    /// How far the tide has risen (or fallen) at the start of the training, 0–100 % of the height between the previous and
+    /// the next high / low water (IHM prediction). nil without extremes around the start.
+    var tidePhasePct: Double? = nil
     var coefficientHeadline: String = "Sin datos"
     var windHeadline: String = "Sin datos"
     var tempHeadline: String = "Sin datos"
@@ -211,6 +214,7 @@ final class EnvironmentModel {
         tideHeadline = "Sin datos"; windHeadline = "Sin datos"; tempHeadline = "Sin datos"; pressureHeadline = "Sin datos"
         waveHeadline = "Sin datos"; coefficientHeadline = "Sin datos"
         tideTrend = "No disponible"
+        tidePhasePct = nil
     }
 
     // ------------------------------------------------------------------ FillEnvironment
@@ -237,6 +241,14 @@ final class EnvironmentModel {
             let h: Double? = tp.heightAt(start)
             tideHeadline = TimeText.num(h, "0.00", " m")
             if let tr = tp.trendAt(start) { tideTrend = tr == "subiendo" ? "Subiendo" : "Bajando" } else { tideTrend = "No disponible" }
+            // % of the rise / fall (trainer's sketch 14/11/2026: «% subida / bajada»)
+            let prev: TideExtreme? = tp.extremes.filter { $0.utc <= start }.max { $0.utc < $1.utc }
+            let next: TideExtreme? = tp.extremes.filter { $0.utc > start }.min { $0.utc < $1.utc }
+            if let a = prev, let b = next, let hh = h, abs(b.heightM - a.heightM) > 0.05 {
+                tidePhasePct = min(100, max(0, (hh - a.heightM) / (b.heightM - a.heightM) * 100))
+            } else {
+                tidePhasePct = nil
+            }
             coefficientHeadline = TimeText.num(tp.coefficientAt(start), "0")
             tRows.add("Fuente", tp.source)
             tRows.add("Tipo de dato", "Predicción (no es una medición)")

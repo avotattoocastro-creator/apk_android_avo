@@ -21,7 +21,7 @@ enum BiomechWindowSignal: String, CaseIterable, Identifiable {
 
 /// Biomechanics page = biomechanics parts of windows/AVO.Windows/ViewModels/MainViewModel.Segments.cs (RefreshBiomech,
 /// RefreshImuWindow, MostMovement) and MainViewModel.Charts.cs (cadence series, gait bands, fused girth movement).
-/// Every index comes from the AVO Equine Intelligence engine and is exploratory; without girth data nothing is computed.
+/// Every index comes from the AVO Performance Equine engine and is exploratory; without girth data nothing is computed.
 @Observable
 final class BiomechModel {
     unowned let app: AppModel

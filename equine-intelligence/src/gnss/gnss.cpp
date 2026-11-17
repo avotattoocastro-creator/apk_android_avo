@@ -7,7 +7,7 @@
 namespace avoeq {
 
 static const double NaN = std::numeric_limits<double>::quiet_NaN();
-static const char* ALG_VER = "1.1.0";
+static const char* ALG_VER = "2.0.0";
 
 double corr_age_code_s(uint8_t code) {
   static const double up[] = {-1, 1, 2, 5, 10, 15, 20, 30, 45, 60, 90, 120, 1e9};
@@ -79,6 +79,29 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
     sp[i] = g[i].gspeed_ms; sps[i] = g[i].sacc_ms; vn[i] = g[i].veln_ms; ve[i] = g[i].vele_ms;
     if (ok[i]) { r.speed[i] = sp[i]; r.speed_sigma[i] = sps[i]; r.usable[i] = 1; r.lat[i] = g[i].lat_deg; r.lon[i] = g[i].lon_deg; }
   }
+  r.speed_raw = r.speed; r.speed_raw_sigma = r.speed_sigma;
+  // ---- 2.0 (F1) single kinematic truth: Kalman + RTS smoothed speed; pieces restart at gaps and unusable epochs
+  // (never bridged). `sv` = speed used by every figure below; the raw gSpeed stays in `sp` for the slopes.
+  std::vector<double> sv(sp);
+  std::vector<double> kal_a(n, NaN), kal_sa(n, NaN);
+  if (c.smooth_speed) {
+    std::vector<double> z(n, NaN);
+    std::vector<bool> brk(n, false);
+    for (size_t i = 0; i < n; i++) {
+      if (ok[i]) z[i] = sp[i];
+      bool gap = i > 0 && v.gnss_flags.size() > i && (v.gnss_flags[i] & GF_GAP_BEFORE);
+      brk[i] = i > 0 && (!ok[i] || !ok[i - 1] || gap || !(r.t[i] > r.t[i - 1]));
+    }
+    SpeedSmootherResult sm = smooth_speed(r.t, z, sps, brk, c.smoother);
+    for (size_t i = 0; i < n; i++) {
+      if (!ok[i]) continue;
+      sv[i] = sm.speed[i];
+      r.speed[i] = sm.speed[i];
+      r.speed_sigma[i] = sm.speed_sigma[i];
+      kal_a[i] = sm.accel[i];
+      kal_sa[i] = sm.accel_sigma[i];
+    }
+  }
   // local tangent plane (equirectangular around the first usable epoch: < 1 mm error over a few km)
   {
     size_t i0 = n;
@@ -96,7 +119,10 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
   for (size_t i = 0; i < n; i++) {
     if (!ok[i]) continue;
     double a, sa;
-    if (local_slope(r.t, sp, sps, ok, i, c.deriv_half_window_s, &a, &sa)) { r.accel[i] = a; r.accel_sigma[i] = sa; }
+    if (c.smooth_speed && c.accel_from_smoother) {
+      // 2.0 (F1b): longitudinal acceleration = state of the same Kalman + RTS filter as the speed, with its σ
+      if (std::isfinite(kal_a[i])) { r.accel[i] = kal_a[i]; r.accel_sigma[i] = kal_sa[i]; }
+    } else if (local_slope(r.t, sp, sps, ok, i, c.deriv_half_window_s, &a, &sa)) { r.accel[i] = a; r.accel_sigma[i] = sa; }
     if (sp[i] >= c.min_speed_heading_ms) {
       double an, sn, ae, se;
       if (local_slope(r.t, vn, sps, ok, i, c.deriv_half_window_s, &an, &sn) && local_slope(r.t, ve, sps, ok, i, c.deriv_half_window_s, &ae, &se)) {
@@ -161,8 +187,8 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
   std::vector<double> good_speed;
   double vmax = -1; size_t imax = 0;
   for (size_t i = 0; i < n; i++) if (ok[i] && r.quality[i] <= (uint8_t)Quality::USABLE) {
-    good_speed.push_back(sp[i]);
-    if (sp[i] > vmax) { vmax = sp[i]; imax = i; }
+    good_speed.push_back(sv[i]);
+    if (sv[i] > vmax) { vmax = sv[i]; imax = i; }
   }
   double fix_frac = k.total_s > 0 ? k.fixed_s / k.total_s : 0;
   Quality global = fix_frac > 0.9 ? Quality::GOOD : fix_frac > 0.5 ? Quality::USABLE : Quality::POOR;
@@ -180,8 +206,10 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
   }
   r.metrics.push_back(metric("duracion", "s", duration, Quality::GOOD, "tiempo GNSS (iTOW) primera-última época"));
   if (vmax >= 0) {
-    Metric mv = metric("velocidad_maxima", "m/s", vmax, (Quality)r.quality[imax], "máximo de gSpeed del receptor en épocas utilizables");
-    mv.uncertainty = g[imax].sacc_ms;
+    Metric mv = metric("velocidad_maxima", "m/s", vmax, (Quality)r.quality[imax],
+                       c.smooth_speed ? "máximo de la velocidad suavizada (Kalman v-a + RTS sobre gSpeed) en épocas utilizables"
+                                      : "máximo de gSpeed del receptor en épocas utilizables");
+    mv.uncertainty = r.speed_sigma[imax];
     r.metrics.push_back(mv);
   }
   r.metrics.push_back(metric("velocidad_media", "m/s", duration > 0 ? d / duration : 0, global, "distancia / duración"));
@@ -194,7 +222,8 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
   }
   if (!std::isnan(amax)) {
     Metric a1 = metric("aceleracion_maxima", "m/s2", amax, samax <= c.accel_good_sigma ? Quality::GOOD : Quality::USABLE,
-                       "pendiente por mínimos cuadrados ponderados (1/sAcc²) en ±0,5 s");
+                       c.smooth_speed && c.accel_from_smoother ? "estado de aceleración del filtro Kalman v-a + RTS (misma velocidad que el resto de cifras)"
+                                                               : "pendiente por mínimos cuadrados ponderados (1/sAcc²) en ±0,5 s");
     a1.uncertainty = samax; a1.warnings.push_back("cinemática del jinete (antena en el chaleco), no del centro de masas del caballo");
     r.metrics.push_back(a1);
     Metric a2 = metric("desaceleracion_maxima", "m/s2", amin, samin <= c.accel_good_sigma ? Quality::GOOD : Quality::USABLE, a1.algorithm.c_str());
@@ -206,11 +235,11 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
   for (size_t i = 0; i + 1 < n; i++) {
     double dt = std::min(std::max(r.t[i + 1] - r.t[i], 0.0), 2 * dt_nom);
     if (!std::isnan(r.heading_rate[i])) turn_abs += std::fabs(r.heading_rate[i]) * dt;
-    if (!std::isnan(r.radius[i]) && r.radius[i] < c.curve_radius_m) { curve_t += dt; curve_v += sp[i] * dt; }
+    if (!std::isnan(r.radius[i]) && r.radius[i] < c.curve_radius_m) { curve_t += dt; curve_v += sv[i] * dt; }
   }
   r.metrics.push_back(metric("giro_total", "deg", turn_abs, global, "integral de |velocidad angular del vector velocidad|"));
   r.metrics.push_back(metric("tiempo_en_curva", "s", curve_t, global, "radio < 30 m (radio = v / |ω|)"));
-  if (curve_t > 0) r.metrics.push_back(metric("velocidad_media_en_curva", "m/s", curve_v / curve_t, global, "media temporal de gSpeed con radio < 30 m"));
+  if (curve_t > 0) r.metrics.push_back(metric("velocidad_media_en_curva", "m/s", curve_v / curve_t, global, "media temporal de la velocidad con radio < 30 m"));
   // splits
   if (d > 0) {
     double next = c.split_m; size_t i0 = 0;
@@ -227,7 +256,7 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
     if (!ok[i]) continue;
     double dt = std::min(std::max(r.t[i + 1] - r.t[i], 0.0), 2 * dt_nom);
     for (size_t b = 0; b + 1 < r.speed_hist_edges.size(); b++)
-      if (sp[i] >= r.speed_hist_edges[b] && sp[i] < r.speed_hist_edges[b + 1]) { r.speed_hist_s[b] += dt; break; }
+      if (sv[i] >= r.speed_hist_edges[b] && sv[i] < r.speed_hist_edges[b + 1]) { r.speed_hist_s[b] += dt; break; }
   }
   return r;
 }

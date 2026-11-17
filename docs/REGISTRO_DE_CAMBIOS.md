@@ -115,6 +115,1219 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-17 — Cincha CAD REV 6.4 — balancín magnético empotrado a ras en la pared
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-3-balancin-magnetico` (PR #60)
+**Qué cambia (captura del usuario):**
+- extremos de la cápsula +5 mm (69,0 mm) con el balancín empotrado a ras en un hueco de la pared, fuera de la línea de la junta;
+- eje: pasador de acero Ø2 × 20 / Ø2 × 18 a presión en el balancín, que gira en cojinetes impresos con la base; lo cierran lengüetas de la tapa;
+- imanes 2 + 2 Ø5 × 1 entre el balancín y la pared (pozo desde abajo con tapón);
+- diente recto en la cama del soporte;
+- se quitan las aletas, la barra y el labio de la 6.3.1;
+- soporte de 94,5 × 84,6; patrón de la funda regenerado.
+**Comprobado (script local):**
+- piezas cerradas; conjuntos de 96 sólidos con 0 aristas abiertas; `verificar_step.py` 25/25 OK;
+- `verificar_cierre.py`: 0 mm³ cerrado; diente libre a unos 4° (0,5 mm de pulsador); tope a unos 12°; sin choques con el soporte antes del tope.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+**Pendiente:** rozamiento real (μ ≥ 0,17–0,24 con diente recto), fuerza de los imanes y probeta del extremo.
+
+## 2026-11-17 — Cincha CAD REV 6.3.1 — eje en las columnas y labio sobre la tapa
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-3-balancin-magnetico` (PR #60)
+**Qué cambia (marcado del usuario, «integrado»):**
+- las aletas del eje pasan junto a las columnas de las esquinas (±20,5 en +X, ±19,5 en −X: llave de posición);
+- el balancín (14 / 12 mm) lleva una barra de columna a columna con los pasadores Ø2 × 6 en sus extremos;
+- labio superior que tapa el hueco y entra en un rebaje del borde de la tapa (fondo a 0,5 mm del interior).
+**Comprobado (script local):**
+- piezas cerradas; conjuntos de 96 sólidos con 0 aristas abiertas; `verificar_step.py` 25/25 OK;
+- `verificar_cierre.py`: 0 mm³ de interferencia cerrado y sin choques con el soporte al abrir;
+- diente libre a unos 9,5° (1,4 mm de pulsador); tope del labio a unos 14,5°.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+
+## 2026-11-17 — Cincha CAD REV 6.3 (con funda) — cierre magnético de balancín
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-3-balancin-magnetico`
+**Qué cambia:** en `hardware/girth/CINCHA_MONTAJE` los pestillos elásticos y los seguros TPU de la REV 6.2 se sustituyen por un **balancín magnético en cada lado corto**:
+- balancín a ras de la tapa, con 2 pasadores de acero Ø2 × 6 en aletas de la base;
+- dientes rectos en ventanas del cerco;
+- 2 + 2 imanes Ø5 × 1 en atracción (balancín ↔ cerco), con orificio y tapón;
+- cerco de 3,0;
+- soporte de 99,6 × 84,6;
+- piezas renombradas a `R6_3`;
+- `fuente/verificar_cierre.py` nuevo (comprobación por vóxeles);
+- renders 13, 13b y 14 nuevos;
+- patrón de la funda regenerado (los tornillos de Chicago cambian de sitio).
+**Por qué:** decisión del usuario, que aplica a la cincha vigente (con funda) el diseño que se había acordado sobre la REV5 (PR #46, que se cierra sin fusionar). Sin imanes de repulsión arriba: no caben por la ranura de la junta y la tapa de 2,5 mm.
+**Comprobado (script local, no hay workflow para esta carpeta):**
+- `avo_cincha_montaje.py`: todas las piezas cerradas; conjuntos de 96 sólidos con 0 aristas abiertas;
+- `verificar_step.py`: 25/25 OK;
+- `verificar_cierre.py`: 0 mm³ de interferencia cerrado, sin choques al abrir, dientes libres a unos 10° (1,5 mm de pulsador), tope a unos 26°.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO** (ni impreso ni probado).
+**Pendiente:** fuerza real de los imanes apilados y del rozamiento, probeta del cierre, ensayo de tirón (§8.4).
+
+
+
+
+
+
+
+
+## 2026-11-17 — Docs/CI — Nombres PROTOTIPO / BETA y estado vigente único
+**Autor:** Claude · Rama `claude/nombres-prototipo-beta`
+**Qué cambia:** regla del usuario: sin PCB propia = **PROTOTIPO** (Waveshare, Heltec, XIAO); con PCB propia = **BETA**
+(cincha PCB REV D, casco V5, DOCK V1, espalda V4). Descargas renombradas (`AVO_PECHO_PROTOTIPO_FW.zip`,
+`CAD_CINCHA_BETA_REV6_MONTAJE.zip`…), nueva `AVO_CINCHA_BETA_FW.zip` (0.6.x) y entrada para la espalda BETA V4; los
+nombres antiguos se retiran de la release. `AGENTS.md`: bloque «Empieza aquí», regla de nombres, hardware por líneas,
+etiquetas de respaldo ya creadas, descargas y **plan de pruebas**: campo solo con PROTOTIPOS hasta tener todas las PCB
+construidas; después se porta a las BETA y se prueban. `ESTADO_DESARROLLO_Y_VERSIONES.md`: tabla única vigente arriba; lo del
+22/10 queda como histórico.
+**No se ha tocado:** carpetas, workflows de compilación ni nombres de artefactos existentes (renombrarlos rompería CI e
+historial; la etiqueta se aplica en docs, descargas y carpetas nuevas).
+**Validación:** publicación simulada en local con los artefactos reales · se publica al fusionar.
+
+## 2026-11-17 — CI — Descargas directas (release fija `descargas`)
+**Autor:** Claude · Rama `claude/descargas-directas` · **CI:** se ejecuta por primera vez al integrar en `develop`
+**Qué cambia:** workflow nuevo `publicar-descargas.yml` + `scripts/descargas/publicar.py` + `descargas.json`. Publica en
+la release `descargas`, con nombres fijos, la última versión de firmware (pecho, espalda, cincha, cincha ECG), apps
+(Android, Tarjetas, AVO Update, Windows) y ZIP de CAD (cincha REV5, montaje, casco V5, DOCK V1, espalda V4), más
+`VERSIONES.txt` y `manifiesto.json`. Espera a que terminen las compilaciones del commit y solo sube lo que cambia.
+**Por qué:** el usuario pide descarga directa de lo último de todo; los artefactos caducan y piden iniciar sesión.
+**No se ha tocado:** ningún workflow de compilación, firmas, `Info.plist` ni TestFlight. iOS sigue solo por TestFlight.
+**Validación:** IMPLEMENTADO · simulado en local con `gh` falso y los 988 artefactos reales de la API (17 entradas:
+12 publicables, 5 pendientes) · **sin ejecutar aún en Actions**. Detalle: `docs/DESCARGAS_DIRECTAS.md`.
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — licencias por QR en la base de carga
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §16 en `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: la app muestra un QR con la licencia de cuadra (una firma
+para todos los cascos) y la elección de caballos; la base de carga lo lee con un lector UART y lo instala en todos los
+cascos que cargan.
+**Por qué:** idea del usuario (16/11/2026 21:56).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, PCB del DOCK, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — plazas de caballo compartidas por todos los cascos de la cuadra
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §15 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: las plazas son de la cuadra; cualquier casco alquilado por la
+cuadra graba con cualquiera de sus caballos activados; el comprobante de activación se reparte entre cascos y, si hay dos,
+gana el más antiguo.
+**Por qué:** indicación del usuario (16/11/2026 21:52).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — renovación con los caballos anteriores marcados
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §15 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: al renovar, la selección aparece con los caballos que ya
+tenían plaza marcados; el cliente confirma o cambia.
+**Por qué:** indicación del usuario (16/11/2026 21:49).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — activación de caballos al recibir la licencia
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §15 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: caballos ilimitados en la app; al recibir la licencia se
+eligen los de las plazas contratadas y quedan bloqueados (nombre e id); el casco ata la elección por nº de licencia y emite un
+comprobante firmado por su ATECC608B. Resuelta la decisión pendiente de §11.
+**Por qué:** flujo definido por el usuario (16/11/2026 21:48).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — cupo de caballos por licencia de cuadra
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §15 en `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: la licencia de cuadra lleva plazas de caballo firmadas; no se
+cambia de caballo hasta renovar o contratar otra plaza; el caballo sustituido queda bloqueado para el casco (sus datos se
+siguen viendo). Nueva decisión pendiente sobre quién rellena una plaza vacía.
+**Por qué:** regla del usuario (16/11/2026 21:43).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — licencias hijas sin caducidad propia
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §14 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: las licencias de entrenador, jockeys y caballos no tienen
+fecha de fin; dependen solo de la de la cuadra. Con la cuadra caducada las apps permiten ver en solo lectura todo lo
+generado durante la licencia activa; nada nuevo. Resuelta la decisión pendiente de §11.
+**Por qué:** aclaración del usuario (16/11/2026 21:39).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — jerarquía de licencias (la cuadra manda)
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §14 en `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: con la licencia de cuadra caducada no funcionan las licencias
+de entrenador, jockeys, caballos ni cascos de esa cuadra; las licencias hijas nunca duran más que la cuadra; personas con
+varias cuadras solo pierden la caducada; se mantiene la descarga de lo grabado (§12). Nueva decisión pendiente: consulta en
+solo lectura con la cuadra caducada.
+**Por qué:** regla del usuario (16/11/2026 21:35).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
+## 2026-11-16 — AVO-LOCK-1: alquiler mensual y cambio de cuadra del casco
+**Autor:** Claude · **Rama:** `docs/avo-lock-1-alquiler` · solo documento.
+**Qué cambia:** nueva §13 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`:
+- licencia mensual del casco;
+- en la devolución, la app comprueba que todo esté descargado;
+- solo AVO lo pasa a otra cuadra, con una licencia y una llave pública nuevas firmadas;
+- el casco borra la SD y la configuración, y rechaza el cambio si hay sesiones sin descargar, salvo con la marca `BORRAR_PENDIENTES`;
+- el casco y AVO Tarjetas guardan el historial del casco.
+
+**Estado:** DISEÑO.
+
+## 2026-11-16 — AVO-LOCK-1: decisiones confirmadas
+**Autor:** Claude · **Rama:** `docs/avo-lock-1-decisiones` · solo documento.
+**Qué cambia:** en la §12 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md` el usuario confirma:
+- aviso desde 7 días antes y bloqueo de la grabación el día de fin;
+- con la licencia caducada se pueden descargar los datos ya grabados;
+- hacen falta dos licencias, la del casco (cuadra) y la de la persona.
+
+**Estado:** DISEÑO.
+
+## 2026-11-16 — Diseño AVO-LOCK-1: el casco solo funciona dentro del sistema y de su licencia
+**Autor:** Claude · **Rama:** `docs/avo-lock-1` · solo documento.
+**Qué cambia:** nueva §12 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`:
+- **Identidad:** ATECC608B con certificado de casco firmado por AVO Tarjetas.
+- **Licencia:** licencia propia del casco, comprobada con la hora GNSS.
+- **Conexión:** reto y respuesta mutuos entre la app (llave de cuadra) y el casco, con el canal cifrado.
+- **Firmware:** arranque seguro y cifrado de flash en serie.
+- **Estados:** licencia válida, aviso, caducada (sin grabar, pero se puede descargar) y sin licencia.
+
+**Estado:** DISEÑO · decisiones pendientes en §12.
+
+## 2026-11-16 — AVO-ENC-1: solo el casco cifra; pecho y espalda siguen como banco de pruebas
+**Autor:** Claude · **Rama:** `docs/avo-enc-1-casco` · solo documento.
+**Qué cambia:** decisión del usuario en `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`:
+- el cifrado es solo para el casco (PCB propia);
+- el pecho y la espalda actuales son el banco de pruebas y siguen grabando `.avr` sin cifrar;
+- en la placa de serie del casco se recomienda arranque seguro y cifrado de flash, y el elemento seguro opcional queda como decisión pendiente.
+
+**Estado:** DISEÑO.
+
+## 2026-11-16 — Diseño AVO-ENC-1: RAW comprimido y cifrado en el casco + llavero de cuadras
+**Autor:** Claude · **Rama:** `docs/avo-enc-1` · solo documento.
+**Qué cambia:** nuevo `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, con el diseño aprobado por el usuario:
+- **Formato en la SD:** el casco escribe `.avoe` por bloques (deflate + AES-256-GCM, ECDH P-256 para envolver la llave de sesión).
+- **Llaves:** una llave por cuadra y una llave personal por persona.
+- **Llavero `.avokeys`:** cifrado con la clave secreta de la tarjeta NFC; un propietario o veterinario con varias cuadras usa una sola tarjeta.
+- **Copias por destinatario:** al asignar el caballo se añade una para su propietario.
+- **Casco:** solo acepta llaves públicas de cuadra firmadas por AVO Tarjetas.
+
+**No se ha tocado:** firmware, apps, workflows ni firmas.
+**Estado:** DISEÑO · sin implementar.
+
+## 2026-11-16 — iPad — «Análisis visual» de la carrera a pantalla completa
+**Autor:** Claude · **Rama:** `feature/ipad-carrera-analisis-profundo`
+**Qué cambia:** en la ficha de la carrera hay un botón nuevo, **«Análisis visual»** (icono de gráficas, a la izquierda de «Informe PDF»). Abre una ventana a pantalla completa.
+- **Panel izquierdo:** se elige qué se muestra:
+  - cualquier caballo de la carrera, con atajos «Mío + ganador», «Top 3», «Todos» y «Ninguno»;
+  - los entrenamientos con parciales de los 60 días anteriores, en línea discontinua y alineados desde la meta;
+  - las otras carreras del mismo caballo, en línea punteada y alineadas por la distancia a la meta.
+- **8 medidas:** velocidad, % de su mejor tramo, tiempo del tramo, posición, distancia al primero, diferencia con mi caballo, zancada y foulées.
+- **Gráfica grande:** al tocar o arrastrar se elige un tramo y aparece un ranking de ese tramo de mejor a peor. Debajo, una tabla con todos los tramos en la que el mejor de cada tramo sale en verde y el peor en rojo.
+- **Por defecto** se muestran mi caballo, el ganador y el entrenamiento elegido en la ficha.
+
+**Por qué:** boceto del entrenador sobre la build 165 (16/11/2026 11:25): «ventana a pantalla completa donde hacer un análisis visual profundo de la carrera, poder seleccionar qué caballos mostrar, comparar con mi carrera y mis entrenos».
+**Archivos:** `Views/RaceDeepAnalysisView.swift` (nuevo), `Views/RaceDetailView.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
+## 2026-11-16 — Logotipo de los informes: «PERFORMANCE» un poco más abajo y sin el trazo rojo bajo «PE»
+**Autor:** Claude · **Rama:** `feature/logo-ajuste`
+**Qué cambia:** en `report_text.jpg` (iPad y Windows):
+- «PERFORMANCE» baja 7 px respecto a la línea roja de «AVO»;
+- se borra la cola roja que quedaba bajo «PE», un resto de la línea roja de «AVO» que se había movido con la banda de «HORSE EDITION»;
+- se añade un margen inferior a «HORSE EDITION».
+
+El tamaño queda en 670 × 293 px.
+**Por qué:** boceto del entrenador sobre un PDF de tramo (16/11/2026 01:05): «un pelín más bajo».
+**Estado:** imagen cambiada · NO VERIFICADO en los PDF generados.
+
+## 2026-11-16 — iPad — Flechas de «% carrera» vistas desde la carrera
+**Autor:** Claude · **Rama:** `feature/ipad-flechas-carrera`
+**Qué cambia:** las flechas de «Entrenamiento vs carrera» (app y PDF) se leen ahora desde la carrera:
+- ▲ verde si en ese tramo la carrera fue **más rápida** que el entrenamiento (% carrera < 100 %);
+- ▼ roja si la carrera fue igual o más lenta.
+
+Antes era al revés.
+**Por qué:** boceto del entrenador sobre la build 159 (16/11/2026 00:47): «está al revés».
+**Archivos:** `Views/RaceTrainingSplitsView.swift`, `Core/RaceComparisonPdf.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
+## 2026-11-16 — Imagen de marca (`avo_brand_hero`): «PERFORMANCE» arriba y «HORSE EDITION» debajo
+**Autor:** Claude · **Rama:** `feature/hero-performance-arriba`
+**Qué cambia:** igual que en el logotipo de los informes, en la imagen grande de marca se intercambian las bandas «HORSE EDITION» y «PERFORMANCE». Se hace solo en la zona del texto y con los bordes fundidos, para no cortar las rayas rojas del fondo. Misma resolución (941 × 869). Cambia en todas las apps que usan la imagen:
+- iPad: Dashboard e Inicio;
+- Windows: `Assets/avo_brand_hero.jpg`;
+- Android: `app`, `cards` y `usb-updater` (`drawable-nodpi/avo_brand_hero.webp`).
+
+**Por qué:** boceto del entrenador sobre el Dashboard del iPad (16/11/2026 01:02).
+**Estado:** imagen cambiada · NO VERIFICADO en los dispositivos.
+
+## 2026-11-16 — Logotipo de los informes: «PERFORMANCE» arriba y «HORSE EDITION» debajo
+**Autor:** Claude · **Rama:** `feature/logo-performance-arriba`
+**Qué cambia:** en el logotipo de la cabecera de los informes (`report_text.jpg`) se intercambian las dos bandas: «PERFORMANCE» pasa justo bajo «AVO» y «HORSE EDITION» va debajo. Mismo tamaño (670 × 282 px). Se cambia en el iPad (`Assets.xcassets/report_text.imageset`) y en Windows (`AVO.Windows.Core/Reports`), que comparten el mismo archivo.
+**Por qué:** petición del entrenador (16/11/2026).
+**Estado:** imagen cambiada · NO VERIFICADO en los PDF generados en el iPad.
+
+## 2026-11-16 — iPad — Cuadra: número de carreras de cada caballo
+**Autor:** Claude · **Rama:** `feature/ipad-cuadra-carreras`
+**Qué cambia:** en la lista de la Cuadra cada caballo muestra su número de carreras importadas («1 carrera», «0 carreras»), antes del número de entrenamientos.
+**Por qué:** boceto del entrenador sobre la build 155 (16/11/2026 00:17).
+**Archivos:** `Views/StableView.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
+## 2026-11-16 — iPad — Carreras: «mediana del campo» pasa a llamarse «caballo medio»
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-saltos`
+**Qué cambia:** en todo lo que tiene que ver con carreras, «mediana del campo» pasa a ser **«caballo medio»** y «mediana de sus trabajos» pasa a ser «valor medio». Afecta a la ficha de la carrera, las gráficas, el análisis, las observaciones, el método y el Informe PDF. El cálculo no cambia: sigue siendo la mediana de los demás participantes, sin contar el nuestro, y la explicación lo dice con palabras sencillas.
+**Por qué:** petición del entrenador (16/11/2026): «algo que sea entendible por cualquiera», «en todas partes».
+**Archivos:** `Views/RaceDetailView.swift`, `Core/RaceAnalysis.swift`, `Core/RaceComparisonPdf.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
+## 2026-11-16 — iPad — Informe PDF de la carrera: ningún título queda solo al final de una página
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-saltos`
+**Qué cambia:** cada título y subtítulo del PDF se mantiene en la misma página que su primer bloque. Si no caben juntos, el título pasa a la página siguiente. Antes quedaban sueltos al pie de la página 1 y 2:
+- «Entrenamiento vs carrera»: el título va con sus datos, las cifras y la primera gráfica;
+- «Análisis según los entrenamientos»: el título va con el primer bloque, y «Lo que dice la carrera» con sus 6 filas;
+- lo mismo para entrenamientos, forma, estimación y observaciones.
+
+**Por qué:** bocetos del entrenador sobre la build de TestFlight (15/11/2026 23:58, «siguiente página»).
+**Archivos:** `Core/RaceComparisonPdf.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
+## 2026-11-15 — iPad — Flechas en «% carrera», «mediana del campo» explicada, visor PDF a pantalla completa y símbolos del PDF
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-fila`
+**Qué cambia (bocetos del entrenador 15/11/2026, build 151):**
+- **Flechas en «% carrera»** (app y PDF) de «Entrenamiento vs carrera»: ▲ verde si en ese tramo el entrenamiento fue igual o más rápido que la carrera (≥ 100 %) y ▼ roja si fue más lento.
+- **«Mediana del campo» explicada** (app y PDF), bajo «Lo que dice la carrera»: es el «caballo típico» de la carrera, es decir, el valor del caballo que queda en medio de los demás participantes, sin el nuestro.
+- **Visor de PDF a pantalla completa** (antes era una hoja pequeña centrada).
+- **Símbolos del PDF:** ≈, ≥, ≤ y → salían como «?» porque las fuentes estándar del PDF no los tienen. Ahora se escriben ~, >=, <= y ->.
+
+**Archivos:** `Core/PdfDocument.swift` (`safe`, `fillPolygon`, `arrow`), `Core/RaceComparisonPdf.swift`, `Views/RaceTrainingSplitsView.swift`, `Views/RaceDetailView.swift`, `App/RootView.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
+## 2026-11-15 — iPad — Informe PDF de la carrera: las 8 cifras del resultado en una sola línea
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-fila`
+**Qué cambia:** las 8 cifras del resultado van ahora en una sola línea:
+- puesto, tiempo oficial y distancia al ganador;
+- velocidad máxima y velocidad media;
+- mejor 200 m, últimos 600 m y recorrido vs 1.º.
+
+Todas las cifras de una línea comparten tamaño, que se reduce para que quepa la más ancha, y los nombres y textos pequeños se ajustan al recuadro.
+**Por qué:** boceto del entrenador sobre el PDF (15/11/2026, build 151): «Todos en misma línea».
+**Archivos:** `Core/RaceComparisonPdf.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
+## 2026-11-15 — iPad — Casilla «PDF» en cada grupo de datos de la carrera
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-checks` · **CI:** ver PR
+**Qué cambia:** cada recuadro de la ficha de la carrera tiene arriba a la derecha una casilla **«PDF»** que decide si sale en el «Informe PDF». Son 17 grupos:
+- datos de la carrera y resultado;
+- clasificación y tramos;
+- las 4 gráficas por tramo: velocidad, posición, foulées/zancada y distancia al primero;
+- entrenamiento vs carrera;
+- conclusión, lo que dice la carrera, lo que dicen sus entrenamientos, forma, estimación, observaciones y método;
+- notas.
+
+La elección se guarda y se aplica a todas las carreras. El PDF incluye ahora también las 4 gráficas de la carrera. Si no hay nada marcado, avisa y no genera el PDF.
+**Por qué:** petición del entrenador (15/11/2026): elegir qué incluir y qué no en el informe.
+**Archivos:** `Core/RaceComparisonPdf.swift` (`RacePdfSection`, gráficas), `Views/RacePdfCheck.swift` (nuevo), `App/RacesModel.swift` (`pdfSections`), `Views/RaceDetailView.swift`.
+**No se ha tocado:** workflows, firmas, `Info.plist`, número de build.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
+## 2026-11-15 — iPad — «Informe PDF» de la carrera frente al entrenamiento
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-entreno` · **CI:** ver PR
+**Qué cambia:** en la ficha de la carrera aparece el botón **«Informe PDF»**. Genera un PDF para enviar, con el estilo de los informes de entrenamiento, y lo abre en el visor con «Compartir». El PDF incluye:
+- la carrera y el resultado;
+- los tramos de nuestro caballo;
+- la clasificación con nuestro caballo resaltado;
+- «Entrenamiento vs carrera, tramo a tramo» con el trabajo elegido en la ficha: cifras, gráfica de velocidad por tramo, perfil de caída y tabla;
+- el «Análisis según los entrenamientos» completo: conclusión, carrera, entrenamientos, forma, estimación, observaciones y método;
+- las notas.
+
+El botón del PDF del tracker pasa a llamarse «PDF original».
+**Por qué:** petición del entrenador (15/11/2026): la comparación solo se veía en la app.
+**Archivos:** `Core/RaceComparisonPdf.swift` (nuevo), `App/RacesModel.swift` (`exportComparisonPdf`, `splitChoice`), `Views/RaceDetailView.swift`, `Views/RaceTrainingSplitsView.swift`.
+**No se ha tocado:** workflows, firmas, `Info.plist`, número de build.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
+## 2026-11-15 — Cincha REV D: CPL corregido para las huellas de JLCPCB
+**Autor:** Claude · **Rama:** `fix/girth-revd-cpl-centros` · **CI:** PCB run 43738514699 (puerta superada)
+**Qué cambia:** el CPL ya aplica el giro y el centro de las huellas de JLCPCB/EasyEDA (`fuente/jlc_correcciones.py`, `jlc_correcciones.json`, `jlc.py`).
+- U4: desplazado 2,7 mm.
+- U6: +270°.
+- U3 y U7: +270°.
+- Q1 y Q2: +180°.
+- U5 y U8: +180°.
+- C47: +180°.
+
+**Por qué:** la vista previa de JLCPCB mostraba el módulo C6 desplazado sobre el borde. La placa (cobre) no cambia.
+**Aviso:** la REV C tiene el mismo problema de CPL. No pedirla con su CPL sin aplicar esta corrección.
+**Estado:** compilado en CI · NO VERIFICADO en hardware.
+
+## 2026-11-15 — Cincha — REV 6.2: sin bolsillo; cápsula sujeta por pestillos con seguro positivo (CAD)
+**Autor:** Claude · Rama `feature/cincha-rev6-2-cierre` (desde develop, con la 6.1 integrada) · **CI:** no aplica
+**Qué cambia (decisión del usuario 15/11 18:34 y aclaración de 18:35: cápsula expuesta, mucha vibración):**
+- **Bolsillo de piel eliminado:** fuera del STEP, del patrón (B1/B2, broche y ventanas) y de la BOM.
+- **Soporte** (`AVO_CINCHA_R6_2_soporte_pestillos_PETG`):
+  - 2 pestillos elásticos de PETG integrados (viga de 1,2 × 12 × 12,9 mm, ε = 1,19 %), con gancho en una **ranura
+    exterior** de la base (1,2 mm; no atraviesa la pared);
+  - **seguros deslizantes de TPU 95A con retén de clic** (bloqueo positivo);
+  - contrafuertes que protegen los pulsadores, rebajados;
+  - cerco de 4,5 mm con 0,25 de holgura;
+  - 4 tacos TPU 85A de precarga (sin juego vertical);
+  - desagües en los huecos de los pestillos;
+  - anclaje del cordón de seguridad.
+- **Cápsula:**
+  - ranura exterior y chaflán de entrada en la base;
+  - **oreja maciza en la tapa** para un cordón Dyneema Ø1,5, fuera de la junta. La estanqueidad no cambia.
+- **Retención calculada:**
+  - ≈ 165 N con seguros (objetivo ≥ 100 N; choque de 50 g ≈ 32 N);
+  - ≈ 65 N sin seguros;
+  - lateral y giro, por el cerco.
+- `DOCS/MONTAJE_CINCHA.md` §8 «Retención»: cálculo, uso con guantes y ensayos (tirón de 10 kg, vibración 1 h,
+  caída de 1,5 m, 2000 ciclos, barro).
+- Se actualizan la tabla de estanqueidad (filas 14–16), la BOM, los renders (13 = corte por el pestillo, 14 = pestillo
+  y seguro) y el zip.
+**No se ha tocado:** PCB, firmware, apps, workflows, firmas, Info.plist ni números de build.
+**Validación:** IMPLEMENTADO.
+- `verificar_step.py`: 24/24 STEP cerrados y planos.
+- **NO VERIFICADO:** nada impreso; retención, fatiga e IP67 sin ensayar.
+**Pendiente:** imprimir el soporte y una base; hacer los ensayos de §8.4 y §7.4. La fatiga entre capas de la raíz del
+pestillo es el riesgo principal.
+
+## 2026-11-15 — Cincha — cápsula REV 6.1: aro de luz (4 LED SK6812SIDE-A) y todo estanco (objetivo IP67) (CAD)
+**Autor:** Claude · Rama `feature/cincha-cad-montaje` (con develop fusionado) · **CI:** no aplica
+**Qué cambia (petición del usuario 15/11 15:10):**
+- **Aro de luz:**
+  - la **base entera** se imprime en PETG translúcido «natural» y su pared de 4 mm rodea la PCB a la altura de los 4 LED
+    laterales (centro de la luz a z = 10,9; lentes a y = ±14,66; cotas de `feature/girth-pcb-rev-d-aro`);
+  - la tapa pasa a ser plana, de PETG opaco;
+  - no hay costuras ni uniones nuevas.
+- **Estanqueidad:**
+  - una sola junta TPU 85A de 1,2 × 1,6 en ranura de 1,9 × 1,2 (25 % de compresión, tope duro);
+  - 6 tornillos M2 × 6 + arandela DIN 433 **fuera** de la línea de la junta, en insertos ciegos;
+  - guías ciegas en la tapa;
+  - pogos con epoxi de colada;
+  - colas del soporte encapsuladas;
+  - empalme de los electrodos soldado con termorretráctil con adhesivo (se quita el JST);
+  - sin USB ni pasantes.
+- **Bolsillo:** 2 + 2 ventanas de 20 × 4,5 frente a la banda de luz (patrón B2 actualizado).
+- **Medidas:** cápsula de 62,9 × 60,1 × 15,5 mm (antes 59,4 × 54,5 × 14,7); soporte de 83,5 × 80,7 × 10,5.
+- **Documentación:** `DOCS/MONTAJE_CINCHA.md` con la nueva §7 «Estanqueidad»:
+  - tabla de los 13 puntos de entrada de agua;
+  - impresión estanca;
+  - ensayos de vacío, de inmersión a 1 m durante 30 min con papel indicador y de manguera.
+  También se actualizan la BOM (≈ 200 €), los renders 12 (corte por los LED) y 13 (ventanas de luz) y el zip.
+**No se ha tocado:** firmware, apps, PCB (solo se copia `piezas.json` de develop; los LED se modelan con las cotas indicadas),
+workflows, firmas, Info.plist ni números de build.
+**Validación:** IMPLEMENTADO.
+- `verificar_step.py`: todos los STEP cerrados y planos.
+- **NO VERIFICADO:**
+  - IP67 sin ensayar;
+  - luz sin probar;
+  - nada impreso.
+**Pendiente:**
+- ensayos de §7.4 con una base impresa;
+- comprobar la luz a través de la pared y de las ventanas;
+- fusionar las cotas finales de los LED cuando se integre `feature/girth-pcb-rev-d-aro`.
+
+## 2026-11-15 — Cincha — montaje del sistema en la cincha: cápsula REV 6, soporte, funda de piel y electrodos ECG (CAD)
+**Autor:** Claude · Rama `feature/cincha-cad-montaje` · **CI:** no aplica (no hay workflow para esta carpeta)
+**Qué cambia:** nueva carpeta `hardware/girth/CINCHA_MONTAJE/` (petición del usuario: «todo el sistema montado en una cincha,
+en STEP, con funda de piel»):
+- **STEP del conjunto completo**, curvado sobre un tórax de 188 cm de perímetro y en versión recta (87 sólidos):
+  - cincha tipo Decathlon Fouganza de 110 cm, con elásticos, hebillas de rodillo de 25 mm y anilla D;
+  - funda de piel con bolsillo;
+  - soporte con 2 conectores pogo de pines;
+  - cápsula REV 6, con PCB REV D, celda 603450, antena Molex 146153 y tornillería M2 inox;
+  - 2 electrodos Vialta PG980/51 (60 × 85) + REF opcional, con espuma EVA, y cables.
+- STEP por pieza, incluida una cincha anatómica tipo Horze (recta y curvada).
+- **Piezas impresas** (STL):
+  - base, tapa y soporte de PETG; junta y separador de TPU 85A;
+  - cápsula de 59,4 × 54,5 × 14,7 mm, con la PCB colgada de la tapa sobre la celda;
+  - 6 M2 × 8 en insertos térmicos.
+- **Patrón plano de la funda** (DXF R12 + SVG 1:1, con capas de corte, pliegue, costura cada 4 mm, rebaje y taladros).
+- Renders de comprobación y `DOCS/MONTAJE_CINCHA.md`: fuentes, BOM (≈ 190 €), impresión, montaje paso a paso y notas de la piel.
+- Scripts reproducibles en `fuente/`: núcleo CAD propio `avo_cad.py` (numpy + OpenCV; en el entorno no había CadQuery/OCP ni
+  FreeCAD), `avo_cincha_montaje.py`, `patron_funda.py`, `render.py` y `verificar_step.py`.
+**Por qué:** petición del usuario con fotos de referencia (Decathlon Fouganza 14,50 €, Horze 110 cm 79,95 €). Electrodos
+Vialta PG980/51 elegidos por el usuario. La lámina POTUBI con broche de 4 mm queda documentada como alternativa.
+**No se ha tocado:** firmware, apps, PCB REV D (solo se copió su `piezas.json`), workflows, firmas, Info.plist ni números de build.
+**Validación:** IMPLEMENTADO.
+- `verificar_step.py`: 21/21 STEP con referencias completas, sólidos cerrados (0 aristas mal cosidas) y vértices en su plano.
+- **NO VERIFICADO:**
+  - los STEP no se han abierto en FreeCAD/SolidWorks;
+  - no hay cálculo automático de interferencias;
+  - nada impreso ni cosido;
+  - nada probado en un caballo.
+**Pendiente:**
+- medir la cincha real (ancho y grueso estimados) y el electrodo Vialta (grosor y salida del cable estimados);
+- imprimir una base y un soporte de prueba;
+- prueba de inmersión de la cápsula;
+- RSSI con la antena dentro;
+- ECG en reposo.
+
+## 2026-11-15 — Cincha REV D: aro de luz (4 LED) y firmware 0.6.0 con el aro
+**Autor:** Claude · **Rama:** `feature/girth-pcb-rev-d-aro` · **CI:** PCB run 43723857285 (puerta superada: DRC 0, 0 conexiones, paridad 0, ERC 0/0) · firmware run 43723342562 (éxito, host 80/80)
+**Qué cambia:**
+- **PCB:** 4 × SK6812SIDE-A en los cantos largos en lugar del LED verde, datos por GPIO15 y alimentación conmutada (AO3401A + 2N7002, GPIO18). Ver `hardware/girth/PCB_REV_D/DOCS/INFORME_PCB_REV_D.md`.
+- **Firmware:** `girth_ring.cpp` (RMT a 800 kHz). Los LED solo reciben tensión mientras se encienden.
+- **Colores:**
+  - azul: buscando la espalda;
+  - verde: todo bien;
+  - ámbar ×3: electrodos sin contacto;
+  - rojo ×2: IMU sin datos;
+  - rojo ×1: batería < 15 %;
+  - en el soporte, naranja fijo cargando y verde fijo cargada (CHG por GPIO8).
+- **Comando nuevo:** `aro on|off`.
+
+**Por qué:** petición del usuario, igual que el aro del casco V5. La cápsula estanca con el aro va en `feature/cincha-cad-montaje`.
+**Workflows:** sin cambios. Se lanzaron a mano (`workflow_dispatch`) en la rama nueva.
+**Estado:** COMPILADO / CI · **NO VERIFICADO en hardware real**.
+
+## 2026-11-15 — Cincha PCB REV D + firmware 0.6.0 + batería 1000 mAh
+**Autor:** Claude · **Commits:** rama `feature/girth-pcb-rev-d` (puerta en `b63c741`) · **CI:** PCB run 43721512373 (éxito: DRC 0, 0 conexiones, paridad 0, ERC 0/0) · firmware run 43706692273 (éxito)
+**Qué cambia:**
+- **PCB REV D (46 × 30 mm, 4 capas):** ESP32-C6-MINI-1U-H4, LSM6DSV16X, MMC5983MA y ECG ADS1292 en TQFP-32 (C2651570), con RT9080 propio para AVDD.
+- **Pines:** el CLK del ADS va a DGND (sin R46), y los pads 14 y 51 del módulo quedan sin conectar.
+- **Reparación del ruteado:** vías GND de cosido (`stitch_gnd.py`) y `repair.py --src`, con costes configurables.
+- **Firmware cincha 0.6.0:** controladores del ADS1292, del LSM6DSV16X (SFLP) y del MMC5983MA, lotes ESP-NOW fmt 0/1/2 y pines de la REV D. Sin conmutador de antena: GPIO3 y GPIO14 son del ADS. 71/71 pruebas de host.
+- **Batería:** análisis en `DOCS/CONSUMO_BATERIA.md`, con la decisión de usar la 603450 de 1000 mAh.
+
+**Workflows:** se añaden `build-girth-pcb-revd.yml` (Freerouting con `-mp 80`), `easyeda-fp-girth-revd.yml`, `jlc-stock-girth-revd.yml` y `build-girth-v060.yml`.
+**Por qué:** el BNO085 y el MAX30003 no tenían existencias en JLCPCB. Con el VQFN del ADS1292 no se completaba el ruteado.
+**Archivos:** `hardware/girth/PCB_REV_D/**`, `firmware/girth/V0_6_0/**`.
+**No se ha tocado:** firmas, `Info.plist`, número de build.
+**Estado:** COMPILADO / CI · **NO VERIFICADO en hardware real**. La PCB no se ha fabricado y el firmware no se ha cargado en ninguna placa.
+
+
+## 2026-11-15 — iPad 1.0.0 — «Cámara» se abre con el menú lateral oculto
+**Autor:** Claude · **Commits:** ver PR · **CI:** pendiente
+**Qué cambia:** al entrar en «Cámara» el menú lateral se oculta (como en Inicio); solo se abre con el botón de menú
+flotante de la esquina superior izquierda. Volver a pulsar «Cámara» en el menú también lo cierra. Las demás páginas
+siguen abriendo con el menú visible.
+**Por qué:** boceto del entrenador 15/11/2026 (build 145): «Al entrar a cámara menú oculto, solo lo abrís botón menú».
+**Archivos:** `ipad/AVOiPad/App/RootView.swift` (`RootView.hidesSidebar`).
+**No se ha tocado:** workflows, firmas, `Info.plist`, número de build.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+## 2026-11-15 — iPad — botón «SALIR» para cerrar la app del todo
+**Autor:** Claude · Rama `feature/ipad-salir`
+**Qué cambia:** al pie de la barra lateral, sobre los datos de versión, un botón rojo «SALIR» con confirmación. Cierra el Wi-Fi y el
+Bluetooth del reloj, detiene la cámara (si graba, espera 2,5 s a que el vídeo se cierre), guarda y cierra la app del todo
+(`App/AppModel+Quit.swift`). Boceto del entrenador del 15/11/2026.
+**Aviso:** iPadOS no tiene una forma oficial de cerrar una app y Apple lo desaconseja: en TestFlight funciona; en una revisión de la
+App Store podrían pedir quitarlo.
+**Validación:** pendiente del CI del iPad. **NO VERIFICADO** en el iPad.
+
+## 2026-11-15 — iPad — Vídeo asociado al entrenamiento, datos impresos y recorte
+**Autor:** Claude · Rama `claude/ipad-video-datos` · **CI:** run 43698716776 (compila y pruebas unitarias OK, sin TestFlight)
+**Qué cambia (peticiones del entrenador 15/11/2026, con referencia tipo «telemetry overlay»):**
+- **Caballo al grabar:** se elige en el panel y se guarda en el `.avosync.json`.
+- **Asociación al entrenamiento:** automática por la hora, prefiriendo el mismo caballo, o elegida a mano en el
+  reproductor. En la lista de vídeos se ve a qué entrenamiento está asociado cada uno.
+- **Reproductor con los datos encima:** velocímetro, barra de distancia, recorrido, brújula, coordenadas, aire,
+  aceleraciones, tranco, IMU de la cincha, altitud, calidad GNSS, hora GPS y caballo.
+  - Todo se puede elegir con el botón «Datos».
+  - El pulso aparece «sin datos» hasta que se decodifique el ECG.
+- **Recorte por delante y por detrás:** no destructivo, con agarres y botones.
+- **Exportar con datos:** vídeo HEVC con los indicadores impresos (`videos/exportados/`), «Guardar en Fotos» y compartir.
+- **Nuevos archivos:** `Core/VideoTelemetry.swift` (series del entrenamiento + dibujo), `App/VideoOverlayExporter.swift`.
+  - `SessionItem.fullImu` pasa a ser legible.
+  - `AvoSyncVideoFile` añade `horse`, `training_id`, `trim_start_s` y `trim_end_s`, opcionales, y lee igual los archivos
+    de la build 136.
+**No se ha tocado:** protocolo AVO SYNC, motor, Android, Windows, firmware, Info.plist (los permisos de Cámara y Fotos ya
+estaban), workflows ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+- No está comprobado que el vídeo exportado salga bien orientado con el iPad girado al revés.
+- La sincronía con el reloj del iPad es de decenas de ms (estimada).
+
+## 2026-11-15 — iPad — «Cámara» a todo el ancho y panel desplegable
+**Autor:** Claude · Rama `claude/ipad-camara-ancho`
+**Qué cambia (boceto del entrenador 15/11/2026, build 136):**
+- **Imagen a todo el ancho:** la imagen de la cámara ocupa toda la página. Se quitan la barra superior, los márgenes y las
+  bandas negras: la vista previa rellena el recuadro, y el vídeo grabado conserva el encuadre completo del sensor.
+- **Botón de menú:** con el menú oculto, el botón para mostrarlo flota sobre la imagen.
+- **Panel desplegable:** AVO SYNC, Grabación y Vídeos pasan a un panel que se despliega por encima de la imagen, a la derecha.
+  - Se abre con el botón junto a la hora. El botón lleva un punto con el estado de AVO SYNC.
+  - Se cierra con la ✕ o con el mismo botón.
+  - La app recuerda si estaba abierto o cerrado.
+- **REC:** el contador pasa arriba, al centro, y durante la grabación hay un marco rojo.
+- **Reproductor:** se abre a pantalla completa, con fondo negro.
+**No se ha tocado:** grabación, AVO SYNC, archivos, Info.plist, workflows ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
+## 2026-11-15 — Cincha PCB REV C — placa propia compacta con ECG (MAX30003)
+**Autor:** Claude · Rama `feature/girth-pcb-rev-c` · **CI:** `build-girth-pcb-revc.yml` run 43672058713 (puerta superada)
+**Qué cambia:** nueva PCB de la cincha en `hardware/girth/PCB_REV_C` (generador Python → KiCad 9, mismas herramientas que el
+casco V5). 40 × 26 mm, 4 capas, 1,0 mm, componentes en una cara: ESP32-C6-MINI-1U-H4, BNO085 por I²C, MAX30003 con 1,8 V propio
+y oscilador MEMS SiT1533, cargador BQ24072, 3,3 V RT9080, pogos de carga y de electrodos y batería por hilos, pads de
+programación USB. Mismos GPIO que el XIAO: el firmware 0.5.0 sirve sin cambios. DRC 0, ERC 0/0, paridad 0, 0 conexiones
+pendientes; Gerber, BOM, CPL y STEP en `out/FINAL`. El pad de esquina 51 del módulo (GND de anclaje) queda sin conectar.
+**Workflows NUEVOS** (no se modifica ninguno existente): `build-girth-pcb-revc.yml`, `easyeda-fp-girth-revc.yml`,
+`jlc-stock-girth-revc.yml`.
+**Por qué:** el usuario pide una PCB de cincha lo más compacta posible, como la del casco (arquitectura confirmada: pogo +
+BNO085 + MAX30003, cápsula nueva más pequeña, dos pogos de 3).
+**Validación:** DISEÑO VERIFICADO POR SOFTWARE. **NO VERIFICADO** en hardware (no fabricada).
+**Pendiente:** MAX30003 y BNO085 sin existencias en JLCPCB (Global Sourcing); cápsula REV 6 en FreeCAD; comprobar con la hoja
+de ADI los valores del filtro de entrada y la huella del SiT1533.
+
+## 2026-11-15 — iPad — Página «Cámara»: vídeo con hora GPS (AVO SYNC v1)
+**Autor:** Claude · Rama `claude/ipad-camara-avo-sync` · **Commits:** `7a8ca9e` · **CI:** run 43665157107 (éxito, lanzado a mano sin TestFlight)
+**Qué cambia:**
+- **Menú del iPad:** nueva página «Cámara» (`Page.camera` = `Camera`) debajo de «Análisis», según el boceto del entrenador.
+  Siempre está activa.
+- **Grabación:** cámara trasera, HEVC, 1080p o 4K a 30/60/120/240 fps según el iPad, sin audio.
+  - Se graba con `AVAssetWriter` para conservar el sello del reloj del iPad de cada fotograma.
+  - Cada vídeo se guarda en `videos/` (`.mov`) con su archivo de hora `.avosync.json`.
+- **AVO SYNC v1:** protocolo BLE nuevo e independiente, con UUID fijos, tramas `TIME_REQ`, `TIME_RESP`, `MARK` y `STATUS`,
+  e intercambio tipo NTP cada segundo.
+  - Filtro de menor retardo por ventanas de 10 s y recta de deriva.
+  - Gestor Bluetooth propio, separado del de los relojes.
+  - Sin gadget, se graba con el reloj del iPad y queda indicado.
+- **Página:**
+  - hora en directo sobre la vista previa;
+  - estado del gadget;
+  - marcas «Serie», «Vuelta» y «Fin»;
+  - lista de vídeos con reproductor (hora GPS del fotograma y saltos a las marcas), compartir y borrar.
+- **Prueba de capturas:** se añade `Camera`. En el simulador sale «sin cámara».
+**Por qué:** boceto del entrenador («Cámara» debajo de «Análisis») y propuesta AVO SYNC V0.1: grabar el entrenamiento y
+juntarlo con los datos por la hora GPS, aunque el caballo esté lejos (playa).
+**Archivos:** `ipad/AVOiPad/Core/AvoSync.swift`, `App/AvoSyncLink.swift`, `App/CameraModel.swift`,
+`Views/CameraView.swift`, `App/AppModel.swift`, `App/AppModel+Shell.swift`, `App/RootView.swift`,
+`Resources/Info.plist`, `AVOiPadTests/AvoSyncTests.swift`, `AVOiPadUITests/ScreenshotTests.swift`,
+`docs/AVO_SYNC.md`, `ipad/UI_CONTRACT.md`.
+**Info.plist (avisado al usuario):** se añaden `NSCameraUsageDescription` y `NSPhotoLibraryAddUsageDescription`.
+Sin el primero, la app se cierra al abrir la cámara. El segundo hace falta para «Guardar vídeo» desde Compartir.
+**No se ha tocado:** contratos existentes (TELEMETRY, BackStatus, cincha, AVO1, `.avr`), enlace BLE con el reloj, motor,
+Android, Windows, firmware, workflows, firmas ni el número de build.
+**Validación:** IMPLEMENTADO.
+- COMPILADO / CI: run 43665157107 sobre `7a8ca9e`. Compila para el simulador.
+- `AvoSyncTests`: 4 de 4 pruebas superadas (simuladas).
+- La prueba de capturas no saca la página: ya fallaba en `develop` desde la run 43653284779 (`No existe nav.*` en
+  todas las páginas tras «Listado»), y no la causa este cambio.
+- **NO VERIFICADO** en iPad real ni con gadget, porque el gadget no existe.
+**Pendiente:**
+- gadget y firmware `firmware/sync/V0_1`;
+- medir la precisión real (LED a 240 fps);
+- juntar el vídeo con el entrenamiento y superponer los datos;
+- audio opcional;
+- Android y Windows.
+
+## 2026-11-15 — Cincha v0.5.0 — ECG con MAX30003 (fmt 2) sin tocar espalda ni pecho
+**Autor:** Claude · Rama `feature/girth-ecg-0-5-0` · **CI:** `build-girth-v050.yml` (workflow NUEVO; no se modifica ninguno existente)
+**Qué cambia:** nuevo firmware `firmware/girth/V0_5_0` (copia de 0.4.3 + ECG). Driver MAX30003 por SPI (CSB 17, SCK 19,
+MISO 20, MOSI 18, INTB 7, FCLK 4) en tarea propia: 512 sps, 18 bits, ganancia 40 (configurable), HPF 0,5 Hz, LPF 40 Hz,
+detección de electrodo despegado. Reloj FCLK de 32 768 Hz generado automáticamente si el módulo no lleva cristal. Sellos de
+tiempo uniformes con corrección de deriva (`EcgClock`). Envío como lote `IMU_SAMPLE` fmt 2 (`imu_id` 3, unidades 2, int24 en
+0,1 µV, 51 muestras = 177 B, máx. 60 = 204 B). LED de 3 destellos si los electrodos no hacen contacto. Órdenes serie `ecg`,
+`ganancia`, `fclk`; `estado` muestra frecuencia, amplitud pico a pico y contadores.
+**Por qué:** frecuencia cardiaca / ECG en la cincha (arquitectura confirmada por el usuario: pogo + BNO085 + MAX30003, dos placas
+de electrodo separadas).
+**Archivos:** `firmware/girth/V0_5_0/**`, `.github/workflows/build-girth-v050.yml`.
+**No se ha tocado:** firmware de espalda y pecho (reenvían fmt desconocidos tal cual, comprobado en prueba de host con el
+`GirthHub` real), workflows existentes, firmas, `Info.plist`, build de TestFlight.
+**Validación:** pruebas de host 65/65 OK (simulación). Compilación ESP32-C6 en CI. **NO VERIFICADO** en hardware real.
+**Pendiente:** decodificar fmt 2 en Android, Windows, iPad y motor (picos R, FC, recuperación); CAD de las placas de electrodo
+y adaptación de la cápsula REV 5.10; confirmar si el módulo trae cristal de 32 768 Hz y su pinout ECGP/ECGN/VCM.
+
+## 2026-11-15 — AVO-SHELL-31 — Biblioteca: una copia mala ya no hace rechazar el archivo bueno
+**Autor:** Claude · Rama `feature/avo-equine-2-0`
+**Qué pasaba:** si en la biblioteca de la app ya había una copia con el mismo nombre (la huella SHA-256 del archivo) pero con
+otro contenido, por ejemplo una copia que quedó a medias, no se reemplazaba. El archivo bueno se rechazaba con «La copia de la
+biblioteca no coincide con el original» (visto en «MALWINA_BELLA 2.avo» y «BELLA_AL_SHAHANIA 2.avo»).
+**Qué cambia (iPad y Windows, por igual):** la copia mala se borra y se vuelve a copiar el original. Si después la copia sigue
+sin coincidir, se rechaza como antes. El archivo original nunca se toca.
+**No se ha tocado:** el motor, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+
+## 2026-11-14 — AVO-SHELL-30 — El arranque no interrumpe con archivos de AVO Horse que no se pueden leer
+**Autor:** Claude · Rama `feature/avo-equine-2-0`
+**Qué pasaba:** la búsqueda automática de «AVO Horse» al arrancar intentaba importar en cada arranque los mismos archivos
+que no se pueden leer, y sacaba en la portada el aviso «2 archivo(s) rechazados».
+**Qué cambia (iPad):**
+- La búsqueda del arranque ya no muestra ese aviso. El resumen queda en la barra de estado, con el número de archivos no
+  legibles, y el motivo de cada uno sigue en «Estado de importaciones».
+- Recuerda los archivos que fallaron (ruta, tamaño y fecha) y no los vuelve a intentar al arrancar. Si el archivo cambia,
+  se reintenta.
+- La importación manual («Abrir», «Buscar entrenamientos») sigue avisando como antes.
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
+## 2026-11-14 — AVO-ENGINE-2.0-F2a — Trabajo completo bien detectado; selección movible; % de la espalda
+**Autor:** Claude · Rama `feature/avo-equine-2-0`
+**Por qué (boceto del entrenador):** «No detecta bien el trabajo; es esencial que se detecten bien las zonas». Antes, el
+trabajo solo abarcaba lo que iba por encima del umbral de velocidad (11 m/s en PSI) y se dejaba fuera la arrancada y la
+frenada.
+**Qué cambia:**
+- **Motor (EFFORT_V2):**
+  - cada trabajo tiene límites completos, de la arrancada (acelerando) a la frenada (desacelerando);
+  - la fase de trabajo y el calentamiento se miden con esos límites;
+  - nuevo `distancia_trabajo_m` con su ventana `t0_trabajo`–`t1_trabajo`;
+  - las métricas de fatiga siguen en el núcleo;
+  - prueba del entreno de mañana ampliada: calentamiento 240 s (antes 246 s), arrancada y frenada incluidas.
+  - Detalle: `docs/algoritmos/13_TRABAJO_PISTA.md`.
+- **iPad y Windows (Parámetros clave / Datos clave):** «Distancia de trabajo» muestra el trabajo completo y al tocarla
+  selecciona exactamente esa ventana del motor. Con resultados 1.x se mantiene la regla anterior. Pruebas idénticas en las
+  dos apps.
+- **iPad · Gráficas:** la selección tiene dos agarres, «Inicio» y «Fin», en la gráfica de velocidad, para moverla a mano;
+  la tabla de la selección se recalcula.
+- **iPad · Equipo conectado:** el recuadro Espalda muestra el % de batería de la espalda (TELEMETRY v2, `backBatteryMv`,
+  misma tabla Li-ion que Android) y los mV.
+  - El iPad se suscribe a la telemetría solo si el reloj la ofrece; si no, se ve «Enlazada» como antes.
+  - Solo lectura: el protocolo no cambia.
+- **iPad · Cuadra:** «France Galop» se mueve al extremo derecho de la barra.
+**No se ha tocado:** protocolos, firmware, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** motor local 87 casos / 1524 comprobaciones, 0 fallos. CI pendiente. **NO VERIFICADO** con sesiones reales
+ni con el reloj.
+
+## 2026-11-14 — AVO-ENGINE-2.0-F1b — Aceleración del filtro y apps con la velocidad del motor
+**Autor:** Claude · Rama `feature/avo-equine-2-0`
+**Qué cambia:**
+- **Motor:** la aceleración longitudinal (y su σ) sale del mismo filtro Kalman + RTS que la velocidad, en vez de la
+  pendiente local ±0,5 s sobre gSpeed. Afecta a los máximos de aceleración y frenada, a los eventos de aceleración y frenada
+  sostenida y a los cálculos de Trabajo en pista.
+  - Las pruebas de aceleración conocida (rampa de 2 m/s², sostenida de 1,0 / −1,5 m/s² y ningún falso evento con ruido)
+    siguen pasando.
+  - El modo anterior sigue disponible (`accel_from_smoother = false`).
+- **iPad y Windows:** la línea de tiempo adopta la velocidad y la aceleración del motor, con su σ, al recibir el análisis y
+  al recortar la ventana útil. Así barra, gráficas, Parámetros clave, Cuadra, Comparar e informes salen de la misma serie
+  que el motor.
+  - Se interpola solo entre muestras del motor separadas como mucho 0,5 s; fuera de ellas se mantiene el filtro de la app.
+  - No se adopta si el usuario ha cambiado la sacudida del filtro en Ajustes.
+  - Pruebas nuevas idénticas en iPad (XCTest) y Windows (autoprueba) con la sesión sintética de referencia.
+- **Android:** no tenía filtro propio; sus gráficas del motor ya reciben la serie suavizada.
+- Fixtures JSON del motor regenerados.
+**No se ha tocado:** protocolos, firmware, `.avr`, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** motor local 87 casos / 1521 comprobaciones, 0 fallos. CI pendiente. **NO VERIFICADO** con sesiones reales.
+
+## 2026-11-14 — AVO-SHELL-29 — GPS sin cabecera y marea con % de subida o bajada
+**Autor:** Claude · Rama `feature/avo-equine-2-0`
+**Qué cambia (iPad):**
+- **GPS:** sin el título «Datos GPS» ni el aviso de la antena del chaleco. La barra del entrenamiento ya identifica la sesión.
+- **Resumen · marea:** debajo de «Marea 1,70 m · subiendo» aparece «N % de la subida» (o «de la bajada»). Es la altura a la
+  hora del entrenamiento entre la bajamar y la pleamar anterior y siguiente, según la predicción del IHM
+  (`EnvironmentModel.tidePhasePct`).
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
+## 2026-11-14 — AVO-ENGINE-2.0-F1a — AVO Performance Equine 2.0.0-dev1: una sola velocidad para todo
+**Autor:** Claude · Rama `feature/avo-equine-2-0` (desde `develop/avo-performance-horse` tras integrar el PR #20)
+**Por qué:** el motor 1.1 calculaba todas sus cifras con la velocidad bruta del receptor (gSpeed), mientras que las apps
+mostraban una velocidad filtrada propia. Por eso el mismo entrenamiento daba 60,2 km/h en el motor y 58,3 km/h en la barra.
+Plan completo: proyecto, `claude/AVO_PERFORMANCE_EQUINE_2_0_PLAN.md`.
+**Qué cambia:**
+- **Velocidad del motor:** Kalman v-a + suavizado RTS en C++ (`smoother.h/.cpp`), con el mismo modelo y valores por
+  defecto que las apps.
+  - `GnssResult.speed` es ahora la velocidad suavizada, con su σ posterior, y de ella salen todas las cifras de velocidad:
+    máxima, histograma, curvas, Trabajo en pista (distancias de trabajo y rápida, mejores distancias), aires y fusión.
+  - gSpeed se conserva en `speed_raw` y en la nueva serie `velocidad_receptor`.
+  - El modo 1.x sigue disponible (`smooth_speed = false`).
+- **Versión:** `ENGINE_VERSION` 2.0.0-dev1 y versión de algoritmo GNSS 2.0.0. El nombre visible pasa a «AVO Performance
+  Equine» en Android, Windows e iPad. Los identificadores técnicos (`avo_eq`, `avo-equine-*`) no cambian, por compatibilidad.
+- **Pruebas del motor:** dos casos nuevos (`gnss2.*`) y fixtures JSON regenerados. Las pruebas de versión de Kotlin,
+  Android, Windows e iPad esperan ya «2.0.0».
+- **Resultado en simulación:** galope de 14 m/s con ruido σ 0,3 m/s → RMS 0,310 → 0,081 m/s; velocidad máxima 14,91 →
+  14,22 m/s.
+**No se ha tocado:** protocolos, firmware, formato `.avr`, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** pruebas locales del motor 87 casos / 1520 comprobaciones, 0 fallos (Linux, GCC). CI pendiente.
+**NO VERIFICADO** con sesiones reales: es el paso F5.
+**Siguiente (F1b):** las apps dejan de filtrar por su cuenta y dibujan la serie `velocidad` del motor; aceleración también
+desde el filtro, con su σ.
+## 2026-11-15 — iPad: motivo real cuando el reloj rechaza el Wi-Fi y botón «Reactivar Wi-Fi del reloj»
+**Autor:** Claude · Rama `fix/ipad-wifi-motivos-rechazo` (desde `develop/avo-performance-horse`)
+**Síntoma:** en la build 125 (ya sin el error del permiso de iOS) el iPad mostraba «el reloj no pudo activar su Wi-Fi (radio del reloj)» y descargaba por Bluetooth. El iPad reducía todos los rechazos de `WIFI_SYNC(start)` distintos de «sin microSD» a «radio del reloj».
+**Qué cambia:**
+- `BleWifiControl.refusal(code:)` traduce los códigos de `StartResult` del pecho: 3 sin microSD, 4 no arrancó su punto de acceso, 6 Wi-Fi bloqueado tras un reinicio (CHEST 3.7.7+), 7 memoria del reloj baja (CHEST 3.7.7+), otros «radio del reloj, código N».
+- `WifiSyncAction.reenable = 5` y `BleWifiControl.reenableWatchWifi()`. La orden ya existía en el pecho desde 3.7.4 rc2 (`wifisync::set_enabled(true)`).
+- Botón «Reactivar Wi-Fi del reloj» en «Reloj Wi-Fi», solo cuando el reloj respondió con el código 6, siempre con una confirmación previa. El bloqueo protege del bucle de reinicios: si el reloj vuelve a reiniciarse al encender el punto de acceso, se bloquea de nuevo y la descarga sigue por Bluetooth.
+- La línea de estado sigue la fase de la descarga por Wi-Fi (uniendo, lista, descargando con velocidad, comprobando SHA-256); antes se quedaba en «Pidiendo al reloj que active su Wi-Fi…».
+- Prueba unitaria `testWifiStartRefusalCodes`.
+- Nota: el 14/11/2026 23:30 la build 125 sí descargó por Wi-Fi con el pecho 3.7.10 (captura del usuario, 32 % del entrenamiento 2 de 2): el rechazo anterior fue puntual.
+**Archivos:** `ipad/AVOiPad/Core/WifiSync.swift`, `ipad/AVOiPad/App/WatchWifiModel.swift`, `ipad/AVOiPad/Views/WatchWifiView.swift`, `ipad/AVOiPadTests/WatchTests.swift`.
+**No se ha tocado:** firmware, protocolo BLE, workflows, firmas, `Info.plist`, número de build, Android (Android tiene el mismo mapeo genérico en `AvoWifiSyncManager.kt`, pendiente).
+**Validación:** IMPLEMENTADO. CI pendiente. NO VERIFICADO en iPad ni en el reloj.
+**Pendiente:** probar en iPad + pecho 3.7.10 y llevar el mismo mapeo a Android.
+
+---
+
+## 2026-11-15 — iPad: el Wi-Fi del reloj fallaba siempre en TestFlight («error interno de iOS»)
+**Autor:** Claude · Rama `fix/ipad-wifi-hotspot-entitlement` (desde `develop/avo-performance-horse`)
+**Síntoma:** en la página «Reloj Wi-Fi» del iPad (build 123), `NEHotspotConfigurationManager.apply` devolvía `.internal` en los 3 intentos y la descarga pasaba a Bluetooth.
+**Causa:**
+- `build-avo-ipad.yml` archivaba la app **sin firmar** (`CODE_SIGNING_ALLOWED=NO`), así que el entitlement `com.apple.developer.networking.HotspotConfiguration` de `AVOiPad.entitlements` no llegaba al binario.
+- La exportación vuelve a firmar con lo que encuentra en el archivo, de modo que la app de TestFlight salía sin el entitlement.
+- Sin ese entitlement, iOS responde con el error interno.
+
+**Cambio (workflow, avisado al usuario):**
+- el archivo se firma **ad hoc** (`CODE_SIGN_IDENTITY=-`, sin certificado: no se acumula nada en la cuenta), solo para incrustar los entitlements;
+- la exportación sigue usando la firma de distribución gestionada en la nube;
+- un paso nuevo comprueba con `codesign` que el archivo lleva HotspotConfiguration y para el job si no.
+
+**Sin cambios:** número de build, `Info.plist`, `ExportOptions` ni firma de distribución.
+**Validación:** pendiente del CI de macOS y de probarlo en el iPad con la nueva build de TestFlight.
+
+---
+
+## 2026-11-14 — AVO-SHELL-28 — Cifras que coinciden: velocidad máxima y distancia de trabajo
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad y Windows, por igual):**
+- **Velocidad máxima:** Datos clave / Parámetros clave mostraban la máxima propia del motor (p. ej. 60,2 km/h), mientras
+  que la barra, Gráficas y Cuadra mostraban la filtrada (58,3 km/h). Ahora el recuadro usa la misma velocidad filtrada en
+  todas partes, con el pie «Velocidad filtrada» (`withMaxSpeed` / `WithMaxSpeed`).
+- **Distancia de trabajo:** el motor la calcula como la distancia recorrida a la velocidad de «trabajo rápido» o más
+  (`trabajo_pista.perfil.v_rapido`, PSI 14,5 m/s), y no como un tramo continuo. Antes, al tocarla, se seleccionaba del
+  primer al último esfuerzo, con pausas incluidas (2,11 km frente a 1,11 km).
+  - Ahora selecciona desde el primer hasta el último momento por encima de ese umbral, sobre la misma velocidad filtrada de
+    Gráficas (`openFastWork` / `OpenFastWork`).
+  - Si no hay umbral, abre la ventana de los esfuerzos del motor.
+  - Con un solo trabajo rápido la selección coincide; con varios separados incluye la pausa entre ellos.
+**No se ha tocado:** el motor C++, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+
+## 2026-11-14 — AVO-SHELL-27 — Comparar: tramo sin «Observaciones» y doble toque para quitar la selección
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- «Tramo seleccionado» ya no tiene la columna «Observaciones»; las cifras ocupan el ancho que deja libre.
+- En las gráficas de Comparar, un doble toque quita la selección al momento. Sin selección, el doble toque sigue
+  restableciendo el zoom.
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
+## 2026-11-14 — AVO-SHELL-26 — Recuadros de cifras alineados por arriba
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad y Windows):** los recuadros de cifras (Datos clave / Parámetros clave, `AvoMetric` y `AvoMetricTile`) se
+alinean por arriba en lugar de centrarse, así que los iconos y las cifras de una fila quedan en la misma línea aunque el texto
+de debajo ocupe una o dos líneas (boceto «línea / línea»). En el iPad, un recuadro sin icono reserva su hueco.
+**No se ha tocado:** el motor, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+
+## 2026-11-14 — AVO-SHELL-25 — Distancia de trabajo enlazada a gráficas y mapa de Comparar orientado
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:**
+- **Datos clave / Parámetros clave (iPad y Windows, por igual):** «Distancia de trabajo» abre las gráficas sobre el trabajo,
+  igual que «Mejor 200 m» y «Mejor 600 m». El tramo va del inicio del primer esfuerzo al final del último, según el motor.
+  Hay una prueba idéntica en iPad y Windows.
+- **Comparar (iPad):** el mapa de recorridos arranca como «Mapa»: recorrido en horizontal (el mar arriba, misma regla que
+  `MapKitRoute`) y encuadrado con margen. «Ajustar recorridos» vuelve a esa vista, y las lupas conservan la orientación.
+**No se ha tocado:** el motor C++, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+
+## 2026-11-14 — AVO-SHELL-24 — Resumen: marea subiendo o bajando
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):** el tiempo del Resumen muestra la marea con su tendencia a la hora del entrenamiento: «Marea 1,70 m ·
+subiendo», con flecha azul, o «· bajando», con flecha ámbar. Sale de la predicción del IHM (`tideTrend`), igual que en Mareas.
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
+## 2026-11-14 — AVO-SHELL-23 — Comparar con encuadre manual y automático; Resumen con tarjetas a la misma altura
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- **Comparar · Encuadre** (boceto: «posibilidad de mover los entrenamientos para encuadrar y encuadre automático»):
+  - barra «Encuadre» sobre la velocidad comparada, con una fila por entrenamiento y botones −10 / −1 / +1 / +10 s (o
+    −100 / −10 / +10 / +100 m al alinear por distancia), más «Encuadre automático» y «Restablecer»;
+  - el encuadre automático hace coincidir el inicio del trabajo más rápido de cada entrenamiento. Desde la velocidad
+    máxima retrocede mientras la velocidad sigue por encima de la mitad de esa máxima;
+  - los desplazamientos solo afectan a la vista: mueven todas las gráficas comparadas. El tramo seleccionado y
+    «Guardar como tramo» los tienen en cuenta; las sesiones no se modifican;
+  - los desplazamientos se ponen a cero al cambiar los entrenamientos o el modo de alineación.
+- **Resumen:** «Motor AVO Equine Intelligence» y «Valoración del entrenador» con la misma altura.
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
+## 2026-11-14 — AVO-SHELL-22 — Menú lateral reordenado, Calendario como botón y barra de Cuadra en una fila
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- **Menú lateral:** Dashboard, Entrenamientos, Análisis, Biomecánica, Informes, Cuadra, Jinetes, Carreras, y Configuración.
+  Calendario sale del menú.
+- **Entrenamientos:** botón «Calendario» junto a «Abrir».
+- **Cuadra y Jinetes:**
+  - sin la línea «N registrados · …»;
+  - «Mostrar inactivos» y «France Galop» van en la misma fila que «Nuevo» y la búsqueda.
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
+## 2026-11-14 — AVO-SHELL-21 — Comparar a todo el ancho, nuevo orden de pestañas y páginas sin cabecera
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- **Comparar:**
+  - sin título y sin panel izquierdo;
+  - sin la fila de zoom y rango;
+  - los entrenamientos a comparar se eligen en la barra superior (`CompareSelector`): lista ancha, una línea por
+    entrenamiento con casilla y color, «Alinear por Tiempo / Distancia» y «Ocultar sin recorrido»; cada cambio actualiza
+    la comparación;
+  - el mapa superpuesto y las gráficas ocupan todo el ancho.
+- **Pestañas:**
+  - nuevo orden: Resumen, Mapa, Gráficas, Trabajo en pista, Comparar, GPS, Mareas, Motor, Asistente IA (Comparar pasa
+    detrás de Trabajo en pista y el Asistente al final);
+  - «Tramos» se oculta de momento: el análisis de tramos está en «Análisis tramo».
+- **Asistente IA:** sin la cabecera del entrenamiento ni la barra «Archivo completo / Inicio = cursor…».
+- **Trabajo en pista:**
+  - sin la tarjeta de perfil de raza y base de las fases;
+  - Calentamiento, Trabajo y Vuelta a la calma con la misma medida y el contenido centrado.
+- **Biomecánica:**
+  - sin la cabecera del entrenamiento;
+  - sin la fila de lupas / Ver ±2 s / Guardar como tramo / Quitar selección;
+  - sin la fila «VER Completo / Calentamiento / Trabajo / Enfriamiento»;
+  - se mantiene la barra de vista general.
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
+## 2026-11-14 — AVO-SHELL-20 — Motor legible para el entrenador y Mareas más limpia
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- **Motor** (entrenador: «algo legible y entendible, que cualquier entrenador pueda sacar provecho»). Se quitan la
+  cabecera del entrenamiento, la barra de ventana del archivo y la tarjeta técnica del motor. En su lugar:
+  - **Lectura del entrenamiento:** frases cortas con el reparto por aires, los tramos a galope (el más largo, con su
+    distancia y su media), las paradas, las frenadas sostenidas y las curvas. Avisa si no hay cincha y recuerda que no es un
+    diagnóstico veterinario.
+  - **Tiempo en cada aire:** barra de colores con tiempo, % y distancia por aire.
+  - **Fases del entrenamiento:** cada fase con su aire, desde → hasta, duración, distancia y media.
+  - **Momentos clave:** los eventos en lenguaje llano («Pasa de paso a galope», «Se para», «Arranca», «Frena de forma
+    sostenida», «Entra en curva a la izquierda»), con su minuto.
+  - **Curvas:** una frase por curva (sentido, giro, radio y fuerza lateral).
+  - **¿Cuánto fiarse de estos datos?:** semáforo por dominio, con nombres y explicación claros (cincha, sincronización,
+    archivo, calibración de sensores y cálculos del motor).
+  - **Detalle técnico** (plegado): las tablas originales del motor y «Reprocesar con el motor».
+  - Todo sale de las filas del motor: no se calcula ninguna cifra nueva.
+- **Mareas:**
+  - sin la cabecera del entrenamiento;
+  - «Marea · fuente y valores», «Meteorología y oleaje» y «Origen de los datos» con la misma altura;
+  - fuera los textos explicativos de «Origen de los datos». El estado solo aparece mientras carga o si hay un problema.
+**No se ha tocado:** el motor C++, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
+## 2026-11-14 — AVO-SHELL-19 — Gráficas sin la fila de botones
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):** por decisión del entrenador («quitarla entera»), «Gráficas» ya no tiene la fila de botones:
+lupas, flechas, Guardar como tramo, Quitar selección, Exportar CSV ni reproducción.
+- Se mantienen el zoom con los dedos, la barra de vista general y la selección manteniendo pulsado y arrastrando.
+- Guardar tramos sigue disponible en Tramos y en Biomecánica, y la reproducción en Mapa.
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
+## 2026-11-14 — AVO-SHELL-18 — Gráficas: «Mostrar datos» desplegable y sin «Uso, filtrado y unidades»
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- «Mostrar datos» va plegado por defecto, con Desplegar / Ocultar. Los interruptores y «Ver todo» no cambian.
+- Se quita la tarjeta «Uso, filtrado y unidades» (texto de ayuda). Los filtros siguen igual.
+**No se ha tocado:** el motor, el filtrado, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
+## 2026-11-14 — AVO-SHELL-17 — Mapa con la fila de pestañas del entrenamiento
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):** la pestaña «Mapa» muestra la misma fila de pestañas que el resto de páginas del entrenamiento
+(Resumen, Mapa, Gráficas…). Antes la ocultaba, porque era la página de mapa a pantalla completa del menú lateral.
+Se mantiene «Análisis tramo» en la barra superior.
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
+## 2026-11-14 — AVO-SHELL-16 — Equipo conectado: batería y módulos Chaleco · Espalda · Cincha
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- **Decodificación de GET_STATUS:** `WatchStatusFull` lee la respuesta completa del reloj, con la misma disposición que
+  Android (`core/…/ble/Messages.kt`, `WatchStatus`): batería %, mV, carga (VBUS), enlace de la espalda, cincha, flujo RTCM,
+  SD y grabación. No cambia el protocolo: solo se lee lo que el reloj ya envía.
+- **Consulta:** `WatchWifiModel.readStatus()` pregunta por el enlace abierto; la ventana lo repite cada 5 s mientras está abierta.
+- **Ventana «Equipo conectado»:**
+  - la tarjeta del reloj muestra «Batería N %» con su icono (en rojo por debajo del 15 %), en lugar de la hora y el identificador;
+  - tres recuadros: **Chaleco** (batería, mV, cargando, grabando), **Espalda** (enlazada o no, correcciones RTCM) y
+    **Cincha** (conectada o no).
+  - Sin estado legible se muestra «—» y «Sin estado del reloj».
+**Limitación:** el estado del reloj no informa de la batería de la espalda ni de la de la cincha, solo de si están
+enlazadas; por eso no se muestran.
+**No se ha tocado:** protocolos, firmware, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** con el reloj real.
+
+## 2026-11-14 — AVO-SHELL-15 — LIVE, tiempo automático en Resumen, lista de entrenamientos en línea y sin Datos clave
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- **LIVE:** el botón «Equipo conectado» pasa a ser la sección «LIVE» del menú lateral. Hay una fila por equipo conectado
+  por Bluetooth, hasta 4; cada fila abre la ventana de gestión. El Dashboard añade el contador «Live» (conectados en tiempo
+  real, máx. 4).
+  - Se muestra el nombre del equipo y la hora de conexión. Caballo y jockey aún no llegan por el enlace (la telemetría en
+    vivo no está decodificada en el iPad): no se inventan.
+- **Resumen · tiempo:** se consulta solo al entrar, con la hora de inicio y la primera posición GNSS del entrenamiento
+  (`EnvironmentModel.load`, con copia local). Desaparece el botón «Consultar». Si la consulta en línea está desactivada,
+  se dice.
+- **Selector de entrenamiento** de la barra superior: en vez del menú, que partía las líneas, abre una lista ancha con
+  toda la información en una línea: Fecha | Caballo | Jinete | Disciplina | V. máx. | Tiempo | Km.
+- **Pestañas:** «Datos clave» se oculta de la barra; sus cifras están en Resumen → Parámetros clave.
+**No se ha tocado:** protocolos, firmware, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real ni con relojes conectados.
+
+## 2026-11-14 — AVO-SHELL-14 — Botón «Equipo conectado» por Bluetooth
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- **Seguimiento de enlaces:** `IosBleCentral` lleva la lista de enlaces Bluetooth abiertos y avisa cuando uno se abre o se
+  cierra (`BleLink`, `.avoBleLinksChanged`). La app no inicia ningún escaneo ni pide permiso por esto.
+- **Botón en el menú lateral:** bajo Configuración aparece «Equipo conectado» solo mientras hay un equipo enlazado, con su
+  nombre y un punto verde. Abre la ventana de gestión.
+- **Ventana de gestión del hardware:**
+  - por cada equipo, su nombre, la hora de conexión y su identificador en el iPad, con un botón «Desconectar»;
+  - accesos a Reloj Wi-Fi y descargas, Geocercas y líneas, y Configuración;
+  - no muestra batería, GNSS ni firmware, porque el enlace actual no los informa: no se inventan.
+**Limitación:** el iPad solo abre el enlace mientras trabaja con el reloj (descarga, Wi-Fi, geocercas), así que el botón
+aparece durante esas operaciones.
+**No se ha tocado:** protocolos, firmware, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** con un reloj real.
+
+## 2026-11-14 — AVO-SHELL-13 — Resumen: columnas del análisis del caballo a la misma altura
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):** en «Análisis del caballo», las tres columnas terminan a la misma altura: Zonas de velocidad, Esfuerzo
+y Aceleraciones + Curvas. La tarjeta de Curvas se estira hasta abajo.
+**No se ha tocado:** el motor, Windows, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
+## 2026-11-14 — AVO-SHELL-12 — Resumen al estilo Equimetre, Resumen y Mapa primeros, ficha con «X»
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- **Resumen** (boceto Equimetre del entrenador, «Así quiero resumen»):
+  - cabecera con foto y nombre del caballo, «Ver ficha», Editar (asignar) e Informe PDF; fecha y hora grandes;
+  - disciplina · jinete; distancia, duración y lugar; comentario del entrenamiento (las notas de siempre);
+  - tiempo de la sesión, solo si se ha consultado en Mareas para esa sesión (si no, «Sin datos del tiempo · Consultar»);
+  - debajo, «Parámetros clave» (las cifras de Datos clave) y «Análisis del caballo», desplegables;
+  - al final, el motor y la valoración.
+  - La reproducción, el mapa y los recuadros del cursor salen del Resumen.
+- **Barra del entrenamiento:**
+  - el orden es Resumen, Mapa, Datos clave, Gráficas…;
+  - «Mapa» ocupa el sitio de «Análisis», que queda oculto de momento: pedir Análisis abre Resumen;
+  - el menú lateral pierde «Mapa»; «Análisis» abre el entrenamiento por Resumen.
+- **Ficha de Cuadra y Jinetes:** sin el botón «‹ Cuadra / ‹ Jinetes» encima (la ficha sube arriba) y con una «X» de salir en
+  la esquina superior derecha de la tarjeta.
+**No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+**Pendiente:** Windows aún no tiene el Resumen nuevo ni este orden de pestañas.
+
+## 2026-11-14 — AVO-SHELL-11 — Cuadra y Jinetes: «Mejor 200 m» en los totales
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad y Windows, por igual):**
+- Los totales de la ficha pasan de 5 a 6 recuadros: «Mejor 200 m» entre «V. máxima» y «Último». Es el mejor tiempo de
+  200 m entre todos los entrenamientos de la ficha que tienen resultado del motor, con la misma regla que el recuadro
+  «Mejor 200 m» de Datos clave (si no hay, «—»).
+- `KeyData` expone el valor numérico (`best200S` / `Best200S`), con pruebas idénticas en iPad y Windows (11,36 s).
+- Informes: la vista previa ocupa el 62 % del ancho (ajuste de AVO-SHELL-10).
+**No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+
+## 2026-11-14 — AVO-SHELL-10 — Informes: opciones arriba y Exportar a todo el ancho
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- La columna derecha de Informes lleva, de arriba abajo, «Opciones del informe» (desplegable), «Exportar» y «Notas», todas
+  al ancho completo de la columna. La vista previa ocupa el 62 % del ancho (antes la mitad; boceto 14/11/2026 10:44)
+  y la columna derecha el resto.
+- En Exportar, los botones van en tres columnas, todos del mismo alto y en una sola línea («Informe PDF» y «Compartir
+  último» ya no se cortan).
+- «Último:» muestra solo el nombre del archivo, no la ruta interna.
+**No se ha tocado:** el motor, Windows, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
+## 2026-11-14 — AVO-SHELL-9 — Botones de ficha a igual alto, Biomecánica en 4 bloques iguales e informe con cifras estilo Datos clave
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:**
+- **Ficha de Cuadra y Jinetes (iPad):** Guardar, Copiar enlace y Eliminar tienen el mismo ancho y alto, en una sola línea
+  (el texto pasa de «Copiar enlace avohorse://» a «Copiar enlace»; copia el mismo enlace).
+- **Biomecánica (iPad):** cuatro bloques del mismo tamaño en dos columnas iguales: caballo | cifras y, debajo,
+  Canales de la cincha | Índices del motor por sensor (sustituye a la disposición de AVO-SHELL-8).
+- **Informes PDF y HTML (iPad y Windows, por igual):** los recuadros de cifras (Tramo, Resumen, etc.) usan el estilo de
+  Datos clave: sin caja ni barra roja, cifra centrada, nombre en versalitas debajo y líneas finas de separación.
+**No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+
+## 2026-11-14 — AVO-SHELL-8 — Arranque sin entrar solo, Biomecánica a medida igual e Informes desplegable
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:**
+- **Arranque (iPad):** la búsqueda silenciosa de «AVO Horse» ya no abre el último entrenamiento importado ni cambia de
+  página; la app se queda en la portada y solo activa INICIAR. `importFiles(_:restoring:navigate:)` con `navigate: false`
+  desde `loadFromAvoHorse()`.
+- **Biomecánica (iPad):**
+  - la tarjeta del caballo tiene la misma altura que el bloque de cifras;
+  - las cuatro cifras miden lo mismo (dos filas iguales de dos);
+  - «Canales de la cincha» va debajo, con el mismo ancho, y la columna termina a ras de «Índices del motor por sensor».
+  - `AvoCard` admite `fill: true` para estirarse a la altura de la fila.
+- **Informes (iPad):**
+  - sin título de página: la vista previa empieza arriba;
+  - «Opciones del informe» es un desplegable (Ocultar / Desplegar), cerrado por defecto, que indica cuántas secciones van marcadas.
+**No se ha tocado:** el motor, Windows, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
+## 2026-11-14 — AVO-SHELL-7 — Todos los recuadros de cifras con el estilo de Datos clave; Cuadra, Configuración y tramo
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:**
+- **Recuadros de cifras (iPad `AvoMetric`, Windows `AvoMetricTile`):** pasan al estilo de Datos clave en toda la app: sin caja,
+  icono fino elegido por el nombre de la cifra, cifra y unidad centradas, nombre en versalitas y líneas finas. Todos miden lo
+  mismo (alto mínimo de 138). Afecta a Análisis del tramo, Cuadra, Jinetes, Calendario, Resumen, etc.
+- **Cuadra y Jinetes (iPad):**
+  - sin título de página en la ficha;
+  - Guardar, Copiar enlace y Eliminar tienen el mismo ancho;
+  - los totales van en una fila de 5.
+- **Ficha de Cuadra y Jinetes (iPad):**
+  - foto a la izquierda con los datos a su derecha; se elige de Fotos, se guarda en `<app>/fotos/<código>.jpg` (máx. 900 px)
+    y también se ve en la fila de la lista;
+  - «Entrenamientos» y «Tramos guardados» van primero, como desplegables (Ocultar / Desplegar).
+- **Configuración (iPad):** incluye «Reloj Wi-Fi» y «Geocercas y líneas» (salen del menú lateral) junto al Servidor AVO.
+  La prueba de capturas llega a ellas desde Configuración.
+- **Análisis del tramo (iPad):** la tabla de parciales usa todo el ancho de la tarjeta y los metros («1000–1200») no se parten.
+- Se incluyen también el mapa alineado y encuadrado por defecto y la reproducción a 1× (AVO-SHELL-6).
+**No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+**Pendiente:** en Windows, la ficha de Cuadra/Jinetes y la página Configuración aún no siguen estos bocetos.
+
+## 2026-11-14 — AVO-SHELL-6 — Datos clave por recuadros, carga de AVO Horse al arrancar y gráficas al arrastrar
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:**
+- **Datos clave (iPad y Windows, mismas reglas y pruebas):**
+  - «Mejor 1000 m» pasa a ser **Distancia de trabajo**: la distancia del trabajo rápido dentro del entrenamiento
+    (`trabajos.distancia_rapida_m` del motor).
+  - Recuadros por fila: velocidad 6, pulso 3 (sin «Recuperación a 15 min») y tranco 5 (sin «Frecuencia a 58 km/h»), cada
+    fila a todo el ancho.
+  - Se quitan el título de la página, la columna de sesiones y la tarjeta «Calidad de la posición». Aires ocupa todo el ancho.
+  - En los parciales, el tiempo y la velocidad van en dos columnas de la misma medida.
+- **Barra del entrenamiento (iPad):** como en Mapa, solo la sesión con sus datos; sin «Entreno 2».
+- **Arranque (iPad):** tras restaurar la biblioteca, la app revisa «Archivos › En mi iPad › AVO Horse» e importa en silencio los
+  entrenamientos guardados que falten, sin duplicados. «INICIAR» espera a que termine y mientras tanto muestra «Cargando datos
+  de AVO Horse…».
+- **Mapa (iPad):** al abrirse, el recorrido sale siempre alineado en horizontal y encuadrado entero (vista predeterminada; ya no
+  se recuerda la orientación norte arriba), y la reproducción empieza a 1×.
+- **Gráficas (iPad):** al arrastrar la ventana de la barra de resumen (o desplazar y pellizcar) se redibujan cada 120 ms; antes
+  solo se redibujaban al soltar.
+**No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+
+## 2026-11-14 — AVO-SHELL-5 — iPad: barras, menú lateral, mapa del análisis y tabla de entrenamientos
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad, bocetos del usuario sobre la build 91):**
+- **Entrenamientos:** se corrige el hueco enorme encima de la tabla (un `Color.clear` de la cabecera se estiraba en vertical).
+- **Menú lateral:**
+  - Mapa, Análisis y Biomecánica quedan atenuados y sin acción hasta que se abre un entrenamiento (desde la lista, el
+    calendario o el Dashboard).
+  - El pie muestra los datos de la app: versión, build y fecha de compilación.
+- **Barra inferior:** a la izquierda, la versión del motor de IA; a la derecha, el copyright.
+- **Barra del entrenamiento:** Fecha | Caballo | V. máx. | Tiempo | Km.
+- **Análisis/Mapa:**
+  - el mapa abre encuadrando el recorrido entero y ya no salta al tramo de trabajo cuando llega el resultado del motor;
+  - los paneles y botones sobre el mapa usan siempre los colores oscuros (en modo claro no se veían las cifras ni los iconos);
+  - se quitan la fila de botones «Zonas» y su leyenda.
+**No se ha tocado:** Windows, el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** COMPILADO / CI: iPad run 43526019186 (TestFlight build 92). **NO VERIFICADO** en iPad real.
+
+## 2026-11-14 — AVO-SHELL-4 — iPad: el menú lateral vuelve a abrirse, imagen entera y gris claro más oscuro
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad, sobre la build 90):**
+- Al ocultar el menú lateral en el Dashboard no se podía volver a abrir: la barra lateral se pedía con `.all`, que en una vista de
+  dos columnas puede quedarse oculta. Ahora se pide con `.doubleColumn` en el botón y al cambiar de página.
+- El Dashboard muestra el logotipo entero (antes se cortaba «PERFORMANCE» y, sin menú, la página quedaba descompensada): la
+  imagen se ajusta dentro del recuadro sobre su fondo negro.
+- Modo claro: fondo, superficies secundarias, líneas y cabecera un poco más oscuros.
+**No se ha tocado:** Windows, el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** COMPILADO / CI: iPad run 43524630332 (TestFlight build 91). **NO VERIFICADO** en iPad real.
+
+## 2026-11-13 — AVO-SHELL-3 — Entrenamientos, Calendario (Semana), Cuadra e informe con logotipo
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:**
+- **Entrenamientos (iPad):** la tabla es propia en lugar de `Table`:
+  - filas rectas, sin redondeo, con colores alternos;
+  - la fila seleccionada va en un tono neutro con una barra roja a la izquierda, en lugar del rojo/granate;
+  - las cabeceras ordenan al tocarlas; se mantienen el menú contextual y el botón de abrir grande.
+- **Menú lateral (iPad):** los nombres nunca se cortan (una línea y columna algo más ancha).
+- **Calendario (iPad y Windows):** nueva vista **Semana**: 7 columnas a toda la altura con hora, caballo, distancia y
+  duración. Las reglas `weekStart`/`weekGrid`/`weekTitle` son las mismas en Swift y C#, con la misma prueba.
+- **Cuadra (iPad):** lista a todo el ancho, con una fila por caballo o jinete, colores alternos y desplazamiento; al tocar
+  una se abre su ficha a página completa con «‹ volver».
+- **Informe (iPad y Windows, HTML y PDF):** la cabecera lleva el logotipo (1 · cabeza de caballo, 2 · «AVO Horse Edition
+  Performance», recortados de `avo_brand_hero`). Título, fecha y sesión van en tres líneas a la derecha y ya no se montan.
+  El PDF de Windows admite imágenes JPEG, como el del iPad, y guarda una sola copia del logotipo para todas las páginas.
+**No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** COMPILADO / CI: Windows run 43520776654 (éxito) · iPad run 43520780825 (tests unitarios en verde; TestFlight build 90).
+**NO VERIFICADO** en iPad ni en PC reales.
+
+## 2026-11-13 — AVO-SHELL-2 — Modo claro (iPad), Datos clave estilo Equimetre y ajustes del Dashboard
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:**
+- **Paleta doble en iPad (`Views/Theme.swift`):** cada color de `Avo` tiene un valor oscuro (el de siempre) y otro claro.
+  Las tarjetas y la cabecera también. «Configuración › Apariencia» permite elegir Oscuro o Claro; la elección se guarda en
+  `UserDefaults` («avo.appearance») y se aplica al momento en la app y en las hojas (`.avoColorScheme()`).
+  No hay opción «Como el sistema» porque `Info.plist` fija `UIUserInterfaceStyle = Dark` y no se ha tocado.
+- **Datos clave (iPad y Windows), estilo «Key parameters» de Equimetre:** sin cajas; icono fino, cifra y unidad centradas,
+  nombre en mayúsculas pequeñas y líneas finas entre celdas. Las velocidades y los tiempos usan el icono del caballo.
+- **Dashboard:**
+  - el panel de cifras se salía de la pantalla porque la imagen pedía más ancho, y por eso no se veían los números
+    (build 88); corregido;
+  - los 5 huecos de «Últimos entrenamientos» miden lo mismo, con un hueco vacío si hay menos de 5.
+**No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** COMPILADO / CI: Windows run 43518612675 (éxito) · iPad run 43518616953 (TestFlight build 89).
+**NO VERIFICADO** en iPad ni en PC reales.
+**Pendiente:** modo claro en Windows (allí la paleta usa `StaticResource` y aún no hay página de Configuración).
+
+## 2026-11-13 — AVO-SHELL-1 — Dashboard, Entrenamientos, Calendario y Configuración (bocetos del usuario)
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:**
+- **Barra superior:** en iPad y Windows solo aparece en las páginas de un entrenamiento; las páginas generales no la tienen.
+  En iPad se mantiene el botón del menú cuando la barra lateral está oculta.
+- **Inicio:** sale del menú lateral; la portada solo se ve al arrancar.
+- **Dashboard (iPad y Windows):**
+  - la imagen va sin texto encima;
+  - a la derecha, cinco contadores pulsables: Caballos, Jockeys, Entrenamientos, Esta semana (de lunes a domingo, hora
+    de Madrid) y Por revisar (sin caballo o sin analizar);
+  - abajo, los 5 últimos entrenamientos en lugar de la fila de totales; al tocar uno se abre en Datos clave.
+  - Las reglas están en `DashboardSummary` (Core `KeyData.swift`/`.cs`), con la misma prueba en las dos apps.
+- **Entrenamientos (iPad):**
+  - sin título ni resumen; barra con «Filtros» (panel plegable) y «Abrir»;
+  - la tabla queda con favorito, fecha, caballo, jinete, distancia, velocidad máxima y abrir, con el botón de abrir más grande;
+  - la selección va en un tono rojo más apagado.
+  - En Windows la tabla del Dashboard tiene las mismas columnas, y «Abrir» / «Importar carpeta» van en su cabecera.
+- **Configuración (iPad, nueva):** en lugar de «Servidor AVO» en el menú. Contiene:
+  - buscar entrenamientos perdidos, buscar en una carpeta, exportar y copiar a AVO Horse;
+  - el acceso al servidor.
+  - Más adelante tendrá otros ajustes, como el modo claro/oscuro.
+- **Calendario (iPad y Windows):** solo la cuadrícula, a página completa, sin acumulados ni filtro de caballos.
+**No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** COMPILADO / CI: Windows run 43515844299 (éxito) · iPad run 43515849775 (tests unitarios en verde; TestFlight build 88).
+**NO VERIFICADO** en iPad ni en PC reales.
+**Pendiente:** página Configuración en Windows (allí no hay recuperación ni copia a AVO Horse); modo claro.
+
+## 2026-11-13 — AVO-START-2 — Pantalla de inicio con botón «INICIAR» (iPad y Windows)
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:** boceto del usuario sobre la build 86.
+- En la pantalla de inicio se quitan el botón «Menú» y el panel lateral de accesos.
+- El lema «CIENCIA · TECNOLOGÍA · RENDIMIENTO» queda centrado abajo.
+- Encima del lema hay un único botón «INICIAR», con borde blanco fino sobre azul marino translúcido, que abre el Dashboard.
+  La barra lateral vuelve en el resto de páginas.
+- Archivos: `ipad/AVOiPad/Views/StartView.swift`, `ipad/AVOiPad/App/RootView.swift` y
+  `ipad/AVOiPadUITests/ScreenshotTests.swift` (las capturas entran por `start.iniciar`); en Windows,
+  `Views/StartView.xaml` y `Views/HeroArt.xaml` (el lema pasa de HeroArt a StartView con los mismos contornos Montserrat).
+**No se ha tocado:** los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** COMPILADO / CI: Windows run 43514114679 (éxito; el run 43513678310 falló porque la comprobación de captura
+esperaba 5 acciones, corregido) · iPad run 43513683877 (TestFlight build 87 subido). **NO VERIFICADO** en iPad ni en PC reales.
+
+## 2026-11-13 — AVO-PARITY-2 — Datos clave: 6 por fila, tranco a velocidad de referencia, parciales y navegador
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20) · Contrato: `docs/PARIDAD_IPAD_PC.md`
+**Qué cambia (iPad y Windows, mismas reglas y mismas pruebas):**
+- Rejilla de 6 fichas por fila. Tras ver la build 84, el usuario pidió «6 en línea».
+- Cuatro fichas nuevas de tranco y frecuencia a las dos velocidades de referencia de la raza (`referencia[]` del motor;
+  mediana entre trabajos, como `training.cpp`).
+- Al tocar un mejor 200/600/1000 m se abre Gráficas con ese tramo seleccionado y ampliado.
+- Tarjeta «Parciales cada 200 m» por trabajo, con el parcial más rápido en rojo; al tocar un parcial o el trabajo se abre en Gráficas.
+- Navegador lateral de sesiones por día, con búsqueda por caballo, que se puede ocultar.
+- Archivos:
+  - iPad: `Core/KeyData.swift`, `App/AppModel+KeyData.swift`, `Views/KeyDataView.swift`, `Views/CalendarView.swift`
+    y `AVOiPadTests/KeyDataTests.swift`.
+  - Windows: `Core/Analysis/KeyData.cs`, `MainViewModel.Parity.cs`, `Views/KeyDataView.xaml` y `SelfTest/KeyDataTests.cs`.
+**Por qué:** ideas del webinar de Equimetre (capítulos Key Data y Graphics) que pidió el usuario.
+**No se ha tocado:** el motor C++ (ya daba `parciales` y `referencia`), los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** COMPILADO / CI: Windows run 43387375222 (éxito, 7 self-tests nuevos PASS; el run 43387112395 falló por
+`CultureInfo.GetUnicodeCategory`, corregido) · iPad run 43387116210 (tests unitarios en verde; TestFlight build 86 subido).
+**NO VERIFICADO** en iPad ni en PC reales.
+**Pendiente:** eje de distancia en Gráficas; zonas de pulso cuando llegue el ECG de la cincha.
+
+## 2026-11-13 — AVO-PARITY-1 — iPad y PC: Calendario y Datos clave (paridad)
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` · Contrato: `docs/PARIDAD_IPAD_PC.md`
+**Qué cambia:**
+- **iPad:** nuevas páginas **Calendario** (vista de mes y de año, acumulados y filtro por caballo) y **Datos clave**
+  (velocidad, mejores 200/600/1000 m, pulso pendiente del ECG de la cincha, tranco, aires y calidad GNSS).
+  `Core/KeyData.swift`, `Views/CalendarView.swift`, `Views/KeyDataView.swift`, pruebas `KeyDataTests`, y las dos páginas
+  añadidas a las capturas de la UI.
+- **Windows:** las mismas páginas con las mismas reglas: `AVO.Windows.Core/Analysis/KeyData.cs`,
+  `MainViewModel.Parity.cs`, `Views/CalendarView.xaml`, `Views/KeyDataView.xaml`, `SelfTest/KeyDataTests.cs` (mismo JSON y
+  mismos valores que en iPad), y las dos páginas añadidas a las capturas.
+**Por qué:** petición del usuario de que iPad y PC tengan los mismos datos y análisis, con ideas de presentación tomadas de
+Equimetre. El pulso solo procederá de la cincha propia (no se usará el Polar H10).
+**No se ha tocado:** el motor C++, los contratos binarios, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** COMPILADO / CI: Windows run 43333938426 (éxito, 8 self-tests nuevos PASS) · iPad run 43333943702 (TestFlight
+build 84 subido; tests fallaron por el nombre del módulo, corregido) · iPad run 43335103721 (éxito: tests + capturas
+`04_Calendar`, `09_KeyData`). **NO VERIFICADO** en iPad ni en PC reales.
+**Pendiente:** tabla de análisis, Comparar, Historia y Track Work en Windows; sesión de referencia; ficha de sesión.
+
 ## 2026-11-13 — AVO-ASSIGN-1 — asignación de caballo y jinete en todas las apps y en el motor
 **Autor:** Claude · Rama `claude/asignacion-caballo` · Contrato: `docs/ASIGNACION_CABALLO.md`
 **Qué cambia:**

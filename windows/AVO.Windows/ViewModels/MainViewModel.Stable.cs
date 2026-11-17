@@ -40,6 +40,17 @@ public sealed class IdentityRow : ObservableObject
     public string LastDateText => Sessions.Count == 0 ? "—" : MadridTime.Format(Sessions.Max(s => s.Start), "dd/MM/yyyy");
     public string LastText => Sessions.Count == 0 ? "Sin entrenamientos" : "Último " + MadridTime.Format(Sessions.Max(s => s.Start), "dd/MM/yyyy");
     public string BestSpeedText => Sessions.Count == 0 ? "—" : Sessions.Max(s => s.MaxSpeedKmh).ToString("0.0", MainViewModel.Es) + " km/h";
+    /// <summary>Best 200 m among its trainings (engine «Mejor 200 m»; trainer 14/11/2026).</summary>
+    public string Best200Text
+    {
+        get
+        {
+            double? b = null;
+            foreach (var s in Sessions)
+                if (s.Engine is EquineAnalysis e && KeyData.Cached(s.Id, e.RawJson).Best200S is double t) b = b is null ? t : Math.Min(b.Value, t);
+            return b is double v ? v.ToString("0.00", MainViewModel.Es) + " s" : "—";
+        }
+    }
     public string TotalTimeText => Core.TimeText.Clock(Sessions.Sum(s => s.Timeline.Count > 1 ? s.Timeline.DurationS : s.Session.DurationSeconds));
 }
 
@@ -406,6 +417,7 @@ public sealed partial class MainViewModel
         HorseNames.Clear(); foreach (var n in Stable.Horses.Where(h => h.Active).Select(h => h.Name).Distinct().OrderBy(x => x, StringComparer.CurrentCultureIgnoreCase)) HorseNames.Add(n);
         RiderNames.Clear(); foreach (var n in Stable.Riders.Where(h => h.Active).Select(h => h.Name).Distinct().OrderBy(x => x, StringComparer.CurrentCultureIgnoreCase)) RiderNames.Add(n);
         RaiseMany(nameof(UnknownHorseCount), nameof(UnknownRiderCount));
+        RefreshDashboard();
     }
     public int UnknownHorseCount => Sessions.Count(s => !s.HorseKnown);
     public int UnknownRiderCount => Sessions.Count(s => !s.RiderKnown);

@@ -324,6 +324,8 @@ static void write_series(std::ostringstream& o, const Analysis& a, const EngineC
   auto col = [&](const char* name, const std::vector<double>& v) { o << ",\"" << name << "\":["; for (size_t i = 0; i < v.size(); i++) o << (i ? "," : "") << num(v[i]); o << "]"; };
   o << ",\"series\":{\"t\":["; for (size_t i = 0; i < g.t.size(); i++) o << (i ? "," : "") << num(g.t[i]); o << "]";
   col("velocidad", g.speed); col("aceleracion", g.accel); col("sigma_velocidad", g.speed_sigma); col("sigma_aceleracion", g.accel_sigma);
+  // 2.0: «velocidad» is the smoothed single truth; the receiver gSpeed stays available beside it
+  col("velocidad_receptor", g.speed_raw); col("sigma_velocidad_receptor", g.speed_raw_sigma);
   col("aceleracion_lateral", g.lat_accel); col("curvatura", g.curvature); col("distancia", g.dist); col("lat", g.lat); col("lon", g.lon);
   o << ",\"calidad\":["; for (size_t i = 0; i < g.quality.size(); i++) o << (i ? "," : "") << (int)g.quality[i]; o << "]";
   const GaitResult& chosen = c.performance_uses_v2 ? a.gait_v2 : a.gait;

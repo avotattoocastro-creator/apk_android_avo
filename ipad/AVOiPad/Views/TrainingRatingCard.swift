@@ -4,6 +4,8 @@ import SwiftUI
 /// pista (superficie, estado). Stored in paths.root/valoraciones.json by session id; regenerates the training summary.
 struct TrainingRatingCard: View {
     @Environment(AppModel.self) private var app
+    /// Stretch to the height of the row (Resumen: same height as the engine card, sketch 14/11/2026).
+    var fill: Bool = false
     @State private var loadedId: String = ""
     @State private var rpe: Int = 0
     @State private var estado: String = ""
@@ -16,7 +18,7 @@ struct TrainingRatingCard: View {
     var body: some View {
         let s: SessionItem? = app.selected
         AvoCard(title: "Valoración del entrenador",
-                subtitle: "Se guarda en este iPad y entra en la historia del caballo (carga sRPE y estado)") {
+                subtitle: "Se guarda en este iPad y entra en la historia del caballo (carga sRPE y estado)", fill: fill) {
             if let s = s {
                 VStack(alignment: .leading, spacing: 10) {
                     label("ESFUERZO PERCIBIDO (RPE 1–10)")

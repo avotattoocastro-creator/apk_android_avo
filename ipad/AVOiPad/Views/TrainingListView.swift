@@ -19,12 +19,16 @@ private struct TrainingListContent: View {
     @State private var selection: String? = nil
     /// Training waiting for the «Eliminar» confirmation.
     @State private var pendingDelete: SessionItem? = nil
+    /// Filters folded away by default (trainer's sketch 13/11/2026: «desplegable»).
+    @State private var showFilters: Bool = false
 
     var body: some View {
         let rows: [TrainingListRow] = model.rows.sorted(using: sortOrder)
         VStack(alignment: .leading, spacing: 0) {
-            header(rows)
-            if !app.sessions.isEmpty { filtersBar }
+            if !app.sessions.isEmpty {
+                toolbar(rows)
+                if showFilters { filtersBar }
+            }
             Rectangle().fill(Avo.line).frame(height: 1)
             if app.sessions.isEmpty {
                 emptyState
@@ -61,86 +65,55 @@ private struct TrainingListContent: View {
         .sheet(isPresented: Binding(get: { model.report != nil }, set: { if !$0 { model.report = nil } })) {
             if let r = model.report {
                 TrainingRecoverySheet(report: r) { model.report = nil }
-                    .preferredColorScheme(.dark)
+                    .avoColorScheme()
             }
         }
     }
 
-    // ------------------------------------------------------------------ header
-    private func header(_ rows: [TrainingListRow]) -> some View {
-        ViewThatFits(in: .horizontal) {
-            HStack(alignment: .center, spacing: 12) {
-                titleBlock(rows)
-                Spacer(minLength: 8)
-                recoveryButtons
+    // ------------------------------------------------------------------ toolbar
+    /// Trainer's sketch 13/11/2026: no title or summary; the filters fold into «Filtros» and the maintenance buttons
+    /// (buscar perdidos, carpeta, exportar, copiar) moved to «Configuración».
+    private func toolbar(_ rows: [TrainingListRow]) -> some View {
+        HStack(spacing: 10) {
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) { showFilters.toggle() }
+            } label: {
+                HStack(spacing: 6) {
+                    Image(systemName: "line.3.horizontal.decrease.circle")
+                    Text("Filtros")
+                    if !model.filter.isEmpty {
+                        Text("activos").font(.caption.weight(.semibold)).foregroundStyle(Avo.warn)
+                    }
+                    Image(systemName: showFilters ? "chevron.up" : "chevron.down").font(.caption2)
+                }
             }
-            VStack(alignment: .leading, spacing: 10) {
-                titleBlock(rows)
-                HStack(spacing: 10) { recoveryButtons }
+            .buttonStyle(.avoSecondary)
+            .accessibilityIdentifier("list.filters")
+            if rows.count != app.sessions.count {
+                Text("\(rows.count) de \(app.sessions.count)").font(.footnote.monospacedDigit()).foregroundStyle(Avo.textDim)
             }
+            if model.computing { ProgressView().controlSize(.mini) }
+            Spacer(minLength: 8)
+            // «Calendario» leaves the sidebar and becomes a button here (trainer's sketch 14/11/2026)
+            Button {
+                app.page = .calendar
+            } label: {
+                Label("Calendario", systemImage: "calendar")
+            }
+            .buttonStyle(.avoSecondary)
+            .accessibilityIdentifier("list.calendar")
+            Button {
+                app.showImporter = true
+            } label: {
+                Label("Abrir", systemImage: "folder")
+            }
+            .buttonStyle(.avoPrimary)
+            .disabled(app.busy)
+            .accessibilityIdentifier("list.open")
         }
         .padding(.horizontal, 20)
         .padding(.top, 14)
         .padding(.bottom, 10)
-    }
-
-    private func titleBlock(_ rows: [TrainingListRow]) -> some View {
-        VStack(alignment: .leading, spacing: 3) {
-            Text("Entrenamientos").font(.title2.weight(.semibold)).foregroundStyle(Avo.text)
-            HStack(spacing: 8) {
-                Text(TrainingListFilter.summary(rows)).font(.footnote.monospacedDigit()).foregroundStyle(Avo.silver)
-                if rows.count != app.sessions.count {
-                    Text("de \(app.sessions.count) en el iPad").font(.footnote).foregroundStyle(Avo.textDim)
-                }
-                if model.computing {
-                    ProgressView().controlSize(.mini)
-                    Text("Calculando geocercas…").font(.caption2).foregroundStyle(Avo.textDim)
-                }
-            }
-            if model.scanning || !model.scanStatus.isEmpty {
-                HStack(spacing: 6) {
-                    if model.scanning { ProgressView().controlSize(.mini) }
-                    Text(model.scanStatus).font(.caption).foregroundStyle(Avo.cyan).lineLimit(2)
-                }
-            }
-        }
-        .fixedSize(horizontal: false, vertical: true)
-    }
-
-    @ViewBuilder
-    private var recoveryButtons: some View {
-        Button {
-            Task { @MainActor in await model.scanDevice() }
-        } label: {
-            Label("Buscar entrenamientos perdidos", systemImage: "arrow.triangle.2.circlepath")
-        }
-        .buttonStyle(.avoPrimary)
-        .disabled(model.scanning || app.busy)
-        .accessibilityIdentifier("list.recover")
-        Button {
-            model.pickingFolder = true
-        } label: {
-            Label("Buscar en una carpeta…", systemImage: "folder.badge.questionmark")
-        }
-        .buttonStyle(.avoSecondary)
-        .disabled(model.scanning || app.busy)
-        Button {
-            let items: [SessionItem] = model.rows.compactMap { model.item($0.id) }
-            Task { @MainActor in await app.exportTrainingsAndReport(items) }
-        } label: {
-            Label("Exportar \(model.rows.count) a AVO Horse", systemImage: "square.and.arrow.up.on.square")
-        }
-        .buttonStyle(.avoSecondary)
-        .disabled(model.rows.isEmpty || app.busy)
-        .accessibilityIdentifier("list.export")
-        Button {
-            Task { @MainActor in await app.syncDocumentsAndReport() }
-        } label: {
-            Label("Copiar todo a AVO Horse", systemImage: "externaldrive.badge.checkmark")
-        }
-        .buttonStyle(.avoSecondary)
-        .disabled(app.busy)
-        .accessibilityIdentifier("list.syncDocs")
     }
 
     // ------------------------------------------------------------------ filters
@@ -261,110 +234,27 @@ private struct TrainingListContent: View {
     }
 
     // ------------------------------------------------------------------ table (regular width)
+    /// Trainer's sketches 13/11/2026: square rows (no rounded selection), alternating row colours, a neutral selection
+    /// (lighter row + red bar on the left) instead of the red / wine tint, bigger «Abrir». Columns sort on tap.
     private func table(_ rows: [TrainingListRow]) -> some View {
-        Table(rows, selection: $selection, sortOrder: $sortOrder) {
-            Group {
-                TableColumn("★", value: \TrainingListRow.favKey) { (r: TrainingListRow) in
-                    Button {
-                        model.toggleFavorite(r.id)
-                    } label: {
-                        Image(systemName: r.isFavorite ? "star.fill" : "star")
-                            .foregroundStyle(r.isFavorite ? Avo.warn : Avo.textDim)
-                    }
-                    .buttonStyle(.borderless)
-                    .accessibilityLabel(r.isFavorite ? "Quitar de favoritos" : "Marcar como favorito")
-                }
-                .width(34)
-                TableColumn("Fecha y hora", value: \TrainingListRow.startKey) { (r: TrainingListRow) in
-                    HStack(spacing: 6) {
-                        Text(r.dateTimeText).monospacedDigit().foregroundStyle(Avo.text)
-                        if r.isSynthetic { AvoPill(text: "DEMOSTRACIÓN", color: Avo.warn) }
-                    }
-                }
-                .width(min: 130, ideal: 170)
-                TableColumn("Caballo", value: \TrainingListRow.horse) { (r: TrainingListRow) in
-                    Text(r.horse).fontWeight(.semibold).foregroundStyle(Avo.text)
-                }
-                .width(min: 90, ideal: 130)
-                TableColumn("Jinete", value: \TrainingListRow.rider) { (r: TrainingListRow) in
-                    Text(r.rider).foregroundStyle(Avo.silver)
-                }
-                .width(min: 80, ideal: 120)
-                TableColumn("Modalidad", value: \TrainingListRow.discipline) { (r: TrainingListRow) in
-                    Text(r.discipline).foregroundStyle(Avo.silver)
-                }
-                .width(min: 70, ideal: 90)
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                Color.clear.frame(width: 48, height: 1)
+                sortHeader("Fecha y hora", \TrainingListRow.startKey, flex: 1.3)
+                sortHeader("Caballo", \TrainingListRow.horse, flex: 1.4)
+                sortHeader("Jinete", \TrainingListRow.rider, flex: 1.2)
+                sortHeader("Distancia", \TrainingListRow.distanceKm, flex: 0.8)
+                sortHeader("Vel. máx.", \TrainingListRow.maxSpeedKmh, flex: 0.8)
+                Text("Abrir").font(.footnote.weight(.semibold)).foregroundStyle(Avo.textDim).frame(width: 72)
             }
-            Group {
-                TableColumn("Duración", value: \TrainingListRow.durationS) { (r: TrainingListRow) in
-                    Text(r.durationText).monospacedDigit().foregroundStyle(Avo.text)
-                }
-                .width(min: 60, ideal: 75)
-                TableColumn("Distancia", value: \TrainingListRow.distanceKm) { (r: TrainingListRow) in
-                    Text(r.distanceText).monospacedDigit().foregroundStyle(Avo.text)
-                }
-                .width(min: 65, ideal: 80)
-                TableColumn("Vel. máx.", value: \TrainingListRow.maxSpeedKmh) { (r: TrainingListRow) in
-                    Text(r.maxSpeedText).monospacedDigit().foregroundStyle(Avo.text)
-                }
-                .width(min: 70, ideal: 85)
-                TableColumn("Cincha", value: \TrainingListRow.girthText) { (r: TrainingListRow) in
-                    Text(r.girthText).foregroundStyle(r.hasGirth ? Avo.ok : Avo.textDim)
-                }
-                .width(min: 44, ideal: 56)
-                TableColumn("Geocercas visitadas", value: \TrainingListRow.fencesText) { (r: TrainingListRow) in
-                    Text(r.fencesText).foregroundStyle(Avo.silver).lineLimit(2)
-                }
-                .width(min: 90, ideal: 150)
-            }
-            Group {
-                TableColumn("Origen", value: \TrainingListRow.origin) { (r: TrainingListRow) in
-                    Text(r.origin).foregroundStyle(TrainingListContent.originColor(r.origin))
-                }
-                .width(min: 60, ideal: 80)
-                TableColumn("Estado del motor", value: \TrainingListRow.engineState) { (r: TrainingListRow) in
-                    Text(r.engineState).font(.caption).foregroundStyle(Avo.textDim).lineLimit(2)
-                }
-                .width(min: 90, ideal: 140)
-                TableColumn("Abrir", value: \TrainingListRow.id) { (r: TrainingListRow) in
-                    Button {
-                        model.open(r.id)
-                    } label: {
-                        Image(systemName: "chevron.right.circle.fill").foregroundStyle(Avo.red)
+            .padding(.vertical, 8)
+            .background(Avo.surface)
+            .overlay(alignment: .bottom) { Rectangle().fill(Avo.line).frame(height: 1) }
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    ForEach(Array(rows.enumerated()), id: \.element.id) { (p: (offset: Int, element: TrainingListRow)) in
+                        tableRow(p.element, odd: p.offset % 2 == 1)
                     }
-                    .buttonStyle(.borderless)
-                    .accessibilityLabel("Abrir en Análisis")
-                }
-                .width(44)
-            }
-        }
-        .contextMenu(forSelectionType: String.self) { (ids: Set<String>) in
-            if let id = ids.first {
-                Button {
-                    model.open(id)
-                } label: {
-                    Label("Abrir en Análisis", systemImage: "waveform.path.ecg")
-                }
-                Button {
-                    model.toggleFavorite(id)
-                } label: {
-                    Label((model.item(id)?.isFavorite ?? false) ? "Quitar de favoritos" : "Marcar como favorito", systemImage: "star")
-                }
-                Button {
-                    if let s = model.item(id) { app.stable.openAssign(s) }
-                } label: {
-                    Label("Asignar caballo y jinete", systemImage: "figure.equestrian.sports")
-                }
-                Button {
-                    if let s = model.item(id) { Task { @MainActor in await app.exportTrainingsAndReport([s]) } }
-                } label: {
-                    Label("Exportar a AVO Horse", systemImage: "square.and.arrow.up")
-                }
-                Divider()
-                Button(role: .destructive) {
-                    pendingDelete = model.item(id)
-                } label: {
-                    Label("Eliminar entrenamiento…", systemImage: "trash")
                 }
             }
         }
@@ -380,9 +270,100 @@ private struct TrainingListContent: View {
             Text("\(s.dateTimeText) · \(s.horse) · \(s.distanceText)\n\nSe borrarán del iPad el entrenamiento y todo lo calculado con él: análisis del motor, zonas corregidas, valoración, tramos y notas. Los archivos que tengas en Archivos no se tocan. No se puede deshacer.")
         }
         .font(.callout)
-        .scrollContentBackground(.hidden)
         .background(Avo.bg)
         .accessibilityIdentifier("list.table")
+    }
+
+    private func sortHeader<V: Comparable>(_ title: String, _ key: KeyPath<TrainingListRow, V>, flex: CGFloat = 1) -> some View {
+        let active: Bool = (sortOrder.first?.keyPath as AnyKeyPath?) == (key as AnyKeyPath)
+        let ascending: Bool = sortOrder.first?.order == .forward
+        return Button {
+            sortOrder = [KeyPathComparator(key, order: active && !ascending ? .forward : .reverse)]
+        } label: {
+            HStack(spacing: 4) {
+                Text(title).font(.footnote.weight(.semibold))
+                if active { Image(systemName: ascending ? "chevron.up" : "chevron.down").font(.caption2) }
+            }
+            .foregroundStyle(active ? Avo.text : Avo.textDim)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .frame(maxWidth: .infinity)
+    }
+
+    private func tableRow(_ r: TrainingListRow, odd: Bool) -> some View {
+        let on: Bool = selection == r.id
+        return HStack(spacing: 0) {
+            Button {
+                model.toggleFavorite(r.id)
+            } label: {
+                Image(systemName: r.isFavorite ? "star.fill" : "star")
+                    .foregroundStyle(r.isFavorite ? Avo.warn : Avo.textDim)
+                    .frame(width: 48, height: 44)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(r.isFavorite ? "Quitar de favoritos" : "Marcar como favorito")
+            HStack(spacing: 6) {
+                Text(r.dateTimeText).monospacedDigit().foregroundStyle(Avo.text).lineLimit(1)
+                if r.isSynthetic { AvoPill(text: "DEMO", color: Avo.warn) }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            Text(r.horse).fontWeight(.semibold).foregroundStyle(Avo.text).lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Text(r.rider).foregroundStyle(Avo.silver).lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Text(r.distanceText).monospacedDigit().foregroundStyle(Avo.text).lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Text(r.maxSpeedText).monospacedDigit().foregroundStyle(Avo.text).lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Button {
+                model.open(r.id)
+            } label: {
+                Image(systemName: "chevron.right.circle.fill").font(.system(size: 30)).foregroundStyle(Avo.red)
+                    .frame(width: 72, height: 52)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Abrir en Análisis")
+        }
+        .frame(minHeight: 56)
+        .background(on ? Avo.surface2 : (odd ? Avo.surface : Avo.bg))
+        .overlay(alignment: .leading) { if on { Rectangle().fill(Avo.red).frame(width: 4) } }
+        .overlay(alignment: .bottom) { Rectangle().fill(Avo.line.opacity(0.6)).frame(height: 1) }
+        .contentShape(Rectangle())
+        .onTapGesture { selection = r.id }
+        .contextMenu { rowMenu(r.id) }
+        .accessibilityIdentifier("list.row.\(r.id)")
+    }
+
+    @ViewBuilder
+    private func rowMenu(_ id: String) -> some View {
+        Button {
+            model.open(id)
+        } label: {
+            Label("Abrir en Análisis", systemImage: "waveform.path.ecg")
+        }
+        Button {
+            model.toggleFavorite(id)
+        } label: {
+            Label((model.item(id)?.isFavorite ?? false) ? "Quitar de favoritos" : "Marcar como favorito", systemImage: "star")
+        }
+        Button {
+            if let s = model.item(id) { app.stable.openAssign(s) }
+        } label: {
+            Label("Asignar caballo y jinete", systemImage: "figure.equestrian.sports")
+        }
+        Button {
+            if let s = model.item(id) { Task { @MainActor in await app.exportTrainingsAndReport([s]) } }
+        } label: {
+            Label("Exportar a AVO Horse", systemImage: "square.and.arrow.up")
+        }
+        Divider()
+        Button(role: .destructive) {
+            pendingDelete = model.item(id)
+        } label: {
+            Label("Eliminar entrenamiento…", systemImage: "trash")
+        }
     }
 
     static func originColor(_ o: String) -> Color {
@@ -409,17 +390,12 @@ private struct TrainingListContent: View {
                         HStack(spacing: 6) {
                             Text(r.dateTimeText).font(.callout.weight(.semibold)).monospacedDigit().foregroundStyle(Avo.text)
                             if r.isSynthetic { AvoPill(text: "DEMOSTRACIÓN", color: Avo.warn) }
-                            Spacer(minLength: 4)
-                            Text(r.origin).font(.caption).foregroundStyle(TrainingListContent.originColor(r.origin))
                         }
-                        Text("\(r.horse) · \(r.rider) · \(r.discipline)").font(.footnote).foregroundStyle(Avo.silver).lineLimit(1)
-                        Text("\(r.durationText) · \(r.distanceText) · \(r.maxSpeedText) · Cincha \(r.girthText.lowercased())")
+                        Text("\(r.horse) · \(r.rider)").font(.footnote).foregroundStyle(Avo.silver).lineLimit(1)
+                        Text("\(r.distanceText) · \(r.maxSpeedText)")
                             .font(.caption).monospacedDigit().foregroundStyle(Avo.textDim).lineLimit(1)
-                        if r.fencesText != "—" {
-                            Text("Geocercas: \(r.fencesText)").font(.caption).foregroundStyle(Avo.textDim).lineLimit(1)
-                        }
                     }
-                    Image(systemName: "chevron.right").font(.caption).foregroundStyle(Avo.textDim).padding(.top, 4)
+                    Image(systemName: "chevron.right.circle.fill").font(.system(size: 28)).foregroundStyle(Avo.red)
                 }
                 .contentShape(Rectangle())
             }
@@ -509,7 +485,7 @@ private struct TrainingListChip: View {
 }
 
 /// Result of «Buscar entrenamientos perdidos».
-private struct TrainingRecoverySheet: View {
+struct TrainingRecoverySheet: View {
     var report: TrainingRecoveryReport
     var close: () -> Void
 

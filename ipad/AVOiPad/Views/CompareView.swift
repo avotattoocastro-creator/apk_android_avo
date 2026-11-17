@@ -15,40 +15,163 @@ struct CompareView: View {
 
     var body: some View {
         let model: CompareModel = app.compare
-        VStack(alignment: .leading, spacing: 12) {
-            AvoPageTitle(title: "Comparar entrenamientos",
-                         subtitle: "Series alineadas por tiempo relativo o distancia; sin interpolar a través de huecos sin datos")
-            if hSize == .compact {
-                VStack(alignment: .leading, spacing: 10) {
-                    CompareChartToolbar(model: model)
-                    if model.hasRange { CompareRangeCard(model: model) }
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 12) {
-                            CompareSessionPicker(model: model)
-                            CompareResults(model: model)
-                        }
-                    }
-                    // while «Seleccionar rango» is on, a drag on a chart must select, never scroll
-                    .scrollDisabled(model.rangeMode)
-                }
-            } else {
-                HStack(alignment: .top, spacing: 12) {
-                    ScrollView { CompareSessionPicker(model: model) }
-                        .frame(width: 300)
-                    VStack(alignment: .leading, spacing: 10) {
-                        CompareChartToolbar(model: model)
-                        if model.hasRange { CompareRangeCard(model: model) }
-                        ScrollView { CompareResults(model: model).padding(.bottom, 24) }
-                            .scrollDisabled(model.rangeMode)
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-            }
+        // trainer's sketch 14/11/2026: no title, no left panel and no zoom row; the trainings to compare are chosen in the
+        // top bar (CompareSelector) and the routes and charts use the whole width of the page
+        VStack(alignment: .leading, spacing: 10) {
+            if model.hasRange { CompareRangeCard(model: model) }
+            ScrollView { CompareResults(model: model).padding(.bottom, 24) }
+                .scrollDisabled(model.rangeMode)
         }
         .padding(16)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(Avo.bg)
         .onAppear { model.pageShown() }
+    }
+}
+
+/// Top-bar selector of the trainings to compare (trainer's sketch 14/11/2026): wide popover, one line per training with
+/// its check box and colour, plus the alignment of the series. Every change refreshes the comparison.
+struct CompareSelector: View {
+    @Environment(AppModel.self) private var app
+    @State private var open: Bool = false
+
+    var body: some View {
+        let model: CompareModel = app.compare
+        let marked: [SessionItem] = app.sessionsView.filter { $0.isCompared }
+        Button { open = true } label: {
+            HStack(spacing: 8) {
+                Image(systemName: "square.split.2x1").foregroundStyle(Avo.red)
+                Text("Comparar").fontWeight(.semibold).foregroundStyle(Avo.text)
+                ForEach(Array(marked.prefix(5))) { (s: SessionItem) in
+                    HStack(spacing: 4) {
+                        RoundedRectangle(cornerRadius: 1.5).fill(s.compareColor).frame(width: 4, height: 16)
+                        Text("\(s.dateTimeText) · \(s.horse)").foregroundStyle(Avo.silver).lineLimit(1)
+                    }
+                }
+                if marked.isEmpty { Text("elige entrenamientos").foregroundStyle(Avo.textDim) }
+                Image(systemName: "chevron.down").font(.caption).foregroundStyle(Avo.textDim)
+            }
+            .font(.callout)
+            .lineLimit(1)
+            .padding(.horizontal, 12).padding(.vertical, 8)
+            .frame(maxWidth: 1000, alignment: .leading)
+            .background(Avo.surface2, in: RoundedRectangle(cornerRadius: 7))
+            .overlay(RoundedRectangle(cornerRadius: 7).stroke(Avo.line, lineWidth: 1))
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("compare.selector")
+        .popover(isPresented: $open, arrowEdge: .top) {
+            CompareSelectorList(model: model).environment(app).avoColorScheme()
+        }
+    }
+}
+
+private struct CompareSelectorList: View {
+    @Environment(AppModel.self) private var app
+    var model: CompareModel
+
+    var body: some View {
+        @Bindable var m = model
+        let list: [SessionItem] = model.listed(app.sessionsView)
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(spacing: 14) {
+                Text("ENTRENAMIENTOS A COMPARAR").font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
+                Spacer()
+                Text("Alinear por").font(.caption).foregroundStyle(Avo.textDim)
+                Picker("Alinear series por", selection: $m.alignment) {
+                    Text("Tiempo").tag(AlignmentMode.relativeTime)
+                    Text("Distancia").tag(AlignmentMode.distance)
+                }
+                .pickerStyle(.segmented)
+                .frame(width: 200)
+            }
+            Toggle(isOn: $m.hideEmpty) {
+                Text("Ocultar entrenamientos sin recorrido (0 km)").font(.caption).foregroundStyle(Avo.text)
+            }
+            .tint(Avo.red)
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    ForEach(list) { (s: SessionItem) in
+                        Button { model.toggle(s) } label: {
+                            HStack(spacing: 10) {
+                                Image(systemName: s.isCompared ? "checkmark.square.fill" : "square")
+                                    .foregroundStyle(s.isCompared ? Avo.red : Avo.textDim)
+                                RoundedRectangle(cornerRadius: 2).fill(s.compareColor).frame(width: 4, height: 22)
+                                Text(s.dateTimeText).font(.callout.weight(.semibold)).foregroundStyle(Avo.text).frame(width: 150, alignment: .leading)
+                                Text(s.horse).font(.callout.weight(.semibold)).foregroundStyle(Avo.text).frame(width: 200, alignment: .leading)
+                                Text(s.rider).font(.callout).foregroundStyle(Avo.silver).frame(width: 170, alignment: .leading)
+                                Text(s.discipline).font(.callout).foregroundStyle(Avo.silver).frame(width: 90, alignment: .leading)
+                                Text(s.maxSpeedText).font(.callout.monospacedDigit()).foregroundStyle(Avo.silver).frame(width: 100, alignment: .leading)
+                                Text(s.durationText).font(.callout.monospacedDigit()).foregroundStyle(Avo.silver).frame(width: 80, alignment: .leading)
+                                Text(s.distanceText).font(.callout.monospacedDigit()).foregroundStyle(Avo.silver).frame(width: 90, alignment: .leading)
+                            }
+                            .lineLimit(1)
+                            .padding(.vertical, 9)
+                            .background(s.isCompared ? Avo.redSoft : Color.clear)
+                            .overlay(alignment: .bottom) { Rectangle().fill(Avo.line).frame(height: 1) }
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier("compare.session.\(s.id)")
+                    }
+                }
+            }
+        }
+        .padding(14)
+        .frame(width: 960)
+        .frame(maxHeight: 560)
+        .background(Avo.surface)
+    }
+}
+
+/// «Encuadre» of the compared trainings (trainer's sketch 14/11/2026: «posibilidad de mover los entrenamientos para
+/// encuadrar y encuadre automático»). Display only: the sessions are not modified.
+private struct CompareShiftBar: View {
+    @Environment(AppModel.self) private var app
+    var model: CompareModel
+
+    var body: some View {
+        let dist: Bool = model.alignment == .distance
+        let small: Double = dist ? 10 : 1
+        let big: Double = dist ? 100 : 10
+        let marked: [SessionItem] = CompareModel.byDateDescending(app.sessions.filter { s in model.speedSeries.contains { $0.id == s.id } })
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 10) {
+                Text("ENCUADRE").font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
+                Text("Mueve cada entrenamiento sobre el eje para superponer los trabajos").font(.caption).foregroundStyle(Avo.textDim)
+                Spacer()
+                Button { model.autoFrame() } label: { Label("Encuadre automático", systemImage: "wand.and.stars") }
+                    .buttonStyle(.avoPrimary)
+                    .accessibilityIdentifier("compare.autoFrame")
+                Button("Restablecer") { model.resetShifts() }
+                    .buttonStyle(.avoSecondary)
+                    .disabled(model.shifts.values.allSatisfy { $0 == 0 })
+            }
+            ForEach(marked) { (s: SessionItem) in
+                let sh: Double = model.shifts[s.id] ?? 0
+                HStack(spacing: 8) {
+                    RoundedRectangle(cornerRadius: 2).fill(s.compareColor).frame(width: 4, height: 22)
+                    Text("\(s.dateTimeText) · \(s.horse)").font(.callout.weight(.semibold)).foregroundStyle(Avo.text).lineLimit(1)
+                    Spacer(minLength: 8)
+                    Text(dist ? "\(Int(sh.rounded())) m" : "+\(TimeText.clock(sh))").font(.callout.monospacedDigit()).foregroundStyle(Avo.silver)
+                        .frame(width: 90, alignment: .trailing)
+                    shiftButton("−\(Int(big))", s.id, -big)
+                    shiftButton("−\(Int(small))", s.id, -small)
+                    shiftButton("+\(Int(small))", s.id, small)
+                    shiftButton("+\(Int(big))", s.id, big)
+                    Text(dist ? "m" : "s").font(.caption).foregroundStyle(Avo.textDim)
+                }
+            }
+        }
+        .padding(12)
+        .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 10))
+        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Avo.line, lineWidth: 1))
+    }
+
+    private func shiftButton(_ title: String, _ id: String, _ d: Double) -> some View {
+        Button(title) { model.nudge(id, d) }
+            .buttonStyle(.avoSecondary)
+            .font(.callout.monospacedDigit())
     }
 }
 
@@ -191,10 +314,11 @@ struct CompareRangeCard: View {
         AvoCard(title: "Tramo seleccionado",
                 subtitle: subtitle,
                 padding: 12) {
-            FeatureTable(headers: ["Entrenamiento", "Distancia", "Duración", "V. media", "V. máx", "Acel. máx", "Frenada máx", "Observaciones"],
-                         widths: [190, 80, 70, 80, 80, 85, 90, 300],
+            // no «Observaciones» column (trainer's sketch 14/11/2026); the figures use the freed width
+            FeatureTable(headers: ["Entrenamiento", "Distancia", "Duración", "V. media", "V. máx", "Acel. máx", "Frenada máx"],
+                         widths: [330, 120, 110, 120, 120, 120, 130],
                          rows: model.rangeRows.map { (r: CompareRangeRow) -> [String] in
-                             [r.label, r.distance, r.duration, r.meanSpeed, r.maxSpeed, r.maxAccel, r.maxDecel, r.observations]
+                             [r.label, r.distance, r.duration, r.meanSpeed, r.maxSpeed, r.maxAccel, r.maxDecel]
                          },
                          colors: model.rangeRows.map { (r: CompareRangeRow) -> Color? in r.color },
                          emptyText: "Calculando…")
@@ -232,7 +356,8 @@ struct CompareResults: View {
             CompareMap(model: model)
                 .frame(maxWidth: .infinity)
                 .frame(height: mapHeight)
-            // 2) speed
+            // 2) speed · with «Encuadre» (move the trainings along the axis, or line them up automatically)
+            if model.speedSeries.count > 1 { CompareShiftBar(model: model) }
             FeatureChartPanel(title: "Velocidad comparada (km/h)", minHeight: 240) {
                 CompareChart(model: model, series: model.speedSeries, includeZero: true, emptyText: empty)
             }
@@ -411,7 +536,10 @@ private struct CompareTouchLayer: View {
                     .contentShape(Rectangle())
                     .simultaneousGesture(dragGesture(plot))
                     .simultaneousGesture(pinchGesture())
-                    .simultaneousGesture(TapGesture(count: 2).onEnded { model.resetZoom() })
+                    .simultaneousGesture(TapGesture(count: 2).onEnded {
+                        // double tap = quick «Quitar selección» (trainer's sketch 14/11/2026); without a selection it resets the zoom
+                        if model.hasRange { model.clearRange() } else { model.resetZoom() }
+                    })
                 rangeView(plot).allowsHitTesting(false)
             }
         }
@@ -551,6 +679,8 @@ struct CompareMap: View {
     var model: CompareModel
     @State private var position: MapCameraPosition = .automatic
     @State private var region: MKCoordinateRegion? = nil
+    @State private var camera: MapCamera? = nil
+    @State private var size: CGSize = .zero
 
     /// Explícito: los `@State` privados harían privado el inicializador por miembros (se usa también en Análisis).
     init(model: CompareModel) { self.model = model }
@@ -582,6 +712,7 @@ struct CompareMap: View {
                 .mapStyle(app.settings.map == .vectorOffline ? MapStyle.standard : MapStyle.imagery)
                 .onMapCameraChange(frequency: .onEnd) { (ctx: MapCameraUpdateContext) in
                     region = ctx.region
+                    camera = ctx.camera
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
@@ -608,6 +739,11 @@ struct CompareMap: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
+        .background(GeometryReader { (g: GeometryProxy) in
+            Color.clear
+                .onAppear { size = g.size; fit(model.tracks) }
+                .onChange(of: g.size) { _, v in size = v }
+        })
         .onAppear { fit(model.tracks) }
         .onChange(of: model.tracks.map { $0.id }) { fit(model.tracks) }
     }
@@ -625,16 +761,49 @@ struct CompareMap: View {
         .accessibilityLabel(label)
     }
 
+    /// Same start as «Mapa» (trainer's sketch 14/11/2026: «zoom y orientación de inicio»): the routes laid horizontal
+    /// (sea at the top, as in MapKitRoute) and framed with a margin.
     private func fit(_ list: [CompareTrack]) {
-        guard let r = CompareMap.bounds(list) else {
-            position = .automatic
+        var pts: [MKMapPoint] = []
+        for t in list { for run in t.runs { for c in run where c.latitude.isFinite && c.longitude.isFinite { pts.append(MKMapPoint(c)) } } }
+        guard pts.count > 1, size.width > 40, size.height > 40 else {
+            if let r = CompareMap.bounds(list) { region = r; withAnimation { position = .region(r) } } else { position = .automatic }
             return
         }
-        region = r
-        withAnimation { position = .region(r) }
+        let theta: Double? = MapKitRoute.Coordinator.routeAxis(pts)
+        let heading: Double = theta.map { MapKitRoute.Coordinator.horizontalHeading(axis: $0) } ?? 0
+        let hr: Double = heading * .pi / 180
+        let rx: Double = cos(hr), ry: Double = sin(hr), dxv: Double = -sin(hr), dyv: Double = cos(hr)
+        var sx: Double = 0, sy: Double = 0
+        for p in pts { sx += p.x; sy += p.y }
+        let c0 = MKMapPoint(x: sx / Double(pts.count), y: sy / Double(pts.count))
+        var uMin: Double = .infinity, uMax: Double = -.infinity, vMin: Double = .infinity, vMax: Double = -.infinity
+        for p in pts {
+            let ox: Double = p.x - c0.x, oy: Double = p.y - c0.y
+            let u: Double = ox * rx + oy * ry, v: Double = ox * dxv + oy * dyv
+            uMin = min(uMin, u); uMax = max(uMax, u); vMin = min(vMin, v); vMax = max(vMax, v)
+        }
+        let perMetre: Double = MKMapPointsPerMeterAtLatitude(c0.coordinate.latitude)
+        let w: Double = max(uMax - uMin, 150 * perMetre), h: Double = max(vMax - vMin, 150 * perMetre)
+        let availW: Double = max(40, Double(size.width) - 110), availH: Double = max(40, Double(size.height) - 70)
+        let mpp: Double = max(w / availW, h / availH)
+        let um: Double = (uMin + uMax) / 2, vm: Double = (vMin + vMax) / 2
+        let centre = MKMapPoint(x: c0.x + um * rx + vm * dxv, y: c0.y + um * ry + vm * dyv)
+        // visible height in metres → camera distance (MapKit vertical field of view ≈ 30°)
+        let visibleH: Double = mpp * Double(size.height) / perMetre
+        let distance: Double = max(200, visibleH / (2 * tan(15 * Double.pi / 180)))
+        let cam = MapCamera(centerCoordinate: centre.coordinate, distance: distance, heading: heading, pitch: 0)
+        camera = cam
+        withAnimation { position = .camera(cam) }
     }
 
     private func zoomMap(_ factor: Double) {
+        if let c = camera {
+            let z = MapCamera(centerCoordinate: c.centerCoordinate, distance: max(80, c.distance * factor), heading: c.heading, pitch: c.pitch)
+            camera = z
+            withAnimation { position = .camera(z) }
+            return
+        }
         guard let r = region ?? CompareMap.bounds(model.tracks) else { return }
         let lat: Double = min(max(r.span.latitudeDelta * factor, 0.0002), 120)
         let lon: Double = min(max(r.span.longitudeDelta * factor, 0.0002), 240)

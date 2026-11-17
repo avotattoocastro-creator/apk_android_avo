@@ -1,4 +1,52 @@
-# Estado del desarrollo unificado — 22/10/2026
+# Estado del desarrollo — tabla vigente
+
+**Actualizado:** 17/11/2026 · **Rama:** `develop/avo-performance-horse` (`c813afd`) · Repositorio
+`avotattoocastro-creator/apk_android_avo`.
+
+**Regla:** quien cambie una versión actualiza su fila en el mismo PR. **PROTOTIPO** = placas de desarrollo, sin PCB
+propia. **BETA** = PCB propia. Niveles: IMPLEMENTADO · COMPILADO EN CI · PROBADO FÍSICAMENTE. Sin prueba física
+registrada: **NO VERIFICADO**.
+
+## Vigente
+
+### Firmware y hardware
+
+| Línea | Componente | Versión | Carpeta | Workflow | Descarga | Estado |
+|---|---|---|---|---|---|---|
+| PROTOTIPO | Pecho · Waveshare ESP32-S3 AMOLED 2.06" | **3.7.10** (carga apagado) | `firmware/chest/V3_7_10_CARGA_APAGADO` | `build-chest-v377-despertar.yml` | [`AVO_PECHO_PROTOTIPO_FW.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_PECHO_PROTOTIPO_FW.zip) | CI ✅ · NO VERIFICADO |
+| PROTOTIPO | Espalda · Heltec + ZED-F9P | **3.14.3** (incluye 3.13.12) | `firmware/back/V3_8_0` | `build-back-v380.yml` | [`AVO_ESPALDA_PROTOTIPO_FW.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_ESPALDA_PROTOTIPO_FW.zip) | CI ✅ · NO VERIFICADO |
+| PROTOTIPO | Cincha · XIAO ESP32-C6 + BNO085 | **0.4.3** | `firmware/girth/V0_4_0` | `build-girth-v040.yml` (no se lanza en `develop`) | [`AVO_CINCHA_PROTOTIPO_FW.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_CINCHA_PROTOTIPO_FW.zip) | CI ✅ · NO VERIFICADO |
+| PROTOTIPO | Cincha + ECG MAX30003 | **0.5.0** | `firmware/girth/V0_5_0` | `build-girth-v050.yml` | [`AVO_CINCHA_PROTOTIPO_ECG_FW.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_CINCHA_PROTOTIPO_ECG_FW.zip) | CI ✅ · NO VERIFICADO |
+| PROTOTIPO | Caja pecho REV D · carcasa espalda V2.2H Rev E.5 | — | **no están en el repositorio** | — | pendiente de subir | impresas (fuera de GitHub) |
+| PROTOTIPO | Cápsula cincha REV 5.x | REV 5.10 | `hardware/girth/REV5` | — | [`CAD_CINCHA_PROTOTIPO_REV5.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/CAD_CINCHA_PROTOTIPO_REV5.zip) | diseño |
+| BETA | Cincha · PCB REV D (C6-MINI + LSM6DSV16X + MMC5983MA + ADS1292) | firmware **0.6.0** | `firmware/girth/V0_6_0`, `hardware/girth/PCB_REV_D` | `build-girth-v060.yml`, `build-girth-pcb-revd.yml` | [`AVO_CINCHA_BETA_FW.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_CINCHA_BETA_FW.zip) | CI ✅ · placa sin fabricar |
+| BETA | Cápsula cincha REV 6.2 + montaje | REV 6.2 (REV 6.4 en PR #60) | `hardware/girth/CINCHA_MONTAJE` | — | [`CAD_CINCHA_BETA_REV6_MONTAJE.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/CAD_CINCHA_BETA_REV6_MONTAJE.zip) | diseño |
+| BETA | Casco BACK V5 (PCB + CAD) | — | `hardware/back/V5_CASCO` en `feature/back-v5-casco` (sin integrar) | — | [`CAD_CASCO_BETA_V5.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/CAD_CASCO_BETA_V5.zip) | diseño · sin firmware |
+| BETA | DOCK V1 (PCB REV A + caja) | — | `hardware/dock/V1` en PR #45 | — | [`CAD_DOCK_BETA_V1.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/CAD_DOCK_BETA_V1.zip) | CI ✅ · sin fabricar · sin firmware |
+| BETA | Espalda V4 (placa ESP32-S3) | 4.0.0-dev2 | `firmware/back/V4_0_0`, `hardware/back/V4` | `build-back-v4-*.yml` | [`CAD_ESPALDA_BETA_V4.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/CAD_ESPALDA_BETA_V4.zip) | sin fabricar · **nunca en la Heltec** |
+
+### Apps y motor
+
+| Componente | Versión | Carpeta | Workflow | Descarga | Estado |
+|---|---|---|---|---|---|
+| Android AVO Performance Horse | **2.9-integrada-dev1 (vc 42)** | `app/`, `core/` | `build-android.yml` | [`AVO_ANDROID.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_ANDROID.apk) | CI ✅ · NO VERIFICADO |
+| AVO Tarjetas | **1.4-nfc-movil-dev1 (vc 5)** | `cards/` | `build-android.yml` | [`AVO_TARJETAS.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_TARJETAS.apk) | CI ✅ |
+| AVO Update | **2.3.1 (vc 28)** | `usb-updater/` | `build-usb-updater.yml` | [`AVO_UPDATE.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_UPDATE.apk) | CI ✅ |
+| Windows | **V2 PRO 2.0.0** | `windows/` | `build-avo-windows.yml` | [`AVO_WINDOWS.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_WINDOWS.zip) | CI ✅ |
+| iPad | **1.0.0** (build automático) | `ipad/` | `build-avo-ipad.yml` | solo TestFlight | CI ✅ |
+| Motor C++17 Equine | **2.0.0-dev1** | `equine-intelligence/` | `build-equine-engine.yml` | — | CI ✅ |
+
+**Plan de pruebas (decisión del usuario, 17/11/2026):** hasta construir todas las PCB, las pruebas de campo se hacen
+solo con PROTOTIPOS; lo validado se porta a las BETA, y las pruebas de campo BETA empiezan con todas las PCB
+construidas. PCB BETA construidas hoy: **ninguna**.
+
+**Siguiente prueba física prevista:** Android 2.9 + pecho 3.7.10 + espalda 3.14.3 + cincha PROTOTIPO 0.5.0.
+
+---
+
+# Histórico (estado del 22/10/2026; superado, no usar como referencia)
+
+## Estado del desarrollo unificado — 22/10/2026
 
 **Rama:** `develop/avo-performance-horse`  
 **Repositorio:** `avotattoocastro-creator/apk_android_avo`

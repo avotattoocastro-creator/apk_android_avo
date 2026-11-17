@@ -566,6 +566,7 @@ RacingResult analyse_racing(const GnssResult& g, const std::vector<ImuSeries>& i
       std::sort(r.efforts.begin(), r.efforts.end(), [](const Effort& x, const Effort& y) { return x.t0 < y.t0; });
       for (size_t k = 0; k < r.efforts.size(); k++) r.efforts[k].id = (int)k + 1;
     }
+    size_t full_floor_idx = 0;   // last index already owned by an effort (full limits never overlap)
     while (i < n) {
       if (std::isnan(g.speed[i]) || g.speed[i] < c.breed.work_speed) { i++; continue; }
       size_t j = i, end = i;
@@ -577,17 +578,30 @@ RacingResult analyse_racing(const GnssResult& g, const std::vector<ImuSeries>& i
       size_t i0 = i, i1 = end;
       i = end + 1;
       if (g.t[i1] - g.t[i0] < c.effort_min_s) continue;
+      // 2.0: full limits — run-up (still accelerating) before the core and pull-up (still decelerating) after it,
+      // never across a gap, below the walk floor or into the previous effort
+      size_t fa = i0, fb = i1;
+      if (c.effort_full_limits) {
+        auto good = [&](size_t k) { return !std::isnan(g.speed[k]) && !std::isnan(g.accel[k]) && !std::isnan(g.dist[k]); };
+        while (fa > full_floor_idx + 1 && good(fa - 1) && g.t[fa] - g.t[fa - 1] <= c.effort_gap_s &&
+               g.speed[fa - 1] >= c.effort_extend_floor && g.accel[fa - 1] >= c.effort_extend_accel) fa--;
+        while (fb + 1 < n && good(fb + 1) && g.t[fb + 1] - g.t[fb] <= c.effort_gap_s &&
+               g.speed[fb + 1] >= c.effort_extend_floor && g.accel[fb + 1] <= -c.effort_extend_accel) fb++;
+      }
+      full_floor_idx = fb;
       Track T;
       for (size_t k = i0; k <= i1; k++) { T.t.push_back(g.t[k]); T.d.push_back(g.dist[k]); T.v.push_back(g.speed[k]); T.a.push_back(g.accel[k]); }
       if (std::isnan(T.d.front()) || std::isnan(T.d.back())) continue;
       Effort e; e.id = ++id;
       fill_effort(&e, T, r, c);
       e.type = e.vmax >= c.breed.fast_speed ? "TRABAJO_RAPIDO" : "GALOPE_TRABAJO";
+      e.t0_full = g.t[fa]; e.t1_full = g.t[fb]; e.distance_full_m = g.dist[fb] - g.dist[fa];
       if (std::isnan(r.vmax) || e.vmax > r.vmax) r.vmax = e.vmax;
       for (const auto& bs : e.best) if (bs.distance_m == 200 && !std::isnan(bs.time_s) && (std::isnan(r.best_200_s) || bs.time_s < r.best_200_s)) r.best_200_s = bs.time_s;
       r.efforts.push_back(e);
     }
   }
+  for (auto& e : r.efforts) if (std::isnan(e.t0_full)) { e.t0_full = e.t0; e.t1_full = e.t1; e.distance_full_m = e.distance_m; }
   // ================================================================ G. course: start / finish lines
   if (c.course.defined() && n > 2) {
     r.course_defined = true; r.course_name = c.course.name;
@@ -704,9 +718,10 @@ RacingResult analyse_racing(const GnssResult& g, const std::vector<ImuSeries>& i
       fill(&r.work, r.passes.front().t0, r.passes.back().t1);
       fill(&r.cooldown, r.passes.back().t1, te);
     } else if (!r.efforts.empty() && !std::isnan(ts)) {
-      fill(&r.warmup, ts, r.efforts.front().t0);
-      fill(&r.work, r.efforts.front().t0, r.efforts.back().t1);
-      fill(&r.cooldown, r.efforts.back().t1, te);
+      // 2.0: the work phase runs from the run-up of the first effort to the pull-up of the last one
+      fill(&r.warmup, ts, r.efforts.front().t0_full);
+      fill(&r.work, r.efforts.front().t0_full, r.efforts.back().t1_full);
+      fill(&r.cooldown, r.efforts.back().t1_full, te);
     }
     // recovery to walk and pauses between repetitions (efforts and course passes)
     std::vector<double> rec;
@@ -808,10 +823,21 @@ std::string racing_json(const RacingResult& r, const RacingConfig& c) {
     for (int k = 0; k < 2; k++) o << (k ? "," : "") << "{\"v\":" << num(c.breed.ref_speed[k]) << ",\"f_hz\":" << num(e.sf_ref[k]) << ",\"l_m\":" << num(e.sl_ref[k]) << "}";
     o << "],\"mano\":{\"izquierda\":" << e.lead_left << ",\"derecha\":" << e.lead_right << ",\"cambios\":" << e.lead_changes << "}"
       << ",\"recuperacion_hasta_paso_s\":" << num(e.recovery_to_walk_s) << ",\"pausa_hasta_siguiente_s\":" << num(e.pause_to_next_s)
-      << ",\"v_media_pausa\":" << num(e.pause_speed_mean) << ",\"manual\":" << (e.manual ? "true" : "false") << "}";
+      << ",\"v_media_pausa\":" << num(e.pause_speed_mean) << ",\"manual\":" << (e.manual ? "true" : "false")
+      << ",\"t0_completo\":" << num(e.t0_full) << ",\"t1_completo\":" << num(e.t1_full) << ",\"distancia_completa_m\":" << num(e.distance_full_m) << "}";
   }
   };
-  o << ",\"trabajos\":{\"algoritmo\":\"EFFORT_V1\",\"distancia_galope_trabajo_m\":" << num(r.dist_work_m) << ",\"distancia_rapida_m\":" << num(r.dist_fast_m)
+  // 2.0: «trabajo fuerte» = full limits of the fast efforts (all efforts when none is fast): what the trainer calls the work
+  double tw_d = 0, tw_t0 = NAN, tw_t1 = NAN; bool any_fast = false;
+  for (const auto& e : r.efforts) if (e.type == "TRABAJO_RAPIDO") any_fast = true;
+  for (const auto& e : r.efforts) if (!any_fast || e.type == "TRABAJO_RAPIDO") {
+    if (!std::isnan(e.distance_full_m)) tw_d += e.distance_full_m;
+    if (std::isnan(tw_t0) || e.t0_full < tw_t0) tw_t0 = e.t0_full;
+    if (std::isnan(tw_t1) || e.t1_full > tw_t1) tw_t1 = e.t1_full;
+  }
+  o << ",\"trabajos\":{\"algoritmo\":\"EFFORT_V2\",\"distancia_trabajo_m\":" << (r.efforts.empty() ? std::string("null") : num(tw_d))
+    << ",\"t0_trabajo\":" << num(tw_t0) << ",\"t1_trabajo\":" << num(tw_t1)
+    << ",\"distancia_galope_trabajo_m\":" << num(r.dist_work_m) << ",\"distancia_rapida_m\":" << num(r.dist_fast_m)
     << ",\"v_max\":" << num(r.vmax) << ",\"mejor_200m_s\":" << num(r.best_200_s) << ",\"lista\":[";
   effort_json(r.efforts);
   o << "]},\"recorrido\":";

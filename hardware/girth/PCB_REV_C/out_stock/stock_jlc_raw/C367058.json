@@ -1,0 +1,211 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 1,
+   "list": [
+    {
+     "componentId": 341054,
+     "componentLibraryType": "expand",
+     "stockCount": 971,
+     "componentTypeEn": "Programmable Oscillators",
+     "erpComponentName": "32.768kHz \u00b1100ppm 1.5V~3.63V LVCMOS",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/programmable-oscillators_sitime-sit1533ai-h4-dcc-32-768e_C367058.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.286
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.0619
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.9392
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.8001
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.7379
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.7101
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.9047
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.2388
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.7708
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.7109
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.0229
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.6841
+      }
+     ],
+     "firstSortAccessId": "fef7fb84489e4849acf8e6b9cb97ff9f",
+     "secondSortAccessId": "ab8cef3ec523481d8a33f964ba4a093c",
+     "canPresaleNumber": 725,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "SiTime-SIT1533AI_H4_DCC_32768E/C367058",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 3.8,
+     "preMinPurchaseNum": 8,
+     "minPurchaseNum": 1,
+     "initialPrice": 1.286,
+     "componentCode": "C367058",
+     "componentBrandEn": "SiTime",
+     "componentModelEn": "SIT1533AI-H4-DCC-32.768E",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583522408107663360-C367058/C367058-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261115T032542Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5njOcnWnY5Y%2Bo%2FYZWXUj2Egbf5%2B3rOSmjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qZVRrg40557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jbcUNorteDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5VpeIOc5ch3ARqAAZJX%2FjDPih5FqqD8pGJHd2TveB8pkFb5e2wYHGs%2B%2F27tS34h923%2BeVL94zCQxQwEkFvttuHod%2FoFKPET6QIetarq403unKfS4078IXJuBl4kZaSchsVpqGvXaCzmgwVoJdSqfc7t5HalMUIz35Gavi7aiy%2FaMvKbbD6k21y5j8ShIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZVrsbpQyMM3gCekauaqR1v9x%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=8addceb4d12ac8831a2e333df9bed7e32d3285c0c8ea1af385158438e8c60816",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304140030_SiTime-SIT1533AI-H4-DCC-32-768E_C367058.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588931644794785792-C367058.pdf?response-content-disposition=attachment%3B%20filename%3DC367058.pdf%3B%20filename%2A%3DUTF-8%27%27C367058.pdf&x-oss-date=20261115T032542Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5vPCY312bhV35qtdnbHgHliQPkdhaz%2Bkzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdAFoQ80557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWiogTs5LLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIaPX%2FIKKWD5sagAGAEZYYiWjBmi%2BQhYI6sBWk%2FgQrqf7FEoN4xWz4FwDQfyxXY56i1M6Tpmn91a8U3MpVM4TuBs9bJC8aifBYDOQTancu9AdkvMPepNAZzLBC2Lmn27M5lYgr17qircNGJX8Oq90%2BfZi7rndnO5p%2B9Z8XqtDbhkDQr3r5I1sNPMTppyAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXzB7A4gthXFtPvdy7Lv1jiUq%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=eab95fe8f24020d8c2db5070d3c1118561467553afca4a14a729a5fe580ff63f",
+     "dataManualOfficialLink": "",
+     "componentName": "SiTime SIT1533AI-H4-DCC-32.768E",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583522408989413376-C367058/C367058-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261115T032542Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5njOcnWnY5Y%2Bo%2FYZWXUj2Egbf5%2B3rOSmjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qZVRrg40557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jbcUNorteDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5VpeIOc5ch3ARqAAZJX%2FjDPih5FqqD8pGJHd2TveB8pkFb5e2wYHGs%2B%2F27tS34h923%2BeVL94zCQxQwEkFvttuHod%2FoFKPET6QIetarq403unKfS4078IXJuBl4kZaSchsVpqGvXaCzmgwVoJdSqfc7t5HalMUIz35Gavi7aiy%2FaMvKbbD6k21y5j8ShIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZVrsbpQyMM3gCekauaqR1v9x%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=93356320cc744df608110923bab64e2de221c4161db4c902bbb4af12ef04ea60",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD2012-4P",
+     "describe": "-40\u2103~+85\u2103 1.5V~3.63V 32.768kHz LVCMOS \u00b1100ppm SMD2012-4P Programmable Oscillators ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.5V~3.63V"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "LVCMOS"
+      },
+      {
+       "attribute_name_en": "Frequency Stability",
+       "attribute_value_name": "\u00b1100ppm"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "32.768kHz"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Programmable Oscillators",
+     "secondSortName": "Crystals, Oscillators, Resonators",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C367058</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C367058"
+ },
+ "message": null
+}

@@ -60,7 +60,7 @@ fun CompareScreen(c: AppContainer, firstId: String, secondId: String) {
                 KV("IMU B", if (right.imuAvailable) "${right.imuSamples} muestras" else "Sin datos")
             } }
         } else item { Note("Analizando los dos ficheros locales… Necesitas descargar y verificar ambas sesiones.") }
-        // ---- AVO Equine Intelligence Engine comparison (says whether the sessions are really comparable)
+        // ---- AVO Performance Equine comparison (says whether the sessions are really comparable)
         item { AvoCard("Comparación avanzada (motor)") {
             Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
                 androidx.compose.material3.Switch(checked = sameRoute, onCheckedChange = { sameRoute = it })
