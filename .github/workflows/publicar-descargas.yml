@@ -1,0 +1,43 @@
+# Descargas directas: release fija «descargas» con nombres de archivo que no cambian.
+#   https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/<ARCHIVO>
+# No compila nada: recoge los artefactos de los workflows existentes (sin modificarlos) y comprime el CAD.
+# Configuración: scripts/descargas/descargas.json · Explicación: docs/DESCARGAS_DIRECTAS.md
+name: Publicar descargas directas
+
+on:
+  push:
+    branches:
+      - 'develop/avo-performance-horse'
+  # El botón manual y la programación solo aparecen si este fichero está en la rama por defecto del repositorio.
+  workflow_dispatch:
+    inputs:
+      forzar:
+        description: 'Volver a subir todo aunque no haya cambiado'
+        type: boolean
+        default: false
+  schedule:
+    - cron: '23 */6 * * *'
+
+permissions:
+  contents: write   # crear/editar la release «descargas» y subir archivos
+  actions: read     # leer y descargar artefactos de otras ejecuciones
+
+concurrency:
+  group: publicar-descargas
+  cancel-in-progress: true   # un push nuevo sustituye a la espera del anterior
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 110
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: develop/avo-performance-horse
+          fetch-depth: 1
+
+      - name: Publicar la última versión de cada cosa
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FORZAR: ${{ inputs.forzar || 'false' }}
+        run: python3 -I scripts/descargas/publicar.py scripts/descargas/descargas.json
