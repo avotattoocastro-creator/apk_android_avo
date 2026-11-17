@@ -115,6 +115,46 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — DOCK V1 (nuevo) — soporte de pared cargador: PCB REV A y caja
+**Autor:** Claude · **Rama:** `claude/dock-cargador-v1` (sale de `develop/avo-performance-horse`) · **CI:** ver PR
+**Qué cambia:** módulo nuevo `hardware/dock/V1`.
+- **Para qué:** cargar 2 cascos (BACK V5, pogo de 5 contactos) y 2 cinchas (REV 5.9.1 / 5.10, pogo de 3 contactos).
+- **Alimentación:** red de 230 V con un Mean Well IRM-20-5 en la PCB, en una zona aislada con foso de 6,5 mm, o USB-C de 5 V con prioridad a la red.
+- **Pantalla** ST7789 de 2" con la batería de las 4 cápsulas.
+- **ESP32-S3** con BLE y Wi-Fi, más un **hub USB2514B** y 2 TS3USB221 para dos modos:
+  - **modo PC:** el PC ve los cascos y el soporte;
+  - **modo autónomo:** el S3 hace de anfitrión, lee los cascos y sirve los entrenamientos por Wi-Fi.
+- **Puertos:** 4 TPS2553 con límite de corriente y 4 INA180.
+- **PCB:** generador derivado del de la BACK V5 (`PCB/fuente/avo_dock_v1_pcb.py`, `place_dock.py`, `build.py`). Placa de 130 × 76 mm, 4 capas.
+- **Caja:** CadQuery (`CAD/avo_dock_v1.py`), 200 × 190 × 55, en 2 piezas de PETG.
+- **Workflows nuevos** (no se ha modificado ninguno existente): `build-dock-v1-pcb.yml` y `build-dock-v1-cad.yml`. Solo se lanzan en esta rama o a mano.
+
+**Por qué:** petición del usuario (15/11/2026). Decisiones tomadas: pogo de 3 de la REV 5.9.1, hub USB + ESP32-S3, módulo AC-DC certificado y rama desde develop.
+**Archivos:** `hardware/dock/V1/**`, `.github/workflows/build-dock-v1-pcb.yml`, `.github/workflows/build-dock-v1-cad.yml`.
+**No se ha tocado:** firmware, apps, contratos binarios, workflows existentes, firmas, `Info.plist`, número de build.
+**Iteraciones del ruteado (16/11/2026):**
+- se gira el hub 270° y se fijan el cristal y los desacoplos;
+- 0,25 mm entre patios;
+- In2 pasa a plano +3V3 con vía desde cada pad;
+- F.Cu y B.Cu quedan como capas de señal;
+- OCS_N del hub a +3V3 (sin R25);
+- se unen los pads VBUS superpuestos del USB-C;
+- se quita la zona +3V3 duplicada al importar la sesión;
+- `jlc.py` ordena referencias como Q1B.
+
+**Validación:**
+- IMPLEMENTADO.
+- **COMPILADO / CI:**
+  - PCB: [43789462892](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/43789462892). DRC 0 errores, 0 conexiones incompletas, paridad 0, ERC 0/0, puerta superada. Ficheros en `out/FINAL/`. Ruteado de la ejecución 43788505774.
+  - Caja: CI 43785237645. 1 sólido por pieza, 0 interferencias.
+- **NO VERIFICADO** en hardware: nada fabricado.
+**Pendiente:**
+- códigos LCSC de 6 piezas;
+- STEP real del pogo de 5 contactos;
+- medidas de la pantalla;
+- firmware DOCK 0.1.0 y el contrato `DockStatus v1` en todas las apps a la vez;
+- % de batería por USB en la BACK 5.x;
+- protocolo por MTCK y divisor de batería en la GIRTH.
 ## 2026-11-17 — Cincha CAD REV 6.4 — balancín magnético empotrado a ras en la pared
 **Autor:** Claude · **Rama:** `cad/cincha-rev6-3-balancin-magnetico` (PR #60)
 **Qué cambia (captura del usuario):**
