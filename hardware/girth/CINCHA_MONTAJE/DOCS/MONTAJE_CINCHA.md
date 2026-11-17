@@ -1,4 +1,4 @@
-# AVO GIRTH · montaje del sistema en la cincha (cápsula REV 6.5: aro de luz, estanca y con cierre magnético de balancín empotrado y portaimanes; funda de piel y electrodos ECG)
+# AVO GIRTH · montaje del sistema en la cincha (cápsula REV 6.6: aro de luz, estanca, cierre magnético de balancín empotrado, portaimanes y pared a ras del soporte; funda de piel y electrodos ECG)
 
 > **Estado: diseño · NO VERIFICADO en caballo real.** No se ha impreso, cosido ni montado nada. Los STEP no se han
 > abierto en FreeCAD dentro de este entorno (no está instalado). Solo pasaron la comprobación automática de
@@ -64,20 +64,35 @@ el resto de la REV 6.4 no cambia (comprobado: mismo ángulo de suelta, 4°, y de
   (z 7,0 < 8,0).
 - Desaparecen los 2 tapones de `tapas_imanes` (quedan las 2 tapas de los balancines).
 
+**REV 6.6 (17/11/2026, capturas del usuario): pared a ras del soporte.**
+- Por encima del cerco, la base engorda hasta la **cara exterior del cerco**. Esa cara es ahora una envolvente limpia
+  (convexa) de las columnas de los tornillos + holgura + cerco, común a la cápsula y al soporte: quedan **a ras**, sin
+  entrantes entre columnas. Diferencia medida entre las dos caras ≤ 0,03 mm (rasterizado).
+- La parte de la base que entra en el cerco (hasta z = 4,25) no cambia (69,0 × 60,1); la alta pasa a **69,0 × 66,6**.
+  Escalón a z = 4,25: rendija de 0,45 mm sobre el canto del cerco (0,25 de recorrido al abrir + 0,2).
+- La tapa sigue la misma envolvente (más la oreja del cordón). Los extremos ±X (balancín) no cambian.
+- El cerco del soporte rellena los entrantes entre columnas con la misma envolvente.
+- Pared alta en los lados largos: ≈ 9,9 mm (x = ±20) y 11,4 mm en el centro (antes 4,0 + columnas). Base
+  18,5 → 25,3 cm³; tapa 9,0 → 10,8 cm³.
+- **Luz:** la luz de los LED atraviesa más PETG translúcido (≈ 10 mm en ±Y): saldrá más difusa y algo más débil.
+- **Impresión:** el escalón es un voladizo plano de 3–7 mm a z = 4,25 → **soportes** (árbol, solo desde la cama) bajo
+  el escalón. La cara del escalón queda oculta sobre el cerco.
+- Comprobado por vóxeles: 0 mm³ entre cápsula y soporte, cerrada y empujada 0,25 mm; cierre y portaimanes sin cambios.
+
 ## 1. Qué hay en esta carpeta
 
 | Ruta | Contenido |
 |---|---|
 | `out/STEP/AVO_CINCHA_MONTAJE_CONJUNTO_CURVADO.step` | **Conjunto completo** curvado sobre el tórax: cincha, funda, soporte con pestillos y seguros, cápsula, PCB, celda, antena, pogos, tornillería, electrodos, espuma y cables (92 sólidos en 8 subconjuntos) |
 | `out/STEP/AVO_CINCHA_MONTAJE_CONJUNTO_RECTO.step` | El mismo conjunto con la cincha recta (tumbada, con la cara interior abajo) |
-| `out/STEP/AVO_CINCHA_R6_5_CAPSULA_CONJUNTO.step`, `..._SOPORTE_CONJUNTO.step` | Subconjuntos de la cápsula y del soporte, en coordenadas locales |
+| `out/STEP/AVO_CINCHA_R6_6_CAPSULA_CONJUNTO.step`, `..._SOPORTE_CONJUNTO.step` | Subconjuntos de la cápsula y del soporte, en coordenadas locales |
 | `out/STEP/REF_torax_caballo_seccion.step` | Sección del tórax de referencia (300 mm de largo) |
 | `out/STEP/piezas/*.step` | Un STEP por pieza: impresas, PCB, celda, antena, electrodo, funda, cincha Decathlon y Horze (recta y curvada) |
 | `out/STL/*.stl` | Piezas impresas, ya colocadas para imprimir |
 | `out/PATRON/AVO_CINCHA_funda_piel_patron.{svg,dxf}` | Patrón plano 1:1 de la funda, en mm, con capas de corte, pliegue, costura, agujeros cada 4 mm, rebaje, taladros y marcas |
 | `out/informe.json` | Medidas, volúmenes, longitudes de cable y comprobaciones |
 | `out/AVO_CINCHA_MONTAJE.zip` | Todo lo anterior junto, para descargar |
-| `renders/*.png` | Renders de comprobación (01–14; 12 = corte por los LED, 13 = corte por un diente del balancín, 13b = corte por los imanes, 14 = balancín entre sus aletas, 15 = portaimanes desde abajo, 15b = corte por el portaimanes) |
+| `renders/*.png` | Renders de comprobación (01–14; 12 = corte por los LED, 13 = corte por un diente del balancín, 13b = corte por los imanes, 14 = balancín entre sus aletas, 15 = portaimanes desde abajo, 15b = corte por el portaimanes, 16 = pared a ras del soporte, 16b = corte por x = 0) |
 | `fuente/` | Scripts que lo generan todo (ver §9) |
 
 **Coordenadas.** En la cincha:
@@ -318,12 +333,12 @@ Las longitudes son las del modelo, todas < 40 cm. Se recomienda añadir 30 mm de
 ### 3.6 Cierre magnético de balancín empotrado (REV 6.4; portaimanes REV 6.5)
 
 Piezas:
-- `AVO_CINCHA_R6_5_balancin_Xpos_PETG` y `..._Xneg_PETG`;
+- `AVO_CINCHA_R6_6_balancin_Xpos_PETG` y `..._Xneg_PETG`;
 - cojinetes en el mismo STL que la base;
-- `AVO_CINCHA_R6_5_tapa_PETG_opaco` (con las 4 lengüetas);
-- `AVO_CINCHA_R6_5_soporte_PETG`;
-- `AVO_CINCHA_R6_5_tapas_imanes_PETG` (2 tapas de los balancines);
-- `AVO_CINCHA_R6_5_portaimanes_PETG_x2` (REV 6.5).
+- `AVO_CINCHA_R6_6_tapa_PETG_opaco` (con las 4 lengüetas);
+- `AVO_CINCHA_R6_6_soporte_PETG`;
+- `AVO_CINCHA_R6_6_tapas_imanes_PETG` (2 tapas de los balancines);
+- `AVO_CINCHA_R6_6_portaimanes_PETG_x2` (REV 6.5).
 
 Cotas en `BAL` y `END_T` de `fuente/avo_cincha_montaje.py`.
 
@@ -398,7 +413,7 @@ Herramientas que no entran en el total:
 
 | Pieza | Material | Orientación | Ajustes |
 |---|---|---|---|
-| **Base (aro de luz)** | **PETG translúcido natural** | Fondo sobre la cama | Ver «Impresión estanca» (§7.3) |
+| **Base (aro de luz)** | **PETG translúcido natural** | Fondo sobre la cama | Ver «Impresión estanca» (§7.3). REV 6.6: soportes en árbol desde la cama bajo el escalón (z 4,25) |
 | Tapa | PETG opaco (rojo) | **Boca abajo** (cara superior sobre la cama) | §7.3. Columnas y lengüeta hacia arriba |
 | Soporte (REV 6.3) | PETG opaco | Ala sobre la cama | 0,2 mm, 4 perímetros. Sin soportes: las ventanas de los dientes son puentes de ≤ 3,6 mm |
 | Balancines (×2, REV 6.4) | PETG | **Cara exterior sobre la cama** | 0,15 mm, 100 %. Sin soportes; el agujero del pasador, en gota |

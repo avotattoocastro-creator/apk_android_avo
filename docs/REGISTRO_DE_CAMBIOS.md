@@ -24,6 +24,19 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-17 — Cincha CAD REV 6.6 — pared de la cápsula a ras del soporte
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-6-pared-a-ras` (sobre el PR #67)
+**Qué cambia (capturas del usuario):** por encima del cerco la base engorda hasta la cara exterior del cerco, que pasa
+a ser una envolvente convexa común (sin entrantes entre columnas); cápsula y soporte quedan a ras. Parte alta 69,0 ×
+66,6 mm; la parte que entra en el cerco no cambia. Escalón a z = 4,25 con rendija de 0,45 mm. Tapa con la misma
+envolvente. Extremos ±X sin cambios. Archivos `R6_5` → `R6_6`.
+**Archivos:** `hardware/girth/CINCHA_MONTAJE/` (fuente, out, renders 16 y 16b, DOCS).
+**Validación:** IMPLEMENTADO · `verificar_step.py` 26/26 OK · vóxeles: 0 mm³ cápsula/soporte (cerrada y empujada
+0,25), cierre (4° / 12°) y portaimanes sin cambios · **NO VERIFICADO** (nada impreso).
+**Pendiente:** luz del aro a través de ≈ 10 mm de PETG; soportes bajo el escalón al imprimir la base.
+
+---
+
 ## 2026-11-17 — Cincha CAD REV 6.5 — portaimanes para los imanes de la pared
 **Autor:** Claude · **Rama:** `cad/cincha-rev6-5-portaimanes` (sobre el PR #60)
 **Qué cambia (captura del usuario):**
