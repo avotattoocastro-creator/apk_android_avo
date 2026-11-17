@@ -21,7 +21,7 @@ BLOCKS = {   # name: (x0, y0, x1, y1, title)
     "microSD": (0, 0, 0, 0, "microSD (SDMMC 4 bits) · alimentación conmutada"),
     "I2C": (0, 0, 0, 0, "BUS I²C (GPIO41 SCL · GPIO42 SDA, 400 kHz)"),
     "Medidor": (0, 0, 0, 0, "MEDIDOR DE BATERÍA MAX17048 (0x36, ModelGauge, ≈ 3 µA)"),
-    "IMU": (0, 0, 0, 0, "IMU LSM6DSV16X (0x6A) · INT1 → GPIO3 (despierta por movimiento)"),
+    "IMU": (0, 0, 0, 0, "IMU LSM6DSV16X (0x6A) · INT1 → GPIO7 (despierta por movimiento)"),
     "Pruebas": (0, 0, 0, 0, "PUNTOS DE PRUEBA"),
 }
 BLOCK_OF = {}

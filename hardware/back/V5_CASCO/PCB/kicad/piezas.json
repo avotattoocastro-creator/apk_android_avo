@@ -490,8 +490,8 @@
   "no_assembly": false,
   "note": "divisor 1:2 → GPIO2 (ADC1_CH1)",
   "jlc_rot": 0,
-  "x": -3.54,
-  "y": 13.46,
+  "x": 1.47,
+  "y": 7.69,
   "rot": 90
  },
  {
@@ -505,8 +505,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -12.87,
-  "y": 13.62,
+  "x": -3.7,
+  "y": 13.46,
   "rot": 90
  },
  {
@@ -520,7 +520,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -14.1,
+  "x": -12.85,
   "y": 13.63,
   "rot": 90
  },
@@ -1060,9 +1060,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 1.38,
-  "y": 7.45,
-  "rot": 90
+  "x": -1.86,
+  "y": -10.94,
+  "rot": 0
  },
  {
   "ref": "R55",
@@ -1675,8 +1675,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -1.93,
-  "y": -10.97,
+  "x": 8.78,
+  "y": 19.55,
   "rot": 0
  },
  {
@@ -1793,7 +1793,7 @@
   "block": "IMU",
   "dnp": false,
   "no_assembly": false,
-  "note": "IMU del casco (la misma que la cincha REV D): movimiento de la cabeza frente al tronco, reposo automático y caídas. INT1 → GPIO3 (RTC: despierta del sueño por movimiento)",
+  "note": "IMU del casco (la misma que la cincha REV D): movimiento de la cabeza frente al tronco, reposo automático y caídas. INT1 → GPIO7 (RTC: despierta del sueño por movimiento)",
   "jlc_rot": 0,
   "x": 0.0,
   "y": 17.0,
@@ -1975,8 +1975,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -16.18,
-  "y": 13.42,
+  "x": -15.35,
+  "y": 13.43,
   "rot": 0
  },
  {
@@ -2005,8 +2005,8 @@
   "no_assembly": true,
   "note": "SAFEBOOT_N del ZED: solo para recuperar su firmware",
   "jlc_rot": 0,
-  "x": -17.86,
-  "y": 13.51,
+  "x": -17.04,
+  "y": 13.4,
   "rot": 0
  }
 ]

@@ -6,7 +6,7 @@ verificada en hardware.** La REV A (14/11/2026) queda en el historial de git (`c
 ## Cambios de la REV B (decisiones del usuario, 17/11/2026)
 | Bloque | REV A | REV B |
 |---|---|---|
-| Micro | ESP32-S3-MINI-1U-N8 (8 MB, sin PSRAM, 2,4 mm) | **ESP32-S3-WROOM-1U-N16R8** (16 MB + 8 MB de PSRAM octal, 18 × 19,2 × 3,2 mm, C3013946). Mismos GPIO de la REV A |
+| Micro | ESP32-S3-MINI-1U-N8 (8 MB, sin PSRAM, 2,4 mm) | **ESP32-S3-WROOM-1U-N16R8** (16 MB + 8 MB de PSRAM octal, 18 × 19,2 × 3,2 mm, C3013946). GPIO de la REV A salvo el RX de la UART2 del ZED: GPIO7 → GPIO3 |
 | Altura en la cara F | 2,6 mm | **3,2 mm**: la cápsula sube 0,6 mm (24,1 → 24,7). La planta de 51 × 51 no cambia |
 | Encendido | siempre alimentada; Hall y VBUS despiertan del reposo | **apagado total**: EN del TLV75733P = OR(táctil TTP223, POWER_HOLD en GPIO46, VBUS) con 2 × BAT54C. Hall y VBUS_DET siguen despertando del reposo |
 | V_BCKP del ZED | del 3,3 V principal | **+3V3_AON** (XC6206, ≈ 1 µA, desde la batería): arranque en caliente también tras apagar |
@@ -14,7 +14,7 @@ verificada en hardware.** La REV A (14/11/2026) queda en el historial de git (`c
 | Cargador | TMR al aire (4–6 h) | **R_TMR 68 kΩ** (≈ 8,5 h; 6,6–10,4 h con la tolerancia de K_TMR) |
 | Batería | sin protección de polaridad | **PMOS AO3401A** (como Q3 de la V4) |
 | % de batería | divisor al ADC | divisor + **MAX17048** (I²C 0x36, ≈ 3 µA, sigue midiendo con el casco apagado) |
-| IMU | — | **LSM6DSV16X** (I²C 0x6A; INT1 → GPIO3, despierta por movimiento) |
+| IMU | — | **LSM6DSV16X** (I²C 0x6A; INT1 → GPIO7, despierta por movimiento) |
 
 **Consumo con el casco apagado (ESTIMADO, hojas de datos):** ZED V_BCKP (decenas de µA) + MAX17048 ≈ 3 µA + TTP223
 ≈ 1,5 µA + XC6206 ≈ 1 µA + BQ24072 ≈ 6,5 µA + divisor del ADC ≈ 2 µA. Del orden de 50 µA: años de reposo con 2000 mAh.
@@ -25,7 +25,7 @@ Hay que medirlo.
   no llega a ~2 s, soltar POWER_HOLD (apagado). Mantener GPIO46 con `gpio_hold` en el sueño profundo.
 - Apagar: confirmación en el anillo, cerrar sesión y microSD, soltar POWER_HOLD. Nunca a mitad de una grabación sin confirmar.
 - Anillo: **LED_PWR (GPIO48)** = 1 antes de enviar datos por GPIO47; con el anillo apagado, GPIO47 a 0.
-- I²C en GPIO41 (SCL) / GPIO42 (SDA): MAX17048 (0x36) y LSM6DSV16X (0x6A).
+- I²C en GPIO41 (SCL) / GPIO42 (SDA): MAX17048 (0x36) y LSM6DSV16X (0x6A). UART2 del ZED: RX = GPIO3, TX = GPIO8.
 - Siguen vigentes los avisos de la REV A (GPIO6/8/9 como entradas antes de bajar ZED_EN).
 
 ## Placa
@@ -60,10 +60,11 @@ Hay que medirlo.
 |---|---|---|---|
 | 1 | HALL (despertar) | 12–17 | microSD (SDMMC 4 bits) |
 | 2 | BAT_ADC | 18 | VBUS_DET (despertar) |
-| **3** | **IMU_INT1 (despertar)** | 19/20 | USB D−/D+ (pogo) |
+| **3** | **RX de la UART2 del ZED (antes GPIO7)** | 19/20 | USB D−/D+ (pogo) |
 | 4 | PPS del ZED | 21 | alimentación de la microSD (0 = encendida) |
 | 5/6 | UART1 del ZED (RX/TX) | 35–37 | PSRAM octal del módulo (no usar) |
-| 7/8 | UART2 del ZED (RX/TX) | 38/39 | PGOOD / CHG del cargador |
+| **7** | **IMU_INT1 (despertar)** | 38/39 | PGOOD / CHG del cargador |
+| 8 | TX de la UART2 del ZED | | |
 | 9 | RESET_N del ZED | 40 | POGO_AUX |
 | 10 | ZED_EN | **41/42** | **I²C SCL / SDA** |
 | **11** | **TOUCH_SENSE (despertar)** | **46** | **POWER_HOLD** |
