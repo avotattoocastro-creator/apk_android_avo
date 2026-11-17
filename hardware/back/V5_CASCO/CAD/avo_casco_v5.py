@@ -16,7 +16,8 @@ Cierre: 4 × M2,5 × 16 desde abajo por los taladros de la PCB (±22, ±22) con 
   (z 10,4–13,4). SIN juntas TPU: las 2 uniones del anillo se sellan con pegamento (tipo B-7000/T-7000).
 Pogo de 5 contactos (ESTIMADO a partir del STEP del de 3 contactos, paso 2,3): en el fondo, franja −Y, cara a ras.
 Táctil (REV B): la pared de la base se adelgaza POR DENTRO a 1,4 mm frente al hilo J7 de la PCB (lámina de cobre pegada
-  en el rebaje y unida a J7 con un hilo): sin agujero, la estanqueidad no cambia. Por fuera, un punto en relieve.
+  en el rebaje y unida a J7 con un hilo): sin agujero, la estanqueidad no cambia. Por fuera, un anillo grabado de
+  0,3 mm (la pared queda en 1,1 mm solo en la línea del anillo); no sobresale de la planta.
 Base del casco: anillo de PETG con 4 imanes Ø6 × 2 (frente a los 4 de la cápsula), imán Ø8 × 3 del Hall y alojamiento
   con paredes a 45° de 1,2 mm de alto (se suelta con un golpe lateral); cara inferior cóncava R = 110 (ajustable).
 """
@@ -62,7 +63,7 @@ U8 = next(e for e in MEC["envolventes"] if e[0] == "U8")
 HALL_XY = (-(U8[1] + U8[3]) / 2, (U8[2] + U8[4]) / 2)
 CHAMF = 1.2                                # chaflán inferior de la cápsula = alojamiento de la base del casco
 J7 = MEC["hilos"]["J7"]["pos"]           # hilo del electrodo táctil en la PCB (REV B)
-TOUCH = dict(x=-J7[0], y=J7[1], len=9.0, wall=1.4, z0=FLOOR + 2.6, dot_d=5.0, dot_h=0.4)
+TOUCH = dict(x=-J7[0], y=J7[1], len=9.0, wall=1.4, z0=FLOOR + 2.6, dot_d=5.0, dot_h=0.3)
 HB = dict(t=3.5, ring=9.5, rim=1.8, recess=1.2, helmet_r=110.0, sag=8.0, hall_mag=(8.0, 3.0))
 
 
@@ -105,9 +106,11 @@ def base():
     d_cut = WALL - TOUCH["wall"]
     z1 = Z_RING0 - 1.5
     b = b.cut(box(sx * (IN / 2 + d_cut / 2 - 0.05), TOUCH["y"], TOUCH["z0"], d_cut + 0.1, TOUCH["len"], z1 - TOUCH["z0"]))
-    b = b.union(cq.Workplane("YZ").circle(TOUCH["dot_d"] / 2).extrude(TOUCH["dot_h"] + 0.1)
-                .translate((sx * (OUTS / 2 - 0.1) if sx > 0 else -(OUTS / 2 + TOUCH["dot_h"]), TOUCH["y"],
-                            (TOUCH["z0"] + z1) / 2)))
+    # marca GRABADA (no en relieve: no puede agrandar la planta): anillo Ø5 de 0,6 de ancho y 0,3 de hondo
+    ring_ = (cq.Workplane("YZ").circle(TOUCH["dot_d"] / 2).circle(TOUCH["dot_d"] / 2 - 0.6)
+             .extrude(TOUCH["dot_h"] + 0.5))
+    b = b.cut(ring_.translate((sx * (OUTS / 2 - TOUCH["dot_h"]) if sx > 0 else -(OUTS / 2 + 0.5), TOUCH["y"],
+                               (TOUCH["z0"] + z1) / 2)))
     # cuna de la batería: topes bajos en las 4 esquinas de la celda
     for sx in (-1, 1):
         for sy in (-1, 1):
