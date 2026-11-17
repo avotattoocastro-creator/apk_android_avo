@@ -1,4 +1,4 @@
-# AVO GIRTH · montaje del sistema en la cincha (cápsula REV 6.10: rectangular con aristas redondeadas, aro de luz, estanca, cierre magnético de balancín empotrado y portaimanes, a ras del soporte; funda de piel y electrodos ECG)
+# AVO GIRTH · montaje del sistema en la cincha (REV 7.0: 3 IMU con PCB de sensores en el soporte; cápsula rectangular con aristas redondeadas, aro de luz, estanca, cierre magnético de balancín empotrado y portaimanes, a ras del soporte; funda de piel y electrodos ECG)
 
 > **Estado: diseño · NO VERIFICADO en caballo real.** No se ha impreso, cosido ni montado nada. Los STEP no se han
 > abierto en FreeCAD dentro de este entorno (no está instalado). Solo pasaron la comprobación automática de
@@ -119,6 +119,32 @@ agujero, el anclaje del ala del soporte y el cordón Dyneema. La tapa es el rect
 cápsula queda sujeta solo por los 2 balancines y el cerco: el ensayo de tirón y de caída de §8.4 pasa a ser
 **imprescindible** antes de llevarla al caballo. Las menciones al cordón en §2–§8 son de revisiones anteriores.
 
+**REV 7.0 (17/11/2026, decisión del usuario): arquitectura de 3 IMU en el CAD completo.** Detalle y motivos en
+`claude/AVO_CINCHA_BETA_3IMU_ARQUITECTURA_PROPUESTA_2026-11-17.md` (proyecto). Medidas de pogo y PCB **PROVISIONALES**.
+- **Un solo pogo magnético de 6 pines** (paso 2,5; VBUS, 3V3_SOP, GND, TX, RX, DET) en el centro del lado −Y, en lugar
+  de los dos de 3 pines (ECG y carga). Placa en la cápsula 27,0 × 4,65 (brida 28,6 × 6,25); conector de pines en el
+  soporte con orejas de 36,5 mm y 2 × M2.
+- **Soporte:** alojamiento de 44 × 26 × 5,5 mm abierto por abajo para la **PCB de sensores SOP REV A** (40 × 22 × 1,6:
+  MCU, ADS1292, IMU 1 LSM6DSV16X, MMC5983MA y 2 conectores de satélite), unido por un canal al hueco de las colas del
+  pogo; todo relleno de **resina**. Ventana en la funda bajo el alojamiento para los cables.
+- **2 satélites IMU** (IMU 2 en u = +355, IMU 3 en u = −355), misma pieza: caja PETG **48 × 26 × 9** con esquinas R6 y
+  borde superior R1,5, 2 tornillos de Chicago a la funda y alojamiento inferior de 22 × 18 × 5 con la PCB (20 × 14, LSM6DSV16X)
+  en resina. Cable fijo de **6 hilos (Ø3,5, ≈ 350 mm)** del soporte a cada satélite por dentro de la funda.
+- **Electrodos junto a su módulo:** ECG+ bajo IMU 2 (u = +345), ECG− bajo IMU 3 (u = −345), REF bajo el soporte (u = 0).
+  Cable de electrodo ≈ 155 mm. Funda 800 → **860 mm**; canal cosido de ±40 a ±290.
+- **Posición de los satélites:** el usuario pidió ≈ ±45 cm en una cincha de 100 cm. En la cincha del modelo (Decathlon
+  110 cm) el acolchado acaba en ±430 y las trabillas de la funda están en ±400, así que caben a ±355. Se cambia con
+  `SAT["u"]` y `e_pos` cuando se mida la cincha real.
+- **Portaimanes del balancín** (captura del usuario): bloque PETG 6 × 6 × 2,6 con la cara hacia la pared cerrada (0,5)
+  y la cuna de los 2 imanes abierta hacia el fondo del alojamiento; sustituye a las tapas de los imanes. Misma
+  distancia entre imanes. `mag_c` 3,7 → 3,4 para dejar 0,5 mm de pared hasta el agujero del pasador.
+- **Lengüetas de la tapa en media caña** (captura del usuario): la punta abraza el pasador con radio 1,05 (0,05 de juego).
+- El agujero del pasador en el balancín sigue **en gota a propósito**: el balancín se imprime con la cara exterior en
+  la cama y la gota evita soportes; la parte redonda (Ø1,95) es la que sujeta el pasador a presión.
+- Comprobado: `verificar_step.py` 27/27; vóxeles: 0 mm³ cápsula/soporte (cerrada y empujada 0,25), portaimanes de la
+  pared y del balancín sin interferencias, pasador sin tocar la tapa; suelta a 4°, tope contra el soporte a ~10°.
+  Conjunto completo: 102 sólidos, 0 aristas abiertas.
+
 **Base de un solo color o con franja de luz (propuesta, 17/11/2026):** la base se puede imprimir **en una pieza** con
 cambio de filamento por altura (pausa del laminador; la Centauri Carbon lo admite): PETG opaco de z 0 a 8,0, **PETG
 translúcido de 8,0 a 12,0** (los LED están a z ≈ 10,9) y opaco de 12,0 a 13,0, bajo la tapa. Es el mismo material:
@@ -130,14 +156,14 @@ la unión entre capas es igual de estanca. Alturas múltiplo de 0,2 mm; a confir
 |---|---|
 | `out/STEP/AVO_CINCHA_MONTAJE_CONJUNTO_CURVADO.step` | **Conjunto completo** curvado sobre el tórax: cincha, funda, soporte con pestillos y seguros, cápsula, PCB, celda, antena, pogos, tornillería, electrodos, espuma y cables (92 sólidos en 8 subconjuntos) |
 | `out/STEP/AVO_CINCHA_MONTAJE_CONJUNTO_RECTO.step` | El mismo conjunto con la cincha recta (tumbada, con la cara interior abajo) |
-| `out/STEP/AVO_CINCHA_R6_10_CAPSULA_CONJUNTO.step`, `..._SOPORTE_CONJUNTO.step` | Subconjuntos de la cápsula y del soporte, en coordenadas locales |
+| `out/STEP/AVO_CINCHA_R7_0_CAPSULA_CONJUNTO.step`, `..._SOPORTE_CONJUNTO.step` | Subconjuntos de la cápsula y del soporte, en coordenadas locales |
 | `out/STEP/REF_torax_caballo_seccion.step` | Sección del tórax de referencia (300 mm de largo) |
 | `out/STEP/piezas/*.step` | Un STEP por pieza: impresas, PCB, celda, antena, electrodo, funda, cincha Decathlon y Horze (recta y curvada) |
 | `out/STL/*.stl` | Piezas impresas, ya colocadas para imprimir |
 | `out/PATRON/AVO_CINCHA_funda_piel_patron.{svg,dxf}` | Patrón plano 1:1 de la funda, en mm, con capas de corte, pliegue, costura, agujeros cada 4 mm, rebaje, taladros y marcas |
 | `out/informe.json` | Medidas, volúmenes, longitudes de cable y comprobaciones |
 | `out/AVO_CINCHA_MONTAJE.zip` | Todo lo anterior junto, para descargar |
-| `renders/*.png` | Renders de comprobación (01–14; 12 = corte por los LED, 13 = corte por un diente del balancín, 13b = corte por los imanes, 14 = balancín entre sus aletas, 15 = portaimanes desde abajo, 15b = corte por el portaimanes, 16 = pared a ras del soporte, 16b = corte por x = 0, 17 = extremo a ras y redondeos, 18 = acabado comercial, 19 = soporte continuo) |
+| `renders/*.png` | Renders de comprobación (01–14; 12 = corte por los LED, 13 = corte por un diente del balancín, 13b = corte por los imanes, 14 = balancín entre sus aletas, 15 = portaimanes desde abajo, 15b = corte por el portaimanes, 16 = pared a ras del soporte, 16b = corte por x = 0, 17 = extremo a ras y redondeos, 18 = acabado comercial, 19 = soporte continuo, 20 = satélite IMU 2, 21 = PCB de sensores en el soporte, 22 = portaimanes del balancín y lengüetas) |
 | `fuente/` | Scripts que lo generan todo (ver §9) |
 
 **Coordenadas.** En la cincha:
@@ -378,12 +404,12 @@ Las longitudes son las del modelo, todas < 40 cm. Se recomienda añadir 30 mm de
 ### 3.6 Cierre magnético de balancín empotrado (REV 6.4; portaimanes REV 6.5)
 
 Piezas:
-- `AVO_CINCHA_R6_10_balancin_Xpos_PETG` y `..._Xneg_PETG`;
+- `AVO_CINCHA_R7_0_balancin_Xpos_PETG` y `..._Xneg_PETG`;
 - cojinetes en el mismo STL que la base;
-- `AVO_CINCHA_R6_10_tapa_PETG_opaco` (con las 4 lengüetas);
-- `AVO_CINCHA_R6_10_soporte_PETG`;
-- `AVO_CINCHA_R6_10_tapas_imanes_PETG` (2 tapas de los balancines);
-- `AVO_CINCHA_R6_10_portaimanes_PETG_x2` (REV 6.5).
+- `AVO_CINCHA_R7_0_tapa_PETG_opaco` (con las 4 lengüetas);
+- `AVO_CINCHA_R7_0_soporte_PETG`;
+- `AVO_CINCHA_R7_0_tapas_imanes_PETG` (2 tapas de los balancines);
+- `AVO_CINCHA_R7_0_portaimanes_PETG_x2` (REV 6.5).
 
 Cotas en `BAL` y `END_T` de `fuente/avo_cincha_montaje.py`.
 
@@ -824,6 +850,6 @@ python3 patron_funda.py            # patrón SVG/DXF
 python3 render.py                  # renders PNG (≈ 2,5 min)
 python3 verificar_step.py ../out/STEP/*.step ../out/STEP/piezas/*.step
 python3 verificar_cierre.py        # REV 6.3: interferencias y apertura del balancín por vóxeles
-python3 verificar_portaimanes.py   # REV 6.5: encaje del portaimanes y de los imanes por vóxeles
+python3 verificar_portaimanes.py   # REV 6.5: encaje del portaimanes de la pared y de los imanes por vóxeles
 ```
 Solo necesitan Python 3 con numpy, OpenCV (`cv2`) y Pillow.

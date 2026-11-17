@@ -14,12 +14,12 @@
   "portaiman_XxYxZ": [
    2.6,
    6.4,
-   6.9
+   6.6
   ],
   "abertura_XxYxZ": [
    2.8,
    6.6,
-   7.0
+   6.7
   ],
   "cuna_XxYxZ": [
    2.0,
@@ -32,7 +32,7 @@
   "pared_abertura_a_interior": 0.95,
   "piel_iman_a_hueco_balancin": 0.65,
   "llave_chaflan": 1.0,
-  "techo_abertura_z": 7.0,
+  "techo_abertura_z": 6.7,
   "insertos_M2_desde_z": 8.0
  }
 }

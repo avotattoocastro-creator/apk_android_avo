@@ -67,28 +67,28 @@
     "puntos_del_diente_en_el_cerco": 0
    },
    "-11": {
-    "soporte_mm3": 1.609,
+    "soporte_mm3": 1.606,
     "capsula_mm3": 0.0,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-12": {
-    "soporte_mm3": 6.119,
+    "soporte_mm3": 6.209,
     "capsula_mm3": 0.03,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-13": {
-    "soporte_mm3": 12.213,
+    "soporte_mm3": 12.489,
     "capsula_mm3": 0.105,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-14": {
-    "soporte_mm3": 18.543,
-    "capsula_mm3": 0.985,
+    "soporte_mm3": 19.0,
+    "capsula_mm3": 0.973,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-16": {
-    "soporte_mm3": 34.738,
-    "capsula_mm3": 6.178,
+    "soporte_mm3": 35.681,
+    "capsula_mm3": 6.283,
     "puntos_del_diente_en_el_cerco": 0
    }
   },
@@ -154,33 +154,33 @@
     "puntos_del_diente_en_el_cerco": 0
    },
    "-10": {
-    "soporte_mm3": 0.15,
+    "soporte_mm3": 0.145,
     "capsula_mm3": 0.0,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-11": {
-    "soporte_mm3": 2.004,
+    "soporte_mm3": 2.015,
     "capsula_mm3": 0.0,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-12": {
-    "soporte_mm3": 5.899,
+    "soporte_mm3": 6.02,
     "capsula_mm3": 0.02,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-13": {
-    "soporte_mm3": 11.05,
+    "soporte_mm3": 11.355,
     "capsula_mm3": 0.04,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-14": {
-    "soporte_mm3": 16.514,
-    "capsula_mm3": 0.33,
+    "soporte_mm3": 16.996,
+    "capsula_mm3": 0.325,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-16": {
-    "soporte_mm3": 30.269,
-    "capsula_mm3": 4.005,
+    "soporte_mm3": 31.246,
+    "capsula_mm3": 4.074,
     "puntos_del_diente_en_el_cerco": 0
    }
   },
@@ -194,7 +194,7 @@
    8.0
   ],
   "brazo_pulsador_mm": 7.5,
-  "brazo_iman_mm": 4.3,
+  "brazo_iman_mm": 4.6,
   "brazo_diente_mm": 9.9,
   "separacion_imanes_mm": 1.5,
   "diente": "recto, entra 1.0 mm; bisel de entrada abajo; engancha en la cama del soporte",

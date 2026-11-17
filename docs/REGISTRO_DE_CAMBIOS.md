@@ -24,6 +24,20 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-17 — Cincha CAD REV 7.0 — arquitectura de 3 IMU en el CAD completo
+**Autor:** Claude · **Rama:** `cad/cincha-rev7-0-tres-imu` (sobre el PR #72)
+**Qué cambia (decisiones del usuario):** un solo pogo magnético de 6 pines; PCB de sensores SOP REV A encapsulada en
+un alojamiento del soporte; 2 satélites IMU (±355 mm) en la funda con cable fijo de 6 hilos; electrodos ECG+/ECG−
+bajo los satélites y REF bajo el soporte; funda 860 mm; portaimanes del balancín (sustituye a las tapas de los imanes,
+`mag_c` 3,4); lengüetas de la tapa en media caña sobre el pasador. Medidas de pogo y PCB PROVISIONALES. Archivos
+`R6_10` → `R7_0`; renders 20–22.
+**Validación:** IMPLEMENTADO · `verificar_step.py` 27/27 · vóxeles: 0 mm³ cápsula/soporte, portaimanes sin
+interferencias; cierre 4° / ~10° · **NO VERIFICADO** (nada impreso; PCB sin diseñar).
+**Pendiente:** elegir el pogo de 6 pines real y diseñar las PCB (SOP REV A, satélite, cápsula REV E); contrato de
+datos de 3 IMU (firmware + apps a la vez); prueba en PROTOTIPO.
+
+---
+
 ## 2026-11-17 — Cincha CAD REV 6.10 — sin cordón de seguridad
 **Autor:** Claude · **Rama:** `cad/cincha-rev6-10-sin-cordon` (sobre el PR #71)
 **Qué cambia (decisión del usuario):** fuera la oreja de la tapa, su agujero, el anclaje del ala del soporte y el
