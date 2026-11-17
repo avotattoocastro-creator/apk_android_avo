@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-17 — Archivo completo en `main` — código, binarios y etiquetas de respaldo
+**Autor:** Claude · **Rama:** `archivo/todo-2026-11-17` → `main`
+**Qué cambia:** `main` pasa a contener `develop` completo + las ramas pendientes (DOCK V1, casco V5, cincha REV 6.3.1,
+REV 5.11.2, PCB REV C stock) + las subidas manuales antiguas de `main`. Nuevo workflow `archivar-artefactos.yml`
+(solo se dispara en la rama de archivo): crea las etiquetas `backup/2026-11-12/*` y `backup/2026-11-17/*` y copia la
+última versión de cada artefacto de Actions a `archivo/binarios/`.
+**Por qué:** los artefactos caducan (los primeros el 18/11) y faltaban las etiquetas de respaldo (P0 desde el 12/11).
+**No se ha tocado:** ningún workflow existente, firmas, `Info.plist`, build number de TestFlight ni código de producto.
+**Conflictos:** solo `docs/REGISTRO_DE_CAMBIOS.md` (se conservan todas las entradas).
+**Validación:** NO VERIFICADO en hardware (es un archivo; no cambia ningún binario).
+
 ## 2026-11-17 — Cincha CAD REV 6.3.1 — eje en las columnas y labio sobre la tapa
 **Autor:** Claude · **Rama:** `cad/cincha-rev6-3-balancin-magnetico` (PR #60)
 **Qué cambia (marcado del usuario, «integrado»):**
