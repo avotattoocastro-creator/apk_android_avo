@@ -24,6 +24,34 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-17 — Casco BETA BACK V5 — PCB REV B (PSRAM, apagado total por táctil, anillo a 4,3 V, medidor, IMU) y CAD REV B
+**Autor:** Claude · Rama `feature/back-v5-casco` (sale de `develop` `c3a9778`) · **Commits:** `2e46518` … ver PR
+**CI:** PCB `build-back-v5-pcb.yml` runs 44171321366, 44177067166, 44184593068, 44191363959 (+ el de la placa reparada,
+ver PR); CAD `build-back-v5-cad.yml`; existencias `jlc-stock-back-v5.yml`; huellas `easyeda-fp-back-v5.yml`.
+**Qué cambia (decisiones del usuario del 17/11: «subiremos cápsula, anillo 5 V, añadimos solo si no amplía ancho y largo»):**
+- **PCB REV B** (`hardware/back/V5_CASCO/PCB`), 51 × 51 sin cambios:
+  - **ESP32-S3-WROOM-1U-N16R8** (C3013946; 16 MB + 8 MB de PSRAM octal) en lugar del MINI-1U-N8. Altura máxima de la
+    cara F 2,6 → 3,2 mm. GPIO de la REV A salvo el **RX de la UART2 del ZED (GPIO7 → GPIO3)** y el **PPS
+    (GPIO4 → GPIO7)**, para que el ruteado cierre.
+  - **Apagado total:** EN del TLV75733P = OR(TTP223-BA6-TD, POWER_HOLD en GPIO46, VBUS) con 2 × BAT54C; TOUCH_SENSE en
+    GPIO11. Hall y VBUS_DET siguen despertando del reposo.
+  - **+3V3_AON** (XC6206, ≈ 1 µA) desde la batería: V_BCKP del ZED y táctil.
+  - **Anillo a 4,3 V** con TPS61023 (EN = GPIO48, salida desconectada con EN = 0): fuera los ≈ 4,8 mA permanentes de
+    los 8 SK6812SIDE-A y el funcionamiento fuera de hoja por debajo de 3,7 V.
+  - **R_TMR 68 kΩ** (≈ 8,5 h; antes 4–6 h por defecto), **PMOS de polaridad** de la celda (AO3401A).
+  - **MAX17048** (0x36) y **LSM6DSV16X** (0x6A) por I²C en GPIO41/42; INT1 de la IMU en GPIO4.
+  - microSD 0,8 mm más abajo y sus resistencias en el canal bajo el módulo.
+- **CAD REV B** (`hardware/back/V5_CASCO/CAD`): cápsula **56,4 × 56,4 × 24,7** (+0,6 de alto, planta igual); rebaje
+  interior del electrodo táctil (pared de 1,4 mm, sin agujero) con anillo grabado por fuera; escalón de las columnas
+  bajado con la altura máxima.
+**Por qué:** auditoría BETA (C1, C3, C4, C6) y revisión electrónica del 17/11 (E1–E7: el anillo gastaba 0,6 mA por LED
+en reposo según su hoja; temporizador de carga corto; sin polaridad; sin medidor).
+**Validación:** colocación local sin errores; CI de PCB y CAD (ver arriba). **No fabricado. NO VERIFICADO.**
+**Pendiente:** firmware BACK 5.x (POWER_HOLD, pulsación larga, LED_PWR, I²C, UART2 RX en GPIO3, PPS en GPIO7); ajustar la
+sensibilidad del táctil (C69) con la pared real y agua; medir el consumo apagado; STEP real del pogo y de la batería.
+
+---
+
 ## 2026-11-14 — Espalda V5 CASCO: anillo de luz (8 LED laterales) y caja sin juntas
 **Autor:** Claude · Rama `feature/back-v5-casco`
 **Qué cambia:**

@@ -6039,14 +6039,14 @@
 		"AVO:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "14bc51cd-1362-5d94-bc84-c43b4f6376ff")
-		(at 87.17 86.52 90)
+		(at 81.63 94.97)
 		(descr
 			"Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator"
 		)
 		(property
 			"Reference"
 			"C34"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(uuid "0f5b3f17-d0f6-50bc-a26f-1a19eff0733d")
 			(effects (font (size 0.5 0.5) (thickness 0.1)))
@@ -6054,7 +6054,7 @@
 		(property
 			"Value"
 			"100n"
-			(at 0 1.06 90)
+			(at 0 1.06 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "55a6ccde-fff4-5451-b59a-60effe0d8a93")
@@ -6063,7 +6063,7 @@
 		(property
 			"Footprint"
 			"AVO:C_0402_1005Metric"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "d73a85f8-5d69-5a05-952d-d52b032fcba5")
@@ -6072,7 +6072,7 @@
 		(property
 			"Datasheet"
 			""
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "9ae6f6a0-dc64-53d8-a0bd-1537ff1a803b")
@@ -6081,7 +6081,7 @@
 		(property
 			"Description"
 			""
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "9500074c-b419-5802-8b53-9af5a3218613")
@@ -6090,7 +6090,7 @@
 		(property
 			"LCSC"
 			"C1525"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "851c7b5f-c7f7-5a19-bad1-252c7ae33a71")
@@ -6099,7 +6099,7 @@
 		(property
 			"MPN"
 			"100n"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "0bf60e7c-2607-5660-80a2-0e0b35aeecb6")
@@ -6183,7 +6183,7 @@
 			"1"
 			smd
 			roundrect
-			(at -0.48 0 90)
+			(at -0.48 0)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -6194,7 +6194,7 @@
 			"2"
 			smd
 			roundrect
-			(at 0.48 0 90)
+			(at 0.48 0)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -13834,7 +13834,7 @@
 		"AVO:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "18a2c695-73c1-5b03-ac79-d06ae8e6a34c")
-		(at 89.61 83 90)
+		(at 87.17 86.53 90)
 		(descr
 			"Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator"
 		)
@@ -14268,7 +14268,7 @@
 			(at -8.75 -4.45)
 			(size 1.5 0.9)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 71 "ZED_PPS")
+			(net 26 "IMU_INT1")
 			(uuid "4c7f5ef4-0ac9-5109-a73a-c5ac3ffc67be")
 		)
 		(pad
@@ -14298,7 +14298,7 @@
 			(at -8.75 -0.64)
 			(size 1.5 0.9)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 26 "IMU_INT1")
+			(net 71 "ZED_PPS")
 			(uuid "5b2af7e8-b295-59b7-9bfb-cb18f90f2ba4")
 		)
 		(pad
@@ -26058,12 +26058,12 @@
 		(uuid "4185c0d7-96ff-5140-b8c5-54f7f9a3bf0b")
 	)
 	(segment
-		(start 87.17 86.04)
-		(end 87.175 86.025)
+		(start 82.11 94.97)
+		(end 82.125 94.975)
 		(width 0.3)
 		(layer "F.Cu")
 		(net 4)
-		(uuid "5d8163d3-a380-5bf8-8c5f-7d188aad53e3")
+		(uuid "7eb09e61-6ad0-5147-855c-e0a5612b2316")
 	)
 	(segment
 		(start 92.8625 114.5)
@@ -27371,27 +27371,35 @@
 	)
 	(segment
 		(start 81.22 96.675)
-		(end 81.175 96.125)
+		(end 80.525 96.125)
 		(width 0.3)
 		(layer "F.Cu")
 		(net 66)
-		(uuid "db8473fa-5182-5c57-8f12-271dc8b758af")
+		(uuid "f4033a29-1b18-5b91-b7c2-325140e01c5f")
 	)
 	(segment
-		(start 81.175 96.125)
-		(end 81.175 93.725)
+		(start 80.525 96.125)
+		(end 80.525 94.125)
 		(width 0.3)
 		(layer "F.Cu")
 		(net 66)
-		(uuid "b6ad651e-c678-5e9c-a01f-0816e4700328")
+		(uuid "5b08f877-da09-5c9e-997f-46856e1fa130")
 	)
 	(segment
-		(start 81.175 93.725)
+		(start 80.525 94.125)
+		(end 80.925 93.725)
+		(width 0.3)
+		(layer "F.Cu")
+		(net 66)
+		(uuid "0633e550-1be9-5cc9-91aa-dbfe8187cb91")
+	)
+	(segment
+		(start 80.925 93.725)
 		(end 81.15 93.46)
 		(width 0.3)
 		(layer "F.Cu")
 		(net 66)
-		(uuid "ed749b29-89ac-5888-bfde-b0dbc5f35b0d")
+		(uuid "5a37218c-f1f4-577d-bc64-6997244679f3")
 	)
 	(segment
 		(start 81.22 96.675)
@@ -27842,12 +27850,12 @@
 		(uuid "26ca09af-efbd-5604-99da-7f8bb760b6aa")
 	)
 	(via
-		(at 87.175 86.025)
+		(at 82.125 94.975)
 		(size 0.5)
 		(drill 0.3)
 		(layers "F.Cu" "B.Cu")
 		(net 4)
-		(uuid "320ce799-f4f8-5613-9bbd-bcefc79ad8c5")
+		(uuid "ce5428b0-88af-5126-9d4e-77a10f917aa5")
 	)
 	(via
 		(at 92.875 114.525)

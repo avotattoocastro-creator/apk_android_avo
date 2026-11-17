@@ -398,18 +398,19 @@ R("R51", "1k", "S3_TX2", "ZED_RX2", block="ZED")
 R("R52", "1k", "S3_ZRST", "ZED_RST", block="ZED", note="RESET_N del ZED (GPIO9 en colector abierto)")
 R("R53", "330R", "ZED_TX1_C", "ZED_TX1", block="ZED")
 R("R54", "330R", "ZED_TX2_C", "ZED_TX2", block="ZED")
-R("R55", "330R", "ZED_PPS_C", "ZED_PPS", block="ZED", note="PPS → GPIO4")
+R("R55", "330R", "ZED_PPS_C", "ZED_PPS", block="ZED", note="PPS → GPIO7 (REV B; REV A: GPIO4)")
 
 # ---------------------------------------------------------------------------------------- ESP32-S3 (U4)
 # REV B: ESP32-S3-WROOM-1U-N16R8 (pines del módulo según su hoja de datos y el símbolo de Espressif). Con la PSRAM octal
 # (R8) los GPIO35–37 son del módulo: sin conectar. GPIO de la REV A conservados salvo el RX de la UART2 del ZED, que
 # pasa de IO7 a IO3 (pad de la fila inferior, junto a los pines 26/27 del ZED): el ruteado no cerraba la IMU por el
-# pasillo ZED ↔ módulo (CI 44177067166). Nuevos: IO7 = IMU_INT1 (RTC: despierta por movimiento) · IO3 = ZED_TX2 (RX)
+# pasillo ZED ↔ módulo (CI 44177067166), y el PPS pasa de IO4 a IO7 para dejar a la IMU el pad más alto de la
+# columna izquierda (CI 44191363959). Nuevos: IO4 = IMU_INT1 (RTC: despierta por movimiento) · IO3 = ZED_TX2 (RX)
 # · IO11 = TOUCH_SENSE (RTC) · IO41/IO42 = I²C (medidor + IMU)
 # · IO46 = POWER_HOLD (de arranque, bajo por defecto) · IO48 = LED_PWR (EN del elevador del anillo).
 GPIO = {  # pad del módulo: (GPIO, red)
     2: ("3V3", V3), 3: ("EN", "EN"),
-    4: ("IO4", "ZED_PPS"), 5: ("IO5", "ZED_TX1"), 6: ("IO6", "S3_TX1"), 7: ("IO7", "IMU_INT1"),
+    4: ("IO4", "IMU_INT1"), 5: ("IO5", "ZED_TX1"), 6: ("IO6", "S3_TX1"), 7: ("IO7", "ZED_PPS"),
     8: ("IO15", "SD_D1"), 9: ("IO16", "SD_D2"), 10: ("IO17", "SD_D3"), 11: ("IO18", "VBUS_DET"), 12: ("IO8", "S3_TX2"),
     13: ("IO19 D-", "USB_DM"), 14: ("IO20 D+", "USB_DP"), 15: ("IO3", "ZED_TX2"), 16: ("IO46", "PWR_HOLD"),
     17: ("IO9", "S3_ZRST"), 18: ("IO10", "ZED_EN"), 19: ("IO11", "TOUCH_SENSE"), 20: ("IO12", "SD_CLK0"),
@@ -504,7 +505,7 @@ part("U13", "LGA14", "LSM6DSV16X", (0, 0), 0,
      sym=dict(L=[(8, "VDD"), (5, "VDDIO"), (12, "CS"), (1, "SDO/SA0"), (2, "SDx"), (3, "SCx"), (6, "GND"), (7, "GND")],
               R=[(13, "SCL"), (14, "SDA"), (4, "INT1"), (9, "INT2"), (10, "OCS_Aux"), (11, "SDO_Aux")]),
      note="IMU del casco (la misma que la cincha REV D): movimiento de la cabeza frente al tronco, reposo automático y "
-          "caídas. INT1 → GPIO7 (RTC: despierta del sueño por movimiento)")
+          "caídas. INT1 → GPIO4 (RTC: despierta del sueño por movimiento)")
 C("C37", "100n", V3, GND, block="IMU", note="VDD del LSM6")
 C("C38", "100n", V3, GND, block="IMU", note="VDDIO del LSM6")
 

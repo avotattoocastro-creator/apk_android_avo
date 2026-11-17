@@ -520,9 +520,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -12.83,
-  "y": 13.48,
-  "rot": 90
+  "x": -18.37,
+  "y": 5.03,
+  "rot": 0
  },
  {
   "ref": "U3",
@@ -1073,10 +1073,10 @@
   "block": "ZED",
   "dnp": false,
   "no_assembly": false,
-  "note": "PPS → GPIO4",
+  "note": "PPS → GPIO7 (REV B; REV A: GPIO4)",
   "jlc_rot": 0,
-  "x": -10.39,
-  "y": 17.0,
+  "x": -12.83,
+  "y": 13.47,
   "rot": 90
  },
  {
@@ -1793,7 +1793,7 @@
   "block": "IMU",
   "dnp": false,
   "no_assembly": false,
-  "note": "IMU del casco (la misma que la cincha REV D): movimiento de la cabeza frente al tronco, reposo automático y caídas. INT1 → GPIO7 (RTC: despierta del sueño por movimiento)",
+  "note": "IMU del casco (la misma que la cincha REV D): movimiento de la cabeza frente al tronco, reposo automático y caídas. INT1 → GPIO4 (RTC: despierta del sueño por movimiento)",
   "jlc_rot": 0,
   "x": 0.0,
   "y": 17.0,
