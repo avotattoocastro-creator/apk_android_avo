@@ -37,7 +37,8 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 (cincha PCB REV D, casco V5, DOCK V1, espalda V4). Descargas renombradas (`AVO_PECHO_PROTOTIPO_FW.zip`,
 `CAD_CINCHA_BETA_REV6_MONTAJE.zip`…), nueva `AVO_CINCHA_BETA_FW.zip` (0.6.x) y entrada para la espalda BETA V4; los
 nombres antiguos se retiran de la release. `AGENTS.md`: bloque «Empieza aquí», regla de nombres, hardware por líneas,
-etiquetas de respaldo ya creadas y descargas. `ESTADO_DESARROLLO_Y_VERSIONES.md`: tabla única vigente arriba; lo del
+etiquetas de respaldo ya creadas, descargas y **plan de pruebas**: campo solo con PROTOTIPOS hasta tener todas las PCB
+construidas; después se porta a las BETA y se prueban. `ESTADO_DESARROLLO_Y_VERSIONES.md`: tabla única vigente arriba; lo del
 22/10 queda como histórico.
 **No se ha tocado:** carpetas, workflows de compilación ni nombres de artefactos existentes (renombrarlos rompería CI e
 historial; la etiqueta se aplica en docs, descargas y carpetas nuevas).

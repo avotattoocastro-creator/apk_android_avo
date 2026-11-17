@@ -36,6 +36,10 @@ registrada: **NO VERIFICADO**.
 | iPad | **1.0.0** (build automático) | `ipad/` | `build-avo-ipad.yml` | solo TestFlight | CI ✅ |
 | Motor C++17 Equine | **2.0.0-dev1** | `equine-intelligence/` | `build-equine-engine.yml` | — | CI ✅ |
 
+**Plan de pruebas (decisión del usuario, 17/11/2026):** hasta construir todas las PCB, las pruebas de campo se hacen
+solo con PROTOTIPOS; lo validado se porta a las BETA, y las pruebas de campo BETA empiezan con todas las PCB
+construidas. PCB BETA construidas hoy: **ninguna**.
+
 **Siguiente prueba física prevista:** Android 2.9 + pecho 3.7.10 + espalda 3.14.3 + cincha PROTOTIPO 0.5.0.
 
 ---

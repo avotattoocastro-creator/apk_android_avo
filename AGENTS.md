@@ -18,6 +18,10 @@ compartida**: lo que no esté en la rama no existe para el siguiente asistente. 
   carcasas y firmware.
 - Los nombres nuevos de archivos, artefactos, descargas y documentos llevan `PROTOTIPO` o `BETA`
   (p. ej. `AVO_CINCHA_BETA_FW.zip`, `CAD_PECHO_PROTOTIPO_REV_D.zip`). Las apps no llevan etiqueta.
+- **Pruebas de campo (decisión del usuario, 17/11/2026):** hasta que estén construidas **todas** las PCB del sistema,
+  las pruebas de campo que corroboran el funcionamiento se hacen **solo con PROTOTIPOS**. Lo validado ahí se porta
+  después a las BETA. Con todas las PCB construidas empiezan las pruebas de campo con las BETA. Por eso una función
+  nueva se valida primero en el firmware PROTOTIPO, y el firmware BETA la recibe ya probada (mismos contratos binarios).
 - Las carpetas y workflows existentes **no se renombran** de golpe (romperían rutas de CI, enlaces e historial): la
   etiqueta se aplica en documentación y descargas, y en cada carpeta nueva.
 
