@@ -1,0 +1,49 @@
+name: Build AVO DOCK V1 CAD (STEP/STL)
+
+# Caja del soporte de pared cargador (fondo + frente). Solo en la rama del soporte; también a mano.
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/dock-cargador-v1]
+    paths:
+      - 'hardware/dock/V1/CAD/avo_dock_v1.py'
+      - 'hardware/dock/V1/PCB/pcb_mecanica.json'
+      - '.github/workflows/build-dock-v1-cad.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dock-v1-cad-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  cad:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install CadQuery
+        run: pip install cadquery==2.4.0 "numpy<2"
+      - name: Build
+        working-directory: hardware/dock/V1/CAD
+        run: |
+          set -o pipefail
+          if ! python avo_dock_v1.py 2>&1 | tee build.log; then
+            tail -25 build.log | while IFS= read -r l; do echo "::error::${l//%/%25}"; done
+            exit 1
+          fi
+      - name: Commit outputs
+        run: |
+          git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
+          git add hardware/dock/V1/CAD/out hardware/dock/V1/CAD/build.log
+          git commit -m "CAD soporte de pared V1: STEP/STL generados [skip ci]" || echo "sin cambios"
+          git pull --rebase -q origin ${{ github.ref_name }} && git push origin HEAD:${{ github.ref_name }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AVO-DOCK-V1-CAD
+          path: hardware/dock/V1/CAD/out
