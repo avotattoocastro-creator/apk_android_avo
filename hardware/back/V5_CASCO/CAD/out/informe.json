@@ -2,8 +2,8 @@
  "piezas": {
   "AVO_CASCO_V5_base": {
    "solidos": 1,
-   "volumen_mm3": 10046.4,
-   "peso_g": 12.8,
+   "volumen_mm3": 10027.2,
+   "peso_g": 12.7,
    "caja": [
     56.4,
     56.4,
@@ -32,7 +32,7 @@
   },
   "AVO_CASCO_V5_base_casco": {
    "solidos": 1,
-   "volumen_mm3": 16427.0,
+   "volumen_mm3": 16454.8,
    "peso_g": 20.9,
    "caja": [
     60.4,
@@ -41,9 +41,7 @@
    ]
   }
  },
- "interferencias": {
-  "componentes_cara_F × AVO_CASCO_V5_base": 0.019
- },
+ "interferencias": {},
  "medidas": {
   "capsula_mm": [
    56.4,
@@ -68,8 +66,8 @@
   "altura_total_sobre_casco_mm": 28.2,
   "tornillos": "4 × M2,5 × 16 (cabeza cilíndrica) + junta tórica 2,5 × 1 + inserto M2,5 Ø3,5 × 4",
   "hall_xy": [
-   -21.95,
-   -3.15
+   -21.35,
+   -3.19
   ],
   "tactil": {
    "xy": [
