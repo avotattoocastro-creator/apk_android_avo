@@ -1,0 +1,226 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 1,
+   "list": [
+    {
+     "componentId": 44440380,
+     "componentLibraryType": "expand",
+     "stockCount": 38667,
+     "componentTypeEn": "Touch Sensors",
+     "erpComponentName": "\u5355\u952e\u7535\u5bb9\u5f0f\u89e6\u6478\u6309\u952eIC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/touch-sensors_tdsemic-ttp223-ba6-td_C42422127.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1713
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1322
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1132
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.0962
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0915
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.0887
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1274
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1091
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0881
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.165
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.0854
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.0927
+      }
+     ],
+     "firstSortAccessId": "caefd6d6f2bc4507bdc2837246857fba",
+     "secondSortAccessId": "770b43ae04fb49d6b448d12993b90bb0",
+     "canPresaleNumber": 37128,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDSEMIC-TTP223_BA6TD/C42422127",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.43263,
+     "preMinPurchaseNum": 69,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1713,
+     "componentCode": "C42422127",
+     "componentBrandEn": "TDSEMIC",
+     "componentModelEn": "TTP223-BA6-TD",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8765919159001858048-C42422127-front.jpg?x-oss-date=20261117T202914Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=ea7fc6176347007b2756d555cdbb03a7a9dab362d5bc27f8addc348720c7139e",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2501131948_TDSEMIC-TTP223-BA6-TD_C42422127.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8614113501556731904-C42422127.pdf?response-content-disposition=attachment%3B%20filename%3DC42422127.pdf%3B%20filename%2A%3DUTF-8%27%27C42422127.pdf&x-oss-date=20261117T202914Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d2bfc9c58b2cc0dfd997b2ecc9c109d9071e696367fd7dbbfa6a599584ce4b10",
+     "dataManualOfficialLink": "",
+     "componentName": "TDSEMIC TTP223-BA6-TD",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8765919160033251328-C42422127-front.jpg?x-oss-date=20261117T202914Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c38538ad2e490f090aea75bef8e924541b57fe374af8dac2a0e2477cc36f0d8a",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23-6",
+     "describe": "-20\u2103~+85\u2103 1 1.7uA 2V~5.5V 3.5uA Capacitive Touch Yes SOT-23-6 Touch Sensors ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-20\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Standby Current",
+       "attribute_value_name": "1.7uA"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "2V~5.5V"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Capacitive Touch\u3001Automatic sensitivity calibration\u3001Waterproof anti-interference touch"
+      },
+      {
+       "attribute_name_en": "Whether the Lock",
+       "attribute_value_name": "Yes"
+      },
+      {
+       "attribute_name_en": "Current - Supply",
+       "attribute_value_name": "3.5uA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Touch Sensors",
+     "secondSortName": "Sensors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C42422127</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C42422127"
+ },
+ "message": null
+}

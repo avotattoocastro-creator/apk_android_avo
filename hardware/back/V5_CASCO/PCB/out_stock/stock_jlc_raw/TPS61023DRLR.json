@@ -1,0 +1,243 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 1,
+   "list": [
+    {
+     "componentId": 997354,
+     "componentLibraryType": "expand",
+     "stockCount": 1460,
+     "componentTypeEn": "DC-DC Converters",
+     "erpComponentName": "\u5347\u538b\u578b 3A 500mV~5.5V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/dc-dc-converters_texas-instruments-tps61023drlr_C919459.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.2333
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1824
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1575
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.1352
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 3999,
+       "productPrice": 0.1168
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": -1,
+       "productPrice": 0.1131
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1517
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.2248
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.1302
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": -1,
+       "productPrice": 0.1089
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 3999,
+       "productPrice": 0.1126
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1757
+      }
+     ],
+     "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
+     "secondSortAccessId": "9023cccfe13e4581b60de0d6c025e808",
+     "canPresaleNumber": 314,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TPS61023DRLR/C919459",
+     "leastPatchNumber": 5,
+     "lossNumber": 1,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 4000,
+     "shopCostPrice": 0.62113,
+     "preMinPurchaseNum": 39,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.2333,
+     "componentCode": "C919459",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TPS61023DRLR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583285049013227520-C919459/C919459-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261117T203019Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d6910d95920c2a8507065259ec4e750123aed7f9aa94186533dc053332c7c11f",
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com.cn/cn/lit/ds/symlink/tps61023.pdf?ts=1728812468331&ref_url=https%253A%252F%252Fwww.ti.com.cn%252Fproduct%252Fcn%252FTPS61023",
+     "componentName": "TI TPS61023DRLR",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583285049919332352-C919459/C919459-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261117T203019Z&x-oss-expires=1799&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3cc50087a299834ee5b477bdde42c296e885c15a40f3b6b7c3a08f145748cbef",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-563",
+     "describe": "-40\u2103~+125\u2103@(TJ) 1 1MHz 2.2V~5.5V 3A 3uA 500mV~5.5V Adjustable Boost Boost Built-in Overcurrent Protection\u3001Light load efficient mode\u3001Load disconnect Yes SOT-563 DC-DC Converters ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103@(TJ)"
+      },
+      {
+       "attribute_name_en": "Function",
+       "attribute_value_name": "Boost"
+      },
+      {
+       "attribute_name_en": "Synchronous Rectifier",
+       "attribute_value_name": "Yes"
+      },
+      {
+       "attribute_name_en": "Frequency - Switching",
+       "attribute_value_name": "1MHz"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "Adjustable"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "500mV~5.5V"
+      },
+      {
+       "attribute_name_en": "Output Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Quiescent Current",
+       "attribute_value_name": "3uA"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Overcurrent Protection\u3001Light load efficient mode\u3001Load disconnect"
+      },
+      {
+       "attribute_name_en": "Switch tube (built-in/external)",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Topology",
+       "attribute_value_name": "Boost"
+      },
+      {
+       "attribute_name_en": "Output Voltage",
+       "attribute_value_name": "2.2V~5.5V"
+      },
+      {
+       "attribute_name_en": "Number of Outputs",
+       "attribute_value_name": "1"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "DC-DC Converters",
+     "secondSortName": "Power Management (PMIC)",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>TPS61023DRLR</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "TPS61023DRLR"
+ },
+ "message": null
+}

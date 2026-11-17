@@ -7,7 +7,7 @@
     {
      "componentId": 11206,
      "componentLibraryType": "expand",
-     "stockCount": 87181,
+     "stockCount": 86870,
      "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
      "erpComponentName": "\u578b\u53f7\u522b\u540d\uff1aRF1600-000 \u53cc\u5411ESD 14V\u622a\u6b62",
      "componentSource": "shop",
@@ -16,69 +16,69 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.1372
+       "productPrice": 0.1373
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.1136
+       "productPrice": 0.1137
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.1015
+       "productPrice": 0.1016
       },
       {
        "startNumber": 500,
        "endNumber": 2499,
-       "productPrice": 0.0915
+       "productPrice": 0.0916
       },
       {
        "startNumber": 2500,
        "endNumber": 4999,
-       "productPrice": 0.0658
+       "productPrice": 0.0659
       },
       {
        "startNumber": 5000,
        "endNumber": -1,
-       "productPrice": 0.0635
+       "productPrice": 0.0636
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.1321
+       "productPrice": 0.1323
       },
       {
        "startNumber": 2500,
        "endNumber": 4999,
-       "productPrice": 0.0634
+       "productPrice": 0.0635
       },
       {
        "startNumber": 5000,
        "endNumber": -1,
-       "productPrice": 0.0612
+       "productPrice": 0.0613
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.1094
+       "productPrice": 0.1096
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.0978
+       "productPrice": 0.0979
       },
       {
        "startNumber": 500,
        "endNumber": 2499,
-       "productPrice": 0.0882
+       "productPrice": 0.0883
       }
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
      "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
-     "canPresaleNumber": 85125,
+     "canPresaleNumber": 84842,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "Littelfuse-PESD0402140/C10662",
@@ -98,21 +98,21 @@
      "shopCostPrice": 0.32901,
      "preMinPurchaseNum": 80,
      "minPurchaseNum": 1,
-     "initialPrice": 0.1372,
+     "initialPrice": 0.1373,
      "componentCode": "C10662",
      "componentBrandEn": "Littelfuse",
      "componentModelEn": "PESD0402-140",
      "componentImageUrl": "",
      "productBigImageAccessId": null,
-     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8759382897696481280-C10662-front.jpg?x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=7703e3a9ad3a5d682d3af681976293d4748794f91307a82927fefefbc1a3f0a2",
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8759382897696481280-C10662-front.jpg?x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9ca7bc4e0242348809558ac2557603828f73cd164dc3aadaffee3908287f92f4",
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Littelfuse-PESD0402-140_C10662.pdf",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588884586332106752-C10662.pdf?response-content-disposition=attachment%3B%20filename%3DC10662.pdf%3B%20filename%2A%3DUTF-8%27%27C10662.pdf&x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=05e1862aa422be4df055b691d55f6db85f5295ea24f5b320d7ae1da8eee48bb2",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588884586332106752-C10662.pdf?response-content-disposition=attachment%3B%20filename%3DC10662.pdf%3B%20filename%2A%3DUTF-8%27%27C10662.pdf&x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b0cf9782f0f48e07ae8ec58d6f68ec872323404e94050897b87b1405b8002f05",
      "dataManualOfficialLink": "",
      "componentName": "Littelfuse PESD0402-140",
      "minImage": "",
      "minImageAccessId": null,
-     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8759382898762104832-C10662-front.jpg?x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=94fab103037c6b5d0f298d7b3df7b3adf1adfa1abd0fa0f408f15d27509add7d",
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8759382898762104832-C10662-front.jpg?x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=64d76105443998fda15e42248ff9fd49e59c4e5ed363179a2b2124a38994650f",
      "imageList": [
       {
        "productImage": null,
@@ -214,12 +214,12 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0593
+       "productPrice": 0.0594
       },
       {
        "startNumber": 100,
        "endNumber": 299,
-       "productPrice": 0.0483
+       "productPrice": 0.0484
       },
       {
        "startNumber": 300,
@@ -234,7 +234,7 @@
       {
        "startNumber": 5000,
        "endNumber": 9999,
-       "productPrice": 0.0303
+       "productPrice": 0.0304
       },
       {
        "startNumber": 10000,
@@ -246,12 +246,12 @@
       {
        "startNumber": 100,
        "endNumber": 299,
-       "productPrice": 0.0465
+       "productPrice": 0.0466
       },
       {
        "startNumber": 1000,
        "endNumber": 4999,
-       "productPrice": 0.0372
+       "productPrice": 0.0373
       },
       {
        "startNumber": 300,
@@ -261,12 +261,12 @@
       {
        "startNumber": 10000,
        "endNumber": -1,
-       "productPrice": 0.0276
+       "productPrice": 0.0277
       },
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0571
+       "productPrice": 0.0572
       },
       {
        "startNumber": 5000,
@@ -276,7 +276,7 @@
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
      "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
-     "canPresaleNumber": 33136,
+     "canPresaleNumber": 33132,
      "componentProductType": 0,
      "mergedComponentCode": "",
      "urlSuffix": "BORN-BPESD0402140/C2929253",
@@ -296,21 +296,21 @@
      "shopCostPrice": 0.14,
      "preMinPurchaseNum": 187,
      "minPurchaseNum": 1,
-     "initialPrice": 0.0593,
+     "initialPrice": 0.0594,
      "componentCode": "C2929253",
      "componentBrandEn": "BORN",
      "componentModelEn": "BPESD0402-140",
      "componentImageUrl": "",
      "productBigImageAccessId": null,
-     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583706939788570624-C2929253/C2929253-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=1344c0021c8a4bae8958a14ee231b1d84913317efc2680170ba50fd8c2126a82",
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583706939788570624-C2929253/C2929253-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=efe903663761ae06f07246afb6e04bee1d5ee8bfa6a9e03579290a68853df862",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2201121400_BORN-BPESD0402-140_C2929253.pdf",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8802994860531957760-C2929253.pdf?response-content-disposition=attachment%3B%20filename%3DC2929253.pdf%3B%20filename%2A%3DUTF-8%27%27C2929253.pdf&x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c628719ca879fa65d5b8f5febc99e408db42b926254fbf9a76e7ed3cebe8fe15",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8802994860531957760-C2929253.pdf?response-content-disposition=attachment%3B%20filename%3DC2929253.pdf%3B%20filename%2A%3DUTF-8%27%27C2929253.pdf&x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=1264c3906080f230da4d5f9b19c84c6b71b5df0bac616acf2706f29c1252cdb3",
      "dataManualOfficialLink": "",
      "componentName": "BORN BPESD0402-140",
      "minImage": "",
      "minImageAccessId": null,
-     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583706940756643840-C2929253/C2929253-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=87d94c03c1ef5a183b2ae99fff85ef0ce0504ebaa01c59ab4bd8c91ab8be7379",
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583706940756643840-C2929253/C2929253-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b7eaddeaa81b447c6e2e699859b72db36aa3f05183d7c333dd5669febec29373",
      "imageList": [
       {
        "productImage": null,
@@ -402,7 +402,7 @@
     {
      "componentId": 8533541,
      "componentLibraryType": "expand",
-     "stockCount": 29796,
+     "stockCount": 28766,
      "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
      "erpComponentName": "\u53cc\u5411ESD 14V\u622a\u6b62",
      "componentSource": "shop",
@@ -411,7 +411,7 @@
       {
        "startNumber": 1,
        "endNumber": 199,
-       "productPrice": 0.0411
+       "productPrice": 0.0412
       },
       {
        "startNumber": 200,
@@ -443,7 +443,7 @@
       {
        "startNumber": 600,
        "endNumber": 1999,
-       "productPrice": 0.0276
+       "productPrice": 0.0277
       },
       {
        "startNumber": 200,
@@ -458,7 +458,7 @@
       {
        "startNumber": 1,
        "endNumber": 199,
-       "productPrice": 0.0396
+       "productPrice": 0.0397
       },
       {
        "startNumber": 10000,
@@ -473,7 +473,7 @@
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
      "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
-     "canPresaleNumber": 29375,
+     "canPresaleNumber": 28356,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "MSKSEMI-PESD0402140/C7473167",
@@ -493,21 +493,21 @@
      "shopCostPrice": 0.09,
      "preMinPurchaseNum": 273,
      "minPurchaseNum": 1,
-     "initialPrice": 0.0411,
+     "initialPrice": 0.0412,
      "componentCode": "C7473167",
      "componentBrandEn": "MSKSEMI",
      "componentModelEn": "PESD0402-140",
      "componentImageUrl": "",
      "productBigImageAccessId": null,
-     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585209944861233152-C7473167/C7473167-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=25b7b869fa0bdbe828d8c831a2e0feb583b41ca352c909fd980aa96d280128ce",
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585209944861233152-C7473167/C7473167-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=385a244aacb331feba515fea115da0a90fff98d6fd5b520b5c9ca1cfb6fcdc0d",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2308080950_MSKSEMI-PESD0402-140_C7473167.pdf",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590905325036130304-C7473167.pdf?response-content-disposition=attachment%3B%20filename%3DC7473167.pdf%3B%20filename%2A%3DUTF-8%27%27C7473167.pdf&x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=eea67ea53018de1c7c6945a84c62bc04e2871c9587aeb0879679ae2ccf7c51f7",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590905325036130304-C7473167.pdf?response-content-disposition=attachment%3B%20filename%3DC7473167.pdf%3B%20filename%2A%3DUTF-8%27%27C7473167.pdf&x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=e5129ef95727bf47ebdea3a2b30976771b6ec07942acfedd5d9561e9e9283f99",
      "dataManualOfficialLink": "",
      "componentName": "MSKSEMI PESD0402-140",
      "minImage": "",
      "minImageAccessId": null,
-     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585209945788309504-C7473167/C7473167-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=31ae48bc4ef02470542d7e4da10fe440ba07fd2f9a479696d5b3508f2e8057cf",
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585209945788309504-C7473167/C7473167-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d1dc195da94d0b8e0d673ccb6932c78aa62bb90f5f567054314a26f872409de7",
      "imageList": [
       {
        "productImage": null,
@@ -611,7 +611,7 @@
     {
      "componentId": 21156764,
      "componentLibraryType": "expand",
-     "stockCount": 20582,
+     "stockCount": 20542,
      "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
      "erpComponentName": "\u8868\u9762\u8d34\u88c5\u805a\u5408\u7269ESD\u6291\u5236\u5668",
      "componentSource": "shop",
@@ -620,7 +620,7 @@
       {
        "startNumber": 1,
        "endNumber": 199,
-       "productPrice": 0.0293
+       "productPrice": 0.0294
       },
       {
        "startNumber": 200,
@@ -682,7 +682,7 @@
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
      "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
-     "canPresaleNumber": 20382,
+     "canPresaleNumber": 20347,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "TECHPUBLIC-PESD0402140/C19829469",
@@ -702,21 +702,21 @@
      "shopCostPrice": 0.07,
      "preMinPurchaseNum": 391,
      "minPurchaseNum": 1,
-     "initialPrice": 0.0293,
+     "initialPrice": 0.0294,
      "componentCode": "C19829469",
      "componentBrandEn": "TECH PUBLIC",
      "componentModelEn": "PESD0402-140",
      "componentImageUrl": "",
      "productBigImageAccessId": null,
-     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585281576045588480-C19829469/C19829469-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=60780f60cbe8594a9e81ec97d5c8fdbde72532731f3024a06499ee56fbc8c6bb",
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585281576045588480-C19829469/C19829469-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0fa82093531dc62640bdf92a8c229a65a17ce8e501d57db4fc76dcc3666085c7",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2401191738_TECH-PUBLIC-PESD0402-140_C19829469.pdf",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590929191477334016-C19829469.pdf?response-content-disposition=attachment%3B%20filename%3DC19829469.pdf%3B%20filename%2A%3DUTF-8%27%27C19829469.pdf&x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=00bf21b05933018ca63ee83187c2e2cfc414c60a2753745ed7f3d3fd24a31670",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590929191477334016-C19829469.pdf?response-content-disposition=attachment%3B%20filename%3DC19829469.pdf%3B%20filename%2A%3DUTF-8%27%27C19829469.pdf&x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f59cde330deccb319eab80ff494363dc386e5827ccc95b6c8a793aecd464de80",
      "dataManualOfficialLink": "",
      "componentName": "TECH PUBLIC PESD0402-140",
      "minImage": "",
      "minImageAccessId": null,
-     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585281576918274048-C19829469/C19829469-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0e3650beb447d4026a8e2313e1f24485dfa28e4fa7e989060348196f3fc67836",
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585281576918274048-C19829469/C19829469-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=bbac79da6e8d8a25b95cb151cff7796e151ad4b01a24e97c005bf3c8fda2cdf9",
      "imageList": [
       {
        "productImage": null,
@@ -839,7 +839,7 @@
       {
        "startNumber": 1500,
        "endNumber": 9999,
-       "productPrice": 0.0133
+       "productPrice": 0.0134
       },
       {
        "startNumber": 10000,
@@ -861,7 +861,7 @@
       {
        "startNumber": 500,
        "endNumber": 1499,
-       "productPrice": 0.0153
+       "productPrice": 0.0154
       },
       {
        "startNumber": 10000,
@@ -871,7 +871,7 @@
       {
        "startNumber": 1500,
        "endNumber": 9999,
-       "productPrice": 0.0128
+       "productPrice": 0.0129
       },
       {
        "startNumber": 20000,
@@ -917,15 +917,15 @@
      "componentModelEn": "PESD0402-140-ES",
      "componentImageUrl": "",
      "productBigImageAccessId": null,
-     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585251708641820672-C22379590/C22379590-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=52eadba7354334487fadecdf4410e614396181b13120e0d8e6e96687c50e83ec",
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585251708641820672-C22379590/C22379590-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=254f04797d84c716c0ca98174d29b7a7208bbbb491072fa81022aa825b086ccb",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2404101519_ElecSuper-PESD0402-140-ES_C22379590.pdf",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590917079137017856-C22379590.pdf?response-content-disposition=attachment%3B%20filename%3DC22379590.pdf%3B%20filename%2A%3DUTF-8%27%27C22379590.pdf&x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3cf875f67bfa72ac94182c4fdf1cda474c57ffb5c52fa2f9a6168b198dba2ddb",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590917079137017856-C22379590.pdf?response-content-disposition=attachment%3B%20filename%3DC22379590.pdf%3B%20filename%2A%3DUTF-8%27%27C22379590.pdf&x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c7c66546dd30c8fe7bea607a3fae2a33dff9d237d8c5a2a621e24cd4df5113b3",
      "dataManualOfficialLink": "",
      "componentName": "ElecSuper PESD0402-140-ES",
      "minImage": "",
      "minImageAccessId": null,
-     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585251709521813504-C22379590/C22379590-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=591a3d3cf4f9b20c267ac32a251a46bf58e71c0d84834fc3c4244874ede975af",
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585251709521813504-C22379590/C22379590-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=605e7785bb9e6d40d04287ce4eadb8255f49a8e09675af72bc2cb692611d4a92",
      "imageList": [
       {
        "productImage": null,
@@ -1029,7 +1029,7 @@
     {
      "componentId": 44240294,
      "componentLibraryType": "expand",
-     "stockCount": 10522,
+     "stockCount": 222,
      "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
      "erpComponentName": "\u53cc\u5411ESD 14V\u622a\u6b62",
      "componentSource": "shop",
@@ -1038,69 +1038,69 @@
       {
        "startNumber": 1,
        "endNumber": 499,
-       "productPrice": 0.0203
+       "productPrice": 0.021
       },
       {
        "startNumber": 500,
        "endNumber": 1499,
-       "productPrice": 0.0159
+       "productPrice": 0.0166
       },
       {
        "startNumber": 1500,
        "endNumber": 9999,
-       "productPrice": 0.0135
+       "productPrice": 0.0141
       },
       {
        "startNumber": 10000,
        "endNumber": 19999,
-       "productPrice": 0.012
+       "productPrice": 0.0126
       },
       {
        "startNumber": 20000,
        "endNumber": 49999,
-       "productPrice": 0.0107
+       "productPrice": 0.0113
       },
       {
        "startNumber": 50000,
        "endNumber": -1,
-       "productPrice": 0.01
+       "productPrice": 0.0106
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 50000,
        "endNumber": -1,
-       "productPrice": 0.0097
+       "productPrice": 0.0102
       },
       {
        "startNumber": 1,
        "endNumber": 499,
-       "productPrice": 0.0196
+       "productPrice": 0.0202
       },
       {
        "startNumber": 1500,
        "endNumber": 9999,
-       "productPrice": 0.013
+       "productPrice": 0.0136
       },
       {
        "startNumber": 20000,
        "endNumber": 49999,
-       "productPrice": 0.0103
+       "productPrice": 0.0109
       },
       {
        "startNumber": 500,
        "endNumber": 1499,
-       "productPrice": 0.0153
+       "productPrice": 0.016
       },
       {
        "startNumber": 10000,
        "endNumber": 19999,
-       "productPrice": 0.0116
+       "productPrice": 0.0121
       }
      ],
      "firstSortAccessId": null,
      "secondSortAccessId": null,
-     "canPresaleNumber": 10419,
+     "canPresaleNumber": 118,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "KUU-PESD0402140/C42369111",
@@ -1118,9 +1118,9 @@
      "fullReelPrice": null,
      "encapsulationNumber": 10000,
      "shopCostPrice": 0.05,
-     "preMinPurchaseNum": 445,
+     "preMinPurchaseNum": 430,
      "minPurchaseNum": 1,
-     "initialPrice": 0.0203,
+     "initialPrice": 0.021,
      "componentCode": "C42369111",
      "componentBrandEn": "KUU",
      "componentModelEn": "PESD0402-140",
@@ -1223,12 +1223,12 @@
       {
        "startNumber": 100,
        "endNumber": 299,
-       "productPrice": 0.0303
+       "productPrice": 0.0304
       },
       {
        "startNumber": 300,
        "endNumber": 999,
-       "productPrice": 0.0298
+       "productPrice": 0.0299
       },
       {
        "startNumber": 1000,
@@ -1250,27 +1250,27 @@
       {
        "startNumber": 300,
        "endNumber": 999,
-       "productPrice": 0.0287
+       "productPrice": 0.0288
       },
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0298
+       "productPrice": 0.0299
       },
       {
        "startNumber": 1040,
        "endNumber": -1,
-       "productPrice": 0.0284
+       "productPrice": 0.0285
       },
       {
        "startNumber": 1020,
        "endNumber": 1039,
-       "productPrice": 0.0284
+       "productPrice": 0.0285
       },
       {
        "startNumber": 1000,
        "endNumber": 1019,
-       "productPrice": 0.0284
+       "productPrice": 0.0285
       },
       {
        "startNumber": 100,
@@ -1298,23 +1298,23 @@
      "fullReelPrice": null,
      "encapsulationNumber": 10000,
      "shopCostPrice": 0.13,
-     "preMinPurchaseNum": 298,
-     "minPurchaseNum": 298,
-     "initialPrice": 0.0303,
+     "preMinPurchaseNum": 297,
+     "minPurchaseNum": 297,
+     "initialPrice": 0.0304,
      "componentCode": "C133008",
      "componentBrandEn": "Yenji Elec",
      "componentModelEn": "PESD0402-140",
      "componentImageUrl": "",
      "productBigImageAccessId": null,
-     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583583351135068160-C133008/C133008-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fe3ce557a25c497f0cf647612133d36e26199e1e11f297a353c983bf78a90549",
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583583351135068160-C133008/C133008-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=eb84bb7eb5c7e94120672353128b91846910348ccc75439aae20b1d7ec932548",
      "dataManualUrl": null,
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588943600280985600-C133008.pdf?response-content-disposition=attachment%3B%20filename%3DC133008.pdf%3B%20filename%2A%3DUTF-8%27%27C133008.pdf&x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f9f2b33a85fc3b50d5c783b1dfd2917992ebe87448aba2ba7fd4e1b6779debb3",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588943600280985600-C133008.pdf?response-content-disposition=attachment%3B%20filename%3DC133008.pdf%3B%20filename%2A%3DUTF-8%27%27C133008.pdf&x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=399e8cf63d355fde04cb05544976d895387e0504f8155932ad040765d5c1430e",
      "dataManualOfficialLink": "",
      "componentName": "Yenji Elec PESD0402-140",
      "minImage": "",
      "minImageAccessId": null,
-     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583583352071208960-C133008/C133008-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T161304Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c0f1b705b397953b9e1b0fdf976e93c58085ab962d19736aa1387c1bb690b9cf",
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583583352071208960-C133008/C133008-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261117T202934Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f661de1303c74acc22430c75fb0cc58d4db58dfed63b38d76b3c3fe3cf1fae62",
      "imageList": [
       {
        "productImage": null,

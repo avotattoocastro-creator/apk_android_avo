@@ -7,7 +7,7 @@
     {
      "componentId": 78258,
      "componentLibraryType": "expand",
-     "stockCount": 297586,
+     "stockCount": 298896,
      "componentTypeEn": "NTC Thermistors",
      "erpComponentName": "10k\u03a9 3380K 100mW",
      "componentSource": "shop",
@@ -53,7 +53,7 @@
       {
        "startNumber": 50000,
        "endNumber": -1,
-       "productPrice": 0.0076
+       "productPrice": 0.0077
       },
       {
        "startNumber": 10000,
@@ -73,12 +73,12 @@
       {
        "startNumber": 500,
        "endNumber": 1499,
-       "productPrice": 0.0121
+       "productPrice": 0.0122
       }
      ],
      "firstSortAccessId": "caefd6d6f2bc4507bdc2837246857fba",
      "secondSortAccessId": "7bd534bdda8344d6b5a11abb79f12e9b",
-     "canPresaleNumber": 292864,
+     "canPresaleNumber": 294156,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "MurataElectronics-NCP15XH103F03RC/C77131",
@@ -104,15 +104,15 @@
      "componentModelEn": "NCP15XH103F03RC",
      "componentImageUrl": "",
      "productBigImageAccessId": null,
-     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8762368929551663104-C77131-front.jpg?x-oss-date=20261114T161250Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3fd10d6e0f9942b67e83107f9dde0a988a176b739c9f1f558c25fcea777e23e0",
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8762368929551663104-C77131-front.jpg?x-oss-date=20261117T202901Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=2143246552ccac4da41a6eb65277bb4cd1052988bfa7ca07b1a953bae0877582",
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Murata-Electronics-NCP15XH103F03RC_C77131.pdf",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8586175050076184576-C77131.pdf?response-content-disposition=attachment%3B%20filename%3DC77131.pdf%3B%20filename%2A%3DUTF-8%27%27C77131.pdf&x-oss-date=20261114T161250Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9e522054f7cdeb04e3d918dec2f976167862ccbaa790b5e86c4b4a2190f3249d",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8586175050076184576-C77131.pdf?response-content-disposition=attachment%3B%20filename%3DC77131.pdf%3B%20filename%2A%3DUTF-8%27%27C77131.pdf&x-oss-date=20261117T202901Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fae568e95a4e5b823c12641ca6d56df7bdcdea6e7026974bb94da46f7649e311",
      "dataManualOfficialLink": "",
      "componentName": "muRata NCP15XH103F03RC",
      "minImage": "",
      "minImageAccessId": null,
-     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8762368930743115776-C77131-front.jpg?x-oss-date=20261114T161250Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=618d7ca5f185cfa4a0156769517deb646703de728370423de24b299a5e5e49b2",
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8762368930743115776-C77131-front.jpg?x-oss-date=20261117T202901Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=6477d80a40314451e82e862836652b51918ddaa257175dd1dc30ee05612c20ac",
      "imageList": [
       {
        "productImage": null,

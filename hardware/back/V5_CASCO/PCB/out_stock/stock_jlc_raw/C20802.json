@@ -7,7 +7,7 @@
     {
      "componentId": 21514,
      "componentLibraryType": "expand",
-     "stockCount": 11303,
+     "stockCount": 11250,
      "componentTypeEn": "Resettable Fuses",
      "erpComponentName": "6V 35A 1206 \u81ea\u6062\u590d",
      "componentSource": "shop",
@@ -16,22 +16,22 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.1187
+       "productPrice": 0.1188
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.0933
+       "productPrice": 0.0934
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.0807
+       "productPrice": 0.0808
       },
       {
        "startNumber": 500,
        "endNumber": 3499,
-       "productPrice": 0.0712
+       "productPrice": 0.0713
       },
       {
        "startNumber": 3500,
@@ -41,14 +41,14 @@
       {
        "startNumber": 7000,
        "endNumber": -1,
-       "productPrice": 0.054
+       "productPrice": 0.0541
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.0899
+       "productPrice": 0.09
       },
       {
        "startNumber": 7000,
@@ -58,12 +58,12 @@
       {
        "startNumber": 3500,
        "endNumber": 6999,
-       "productPrice": 0.0558
+       "productPrice": 0.0559
       },
       {
        "startNumber": 500,
        "endNumber": 3499,
-       "productPrice": 0.0686
+       "productPrice": 0.0687
       },
       {
        "startNumber": 150,
@@ -73,12 +73,12 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.1143
+       "productPrice": 0.1145
       }
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
      "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
-     "canPresaleNumber": 11220,
+     "canPresaleNumber": 11166,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "21514-SMD1206P150TF/C20802",
@@ -98,21 +98,21 @@
      "shopCostPrice": 0.28,
      "preMinPurchaseNum": 97,
      "minPurchaseNum": 1,
-     "initialPrice": 0.1187,
+     "initialPrice": 0.1188,
      "componentCode": "C20802",
      "componentBrandEn": "RUILON(Shenzhen Ruilongyuan Elec)",
      "componentModelEn": "SMD1206P150TF",
      "componentImageUrl": "",
      "productBigImageAccessId": null,
-     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8553352261670617088-C20802-front.jpg?x-oss-date=20261114T161234Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=00c2709924ca032063c930e4a06bfc528cd68e9c0c65dcc726aeaf41aa285063",
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8553352261670617088-C20802-front.jpg?x-oss-date=20261117T202842Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=5de66a6cd90b3b40b75baf278b6c01bba711607e1b9721f21b71f7b2531d1541",
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2403081022_RUILON-Shenzhen-Ruilongyuan-Elec-SMD1206P150TF_C20802.pdf",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8770256253350092800-C20802.pdf?response-content-disposition=attachment%3B%20filename%3DC20802.pdf%3B%20filename%2A%3DUTF-8%27%27C20802.pdf&x-oss-date=20261114T161234Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=58d74ef9ac0305f2ce116be7edc9b70f9d2aef99d106adb29c7ba8d466132ede",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8770256253350092800-C20802.pdf?response-content-disposition=attachment%3B%20filename%3DC20802.pdf%3B%20filename%2A%3DUTF-8%27%27C20802.pdf&x-oss-date=20261117T202842Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=4e0c8c6a693fb288e618cef55fe03d87650b11f1dcd48f67f35a6898898173dd",
      "dataManualOfficialLink": "",
      "componentName": "RUILON SMD1206P150TF",
      "minImage": "",
      "minImageAccessId": null,
-     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8553352262308151296-C20802-%25E6%25AD%25A3%25E9%259D%25A2.jpg?x-oss-date=20261114T161234Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0d479534a93db9e97cdb95efa72463a1f28df939e3408242348c7749c9b65bc0",
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8553352262308151296-C20802-%25E6%25AD%25A3%25E9%259D%25A2.jpg?x-oss-date=20261117T202842Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=96ac3ff4910dc2fbb7c7a91f7045ddd69c8d497383b8096f0d82be099048d0cc",
      "imageList": [
       {
        "productImage": null,
@@ -229,64 +229,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 9.982
+       "productPrice": 9.9943
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 9.982
+       "productPrice": 9.9943
       },
       {
        "startNumber": 12,
        "endNumber": 191,
-       "productPrice": 9.982
+       "productPrice": 9.9943
       },
       {
        "startNumber": 192,
        "endNumber": 503,
-       "productPrice": 3.9824
+       "productPrice": 3.9873
       },
       {
        "startNumber": 504,
        "endNumber": 1007,
-       "productPrice": 3.8498
+       "productPrice": 3.8546
       },
       {
        "startNumber": 1008,
        "endNumber": -1,
-       "productPrice": 3.7844
+       "productPrice": 3.7891
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 192,
        "endNumber": 503,
-       "productPrice": 3.8362
+       "productPrice": 3.841
       },
       {
        "startNumber": 12,
        "endNumber": 191,
-       "productPrice": 9.6157
+       "productPrice": 9.6276
       },
       {
        "startNumber": 1008,
        "endNumber": -1,
-       "productPrice": 3.6455
+       "productPrice": 3.65
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 9.6157
+       "productPrice": 9.6276
       },
       {
        "startNumber": 504,
        "endNumber": 1007,
-       "productPrice": 3.7086
+       "productPrice": 3.7131
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 9.6157
+       "productPrice": 9.6276
       }
      ],
      "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
@@ -311,7 +311,7 @@
      "shopCostPrice": 0.0,
      "preMinPurchaseNum": 1,
      "minPurchaseNum": 1,
-     "initialPrice": 9.982,
+     "initialPrice": 9.9943,
      "componentCode": "C6590947",
      "componentBrandEn": "Samtec",
      "componentModelEn": "MEC2-08-02-L-DV-WT",
@@ -320,7 +320,7 @@
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8555064653335932928-C6590947.pdf?response-content-disposition=attachment%3B%20filename%3DC6590947.pdf%3B%20filename%2A%3DUTF-8%27%27C6590947.pdf&x-oss-date=20261114T161234Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=11ae5fd63352dcf00a83d48e4d0b95ea695bf06a40ec16832a294af10177dfe4",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8555064653335932928-C6590947.pdf?response-content-disposition=attachment%3B%20filename%3DC6590947.pdf%3B%20filename%2A%3DUTF-8%27%27C6590947.pdf&x-oss-date=20261117T202842Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=4c88c2d4b657894a9beb24588884afc18a4f6bf7b06a1fd19a667c2dad71f784",
      "dataManualOfficialLink": "",
      "componentName": "Samtec MEC2-08-02-L-DV-WT",
      "minImage": null,
@@ -360,64 +360,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 15.2389
+       "productPrice": 15.2577
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 15.2389
+       "productPrice": 15.2577
       },
       {
        "startNumber": 30,
        "endNumber": 199,
-       "productPrice": 15.2389
+       "productPrice": 15.2577
       },
       {
        "startNumber": 200,
        "endNumber": 499,
-       "productPrice": 6.0799
+       "productPrice": 6.0874
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 5.877
+       "productPrice": 5.8842
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 5.7772
+       "productPrice": 5.7843
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 5.5652
+       "productPrice": 5.572
       },
       {
        "startNumber": 200,
        "endNumber": 499,
-       "productPrice": 5.8568
+       "productPrice": 5.864
       },
       {
        "startNumber": 30,
        "endNumber": 199,
-       "productPrice": 14.6797
+       "productPrice": 14.6977
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 14.6797
+       "productPrice": 14.6977
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 5.6613
+       "productPrice": 5.6683
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 14.6797
+       "productPrice": 14.6977
       }
      ],
      "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
@@ -442,7 +442,7 @@
      "shopCostPrice": 0.0,
      "preMinPurchaseNum": 1,
      "minPurchaseNum": 1,
-     "initialPrice": 15.2389,
+     "initialPrice": 15.2577,
      "componentCode": "C20373999",
      "componentBrandEn": "Samtec",
      "componentModelEn": "MEC2-08-02-L-TH1-WT",
@@ -451,7 +451,7 @@
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401241004_Samtec-MEC2-08-02-L-TH1-WT_C20373999.pdf",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603543160761577472-C20373999.pdf?response-content-disposition=attachment%3B%20filename%3DC20373999.pdf%3B%20filename%2A%3DUTF-8%27%27C20373999.pdf&x-oss-date=20261114T161234Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c07346a5e332047ea63beb3a4e39ec15e4e0b62d157d2894aa5e7eed95c35406",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603543160761577472-C20373999.pdf?response-content-disposition=attachment%3B%20filename%3DC20373999.pdf%3B%20filename%2A%3DUTF-8%27%27C20373999.pdf&x-oss-date=20261117T202842Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9b44b2386f692d2601f565f9b5c60099458052e4fd8511a1efa8037db51bf8aa",
      "dataManualOfficialLink": "",
      "componentName": "Samtec MEC2-08-02-L-TH1-WT",
      "minImage": null,
@@ -491,64 +491,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 15.2389
+       "productPrice": 15.2577
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 15.2389
+       "productPrice": 15.2577
       },
       {
        "startNumber": 12,
        "endNumber": 191,
-       "productPrice": 15.2389
+       "productPrice": 15.2577
       },
       {
        "startNumber": 192,
        "endNumber": 503,
-       "productPrice": 6.0799
+       "productPrice": 6.0874
       },
       {
        "startNumber": 504,
        "endNumber": 1007,
-       "productPrice": 5.877
+       "productPrice": 5.8842
       },
       {
        "startNumber": 1008,
        "endNumber": -1,
-       "productPrice": 5.7772
+       "productPrice": 5.7843
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 192,
        "endNumber": 503,
-       "productPrice": 5.8568
+       "productPrice": 5.864
       },
       {
        "startNumber": 12,
        "endNumber": 191,
-       "productPrice": 14.6797
+       "productPrice": 14.6977
       },
       {
        "startNumber": 1008,
        "endNumber": -1,
-       "productPrice": 5.5652
+       "productPrice": 5.572
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 14.6797
+       "productPrice": 14.6977
       },
       {
        "startNumber": 504,
        "endNumber": 1007,
-       "productPrice": 5.6613
+       "productPrice": 5.6683
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 14.6797
+       "productPrice": 14.6977
       }
      ],
      "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
@@ -573,7 +573,7 @@
      "shopCostPrice": 0.0,
      "preMinPurchaseNum": 1,
      "minPurchaseNum": 1,
-     "initialPrice": 15.2389,
+     "initialPrice": 15.2577,
      "componentCode": "C20373994",
      "componentBrandEn": "Samtec",
      "componentModelEn": "MEC2-08-02-L-DV-NP-WT",
@@ -582,7 +582,7 @@
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401171339_Samtec-MEC2-08-02-L-DV-NP-WT_C20373994.pdf",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8604292570659115008-C20373994.pdf?response-content-disposition=attachment%3B%20filename%3DC20373994.pdf%3B%20filename%2A%3DUTF-8%27%27C20373994.pdf&x-oss-date=20261114T161234Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=30303620c7d2eac77b73f12ffc51dc9525ac1638fd87bfd6ae8f98b103c0bd3d",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8604292570659115008-C20373994.pdf?response-content-disposition=attachment%3B%20filename%3DC20373994.pdf%3B%20filename%2A%3DUTF-8%27%27C20373994.pdf&x-oss-date=20261117T202842Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=40d22ac50252037dfe8253493c3deffceb20c0641ad935b0c197649ffdb2922c",
      "dataManualOfficialLink": "",
      "componentName": "Samtec MEC2-08-02-L-DV-NP-WT",
      "minImage": null,
@@ -622,64 +622,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 12.4362
+       "productPrice": 12.4515
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 12.4362
+       "productPrice": 12.4515
       },
       {
        "startNumber": 12,
        "endNumber": 249,
-       "productPrice": 12.4362
+       "productPrice": 12.4515
       },
       {
        "startNumber": 250,
        "endNumber": 499,
-       "productPrice": 4.9624
+       "productPrice": 4.9685
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 4.7972
+       "productPrice": 4.8031
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 4.7153
+       "productPrice": 4.7212
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 12,
        "endNumber": 249,
-       "productPrice": 11.9798
+       "productPrice": 11.9946
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 4.5423
+       "productPrice": 4.5479
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 11.9798
+       "productPrice": 11.9946
       },
       {
        "startNumber": 250,
        "endNumber": 499,
-       "productPrice": 4.7803
+       "productPrice": 4.7862
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 11.9798
+       "productPrice": 11.9946
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 4.6211
+       "productPrice": 4.6268
       }
      ],
      "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
@@ -704,7 +704,7 @@
      "shopCostPrice": 0.0,
      "preMinPurchaseNum": 1,
      "minPurchaseNum": 1,
-     "initialPrice": 12.4362,
+     "initialPrice": 12.4515,
      "componentCode": "C20373997",
      "componentBrandEn": "Samtec",
      "componentModelEn": "MEC2-08-02-L-DV-WT-TR",
@@ -713,7 +713,7 @@
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401241004_Samtec-MEC2-08-02-L-DV-WT-TR_C20373997.pdf",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603545098781548544-C20373997.pdf?response-content-disposition=attachment%3B%20filename%3DC20373997.pdf%3B%20filename%2A%3DUTF-8%27%27C20373997.pdf&x-oss-date=20261114T161234Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=36363e0433bbf373c894e58d0787300fa7cecb4306a0acb35f5f9fd88cad416a",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603545098781548544-C20373997.pdf?response-content-disposition=attachment%3B%20filename%3DC20373997.pdf%3B%20filename%2A%3DUTF-8%27%27C20373997.pdf&x-oss-date=20261117T202842Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=25cda55cbbda5a999f4587a8c2001881808554d647db0c43c5ccb637efd2de8c",
      "dataManualOfficialLink": "",
      "componentName": "Samtec MEC2-08-02-L-DV-WT-TR",
      "minImage": null,
@@ -753,64 +753,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 89.9589
+       "productPrice": 90.0697
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 89.9589
+       "productPrice": 90.0697
       },
       {
        "startNumber": 30,
        "endNumber": 199,
-       "productPrice": 89.9589
+       "productPrice": 90.0697
       },
       {
        "startNumber": 200,
        "endNumber": 499,
-       "productPrice": 35.8949
+       "productPrice": 35.9391
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 34.6956
+       "productPrice": 34.7384
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 34.1017
+       "productPrice": 34.1437
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 32.8503
+       "productPrice": 32.8908
       },
       {
        "startNumber": 200,
        "endNumber": 499,
-       "productPrice": 34.5777
+       "productPrice": 34.6203
       },
       {
        "startNumber": 30,
        "endNumber": 199,
-       "productPrice": 86.6576
+       "productPrice": 86.7644
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 86.6576
+       "productPrice": 86.7644
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 33.4224
+       "productPrice": 33.4636
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 86.6576
+       "productPrice": 86.7644
       }
      ],
      "firstSortAccessId": "fef7fb84489e4849acf8e6b9cb97ff9f",
@@ -835,7 +835,7 @@
      "shopCostPrice": 0.0,
      "preMinPurchaseNum": 1,
      "minPurchaseNum": 1,
-     "initialPrice": 89.9589,
+     "initialPrice": 90.0697,
      "componentCode": "C17438841",
      "componentBrandEn": "Crystek Corporation",
      "componentModelEn": "CVCO55CC-2080-2080",
@@ -844,7 +844,7 @@
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590935694078521344-C17438841.pdf?response-content-disposition=attachment%3B%20filename%3DC17438841.pdf%3B%20filename%2A%3DUTF-8%27%27C17438841.pdf&x-oss-date=20261114T161234Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=1a7bbbe39d0386da32a47250374205acedfede5a269775e91bf5dceb4e378d6f",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590935694078521344-C17438841.pdf?response-content-disposition=attachment%3B%20filename%3DC17438841.pdf%3B%20filename%2A%3DUTF-8%27%27C17438841.pdf&x-oss-date=20261117T202842Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=ccd728e7a27cf72d1daaa565a4da5276d1d1994de3097d55ea7ee6d0b174b71f",
      "dataManualOfficialLink": "",
      "componentName": "Crystek Corporation CVCO55CC-2080-2080",
      "minImage": null,
@@ -893,64 +893,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 12.8076
+       "productPrice": 12.8234
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 12.8076
+       "productPrice": 12.8234
       },
       {
        "startNumber": 12,
        "endNumber": 249,
-       "productPrice": 12.8076
+       "productPrice": 12.8234
       },
       {
        "startNumber": 250,
        "endNumber": 499,
-       "productPrice": 5.1113
+       "productPrice": 5.1176
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 4.9411
+       "productPrice": 4.9472
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 4.8561
+       "productPrice": 4.862
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 12,
        "endNumber": 249,
-       "productPrice": 12.3376
+       "productPrice": 12.3528
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 4.6779
+       "productPrice": 4.6836
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 12.3376
+       "productPrice": 12.3528
       },
       {
        "startNumber": 250,
        "endNumber": 499,
-       "productPrice": 4.9237
+       "productPrice": 4.9298
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 12.3376
+       "productPrice": 12.3528
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 4.7598
+       "productPrice": 4.7657
       }
      ],
      "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
@@ -975,7 +975,7 @@
      "shopCostPrice": 0.0,
      "preMinPurchaseNum": 1,
      "minPurchaseNum": 1,
-     "initialPrice": 12.8076,
+     "initialPrice": 12.8234,
      "componentCode": "C20373996",
      "componentBrandEn": "Samtec",
      "componentModelEn": "MEC2-08-02-L-DV-WT-K-TR",
@@ -984,7 +984,7 @@
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401171339_Samtec-MEC2-08-02-L-DV-WT-K-TR_C20373996.pdf",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603695577532690432-C20373996.pdf?response-content-disposition=attachment%3B%20filename%3DC20373996.pdf%3B%20filename%2A%3DUTF-8%27%27C20373996.pdf&x-oss-date=20261114T161234Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=73e40f2aa843ce688e854efa8648df14404a06183594b51f71e8a7da46bc9813",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603695577532690432-C20373996.pdf?response-content-disposition=attachment%3B%20filename%3DC20373996.pdf%3B%20filename%2A%3DUTF-8%27%27C20373996.pdf&x-oss-date=20261117T202842Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=448d325c1dc4601c4f07770edbcb8737b6f225299ac0fa84e7270a8165f58eda",
      "dataManualOfficialLink": "",
      "componentName": "Samtec MEC2-08-02-L-DV-WT-K-TR",
      "minImage": null,
@@ -1024,64 +1024,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 15.2389
+       "productPrice": 15.2577
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 15.2389
+       "productPrice": 15.2577
       },
       {
        "startNumber": 12,
        "endNumber": 191,
-       "productPrice": 15.2389
+       "productPrice": 15.2577
       },
       {
        "startNumber": 192,
        "endNumber": 503,
-       "productPrice": 6.0799
+       "productPrice": 6.0874
       },
       {
        "startNumber": 504,
        "endNumber": 1007,
-       "productPrice": 5.877
+       "productPrice": 5.8842
       },
       {
        "startNumber": 1008,
        "endNumber": -1,
-       "productPrice": 5.7772
+       "productPrice": 5.7843
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 192,
        "endNumber": 503,
-       "productPrice": 5.8568
+       "productPrice": 5.864
       },
       {
        "startNumber": 12,
        "endNumber": 191,
-       "productPrice": 14.6797
+       "productPrice": 14.6977
       },
       {
        "startNumber": 1008,
        "endNumber": -1,
-       "productPrice": 5.5652
+       "productPrice": 5.572
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 14.6797
+       "productPrice": 14.6977
       },
       {
        "startNumber": 504,
        "endNumber": 1007,
-       "productPrice": 5.6613
+       "productPrice": 5.6683
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 14.6797
+       "productPrice": 14.6977
       }
      ],
      "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
@@ -1106,7 +1106,7 @@
      "shopCostPrice": 0.0,
      "preMinPurchaseNum": 1,
      "minPurchaseNum": 1,
-     "initialPrice": 15.2389,
+     "initialPrice": 15.2577,
      "componentCode": "C20373998",
      "componentBrandEn": "Samtec",
      "componentModelEn": "MEC2-08-02-L-TH1-NP-WT",
@@ -1115,7 +1115,7 @@
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401241004_Samtec-MEC2-08-02-L-TH1-NP-WT_C20373998.pdf",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603694394528976896-C20373998.pdf?response-content-disposition=attachment%3B%20filename%3DC20373998.pdf%3B%20filename%2A%3DUTF-8%27%27C20373998.pdf&x-oss-date=20261114T161234Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=df1e984c9dfc6a4a775d2a39f2a491bad7a4dfa4e300ee8b8082fe045767f075",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603694394528976896-C20373998.pdf?response-content-disposition=attachment%3B%20filename%3DC20373998.pdf%3B%20filename%2A%3DUTF-8%27%27C20373998.pdf&x-oss-date=20261117T202842Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=4f86762b6cba1a62c22ec20e6551000e6d55b58172403fbc098d2b4e710b422f",
      "dataManualOfficialLink": "",
      "componentName": "Samtec MEC2-08-02-L-TH1-NP-WT",
      "minImage": null,
@@ -1155,64 +1155,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 12.4362
+       "productPrice": 12.4515
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 12.4362
+       "productPrice": 12.4515
       },
       {
        "startNumber": 12,
        "endNumber": 249,
-       "productPrice": 12.4362
+       "productPrice": 12.4515
       },
       {
        "startNumber": 250,
        "endNumber": 499,
-       "productPrice": 4.9624
+       "productPrice": 4.9685
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 4.7972
+       "productPrice": 4.8031
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 4.7153
+       "productPrice": 4.7212
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 12,
        "endNumber": 249,
-       "productPrice": 11.9798
+       "productPrice": 11.9946
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 4.5423
+       "productPrice": 4.5479
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 11.9798
+       "productPrice": 11.9946
       },
       {
        "startNumber": 250,
        "endNumber": 499,
-       "productPrice": 4.7803
+       "productPrice": 4.7862
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 11.9798
+       "productPrice": 11.9946
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 4.6211
+       "productPrice": 4.6268
       }
      ],
      "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
@@ -1237,7 +1237,7 @@
      "shopCostPrice": 0.0,
      "preMinPurchaseNum": 1,
      "minPurchaseNum": 1,
-     "initialPrice": 12.4362,
+     "initialPrice": 12.4515,
      "componentCode": "C20373995",
      "componentBrandEn": "Samtec",
      "componentModelEn": "MEC2-08-02-L-DV-NP-WT-TR",
@@ -1246,7 +1246,7 @@
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401171339_Samtec-MEC2-08-02-L-DV-NP-WT-TR_C20373995.pdf",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603683745123606528-C20373995.pdf?response-content-disposition=attachment%3B%20filename%3DC20373995.pdf%3B%20filename%2A%3DUTF-8%27%27C20373995.pdf&x-oss-date=20261114T161234Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=50cb29a7a24f3df636028ee25e32fcedc79072c3d3e6e8aed797a4a5369632cc",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603683745123606528-C20373995.pdf?response-content-disposition=attachment%3B%20filename%3DC20373995.pdf%3B%20filename%2A%3DUTF-8%27%27C20373995.pdf&x-oss-date=20261117T202842Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0bfd7e2e5daaf11c0b8cc67d0d697368d7699a18400ed9c0b5416774706d7b7e",
      "dataManualOfficialLink": "",
      "componentName": "Samtec MEC2-08-02-L-DV-NP-WT-TR",
      "minImage": null,
@@ -1286,64 +1286,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 5.7085
+       "productPrice": 5.7155
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 5.7085
+       "productPrice": 5.7155
       },
       {
        "startNumber": 12,
        "endNumber": 249,
-       "productPrice": 5.7085
+       "productPrice": 5.7155
       },
       {
        "startNumber": 250,
        "endNumber": 499,
-       "productPrice": 2.2104
+       "productPrice": 2.2132
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 2.1319
+       "productPrice": 2.1345
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 2.0943
+       "productPrice": 2.0969
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 12,
        "endNumber": 249,
-       "productPrice": 5.499
+       "productPrice": 5.5058
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 2.0174
+       "productPrice": 2.0199
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 5.499
+       "productPrice": 5.5058
       },
       {
        "startNumber": 250,
        "endNumber": 499,
-       "productPrice": 2.1293
+       "productPrice": 2.132
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 5.499
+       "productPrice": 5.5058
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 2.0537
+       "productPrice": 2.0562
       }
      ],
      "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
@@ -1368,7 +1368,7 @@
      "shopCostPrice": 0.0,
      "preMinPurchaseNum": 2,
      "minPurchaseNum": 2,
-     "initialPrice": 5.7085,
+     "initialPrice": 5.7155,
      "componentCode": "C4884524",
      "componentBrandEn": "Samtec",
      "componentModelEn": "MEC2-08-02-L-DV-NP-WT-K-TR",
@@ -1377,7 +1377,7 @@
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8556951800176795648-C4884524.pdf?response-content-disposition=attachment%3B%20filename%3DC4884524.pdf%3B%20filename%2A%3DUTF-8%27%27C4884524.pdf&x-oss-date=20261114T161234Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=989bf64434768eb980c15a31d1609f6cc271462b3db5208e1a15514ac975cae0",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8556951800176795648-C4884524.pdf?response-content-disposition=attachment%3B%20filename%3DC4884524.pdf%3B%20filename%2A%3DUTF-8%27%27C4884524.pdf&x-oss-date=20261117T202842Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=8ab2c187722a2d6c1466865d19fd7384d620c7778333055a73bcd96a1cfef55e",
      "dataManualOfficialLink": "",
      "componentName": "Samtec MEC2-08-02-L-DV-NP-WT-K-TR",
      "minImage": null,
@@ -1442,7 +1442,7 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0398
+       "productPrice": 0.0399
       },
       {
        "startNumber": 100,
@@ -1454,7 +1454,7 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0383
+       "productPrice": 0.0384
       },
       {
        "startNumber": 100,
