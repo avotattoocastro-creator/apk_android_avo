@@ -4,7 +4,8 @@ Va entre la URTK1.2 y la antena plana (Taoglas AHP2258, probada por el fabricant
 antena solo vería la URTK1.2 (43 × 43, con componentes). PCB de 2 capas, 0,8 mm, cobre macizo en las dos caras unido
 por vías cada ≈ 4 mm, máscara en las dos caras (la de abajo apoya en el blindaje del ZED, con kapton además).
 Recortes: esquinas (postes de la tapa), tiras de pines de la URTK1.2, portapilas J6, USB-C J1, conector J3 y el U.FL
-J4 con la clavija del cable. Pad de masa Ø1,8 junto al pin GND de la tira de 9: un hilo corto a ese pin.
+J4 con la clavija del cable. 4 pads de masa Ø1,8 en las esquinas (petición del usuario 18/11): los pines de masa
+J12–J15 de la PCB suben por fuera de la URTK1.2 y se sueldan aquí (unen la placa a GND y la sujetan).
 
 Marco: VISTA DESDE ARRIBA (cielo), origen en el centro de la cápsula = marco del CAD (X del CAD = −X de la PCB).
 Las posiciones de J1/J3/J4/J6 salen del plano del anuncio de la URTK1.2: VERIFICAR CON LA PLACA REAL.
@@ -119,7 +120,8 @@ OUTL = outline()
 CU = outline(EDGE_CU)
 CUTS = cutouts_sky()
 CUTS_CU = cutouts_sky(EDGE_CU)
-GND_PAD = (u2sky(D.URTK["u0"], D.URTK["fila"])[0] + 0.0, u2sky(D.URTK["u0"] - 4.0, D.URTK["fila"])[1])
+GND_PADS = [(-x, y) for x, y in D.GND_PINS]          # vista desde arriba: x = −X de la PCB
+GND_PAD = GND_PADS[0]
 # vías de unión de las dos caras (Ø0,6 / 0,3) en rejilla de 4 mm, lejos de bordes y recortes
 VIAS = []
 for i in range(-6, 7):
@@ -129,7 +131,7 @@ for i in range(-6, 7):
             continue
         if any(point_in(c, x, y) or dist_poly(c, x, y) < 0.8 for c in CUTS_CU):
             continue
-        if math.hypot(x - GND_PAD[0], y - GND_PAD[1]) < 2.5:
+        if any(math.hypot(x - gx, y - gy) < 2.5 for gx, gy in GND_PADS):
             continue
         VIAS.append((x, y))
 
@@ -159,13 +161,13 @@ def copper(func):
     for c in CUTS_CU:
         L += region(c)
     L += ["%LPD*%", "D10*"] + ["X%sY%sD03*" % (fmt(x), fmt(y)) for x, y in VIAS]
-    L += ["D11*", "X%sY%sD03*" % (fmt(GND_PAD[0]), fmt(GND_PAD[1]))]
+    L += ["D11*"] + ["X%sY%sD03*" % (fmt(x), fmt(y)) for x, y in GND_PADS]
     return L
 
 
 def mask(func):
     # máscara en todo; solo se abre el pad de masa (las vías quedan tapadas)
-    return header(func) + ["%ADD12C,2.000000*%", "D12*", "X%sY%sD03*" % (fmt(GND_PAD[0]), fmt(GND_PAD[1]))]
+    return header(func) + ["%ADD12C,2.000000*%", "D12*"] + ["X%sY%sD03*" % (fmt(x), fmt(y)) for x, y in GND_PADS]
 
 
 def outline_g():
@@ -180,7 +182,7 @@ def outline_g():
 def silk():
     # texto mínimo con trazos: «GND» junto al pad y una flecha hacia la antena (sin fuentes externas)
     L = header("Legend,Top") + ["%ADD14C,0.150000*%", "D14*"]
-    x, y = GND_PAD[0] + 2.0, GND_PAD[1]
+    x, y = GND_PAD[0] - 3.2, GND_PAD[1]
     for (x0, y0), (x1, y1) in (((x, y + 0.6), (x + 0.9, y + 0.6)), ((x, y + 0.6), (x, y - 0.6)), ((x, y - 0.6), (x + 0.9, y - 0.6)),
                                ((x + 0.9, y - 0.6), (x + 0.9, y))):
         L += ["X%sY%sD02*" % (fmt(x0), fmt(y0)), "X%sY%sD01*" % (fmt(x1), fmt(y1))]
@@ -199,7 +201,7 @@ write(NAME + "-B_Mask.gbs", mask("Soldermask,Bot"))
 write(NAME + "-F_Silkscreen.gto", silk())
 write(NAME + "-Edge_Cuts.gm1", outline_g())
 drl = ["M48", "METRIC,TZ", "T1C0.300", "T2C1.000", "%", "G90", "G05", "T1"]
-drl += ["X%.3fY%.3f" % (x, y) for x, y in VIAS] + ["T2", "X%.3fY%.3f" % GND_PAD, "M30"]
+drl += ["X%.3fY%.3f" % (x, y) for x, y in VIAS] + ["T2"] + ["X%.3fY%.3f" % g for g in GND_PADS] + ["M30"]
 open(os.path.join(OUT, NAME + "-PTH.drl"), "w").write("\n".join(drl) + "\n")
 
 with zipfile.ZipFile(os.path.join(OUT, NAME + "_GERBER_JLCPCB.zip"), "w", zipfile.ZIP_DEFLATED) as z:
@@ -208,7 +210,7 @@ with zipfile.ZipFile(os.path.join(OUT, NAME + "_GERBER_JLCPCB.zip"), "w", zipfil
             z.write(os.path.join(OUT, f), f)
 
 geo = dict(lado=SIDE, espesor=0.8, contorno=[list(map(lambda v: round(v, 3), p)) for p in OUTL],
-           recortes=[[list(map(lambda v: round(v, 3), p)) for p in c] for c in CUTS], pad_gnd=list(GND_PAD),
+           recortes=[[list(map(lambda v: round(v, 3), p)) for p in c] for c in CUTS], pads_gnd=[list(g) for g in GND_PADS],
            vias=len(VIAS), marco="vista desde arriba (marco del CAD), mm", pedido="JLCPCB 2 capas 0,8 mm, 52 × 52, "
            "máscara en las dos caras, sin montaje")
 json.dump(geo, open(os.path.join(OUT, "placa_masa.json"), "w"), indent=1, ensure_ascii=False)
@@ -223,12 +225,12 @@ ax.add_patch(Polygon(OUTL, closed=True, fc="#c88a3a", ec="k"))
 for c in CUTS:
     ax.add_patch(Polygon(c, closed=True, fc="white", ec="k"))
 ax.plot([v[0] for v in VIAS], [v[1] for v in VIAS], "k.", ms=2)
-ax.plot(*GND_PAD, "go", ms=7)
+ax.plot([g[0] for g in GND_PADS], [g[1] for g in GND_PADS], "go", ms=7)
 ux, uy = D.urtk_xy(0, 0)
 hx, hy = D.URTK["ly"] / 2, D.URTK["lx"] / 2
 ax.add_patch(Polygon([(-ux - hx, uy - hy), (-ux + hx, uy - hy), (-ux + hx, uy + hy), (-ux - hx, uy + hy)], closed=True,
                      fill=False, ec="#2a8a2a", ls="--"))
 ax.set_xlim(-30, 30); ax.set_ylim(-30, 30); ax.set_aspect("equal"); ax.grid(alpha=.2)
-ax.set_title("Placa de masa 52 × 52 × 0,8 (vista desde arriba) · verde: URTK1.2 · punto: pad GND")
+ax.set_title("Placa de masa 52 × 52 × 0,8 (vista desde arriba) · verde: URTK1.2 · puntos: pads GND")
 plt.savefig(os.path.join(OUT, NAME + "_vista.png"), dpi=90, bbox_inches="tight")
 print("placa de masa: %d vías, %d recortes → %s" % (len(VIAS), len(CUTS), OUT))

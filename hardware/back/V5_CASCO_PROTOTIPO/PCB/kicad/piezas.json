@@ -220,8 +220,8 @@
   "no_assembly": false,
   "note": "REV B (revisión 18/11): 100k/150k → 2,85–3,15 V con VBUS 4,75–5,25 V. Con 100k/100k daba 2,4–2,6 V, por debajo de VIH = 0,75 × VDD = 2,475 V del ESP32-S3 (hoja del WROOM, DC characteristics): lectura no fiable",
   "jlc_rot": 0,
-  "x": -11.48,
-  "y": 5.64,
+  "x": -11.46,
+  "y": 5.77,
   "rot": 90
  },
  {
@@ -415,7 +415,7 @@
   "no_assembly": true,
   "note": "hilo + de la celda (≥ 2000 mAh): soldado, sin conector (más plano y sin holgura al galope)",
   "jlc_rot": 0,
-  "x": -17.3,
+  "x": -17.9,
   "y": -25.5,
   "rot": 0
  },
@@ -430,7 +430,7 @@
   "no_assembly": true,
   "note": "hilo − de la celda",
   "jlc_rot": 0,
-  "x": -14.5,
+  "x": -15.4,
   "y": -25.5,
   "rot": 0
  },
@@ -505,8 +505,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 10.64,
-  "y": 3.14,
+  "x": -11.44,
+  "y": 7.83,
   "rot": 90
  },
  {
@@ -520,8 +520,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 10.75,
-  "y": 7.37,
+  "x": -12.54,
+  "y": 6.25,
   "rot": 90
  },
  {
@@ -655,9 +655,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -15.49,
-  "y": 17.53,
-  "rot": 0
+  "x": -16.37,
+  "y": 19.35,
+  "rot": 90
  },
  {
   "ref": "U10",
@@ -670,8 +670,8 @@
   "no_assembly": false,
   "note": "AHLB = 0 (activo alto), TOG = 0 (directo): Q = 1 mientras se toca. Modo de bajo consumo (≈ 1,5 µA a 3 V). TDSEMIC TTP223-BA6-TD (C42422127): mismo patillaje que el TTP223-BA6 de Tontek, sin existencias en JLC",
   "jlc_rot": 0,
-  "x": -19.0,
-  "y": 21.0,
+  "x": -19.54,
+  "y": 19.93,
   "rot": 0
  },
  {
@@ -685,9 +685,9 @@
   "no_assembly": false,
   "note": "obligatorio y pegado a VDD/VSS (hoja del TTP223)",
   "jlc_rot": 0,
-  "x": -17.31,
-  "y": 23.34,
-  "rot": 0
+  "x": -16.76,
+  "y": 21.39,
+  "rot": 90
  },
  {
   "ref": "C69",
@@ -700,9 +700,9 @@
   "no_assembly": false,
   "note": "Cs de sensibilidad (0–50 pF): sin montar; se ajusta tras la prueba con la pared de 1,2–1,5 mm y agua",
   "jlc_rot": 0,
-  "x": -21.72,
-  "y": 20.25,
-  "rot": 90
+  "x": -20.73,
+  "y": 17.58,
+  "rot": 0
  },
  {
   "ref": "R16",
@@ -715,9 +715,9 @@
   "no_assembly": false,
   "note": "serie del electrodo (ESD)",
   "jlc_rot": 0,
-  "x": -20.39,
-  "y": 18.67,
-  "rot": 0
+  "x": -22.23,
+  "y": 19.38,
+  "rot": 90
  },
  {
   "ref": "J7",
@@ -745,8 +745,8 @@
   "no_assembly": false,
   "note": "→ GPIO11 (RTC: despierta del sueño y mide la pulsación larga); limita la corriente si el S3 está sin tensión",
   "jlc_rot": 0,
-  "x": -19.98,
-  "y": 23.34,
+  "x": -22.88,
+  "y": 20.98,
   "rot": 0
  },
  {
@@ -1000,8 +1000,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -7.86,
-  "y": 18.04,
+  "x": -9.2,
+  "y": 18.05,
   "rot": 0
  },
  {
@@ -1030,9 +1030,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -10.3,
-  "y": 19.26,
-  "rot": 90
+  "x": -6.25,
+  "y": 17.58,
+  "rot": 0
  },
  {
   "ref": "R11",
@@ -1210,7 +1210,7 @@
   "no_assembly": false,
   "note": "RGB direccionable, emisión lateral",
   "jlc_rot": 0,
-  "x": 10.0,
+  "x": 12.0,
   "y": -26.25,
   "rot": 0
  },
@@ -1225,7 +1225,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 9.7,
+  "x": 11.7,
   "y": -24.85,
   "rot": 0
  },
@@ -1240,7 +1240,7 @@
   "no_assembly": false,
   "note": "RGB direccionable, emisión lateral",
   "jlc_rot": 0,
-  "x": -10.0,
+  "x": -12.0,
   "y": -26.25,
   "rot": 0
  },
@@ -1255,7 +1255,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -10.3,
+  "x": -12.3,
   "y": -24.85,
   "rot": 0
  },
@@ -1345,8 +1345,8 @@
   "no_assembly": false,
   "note": "1 µH, I_sat 3 A, 50 mΩ (≈ 0,4 A de pico con los 7 LED a tope desde 3 V)",
   "jlc_rot": 0,
-  "x": -16.71,
-  "y": 15.4,
+  "x": -16.59,
+  "y": 15.79,
   "rot": 90
  },
  {
@@ -1360,8 +1360,8 @@
   "no_assembly": false,
   "note": "entrada del elevador",
   "jlc_rot": 0,
-  "x": -15.15,
-  "y": 10.88,
+  "x": -14.92,
+  "y": 11.0,
   "rot": 0
  },
  {
@@ -1375,8 +1375,8 @@
   "no_assembly": false,
   "note": "salida del elevador (≥ 10 µF efectivos)",
   "jlc_rot": 0,
-  "x": -15.15,
-  "y": 12.75,
+  "x": -15.53,
+  "y": 12.88,
   "rot": 0
  },
  {
@@ -1420,9 +1420,9 @@
   "no_assembly": false,
   "note": "elevador apagado por defecto (arranque y casco apagado)",
   "jlc_rot": 0,
-  "x": -11.11,
-  "y": 17.64,
-  "rot": 0
+  "x": -14.17,
+  "y": 17.0,
+  "rot": 90
  },
  {
   "ref": "U8",
@@ -1765,8 +1765,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -12.19,
-  "y": 9.43,
+  "x": -13.11,
+  "y": 9.42,
   "rot": 0
  },
  {
@@ -1795,8 +1795,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -11.67,
-  "y": 7.48,
+  "x": -8.87,
+  "y": -4.07,
   "rot": 0
  },
  {
@@ -1840,8 +1840,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -9.92,
-  "y": -4.41,
+  "x": -8.88,
+  "y": -9.81,
   "rot": 0
  },
  {
@@ -1900,8 +1900,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -17.3,
-  "y": 18.36,
+  "x": -13.86,
+  "y": 22.68,
   "rot": 0
  },
  {
@@ -1915,8 +1915,8 @@
   "no_assembly": true,
   "note": "4,3 V del anillo (solo con LED_PWR = 1)",
   "jlc_rot": 0,
-  "x": -17.77,
-  "y": 12.95,
+  "x": -18.61,
+  "y": 16.17,
   "rot": 0
  },
  {

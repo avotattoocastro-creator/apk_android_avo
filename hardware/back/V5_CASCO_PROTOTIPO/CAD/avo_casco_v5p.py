@@ -247,6 +247,12 @@ def refs():
     for c in PM["recortes"]:
         pm = pm.cut(cq.Workplane("XY").polyline([tuple(p) for p in c]).close().extrude(5).translate((0, 0, -1)))
     r["placa_masa"] = pm.translate((0, 0, Z_PM0 + 0.02))
+    pins = None   # 4 pines de masa PCB → placa de masa (petición del usuario 18/11), por fuera de la URTK1.2
+    for X, Y in MEC.get("pines_masa", []):
+        c = cyl(-X, Y, Z_PCB_TOP + 0.02, 1.0, Z_PM1 + 1.0 - Z_PCB_TOP)
+        pins = c if pins is None else pins.union(c)
+    if pins is not None:
+        r["pines_masa"] = pins
     py = POGO["y"]
     r["pogo_placa"] = (rrect(POGO["face_l"], POGO["face_w"], POGO["face_w"] / 2 - 0.01, POGO["face_h"], 0.02)
                        .union(rrect(POGO["f_l"], POGO["f_w"], POGO["f_w"] / 2 - 0.01, POGO["f_t"] - POGO["face_h"], POGO["face_h"] + 0.02))
@@ -288,7 +294,8 @@ def main():
                 v = 0.0
             if v > 0.01:
                 rep["interferencias"]["%s × %s" % (rn, pn)] = round(v, 3)
-    for a_, b_ in (("antena", "pila_J6"), ("placa_masa", "pila_J6"), ("antena", "urtk"), ("placa_masa", "zed")):
+    for a_, b_ in (("antena", "pila_J6"), ("placa_masa", "pila_J6"), ("antena", "urtk"), ("placa_masa", "zed"),
+                   ("pines_masa", "urtk")):
         try:
             v = rf[a_].intersect(rf[b_]).val().Volume()
         except Exception:  # noqa: BLE001

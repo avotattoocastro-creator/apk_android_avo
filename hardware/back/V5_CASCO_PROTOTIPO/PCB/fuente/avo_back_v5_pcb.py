@@ -236,6 +236,7 @@ FP = {
     "MICROSD": load("microSD_HC_Hirose_DM3AT-SF-PEJM5.kicad_mod",
                     M3 + "Connector_Card.3dshapes/microSD_HC_Hirose_DM3AT-SF-PEJM5.step", 1.6),
     "SOD323": load("D_SOD-323.kicad_mod", M3 + "Diode_SMD.3dshapes/D_SOD-323.step", 1.1),
+    "GNDPIN": wire_pad("(pin de masa de la placa de la antena)", drill=1.0, d=1.8),
     "FILA9": FILA9_FP,
     "FILA10": FILA10_FP,
     "WROOM1U": S3,
@@ -556,6 +557,14 @@ TP("TP13", "SAFEBOOT", "ZED_SAFEBOOT", "pin SAFE de la URTK1.2 (SAFEBOOT_N del Z
 for i, (sx, sy) in enumerate(((1, 1), (-1, 1), (-1, -1), (1, -1)), 1):
     part("H%d" % i, "HOLE", "TALADRO M2,5", (sx * HOLE_XY, sy * HOLE_XY), 0, {}, block="Mecánica", sym=None,
          no_assembly=True, note="taladro NPTH Ø2,8 del tornillo de la caja")
+# PROTOTIPO A (petición del usuario 18/11 16:45): 4 pines de masa en las esquinas, junto a la URTK1.2 (sin tocarla), que
+# suben hasta la placa de masa de la antena y la sueldan a GND en 4 puntos (también la sujetan). Mismo sitio en
+# fuente/placa_masa.py (vista desde arriba: x = −X).
+GND_PINS = [(sx * 20.0, sy * 23.0) for sx, sy in ((1, 1), (-1, 1), (-1, -1), (1, -1))]
+for i, (x, y) in enumerate(GND_PINS):
+    part("J%d" % (12 + i), "GNDPIN", "GND PLACA ANTENA", (x, y), 0, {1: GND}, block="Mecánica",
+         sym=dict(L=[(1, "GND")], R=[]), no_assembly=True,
+         note="pin de masa (Ø0,64 o hilo de cobre de 1 mm, ≥ 12 mm) hasta la placa de masa de la antena")
 # PROTOTIPO A: sin paso del coaxial (la antena va al U.FL J4 de la URTK1.2, por encima)
 
 # --------------------------------------------------------------------------------- colocación (X, Y, giro)
@@ -731,6 +740,7 @@ def mecanica():
                 urtk=dict(lado_x=URTK["lx"], lado_y=URTK["ly"], espesor=URTK["t"], separador=URTK["separador"],
                           centro=list(urtk_xy(0.0, 0.0)), mapeo="X = off_x + v, Y = off_y + u (vista desde F)",
                           off=list(URTK["off"])),
+                pines_masa=[list(xy) for xy in GND_PINS],
                 hilos={p["ref"]: dict(pos=list(p["pos"]), red=p["nets"]["1"]) for p in PARTS if p["fp"] == "WIRE"},
                 envolventes=env, altura_max_cara_F=Z_MAX_F,
                 origen="generado por PCB/fuente/avo_back_v5_pcb.py (colocacion_v5.json)")
