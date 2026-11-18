@@ -1,0 +1,21 @@
++ timeout 2400 xvfb-run -a java -jar /tmp/freerouting.jar -de hardware/back/V5_CASCO_PROTOTIPO/PCB/out/ruteado/placa.dsn -do hardware/back/V5_CASCO_PROTOTIPO/PCB/out/ruteado/placa.ses -mp 150
+2026-11-18 20:09:24.689 [main] INFO  Freerouting v1.9.0 (build-date: 2023-10-30)
+2026-11-18 20:09:26.047 [main] INFO  Opening 'hardware/back/V5_CASCO_PROTOTIPO/PCB/out/ruteado/placa.dsn'...
+2026-11-18 20:09:26.608 [ForkJoinPool.commonPool-worker-1] INFO  New version available: v2.5.0
+
+(java:2646): dbind-WARNING **: 20:09:28.461: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+2026-11-18 20:09:49.868 [Thread-28] INFO  Starting auto-routing...
+2026-11-18 20:09:50.420 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-18 20:09:50.431 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-18 20:09:50.450 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-18 20:11:19.924 [Thread-28] WARN  There were only 18.40 changes in the last 20 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-18 20:12:19.518 [Thread-28] WARN  There were only 9.78 changes in the last 40 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-18 20:13:16.888 [Thread-28] WARN  There were only 8.40 changes in the last 60 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-18 20:14:13.328 [Thread-28] WARN  There were only 8.06 changes in the last 80 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-18 20:15:10.533 [Thread-28] WARN  There were only 8.00 changes in the last 100 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-18 20:16:08.916 [Thread-28] WARN  There were only 8.00 changes in the last 120 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-18 20:17:09.703 [Thread-28] WARN  There were only 8.00 changes in the last 140 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-18 20:17:12.496 [Thread-28] INFO  Auto-routing was completed in 7 minute(s) 22.63 seconds.
+2026-11-18 20:17:12.597 [Thread-28] INFO  Starting route optimization on 1 thread...
+2026-11-18 20:18:08.201 [Thread-28] INFO  Route optimization was completed in 55.60 seconds.
+2026-11-18 20:18:08.245 [Thread-28] INFO  Saving 'hardware/back/V5_CASCO_PROTOTIPO/PCB/out/ruteado/placa.ses'...
