@@ -32,7 +32,7 @@
   },
   "AVO_CASCO_V5P_base_casco": {
    "solidos": 1,
-   "volumen_mm3": 20164.7,
+   "volumen_mm3": 20154.4,
    "peso_g": 25.6,
    "caja": [
     65.4,
@@ -74,7 +74,7 @@
    22.5
   ],
   "antena_xy": [
-   5.7,
+   7.2,
    1.45
   ],
   "antena_z": [
@@ -82,7 +82,7 @@
    30.6
   ],
   "hall_xy": [
-   -23.7,
+   -23.9,
    -1.0
   ],
   "tactil": {
