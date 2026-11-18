@@ -10,6 +10,7 @@ compartida**: lo que no esté en la rama no existe para el siguiente asistente. 
 3. Haz el cambio en una rama corta (`claude/<tema>`), con PR a `develop` y *merge commit*.
 4. Al terminar: entrada en el registro **y** fila actualizada en la tabla del estado. Si no está en GitHub, no existe.
 5. Descargas de lo último publicado: release `descargas` (ver «Descargas directas»).
+6. **Claude:** antes de empezar, cargar las skills que correspondan a la tarea (ver «Skills de Claude»).
 
 ## Nombres: PROTOTIPO y BETA (decisión del usuario, 17/11/2026)
 - **PROTOTIPO** = todo lo que funciona sobre **placas de desarrollo, sin PCB propia** (Waveshare del pecho, Heltec de la
@@ -127,6 +128,28 @@ La publica `publicar-descargas.yml` en cada push a `develop`; qué entra y con q
 | `firmware/girth/` | Firmware de la cincha (C6; y C3 de la PCB) | `build-girth*.yml` |
 | `firmware/back/V4_0_0`, `hardware/back/V4` | Espalda BETA V4 (sin fabricar) | `build-back-v4-*.yml` |
 | `hardware/` | CAD (FreeCAD 1.0.2) y PCB (KiCad 9) | varios |
+
+## Skills de Claude (activadas en la cuenta del usuario el 18/11/2026)
+Solo aplica a Claude; el resto de asistentes sigue las mismas reglas de este archivo sin skills. Cargar la skill
+**antes** de empezar la tarea; si encajan varias, usarlas todas. Si una skill choca con este archivo, manda este archivo.
+
+| Tarea | Skills |
+|---|---|
+| Cambiar un contrato binario (`BackStatus`, `TELEMETRY`, lote de cincha, `AVO1`, RTCM3, `.avr`, `AVOC`, `.avolic`) | `avo-cambio-protocolo` + `engineering:testing-strategy` |
+| Versionar o publicar firmware o apps (OTA del pecho, espalda, cincha, Android, Windows, iPad) | `avo-release-firmware` + `engineering:deploy-checklist` |
+| Diseñar o revisar PCB (KiCad 9) o CAD (FreeCAD 1.0.2); antes de archivos de fabricación | `avo-revision-pcb-cad` |
+| Revisar un PR antes de fusionar en `develop` | `code-review:code-review` o `engineering:code-review` |
+| Fallo en firmware o apps (brownout, BLE, RTK, ESP-NOW…) | `engineering:debug` |
+| Decisiones de arquitectura (motor, BETA, módulos nuevos) | `engineering:architecture`, `engineering:system-design` |
+| Documentación, runbooks, guías | `engineering:documentation` |
+| Deuda técnica y refactorizaciones | `engineering:tech-debt` |
+| Análisis de sesiones reales (`.avr`, CSV), estadística y paneles | `data:explore-data`, `data:statistical-analysis`, `data:validate-data`, `data:build-dashboard` |
+| Investigación científica (entrenamiento PSI/árabe, biomecánica) | `deep-research` |
+| Hojas de cálculo, BOM, PDF de hojas de datos | `xlsx`, `pdf` |
+
+- Plugin **github**: issues, PR y búsqueda en el repositorio. Plugin **swift-lsp**: diagnósticos de la app iPad (solo
+  en sesiones con Mac y Xcode).
+- Las skills son de la cuenta del usuario: otra persona que trabaje con Claude desde su cuenta debe añadirlas.
 
 ## Estado actual
 **Fuente única:** la tabla «Vigente» al principio de `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`. Quien cambie una versión
