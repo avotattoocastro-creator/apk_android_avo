@@ -351,7 +351,7 @@ def write_board(r, path, outer_pours=True):
     # texts
     # REV B (18/11/2026, petición del usuario): marca en la cara de la antena
     # PROTOTIPO A: textos fuera de la URTK1.2 (que tapa el centro de la cara B) y su contorno
-    tree.append(B.gr_text("AVO Performance", *D.K(0.0, 24.3), "B.SilkS", 1.0, mirror=True))
+    tree.append(B.gr_text("AVO Performance", *D.K(14.3, 24.6), "B.SilkS", 0.75, mirror=True))   # 19/11: fuera de los pads del pogo
     tree.append(B.gr_text("--Horse Edition--", *D.K(0.0, -23.2), "B.SilkS", 0.9, mirror=True))
     hx, hy = D.URTK["lx"] / 2, D.URTK["ly"] / 2
     for (u, v), (w_, z_) in ((((-1, -1), (1, -1))), (((1, -1), (1, 1))), (((1, 1), (-1, 1))), (((-1, 1), (-1, -1)))):
@@ -365,8 +365,11 @@ def write_board(r, path, outer_pours=True):
             x_, y_ = p_["pos"]
             # REV B: los del pogo (P1–P5) debajo del pad, entre el pad y el canto (encima quedaban tapados por piezas)
             dy = 1.55 if p_["ref"].startswith("P") else 1.9          # PROTO A: pogo en el canto superior: rótulo hacia el canto
-            if p_["ref"] in ("P4", "P5"):
-                dy = -1.55                                           # 19/11: segunda fila del pogo: rótulo por debajo
+            if p_["ref"] in ("P4", "P5"):      # 19/11: segunda fila del pogo: rótulo vertical a su lado (debajo está R20)
+                dx = -1.7 if p_["ref"] == "P4" else 1.35
+                tree.append(B.gr_text(p_["value"].replace("POGO ", ""), *D.K(x_ + dx, y_), "F.SilkS", 0.5,
+                                      mirror=False, bold=False, angle=90))
+                continue
             tree.append(B.gr_text(p_["value"].replace("POGO ", "").replace("BAT ", "B"), *D.K(x_, y_ + dy), "F.SilkS", 0.6,
                                   mirror=False, bold=False))
     B.write(path, tree)

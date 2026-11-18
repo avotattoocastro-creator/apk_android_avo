@@ -32273,22 +32273,6 @@
 		(uuid "b63f3304-7594-555d-a297-81c8b964280d")
 	)
 	(segment
-		(start 96.06 80.0375)
-		(end 96.325 80.675)
-		(width 0.2)
-		(layer "F.Cu")
-		(net 64)
-		(uuid "77e52429-6101-5ff4-92cf-d4d64e080e64")
-	)
-	(segment
-		(start 96.425 80.775)
-		(end 96.425 80.875)
-		(width 0.2)
-		(layer "F.Cu")
-		(net 64)
-		(uuid "cf310f34-da80-545c-a903-408763456015")
-	)
-	(segment
 		(start 96.075 77.125)
 		(end 96.06 77.7625)
 		(width 0.2)
@@ -32353,14 +32337,6 @@
 		(uuid "5284d271-6327-574e-a5df-e65012c565bf")
 	)
 	(segment
-		(start 96.425 80.875)
-		(end 96.525 80.975)
-		(width 0.2)
-		(layer "F.Cu")
-		(net 64)
-		(uuid "7b1be6e4-e8de-5b0e-a0b5-4556490356a6")
-	)
-	(segment
 		(start 94.825 80.725)
 		(end 94.51 80.95)
 		(width 0.2)
@@ -32375,14 +32351,6 @@
 		(layer "F.Cu")
 		(net 64)
 		(uuid "018d3050-b65d-5ab3-967c-965a4d81c9b6")
-	)
-	(segment
-		(start 96.325 80.675)
-		(end 96.425 80.775)
-		(width 0.2)
-		(layer "F.Cu")
-		(net 64)
-		(uuid "a647d048-eb68-5eb7-9470-4b2ecc6d97ee")
 	)
 	(segment
 		(start 94.875 80.675)
@@ -36322,10 +36290,10 @@
 	)
 	(gr_text
 		"AVO Performance"
-		(at 100 75.7)
+		(at 114.3 75.4)
 		(layer "B.SilkS")
 		(uuid "370c0eb4-9f17-541b-b6e5-d11e1abf3447")
-		(effects (font (size 1 1) (thickness 0.15) (bold yes)) (justify mirror))
+		(effects (font (size 0.75 0.75) (thickness 0.112) (bold yes)) (justify mirror))
 	)
 	(gr_text
 		"--Horse Edition--"
@@ -36406,17 +36374,17 @@
 	)
 	(gr_text
 		"GND"
-		(at 91.35 78.5)
+		(at 89.65 76.95 90)
 		(layer "F.SilkS")
 		(uuid "04ebf45d-e30c-5f74-b7c9-816970752aac")
-		(effects (font (size 0.6 0.6) (thickness 0.12)))
+		(effects (font (size 0.5 0.5) (thickness 0.1)))
 	)
 	(gr_text
 		"AUX"
-		(at 93.7 78.5)
+		(at 95.05 76.95 90)
 		(layer "F.SilkS")
 		(uuid "0bf05ff7-b6f6-5afa-8efd-06dd23d4a580")
-		(effects (font (size 0.6 0.6) (thickness 0.12)))
+		(effects (font (size 0.5 0.5) (thickness 0.1)))
 	)
 	(gr_text
 		"B+"
