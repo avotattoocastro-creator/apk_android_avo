@@ -1,5 +1,5 @@
 ** Drc report for AVO_BACK_V5_PCB.kicad_pcb **
-** Created on 2026-11-18T08:31:32+0000 **
+** Created on 2026-11-18T11:48:34+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
 ** Found 2 DRC violations **
@@ -10,7 +10,39 @@
     Local override; warning
     @(90.6100 mm, 82.7100 mm): Circle of L71 on F.Silkscreen
 
-** Found 0 unconnected pads **
+** Found 8 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(97.5800 mm, 83.9300 mm): Pad 1 [+3V3] of C37 on F.Cu
+    @(99.5000 mm, 83.9125 mm): Pad 5 [+3V3] of U13 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(101.1625 mm, 83.7500 mm): Track [+3V3] on F.Cu, length 0.0127 mm
+    @(99.5000 mm, 83.9125 mm): Pad 5 [+3V3] of U13 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(116.1300 mm, 101.8400 mm): Pad 2 [+3V3_SD] of R44 on F.Cu
+    @(113.9300 mm, 101.8400 mm): Pad 2 [+3V3_SD] of R41 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(83.7400 mm, 85.6600 mm): Track [+3V3_AON] on F.Cu, length 1.2869 mm
+    @(100.5200 mm, 97.3500 mm): Track [+3V3_AON] on F.Cu, length 1.5200 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(98.8375 mm, 83.7500 mm): Pad 4 [IMU_INT1] of U13 on F.Cu
+    @(103.1500 mm, 86.2500 mm): Pad 4 [IMU_INT1] of U4 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(88.4250 mm, 123.7400 mm): Pad 1 [LED_D5] of D15 on F.Cu
+    @(123.7400 mm, 111.4300 mm): Pad 3 [LED_D5] of D13 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(77.1800 mm, 87.5500 mm): Track [VLED] on F.Cu, length 0.6788 mm
+    @(77.1678 mm, 109.9622 mm): Track [VLED] on F.Cu, length 1.1423 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(122.3700 mm, 88.6300 mm): Pad 1 [VLED] of C92 on F.Cu
+    @(109.5090 mm, 77.6892 mm): Track [VLED] on F.Cu, length 2.1618 mm
 
 ** Found 0 Footprint errors **
 

@@ -1,22 +1,32 @@
-# AVO BACK V5 CASCO · placa de la espalda para el casco · REV B (ESP32-S3-WROOM-1U-N16R8 + ZED-F9P soldado) — informe de fabricación
+# AVO BACK V5 CASCO · placa de la espalda para el casco · REV B (ESP32-S3-WROOM-1U-N16R8 + ZED-F9P soldado) — informe de diagnóstico
 
-- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `e26484da2f7545fb1a6f2a4af4fd4810335c36ce` · ejecución de CI: 44267586293
-- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
+- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
+- Commit: `123fc2559e85bbffddcd40cda817edbe903e387e` · ejecución de CI: 44297339694
+- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
-- Componentes: 132 en total, 111 para montar, 1 sin montar (DNP: C69), 20 a mano (pads de hilo y de prueba)
-- Pistas: 1246 · vías: 263 · ruteado completo (0 conexiones incompletas)
+- Componentes: 135 en total, 114 para montar, 1 sin montar (DNP: C69), 20 a mano (pads de hilo y de prueba)
+- Pistas: 1157 · vías: 258 · ruteado INCOMPLETO (8 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | correcto | 0 |
+| DRC: conexiones incompletas | **FALLA** | 8 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
+
+### Conexiones incompletas
+- Pad 1 [+3V3] of C37 on F.Cu ↔ Pad 5 [+3V3] of U13 on F.Cu
+- Track [+3V3] on F.Cu, length 0.0127 mm ↔ Pad 5 [+3V3] of U13 on F.Cu
+- Track [+3V3_SD] on F.Cu, length 0.7005 mm ↔ Pad 2 [+3V3_SD] of R41 on F.Cu
+- Track [+3V3_AON] on F.Cu, length 1.2869 mm ↔ Track [+3V3_AON] on F.Cu, length 1.5200 mm
+- Pad 4 [IMU_INT1] of U13 on F.Cu ↔ Pad 4 [IMU_INT1] of U4 on F.Cu
+- Pad 1 [LED_D5] of D15 on F.Cu ↔ Pad 3 [LED_D5] of D13 on F.Cu
+- Track [VLED] on F.Cu, length 0.6788 mm ↔ Track [VLED] on F.Cu, length 0.5313 mm
+- Track [VLED] on F.Cu, length 0.2883 mm ↔ Track [VLED] on F.Cu, length 2.1618 mm
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 2
@@ -47,20 +57,20 @@
 | C5446 | XC6206P332MR-G | 1 | 434181 | Basic | 0.1381 US$ |
 | C841192 | RT9080-33GJ5 | 1 | 26824 | Extended | 0.1198 US$ |
 | C20802 | SMD1206P150TF | 2 | 11250 | Extended | 0.1188 US$ |
-| C45783 | CL21A226MAQNNNE | 4 | 3830128 | Basic | 0.1085 US$ |
+| C45783 | CL21A226MAQNNNE | 5 | 3830128 | Basic | 0.1085 US$ |
 | C15127 | AO3401A | 2 | 1430503 | Basic | 0.0815 US$ |
-| C16780 | CL21A476MQYNNNE | 2 | 1266459 | Basic | 0.0744 US$ |
+| C16780 | CL21A476MQYNNNE | 1 | 1266459 | Basic | 0.0744 US$ |
 | C97016 | WPN201610U1R0MT | 1 | 4071 | Extended | 0.0458 US$ |
 | C2827694 | PESD5V0S1BA | 2 | 316283 | Extended | 0.0359 US$ |
 | C96446 | CL10A106MA8NRNC | 6 | 5907824 | Basic | 0.0343 US$ |
 | C2135 | BAT54C | 2 | 152039 | Extended | 0.0246 US$ |
 | C77131 | NCP15XH103F03RC | 1 | 298896 | Extended | 0.0164 US$ |
-| C52923 | CL05A105KA5NQNC | 7 | 9280696 | Basic | 0.0055 US$ |
+| C52923 | CL05A105KA5NQNC | 8 | 9280696 | Basic | 0.0055 US$ |
 | C15195 | CL05B103KB5NNNC | 1 | 5765047 | Basic | 0.0038 US$ |
 | C25867 | 0402WGF1501TCE | 1 | 1197448 | Basic | 0.0029 US$ |
-| C1525 | CL05B104KO5NNNC | 16 | 35747831 | Basic | 0.0024 US$ |
+| C1525 | CL05B104KO5NNNC | 17 | 35747831 | Basic | 0.0024 US$ |
 | C4109 | 0402WGF2001TCE | 1 | 9832798 | Basic | 0.0019 US$ |
-| C25744 | 0402WGF1002TCE | 7 | 26230337 | Basic | 0.0015 US$ |
+| C25744 | 0402WGF1002TCE | 8 | 26230337 | Basic | 0.0015 US$ |
 | C11702 | 0402WGF1001TCE | 5 | 30683190 | Basic | 0.0013 US$ |
 | C36871 | 0402WGF6802TCE | 1 | 1085502 | Extended | 0.0012 US$ |
 | C17168 | 0402WGF0000TCE | 1 | 14794245 | Basic | 0.0012 US$ |
@@ -68,7 +78,8 @@
 | C25104 | 0402WGF3300TCE | 3 | 1406883 | Basic | 0.0011 US$ |
 | C25879 | 0402WGF2201TCE | 2 | 2949931 | Basic | 0.0011 US$ |
 | C25092 | 0402WGF220JTCE | 3 | 4530501 | Basic | 0.0010 US$ |
-| C25741 | 0402WGF1003TCE | 12 | 9759479 | Basic | 0.0009 US$ |
+| C25741 | 0402WGF1003TCE | 11 | 9759479 | Basic | 0.0009 US$ |
+| C25755 | ? | 1 | sin respuesta | Extended | ? |
 | C17958 | ? | 1 | sin respuesta | Extended | ? |
 | C97998 | ? | 1 | sin respuesta | Extended | ? |
 | C10662 | ? | 1 | sin respuesta | Extended | ? |
@@ -77,11 +88,11 @@
 | C5378721 | ? | 7 | sin respuesta | Extended | ? |
 | C137952 | ? | 1 | sin respuesta | Extended | ? |
 
-- Piezas sin existencias para 5 placas: C17958, C97998, C10662, C88373, C25105, C5378721, C137952
+- Piezas sin existencias para 5 placas: C25755, C17958, C97998, C10662, C88373, C25105, C5378721, C137952
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **sí**
-- Apto para solicitar prototipos: **sí, pendiente de validación física**
+- Diseño verificado por software (KiCad 9 en el CI): **no**
+- Apto para solicitar prototipos: **no**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)
