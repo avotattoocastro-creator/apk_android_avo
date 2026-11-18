@@ -24,6 +24,21 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-18 — Casco V5 PROTOTIPO A — PCB de 56 mm con la URTK1.2 (ZED-F9P) por tiras de pines
+**Autor:** Claude · **Commits:** `f9c4a5d`, `f816381`, `a377ae0`, `8da50c8` (rama `feature/back-v5-casco`) · **CI:** PCB run 44333638870 (puerta superada), CAD (éxito)
+**Qué cambia:** nueva carpeta `hardware/back/V5_CASCO_PROTOTIPO` (decisión del usuario: probar el casco con un módulo
+URTK1.2 antes de pagar la BETA con el ZED soldado). Misma electrónica que la REV B sin U1 ni la RF de la antena; la
+URTK1.2 va sobre la cara B con tiras de 9 + 10 pines (plástico de 2,5 mm), mismos GPIO. Placa de 56 × 56 con tornillos
+a ±24,5 (la URTK1.2 tapaba los de ±22), cápsula de 61,4 × 61,4 × 32,1 mm (≈ 35,6 sobre el casco), 0 interferencias.
+Placa de masa de 52 × 52 × 0,8 para la antena (`PCB/fuente/placa_masa.py` → `PCB/PLACA_MASA`). D14 vuelve (8 LED), a
+la derecha de la salida de la microSD. La BETA final sigue siendo la REV B de `V5_CASCO`.
+**Workflows nuevos (avisado al usuario):** `build-back-v5p-pcb.yml` y `build-back-v5p-cad.yml`, copias de los de la REV B
+con otras rutas. No se han tocado los existentes, ni firmas, `Info.plist` ni el número de build.
+**Validación:** COMPILADO / CI. **NO VERIFICADO** en hardware. Cotas de la URTK1.2 tomadas del plano del anuncio:
+medir con calibre antes de pedir. Gerber de la placa de masa escritos por script (sin DRC de KiCad): revisar en el visor
+del fabricante.
+**Pendiente:** medidas reales de la URTK1.2, comprobar J4 sin el SMA, pedido con confirmación del usuario.
+
 ## 2026-11-18 — Casco BETA BACK V5 — PCB REV B: ruteado final, paquete genérico (PCBasic) y revisión previa a fabricación
 **Autor:** Claude · **Commits:** `767fdce`, `373f6b3`, `bb2908a` (rama `feature/back-v5-casco`) · **CI:** run 44302396164 (éxito, puerta de fabricación superada)
 **Qué cambia:**
