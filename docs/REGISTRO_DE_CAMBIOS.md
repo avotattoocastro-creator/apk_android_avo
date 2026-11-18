@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-18 — Casco V5 PROTOTIPO A — correcciones de la revisión independiente
+**Autor:** Claude · **Commits:** `9fbd92a`, `4ce0f18` · **CI:** PCB run 44370108286 (puerta superada), CAD (éxito, 0 interferencias)
+**Qué cambia:** revisión por un agente independiente (sin ver el diseño). Corregido: cabecera TF inválida en los Gerber
+de la placa de masa; recortes solapados unidos en su contorno; pines de masa y sus pads a taladro 1,2 / pad 2,0;
+antena 1,5 mm más lejos de la pila J6 (CAD con Ø13 × 5); patio de las tiras ampliado para soldar a mano; marcas USB-C y
+J4 en la cara B; texto del CPL en el informe. Pendiente BLOQUEANTE: medir la URTK1.2 real (posición de cada fila).
+**Validación:** COMPILADO / CI. **NO VERIFICADO** en hardware.
+
 ## 2026-11-18 — Casco V5 PROTOTIPO A — nueva colocación, LED alineados y 4 pines de masa de la antena
 **Autor:** Claude · **Commits:** `d87d7c1`, `93ed5cd`, `57393e1` · **CI:** PCB run 44341720561 (puerta superada), CAD (éxito, 0 interferencias)
 **Qué cambia (peticiones del usuario):** WROOM a la izquierda; microSD abajo en el centro (tarjeta por el canto
