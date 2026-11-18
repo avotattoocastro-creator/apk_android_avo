@@ -26,8 +26,10 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ## 2026-11-17 — Casco BETA BACK V5 — PCB REV B (PSRAM, apagado total por táctil, anillo a 4,3 V, medidor, IMU) y CAD REV B
 **Autor:** Claude · Rama `feature/back-v5-casco` (sale de `develop` `c3a9778`) · **Commits:** `2e46518` … ver PR
-**CI:** PCB `build-back-v5-pcb.yml` runs 44171321366, 44177067166, 44184593068, 44191363959 (+ el de la placa reparada,
-ver PR); CAD `build-back-v5-cad.yml`; existencias `jlc-stock-back-v5.yml`; huellas `easyeda-fp-back-v5.yml`.
+**CI:** PCB `build-back-v5-pcb.yml`: rondas de Freerouting 44171321366 … 44210170067 (correcciones abajo) y **puerta
+superada en la run 44211872811 (`62d0fe7`)**: DRC 0, 0 conexiones incompletas, paridad 0, ERC 0/0, todas las piezas con
+código LCSC → `PCB/out/FINAL/`. CAD `build-back-v5-cad.yml` (`b0eef98`): 1 sólido por pieza, 0 interferencias.
+Existencias `jlc-stock-back-v5.yml` y huellas `easyeda-fp-back-v5.yml` (17/11, 20:28 UTC).
 **Qué cambia (decisiones del usuario del 17/11: «subiremos cápsula, anillo 5 V, añadimos solo si no amplía ancho y largo»):**
 - **PCB REV B** (`hardware/back/V5_CASCO/PCB`), 51 × 51 sin cambios:
   - **ESP32-S3-WROOM-1U-N16R8** (C3013946; 16 MB + 8 MB de PSRAM octal) en lugar del MINI-1U-N8. Altura máxima de la
@@ -40,15 +42,19 @@ ver PR); CAD `build-back-v5-cad.yml`; existencias `jlc-stock-back-v5.yml`; huell
     los 8 SK6812SIDE-A y el funcionamiento fuera de hoja por debajo de 3,7 V.
   - **R_TMR 68 kΩ** (≈ 8,5 h; antes 4–6 h por defecto), **PMOS de polaridad** de la celda (AO3401A).
   - **MAX17048** (0x36) y **LSM6DSV16X** (0x6A) por I²C en GPIO41/42; INT1 de la IMU en GPIO4.
-  - microSD 0,8 mm más abajo y sus resistencias en el canal bajo el módulo.
+  - microSD 0,8 mm más abajo y sus resistencias en el canal bajo el módulo; pull-ups de PG/CHG junto al micro.
+  - Corregido durante el ruteado: patio del WROOM con sus pads (cortos en la 1.ª ronda), vías de masa del EPAD 41 y del
+    pad 40 del WROOM (build.py seguía con los del MINI-1U), salida OUT del BQ24072 pre-ruteada.
 - **CAD REV B** (`hardware/back/V5_CASCO/CAD`): cápsula **56,4 × 56,4 × 24,7** (+0,6 de alto, planta igual); rebaje
   interior del electrodo táctil (pared de 1,4 mm, sin agujero) con anillo grabado por fuera; escalón de las columnas
   bajado con la altura máxima.
 **Por qué:** auditoría BETA (C1, C3, C4, C6) y revisión electrónica del 17/11 (E1–E7: el anillo gastaba 0,6 mA por LED
 en reposo según su hoja; temporizador de carga corto; sin polaridad; sin medidor).
-**Validación:** colocación local sin errores; CI de PCB y CAD (ver arriba). **No fabricado. NO VERIFICADO.**
+**Validación:** DISEÑO VERIFICADO POR SOFTWARE (KiCad 9 en el CI). **No fabricado ni impreso. NO VERIFICADO.** No se
+pide nada sin confirmación del usuario.
 **Pendiente:** firmware BACK 5.x (POWER_HOLD, pulsación larga, LED_PWR, I²C, UART2 RX en GPIO3, PPS en GPIO7); ajustar la
-sensibilidad del táctil (C69) con la pared real y agua; medir el consumo apagado; STEP real del pogo y de la batería.
+sensibilidad del táctil (C69) con la pared real y agua; medir el consumo apagado; STEP real del pogo y de la batería; consultar existencias de C137952 (620 kΩ) y de las
+piezas de la REV A sin consulta (C17958, C97998, C10662, C88373, C25105, C5378721) el día del pedido.
 
 ---
 

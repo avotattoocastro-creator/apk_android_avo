@@ -1,7 +1,7 @@
 # AVO BACK V5 CASCO · PCB REV B (17/11/2026)
 
-**Estado:** REV B en el CI (ver `out/AVO_BACK_V5_PCB_REPORTE.md` y la puerta de fabricación). **No fabricada. No
-verificada en hardware.** La REV A (14/11/2026) queda en el historial de git (`c3a9778`).
+**Estado:** diseño verificado por software (KiCad 9 en el CI, run 44211872811, `62d0fe7`): DRC 0, 0 conexiones
+incompletas, paridad 0, ERC 0/0. Ficheros en `out/FINAL/`. **No fabricada. No verificada en hardware.** La REV A (14/11/2026) queda en el historial de git (`c3a9778`).
 
 ## Cambios de la REV B (decisiones del usuario, 17/11/2026)
 | Bloque | REV A | REV B |

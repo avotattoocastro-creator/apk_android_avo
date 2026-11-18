@@ -4,7 +4,7 @@ Generador: `avo_casco_v5.py` (CadQuery 2.4, en el CI con `build-back-v5-cad.yml`
 
 **Base del casco:** el imán del Hall queda rodeado de material (la ventana central ya no lo corta).
 
-**Estado:** en el CI, 1 sólido por pieza y 0 interferencias con la PCB, los componentes de la cara F, la batería, la antena, el pogo y los imanes. **No impreso ni probado.**
+**Estado (REV B, CI `b0eef98`):** 1 sólido por pieza y 0 interferencias con la PCB, los componentes de la cara F, la batería, la antena, el pogo y los imanes. **No impreso ni probado.**
 
 ## Medidas
 - **Cápsula: 56,4 × 56,4 × 24,7 mm** (REV B: +0,6 mm por el ESP32-S3-WROOM-1U de 3,2 mm; la planta no cambia). Interior de 51,6 (PCB de 51 + 0,3 por lado) y pared de 2,4.
