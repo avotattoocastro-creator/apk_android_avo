@@ -18,7 +18,7 @@ este prototipo o se pasa a la REV B con el ZED integrado como BETA final.
 | Cápsula | 56,4 × 56,4 × 24,7 | **61,4 × 61,4 × ≈ 32,1** (≈ 35,6 sobre el casco) — estimado; el CI da la cifra exacta |
 | Arranque en caliente del ZED | V_BCKP desde el carril siempre encendido | pila de respaldo de la URTK1.2 (J6) |
 | Piezas quitadas | — | U1, R70, C71, L70, R71, D4, J5, C62, C64, C65 y el paso del coaxial H5 |
-| Colocación | microSD a la derecha, pogo en el canto inferior | **WROOM a la izquierda, microSD abajo en el centro (tarjeta por el canto inferior, entre D15 y D14), pogo en el canto SUPERIOR** (copa del pogo en la franja +Y del suelo de la cápsula) |
+| Colocación | microSD a la derecha, pogo en el canto inferior | **WROOM en el centro-izquierda, microSD abajo en el centro (tarjeta por el canto inferior, entre D15 y D14), pogo en el canto SUPERIOR** (copa del pogo en la franja +Y del suelo de la cápsula) |
 | LED y masa de la antena | 7 LED | **8 LED alineados** (D15/D14 bajo D10/D11; D17/D12 y D16/D13 a la misma altura) · **4 pines de masa J12–J15** en las esquinas, junto a la URTK1.2, soldados a la placa de masa |
 | Resto | | igual: ESP32-S3-WROOM-1U-N16R8, cargador, táctil, anillo (**8 LED**: D14 vuelve, a la derecha de la salida de la tarjeta), MAX17048, LSM6DSV16X, microSD, pogo, Hall |
 
@@ -43,9 +43,18 @@ URTK1.2 lo da el RT9080 (se apaga con ZED_EN), como el prototipo de la espalda d
    sus pads de las esquinas.
 4. Antena Taoglas AHP2258 sobre la placa de masa, en el cuadrado serigrafiado, con su cable al U.FL J4.
 
+## Precauciones (revisión independiente 18/11)
+- **Kapton** sobre la cara B de la PCB bajo la URTK1.2: las patas de J1, J6 y del SMA quitado apoyarían en la máscara
+  sobre el plano de masa.
+- **No conectar el USB-C (J1) de la URTK1.2 montada**: su LDO alimentaría +3V3_ZED con el ZED apagado por ZED_EN.
+- **Pila J6:** usar la que pida la placa (si J6 se carga desde 3V3, una ML1220 recargable; nunca una CR1220).
+- Pines de masa J12–J15: taladro 1,2 mm (pin de tira de 0,64 o hilo de cobre de hasta 1 mm).
+
 ## Comprobaciones antes de pedir nada (con la URTK1.2 en la mano)
-- Medidas de la placa (43,434 × 43,688) y posición de los pines: primer pin a 12,827 mm del canto, filas a 1,524 de
-  los cantos (40,64 entre filas).
+- **Lo más importante:** medir CADA fila por separado: distancia del primer pin al canto del USB-C (supuesto 12,827 mm)
+  y cuál es su pin GND. Si una fila empezara desde el otro canto, se desplazaría 2,54 mm y todas sus redes quedarían
+  mal. Medidas de la placa (43,434 × 43,688) y distancia entre filas (40,64).
+- Diámetro, altura y posición del portapilas J6 (el CAD supone Ø13 × 5 mm).
 - Que **J4 llegue al ZED** con J2 quitado (continuidad / prueba con la antena).
 - Altura del portapilas J6 con pila, de J1 (USB-C) y de J3, y lo que sobresale por debajo (debe ser < 2,5 mm).
 - Versión del ZED en u-center (MON-VER): **ZED-F9P-04B**.

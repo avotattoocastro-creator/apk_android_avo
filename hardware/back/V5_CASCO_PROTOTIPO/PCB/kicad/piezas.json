@@ -220,8 +220,8 @@
   "no_assembly": false,
   "note": "REV B (revisión 18/11): 100k/150k → 2,85–3,15 V con VBUS 4,75–5,25 V. Con 100k/100k daba 2,4–2,6 V, por debajo de VIH = 0,75 × VDD = 2,475 V del ESP32-S3 (hoja del WROOM, DC characteristics): lectura no fiable",
   "jlc_rot": 0,
-  "x": -11.46,
-  "y": 5.77,
+  "x": -11.43,
+  "y": 5.76,
   "rot": 90
  },
  {
@@ -505,8 +505,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -11.44,
-  "y": 7.83,
+  "x": 10.56,
+  "y": 1.69,
   "rot": 90
  },
  {
@@ -520,8 +520,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -12.54,
-  "y": 6.25,
+  "x": 10.68,
+  "y": 7.39,
   "rot": 90
  },
  {
@@ -670,8 +670,8 @@
   "no_assembly": false,
   "note": "AHLB = 0 (activo alto), TOG = 0 (directo): Q = 1 mientras se toca. Modo de bajo consumo (≈ 1,5 µA a 3 V). TDSEMIC TTP223-BA6-TD (C42422127): mismo patillaje que el TTP223-BA6 de Tontek, sin existencias en JLC",
   "jlc_rot": 0,
-  "x": -19.54,
-  "y": 19.93,
+  "x": -19.15,
+  "y": 19.81,
   "rot": 0
  },
  {
@@ -685,8 +685,8 @@
   "no_assembly": false,
   "note": "obligatorio y pegado a VDD/VSS (hoja del TTP223)",
   "jlc_rot": 0,
-  "x": -16.76,
-  "y": 21.39,
+  "x": -16.41,
+  "y": 21.59,
   "rot": 90
  },
  {
@@ -700,9 +700,9 @@
   "no_assembly": false,
   "note": "Cs de sensibilidad (0–50 pF): sin montar; se ajusta tras la prueba con la pared de 1,2–1,5 mm y agua",
   "jlc_rot": 0,
-  "x": -20.73,
-  "y": 17.58,
-  "rot": 0
+  "x": -22.04,
+  "y": 18.46,
+  "rot": 90
  },
  {
   "ref": "R16",
@@ -715,9 +715,9 @@
   "no_assembly": false,
   "note": "serie del electrodo (ESD)",
   "jlc_rot": 0,
-  "x": -22.23,
-  "y": 19.38,
-  "rot": 90
+  "x": -20.34,
+  "y": 17.46,
+  "rot": 0
  },
  {
   "ref": "J7",
@@ -745,9 +745,9 @@
   "no_assembly": false,
   "note": "→ GPIO11 (RTC: despierta del sueño y mide la pulsación larga); limita la corriente si el S3 está sin tensión",
   "jlc_rot": 0,
-  "x": -22.88,
-  "y": 20.98,
-  "rot": 0
+  "x": -21.87,
+  "y": 20.56,
+  "rot": 90
  },
  {
   "ref": "C21",
@@ -820,8 +820,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 18.32,
-  "y": -3.12,
+  "x": 18.04,
+  "y": -3.51,
   "rot": 90
  },
  {
@@ -880,8 +880,8 @@
   "no_assembly": false,
   "note": "junto al pin 3V3 de la URTK1.2",
   "jlc_rot": 0,
-  "x": 22.37,
-  "y": -4.21,
+  "x": 22.68,
+  "y": -4.59,
   "rot": 90
  },
  {
@@ -1435,7 +1435,7 @@
   "no_assembly": false,
   "note": "imán de la base del casco: OUT = 0 en la base → GPIO1 (RTC, despierta del sueño profundo)",
   "jlc_rot": 0,
-  "x": 23.7,
+  "x": 23.9,
   "y": -1.0,
   "rot": 0
  },
@@ -1450,7 +1450,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 23.19,
+  "x": 23.39,
   "y": 1.47,
   "rot": 0
  },
@@ -1765,8 +1765,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -13.11,
-  "y": 9.42,
+  "x": -12.19,
+  "y": 9.43,
   "rot": 0
  },
  {
@@ -1795,8 +1795,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -8.87,
-  "y": -4.07,
+  "x": -11.74,
+  "y": 7.77,
   "rot": 0
  },
  {
@@ -1840,8 +1840,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -8.88,
-  "y": -9.81,
+  "x": -9.92,
+  "y": -4.41,
   "rot": 0
  },
  {
@@ -1915,8 +1915,8 @@
   "no_assembly": true,
   "note": "4,3 V del anillo (solo con LED_PWR = 1)",
   "jlc_rot": 0,
-  "x": -18.61,
-  "y": 16.17,
+  "x": -17.45,
+  "y": 11.02,
   "rot": 0
  },
  {
@@ -1930,14 +1930,14 @@
   "no_assembly": true,
   "note": "pin SAFE de la URTK1.2 (SAFEBOOT_N del ZED): solo para recuperar su firmware",
   "jlc_rot": 0,
-  "x": -21.98,
-  "y": 11.83,
+  "x": -22.32,
+  "y": 12.12,
   "rot": 0
  },
  {
   "ref": "J12",
   "value": "GND PLACA ANTENA",
-  "footprint": "WirePad_D1.8_Drill1.0",
+  "footprint": "WirePad_D2.0_Drill1.2",
   "lcsc": "",
   "mpn": "",
   "block": "ZED",
@@ -1952,7 +1952,7 @@
  {
   "ref": "J13",
   "value": "GND PLACA ANTENA",
-  "footprint": "WirePad_D1.8_Drill1.0",
+  "footprint": "WirePad_D2.0_Drill1.2",
   "lcsc": "",
   "mpn": "",
   "block": "ZED",
@@ -1967,7 +1967,7 @@
  {
   "ref": "J14",
   "value": "GND PLACA ANTENA",
-  "footprint": "WirePad_D1.8_Drill1.0",
+  "footprint": "WirePad_D2.0_Drill1.2",
   "lcsc": "",
   "mpn": "",
   "block": "ZED",
@@ -1982,7 +1982,7 @@
  {
   "ref": "J15",
   "value": "GND PLACA ANTENA",
-  "footprint": "WirePad_D1.8_Drill1.0",
+  "footprint": "WirePad_D2.0_Drill1.2",
   "lcsc": "",
   "mpn": "",
   "block": "ZED",

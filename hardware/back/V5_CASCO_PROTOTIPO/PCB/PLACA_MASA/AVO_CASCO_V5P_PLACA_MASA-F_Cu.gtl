@@ -1,12 +1,12 @@
 %FSLAX46Y46*%
 %MOMM*%
-%%TF.GenerationSoftware,AVO,placa_masa.py,1*%%
+%TF.GenerationSoftware,AVO,placa_masa.py,1*%
 %TF.FileFunction,Copper,L1,Top*%
 %TF.FilePolarity,Positive*%
 G01*
 %LPD*%
 %ADD10C,0.600000*%
-%ADD11C,1.800000*%
+%ADD11C,2.000000*%
 G36*
 X25600000Y20758343D02*
 X24917964Y20622461D01*

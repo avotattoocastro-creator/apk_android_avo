@@ -65,12 +65,12 @@ HOLE_XY, HOLE_D, HOLE_KEEP = 24.5, 2.8, 3.0          # 4 taladros de los tornill
 # 1,524 de los cantos (40,64 entre filas). Marco U = vista desde arriba de la URTK1.2, origen en su centro.
 # En la placa (vista desde F) un punto (u, v) de la URTK1.2 está en X = OFF_X + v, Y = OFF_Y + u (girada 90° y en
 # espejo porque está en la cara B): las tiras quedan VERTICALES en X ≈ ±20,3 (la de 9 pines con las UART junto al
-# WROOM, a la derecha) y el canto inferior queda libre para la microSD y el pogo.
+# lado derecho, cerca del WROOM) y el canto inferior queda libre para la microSD.
 URTK = dict(lx=43.434, ly=43.688, t=1.6, pitch=2.54, u0=12.827 - 43.434 / 2, fila=40.64 / 2, separador=2.5,
             off=(0.3, 0.0))
 FILA9 = ["GND", "5V", "3V3", "TX2", "RX2", "CS", "RX/MOSI", "TX/MISO", "SCK"]          # canto +v
 FILA10 = ["GND", "3V3", "SDA", "SCL", "FENCE", "RTK", "PPS", "RST", "SAFE", "INT"]     # canto −v
-ANT = (1.45, -6.0, 25.0)                              # antena sobre la URTK1.2 (marco U: centro y lado), lejos de J6
+ANT = (1.45, -7.5, 25.0)                              # antena sobre la URTK1.2 (marco U: centro y lado), lejos de J6
 Z_MAX_F = 3.2                                         # altura máxima en F (REV B: WROOM-1U de 3,2; antes 2,6)
 
 
@@ -168,7 +168,8 @@ def urtk_row(names, v):
     pads = [Pad(str(k + 1), "thru_hole", "rect" if k == 0 else "circle", 0.0, round(-(y - cy), 4), 1.7, 1.7, drill=1.0,
                 layers=["*.Cu", "*.Mask"]) for k, (_, y) in enumerate(xs)]
     y0 = min(pd.y for pd in pads) - 1.1; y1 = max(pd.y for pd in pads) + 1.1
-    g = rect_lines(-1.1, y0, 1.1, y1, "F.CrtYd", 0.05) + rect_lines(-1.0, y0 + 0.1, 1.0, y1 - 0.1, "B.SilkS", 0.12)
+    # revisión independiente 18/11: patio ampliado (±1,4) para soldar a mano sin puentes con los condensadores vecinos
+    g = rect_lines(-1.4, y0 - 0.3, 1.4, y1 + 0.3, "F.CrtYd", 0.05) + rect_lines(-1.0, y0 + 0.1, 1.0, y1 - 0.1, "B.SilkS", 0.12)
     fp = Footprint("AVO_URTK1.2_Tira_1x%02d_P2.54" % len(names), pads, g, "through_hole", None,
                    "Tira de pines de la URTK1.2 (ZED-F9P) soldada por la cara B", height=1.5)
     return fp, (round(cx, 4), round(cy, 4))
@@ -236,7 +237,7 @@ FP = {
     "MICROSD": load("microSD_HC_Hirose_DM3AT-SF-PEJM5.kicad_mod",
                     M3 + "Connector_Card.3dshapes/microSD_HC_Hirose_DM3AT-SF-PEJM5.step", 1.6),
     "SOD323": load("D_SOD-323.kicad_mod", M3 + "Diode_SMD.3dshapes/D_SOD-323.step", 1.1),
-    "GNDPIN": wire_pad("(pin de masa de la placa de la antena)", drill=1.0, d=1.8),
+    "GNDPIN": wire_pad("(pin de masa de la placa de la antena)", drill=1.2, d=2.0),   # revisión 18/11: admite hilo de 1 mm
     "FILA9": FILA9_FP,
     "FILA10": FILA10_FP,
     "WROOM1U": S3,

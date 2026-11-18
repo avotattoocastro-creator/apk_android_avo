@@ -1,11 +1,11 @@
 %FSLAX46Y46*%
 %MOMM*%
-%%TF.GenerationSoftware,AVO,placa_masa.py,1*%%
+%TF.GenerationSoftware,AVO,placa_masa.py,1*%
 %TF.FileFunction,Soldermask,Top*%
 %TF.FilePolarity,Positive*%
 G01*
 %LPD*%
-%ADD12C,2.000000*%
+%ADD12C,2.200000*%
 D12*
 X-20000000Y23000000D03*
 X20000000Y23000000D03*

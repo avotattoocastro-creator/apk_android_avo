@@ -5057,7 +5057,7 @@
 		(property "Value" "GND PLACA ANTENA" (at 375.92 194.31 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
-			"AVO:WirePad_D1.8_Drill1.0"
+			"AVO:WirePad_D2.0_Drill1.2"
 			(at 373.38 193.04 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
@@ -5093,7 +5093,7 @@
 		(property "Value" "GND PLACA ANTENA" (at 405.13 194.31 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
-			"AVO:WirePad_D1.8_Drill1.0"
+			"AVO:WirePad_D2.0_Drill1.2"
 			(at 402.59 193.04 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
@@ -5129,7 +5129,7 @@
 		(property "Value" "GND PLACA ANTENA" (at 435.61 194.31 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
-			"AVO:WirePad_D1.8_Drill1.0"
+			"AVO:WirePad_D2.0_Drill1.2"
 			(at 433.07 193.04 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
@@ -5165,7 +5165,7 @@
 		(property "Value" "GND PLACA ANTENA" (at 466.09 194.31 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
-			"AVO:WirePad_D1.8_Drill1.0"
+			"AVO:WirePad_D2.0_Drill1.2"
 			(at 463.55 193.04 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))

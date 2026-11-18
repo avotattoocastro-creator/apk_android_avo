@@ -4,7 +4,7 @@ Va entre la URTK1.2 y la antena plana (Taoglas AHP2258, probada por el fabricant
 antena solo vería la URTK1.2 (43 × 43, con componentes). PCB de 2 capas, 0,8 mm, cobre macizo en las dos caras unido
 por vías cada ≈ 4 mm, máscara en las dos caras (la de abajo apoya en el blindaje del ZED, con kapton además).
 Recortes: esquinas (postes de la tapa), tiras de pines de la URTK1.2, portapilas J6, USB-C J1, conector J3 y el U.FL
-J4 con la clavija del cable. 4 pads de masa Ø1,8 en las esquinas (petición del usuario 18/11): los pines de masa
+J4 con la clavija del cable. 4 pads de masa Ø2,0 (taladro 1,2) en las esquinas (petición del usuario 18/11): los pines de masa
 J12–J15 de la PCB suben por fuera de la URTK1.2 y se sueldan aquí (unen la placa a GND y la sujetan).
 
 Marco: VISTA DESDE ARRIBA (cielo), origen en el centro de la cápsula = marco del CAD (X del CAD = −X de la PCB).
@@ -148,7 +148,7 @@ def region(pts):
 
 
 def header(func, polarity="Positive"):
-    return ["%FSLAX46Y46*%", "%MOMM*%", "%%TF.GenerationSoftware,AVO,placa_masa.py,1*%%",
+    return ["%FSLAX46Y46*%", "%MOMM*%", "%TF.GenerationSoftware,AVO,placa_masa.py,1*%",   # revisión independiente 18/11: antes salía «%%…%%» (bloque inválido)
             "%%TF.FileFunction,%s*%%" % func, "%%TF.FilePolarity,%s*%%" % polarity, "G01*", "%LPD*%"]
 
 
@@ -157,7 +157,7 @@ def write(name, lines):
 
 
 def copper(func):
-    L = header(func) + ["%ADD10C,0.600000*%", "%ADD11C,1.800000*%"] + region(CU) + ["%LPC*%"]
+    L = header(func) + ["%ADD10C,0.600000*%", "%ADD11C,2.000000*%"] + region(CU) + ["%LPC*%"]
     for c in CUTS_CU:
         L += region(c)
     L += ["%LPD*%", "D10*"] + ["X%sY%sD03*" % (fmt(x), fmt(y)) for x, y in VIAS]
@@ -167,12 +167,38 @@ def copper(func):
 
 def mask(func):
     # máscara en todo; solo se abre el pad de masa (las vías quedan tapadas)
-    return header(func) + ["%ADD12C,2.000000*%", "D12*"] + ["X%sY%sD03*" % (fmt(x), fmt(y)) for x, y in GND_PADS]
+    return header(func) + ["%ADD12C,2.200000*%", "D12*"] + ["X%sY%sD03*" % (fmt(x), fmt(y)) for x, y in GND_PADS]
+
+
+def merged_cuts(cuts, g=0.05):
+    """revisión independiente 18/11: los recortes que se solapan (J6 con J3 y con la tira de 9) se unen en un solo
+    contorno para el fresado (contornos cerrados que se cruzan son ambiguos para el fabricante)"""
+    import numpy as np
+    from matplotlib.path import Path
+    from scipy import ndimage
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    xs = np.arange(-30, 30, g); ys = np.arange(-30, 30, g)
+    XX, YY = np.meshgrid(xs, ys)
+    pts = np.c_[XX.ravel(), YY.ravel()]
+    m = np.zeros(XX.shape, bool)
+    for c in cuts:
+        m |= Path(c).contains_points(pts).reshape(XX.shape)
+    lab, n = ndimage.label(m)
+    out = []
+    for k in range(1, n + 1):
+        cs = plt.contour(XX, YY, (lab == k).astype(float), levels=[0.5])
+        paths = [pp for pp in cs.get_paths()[0].to_polygons() if len(pp) > 3]
+        plt.close("all")
+        poly = max(paths, key=len)
+        out.append([(float(x), float(y)) for x, y in poly[:-1]])
+    return out
 
 
 def outline_g():
     L = header("Profile,NP") + ["%ADD13C,0.100000*%", "D13*"]
-    for poly in [OUTL] + CUTS:
+    for poly in [OUTL] + merged_cuts(CUTS):
         L.append("X%sY%sD02*" % (fmt(poly[0][0]), fmt(poly[0][1])))
         L += ["X%sY%sD01*" % (fmt(x), fmt(y)) for x, y in poly[1:]]
         L.append("X%sY%sD01*" % (fmt(poly[0][0]), fmt(poly[0][1])))
@@ -182,7 +208,7 @@ def outline_g():
 def silk():
     # texto mínimo con trazos: «GND» junto al pad y una flecha hacia la antena (sin fuentes externas)
     L = header("Legend,Top") + ["%ADD14C,0.150000*%", "D14*"]
-    x, y = GND_PAD[0] - 3.2, GND_PAD[1]
+    x, y = GND_PAD[0] + 1.8, GND_PAD[1] - 0.6     # hacia dentro (antes caía en el mordisco del poste)
     for (x0, y0), (x1, y1) in (((x, y + 0.6), (x + 0.9, y + 0.6)), ((x, y + 0.6), (x, y - 0.6)), ((x, y - 0.6), (x + 0.9, y - 0.6)),
                                ((x + 0.9, y - 0.6), (x + 0.9, y))):
         L += ["X%sY%sD02*" % (fmt(x0), fmt(y0)), "X%sY%sD01*" % (fmt(x1), fmt(y1))]
@@ -200,7 +226,7 @@ write(NAME + "-F_Mask.gts", mask("Soldermask,Top"))
 write(NAME + "-B_Mask.gbs", mask("Soldermask,Bot"))
 write(NAME + "-F_Silkscreen.gto", silk())
 write(NAME + "-Edge_Cuts.gm1", outline_g())
-drl = ["M48", "METRIC,TZ", "T1C0.300", "T2C1.000", "%", "G90", "G05", "T1"]
+drl = ["M48", "METRIC,TZ", "T1C0.300", "T2C1.200", "%", "G90", "G05", "T1"]
 drl += ["X%.3fY%.3f" % (x, y) for x, y in VIAS] + ["T2"] + ["X%.3fY%.3f" % g for g in GND_PADS] + ["M30"]
 open(os.path.join(OUT, NAME + "-PTH.drl"), "w").write("\n".join(drl) + "\n")
 

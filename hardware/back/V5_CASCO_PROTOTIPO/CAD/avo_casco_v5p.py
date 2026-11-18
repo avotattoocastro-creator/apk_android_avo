@@ -242,7 +242,7 @@ def refs():
     r["zed"] = box((zc0[0] + zc1[0]) / 2, (zc0[1] + zc1[1]) / 2, Z_URTK1 + 0.02, abs(zc1[0] - zc0[0]), abs(zc1[1] - zc0[1]),
                    ZED_H - 0.04)
     j6 = u2cad(-10.93, 13.04)
-    r["pila_J6"] = cyl(j6[0], j6[1], Z_URTK1 + 0.02, 10.0, 4.5)      # (E) portapilas con pila: medir
+    r["pila_J6"] = cyl(j6[0], j6[1], Z_URTK1 + 0.02, 13.0, 5.0)      # (E) portapilas ML1220 Ø12,5 + cuerpo: MEDIR
     pm = cq.Workplane("XY").polyline([tuple(p) for p in PM["contorno"]]).close().extrude(PM["espesor"] - 0.04)
     for c in PM["recortes"]:
         pm = pm.cut(cq.Workplane("XY").polyline([tuple(p) for p in c]).close().extrude(5).translate((0, 0, -1)))
