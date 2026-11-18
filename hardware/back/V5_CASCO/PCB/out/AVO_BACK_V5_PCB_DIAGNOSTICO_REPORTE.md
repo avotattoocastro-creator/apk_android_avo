@@ -1,17 +1,17 @@
 # AVO BACK V5 CASCO · placa de la espalda para el casco · REV B (ESP32-S3-WROOM-1U-N16R8 + ZED-F9P soldado) — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `767fdce1e54855daa839edb6cfa64e78b311b2e8` · ejecución de CI: 44299397401
-- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
+- Commit: `373f6b31ca0cec1b15fc7754bf91976390e99cd8` · ejecución de CI: 44301885056
+- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 135 en total, 114 para montar, 1 sin montar (DNP: C69), 20 a mano (pads de hilo y de prueba)
-- Pistas: 1133 · vías: 245 · ruteado INCOMPLETO (9 conexiones)
+- Pistas: 1250 · vías: 267 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | **FALLA** | 3 |
-| DRC: conexiones incompletas | **FALLA** | 9 |
+| DRC: conexiones incompletas | correcto | 0 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
@@ -19,18 +19,8 @@
 
 Errores de DRC por tipo: copper_edge_clearance 3
 
-### Conexiones incompletas
-- Pad 5 [+3V3] of U13 on F.Cu ↔ Track [+3V3] on F.Cu, length 0.0127 mm
-- Track [VBAT] on F.Cu, length 2.3748 mm ↔ Track [VBAT] on F.Cu, length 0.5000 mm
-- Track [VBUS] on In2.Cu, length 1.1000 mm ↔ Pad 13 [VBUS] of U2 on F.Cu
-- Track [+3V3_AON] on F.Cu, length 1.5200 mm ↔ Track [+3V3_AON] on F.Cu, length 0.1131 mm
-- Pad 4 [IMU_INT1] of U13 on F.Cu ↔ Pad 4 [IMU_INT1] of U4 on F.Cu
-- Pad 3 [LED_D4] of D12 on F.Cu ↔ Pad 1 [LED_D4] of D13 on F.Cu
-- Pad 1 [LED_D5] of D15 on F.Cu ↔ Pad 3 [LED_D5] of D13 on F.Cu
-- Track [VLED] on F.Cu, length 0.6788 mm ↔ Track [VLED] on F.Cu, length 0.5060 mm
-- Pad 1 [VLED] of C92 on F.Cu ↔ Track [VLED] on F.Cu, length 13.7580 mm
-
 ## Advertencias de DRC (no bloqueantes)
+- track_dangling: 2
 - silk_over_copper: 2
 
 ## Lista de materiales y posiciones
