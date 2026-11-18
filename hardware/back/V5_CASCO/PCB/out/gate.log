@@ -1,27 +1,22 @@
-# AVO BACK V5 CASCO · placa de la espalda para el casco · REV B (ESP32-S3-WROOM-1U-N16R8 + ZED-F9P soldado) — informe de diagnóstico
+# AVO BACK V5 CASCO · placa de la espalda para el casco · REV B (ESP32-S3-WROOM-1U-N16R8 + ZED-F9P soldado) — informe de fabricación
 
-- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `e3574ac30874676b9888990b18770534a7c3dc39` · ejecución de CI: 44264156656
-- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
+- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
+- Commit: `50f86aa4ef1fa2cac83442d032b0f65664d37c64` · ejecución de CI: 44265143817
+- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 134 en total, 113 para montar, 1 sin montar (DNP: C69), 20 a mano (pads de hilo y de prueba)
-- Pistas: 1141 · vías: 252 · ruteado INCOMPLETO (3 conexiones)
+- Pistas: 1168 · vías: 256 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | **FALLA** | 3 |
+| DRC: conexiones incompletas | correcto | 0 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
-
-### Conexiones incompletas
-- Pad 5 [+3V3] of U13 on F.Cu ↔ Track [+3V3] on In2.Cu, length 1.8919 mm
-- Track [+3V3_AON] on F.Cu, length 1.2869 mm ↔ Pad 36 [+3V3_AON] of U1 on F.Cu
-- Pad 1 [LED_D6] of D15 on F.Cu ↔ Pad 3 [LED_D6] of D14 on F.Cu
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 6
@@ -86,8 +81,8 @@
 - Piezas sin existencias para 5 placas: C17958, C97998, C10662, C88373, C25105, C5378721, C137952
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **no**
-- Apto para solicitar prototipos: **no**
+- Diseño verificado por software (KiCad 9 en el CI): **sí**
+- Apto para solicitar prototipos: **sí, pendiente de validación física**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)
@@ -103,4 +98,4 @@
 - REV B: firmware nuevo (BACK 5.x): POWER_HOLD (GPIO46) al arrancar, pulsación larga, LED_PWR (GPIO48), I²C (MAX17048 + LSM6DSV16X).
 - REV B: con el anillo apagado, GPIO47 a 0 (no alimentar los LED por DIN).
 - Nada de esto se ha fabricado ni medido: no es un prototipo validado.
-::notice title=Puerta de fabricación::NO SUPERADA
+::notice title=Puerta de fabricación::SUPERADA

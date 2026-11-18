@@ -1,5 +1,5 @@
 ** Drc report for AVO_BACK_V5_PCB.kicad_pcb **
-** Created on 2026-11-18T08:10:33+0000 **
+** Created on 2026-11-18T08:14:34+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
 ** Found 7 DRC violations **
@@ -26,19 +26,7 @@
     @(104.0800 mm, 121.1000 mm): PCB text 'AUX' on F.Silkscreen
     @(104.1264 mm, 120.8300 mm): Segment of R20 on F.Silkscreen
 
-** Found 3 unconnected pads **
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(99.5000 mm, 83.9125 mm): Pad 5 [+3V3] of U13 on F.Cu
-    @(98.2727 mm, 84.4955 mm): Track [+3V3] on In2.Cu, length 1.8919 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(84.6500 mm, 86.5700 mm): Track [+3V3_AON] on F.Cu, length 1.2869 mm
-    @(99.0000 mm, 97.3500 mm): Pad 36 [+3V3_AON] of U1 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(88.4250 mm, 123.7400 mm): Pad 1 [LED_D6] of D15 on F.Cu
-    @(123.7400 mm, 116.4300 mm): Pad 3 [LED_D6] of D14 on F.Cu
+** Found 0 unconnected pads **
 
 ** Found 0 Footprint errors **
 
