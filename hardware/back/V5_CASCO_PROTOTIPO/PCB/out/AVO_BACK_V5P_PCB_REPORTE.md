@@ -1,35 +1,22 @@
-# AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de diagnóstico
+# AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de fabricación
 
-- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `93ed5cda600819c088dc2ec78357b0b3df9f7301` · ejecución de CI: 44340278313
-- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
+- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
+- Commit: `57393e16ceeb4f05552f6ba2fbe55b1af48ae0c4` · ejecución de CI: 44341720561
+- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 56 × 56 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo bajo la URTK1.2, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
-- Componentes: 129 en total, 106 para montar, 1 sin montar (DNP: C69), 22 a mano (pads de hilo y de prueba)
-- Pistas: 1009 · vías: 168 · ruteado INCOMPLETO (4 conexiones)
+- Componentes: 133 en total, 106 para montar, 1 sin montar (DNP: C69), 26 a mano (pads de hilo y de prueba)
+- Pistas: 1038 · vías: 180 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | **FALLA** | 3 |
-| DRC: conexiones incompletas | **FALLA** | 4 |
+| DRC: errores | correcto | 0 |
+| DRC: conexiones incompletas | correcto | 0 |
 | DRC: cortocircuitos | correcto | 0 |
-| DRC: paridad esquema ↔ placa | **FALLA** | 4 |
+| DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
-Errores de DRC por tipo: copper_edge_clearance 3
-
-### Conexiones incompletas
-- Track [+3V3] on F.Cu, length 0.5445 mm ↔ Pad 5 [+3V3] of U13 on F.Cu
-- Track [VSYS] on In2.Cu, length 1.6467 mm ↔ Track [VSYS] on F.Cu, length 0.2510 mm
-- Pad 3 [LED_D4] of D12 on F.Cu ↔ Pad 1 [LED_D4] of D13 on F.Cu
-- Pad 1 [VLED] of C96 on F.Cu ↔ Track [VLED] on F.Cu, length 0.9345 mm
-
-### Paridad esquema ↔ placa
-- extra_footprint: Extra footprint
-- extra_footprint: Extra footprint
-- extra_footprint: Extra footprint
-- extra_footprint: Extra footprint
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 3
@@ -85,8 +72,8 @@ Errores de DRC por tipo: copper_edge_clearance 3
 - Piezas sin existencias para 5 placas: C5378721, C137952
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **no**
-- Apto para solicitar prototipos: **no**
+- Diseño verificado por software (KiCad 9 en el CI): **sí**
+- Apto para solicitar prototipos: **sí, pendiente de validación física**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)
