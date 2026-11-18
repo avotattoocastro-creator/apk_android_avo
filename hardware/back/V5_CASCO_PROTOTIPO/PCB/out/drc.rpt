@@ -1,24 +1,12 @@
 ** Drc report for AVO_BACK_V5P_PCB.kicad_pcb **
-** Created on 2026-11-18T15:06:12+0000 **
+** Created on 2026-11-18T15:13:44+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 9 DRC violations **
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2416 mm)
-    Rule: board setup constraints edge; error
-    @(128.0000 mm, 125.0000 mm): Segment on Edge.Cuts
-    @(127.5084 mm, 112.8729 mm): Via [LED_D4] on F.Cu - B.Cu
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2715 mm)
-    Rule: board setup constraints edge; error
-    @(75.0000 mm, 128.0000 mm): Segment on Edge.Cuts
-    @(86.7248 mm, 127.6285 mm): Track [LED_D6] on F.Cu, length 0.4946 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2715 mm)
-    Rule: board setup constraints edge; error
-    @(75.0000 mm, 128.0000 mm): Segment on Edge.Cuts
-    @(119.6700 mm, 127.0917 mm): Track [LED_D6] on F.Cu, length 0.7591 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2715 mm)
-    Rule: board setup constraints edge; error
-    @(75.0000 mm, 128.0000 mm): Segment on Edge.Cuts
-    @(119.1332 mm, 127.6285 mm): Track [LED_D6] on F.Cu, length 32.4084 mm
+** Found 6 DRC violations **
+[connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0997 mm) (F.Cu)
+    Rule: board setup constraints; warning
+    @(111.6750 mm, 105.4250 mm): Via [SD_CMD] on F.Cu - B.Cu
+    @(112.0250 mm, 106.0750 mm): Track [SD_CMD] on F.Cu, length 0.8517 mm
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(117.3000 mm, 100.0000 mm): PCB text 'URTK1.2 (componentes arriba)' on B.Silkscreen
@@ -37,19 +25,7 @@
     @(117.3000 mm, 100.0000 mm): PCB text 'URTK1.2 (componentes arriba)' on B.Silkscreen
     @(119.6200 mm, 109.8900 mm): Segment of J10 on B.Silkscreen
 
-** Found 3 unconnected pads **
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(99.8000 mm, 80.3425 mm): Pad 5 [+3V3] of U13 on F.Cu
-    @(98.2128 mm, 80.2973 mm): Track [+3V3] on F.Cu, length 0.4989 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(99.1375 mm, 80.1800 mm): Pad 4 [IMU_INT1] of U13 on F.Cu
-    @(100.4500 mm, 86.2500 mm): Pad 4 [IMU_INT1] of U4 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(108.2300 mm, 103.1500 mm): Pad 1 [SD_CMD] of R41 on F.Cu
-    @(109.8350 mm, 99.6991 mm): Track [SD_CMD] on F.Cu, length 0.5009 mm
+** Found 0 unconnected pads **
 
 ** Found 0 Footprint errors **
 
