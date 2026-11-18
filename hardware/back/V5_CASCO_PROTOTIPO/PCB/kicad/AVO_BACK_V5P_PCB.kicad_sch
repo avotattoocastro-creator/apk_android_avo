@@ -4026,7 +4026,7 @@
 		(dnp no)
 		(uuid "169a7c1c-5b14-5ba8-be86-4b3bb219f610")
 		(property "Reference" "R25" (at 26.67 340.36 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "620k" (at 26.67 342.9 0) (effects (font (size 1 1)) (justify left)))
+		(property "Value" "1M" (at 26.67 342.9 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
@@ -4036,7 +4036,7 @@
 		)
 		(property "Datasheet" "" (at 24.13 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 24.13 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C137952" (at 24.13 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C26083" (at 24.13 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 24.13 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "1e69694f-4896-5815-867e-1cb52f455d96"))
 		(pin "2" (uuid "af9299bd-4072-5a89-bebc-4e2394998e01"))
@@ -4072,7 +4072,7 @@
 		(dnp no)
 		(uuid "7147d462-2cdd-5907-99e2-b987c6c2b6c8")
 		(property "Reference" "R26" (at 50.8 342.9 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "100k" (at 50.8 345.44 0) (effects (font (size 1 1)) (justify left)))
+		(property "Value" "150k" (at 50.8 345.44 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
@@ -4082,7 +4082,7 @@
 		)
 		(property "Datasheet" "" (at 48.26 344.17 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 48.26 344.17 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C25741" (at 48.26 344.17 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25755" (at 48.26 344.17 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 48.26 344.17 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "0fa71090-df51-536c-8a54-383aa343ad3b"))
 		(pin "2" (uuid "0f89d073-7824-5ef0-bf87-0971a8fd3174"))

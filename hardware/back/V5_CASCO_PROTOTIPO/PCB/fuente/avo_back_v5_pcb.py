@@ -495,8 +495,8 @@ part("L71", "L0806", "1 µH", (0, 0), 0, {1: VSYS, 2: "VLED_SW"}, LC["1uH 0806"]
      sym="R", note="1 µH, I_sat 3 A, 50 mΩ (≈ 0,4 A de pico con los 7 LED a tope desde 3 V)")
 C("C98", "10u 25V", VSYS, GND, block="Anillo", fp="C0603", note="entrada del elevador")
 C("C99", "22u 10V", "VLED", GND, block="Anillo", fp="C0805", note="salida del elevador (≥ 10 µF efectivos)")
-R("R25", "620k", "VLED", "VLED_FB", block="Anillo", note="V_OUT = 0,595 × (1 + 620k/100k) ≈ 4,28 V")
-R("R26", "100k", "VLED_FB", GND, block="Anillo")
+R("R25", "1M", "VLED", "VLED_FB", block="Anillo", note="PROTO A (18/11, ahorro en JLC: piezas básicas): V_OUT = 0,595 × (1 + 1M/150k) ≈ 4,56 V; DIN 3,3 V ≥ 0,65 × 4,56 = 2,96 V")
+R("R26", "150k", "VLED_FB", GND, block="Anillo")
 R("R27", "100k", "LED_PWR", GND, block="Anillo", note="elevador apagado por defecto (arranque y casco apagado)")
 
 # ---------------------------------------------------------------------------------------- Hall (encendido en la base)
