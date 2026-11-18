@@ -24,6 +24,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-18 — Motor 2.0.0-dev3 — CI en verde en `develop`
+**Autor:** Claude · **Commits:** `e45c103` (#74), `c3dd769` (#75), `5747dbc` (#76)
+**CI:**
+- motor 44299049283 ✅ (lanzado a mano: el workflow no se dispara en `develop`);
+- iPad y TestFlight 44295513273 ✅;
+- Android 44299040682 ✅;
+- Windows 44299040506 ✅;
+- descargas 44299040623 ✅.
+**Validación:** COMPILADO / CI. **NO VERIFICADO** con caballos reales.
+
 ## 2026-11-18 — Motor 2.0.0-dev3 — fixtures JSON regeneradas tras KB-1
 **Autor:** Claude · **Rama:** `claude/fixtures-motor-dev3`
 **Qué cambia:** `core/src/test/resources/equine/synthetic_analysis.json` y `sample_analysis.json` regeneradas con
