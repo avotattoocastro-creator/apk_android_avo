@@ -1,32 +1,34 @@
 # AVO BACK V5 CASCO · placa de la espalda para el casco · REV B (ESP32-S3-WROOM-1U-N16R8 + ZED-F9P soldado) — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `123fc2559e85bbffddcd40cda817edbe903e387e` · ejecución de CI: 44297339694
+- Commit: `767fdce1e54855daa839edb6cfa64e78b311b2e8` · ejecución de CI: 44299397401
 - Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 135 en total, 114 para montar, 1 sin montar (DNP: C69), 20 a mano (pads de hilo y de prueba)
-- Pistas: 1157 · vías: 258 · ruteado INCOMPLETO (8 conexiones)
+- Pistas: 1133 · vías: 245 · ruteado INCOMPLETO (9 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | **FALLA** | 8 |
+| DRC: errores | **FALLA** | 3 |
+| DRC: conexiones incompletas | **FALLA** | 9 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
+Errores de DRC por tipo: copper_edge_clearance 3
 
 ### Conexiones incompletas
-- Pad 1 [+3V3] of C37 on F.Cu ↔ Pad 5 [+3V3] of U13 on F.Cu
-- Track [+3V3] on F.Cu, length 0.0127 mm ↔ Pad 5 [+3V3] of U13 on F.Cu
-- Track [+3V3_SD] on F.Cu, length 0.7005 mm ↔ Pad 2 [+3V3_SD] of R41 on F.Cu
-- Track [+3V3_AON] on F.Cu, length 1.2869 mm ↔ Track [+3V3_AON] on F.Cu, length 1.5200 mm
+- Pad 5 [+3V3] of U13 on F.Cu ↔ Track [+3V3] on F.Cu, length 0.0127 mm
+- Track [VBAT] on F.Cu, length 2.3748 mm ↔ Track [VBAT] on F.Cu, length 0.5000 mm
+- Track [VBUS] on In2.Cu, length 1.1000 mm ↔ Pad 13 [VBUS] of U2 on F.Cu
+- Track [+3V3_AON] on F.Cu, length 1.5200 mm ↔ Track [+3V3_AON] on F.Cu, length 0.1131 mm
 - Pad 4 [IMU_INT1] of U13 on F.Cu ↔ Pad 4 [IMU_INT1] of U4 on F.Cu
+- Pad 3 [LED_D4] of D12 on F.Cu ↔ Pad 1 [LED_D4] of D13 on F.Cu
 - Pad 1 [LED_D5] of D15 on F.Cu ↔ Pad 3 [LED_D5] of D13 on F.Cu
-- Track [VLED] on F.Cu, length 0.6788 mm ↔ Track [VLED] on F.Cu, length 0.5313 mm
-- Track [VLED] on F.Cu, length 0.2883 mm ↔ Track [VLED] on F.Cu, length 2.1618 mm
+- Track [VLED] on F.Cu, length 0.6788 mm ↔ Track [VLED] on F.Cu, length 0.5060 mm
+- Pad 1 [VLED] of C92 on F.Cu ↔ Track [VLED] on F.Cu, length 13.7580 mm
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 2
@@ -40,55 +42,54 @@
 - Modelos de la librería de KiCad 9.0.0 descargados: 13; sin descargar: Package_DFN_QFN.3dshapes/VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm.step, RF_GPS.3dshapes/ublox_ZED.step
 - ESP32-S3-WROOM-1U: modelo de Espressif (`fuente/3d`). Piezas de EasyEDA y pads de hilo/prueba: sin modelo 3D.
 
-## Existencias en JLCPCB (consulta del CI: 2026-11-17 20:28 UTC)
+## Existencias en JLCPCB (consulta del CI: 2026-11-18 11:44 UTC)
 | LCSC | Pieza | Por placa | Existencias | Tipo | Precio (1 ud.) |
 |---|---|---|---|---|---|
-| C5120257 | ZED-F9P-04B | 1 | 884 | Extended | 76.3634 US$ |
-| C3013946 | ESP32-S3-WROOM-1U-N16R8 | 1 | 20317 | Extended | 5.1864 US$ |
-| C5267406 | LSM6DSV16XTR | 1 | 19613 | Extended | 2.8619 US$ |
-| C2682616 | MAX17048G+T10 | 1 | 25958 | Extended | 1.9462 US$ |
-| C114218 | DM3AT-SF-PEJM5 | 1 | 14403 | Extended | 1.3925 US$ |
-| C140288 | BQ24072RGTR | 1 | 1077 | Extended | 1.0501 US$ |
-| C919459 | TPS61023DRLR | 1 | 1460 | Extended | 0.2333 US$ |
-| C485517 | TLV75733PDBVR | 1 | 16248 | Extended | 0.2081 US$ |
-| C42422127 | TTP223-BA6-TD | 1 | 38667 | Extended | 0.1713 US$ |
-| C140921 | DRV5032FADBZR | 1 | 59590 | Extended | 0.1709 US$ |
-| C7519 | USBLC6-2SC6 | 1 | 37370 | Extended | 0.1571 US$ |
-| C5446 | XC6206P332MR-G | 1 | 434181 | Basic | 0.1381 US$ |
-| C841192 | RT9080-33GJ5 | 1 | 26824 | Extended | 0.1198 US$ |
-| C20802 | SMD1206P150TF | 2 | 11250 | Extended | 0.1188 US$ |
-| C45783 | CL21A226MAQNNNE | 5 | 3830128 | Basic | 0.1085 US$ |
-| C15127 | AO3401A | 2 | 1430503 | Basic | 0.0815 US$ |
-| C16780 | CL21A476MQYNNNE | 1 | 1266459 | Basic | 0.0744 US$ |
-| C97016 | WPN201610U1R0MT | 1 | 4071 | Extended | 0.0458 US$ |
-| C2827694 | PESD5V0S1BA | 2 | 316283 | Extended | 0.0359 US$ |
-| C96446 | CL10A106MA8NRNC | 6 | 5907824 | Basic | 0.0343 US$ |
-| C2135 | BAT54C | 2 | 152039 | Extended | 0.0246 US$ |
-| C77131 | NCP15XH103F03RC | 1 | 298896 | Extended | 0.0164 US$ |
-| C52923 | CL05A105KA5NQNC | 8 | 9280696 | Basic | 0.0055 US$ |
-| C15195 | CL05B103KB5NNNC | 1 | 5765047 | Basic | 0.0038 US$ |
-| C25867 | 0402WGF1501TCE | 1 | 1197448 | Basic | 0.0029 US$ |
-| C1525 | CL05B104KO5NNNC | 17 | 35747831 | Basic | 0.0024 US$ |
-| C4109 | 0402WGF2001TCE | 1 | 9832798 | Basic | 0.0019 US$ |
-| C25744 | 0402WGF1002TCE | 8 | 26230337 | Basic | 0.0015 US$ |
-| C11702 | 0402WGF1001TCE | 5 | 30683190 | Basic | 0.0013 US$ |
-| C36871 | 0402WGF6802TCE | 1 | 1085502 | Extended | 0.0012 US$ |
-| C17168 | 0402WGF0000TCE | 1 | 14794245 | Basic | 0.0012 US$ |
-| C26083 | 0402WGF1004TCE | 3 | 2905886 | Basic | 0.0011 US$ |
-| C25104 | 0402WGF3300TCE | 3 | 1406883 | Basic | 0.0011 US$ |
-| C25879 | 0402WGF2201TCE | 2 | 2949931 | Basic | 0.0011 US$ |
-| C25092 | 0402WGF220JTCE | 3 | 4530501 | Basic | 0.0010 US$ |
-| C25741 | 0402WGF1003TCE | 11 | 9759479 | Basic | 0.0009 US$ |
-| C25755 | ? | 1 | sin respuesta | Extended | ? |
-| C17958 | ? | 1 | sin respuesta | Extended | ? |
+| C5120257 | ZED-F9P-04B | 1 | 880 | Extended | 76.3474 US$ |
+| C3013946 | ESP32-S3-WROOM-1U-N16R8 | 1 | 19960 | Extended | 5.1853 US$ |
+| C5267406 | LSM6DSV16XTR | 1 | 19522 | Extended | 2.8613 US$ |
+| C2682616 | MAX17048G+T10 | 1 | 25538 | Extended | 1.9457 US$ |
+| C114218 | DM3AT-SF-PEJM5 | 1 | 14167 | Extended | 1.3922 US$ |
+| C140288 | BQ24072RGTR | 1 | 1062 | Extended | 1.0499 US$ |
+| C919459 | TPS61023DRLR | 1 | 1239 | Extended | 0.2333 US$ |
+| C485517 | TLV75733PDBVR | 1 | 12791 | Extended | 0.2107 US$ |
+| C42422127 | TTP223-BA6-TD | 1 | 38627 | Extended | 0.1713 US$ |
+| C140921 | DRV5032FADBZR | 1 | 59895 | Extended | 0.1709 US$ |
+| C7519 | USBLC6-2SC6 | 1 | 34897 | Extended | 0.1571 US$ |
+| C5446 | XC6206P332MR-G | 1 | 432363 | Basic | 0.1381 US$ |
+| C841192 | RT9080-33GJ5 | 1 | 26322 | Extended | 0.1198 US$ |
+| C20802 | SMD1206P150TF | 2 | 11243 | Extended | 0.1188 US$ |
+| C45783 | CL21A226MAQNNNE | 5 | 3659847 | Basic | 0.1085 US$ |
+| C15127 | AO3401A | 2 | 1392256 | Basic | 0.0814 US$ |
+| C16780 | CL21A476MQYNNNE | 1 | 1252148 | Basic | 0.0744 US$ |
+| C97016 | WPN201610U1R0MT | 1 | 4071 | Extended | 0.0457 US$ |
+| C2827694 | PESD5V0S1BA | 2 | 470715 | Extended | 0.0359 US$ |
+| C96446 | CL10A106MA8NRNC | 6 | 5739712 | Basic | 0.0343 US$ |
+| C2135 | BAT54C | 2 | 150474 | Extended | 0.0246 US$ |
+| C77131 | NCP15XH103F03RC | 1 | 293593 | Extended | 0.0164 US$ |
+| C52923 | CL05A105KA5NQNC | 9 | 9100317 | Basic | 0.0055 US$ |
+| C15195 | CL05B103KB5NNNC | 1 | 5562369 | Basic | 0.0038 US$ |
+| C25867 | 0402WGF1501TCE | 1 | 1179471 | Basic | 0.0029 US$ |
+| C1525 | CL05B104KO5NNNC | 16 | 35317245 | Basic | 0.0024 US$ |
+| C4109 | 0402WGF2001TCE | 1 | 9762766 | Basic | 0.0019 US$ |
+| C25744 | 0402WGF1002TCE | 9 | 36586442 | Basic | 0.0015 US$ |
+| C11702 | 0402WGF1001TCE | 4 | 30290405 | Basic | 0.0013 US$ |
+| C36871 | 0402WGF6802TCE | 1 | 1080092 | Extended | 0.0012 US$ |
+| C17168 | 0402WGF0000TCE | 1 | 14602066 | Basic | 0.0012 US$ |
+| C25755 | 0402WGF1503TCE | 1 | 1002574 | Extended | 0.0011 US$ |
+| C26083 | 0402WGF1004TCE | 3 | 2854070 | Basic | 0.0011 US$ |
+| C25104 | 0402WGF3300TCE | 4 | 2218307 | Basic | 0.0011 US$ |
+| C25879 | 0402WGF2201TCE | 2 | 2895113 | Basic | 0.0011 US$ |
+| C25092 | 0402WGF220JTCE | 3 | 4483746 | Basic | 0.0010 US$ |
+| C25741 | 0402WGF1003TCE | 11 | 8706634 | Basic | 0.0009 US$ |
+| C17995 | ? | 1 | sin respuesta | Extended | ? |
 | C97998 | ? | 1 | sin respuesta | Extended | ? |
 | C10662 | ? | 1 | sin respuesta | Extended | ? |
 | C88373 | ? | 1 | sin respuesta | Extended | ? |
-| C25105 | ? | 1 | sin respuesta | Extended | ? |
 | C5378721 | ? | 7 | sin respuesta | Extended | ? |
 | C137952 | ? | 1 | sin respuesta | Extended | ? |
 
-- Piezas sin existencias para 5 placas: C25755, C17958, C97998, C10662, C88373, C25105, C5378721, C137952
+- Piezas sin existencias para 5 placas: C17995, C97998, C10662, C88373, C5378721, C137952
 
 ## Estado de fabricación
 - Diseño verificado por software (KiCad 9 en el CI): **no**
