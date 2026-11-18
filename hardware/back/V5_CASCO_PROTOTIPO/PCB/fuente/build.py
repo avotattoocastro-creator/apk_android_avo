@@ -367,7 +367,7 @@ def write_board(r, path, outer_pours=True):
             dy = 1.55 if p_["ref"].startswith("P") else 1.9          # PROTO A: pogo en el canto superior: rótulo hacia el canto
             if p_["ref"] in ("P4", "P5"):      # 19/11: segunda fila del pogo: rótulo vertical a su lado (debajo está R20)
                 dx = -1.7 if p_["ref"] == "P4" else 1.35
-                tree.append(B.gr_text(p_["value"].replace("POGO ", ""), *D.K(x_ + dx, y_), "F.SilkS", 0.5,
+                tree.append(B.gr_text(p_["value"].replace("POGO ", ""), *D.K(x_ + dx, y_), "F.SilkS", 0.6,
                                       mirror=False, bold=False, angle=90))
                 continue
             tree.append(B.gr_text(p_["value"].replace("POGO ", "").replace("BAT ", "B"), *D.K(x_, y_ + dy), "F.SilkS", 0.6,

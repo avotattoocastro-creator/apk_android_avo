@@ -36377,14 +36377,14 @@
 		(at 89.65 76.95 90)
 		(layer "F.SilkS")
 		(uuid "04ebf45d-e30c-5f74-b7c9-816970752aac")
-		(effects (font (size 0.5 0.5) (thickness 0.1)))
+		(effects (font (size 0.6 0.6) (thickness 0.12)))
 	)
 	(gr_text
 		"AUX"
 		(at 95.05 76.95 90)
 		(layer "F.SilkS")
 		(uuid "0bf05ff7-b6f6-5afa-8efd-06dd23d4a580")
-		(effects (font (size 0.5 0.5) (thickness 0.1)))
+		(effects (font (size 0.6 0.6) (thickness 0.12)))
 	)
 	(gr_text
 		"B+"
