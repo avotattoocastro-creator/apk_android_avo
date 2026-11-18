@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-11-17T23:54:01+0000",
+    "date": "2026-11-18T00:17:53+0000",
     "included_severities": [
         "error",
         "warning",
@@ -15,20 +15,204 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Track [GND] on F.Cu, length 0.0158 mm",
+                    "description": "Track [+3V3] on F.Cu, length 0.0127 mm",
                     "pos": {
-                        "x": 101.03,
-                        "y": 87.31
+                        "x": 101.1625,
+                        "y": 83.75
                     },
-                    "uuid": "2fbff2cc-37ab-5b61-ad1c-c7bca460d22b"
+                    "uuid": "85459095-c584-4535-a7b3-ef372422de87"
                 },
                 {
-                    "description": "Pad 41 [GND] of U4 on F.Cu",
+                    "description": "Pad 5 [+3V3] of U13 on F.Cu",
                     "pos": {
-                        "x": 109.0,
-                        "y": 88.76
+                        "x": 99.5,
+                        "y": 83.9125
                     },
-                    "uuid": "38b39c7d-41e6-53a8-9b0d-0aba8d39b93b"
+                    "uuid": "2bc2cfe8-dce5-5594-960a-feab13086669"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [+3V3_ZED] on F.Cu, length 1.8094 mm",
+                    "pos": {
+                        "x": 85.3203,
+                        "y": 110.5612
+                    },
+                    "uuid": "81368acd-21d0-4229-bdb6-8a31771f5f49"
+                },
+                {
+                    "description": "Track [+3V3_ZED] on F.Cu, length 0.0745 mm",
+                    "pos": {
+                        "x": 97.8495,
+                        "y": 99.4512
+                    },
+                    "uuid": "0d8799f1-dff5-489e-a8cf-98f8234b38f3"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [VSYS] of R8 on F.Cu",
+                    "pos": {
+                        "x": 96.98,
+                        "y": 118.75
+                    },
+                    "uuid": "8538f735-eb63-585c-afbb-b984bf5f32d1"
+                },
+                {
+                    "description": "Track [VSYS] on F.Cu, length 0.5000 mm",
+                    "pos": {
+                        "x": 100.4625,
+                        "y": 115.75
+                    },
+                    "uuid": "11013e4e-d48d-4a89-af84-e010e8463fcf"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [VSYS] on F.Cu, length 0.5000 mm",
+                    "pos": {
+                        "x": 100.4625,
+                        "y": 115.75
+                    },
+                    "uuid": "11013e4e-d48d-4a89-af84-e010e8463fcf"
+                },
+                {
+                    "description": "Track [VSYS] on In2.Cu, length 4.4089 mm",
+                    "pos": {
+                        "x": 97.3025,
+                        "y": 113.2854
+                    },
+                    "uuid": "befbea21-07a1-462d-885e-9dd4c5ab080e"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [+3V3_AON] on F.Cu, length 1.2869 mm",
+                    "pos": {
+                        "x": 84.65,
+                        "y": 86.57
+                    },
+                    "uuid": "cd0e7277-14fa-4967-ba06-a0f20942a2e5"
+                },
+                {
+                    "description": "Track [+3V3_AON] on F.Cu, length 1.5200 mm",
+                    "pos": {
+                        "x": 100.52,
+                        "y": 97.35
+                    },
+                    "uuid": "6dbaf7a1-0fab-4a5d-a229-2b3afe95f498"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [LED_D6] of D15 on F.Cu",
+                    "pos": {
+                        "x": 88.425,
+                        "y": 123.74
+                    },
+                    "uuid": "3b7dc31b-12d4-5d35-bfd8-373cccf70358"
+                },
+                {
+                    "description": "Pad 3 [LED_D6] of D14 on F.Cu",
+                    "pos": {
+                        "x": 110.57,
+                        "y": 123.74
+                    },
+                    "uuid": "24cd25fa-080b-59d6-837b-2c4518ea8991"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 16 [PWR_HOLD] of U4 on F.Cu",
+                    "pos": {
+                        "x": 106.185,
+                        "y": 100.2
+                    },
+                    "uuid": "b30c58ec-01f5-5f26-a560-bbb07ad98591"
+                },
+                {
+                    "description": "Track [PWR_HOLD] on F.Cu, length 0.3258 mm",
+                    "pos": {
+                        "x": 88.35,
+                        "y": 118.8958
+                    },
+                    "uuid": "986b5af6-e75f-42f2-a9df-7402d02188b9"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [USB_DP] of R18 on F.Cu",
+                    "pos": {
+                        "x": 98.14,
+                        "y": 118.74
+                    },
+                    "uuid": "6096a9fe-bbd2-50d9-955a-1ef815ca6d6c"
+                },
+                {
+                    "description": "Pad 14 [USB_DP] of U4 on F.Cu",
+                    "pos": {
+                        "x": 103.15,
+                        "y": 98.95
+                    },
+                    "uuid": "30c012f7-cd5e-5054-97b2-81458e4478e2"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 26 [ZED_RX2] of U1 on F.Cu",
+                    "pos": {
+                        "x": 97.0,
+                        "y": 108.95
+                    },
+                    "uuid": "11f9ba52-8939-5991-805a-3cd5efd21d92"
+                },
+                {
+                    "description": "Pad 2 [ZED_RX2] of R51 on F.Cu",
+                    "pos": {
+                        "x": 101.37,
+                        "y": 94.68
+                    },
+                    "uuid": "f52220d7-80ea-5049-ac53-7a6ea0e053e0"
                 }
             ],
             "severity": "error",
@@ -36,21 +220,6 @@
         }
     ],
     "violations": [
-        {
-            "description": "Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0961 mm) (F.Cu)",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 125.5,
-                        "y": 122.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "connection_width"
-        },
         {
             "description": "Silkscreen clipped by solder mask",
             "items": [

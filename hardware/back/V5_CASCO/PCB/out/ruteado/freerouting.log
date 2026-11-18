@@ -1,0 +1,14 @@
++ timeout 2400 xvfb-run -a java -jar /tmp/freerouting.jar -de hardware/back/V5_CASCO/PCB/out/ruteado/placa.dsn -do hardware/back/V5_CASCO/PCB/out/ruteado/placa.ses -mp 150
+2026-11-17 23:58:11.256 [main] INFO  Freerouting v1.9.0 (build-date: 2023-10-30)
+2026-11-17 23:58:12.448 [main] INFO  Opening 'hardware/back/V5_CASCO/PCB/out/ruteado/placa.dsn'...
+2026-11-17 23:58:13.067 [ForkJoinPool.commonPool-worker-1] INFO  New version available: v2.5.0
+
+(java:2639): dbind-WARNING **: 23:58:14.208: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+2026-11-17 23:58:35.807 [Thread-28] INFO  Starting auto-routing...
+2026-11-17 23:58:36.317 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-17 23:58:36.330 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-17 23:58:36.340 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-18 00:16:38.649 [Thread-28] INFO  Auto-routing was completed in 18 minute(s) 2.84 seconds.
+2026-11-18 00:16:38.750 [Thread-28] INFO  Starting route optimization on 1 thread...
+2026-11-18 00:17:45.861 [Thread-28] INFO  Route optimization was completed in 1 minute(s) 7.11 seconds.
+2026-11-18 00:17:45.910 [Thread-28] INFO  Saving 'hardware/back/V5_CASCO/PCB/out/ruteado/placa.ses'...
