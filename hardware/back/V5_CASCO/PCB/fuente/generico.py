@@ -36,6 +36,11 @@ if os.path.exists("out/posiciones_kicad.csv"):
         for r in csv.DictReader(f):
             pos[r["Ref"]] = (float(r["PosX"]), float(r["PosY"]), float(r["Rot"]),
                              "Top" if r["Side"].lower().startswith("top") else "Bottom")
+# códigos aún sin consultar por el flujo de existencias (comprobados a mano en lcsc.com, 18/11/2026)
+MANUAL = {"C137952": dict(mpn="RC0402FR-07620KL", maker="YAGEO", describe="620kΩ ±1% 62.5mW 0402 Thick Film Resistor"),
+          "C17995": dict(mpn="1206W4F560JT5E", maker="UNI-ROYAL(Uniroyal Elec)", describe="56Ω ±1% 250mW 1206 Thick Film Resistor")}
+for k, v in MANUAL.items():
+    stock.setdefault(k, v)
 fuente_pos = "out/posiciones_kicad.csv" if pos else "kicad/piezas.json"
 
 
@@ -138,7 +143,8 @@ PCB:   4 capas, FR-4 TG155+, 1,6 mm, 51 x 51 mm (esquinas R3), cobre exterior 1 
        separacion minima 0,15 mm. Tramo RF de antena (U.FL -> ZED-F9P) de 0,36 mm, calculado como 50 ohm
        para el apilado JLC04161H-7628; con otro apilado, pedir al fabricante que lo ajuste a 50 ohm.
 Montaje: una sola cara (TOP). Las coordenadas del CPL son las de KiCad 9 (origen de la placa en KiCad),
-       con el giro NATIVO de KiCad (IPC-7351, pin 1 arriba-izquierda a 0 grados). NO incluyen las
+       con el giro NATIVO de KiCad (IPC-7351, pin 1 arriba-izquierda a 0 grados),
+       en mm con Y positiva hacia arriba: el mismo origen que los Gerber (por eso las Y salen negativas). NO incluyen las
        correcciones de rotacion de JLCPCB: el fabricante debe revisar la rotacion con su propio visor.
        Piezas de referencia: la columna LCSC es solo orientativa; puede sustituirse cualquier pasivo por uno
        equivalente (mismo valor, encapsulado, tension y dielectrico X5R/X7R).

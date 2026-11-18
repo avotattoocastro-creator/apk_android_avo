@@ -24,6 +24,20 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-18 — Casco BETA BACK V5 — PCB REV B: ruteado final, paquete genérico (PCBasic) y revisión previa a fabricación
+**Autor:** Claude · **Commits:** `767fdce`, `373f6b3`, `bb2908a` (rama `feature/back-v5-casco`) · **CI:** run 44302396164 (éxito, puerta de fabricación superada)
+**Qué cambia:**
+- Ruteado completado tras las correcciones de la revisión independiente (`repair.py`); LED_D2 separado del borde (0,27 → ≥ 0,3 mm).
+- Nuevo `hardware/back/V5_CASCO/PCB/fuente/generico.py`: BOM con fabricante y MPN, CPL con giros nativos de KiCad,
+  lista de piezas no montadas, plano de montaje PDF y LEEME para fabricantes que no son JLC (PCBasic, PCBWay…).
+- Nuevo `hardware/back/V5_CASCO/DOCS/REVISION_PRE_FABRICACION_REV_B.md`: qué está verificado por software y qué no,
+  cálculos de consumo, autonomía (≈ 7–8 h con 2000 mAh) y calor, reglas de firmware, maqueta en protoboard con lista de
+  compra y plan de pruebas, y opciones de coste (el ZED-F9P es ≈ la mitad del pedido de 2 placas).
+- Corrección: el MAX17048 **no** mide con el casco apagado (bus I²C sin tensión → reposo tras 2,5 s); README corregido.
+**No se ha tocado:** workflows, firmas, `Info.plist`, número de build. No se ha pedido ninguna placa.
+**Validación:** COMPILADO / CI (DRC 0 errores, ERC 0, 0 conexiones incompletas). **NO VERIFICADO** en hardware.
+**Pendiente:** maqueta (pruebas M1–M10), elegir fabricante y pedir con confirmación del usuario; brillo del anillo ≤ 30 % en el firmware.
+
 ## 2026-11-18 — Casco BETA BACK V5 — PCB REV B: correcciones de la revisión previa a fabricación
 **Autor:** Claude · Rama `feature/back-v5-casco`
 **Qué cambia (revisión pin a pin contra hojas de datos, antes de pedir):**

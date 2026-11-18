@@ -13,10 +13,10 @@ incompletas, paridad 0, ERC 0/0. Ficheros en `out/FINAL/`. **No fabricada. No ve
 | Anillo de LED | VDD = VSYS: 0,6 mA por LED siempre (≈ 4,8 mA) y fuera de hoja por debajo de 3,7 V | **4,3 V con TPS61023** (EN = GPIO48; salida desconectada con EN = 0). DIN a 3,3 V válido |
 | Cargador | TMR al aire (4–6 h) | **R_TMR 68 kΩ** (≈ 8,5 h; 6,6–10,4 h con la tolerancia de K_TMR) |
 | Batería | sin protección de polaridad | **PMOS AO3401A** (como Q3 de la V4) |
-| % de batería | divisor al ADC | divisor + **MAX17048** (I²C 0x36, ≈ 3 µA, sigue midiendo con el casco apagado) |
+| % de batería | divisor al ADC | divisor + **MAX17048** (I²C 0x36, ≈ 23 µA activo). Con el casco apagado el bus I²C queda sin tensión (pull-ups a +3V3), SDA/SCL a 0 V durante > 2,5 s y el medidor entra en reposo (≈ 0,5 µA): **no mide apagado**; al encender estima el % por tensión (ModelGauge) en segundos |
 | IMU | — | **LSM6DSV16X** (I²C 0x6A; INT1 → GPIO4, despierta por movimiento) |
 
-**Consumo con el casco apagado (ESTIMADO, hojas de datos):** ZED V_BCKP (decenas de µA) + MAX17048 ≈ 3 µA + TTP223
+**Consumo con el casco apagado (ESTIMADO, hojas de datos):** ZED V_BCKP (decenas de µA) + MAX17048 en reposo ≈ 0,5 µA + TTP223
 ≈ 1,5 µA + XC6206 ≈ 1 µA + BQ24072 ≈ 6,5 µA + divisor del ADC ≈ 2 µA. Del orden de 50 µA: años de reposo con 2000 mAh.
 Hay que medirlo.
 
