@@ -1,22 +1,27 @@
-# AVO BACK V5 CASCO · placa de la espalda para el casco · REV B (ESP32-S3-WROOM-1U-N16R8 + ZED-F9P soldado) — informe de fabricación
+# AVO BACK V5 CASCO · placa de la espalda para el casco · REV B (ESP32-S3-WROOM-1U-N16R8 + ZED-F9P soldado) — informe de diagnóstico
 
-- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `50f86aa4ef1fa2cac83442d032b0f65664d37c64` · ejecución de CI: 44265143817
-- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
+- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
+- Commit: `764cf8b90936f6ac8ac19b9a8c2ea8cca6cf4f51` · ejecución de CI: 44266620183
+- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
-- Componentes: 134 en total, 113 para montar, 1 sin montar (DNP: C69), 20 a mano (pads de hilo y de prueba)
-- Pistas: 1168 · vías: 256 · ruteado completo (0 conexiones incompletas)
+- Componentes: 132 en total, 111 para montar, 1 sin montar (DNP: C69), 20 a mano (pads de hilo y de prueba)
+- Pistas: 1240 · vías: 259 · ruteado INCOMPLETO (2 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | correcto | 0 |
+| DRC: errores | **FALLA** | 3 |
+| DRC: conexiones incompletas | **FALLA** | 2 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
+Errores de DRC por tipo: copper_edge_clearance 3
+
+### Conexiones incompletas
+- Track [+3V3] on F.Cu, length 1.1302 mm ↔ Pad 5 [+3V3] of U13 on F.Cu
+- Pad 1 [SD_PWR_N] of R40 on F.Cu ↔ Track [SD_PWR_N] on F.Cu, length 0.7017 mm
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 6
@@ -59,7 +64,7 @@
 | C52923 | CL05A105KA5NQNC | 7 | 9280696 | Basic | 0.0055 US$ |
 | C15195 | CL05B103KB5NNNC | 1 | 5765047 | Basic | 0.0038 US$ |
 | C25867 | 0402WGF1501TCE | 1 | 1197448 | Basic | 0.0029 US$ |
-| C1525 | CL05B104KO5NNNC | 17 | 35747831 | Basic | 0.0024 US$ |
+| C1525 | CL05B104KO5NNNC | 16 | 35747831 | Basic | 0.0024 US$ |
 | C4109 | 0402WGF2001TCE | 1 | 9832798 | Basic | 0.0019 US$ |
 | C25744 | 0402WGF1002TCE | 7 | 26230337 | Basic | 0.0015 US$ |
 | C11702 | 0402WGF1001TCE | 5 | 30683190 | Basic | 0.0013 US$ |
@@ -75,14 +80,14 @@
 | C10662 | ? | 1 | sin respuesta | Extended | ? |
 | C88373 | ? | 1 | sin respuesta | Extended | ? |
 | C25105 | ? | 1 | sin respuesta | Extended | ? |
-| C5378721 | ? | 8 | sin respuesta | Extended | ? |
+| C5378721 | ? | 7 | sin respuesta | Extended | ? |
 | C137952 | ? | 1 | sin respuesta | Extended | ? |
 
 - Piezas sin existencias para 5 placas: C17958, C97998, C10662, C88373, C25105, C5378721, C137952
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **sí**
-- Apto para solicitar prototipos: **sí, pendiente de validación física**
+- Diseño verificado por software (KiCad 9 en el CI): **no**
+- Apto para solicitar prototipos: **no**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)

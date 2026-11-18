@@ -1,8 +1,20 @@
 ** Drc report for AVO_BACK_V5_PCB.kicad_pcb **
-** Created on 2026-11-18T08:14:34+0000 **
+** Created on 2026-11-18T08:27:35+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 7 DRC violations **
+** Found 10 DRC violations **
+[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2636 mm)
+    Rule: board setup constraints edge; error
+    @(77.5000 mm, 125.5000 mm): Segment on Edge.Cuts
+    @(113.6818 mm, 125.1364 mm): Track [LED_D5] on F.Cu, length 15.4289 mm
+[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2636 mm)
+    Rule: board setup constraints edge; error
+    @(77.5000 mm, 125.5000 mm): Segment on Edge.Cuts
+    @(88.9697 mm, 125.1364 mm): Track [LED_D5] on F.Cu, length 24.7121 mm
+[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2636 mm)
+    Rule: board setup constraints edge; error
+    @(77.5000 mm, 125.5000 mm): Segment on Edge.Cuts
+    @(88.4250 mm, 124.5917 mm): Track [LED_D5] on F.Cu, length 0.7703 mm
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(96.4600 mm, 121.1000 mm): PCB text 'D−' on F.Silkscreen
@@ -26,7 +38,15 @@
     @(104.0800 mm, 121.1000 mm): PCB text 'AUX' on F.Silkscreen
     @(104.1264 mm, 120.8300 mm): Segment of R20 on F.Silkscreen
 
-** Found 0 unconnected pads **
+** Found 2 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(98.5316 mm, 85.0475 mm): Track [+3V3] on F.Cu, length 1.1302 mm
+    @(99.5000 mm, 83.9125 mm): Pad 5 [+3V3] of U13 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(123.7000 mm, 106.5400 mm): Pad 1 [SD_PWR_N] of R40 on F.Cu
+    @(120.3000 mm, 106.0300 mm): Track [SD_PWR_N] on F.Cu, length 0.7017 mm
 
 ** Found 0 Footprint errors **
 
