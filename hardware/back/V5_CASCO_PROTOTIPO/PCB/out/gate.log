@@ -1,11 +1,11 @@
 # AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de fabricación
 
 - Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `70d97ceebba6f96c2c98d1f0d0d2ec38f9b1e2c6` · ejecución de CI: 44422678595
+- Commit: `39b3d284aee0dac058d0d37b64b67ca791285b30` · ejecución de CI: 44423992614
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 56 × 56 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo bajo la URTK1.2, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 136 en total, 109 para montar, 1 sin montar (DNP: C69), 26 a mano (pads de hilo y de prueba)
-- Pistas: 1137 · vías: 192 · ruteado completo (0 conexiones incompletas)
+- Pistas: 1133 · vías: 192 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
@@ -19,10 +19,9 @@
 
 
 ## Advertencias de DRC (no bloqueantes)
-- silk_over_copper: 6
+- silk_over_copper: 3
 - silk_edge_clearance: 2
-- track_dangling: 1
-- silk_overlap: 1
+- text_height: 2
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: ninguna

@@ -1,11 +1,8 @@
 ** Drc report for AVO_BACK_V5P_PCB.kicad_pcb **
-** Created on 2026-11-18T23:41:00+0000 **
+** Created on 2026-11-18T23:50:32+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 10 DRC violations **
-[track_dangling]: Track has unconnected end
-    Local override; warning
-    @(96.4250 mm, 80.8750 mm): Track [USB_DP_C] on F.Cu, length 0.1414 mm
+** Found 7 DRC violations **
 [silk_edge_clearance]: Silkscreen clipped by board edge
     Rule: board setup constraints silk; warning
     @(125.0000 mm, 72.0000 mm): Segment on Edge.Cuts
@@ -14,28 +11,21 @@
     Rule: board setup constraints silk; warning
     @(125.0000 mm, 72.0000 mm): Segment on Edge.Cuts
     @(108.9000 mm, 73.6500 mm): Segment of J16 on F.Silkscreen
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.6000 mm; actual 0.5000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(89.6500 mm, 76.9500 mm): PCB text 'GND' on F.Silkscreen
+[text_height]: Text height out of range (board setup constraints silk text height min height 0.6000 mm; actual 0.5000 mm)
+    Rule: board setup constraints silk text height; warning
+    @(95.0500 mm, 76.9500 mm): PCB text 'AUX' on F.Silkscreen
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(78.4560 mm, 78.2830 mm): Segment on B.Silkscreen
-[silk_over_copper]: Silkscreen clipped by solder mask
-    Local override; warning
-    @(91.3500 mm, 78.5000 mm): PCB text 'GND' on F.Silkscreen
-[silk_over_copper]: Silkscreen clipped by solder mask
-    Local override; warning
-    @(93.7000 mm, 78.5000 mm): PCB text 'AUX' on F.Silkscreen
-[silk_over_copper]: Silkscreen clipped by solder mask
-    Local override; warning
-    @(100.0000 mm, 75.7000 mm): PCB text 'AVO Performance' on B.Silkscreen
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(113.0000 mm, 95.0000 mm): Circle of U12 on F.Silkscreen
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(82.4600 mm, 85.8000 mm): Circle of L71 on F.Silkscreen
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(93.7000 mm, 78.5000 mm): PCB text 'AUX' on F.Silkscreen
-    @(93.3464 mm, 78.3600 mm): Segment of R20 on F.Silkscreen
 
 ** Found 0 unconnected pads **
 

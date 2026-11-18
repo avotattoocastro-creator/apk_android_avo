@@ -18,7 +18,7 @@
   {
    "net": "GND",
    "layer": "F.Cu",
-   "filled_area_mm2": 1571.0
+   "filled_area_mm2": 1571.1
   },
   {
    "net": "",
@@ -42,7 +42,7 @@
   }
  ],
  "footprints": 140,
- "tracks": 1137,
+ "tracks": 1133,
  "vias": 192,
  "unconnected": 0
 }
