@@ -19,7 +19,7 @@ Cierre: 4 × M2,5 × 16 desde abajo por los taladros de la PCB (±22, ±22) con 
   insertos M2,5 (Ø3,5 × 4) en los postes de la tapa; la PCB queda pinzada entre las columnas de la base y los postes.
   Anillo de resina translúcida de UNA pieza, 3,0 mm de alto, centrado en la luz de los 8 LED laterales de la PCB
   (z 10,4–13,4). SIN juntas TPU: las 2 uniones del anillo se sellan con pegamento (tipo B-7000/T-7000).
-Pogo de 5 contactos (ESTIMADO a partir del STEP del de 3 contactos, paso 2,3): en el fondo, franja −Y, cara a ras.
+Pogo de 5 contactos (ESTIMADO a partir del STEP del de 3 contactos, paso 2,3): en el fondo, franja +Y (PROTO A; la REV B la lleva en −Y), cara a ras.
 Táctil (REV B): la pared de la base se adelgaza POR DENTRO a 1,4 mm frente al hilo J7 de la PCB (lámina de cobre pegada
   en el rebaje y unida a J7 con un hilo): sin agujero, la estanqueidad no cambia. Por fuera, un anillo grabado de
   0,3 mm (la pared queda en 1,1 mm solo en la línea del anillo); no sobresale de la planta.
@@ -81,8 +81,8 @@ SCREWS = [(-x, y) for x, y in MEC["taladros"]]
 SCREW = dict(hole=2.8, cb_d=5.0, cb_h=2.6, boss=6.6, post=6.0, insert_d=3.6, insert_h=4.6)
 GASKET = dict(c=WALL / 2, w_groove=1.0, depth=0.8, w=0.9, h_free=1.1)
 POGO = dict(n=5, pitch=2.3, f_l=21.7, f_w=6.25, f_t=3.5, face_l=20.1, face_w=4.65, face_h=1.7, clear=0.2,
-            y=-(IN / 2 - 6.25 / 2 - 0.2 + 0.05), cup_wall=0.6, cup_z=5.5)    # (E) hasta tener el STEP real
-MAG = dict(d=6.0, t=2.0, skin=0.3, pos=[(-15.5, -25.0), (15.5, -25.0), (-15.0, 25.0), (15.0, 25.0)])   # PROTO A: +2,5
+            y=+(IN / 2 - 6.25 / 2 - 0.2 + 0.05), cup_wall=0.6, cup_z=5.5)    # (E) hasta tener el STEP real
+MAG = dict(d=6.0, t=2.0, skin=0.3, pos=[(-16.0, -25.0), (16.0, -25.0), (-16.0, 25.0), (16.0, 25.0)])   # PROTO A: +2,5 y ±16 (copa del pogo en +Y)
 U8 = next(e for e in MEC["envolventes"] if e[0] == "U8")
 HALL_XY = (-(U8[1] + U8[3]) / 2, (U8[2] + U8[4]) / 2)
 CHAMF = 1.2                                # chaflán inferior de la cápsula = alojamiento de la base del casco
@@ -141,7 +141,7 @@ def base():
         for sy in (-1, 1):
             x0, y0 = sx * (BAT["x"] / 2 + 0.25 + 0.4), sy * (BAT["y"] / 2 + 0.25 + 0.4)
             b = b.union(box(x0, sy * (BAT["y"] / 2 - 3), FLOOR - 0.1, 0.8, 6, 2.1).intersect(rrect(IN, IN, PCB["r"] + CL, 20, 0)))
-            if sy > 0:      # en −Y hace de tope la pared de la copa del pogo
+            if sy < 0:      # PROTO A: el pogo pasa a +Y; allí hace de tope la pared de su copa
                 b = b.union(box(sx * (BAT["x"] / 2 - 3), y0, FLOOR - 0.1, 6, 0.8, 2.1))
     # imanes de sujeción: recrecido interior y alojamiento desde dentro (0,3 de piel abajo)
     for (x, y) in MAG["pos"]:

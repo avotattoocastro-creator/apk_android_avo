@@ -11,7 +11,7 @@
   "note": "5 V del cable USB magnético",
   "jlc_rot": 0,
   "x": -6.08,
-  "y": -25.5,
+  "y": 25.5,
   "rot": 0
  },
  {
@@ -26,7 +26,7 @@
   "note": "USB D−",
   "jlc_rot": 0,
   "x": -3.54,
-  "y": -25.5,
+  "y": 25.5,
   "rot": 0
  },
  {
@@ -41,7 +41,7 @@
   "note": "USB D+",
   "jlc_rot": 0,
   "x": -1.0,
-  "y": -25.5,
+  "y": 25.5,
   "rot": 0
  },
  {
@@ -56,7 +56,7 @@
   "note": "masa",
   "jlc_rot": 0,
   "x": 1.54,
-  "y": -25.5,
+  "y": 25.5,
   "rot": 0
  },
  {
@@ -71,7 +71,7 @@
   "note": "contacto libre (reservado: base o accesorio)",
   "jlc_rot": 0,
   "x": 4.08,
-  "y": -25.5,
+  "y": 25.5,
   "rot": 0
  },
  {
@@ -86,7 +86,7 @@
   "note": "fusible rearmable del VBUS expuesto",
   "jlc_rot": 0,
   "x": -6.0,
-  "y": -21.5,
+  "y": 21.0,
   "rot": 0
  },
  {
@@ -100,9 +100,9 @@
   "no_assembly": false,
   "note": "ESD en VBUS del pogo",
   "jlc_rot": 0,
-  "x": -8.98,
-  "y": -24.14,
-  "rot": 0
+  "x": -8.43,
+  "y": 26.0,
+  "rot": 90
  },
  {
   "ref": "D3",
@@ -115,8 +115,8 @@
   "no_assembly": false,
   "note": "ESD en el contacto AUX",
   "jlc_rot": 0,
-  "x": -2.24,
-  "y": -22.49,
+  "x": 7.68,
+  "y": 25.5,
   "rot": 90
  },
  {
@@ -130,9 +130,9 @@
   "no_assembly": false,
   "note": "serie del contacto AUX → GPIO40. Revisión 18/11: 10 kΩ (0,4 mA como máximo hacia el 3,3 V si la base pusiera 5 V con el casco apagado)",
   "jlc_rot": 0,
-  "x": 3.68,
-  "y": -23.75,
-  "rot": 0
+  "x": 5.88,
+  "y": 25.5,
+  "rot": 90
  },
  {
   "ref": "R21",
@@ -145,8 +145,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 2.49,
-  "y": -18.27,
+  "x": 4.28,
+  "y": 23.71,
   "rot": 0
  },
  {
@@ -160,9 +160,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 1.69,
-  "y": -21.0,
-  "rot": 90
+  "x": 3.0,
+  "y": 21.0,
+  "rot": 0
  },
  {
   "ref": "R18",
@@ -175,9 +175,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -0.63,
-  "y": -21.83,
-  "rot": 90
+  "x": 2.02,
+  "y": 23.34,
+  "rot": 0
  },
  {
   "ref": "R19",
@@ -190,8 +190,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 0.58,
-  "y": -23.73,
+  "x": 1.61,
+  "y": 18.67,
   "rot": 0
  },
  {
@@ -205,9 +205,9 @@
   "no_assembly": false,
   "note": "divisor 100k/150k → GPIO18 (despierta al conectar el cable)",
   "jlc_rot": 0,
-  "x": -4.85,
-  "y": -3.66,
-  "rot": 0
+  "x": -11.61,
+  "y": 1.3,
+  "rot": 90
  },
  {
   "ref": "R23",
@@ -220,9 +220,9 @@
   "no_assembly": false,
   "note": "REV B (revisión 18/11): 100k/150k → 2,85–3,15 V con VBUS 4,75–5,25 V. Con 100k/100k daba 2,4–2,6 V, por debajo de VIH = 0,75 × VDD = 2,475 V del ESP32-S3 (hoja del WROOM, DC characteristics): lectura no fiable",
   "jlc_rot": 0,
-  "x": -2.23,
-  "y": 4.23,
-  "rot": 0
+  "x": -11.48,
+  "y": 5.64,
+  "rot": 90
  },
  {
   "ref": "U2",
@@ -235,8 +235,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -4.0,
-  "y": -16.0,
+  "x": -12.0,
+  "y": -15.0,
   "rot": 0
  },
  {
@@ -250,8 +250,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -2.9,
-  "y": -12.16,
+  "x": -10.9,
+  "y": -11.16,
   "rot": 0
  },
  {
@@ -265,8 +265,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -0.93,
-  "y": -18.03,
+  "x": -8.93,
+  "y": -17.03,
   "rot": 90
  },
  {
@@ -280,8 +280,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -7.14,
-  "y": -17.46,
+  "x": -16.12,
+  "y": -13.86,
   "rot": 90
  },
  {
@@ -295,8 +295,8 @@
   "no_assembly": false,
   "note": "REV B (revisión 18/11): 47 → 22 µF. El BQ24072 pide 4,7–47 µF en OUT y VSYS suma C19, C21, C60 y C98",
   "jlc_rot": 0,
-  "x": 0.65,
-  "y": -14.57,
+  "x": -11.04,
+  "y": -19.12,
   "rot": 90
  },
  {
@@ -310,8 +310,8 @@
   "no_assembly": false,
   "note": "I_carga = 890/1k5 ≈ 590 mA (0,3 C de 2000 mAh; ≈ 4 h)",
   "jlc_rot": 0,
-  "x": -4.2,
-  "y": -13.25,
+  "x": -12.2,
+  "y": -12.25,
   "rot": 0
  },
  {
@@ -325,8 +325,8 @@
   "no_assembly": false,
   "note": "I_entrada = K_ILIM/R_ILIM ≈ 1600/2k ≈ 800 mA (BQ24072T, SLUS937)",
   "jlc_rot": 0,
-  "x": -1.14,
-  "y": -15.25,
+  "x": -9.14,
+  "y": -14.25,
   "rot": 90
  },
  {
@@ -340,8 +340,8 @@
   "no_assembly": false,
   "note": "NTC junto a la batería (cara F, encima de la celda)",
   "jlc_rot": 0,
-  "x": -6.77,
-  "y": -14.75,
+  "x": -14.77,
+  "y": -13.75,
   "rot": 90
  },
  {
@@ -355,8 +355,8 @@
   "no_assembly": false,
   "note": "REV B: temporizador de seguridad t_MAXCH = 10 × K_TMR × R_TMR ≈ 10 × 45 × 68k ≈ 8,5 h (35–55 s/kΩ: 6,6–10,4 h; SLUS937). Al aire eran 4–6 h y podía cortar la carga con el casco encendido en el DOCK",
   "jlc_rot": 0,
-  "x": -1.98,
-  "y": -13.23,
+  "x": -9.98,
+  "y": -12.23,
   "rot": 0
  },
  {
@@ -370,8 +370,8 @@
   "no_assembly": false,
   "note": "EN2 = 1, EN1 = 0: límite por ILIM",
   "jlc_rot": 0,
-  "x": -5.2,
-  "y": -18.79,
+  "x": -13.2,
+  "y": -17.79,
   "rot": 0
  },
  {
@@ -385,8 +385,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 22.35,
-  "y": 6.13,
+  "x": 9.55,
+  "y": 4.13,
   "rot": 90
  },
  {
@@ -400,8 +400,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 22.48,
-  "y": 8.2,
+  "x": 9.5,
+  "y": 6.37,
   "rot": 90
  },
  {
@@ -460,8 +460,8 @@
   "no_assembly": false,
   "note": "REV B: polaridad de la celda (como Q3 de la V4). D a la celda, S al sistema, G a GND: con la celda al revés queda cortado; en uso conduce en los dos sentidos (carga y descarga), ≈ 60 mΩ",
   "jlc_rot": 0,
-  "x": -15.0,
-  "y": -15.0,
+  "x": -16.02,
+  "y": -17.83,
   "rot": 0
  },
  {
@@ -475,8 +475,8 @@
   "no_assembly": false,
   "note": "puerta de Q7 a GND",
   "jlc_rot": 0,
-  "x": -17.37,
-  "y": -13.75,
+  "x": -18.33,
+  "y": -16.38,
   "rot": 90
  },
  {
@@ -490,8 +490,8 @@
   "no_assembly": false,
   "note": "divisor 1:2 → GPIO2 (ADC1_CH1)",
   "jlc_rot": 0,
-  "x": -1.24,
-  "y": 8.88,
+  "x": 10.67,
+  "y": 5.22,
   "rot": 90
  },
  {
@@ -505,8 +505,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -1.36,
-  "y": 6.63,
+  "x": 10.64,
+  "y": 3.14,
   "rot": 90
  },
  {
@@ -520,8 +520,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -2.44,
-  "y": 6.8,
+  "x": 10.75,
+  "y": 7.37,
   "rot": 90
  },
  {
@@ -535,8 +535,8 @@
   "no_assembly": false,
   "note": "1 A: ESP32-S3 (picos de radio ≈ 0,35 A) + microSD + IMU. REV B: EN = OR(táctil, POWER_HOLD, VBUS)",
   "jlc_rot": 0,
-  "x": -8.0,
-  "y": -10.0,
+  "x": -12.0,
+  "y": -8.0,
   "rot": 0
  },
  {
@@ -550,8 +550,8 @@
   "no_assembly": false,
   "note": "OR del táctil y de POWER_HOLD al EN del 3,3 V",
   "jlc_rot": 0,
-  "x": -8.0,
-  "y": -5.0,
+  "x": -14.0,
+  "y": -2.0,
   "rot": 0
  },
  {
@@ -565,8 +565,8 @@
   "no_assembly": false,
   "note": "VBUS del pogo (cargador o DOCK) al EN: una cápsula apagada se enciende al cargar (decisión D1 de la auditoría). Revisión 18/11: desde el divisor VBUS_DET (≈ 0,6 × VBUS) y no desde VBUS: el EN del TLV757P aguanta 6,0 V como máximo",
   "jlc_rot": 0,
-  "x": -11.6,
-  "y": -5.0,
+  "x": -14.0,
+  "y": 2.0,
   "rot": 0
  },
  {
@@ -580,8 +580,8 @@
   "no_assembly": false,
   "note": "EN a 0 sin ninguna fuente: apagado (fuga ≈ 0)",
   "jlc_rot": 0,
-  "x": -9.19,
-  "y": -12.35,
+  "x": -13.19,
+  "y": -10.35,
   "rot": 0
  },
  {
@@ -595,8 +595,8 @@
   "no_assembly": false,
   "note": "REV B (revisión 18/11): mantiene EN ≈ 1 s (1 MΩ · 1 µF) cuando el micro se reinicia (OTA, watchdog, reset): GPIO46 vuelve a 0 en el reinicio y sin esto el casco se apagaba en cada reinicio. El firmware sube POWER_HOLD en el arranque (gancho del bootloader). Apagar tarda ≈ 1–1,5 s tras soltar POWER_HOLD",
   "jlc_rot": 0,
-  "x": -10.72,
-  "y": -10.75,
+  "x": -14.72,
+  "y": -8.75,
   "rot": 90
  },
  {
@@ -610,9 +610,9 @@
   "no_assembly": false,
   "note": "GPIO46 (de arranque: bajo por defecto) — el firmware lo sube nada más arrancar y lo retiene en el sueño",
   "jlc_rot": 0,
-  "x": -9.49,
-  "y": -7.47,
-  "rot": 0
+  "x": -16.37,
+  "y": -2.65,
+  "rot": 90
  },
  {
   "ref": "U9",
@@ -625,8 +625,8 @@
   "no_assembly": false,
   "note": "LDO de ≈ 1 µA: mantiene V_BCKP del ZED (efemérides) con el casco apagado y alimenta el táctil",
   "jlc_rot": 0,
-  "x": -14.1,
-  "y": 19.17,
+  "x": -14.0,
+  "y": 20.0,
   "rot": 0
  },
  {
@@ -640,8 +640,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -11.7,
-  "y": 19.17,
+  "x": -11.6,
+  "y": 20.0,
   "rot": 90
  },
  {
@@ -655,9 +655,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -16.59,
-  "y": 17.63,
-  "rot": 90
+  "x": -15.49,
+  "y": 17.53,
+  "rot": 0
  },
  {
   "ref": "U10",
@@ -671,7 +671,7 @@
   "note": "AHLB = 0 (activo alto), TOG = 0 (directo): Q = 1 mientras se toca. Modo de bajo consumo (≈ 1,5 µA a 3 V). TDSEMIC TTP223-BA6-TD (C42422127): mismo patillaje que el TTP223-BA6 de Tontek, sin existencias en JLC",
   "jlc_rot": 0,
   "x": -19.0,
-  "y": 20.5,
+  "y": 21.0,
   "rot": 0
  },
  {
@@ -685,8 +685,8 @@
   "no_assembly": false,
   "note": "obligatorio y pegado a VDD/VSS (hoja del TTP223)",
   "jlc_rot": 0,
-  "x": -15.76,
-  "y": 21.66,
+  "x": -17.31,
+  "y": 23.34,
   "rot": 0
  },
  {
@@ -701,7 +701,7 @@
   "note": "Cs de sensibilidad (0–50 pF): sin montar; se ajusta tras la prueba con la pared de 1,2–1,5 mm y agua",
   "jlc_rot": 0,
   "x": -21.72,
-  "y": 19.75,
+  "y": 20.25,
   "rot": 90
  },
  {
@@ -716,7 +716,7 @@
   "note": "serie del electrodo (ESD)",
   "jlc_rot": 0,
   "x": -20.39,
-  "y": 18.17,
+  "y": 18.67,
   "rot": 0
  },
  {
@@ -746,7 +746,7 @@
   "note": "→ GPIO11 (RTC: despierta del sueño y mide la pulsación larga); limita la corriente si el S3 está sin tensión",
   "jlc_rot": 0,
   "x": -19.98,
-  "y": 22.84,
+  "y": 23.34,
   "rot": 0
  },
  {
@@ -760,8 +760,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -12.08,
-  "y": -8.45,
+  "x": -12.54,
+  "y": -5.35,
   "rot": 0
  },
  {
@@ -775,8 +775,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -4.66,
-  "y": -9.05,
+  "x": -8.66,
+  "y": -7.05,
   "rot": 90
  },
  {
@@ -790,8 +790,8 @@
   "no_assembly": false,
   "note": "regulador propio del ZED y de la antena activa: EN = 0 corta receptor y LNA",
   "jlc_rot": 0,
-  "x": 6.2,
-  "y": 20.85,
+  "x": 14.0,
+  "y": 16.0,
   "rot": 0
  },
  {
@@ -805,8 +805,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 5.66,
-  "y": 23.5,
+  "x": 13.46,
+  "y": 18.65,
   "rot": 0
  },
  {
@@ -820,8 +820,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 22.85,
-  "y": -5.15,
+  "x": 18.32,
+  "y": -3.12,
   "rot": 90
  },
  {
@@ -835,9 +835,9 @@
   "no_assembly": false,
   "note": "ZED apagado mientras arranca el ESP32",
   "jlc_rot": 0,
-  "x": 3.44,
-  "y": 20.68,
-  "rot": 90
+  "x": 12.61,
+  "y": 13.67,
+  "rot": 0
  },
  {
   "ref": "J10",
@@ -880,8 +880,8 @@
   "no_assembly": false,
   "note": "junto al pin 3V3 de la URTK1.2",
   "jlc_rot": 0,
-  "x": 18.79,
-  "y": -2.58,
+  "x": 22.37,
+  "y": -4.21,
   "rot": 90
  },
  {
@@ -895,8 +895,8 @@
   "no_assembly": false,
   "note": "serie: limita la alimentación parásita del ZED apagado",
   "jlc_rot": 0,
-  "x": 19.75,
-  "y": 13.6,
+  "x": 9.56,
+  "y": 8.58,
   "rot": 90
  },
  {
@@ -910,9 +910,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 3.32,
-  "y": -1.87,
-  "rot": 0
+  "x": 9.44,
+  "y": 1.43,
+  "rot": 90
  },
  {
   "ref": "R52",
@@ -925,9 +925,9 @@
   "no_assembly": false,
   "note": "RESET_N del ZED (GPIO9 en colector abierto)",
   "jlc_rot": 0,
-  "x": -7.63,
-  "y": 4.34,
-  "rot": 0
+  "x": -11.53,
+  "y": 3.34,
+  "rot": 90
  },
  {
   "ref": "R53",
@@ -940,9 +940,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 12.03,
-  "y": 19.56,
-  "rot": 0
+  "x": 9.51,
+  "y": 10.68,
+  "rot": 90
  },
  {
   "ref": "R54",
@@ -955,9 +955,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 3.39,
-  "y": -3.21,
-  "rot": 0
+  "x": 9.52,
+  "y": -1.74,
+  "rot": 90
  },
  {
   "ref": "R55",
@@ -970,8 +970,8 @@
   "no_assembly": false,
   "note": "PPS → GPIO7 (REV B; REV A: GPIO4)",
   "jlc_rot": 0,
-  "x": -9.78,
-  "y": 8.15,
+  "x": -14.88,
+  "y": 7.15,
   "rot": 0
  },
  {
@@ -985,8 +985,8 @@
   "no_assembly": false,
   "note": "16 MB de flash + 8 MB de PSRAM octal (3,2 mm de alto). Antena FPC de 2,4 GHz en el U.FL del módulo, pegada a la pared de la cápsula (lejos de la GNSS)",
   "jlc_rot": 0,
-  "x": 9.2,
-  "y": 9.3,
+  "x": -1.0,
+  "y": 7.3,
   "rot": 0
  },
  {
@@ -1000,9 +1000,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -2.93,
-  "y": 15.89,
-  "rot": 90
+  "x": -7.86,
+  "y": 18.04,
+  "rot": 0
  },
  {
   "ref": "C25",
@@ -1015,9 +1015,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -1.26,
-  "y": 17.68,
-  "rot": 90
+  "x": -12.08,
+  "y": 10.79,
+  "rot": 0
  },
  {
   "ref": "C26",
@@ -1030,8 +1030,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -2.42,
-  "y": 18.78,
+  "x": -10.3,
+  "y": 19.26,
   "rot": 90
  },
  {
@@ -1045,8 +1045,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -1.25,
-  "y": 15.61,
+  "x": -11.45,
+  "y": 12.43,
   "rot": 90
  },
  {
@@ -1060,8 +1060,8 @@
   "no_assembly": false,
   "note": "EN: RC 10 k / 1 µF (guía de diseño de Espressif)",
   "jlc_rot": 0,
-  "x": -1.26,
-  "y": 13.63,
+  "x": -12.69,
+  "y": 12.42,
   "rot": 90
  },
  {
@@ -1075,9 +1075,9 @@
   "no_assembly": false,
   "note": "serie de la línea de datos (GPIO47). Revisión 18/11: 330 Ω limita la alimentación de los LED por DIN con el anillo apagado",
   "jlc_rot": 0,
-  "x": 11.56,
-  "y": -2.36,
-  "rot": 90
+  "x": 2.85,
+  "y": -3.9,
+  "rot": 0
  },
  {
   "ref": "D10",
@@ -1210,7 +1210,7 @@
   "no_assembly": false,
   "note": "RGB direccionable, emisión lateral",
   "jlc_rot": 0,
-  "x": 19.1,
+  "x": 10.0,
   "y": -26.25,
   "rot": 0
  },
@@ -1225,7 +1225,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 18.8,
+  "x": 9.7,
   "y": -24.85,
   "rot": 0
  },
@@ -1255,8 +1255,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -11.67,
-  "y": -24.66,
+  "x": -10.3,
+  "y": -24.85,
   "rot": 0
  },
  {
@@ -1330,8 +1330,8 @@
   "no_assembly": false,
   "note": "elevador síncrono 3,7 A, 1 MHz; V_REF 0,595 V; pasa la entrada si VIN > VOUT; salida desconectada con EN = 0",
   "jlc_rot": 0,
-  "x": -6.0,
-  "y": 20.5,
+  "x": -14.0,
+  "y": 15.0,
   "rot": 0
  },
  {
@@ -1345,8 +1345,8 @@
   "no_assembly": false,
   "note": "1 µH, I_sat 3 A, 50 mΩ (≈ 0,4 A de pico con los 7 LED a tope desde 3 V)",
   "jlc_rot": 0,
-  "x": -8.59,
-  "y": 21.29,
+  "x": -16.71,
+  "y": 15.4,
   "rot": 90
  },
  {
@@ -1360,8 +1360,8 @@
   "no_assembly": false,
   "note": "entrada del elevador",
   "jlc_rot": 0,
-  "x": -5.1,
-  "y": 23.4,
+  "x": -15.15,
+  "y": 10.88,
   "rot": 0
  },
  {
@@ -1375,8 +1375,8 @@
   "no_assembly": false,
   "note": "salida del elevador (≥ 10 µF efectivos)",
   "jlc_rot": 0,
-  "x": -7.05,
-  "y": 18.43,
+  "x": -15.15,
+  "y": 12.75,
   "rot": 0
  },
  {
@@ -1390,8 +1390,8 @@
   "no_assembly": false,
   "note": "V_OUT = 0,595 × (1 + 620k/100k) ≈ 4,28 V",
   "jlc_rot": 0,
-  "x": -4.05,
-  "y": 20.0,
+  "x": -12.05,
+  "y": 14.5,
   "rot": 90
  },
  {
@@ -1405,8 +1405,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -4.19,
-  "y": 18.3,
+  "x": -12.42,
+  "y": 16.54,
   "rot": 0
  },
  {
@@ -1420,8 +1420,8 @@
   "no_assembly": false,
   "note": "elevador apagado por defecto (arranque y casco apagado)",
   "jlc_rot": 0,
-  "x": -4.95,
-  "y": 22.07,
+  "x": -11.11,
+  "y": 17.64,
   "rot": 0
  },
  {
@@ -1465,7 +1465,7 @@
   "no_assembly": false,
   "note": "sin detección de tarjeta (caja estanca: la tarjeta va siempre puesta)",
   "jlc_rot": 0,
-  "x": 11.45,
+  "x": 1.0,
   "y": -13.8,
   "rot": 0
  },
@@ -1480,9 +1480,9 @@
   "no_assembly": false,
   "note": "alimentación de la tarjeta: GPIO21 = 0 la enciende",
   "jlc_rot": 0,
-  "x": 14.0,
-  "y": -3.1,
-  "rot": 90
+  "x": 12.0,
+  "y": -8.0,
+  "rot": 0
  },
  {
   "ref": "R40",
@@ -1495,9 +1495,9 @@
   "no_assembly": false,
   "note": "tarjeta apagada mientras arranca el ESP32",
   "jlc_rot": 0,
-  "x": 10.35,
-  "y": -2.39,
-  "rot": 90
+  "x": 11.49,
+  "y": -5.53,
+  "rot": 0
  },
  {
   "ref": "R47",
@@ -1510,9 +1510,9 @@
   "no_assembly": false,
   "note": "REV B (revisión 18/11): arranque suave con C42 (τ ≈ 0,9 ms). Sin él, los 10 µF de C40 + la tarjeta se cargaban de golpe desde el 3,3 V y podían hundirlo hasta reiniciar el ESP32 (≈ 40 mA de pico en vez de varios amperios)",
   "jlc_rot": 0,
-  "x": 11.05,
-  "y": -4.1,
-  "rot": 0
+  "x": 9.63,
+  "y": -6.75,
+  "rot": 90
  },
  {
   "ref": "C42",
@@ -1525,8 +1525,8 @@
   "no_assembly": false,
   "note": "puerta–fuente de Q4: rampa de encendido de la tarjeta",
   "jlc_rot": 0,
-  "x": 16.44,
-  "y": -3.9,
+  "x": 9.63,
+  "y": -9.02,
   "rot": 90
  },
  {
@@ -1540,9 +1540,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 6.0,
-  "y": -2.2,
-  "rot": 0
+  "x": 14.6,
+  "y": -8.0,
+  "rot": 90
  },
  {
   "ref": "C41",
@@ -1555,8 +1555,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 8.8,
-  "y": -1.99,
+  "x": -6.71,
+  "y": -4.29,
   "rot": 0
  },
  {
@@ -1570,8 +1570,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 8.74,
-  "y": -3.15,
+  "x": 4.95,
+  "y": -4.34,
   "rot": 0
  },
  {
@@ -1585,8 +1585,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 6.74,
-  "y": -4.28,
+  "x": -2.42,
+  "y": -4.32,
   "rot": 0
  },
  {
@@ -1600,8 +1600,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 4.6,
-  "y": -4.33,
+  "x": -4.62,
+  "y": -4.2,
   "rot": 0
  },
  {
@@ -1615,8 +1615,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 18.04,
-  "y": -4.32,
+  "x": 7.15,
+  "y": -4.34,
   "rot": 0
  },
  {
@@ -1630,8 +1630,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 16.96,
-  "y": -2.27,
+  "x": 9.24,
+  "y": -4.29,
   "rot": 0
  },
  {
@@ -1645,8 +1645,8 @@
   "no_assembly": false,
   "note": "serie del reloj (amortigua el flanco)",
   "jlc_rot": 0,
-  "x": 8.94,
-  "y": -4.28,
+  "x": -0.22,
+  "y": -4.32,
   "rot": 0
  },
  {
@@ -1660,8 +1660,8 @@
   "no_assembly": false,
   "note": "pull-up I²C (400 kHz)",
   "jlc_rot": 0,
-  "x": 0.85,
-  "y": 22.77,
+  "x": 15.02,
+  "y": 13.15,
   "rot": 0
  },
  {
@@ -1675,9 +1675,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -1.32,
-  "y": 22.89,
-  "rot": 0
+  "x": 11.5,
+  "y": 11.91,
+  "rot": 90
  },
  {
   "ref": "U12",
@@ -1690,8 +1690,8 @@
   "no_assembly": false,
   "note": "medidor ModelGauge (% de batería sin resistencia de medida): VDD y CELL a la celda (tras Q7), CTG y QSTRT a GND, ALRT sin usar (se lee por I²C). ≈ 3 µA en hibernación: sigue contando con el casco apagado",
   "jlc_rot": 0,
-  "x": -11.0,
-  "y": 16.0,
+  "x": 14.0,
+  "y": 6.0,
   "rot": 0
  },
  {
@@ -1705,8 +1705,8 @@
   "no_assembly": false,
   "note": "VDD del MAX17048, pegado al pin 3",
   "jlc_rot": 0,
-  "x": -11.1,
-  "y": 13.91,
+  "x": 13.9,
+  "y": 3.91,
   "rot": 0
  },
  {
@@ -1720,8 +1720,8 @@
   "no_assembly": false,
   "note": "IMU del casco (la misma que la cincha REV D): movimiento de la cabeza frente al tronco, reposo automático y caídas. INT1 → GPIO4 (RTC: despierta del sueño por movimiento)",
   "jlc_rot": 0,
-  "x": 0.3,
-  "y": 20.57,
+  "x": 14.0,
+  "y": 11.0,
   "rot": 0
  },
  {
@@ -1735,8 +1735,8 @@
   "no_assembly": false,
   "note": "VDD del LSM6",
   "jlc_rot": 0,
-  "x": 2.82,
-  "y": 22.72,
+  "x": 16.56,
+  "y": 10.25,
   "rot": 90
  },
  {
@@ -1750,9 +1750,9 @@
   "no_assembly": false,
   "note": "VDDIO del LSM6",
   "jlc_rot": 0,
-  "x": -2.14,
-  "y": 21.07,
-  "rot": 90
+  "x": 12.86,
+  "y": 8.84,
+  "rot": 0
  },
  {
   "ref": "TP1",
@@ -1765,8 +1765,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -2.74,
-  "y": 13.18,
+  "x": -12.19,
+  "y": 9.43,
   "rot": 0
  },
  {
@@ -1780,8 +1780,8 @@
   "no_assembly": true,
   "note": "GPIO0 a GND al arrancar = descarga (también por USB nativo)",
   "jlc_rot": 0,
-  "x": 22.63,
-  "y": 2.81,
+  "x": 10.95,
+  "y": -0.95,
   "rot": 0
  },
  {
@@ -1795,8 +1795,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -3.77,
-  "y": 5.86,
+  "x": -11.67,
+  "y": 7.48,
   "rot": 0
  },
  {
@@ -1810,8 +1810,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 19.94,
-  "y": 15.42,
+  "x": 9.81,
+  "y": 12.53,
   "rot": 0
  },
  {
@@ -1825,8 +1825,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 21.2,
-  "y": 13.47,
+  "x": 10.89,
+  "y": 9.88,
   "rot": 0
  },
  {
@@ -1840,8 +1840,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -5.42,
-  "y": -6.42,
+  "x": -9.92,
+  "y": -4.41,
   "rot": 0
  },
  {
@@ -1855,8 +1855,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -11.8,
-  "y": -21.0,
+  "x": -13.9,
+  "y": -22.98,
   "rot": 0
  },
  {
@@ -1870,8 +1870,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -12.11,
-  "y": -10.23,
+  "x": -14.98,
+  "y": -6.26,
   "rot": 0
  },
  {
@@ -1885,8 +1885,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 9.34,
-  "y": 21.8,
+  "x": 15.92,
+  "y": 18.57,
   "rot": 0
  },
  {
@@ -1900,8 +1900,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -15.1,
-  "y": 16.42,
+  "x": -17.3,
+  "y": 18.36,
   "rot": 0
  },
  {
@@ -1915,8 +1915,8 @@
   "no_assembly": true,
   "note": "4,3 V del anillo (solo con LED_PWR = 1)",
   "jlc_rot": 0,
-  "x": -9.73,
-  "y": 18.82,
+  "x": -17.77,
+  "y": 12.95,
   "rot": 0
  },
  {
@@ -1930,8 +1930,8 @@
   "no_assembly": true,
   "note": "pin SAFE de la URTK1.2 (SAFEBOOT_N del ZED): solo para recuperar su firmware",
   "jlc_rot": 0,
-  "x": -18.02,
-  "y": 11.43,
+  "x": -21.98,
+  "y": 11.83,
   "rot": 0
  }
 ]

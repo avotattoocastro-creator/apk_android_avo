@@ -18,6 +18,7 @@ este prototipo o se pasa a la REV B con el ZED integrado como BETA final.
 | Cápsula | 56,4 × 56,4 × 24,7 | **61,4 × 61,4 × ≈ 32,1** (≈ 35,6 sobre el casco) — estimado; el CI da la cifra exacta |
 | Arranque en caliente del ZED | V_BCKP desde el carril siempre encendido | pila de respaldo de la URTK1.2 (J6) |
 | Piezas quitadas | — | U1, R70, C71, L70, R71, D4, J5, C62, C64, C65 y el paso del coaxial H5 |
+| Colocación | microSD a la derecha, pogo en el canto inferior | **WROOM a la izquierda, microSD abajo en el centro (tarjeta por el canto inferior, entre D15 y D14), pogo en el canto SUPERIOR** (copa del pogo en la franja +Y del suelo de la cápsula) |
 | Resto | | igual: ESP32-S3-WROOM-1U-N16R8, cargador, táctil, anillo (**8 LED**: D14 vuelve, a la derecha de la salida de la tarjeta), MAX17048, LSM6DSV16X, microSD, pogo, Hall |
 
 Firmware: **sin cambios de GPIO** (UART1 GPIO5/6, UART2 GPIO3/8, PPS GPIO7, RST GPIO9, ZED_EN GPIO10). El 3,3 V de la
