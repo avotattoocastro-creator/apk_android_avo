@@ -444,19 +444,20 @@ C("C27", "1u", "EN", GND, block="ESP32-S3", note="EN: RC 10 k / 1 µF (guía de 
 # consume con el casco dormido ni apagado. DIN a 3,3 V: VIH = 0,65 × 4,3 ≈ 2,8 V (por encima de 4,3 V de VSYS, al
 # cargar, el elevador pasa la entrada: VIH ≈ 2,9 V). El firmware deja GPIO47 a 0 con el anillo apagado.
 R("R24", "33R", "LED_DIN_S3", "LED_D1", block="Anillo", note="serie de la línea de datos (GPIO47)")
-LEDS = ["D%d" % (10 + k) for k in range(8)]
+# REV B (18/11/2026, petición del usuario): sin D14 (estaba delante de la salida de la microSD): 7 LED, D13 → D15.
+LEDS = ["D%d" % (10 + k) for k in range(8) if 10 + k != 14]
 for i, ref in enumerate(LEDS):
     part(ref, "LEDSIDE", "SK6812SIDE-A", (0, 0), 0,
          {1: "LED_D%d" % (i + 1), 2: "VLED", 3: ("LED_D%d" % (i + 2)) if i < len(LEDS) - 1 else None, 4: GND},
          LC["SK6812SIDE"], "SK6812SIDE-A (OPSCO)", "Anillo",
          sym=dict(L=[(1, "DIN"), (2, "VDD")], R=[(3, "DOUT"), (4, "GND")]), note="RGB direccionable, emisión lateral")
-    C("C%d" % (90 + i), "100n", "VLED", GND, block="Anillo")
+    C("C%d" % (80 + int(ref[1:])), "100n", "VLED", GND, block="Anillo")
 part("U11", "SOT563", "TPS61023DRLR", (0, 0), 0, {1: "VLED_FB", 2: "LED_PWR", 3: VSYS, 4: GND, 5: "VLED_SW", 6: "VLED"},
      LC["TPS61023"], "TPS61023DRLR (TI)", "Anillo",
      sym=dict(L=[(3, "VIN"), (2, "EN"), (1, "FB")], R=[(6, "VOUT"), (5, "SW"), (4, "GND")]),
      note="elevador síncrono 3,7 A, 1 MHz; V_REF 0,595 V; pasa la entrada si VIN > VOUT; salida desconectada con EN = 0")
 part("L71", "L0806", "1 µH", (0, 0), 0, {1: VSYS, 2: "VLED_SW"}, LC["1uH 0806"], "WPN201610U1R0MT (Sunlord)", "Anillo",
-     sym="R", note="1 µH, I_sat 3 A, 50 mΩ (≈ 0,45 A de pico con los 8 LED a tope desde 3 V)")
+     sym="R", note="1 µH, I_sat 3 A, 50 mΩ (≈ 0,4 A de pico con los 7 LED a tope desde 3 V)")
 C("C98", "10u 25V", VSYS, GND, block="Anillo", fp="C0603", note="entrada del elevador")
 C("C99", "22u 10V", "VLED", GND, block="Anillo", fp="C0805", note="salida del elevador (≥ 10 µF efectivos)")
 R("R25", "620k", "VLED", "VLED_FB", block="Anillo", note="V_OUT = 0,595 × (1 + 620k/100k) ≈ 4,28 V")

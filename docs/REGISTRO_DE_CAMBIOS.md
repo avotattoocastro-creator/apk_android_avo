@@ -28,7 +28,8 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **Autor:** Claude · Rama `feature/back-v5-casco`
 **Qué cambia:**
 - El LED D14 estaba delante de la ranura de la microSD (DM3AT «push-pull»: la tarjeta sobresale hasta el canto).
-  D14 pasa al lateral derecho (23,75; −17), los pads del pogo se desplazan 1 mm a la izquierda y la franja de la
+  D14 y C94 se quitan (el anillo queda con 7 LED, D13 → D15; petición del usuario 18/11, 09:22), los pads del pogo
+  se desplazan 1 mm a la izquierda y la franja de la
   tarjeta queda reservada (el generador da error si alguna pieza entra en ella). Se vuelve a rutear en el CI.
 - CPL: `fuente/jlc_correcciones.py` (método de la cincha REV D) + `jlc.py` aplica giro y centro de la huella de JLC.
   ZED-F9P +270°, LSM6DSV16X +180°, SOT-23 +180°, SOT-23-5/6 +270°, WROOM-1U desplazamiento de 0,63 mm.

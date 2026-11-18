@@ -22,8 +22,8 @@ Hay que medirlo.
 
 ### Montaje y JLC (18/11/2026)
 - **microSD «push-pull»:** la tarjeta sobresale del conector hasta el canto inferior de la placa. Esa franja queda sin
-  piezas (comprobación en el generador). El LED D14 pasa al lateral derecho (23,75; −17) y los pads del pogo se
-  desplazan 1 mm a la izquierda (P5 quedaba delante de la tarjeta). La tarjeta se pone con la placa fuera de la cápsula.
+  piezas (comprobación en el generador). El LED D14 se **quita** (petición del usuario: el anillo queda con 7 LED,
+  D13 → D15) y los pads del pogo se desplazan 1 mm a la izquierda (P5 quedaba delante de la tarjeta). La tarjeta se pone con la placa fuera de la cápsula.
 - **CPL corregido** con `fuente/jlc_correcciones.py` (como la cincha REV D): ZED-F9P +270°, IMU +180°, SOT-23 +180°,
   SOT-23-5/6 +270°, WROOM con su origen desplazado 0,63 mm. Ver `fuente/jlc_correcciones.json` (notas de los ajustes a
   mano). Comprobar igualmente la vista previa de JLC antes de pagar.
