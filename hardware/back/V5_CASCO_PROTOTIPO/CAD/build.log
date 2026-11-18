@@ -1,0 +1,101 @@
+{
+ "piezas": {
+  "AVO_CASCO_V5P_base": {
+   "solidos": 1,
+   "volumen_mm3": 11322.9,
+   "peso_g": 14.4,
+   "caja": [
+    61.4,
+    61.4,
+    13.5
+   ]
+  },
+  "AVO_CASCO_V5P_tapa": {
+   "solidos": 1,
+   "volumen_mm3": 15266.5,
+   "peso_g": 19.4,
+   "caja": [
+    61.4,
+    61.4,
+    18.1
+   ]
+  },
+  "AVO_CASCO_V5P_anillo_resina": {
+   "solidos": 1,
+   "volumen_mm3": 1588.8,
+   "peso_g": 1.8,
+   "caja": [
+    61.4,
+    61.4,
+    2.9
+   ]
+  },
+  "AVO_CASCO_V5P_base_casco": {
+   "solidos": 1,
+   "volumen_mm3": 20164.7,
+   "peso_g": 25.6,
+   "caja": [
+    65.4,
+    65.4,
+    12.7
+   ]
+  }
+ },
+ "interferencias": {},
+ "medidas": {
+  "capsula_mm": [
+   61.4,
+   61.4,
+   32.1
+  ],
+  "interior_mm": 56.6,
+  "z_cara_F": 13.5,
+  "z_junta": 15.1,
+  "anillo_z": [
+   11.0,
+   14.0
+  ],
+  "sellado": "pegamento (tipo B-7000/T-7000) en las 2 uniones del anillo y entre sus mitades; sin juntas TPU",
+  "z_techo": 30.9,
+  "bateria_max_mm": [
+   50.0,
+   37.0,
+   8.5
+  ],
+  "base_casco": "cóncava R110 (sobre el casco)",
+  "altura_total_sobre_casco_mm": 35.6,
+  "tornillos": "4 × M2,5 × 16 a ±24,5 (cabeza cilíndrica) + junta tórica 2,5 × 1 + inserto M2,5 Ø3,5 × 4",
+  "urtk_z": [
+   17.6,
+   19.2
+  ],
+  "placa_masa_z": [
+   21.7,
+   22.5
+  ],
+  "antena_xy": [
+   5.7,
+   1.45
+  ],
+  "antena_z": [
+   22.5,
+   30.6
+  ],
+  "hall_xy": [
+   -23.7,
+   -1.0
+  ],
+  "tactil": {
+   "xy": [
+    25.7,
+    17.0
+   ],
+   "pared_mm": 1.4,
+   "z": [
+    4.0,
+    9.5
+   ],
+   "largo_mm": 9.0
+  }
+ }
+}
