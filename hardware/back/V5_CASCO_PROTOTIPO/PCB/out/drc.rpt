@@ -1,29 +1,18 @@
 ** Drc report for AVO_BACK_V5P_PCB.kicad_pcb **
-** Created on 2026-11-18T15:13:44+0000 **
+** Created on 2026-11-18T15:17:15+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 6 DRC violations **
+** Found 3 DRC violations **
 [connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0997 mm) (F.Cu)
     Rule: board setup constraints; warning
     @(111.6750 mm, 105.4250 mm): Via [SD_CMD] on F.Cu - B.Cu
     @(112.0250 mm, 106.0750 mm): Track [SD_CMD] on F.Cu, length 0.8517 mm
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
-    @(117.3000 mm, 100.0000 mm): PCB text 'URTK1.2 (componentes arriba)' on B.Silkscreen
-[silk_over_copper]: Silkscreen clipped by solder mask
-    Local override; warning
     @(88.0000 mm, 85.0000 mm): Circle of U12 on F.Silkscreen
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(90.6100 mm, 79.7100 mm): Circle of L71 on F.Silkscreen
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(122.1440 mm, 78.2830 mm): Segment on B.Silkscreen
-    @(117.3000 mm, 100.0000 mm): PCB text 'URTK1.2 (componentes arriba)' on B.Silkscreen
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(117.3000 mm, 100.0000 mm): PCB text 'URTK1.2 (componentes arriba)' on B.Silkscreen
-    @(119.6200 mm, 109.8900 mm): Segment of J10 on B.Silkscreen
 
 ** Found 0 unconnected pads **
 
