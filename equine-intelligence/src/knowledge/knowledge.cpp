@@ -23,6 +23,30 @@ double median_of(std::vector<double> v) {
 bool has_kb(const KbDay& s) { return !std::isnan(s.bone_pct) && !std::isnan(s.band_m[0]); }
 }  // namespace
 
+bool kb_final_speed(const std::vector<double>& t, const std::vector<double>& d, double D, double* time_s, double* speed) {
+  if (!(D > 0) || t.size() != d.size() || t.size() < 2) return false;
+  size_t first = t.size(), last = t.size();
+  for (size_t i = 0; i < t.size(); i++)
+    if (!std::isnan(d[i]) && !std::isnan(t[i])) { if (first == t.size()) first = i; last = i; }
+  if (first == t.size() || last == first) return false;
+  const double d_end = d[last], t_end = t[last], target = d_end - D;
+  if (target < d[first] - 1e-9) return false;
+  for (size_t i = last; i > first; i--) {
+    size_t j = i - 1;
+    while (j > first && (std::isnan(d[j]) || std::isnan(t[j]))) j--;
+    if (std::isnan(d[i]) || std::isnan(t[i]) || std::isnan(d[j]) || std::isnan(t[j])) continue;
+    if (d[j] <= target && d[i] >= target) {
+      double dd = d[i] - d[j];
+      double ta = dd > 0 ? t[j] + (target - d[j]) / dd * (t[i] - t[j]) : t[i];
+      if (!(t_end > ta)) return false;
+      if (time_s) *time_s = t_end - ta;
+      if (speed) *speed = D / (t_end - ta);
+      return true;
+    }
+  }
+  return false;
+}
+
 double bone_vertical_force_n_kg(double v) {
   const double v_peak = 2.1376 / (2 * 0.0535);   // 19,98 m/s
   if (v > v_peak) v = v_peak;

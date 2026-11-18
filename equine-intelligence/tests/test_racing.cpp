@@ -504,6 +504,21 @@ EQ_TEST(pista, base_cientifica_kb1) {
   CHECK(kb["base"].str() == "AVO_KB_1");
   CHECK(kb["fatiga_osea"]["calibrado"].boolean(false));
   CHECK(kb["bandas"].a.size() == 3);
+  // KB-1 1.1.0: velocidad de los últimos 600 m en cada esfuerzo de al menos 600 m (Schrurs 2024)
+  {
+    bool any = false;
+    for (const auto& e : r.efforts) {
+      if (e.distance_m < 600) { CHECK(std::isnan(e.v_last_600)); continue; }
+      any = true;
+      CHECK_NEAR(e.v_last_600, 600.0 / e.last_600_s, 1e-9);
+      CHECK(e.last_600_s > e.last_400_s);
+      CHECK(e.v_last_600 <= e.vmax + 1e-6);
+    }
+    CHECK(any);
+    bool in_json = false;
+    for (const auto& j : v["trabajo_pista"]["trabajos"]["lista"].a) if (j["v_ultimos_600m"].num() > 0) in_json = true;
+    CHECK(in_json);
+  }
   char* out = nullptr;
   CHECK(avo_eq_training_summary(js.c_str(), "{\"fecha_utc\":\"2026-11-17\"}", &out) == 0);
   json::Value sv; CHECK(out && json::parse(out, &sv, &err));

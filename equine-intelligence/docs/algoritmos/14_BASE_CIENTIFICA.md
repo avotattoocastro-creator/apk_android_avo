@@ -1,4 +1,4 @@
-# 14 · Base científica de la cuadra (KB-1) 1.0.0
+# 14 · Base científica de la cuadra (KB-1) 1.1.0
 
 Código: `include/avo_eq/knowledge.h`, `src/knowledge/knowledge.cpp`. Se calcula en Track Work (`src/racing/racing.cpp`,
 bloque `trabajo_pista.base_cientifica`) y se evalúa en Training Analytics (`src/training/training.cpp`, bloques
@@ -17,7 +17,7 @@ lesión y rendimiento, y reglas con su evidencia. Las etiquetas son **[E]** publ
 ```
 F(v) = 2,778 + 2,1376·v − 0,0535·v²      N/kg; saturada en 24,13 por encima de 19,98 m/s [E; saturación I]
 σ    = σ_max · F / 24,13                  MPa; σ_max = 90 por defecto (rango publicado 54–90) [E]
-Nf   = 10^((σ0 − σ) / 14,1)               σ0 = 134,2 MPa (Martig 2013) [E]
+Nf   = 10^((σ0 − σ) / 14,1)               σ0 = 134,2 MPa (Martig 2013, curva de sensibilidad, R² 0,72) [E]
 %SBFL = 100 · Σ 1/Nf                      regla de Miner, sin reparación [E]
 zancadas por época GNSS = f(v)·dt,  f(v) = 1,7052 + 0,0305·v + 0,0004·v² Hz [E, Anwar 2026]
 ```
@@ -25,6 +25,9 @@ zancadas por época GNSS = f(v)·dt,  f(v) = 1,7052 + 0,0305·v + 0,0004·v² Hz
   `pct_extrapolado_lento`, porque el modelo sobrestima el trabajo lento (calculado 1,2–3,3 % por canter frente a 0,41 %
   de mediana en Hong Kong).
 - Huecos GNSS de más de 5 s no cuentan.
+- **σ0 (estudio nocturno del 18/11):** 134,2 MPa es la curva in vitro de sensibilidad de Martig 2013, la que usa
+  Morrice-West 2022 con Miner sin reparación; 139,0 MPa es la calibración in vivo de Pan 2025 para el modelo B (con
+  reparación). El modelo A se queda en 134,2. Los 54–90 MPa son los niveles del ensayo de Martig, no un rango de σ_max.
 - Es un **índice relativo de carga**, no una probabilidad de fractura. En árabes usa parámetros de PSI y la salida dice
   `calibrado: false`.
 
@@ -67,6 +70,13 @@ Opciones de Training Analytics (`base_cientifica`: `true`/`false` u objeto): `ac
 Opciones del análisis de sesión: `v_carrera_m_s` (8–20), `sigma_max_mpa` (30–120), `sigma0_mpa` (100–180).
 
 Los análisis anteriores sin el bloque cuentan como «sesiones sin datos» y no se juzgan.
+
+## 3 bis. Velocidad de los últimos 600 m (KB-1 1.1.0)
+`kb_final_speed(t, d, 600)`: 600 m divididos por el tiempo de los últimos 600 m de cada trabajo, con el tiempo
+interpolado sobre la distancia acumulada (Schrurs 2024 [E], «average speed over the last 600 m»; la velocidad puntual
+en la marca de 600 m no predice). Sale en `trabajo_pista.trabajos.lista[].v_ultimos_600m` y `ultimos_600m_s`, solo en
+trabajos de al menos 600 m. Valor de prueba: 1.000 m a 14 m/s + 400 m a 17 m/s → 37,815 s y 15,867 m/s.
+La regla A8 (caída frente a la línea base) sigue pendiente: no hay umbral publicado.
 
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se

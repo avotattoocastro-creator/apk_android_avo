@@ -201,3 +201,40 @@ EQ_TEST(kb, training_history_and_json) {
   json::Value bad; CHECK(json::parse("{\"base_cientifica\":{\"canter_30d_aviso_km\":50}}", &bad, &err));
   TrainingConfig c3; CHECK(!training_config_from_json(bad, &c3, &err));
 }
+
+// KB-1 1.1.0: velocidad de los últimos 600 m (Schrurs 2024, «average speed over the last 600 m»), pendiente A8.
+EQ_TEST(kb, final_speed_last_600m) {
+  // épocas de 0,1 s con la última muestra exacta al final del tramo
+  auto build = [](const std::vector<std::pair<double, double>>& segs, std::vector<double>* t, std::vector<double>* d) {
+    double tt = 0, dd = 0; t->push_back(0); d->push_back(0);
+    for (const auto& s : segs) {
+      double dur = s.first / s.second, end = tt + dur;
+      for (double x = tt + 0.1; x < end - 1e-9; x += 0.1) { t->push_back(x); d->push_back(dd + (x - tt) * s.second); }
+      tt = end; dd += s.first; t->push_back(tt); d->push_back(dd);
+    }
+  };
+  // R1: 1.000 m a 16 m/s → 37,5 s y 16 m/s
+  std::vector<double> t, d; build({{1000, 16}}, &t, &d);
+  double ts = 0, v = 0;
+  CHECK(kb_final_speed(t, d, KB_FINAL_DISTANCE_M, &ts, &v));
+  CHECK_NEAR(ts, 37.5, 1e-6); CHECK_NEAR(v, 16.0, 1e-6);
+  // R2: 1.000 m a 14 m/s + 400 m a 17 m/s → últimos 600 m = 200/14 + 400/17 = 37,8151 s → 15,8667 m/s
+  t.clear(); d.clear(); build({{1000, 14}, {400, 17}}, &t, &d);
+  CHECK(kb_final_speed(t, d, 600, &ts, &v));
+  REPORT("últimos 600 m: %.4f s, %.4f m/s (referencia 37,8151 s, 15,8667 m/s)\n", ts, v);
+  CHECK_NEAR(ts, 200.0 / 14 + 400.0 / 17, 1e-3); CHECK_NEAR(v, 600.0 / (200.0 / 14 + 400.0 / 17), 1e-3);
+  // R3: la velocidad final es D/tiempo, no la media de las muestras (con desaceleración final 17 → 15 m/s)
+  t.clear(); d.clear(); build({{800, 15}, {300, 17}, {300, 15}}, &t, &d);
+  CHECK(kb_final_speed(t, d, 600, &ts, &v));
+  CHECK_NEAR(ts, 300.0 / 17 + 300.0 / 15, 1e-3); CHECK_NEAR(v, 600.0 / (300.0 / 17 + 20.0), 1e-3);
+  // R4: un hueco GNSS (NaN) fuera del tramo final no cambia el resultado
+  std::vector<double> d2 = d; d2[50] = std::nan(""); d2[51] = std::nan("");
+  double ts2 = 0, v2 = 0;
+  CHECK(kb_final_speed(t, d2, 600, &ts2, &v2)); CHECK_NEAR(ts2, ts, 1e-9);
+  // R5: esfuerzo más corto que 600 m o datos vacíos → false y salida intacta
+  t.clear(); d.clear(); build({{500, 16}}, &t, &d);
+  double keep = -1;
+  CHECK(!kb_final_speed(t, d, 600, &keep, nullptr)); CHECK_NEAR(keep, -1, 0);
+  CHECK(!kb_final_speed({}, {}, 600, &keep, nullptr));
+  CHECK(std::string(KNOWLEDGE_VERSION) == "1.1.0");
+}

@@ -113,6 +113,7 @@ struct Effort {
   double vmax = NAN, t_to_vmax_s = NAN, dist_above_90_m = NAN, accel_max = NAN;
   double v_last_200 = NAN, v_last_400 = NAN, fatigue_pct = NAN;   // caída: (vmax − media últimos 200 m) / vmax
   double last_200_s = NAN, last_400_s = NAN;
+  double last_600_s = NAN, v_last_600 = NAN;   // KB-1 1.1.0: velocidad final de Schrurs 2024 (últimos 600 m)
   std::vector<Sectional> sectionals;
   std::vector<BestSplit> best;
   // zancada (si hay cincha)
