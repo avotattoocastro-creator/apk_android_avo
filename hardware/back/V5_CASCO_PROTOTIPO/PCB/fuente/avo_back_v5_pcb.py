@@ -562,7 +562,7 @@ for i, (sx, sy) in enumerate(((1, 1), (-1, 1), (-1, -1), (1, -1)), 1):
 # fuente/placa_masa.py (vista desde arriba: x = −X).
 GND_PINS = [(sx * 20.0, sy * 23.0) for sx, sy in ((1, 1), (-1, 1), (-1, -1), (1, -1))]
 for i, (x, y) in enumerate(GND_PINS):
-    part("J%d" % (12 + i), "GNDPIN", "GND PLACA ANTENA", (x, y), 0, {1: GND}, block="Mecánica",
+    part("J%d" % (12 + i), "GNDPIN", "GND PLACA ANTENA", (x, y), 0, {1: GND}, block="ZED",
          sym=dict(L=[(1, "GND")], R=[]), no_assembly=True,
          note="pin de masa (Ø0,64 o hilo de cobre de 1 mm, ≥ 12 mm) hasta la placa de masa de la antena")
 # PROTOTIPO A: sin paso del coaxial (la antena va al U.FL J4 de la URTK1.2, por encima)
