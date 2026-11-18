@@ -1,0 +1,4276 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 32,
+   "list": [
+    {
+     "componentId": 12256,
+     "componentLibraryType": "base",
+     "stockCount": 30290405,
+     "componentTypeEn": "Chip Resistor - Surface Mount",
+     "erpComponentName": "\u539a\u819c\u7535\u963b 1k\u03a9 \u00b11% 62.5mW",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/chip-resistor-surface-mount_uni-royal-uniroyal-elec-0402wgf1001tce_C11702.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0013
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.0011
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.001
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0009
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 50199,
+       "productPrice": 0.0009
+      },
+      {
+       "startNumber": 50200,
+       "endNumber": -1,
+       "productPrice": 0.0009
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0013
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0009
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 50199,
+       "productPrice": 0.0008
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0009
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.001
+      },
+      {
+       "startNumber": 50200,
+       "endNumber": -1,
+       "productPrice": 0.0008
+      }
+     ],
+     "firstSortAccessId": "b97df1fd049743c0a0330513eac35a72",
+     "secondSortAccessId": "a49341812cad4b0bafa2ddd547a82bd4",
+     "canPresaleNumber": 26861923,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "12256-0402WGF1001TCE/C11702",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.00241,
+     "preMinPurchaseNum": 9023,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0013,
+     "componentCode": "C11702",
+     "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+     "componentModelEn": "0402WGF1001TCE",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763572900278751232-C11702-front.jpg?x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5r0Me3R3o9nj5q%2BM1H3iXM4O7hNmojBozz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qe8u6hQ3557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j%2FetZpcPbOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZUOGVwu5ch3ARqAAY500Gx8OPNp7XbOAi77U2ZuxIIWVh5sMBOgU3ltOFZ60sAUJ%2F5%2FVGKbGgt6%2BVEF6k%2FT0VGnE4bYY37ZKOjbH40tDvXF%2B0FQ3Wbx%2FTOP7Tq0iW69caI1VX1pvAU7XUMDiw2ZS9uHfWwGUtO7wQOMuQCkjGd1drvxKfbsCowSaGy3IAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYAzWe3PF8XU1wFmsm77auMjA%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=362f0e6d01e879a32f1beb065ce38a3c5e0ee86a446abbedce113382133a037f",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010216_UNI-ROYAL-Uniroyal-Elec-0402WGF1001TCE_C11702.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8579705924159586304-C11702.pdf?response-content-disposition=attachment%3B%20filename%3DC11702.pdf%3B%20filename%2A%3DUTF-8%27%27C11702.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3fe6fdc9838c8100504732dfb1c0f810c92dc2e6e48a8d9f9baa4e849d455ca5",
+     "dataManualOfficialLink": "",
+     "componentName": "UNI-ROYAL 0402WGF1001TCE",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763572901305950208-C11702-front.jpg?x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5r0Me3R3o9nj5q%2BM1H3iXM4O7hNmojBozz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qe8u6hQ3557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j%2FetZpcPbOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZUOGVwu5ch3ARqAAY500Gx8OPNp7XbOAi77U2ZuxIIWVh5sMBOgU3ltOFZ60sAUJ%2F5%2FVGKbGgt6%2BVEF6k%2FT0VGnE4bYY37ZKOjbH40tDvXF%2B0FQ3Wbx%2FTOP7Tq0iW69caI1VX1pvAU7XUMDiw2ZS9uHfWwGUtO7wQOMuQCkjGd1drvxKfbsCowSaGy3IAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYAzWe3PF8XU1wFmsm77auMjA%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=4e48e559a489481e816215bec3c9a1b11511216ca15f4910836200b129a38595",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "-55\u2103~+155\u2103 1k\u03a9 50V 62.5mW Thick Film Resistor \u00b11% \u00b1100ppm/\u2103 0402 Chip Resistor - Surface Mount ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Resistance",
+       "attribute_value_name": "1k\u03a9"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+155\u2103"
+      },
+      {
+       "attribute_name_en": "Power(Watts)",
+       "attribute_value_name": "62.5mW"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "Thick Film Resistor"
+      },
+      {
+       "attribute_name_en": "Voltage-Supply(Max)",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b11%"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "\u00b1100ppm/\u2103"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Chip Resistor - Surface Mount",
+     "secondSortName": "Resistors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C11702</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 8158098,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "FFC, FPC (Flat Flexible) Connector Assemblies",
+     "erpComponentName": "\u95f4\u8ddd:1mm P\u6570:17P \u53cc\u4fa7\u89e6\u70b9/\u4e0a\u4e0b\u63a5",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/ffc-fpc-flat-flexible-connector-assemblies_samtec-fc1-17-02-t_C7190590.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.8421
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 5.8421
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 202,
+       "productPrice": 5.8421
+      },
+      {
+       "startNumber": 203,
+       "endNumber": 492,
+       "productPrice": 2.3323
+      },
+      {
+       "startNumber": 493,
+       "endNumber": 985,
+       "productPrice": 2.2537
+      },
+      {
+       "startNumber": 986,
+       "endNumber": -1,
+       "productPrice": 2.216
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 493,
+       "endNumber": 985,
+       "productPrice": 2.171
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 5.6277
+      },
+      {
+       "startNumber": 203,
+       "endNumber": 492,
+       "productPrice": 2.2467
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.6277
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 202,
+       "productPrice": 5.6277
+      },
+      {
+       "startNumber": 986,
+       "endNumber": -1,
+       "productPrice": 2.1347
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "ca03cf83ab604d358ea828e4a78f97b6",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-FC1_17_02T/C7190590",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 29,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 5.8421,
+     "componentCode": "C7190590",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "FC1-17-02-T",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8556949903525109760-C7190590.pdf?response-content-disposition=attachment%3B%20filename%3DC7190590.pdf%3B%20filename%2A%3DUTF-8%27%27C7190590.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=4709276ef982a49979d89634329d0a04d6a2492c8a4641a9c88a2580ec373579",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec FC1-17-02-T",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1mm,Surface Mount\uff0cRight Angle",
+     "describe": "-55\u2103~+105\u2103 0.3mm 17P 1mm Double-Sided Contacts, Top and Bottom Entry Phosphor bronze Surface Mount, Right Angle Tin SMD,P=1mm,\u5367\u8d34 FFC, FPC (Flat Flexible) Connector Assemblies ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+105\u2103"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Contact Material",
+       "attribute_value_name": "Phosphor bronze"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1mm"
+      },
+      {
+       "attribute_name_en": "Number of Contacts",
+       "attribute_value_name": "17P"
+      },
+      {
+       "attribute_name_en": "Contact Type",
+       "attribute_value_name": "Double-Sided Contacts, Top and Bottom Entry"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount, Right Angle"
+      },
+      {
+       "attribute_name_en": "FFC, FCB Thickness",
+       "attribute_value_name": "0.3mm"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "FFC, FPC (Flat Flexible) Connector Assemblies",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 6821193,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Female Headers",
+     "erpComponentName": "\u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/female-headers_samtec-sfmc-117-02-h-d_C5886496.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 15.7425
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 15.7425
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 15.7425
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 6.2826
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 6.0713
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 5.9682
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 15.1648
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 6.0521
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 15.1648
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 5.8485
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 15.1648
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 5.7492
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "b74d2d6944f14ecc9036735f5231a3ac",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-SFMC_117_02_HD/C5886496",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 26,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 15.7425,
+     "componentCode": "C5886496",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "SFMC-117-02-H-D",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312031856_Samtec-SFMC-117-02-H-D_C5886496.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8602771670034112512-C5886496.pdf?response-content-disposition=attachment%3B%20filename%3DC5886496.pdf%3B%20filename%2A%3DUTF-8%27%27C5886496.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b7d48b9e67bc020e87a9c2d7f16338820d613467cc7671178b664420eeae34a2",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec SFMC-117-02-H-D",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.27mm",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 2 2.9A 34P 4.7mm Gold Surface Mount,Vertical SMD,P=1.27mm Female Headers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Insulation Height",
+       "attribute_value_name": "4.7mm"
+      },
+      {
+       "attribute_name_en": "Number of Positions",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Gold"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "2.9A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Female Headers",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 6821195,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Female Headers",
+     "erpComponentName": "\u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/female-headers_samtec-sfmc-117-02-l-d_C5886498.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 9.9398
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 9.9398
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 9.9398
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 3.9668
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 3.8341
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 3.7686
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 9.5751
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 3.8212
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 9.5751
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 3.6934
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 9.5751
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 3.6303
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "b74d2d6944f14ecc9036735f5231a3ac",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-SFMC_117_02_LD/C5886498",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 26,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 9.9398,
+     "componentCode": "C5886498",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "SFMC-117-02-L-D",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312031856_Samtec-SFMC-117-02-L-D_C5886498.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8602760687333109760-C5886498.pdf?response-content-disposition=attachment%3B%20filename%3DC5886498.pdf%3B%20filename%2A%3DUTF-8%27%27C5886498.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=655820921358b9a7a79f75516faa9e309045c840c7c9451411ea52bab20d7301",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec SFMC-117-02-L-D",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.27mm",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 2 2.9A 34P 4.7mm Surface Mount,Vertical Tin SMD,P=1.27mm Female Headers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Insulation Height",
+       "attribute_value_name": "4.7mm"
+      },
+      {
+       "attribute_name_en": "Number of Positions",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "2.9A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Female Headers",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 7241470,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Female Headers",
+     "erpComponentName": "\u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/female-headers_samtec-sfmc-117-02-f-d_C6294503.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 16.3845
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 16.3845
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 16.3845
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 6.5381
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 6.3203
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 6.2122
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 15.7833
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 6.2982
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 6.0884
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 15.7833
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 15.7833
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 5.9842
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "b74d2d6944f14ecc9036735f5231a3ac",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-SFMC_117_02_FD/C6294503",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 26,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 16.3845,
+     "componentCode": "C6294503",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "SFMC-117-02-F-D",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312100143_Samtec-SFMC-117-02-F-D_C6294503.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8601097272860028928-C6294503.pdf?response-content-disposition=attachment%3B%20filename%3DC6294503.pdf%3B%20filename%2A%3DUTF-8%27%27C6294503.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=5a595d024d59c85dd7b4890ab410a254b84ca700a8391f7e74a91cd1ff072ef4",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec SFMC-117-02-F-D",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.27mm",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 2 2.9A 34P 4.7mm Surface Mount,Vertical Tin SMD,P=1.27mm Female Headers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Insulation Height",
+       "attribute_value_name": "4.7mm"
+      },
+      {
+       "attribute_name_en": "Number of Positions",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "2.9A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Female Headers",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 8328767,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Female Headers",
+     "erpComponentName": "\u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/female-headers_samtec-sfmc-117-02-s-d_C7358033.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.4505
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 12.4505
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 12.4505
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 4.9691
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 4.8021
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 4.7202
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 11.9936
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 4.7868
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 4.6258
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 11.9936
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 11.9936
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 4.547
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "b74d2d6944f14ecc9036735f5231a3ac",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-SFMC_117_02_SD/C7358033",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 26,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 12.4505,
+     "componentCode": "C7358033",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "SFMC-117-02-S-D",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312272300_Samtec-SFMC-117-02-S-D_C7358033.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8597536966019719168-C7358033.pdf?response-content-disposition=attachment%3B%20filename%3DC7358033.pdf%3B%20filename%2A%3DUTF-8%27%27C7358033.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=bab26e24aed8c34cf63a9fa56cad91542d473f612f2b55fbf7b38ab3145b0fc6",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec SFMC-117-02-S-D",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.27mm",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 2 2.9A 34P 4.7mm Surface Mount,Vertical Tin SMD,P=1.27mm Female Headers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Insulation Height",
+       "attribute_value_name": "4.7mm"
+      },
+      {
+       "attribute_name_en": "Number of Positions",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "2.9A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Female Headers",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 18444577,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Wire To Board Connector",
+     "erpComponentName": "2x17P \u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wire-to-board-connector_samtec-tfc-117-02-l-d-a_C17315421.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 17.0855
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 17.0855
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 197,
+       "productPrice": 17.0855
+      },
+      {
+       "startNumber": 198,
+       "endNumber": 505,
+       "productPrice": 6.8182
+      },
+      {
+       "startNumber": 506,
+       "endNumber": 989,
+       "productPrice": 6.5905
+      },
+      {
+       "startNumber": 990,
+       "endNumber": -1,
+       "productPrice": 6.4775
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 506,
+       "endNumber": 989,
+       "productPrice": 6.3487
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 197,
+       "productPrice": 16.4585
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 16.4585
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 16.4585
+      },
+      {
+       "startNumber": 990,
+       "endNumber": -1,
+       "productPrice": 6.2398
+      },
+      {
+       "startNumber": 198,
+       "endNumber": 505,
+       "productPrice": 6.568
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "173a9139d1ba47df8739d202796819ee",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-TFC_117_02_L_DA/C17315421",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 22,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 17.0855,
+     "componentCode": "C17315421",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "TFC-117-02-L-D-A",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8602787156918083584-C17315421.pdf?response-content-disposition=attachment%3B%20filename%3DC17315421.pdf%3B%20filename%2A%3DUTF-8%27%27C17315421.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a8f852cb87db144d0e100090844cac28e22b2cb64a874beb8a8769b4b829e489",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec TFC-117-02-L-D-A",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 17 2 24.77mm 2x17P 34P 5.588mm 5.72mm Black LCP Phosphor bronze Surface Mount,Vertical Tin UL94V-0 SMD Wire To Board Connector ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Color",
+       "attribute_value_name": "Black"
+      },
+      {
+       "attribute_name_en": "Pins Structure",
+       "attribute_value_name": "2x17P"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      },
+      {
+       "attribute_name_en": "Flame Retardant Rating",
+       "attribute_value_name": "UL94V-0"
+      },
+      {
+       "attribute_name_en": "Y-Width of Bottom Edge on Board",
+       "attribute_value_name": "5.72mm"
+      },
+      {
+       "attribute_name_en": "X-Length of Bottom Edge on Board (Spacing Line)",
+       "attribute_value_name": "24.77mm"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Number of Pins",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Material",
+       "attribute_value_name": "Phosphor bronze"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Z-Height of the Board",
+       "attribute_value_name": "5.588mm"
+      },
+      {
+       "attribute_name_en": "Plastic Material",
+       "attribute_value_name": "LCP"
+      },
+      {
+       "attribute_name_en": "Number of PINs Per Row",
+       "attribute_value_name": "17"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Wire To Board Connector",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 18825793,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Wire To Board Connector",
+     "erpComponentName": "2x17P \u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wire-to-board-connector_samtec-tfc-117-02-f-d-a_C17696518.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 13.823
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 13.823
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 197,
+       "productPrice": 13.823
+      },
+      {
+       "startNumber": 198,
+       "endNumber": 505,
+       "productPrice": 5.5161
+      },
+      {
+       "startNumber": 506,
+       "endNumber": 989,
+       "productPrice": 5.3311
+      },
+      {
+       "startNumber": 990,
+       "endNumber": -1,
+       "productPrice": 5.241
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 506,
+       "endNumber": 989,
+       "productPrice": 5.1354
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 197,
+       "productPrice": 13.3158
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 13.3158
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 13.3158
+      },
+      {
+       "startNumber": 198,
+       "endNumber": 505,
+       "productPrice": 5.3137
+      },
+      {
+       "startNumber": 990,
+       "endNumber": -1,
+       "productPrice": 5.0487
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "173a9139d1ba47df8739d202796819ee",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-TFC_117_02_F_DA/C17696518",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 22,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 13.823,
+     "componentCode": "C17696518",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "TFC-117-02-F-D-A",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603089349907136512-C17696518.pdf?response-content-disposition=attachment%3B%20filename%3DC17696518.pdf%3B%20filename%2A%3DUTF-8%27%27C17696518.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c527257d1301e14cbcd0289a49be07f733d544da544361220393de4901e65238",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec TFC-117-02-F-D-A",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 17 2 24.77mm 2x17P 34P 5.588mm 5.72mm Black LCP Phosphor bronze Surface Mount,Vertical Tin UL94V-0 SMD Wire To Board Connector ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Color",
+       "attribute_value_name": "Black"
+      },
+      {
+       "attribute_name_en": "Pins Structure",
+       "attribute_value_name": "2x17P"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      },
+      {
+       "attribute_name_en": "Flame Retardant Rating",
+       "attribute_value_name": "UL94V-0"
+      },
+      {
+       "attribute_name_en": "Y-Width of Bottom Edge on Board",
+       "attribute_value_name": "5.72mm"
+      },
+      {
+       "attribute_name_en": "X-Length of Bottom Edge on Board (Spacing Line)",
+       "attribute_value_name": "24.77mm"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Number of Pins",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Material",
+       "attribute_value_name": "Phosphor bronze"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Z-Height of the Board",
+       "attribute_value_name": "5.588mm"
+      },
+      {
+       "attribute_name_en": "Plastic Material",
+       "attribute_value_name": "LCP"
+      },
+      {
+       "attribute_name_en": "Number of PINs Per Row",
+       "attribute_value_name": "17"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Wire To Board Connector",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 6623127,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "FFC, FPC (Flat Flexible) Connector Assemblies",
+     "erpComponentName": "\u95f4\u8ddd:1mm P\u6570:17P \u53cc\u4fa7\u89e6\u70b9/\u4e0a\u4e0b\u63a5",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/ffc-fpc-flat-flexible-connector-assemblies_samtec-fc1-17-02-t-wt-tr_C5700232.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.7178
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 3.7178
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 3.7178
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 1.4839
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1374,
+       "productPrice": 1.4348
+      },
+      {
+       "startNumber": 1375,
+       "endNumber": -1,
+       "productPrice": 1.4102
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 1.4294
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 3.5814
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 3.5814
+      },
+      {
+       "startNumber": 1375,
+       "endNumber": -1,
+       "productPrice": 1.3584
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1374,
+       "productPrice": 1.3821
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.5814
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "ca03cf83ab604d358ea828e4a78f97b6",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-FC1_17_02_T_WTTR/C5700232",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1375,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 3,
+     "minPurchaseNum": 3,
+     "initialPrice": 3.7178,
+     "componentCode": "C5700232",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "FC1-17-02-T-WT-TR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8555067102599618560-C5700232.pdf?response-content-disposition=attachment%3B%20filename%3DC5700232.pdf%3B%20filename%2A%3DUTF-8%27%27C5700232.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a0bec637f62e4756caac4920f2ca6e3bd68d0465026eb777083be678f45b5e05",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec FC1-17-02-T-WT-TR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1mm,Surface Mount\uff0cRight Angle",
+     "describe": "-55\u2103~+105\u2103 0.3mm 17P 1mm Double-Sided Contacts, Top and Bottom Entry Phosphor Bronze Surface Mount, Right Angle Tin SMD,P=1mm,Surface Mount\uff0cRight Angle FFC, FPC (Flat Flexible) Connector Assemblies ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+105\u2103"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Contact Material",
+       "attribute_value_name": "Phosphor Bronze"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1mm"
+      },
+      {
+       "attribute_name_en": "Number of Contacts",
+       "attribute_value_name": "17P"
+      },
+      {
+       "attribute_name_en": "Contact Type",
+       "attribute_value_name": "Double-Sided Contacts, Top and Bottom Entry"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount, Right Angle"
+      },
+      {
+       "attribute_name_en": "FFC, FCB Thickness",
+       "attribute_value_name": "0.3mm"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "FFC, FPC (Flat Flexible) Connector Assemblies",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 7161690,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Female Headers",
+     "erpComponentName": "\u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/female-headers_samtec-sfmc-117-02-l-d-p_C6216506.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 9.3862
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 9.3862
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 9.3862
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 3.7457
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 3.6212
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 3.559
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 9.0418
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 3.6082
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 3.4883
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 9.0418
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 9.0418
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 3.4284
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "b74d2d6944f14ecc9036735f5231a3ac",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-SFMC_117_02_L_DP/C6216506",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 26,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 9.3862,
+     "componentCode": "C6216506",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "SFMC-117-02-L-D-P",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312090211_Samtec-SFMC-117-02-L-D-P_C6216506.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603230741950050304-C6216506.pdf?response-content-disposition=attachment%3B%20filename%3DC6216506.pdf%3B%20filename%2A%3DUTF-8%27%27C6216506.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=25249e80160e2a1a17e90d352780052064ba19103d6aa0fe86c5d7be670fbed0",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec SFMC-117-02-L-D-P",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.27mm",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 2 2.9A 34P 4.7mm Surface Mount,Vertical Tin SMD,P=1.27mm Female Headers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Insulation Height",
+       "attribute_value_name": "4.7mm"
+      },
+      {
+       "attribute_name_en": "Number of Positions",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "2.9A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Female Headers",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 8042455,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Female Headers",
+     "erpComponentName": "\u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/female-headers_samtec-sfmc-117-02-s-d-p_C7075841.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 23.7841
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 23.7841
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 23.7841
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 9.4911
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 9.1733
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 9.0177
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 22.9113
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 9.1428
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 22.9113
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 8.8367
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 22.9113
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 8.6868
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "b74d2d6944f14ecc9036735f5231a3ac",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-SFMC_117_02_S_DP/C7075841",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 26,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 23.7841,
+     "componentCode": "C7075841",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "SFMC-117-02-S-D-P",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312271444_Samtec-SFMC-117-02-S-D-P_C7075841.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8600393819649159168-C7075841.pdf?response-content-disposition=attachment%3B%20filename%3DC7075841.pdf%3B%20filename%2A%3DUTF-8%27%27C7075841.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=40d8bf4047da97e1fafe29df07770e5ab2466c4d3df63e6a25a3caa9993c20bb",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec SFMC-117-02-S-D-P",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.27mm",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 2 2.9A 34P 4.7mm Surface Mount,Vertical Tin SMD,P=1.27mm Female Headers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Insulation Height",
+       "attribute_value_name": "4.7mm"
+      },
+      {
+       "attribute_name_en": "Number of Positions",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "2.9A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Female Headers",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 8280808,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Female Headers",
+     "erpComponentName": "\u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/female-headers_samtec-sfmc-117-02-s-d-k_C7310286.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 23.4385
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 23.4385
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 23.4385
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 9.3535
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 9.0407
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 8.8867
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 22.5784
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 9.0102
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 8.7089
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 22.5784
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 22.5784
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 8.5606
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "b74d2d6944f14ecc9036735f5231a3ac",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-SFMC_117_02_S_DK/C7310286",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 26,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 23.4385,
+     "componentCode": "C7310286",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "SFMC-117-02-S-D-K",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312272138_Samtec-SFMC-117-02-S-D-K_C7310286.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8597546908567289856-C7310286.pdf?response-content-disposition=attachment%3B%20filename%3DC7310286.pdf%3B%20filename%2A%3DUTF-8%27%27C7310286.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3f1313064d69370077bb899916b2bc7116b86341161e3134302dc0fed83dba27",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec SFMC-117-02-S-D-K",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.27mm",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 2 2.9A 34P 4.7mm Surface Mount,Vertical Tin SMD,P=1.27mm Female Headers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Insulation Height",
+       "attribute_value_name": "4.7mm"
+      },
+      {
+       "attribute_name_en": "Number of Positions",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "2.9A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Female Headers",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 8328764,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Female Headers",
+     "erpComponentName": "\u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/female-headers_samtec-sfmc-117-02-l-d-k_C7358030.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 18.8035
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 18.8035
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 18.8035
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 7.5028
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 7.2522
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 7.1294
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 18.1135
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 7.2274
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 6.9861
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 18.1135
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 18.1135
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 6.8677
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "b74d2d6944f14ecc9036735f5231a3ac",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-SFMC_117_02_L_DK/C7358030",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 26,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 18.8035,
+     "componentCode": "C7358030",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "SFMC-117-02-L-D-K",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312272300_Samtec-SFMC-117-02-L-D-K_C7358030.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8597526126550274048-C7358030.pdf?response-content-disposition=attachment%3B%20filename%3DC7358030.pdf%3B%20filename%2A%3DUTF-8%27%27C7358030.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=54676681880fdbc6cf50ac0e9308167a2bd7afd793c7e0c92c21db00667feff2",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec SFMC-117-02-L-D-K",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.27mm",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 2 2.9A 34P 4.7mm Surface Mount,Vertical Tin SMD,P=1.27mm Female Headers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Insulation Height",
+       "attribute_value_name": "4.7mm"
+      },
+      {
+       "attribute_name_en": "Number of Positions",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "2.9A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Female Headers",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 8328774,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Female Headers",
+     "erpComponentName": "\u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/female-headers_samtec-sfmc-117-02-sm-d_C7358040.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 23.0356
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 23.0356
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 23.0356
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 9.1913
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 8.8851
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 8.7328
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 207,
+       "productPrice": 22.1903
+      },
+      {
+       "startNumber": 208,
+       "endNumber": 493,
+       "productPrice": 8.854
+      },
+      {
+       "startNumber": 494,
+       "endNumber": 987,
+       "productPrice": 8.559
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 22.1903
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 22.1903
+      },
+      {
+       "startNumber": 988,
+       "endNumber": -1,
+       "productPrice": 8.4123
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "b74d2d6944f14ecc9036735f5231a3ac",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-SFMC_117_02_SMD/C7358040",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 26,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 23.0356,
+     "componentCode": "C7358040",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "SFMC-117-02-SM-D",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312272300_Samtec-SFMC-117-02-SM-D_C7358040.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8597534367530950656-C7358040.pdf?response-content-disposition=attachment%3B%20filename%3DC7358040.pdf%3B%20filename%2A%3DUTF-8%27%27C7358040.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=cc0a95b86ac50d14d71902af4ace19f65e2c1c2de27726cb25bf466eedc2cecf",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec SFMC-117-02-SM-D",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.27mm",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 2 2.9A 34P 4.7mm Surface Mount,Vertical Tin SMD,P=1.27mm Female Headers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Insulation Height",
+       "attribute_value_name": "4.7mm"
+      },
+      {
+       "attribute_name_en": "Number of Positions",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "2.9A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Female Headers",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 18562750,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Wire To Board Connector",
+     "erpComponentName": "MOLC-117-02-S-Q-P",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wire-to-board-connector_samtec-molc-117-02-s-q-p_C17433558.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 52.3488
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 52.3488
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 206,
+       "productPrice": 52.3488
+      },
+      {
+       "startNumber": 207,
+       "endNumber": 505,
+       "productPrice": 20.8885
+      },
+      {
+       "startNumber": 506,
+       "endNumber": 988,
+       "productPrice": 20.1908
+      },
+      {
+       "startNumber": 989,
+       "endNumber": -1,
+       "productPrice": 19.8452
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 506,
+       "endNumber": 988,
+       "productPrice": 19.4498
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 206,
+       "productPrice": 50.4278
+      },
+      {
+       "startNumber": 207,
+       "endNumber": 505,
+       "productPrice": 20.1219
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 50.4278
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 50.4278
+      },
+      {
+       "startNumber": 989,
+       "endNumber": -1,
+       "productPrice": 19.1169
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "173a9139d1ba47df8739d202796819ee",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-MOLC_117_02_S_QP/C17433558",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 23,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 52.3488,
+     "componentCode": "C17433558",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "MOLC-117-02-S-Q-P",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603261381387448320-C17433558.pdf?response-content-disposition=attachment%3B%20filename%3DC17433558.pdf%3B%20filename%2A%3DUTF-8%27%27C17433558.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=bebaa8ec45a9a7bc1d418bf2dec5979c58f89df195fadd14c1ce67f8e8fdf776",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec MOLC-117-02-S-Q-P",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "-55\u2103~+125\u2103 1.27mm 4 Phosphor Bronze Surface Mount,Vertical Tin SMD Wire To Board Connector ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "4"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Contact Material",
+       "attribute_value_name": "Phosphor Bronze"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Wire To Board Connector",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 7161692,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Female Headers",
+     "erpComponentName": "\u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/female-headers_samtec-sfmc-117-02-l-d-tr_C6216508.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.2491
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 12.2491
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 12.2491
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 699,
+       "productPrice": 4.8872
+      },
+      {
+       "startNumber": 700,
+       "endNumber": 1399,
+       "productPrice": 4.7251
+      },
+      {
+       "startNumber": 1400,
+       "endNumber": -1,
+       "productPrice": 4.6432
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1400,
+       "endNumber": -1,
+       "productPrice": 4.4728
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 699,
+       "productPrice": 4.7079
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 11.7996
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 11.7996
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 11.7996
+      },
+      {
+       "startNumber": 700,
+       "endNumber": 1399,
+       "productPrice": 4.5517
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "b74d2d6944f14ecc9036735f5231a3ac",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-SFMC_117_02_L_DTR/C6216508",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 700,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 12.2491,
+     "componentCode": "C6216508",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "SFMC-117-02-L-D-TR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312051031_Samtec-SFMC-117-02-L-D-TR_C6216508.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603207008200253440-C6216508.pdf?response-content-disposition=attachment%3B%20filename%3DC6216508.pdf%3B%20filename%2A%3DUTF-8%27%27C6216508.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=16dd744fb084b53fbb4166d8360cb0774899e0ae009ca0d2a6c846e0190f373a",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec SFMC-117-02-L-D-TR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.27mm",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 2 2.9A 34P 4.7mm Surface Mount,Vertical Tin SMD,P=1.27mm Female Headers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Insulation Height",
+       "attribute_value_name": "4.7mm"
+      },
+      {
+       "attribute_name_en": "Number of Positions",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "2.9A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Female Headers",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 7433606,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Female Headers",
+     "erpComponentName": "\u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/female-headers_samtec-sfmc-117-02-s-d-tr_C6480439.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 15.2823
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 15.2823
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 15.2823
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 699,
+       "productPrice": 6.0976
+      },
+      {
+       "startNumber": 700,
+       "endNumber": 1399,
+       "productPrice": 5.8945
+      },
+      {
+       "startNumber": 1400,
+       "endNumber": -1,
+       "productPrice": 5.7946
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1400,
+       "endNumber": -1,
+       "productPrice": 5.5819
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 699,
+       "productPrice": 5.8738
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 14.7215
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 14.7215
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 14.7215
+      },
+      {
+       "startNumber": 700,
+       "endNumber": 1399,
+       "productPrice": 5.6782
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "b74d2d6944f14ecc9036735f5231a3ac",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-SFMC_117_02_S_DTR/C6480439",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 700,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 15.2823,
+     "componentCode": "C6480439",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "SFMC-117-02-S-D-TR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312051047_Samtec-SFMC-117-02-S-D-TR_C6480439.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603216690415628288-C6480439.pdf?response-content-disposition=attachment%3B%20filename%3DC6480439.pdf%3B%20filename%2A%3DUTF-8%27%27C6480439.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c93e1a2f4988ea80129da63bb3d69c151e8c732f5a976c81ba8cfc04a44ddb67",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec SFMC-117-02-S-D-TR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.27mm",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 2 2.9A 34P 4.7mm Surface Mount,Vertical Tin SMD,P=1.27mm Female Headers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Insulation Height",
+       "attribute_value_name": "4.7mm"
+      },
+      {
+       "attribute_name_en": "Number of Positions",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "2.9A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Female Headers",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 18420705,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Wire To Board Connector",
+     "erpComponentName": "2x17P \u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wire-to-board-connector_samtec-tfc-117-02-f-d-k-tr_C17291558.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 11.7054
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 11.7054
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 349,
+       "productPrice": 11.7054
+      },
+      {
+       "startNumber": 350,
+       "endNumber": 699,
+       "productPrice": 4.671
+      },
+      {
+       "startNumber": 700,
+       "endNumber": 1049,
+       "productPrice": 4.5154
+      },
+      {
+       "startNumber": 1050,
+       "endNumber": -1,
+       "productPrice": 4.4385
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 349,
+       "productPrice": 11.2758
+      },
+      {
+       "startNumber": 1050,
+       "endNumber": -1,
+       "productPrice": 4.2756
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 11.2758
+      },
+      {
+       "startNumber": 350,
+       "endNumber": 699,
+       "productPrice": 4.4996
+      },
+      {
+       "startNumber": 700,
+       "endNumber": 1049,
+       "productPrice": 4.3497
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 11.2758
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "173a9139d1ba47df8739d202796819ee",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-TFC_117_02_F_D_KTR/C17291558",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 350,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 11.7054,
+     "componentCode": "C17291558",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "TFC-117-02-F-D-K-TR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8602781129494196224-C17291558.pdf?response-content-disposition=attachment%3B%20filename%3DC17291558.pdf%3B%20filename%2A%3DUTF-8%27%27C17291558.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a692708a7986b2a0a212962eca66b19cddeadae79333f67d6d1c0cfec89302cc",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec TFC-117-02-F-D-K-TR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 17 2 24.77mm 2x17P 34P 5.588mm 5.72mm Black LCP Phosphor Bronze Surface Mount,Vertical Tin UL94V-0 SMD Wire To Board Connector ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Color",
+       "attribute_value_name": "Black"
+      },
+      {
+       "attribute_name_en": "Pins Structure",
+       "attribute_value_name": "2x17P"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      },
+      {
+       "attribute_name_en": "Flame Retardant Rating",
+       "attribute_value_name": "UL94V-0"
+      },
+      {
+       "attribute_name_en": "Y-Width of Bottom Edge on Board",
+       "attribute_value_name": "5.72mm"
+      },
+      {
+       "attribute_name_en": "X-Length of Bottom Edge on Board (Spacing Line)",
+       "attribute_value_name": "24.77mm"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Number of Pins",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Material",
+       "attribute_value_name": "Phosphor Bronze"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Z-Height of the Board",
+       "attribute_value_name": "5.588mm"
+      },
+      {
+       "attribute_name_en": "Plastic Material",
+       "attribute_value_name": "LCP"
+      },
+      {
+       "attribute_name_en": "Number of PINs Per Row",
+       "attribute_value_name": "17"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Wire To Board Connector",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21699896,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Pin Headers",
+     "erpComponentName": "MOLC-117-02-STL-Q",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/pin-headers_samtec-molc-117-02-stl-q_C20374341.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 59.5813
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 59.5813
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 59.5813
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 23.7742
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 22.9799
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 22.5868
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 21.758
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 22.9018
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 57.3948
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 57.3948
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 22.1366
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 57.3948
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "b27176c0811c411e855e7b15d6cb39e8",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-MOLC_117_02_STLQ/C20374341",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 18,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 59.5813,
+     "componentCode": "C20374341",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "MOLC-117-02-STL-Q",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401171340_Samtec-MOLC-117-02-STL-Q_C20374341.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603544555040366592-C20374341.pdf?response-content-disposition=attachment%3B%20filename%3DC20374341.pdf%3B%20filename%2A%3DUTF-8%27%27C20374341.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=600d20edff15e40349683449aa5609c04e0af8995c479d740b0d9ab69540cbef",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec MOLC-117-02-STL-Q",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.27mm",
+     "describe": "SMD,P=1.27mm Pin Headers ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Pin Headers",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 7161694,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Female Headers",
+     "erpComponentName": "\u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/female-headers_samtec-sfmc-117-02-s-d-p-tr_C6216510.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 17.6866
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 17.6866
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 17.6866
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 449,
+       "productPrice": 7.0573
+      },
+      {
+       "startNumber": 450,
+       "endNumber": 899,
+       "productPrice": 6.8215
+      },
+      {
+       "startNumber": 900,
+       "endNumber": -1,
+       "productPrice": 6.7052
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 900,
+       "endNumber": -1,
+       "productPrice": 6.4591
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 17.0375
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 17.0375
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 17.0375
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 449,
+       "productPrice": 6.7983
+      },
+      {
+       "startNumber": 450,
+       "endNumber": 899,
+       "productPrice": 6.5711
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "b74d2d6944f14ecc9036735f5231a3ac",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-SFMC_117_02_S_D_PTR/C6216510",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 450,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 17.6866,
+     "componentCode": "C6216510",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "SFMC-117-02-S-D-P-TR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312090211_Samtec-SFMC-117-02-S-D-P-TR_C6216510.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603207009110552576-C6216510.pdf?response-content-disposition=attachment%3B%20filename%3DC6216510.pdf%3B%20filename%2A%3DUTF-8%27%27C6216510.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=345d6cda2d47197180ce481cf6fce17e7528e256077782a5f6706e7379512f9c",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec SFMC-117-02-S-D-P-TR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.27mm",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 2 2.9A 34P 4.7mm Surface Mount,Vertical Tin SMD,P=1.27mm Female Headers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Insulation Height",
+       "attribute_value_name": "4.7mm"
+      },
+      {
+       "attribute_name_en": "Number of Positions",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "2.9A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Female Headers",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 7628189,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Female Headers",
+     "erpComponentName": "\u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/female-headers_samtec-sfmc-117-02-l-d-p-tr_C6673128.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 14.2816
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 14.2816
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 14.2816
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 449,
+       "productPrice": 5.6979
+      },
+      {
+       "startNumber": 450,
+       "endNumber": 899,
+       "productPrice": 5.5079
+      },
+      {
+       "startNumber": 900,
+       "endNumber": -1,
+       "productPrice": 5.4146
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 900,
+       "endNumber": -1,
+       "productPrice": 5.2159
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 13.7575
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 13.7575
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 13.7575
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 449,
+       "productPrice": 5.4888
+      },
+      {
+       "startNumber": 450,
+       "endNumber": 899,
+       "productPrice": 5.3058
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "b74d2d6944f14ecc9036735f5231a3ac",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-SFMC_117_02_L_D_PTR/C6673128",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 450,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 14.2816,
+     "componentCode": "C6673128",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "SFMC-117-02-L-D-P-TR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312220729_Samtec-SFMC-117-02-L-D-P-TR_C6673128.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8600772307661041664-C6673128.pdf?response-content-disposition=attachment%3B%20filename%3DC6673128.pdf%3B%20filename%2A%3DUTF-8%27%27C6673128.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a2460336e469a43e586443afddea053e93ca14bbcfd107658ff2cb23e8229931",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec SFMC-117-02-L-D-P-TR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.27mm",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 2 2.9A 34P 4.7mm Surface Mount,Vertical Tin SMD,P=1.27mm Female Headers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Insulation Height",
+       "attribute_value_name": "4.7mm"
+      },
+      {
+       "attribute_name_en": "Number of Positions",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "2.9A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Female Headers",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 8328771,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Female Headers",
+     "erpComponentName": "\u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/female-headers_samtec-sfmc-117-02-s-d-k-tr_C7358037.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 18.042
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 18.042
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 18.042
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 699,
+       "productPrice": 7.1998
+      },
+      {
+       "startNumber": 700,
+       "endNumber": 1399,
+       "productPrice": 6.959
+      },
+      {
+       "startNumber": 1400,
+       "endNumber": -1,
+       "productPrice": 6.8395
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1400,
+       "endNumber": -1,
+       "productPrice": 6.5885
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 699,
+       "productPrice": 6.9356
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 17.3799
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 17.3799
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 17.3799
+      },
+      {
+       "startNumber": 700,
+       "endNumber": 1399,
+       "productPrice": 6.7037
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "b74d2d6944f14ecc9036735f5231a3ac",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-SFMC_117_02_S_D_KTR/C7358037",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 700,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 18.042,
+     "componentCode": "C7358037",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "SFMC-117-02-S-D-K-TR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312051133_Samtec-SFMC-117-02-S-D-K-TR_C7358037.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8597539242163912704-C7358037.pdf?response-content-disposition=attachment%3B%20filename%3DC7358037.pdf%3B%20filename%2A%3DUTF-8%27%27C7358037.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=7f39b19033bbde6968f3a9437c16ff77cb86d6d3469d991b39c4b67225e2e8c9",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec SFMC-117-02-S-D-K-TR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.27mm",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 2 2.9A 34P 4.7mm Surface Mount,Vertical Tin SMD,P=1.27mm Female Headers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Insulation Height",
+       "attribute_value_name": "4.7mm"
+      },
+      {
+       "attribute_name_en": "Number of Positions",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "2.9A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Female Headers",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 18694317,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Wire To Board Connector",
+     "erpComponentName": "2x17P \u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wire-to-board-connector_samtec-tfc-117-02-f-d-a-k-tr_C17565089.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 11.7054
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 11.7054
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 349,
+       "productPrice": 11.7054
+      },
+      {
+       "startNumber": 350,
+       "endNumber": 699,
+       "productPrice": 4.671
+      },
+      {
+       "startNumber": 700,
+       "endNumber": 1049,
+       "productPrice": 4.5154
+      },
+      {
+       "startNumber": 1050,
+       "endNumber": -1,
+       "productPrice": 4.4385
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 349,
+       "productPrice": 11.2758
+      },
+      {
+       "startNumber": 1050,
+       "endNumber": -1,
+       "productPrice": 4.2756
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 11.2758
+      },
+      {
+       "startNumber": 700,
+       "endNumber": 1049,
+       "productPrice": 4.3497
+      },
+      {
+       "startNumber": 350,
+       "endNumber": 699,
+       "productPrice": 4.4996
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 11.2758
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "173a9139d1ba47df8739d202796819ee",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-TFC_117_02_F_D_A_KTR/C17565089",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 350,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 11.7054,
+     "componentCode": "C17565089",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "TFC-117-02-F-D-A-K-TR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8556975355304714240-C17565089.pdf?response-content-disposition=attachment%3B%20filename%3DC17565089.pdf%3B%20filename%2A%3DUTF-8%27%27C17565089.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=af77756439faca223954c64652fc518c73f08e5af0c6dd05987a10e78bb3746d",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec TFC-117-02-F-D-A-K-TR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 17 2 24.77mm 2x17P 34P 5.588mm 5.72mm Black LCP Phosphor bronze Surface Mount,Vertical Tin UL94V-0 SMD Wire To Board Connector ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Color",
+       "attribute_value_name": "Black"
+      },
+      {
+       "attribute_name_en": "Pins Structure",
+       "attribute_value_name": "2x17P"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      },
+      {
+       "attribute_name_en": "Flame Retardant Rating",
+       "attribute_value_name": "UL94V-0"
+      },
+      {
+       "attribute_name_en": "Y-Width of Bottom Edge on Board",
+       "attribute_value_name": "5.72mm"
+      },
+      {
+       "attribute_name_en": "X-Length of Bottom Edge on Board (Spacing Line)",
+       "attribute_value_name": "24.77mm"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Number of Pins",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Material",
+       "attribute_value_name": "Phosphor bronze"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Z-Height of the Board",
+       "attribute_value_name": "5.588mm"
+      },
+      {
+       "attribute_name_en": "Plastic Material",
+       "attribute_value_name": "LCP"
+      },
+      {
+       "attribute_name_en": "Number of PINs Per Row",
+       "attribute_value_name": "17"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Wire To Board Connector",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 18803547,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Female Headers",
+     "erpComponentName": "\u95f4\u8ddd:1.27mm \u7acb\u8d34",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/female-headers_samtec-sfmc-117-02-l-d-k-tr_C17674278.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.67
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 12.67
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 249,
+       "productPrice": 12.67
+      },
+      {
+       "startNumber": 250,
+       "endNumber": 499,
+       "productPrice": 5.0559
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.8872
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 4.8037
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 249,
+       "productPrice": 12.2051
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 4.6274
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 12.2051
+      },
+      {
+       "startNumber": 250,
+       "endNumber": 499,
+       "productPrice": 4.8704
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.2051
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.7079
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "b74d2d6944f14ecc9036735f5231a3ac",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-SFMC_117_02_L_D_KTR/C17674278",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 125,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 12.67,
+     "componentCode": "C17674278",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "SFMC-117-02-L-D-K-TR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2311161551_Samtec-SFMC-117-02-L-D-K-TR_C17674278.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8602683262493859840-C17674278.pdf?response-content-disposition=attachment%3B%20filename%3DC17674278.pdf%3B%20filename%2A%3DUTF-8%27%27C17674278.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3687ea6594c4a97554dbbf104edcfe6175eed2ca5112d3c8497153411846ceba",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec SFMC-117-02-L-D-K-TR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.27mm",
+     "describe": "-55\u2103~+125\u2103 1.27mm 1.27mm 2 2.9A 34P 4.7mm Surface Mount,Vertical Tin SMD,P=1.27mm Female Headers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Insulation Height",
+       "attribute_value_name": "4.7mm"
+      },
+      {
+       "attribute_name_en": "Number of Positions",
+       "attribute_value_name": "34P"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "2.9A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "1.27mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Female Headers",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21699901,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Wire To Board Connector",
+     "erpComponentName": "MOLC-117-02-STL-Q-P",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wire-to-board-connector_samtec-molc-117-02-stl-q-p_C20374346.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 60.3822
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 60.3822
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 60.3822
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 24.0936
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 23.2878
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 22.8915
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 22.0514
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 23.2094
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 58.1663
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 58.1663
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 22.4332
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 58.1663
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "173a9139d1ba47df8739d202796819ee",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-MOLC_117_02_STL_QP/C20374346",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 60.3822,
+     "componentCode": "C20374346",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "MOLC-117-02-STL-Q-P",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401161110_Samtec-MOLC-117-02-STL-Q-P_C20374346.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603699007311540224-C20374346.pdf?response-content-disposition=attachment%3B%20filename%3DC20374346.pdf%3B%20filename%2A%3DUTF-8%27%27C20374346.pdf&x-oss-date=20261118T114433Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=dfa7da1f924f2a2e8848a993d134ea373fc412f9d40a5f78ae2c955f12eb02be",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec MOLC-117-02-STL-Q-P",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Wire To Board Connector ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Wire To Board Connector",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 2,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C11702"
+ },
+ "message": null
+}

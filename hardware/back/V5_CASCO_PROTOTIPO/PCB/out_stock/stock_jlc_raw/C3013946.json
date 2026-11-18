@@ -1,0 +1,231 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 1,
+   "list": [
+    {
+     "componentId": 3522416,
+     "componentLibraryType": "expand",
+     "stockCount": 19960,
+     "componentTypeEn": "WiFi Modules",
+     "erpComponentName": "\u4e0d\u5e26\u56fa\u4ef6 \u4e0d\u5e26\u56fa\u4ef6 2.4GHz Wi-Fi (802.11b/g/n) + \u84dd\u7259 5 (LE) \u6a21\u7ec4",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wifi-modules_espressif-systems-esp32-s3-wroom-1u-n16r8_C3013946.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.1853
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 4.5351
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 4.1748
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 649,
+       "productPrice": 3.7309
+      },
+      {
+       "startNumber": 650,
+       "endNumber": 1299,
+       "productPrice": 3.5721
+      },
+      {
+       "startNumber": 1300,
+       "endNumber": -1,
+       "productPrice": 3.5033
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 649,
+       "productPrice": 3.594
+      },
+      {
+       "startNumber": 1300,
+       "endNumber": -1,
+       "productPrice": 3.3747
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 4.0216
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 4.995
+      },
+      {
+       "startNumber": 650,
+       "endNumber": 1299,
+       "productPrice": 3.441
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 4.3687
+      }
+     ],
+     "firstSortAccessId": "3f47180447344e189d9b9aa7555c0cb3",
+     "secondSortAccessId": "c5a9b644133240c89506f8439edd2b11",
+     "canPresaleNumber": 12085,
+     "componentProductType": 2,
+     "mergedComponentCode": "",
+     "urlSuffix": "3522416-ESP32_S3_WROOM_1UN16R8/C3013946",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 650,
+     "shopCostPrice": 18.09944,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 1,
+     "initialPrice": 5.1853,
+     "componentCode": "C3013946",
+     "componentBrandEn": "Espressif Systems",
+     "componentModelEn": "ESP32-S3-WROOM-1U-N16R8",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8687715280253616128-C3013946-front.jpg?x-oss-date=20261118T114503Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5r0Me3R3o9nj5q%2BM1H3iXM4O7hNmojBozz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qe8u6hQ3557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j%2FetZpcPbOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZUOGVwu5ch3ARqAAY500Gx8OPNp7XbOAi77U2ZuxIIWVh5sMBOgU3ltOFZ60sAUJ%2F5%2FVGKbGgt6%2BVEF6k%2FT0VGnE4bYY37ZKOjbH40tDvXF%2B0FQ3Wbx%2FTOP7Tq0iW69caI1VX1pvAU7XUMDiw2ZS9uHfWwGUtO7wQOMuQCkjGd1drvxKfbsCowSaGy3IAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYAzWe3PF8XU1wFmsm77auMjA%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=24618b23f2d80a341476dd90f791bb84b5f0f4af53e04d02379500a35d689544",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2411121101_Espressif-Systems-ESP32-S3-WROOM-1U-N16R8_C3013946.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8560143998750265344-C3013946.pdf?response-content-disposition=attachment%3B%20filename%3DC3013946.pdf%3B%20filename%2A%3DUTF-8%27%27C3013946.pdf&x-oss-date=20261118T114503Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=1ce264f91522496496658f39cc68cccbb88ec072ff4c96af1b255eedc84acf98",
+     "dataManualOfficialLink": "",
+     "componentName": "ESPRESSIF ESP32-S3-WROOM-1U-N16R8",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8687715281662902272-C3013946-front.jpg?x-oss-date=20261118T114503Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5r0Me3R3o9nj5q%2BM1H3iXM4O7hNmojBozz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qe8u6hQ3557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j%2FetZpcPbOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZUOGVwu5ch3ARqAAY500Gx8OPNp7XbOAi77U2ZuxIIWVh5sMBOgU3ltOFZ60sAUJ%2F5%2FVGKbGgt6%2BVEF6k%2FT0VGnE4bYY37ZKOjbH40tDvXF%2B0FQ3Wbx%2FTOP7Tq0iW69caI1VX1pvAU7XUMDiw2ZS9uHfWwGUtO7wQOMuQCkjGd1drvxKfbsCowSaGy3IAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYAzWe3PF8XU1wFmsm77auMjA%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=96f8a2fdd078c3d688799fb7ce5b8b1d34c68349ea96bb7e14b1eff82bae2514",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,19.2x18mm",
+     "describe": "-103.5dBm -40\u2103~+65\u2103 2.4GHz 20.5dBm 355mA 3V~3.6V 95mA Bluetooth5.0 ESP32-S3R8 UART\u3001SDIO\u3001SPI\u3001I2C\u3001GPIO\u3001PWM\u3001ADC\u3001I2S\u3001JTAG\u3001USB SMD,19.2x18mm WiFi Modules ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+65\u2103"
+      },
+      {
+       "attribute_name_en": "Sensitivity",
+       "attribute_value_name": "-103.5dBm"
+      },
+      {
+       "attribute_name_en": "Output Power",
+       "attribute_value_name": "20.5dBm"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "3V~3.6V"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "2.4GHz"
+      },
+      {
+       "attribute_name_en": "Utilized IC / Part",
+       "attribute_value_name": "ESP32-S3R8"
+      },
+      {
+       "attribute_name_en": "Interface Type",
+       "attribute_value_name": "UART\u3001SDIO\u3001SPI\u3001I2C\u3001GPIO\u3001PWM\u3001ADC\u3001I2S\u3001JTAG\u3001USB"
+      },
+      {
+       "attribute_name_en": "Send  Current",
+       "attribute_value_name": "355mA"
+      },
+      {
+       "attribute_name_en": "Wireless Standard",
+       "attribute_value_name": "Bluetooth5.0"
+      },
+      {
+       "attribute_name_en": "Receive  Current",
+       "attribute_value_name": "95mA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "WiFi Modules",
+     "secondSortName": "IoT/Communication Modules",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C3013946</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C3013946"
+ },
+ "message": null
+}

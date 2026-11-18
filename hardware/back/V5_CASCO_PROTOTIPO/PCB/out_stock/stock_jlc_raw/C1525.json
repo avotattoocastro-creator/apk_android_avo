@@ -1,0 +1,3188 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 20,
+   "list": [
+    {
+     "componentId": 1877,
+     "componentLibraryType": "base",
+     "stockCount": 35317245,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "100nF \u00b110% 16V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_samsung-electro-mechanics-cl05b104ko5nnnc_C1525.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0024
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.0018
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0015
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0013
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 50199,
+       "productPrice": 0.0012
+      },
+      {
+       "startNumber": 50200,
+       "endNumber": -1,
+       "productPrice": 0.0012
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0023
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0013
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 50199,
+       "productPrice": 0.0012
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0014
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.0017
+      },
+      {
+       "startNumber": 50200,
+       "endNumber": -1,
+       "productPrice": 0.0012
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 27225687,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "1877-CL05B104KO5NNNC/C1525",
+     "leastPatchNumber": 20,
+     "lossNumber": 15,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.00673,
+     "preMinPurchaseNum": 6016,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0024,
+     "componentCode": "C1525",
+     "componentBrandEn": "Samsung Electro-Mechanics",
+     "componentModelEn": "CL05B104KO5NNNC",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8552476004846223360-C1525-%25E6%25AD%25A3%25E9%259D%25A2.jpg?x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5r0Me3R3o9nj5q%2BM1H3iXM4O7hNmojBozz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qe8u6hQ3557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j%2FetZpcPbOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZUOGVwu5ch3ARqAAY500Gx8OPNp7XbOAi77U2ZuxIIWVh5sMBOgU3ltOFZ60sAUJ%2F5%2FVGKbGgt6%2BVEF6k%2FT0VGnE4bYY37ZKOjbH40tDvXF%2B0FQ3Wbx%2FTOP7Tq0iW69caI1VX1pvAU7XUMDiw2ZS9uHfWwGUtO7wQOMuQCkjGd1drvxKfbsCowSaGy3IAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYAzWe3PF8XU1wFmsm77auMjA%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=01d19c570539ba4a6882e933678d4ba1e84618d9fd6a98b6668fbe0a517d7251",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL05B104KO5NNNC_C1525.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8579707269992677376-C1525.pdf?response-content-disposition=attachment%3B%20filename%3DC1525.pdf%3B%20filename%2A%3DUTF-8%27%27C1525.pdf&x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a6264d3e0ba2d1fa6da48e44d4089c1d3d5d62b247dee8dae3b30d48269afd5f",
+     "dataManualOfficialLink": "",
+     "componentName": "Samsung Electro-Mechanics CL05B104KO5NNNC",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8552476005446144000-C1525-%25E6%25AD%25A3%25E9%259D%25A2.jpg?x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5r0Me3R3o9nj5q%2BM1H3iXM4O7hNmojBozz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qe8u6hQ3557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j%2FetZpcPbOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZUOGVwu5ch3ARqAAY500Gx8OPNp7XbOAi77U2ZuxIIWVh5sMBOgU3ltOFZ60sAUJ%2F5%2FVGKbGgt6%2BVEF6k%2FT0VGnE4bYY37ZKOjbH40tDvXF%2B0FQ3Wbx%2FTOP7Tq0iW69caI1VX1pvAU7XUMDiw2ZS9uHfWwGUtO7wQOMuQCkjGd1drvxKfbsCowSaGy3IAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYAzWe3PF8XU1wFmsm77auMjA%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9595889ad939d4328b97dc376009c53d4f87903f91ae1795f58e6567c2e0ebf5",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "100nF 16V X7R \u00b110% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "16V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b110%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "100nF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "X7R"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C1525</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3748453,
+     "componentLibraryType": "expand",
+     "stockCount": 3,
+     "componentTypeEn": "AC-DC Controllers and Regulators",
+     "erpComponentName": "8V~35V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/dc-dc-converters_texas-instruments-uc1525bj_C3186512.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 25.2499
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 24.4343
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 13,
+       "productPrice": 24.4343
+      },
+      {
+       "startNumber": 14,
+       "endNumber": 15,
+       "productPrice": 24.4343
+      },
+      {
+       "startNumber": 16,
+       "endNumber": 17,
+       "productPrice": 24.4343
+      },
+      {
+       "startNumber": 18,
+       "endNumber": -1,
+       "productPrice": 24.4343
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 18,
+       "endNumber": -1,
+       "productPrice": 23.5376
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 23.5376
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 24.3233
+      },
+      {
+       "startNumber": 14,
+       "endNumber": 15,
+       "productPrice": 23.5376
+      },
+      {
+       "startNumber": 16,
+       "endNumber": 17,
+       "productPrice": 23.5376
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 13,
+       "productPrice": 23.5376
+      }
+     ],
+     "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
+     "secondSortAccessId": "9023cccfe13e4581b60de0d6c025e808",
+     "canPresaleNumber": 3,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-UC1525BJ/C3186512",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 25,
+     "shopCostPrice": 129.72333,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 25.2499,
+     "componentCode": "C3186512",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "UC1525BJ",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8767015098198175744-C3186512-front.jpg?x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5r0Me3R3o9nj5q%2BM1H3iXM4O7hNmojBozz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qe8u6hQ3557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j%2FetZpcPbOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZUOGVwu5ch3ARqAAY500Gx8OPNp7XbOAi77U2ZuxIIWVh5sMBOgU3ltOFZ60sAUJ%2F5%2FVGKbGgt6%2BVEF6k%2FT0VGnE4bYY37ZKOjbH40tDvXF%2B0FQ3Wbx%2FTOP7Tq0iW69caI1VX1pvAU7XUMDiw2ZS9uHfWwGUtO7wQOMuQCkjGd1drvxKfbsCowSaGy3IAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYAzWe3PF8XU1wFmsm77auMjA%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b68c7914381baff5504be3da428c41949981d4cfacd27426bc04f196c3cad896",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2302212109_Texas-Instruments-UC1525BJ_C3186512.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8600719583070605312-C3186512.pdf?response-content-disposition=attachment%3B%20filename%3DC3186512.pdf%3B%20filename%2A%3DUTF-8%27%27C3186512.pdf&x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=02eefbd68ee8ee1df62f83b6513b432c97ecc003026e94ea442b528b63bcb5b2",
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/uc3525b",
+     "componentName": "TI UC1525BJ",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8767015099255410688-C3186512-front.jpg?x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5r0Me3R3o9nj5q%2BM1H3iXM4O7hNmojBozz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qe8u6hQ3557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j%2FetZpcPbOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZUOGVwu5ch3ARqAAY500Gx8OPNp7XbOAi77U2ZuxIIWVh5sMBOgU3ltOFZ60sAUJ%2F5%2FVGKbGgt6%2BVEF6k%2FT0VGnE4bYY37ZKOjbH40tDvXF%2B0FQ3Wbx%2FTOP7Tq0iW69caI1VX1pvAU7XUMDiw2ZS9uHfWwGUtO7wQOMuQCkjGd1drvxKfbsCowSaGy3IAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYAzWe3PF8XU1wFmsm77auMjA%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d4ebec767b266bc30f0e1135484a4408c7aedd4d1fa19c744479d35e7107f798",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DIP-16",
+     "describe": "-55\u2103~+125\u2103 100Hz~400kHz 14mA 2 8V~35V Boost\u3001Flyback\u3001Forward\u3001Push-Pull\u3001Full-Bridge\u3001Half-Bridge Cycle-by-cycle current limiting\u3001Frequency synchronization External Yes DIP-16 AC-DC Controllers and Regulators ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Function",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Synchronous Rectifier",
+       "attribute_value_name": "Yes"
+      },
+      {
+       "attribute_name_en": "Frequency - Switching",
+       "attribute_value_name": "100Hz~400kHz"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "8V~35V"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Output Current",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Quiescent Current",
+       "attribute_value_name": "14mA"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Cycle-by-cycle current limiting\u3001Frequency synchronization"
+      },
+      {
+       "attribute_name_en": "Switch tube (built-in/external)",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Topology",
+       "attribute_value_name": "Boost\u3001Flyback\u3001Forward\u3001Push-Pull\u3001Full-Bridge\u3001Half-Bridge"
+      },
+      {
+       "attribute_name_en": "Output Voltage",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Number of Outputs",
+       "attribute_value_name": "2"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "AC-DC Controllers and Regulators",
+     "secondSortName": "Power Management (PMIC)",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "U<span class='lucene_highlight_class'>C1525</span>BJ",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 24051180,
+     "componentLibraryType": "expand",
+     "stockCount": 5,
+     "componentTypeEn": "DC-DC Converters",
+     "erpComponentName": "\u8c03\u8282\u8109\u5bbd\u8c03\u5236\u5668",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/dc-dc-converters_texas-instruments-uc1525aj_C22427536.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 33.9498
+      },
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 33.9498
+      },
+      {
+       "startNumber": 5,
+       "endNumber": 24,
+       "productPrice": 33.9498
+      },
+      {
+       "startNumber": 25,
+       "endNumber": 26,
+       "productPrice": 32.4988
+      },
+      {
+       "startNumber": 27,
+       "endNumber": 28,
+       "productPrice": 32.4988
+      },
+      {
+       "startNumber": 29,
+       "endNumber": -1,
+       "productPrice": 32.4988
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 32.704
+      },
+      {
+       "startNumber": 5,
+       "endNumber": 24,
+       "productPrice": 32.704
+      },
+      {
+       "startNumber": 29,
+       "endNumber": -1,
+       "productPrice": 31.3062
+      },
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 32.704
+      },
+      {
+       "startNumber": 25,
+       "endNumber": 26,
+       "productPrice": 31.3062
+      },
+      {
+       "startNumber": 27,
+       "endNumber": 28,
+       "productPrice": 31.3062
+      }
+     ],
+     "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
+     "secondSortAccessId": "9023cccfe13e4581b60de0d6c025e808",
+     "canPresaleNumber": 5,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-UC1525AJ/C22427536",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 25,
+     "shopCostPrice": 177.166,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 33.9498,
+     "componentCode": "C22427536",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "UC1525AJ",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/lit/ds/symlink/uc1525a.pdf",
+     "componentName": "TI UC1525AJ",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DIP-16",
+     "describe": "-55\u2103~+125\u2103 100Hz~400kHz 2 20mA 500mA 8V~35V External Push-Pull DIP-16 DC-DC Converters ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Frequency - Switching",
+       "attribute_value_name": "100Hz~400kHz"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "8V~35V"
+      },
+      {
+       "attribute_name_en": "Output Current",
+       "attribute_value_name": "500mA"
+      },
+      {
+       "attribute_name_en": "Quiescent Current",
+       "attribute_value_name": "20mA"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Cycle-by-cycle current limiting\u3001Frequency synchronization"
+      },
+      {
+       "attribute_name_en": "Switch tube (built-in/external)",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Topology",
+       "attribute_value_name": "Push-Pull"
+      },
+      {
+       "attribute_name_en": "Number of Outputs",
+       "attribute_value_name": "2"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "DC-DC Converters",
+     "secondSortName": "Power Management (PMIC)",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "U<span class='lucene_highlight_class'>C1525</span>AJ",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 37574112,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "AC-DC Controllers and Regulators",
+     "erpComponentName": "UC1525AL",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 34.5083
+      },
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 34.5083
+      },
+      {
+       "startNumber": 5,
+       "endNumber": 44,
+       "productPrice": 34.5083
+      },
+      {
+       "startNumber": 45,
+       "endNumber": 46,
+       "productPrice": 32.995
+      },
+      {
+       "startNumber": 47,
+       "endNumber": 48,
+       "productPrice": 32.995
+      },
+      {
+       "startNumber": 49,
+       "endNumber": -1,
+       "productPrice": 32.995
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 5,
+       "endNumber": 44,
+       "productPrice": 33.242
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 33.242
+      },
+      {
+       "startNumber": 45,
+       "endNumber": 46,
+       "productPrice": 31.7842
+      },
+      {
+       "startNumber": 49,
+       "endNumber": -1,
+       "productPrice": 31.7842
+      },
+      {
+       "startNumber": 47,
+       "endNumber": 48,
+       "productPrice": 31.7842
+      },
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 33.242
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-UC1525AL/C35849606",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 45,
+     "shopCostPrice": 184.8235,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 34.5083,
+     "componentCode": "C35849606",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "UC1525AL",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763173989046718464-C35849606-front.jpg?x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5r0Me3R3o9nj5q%2BM1H3iXM4O7hNmojBozz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qe8u6hQ3557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j%2FetZpcPbOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZUOGVwu5ch3ARqAAY500Gx8OPNp7XbOAi77U2ZuxIIWVh5sMBOgU3ltOFZ60sAUJ%2F5%2FVGKbGgt6%2BVEF6k%2FT0VGnE4bYY37ZKOjbH40tDvXF%2B0FQ3Wbx%2FTOP7Tq0iW69caI1VX1pvAU7XUMDiw2ZS9uHfWwGUtO7wQOMuQCkjGd1drvxKfbsCowSaGy3IAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYAzWe3PF8XU1wFmsm77auMjA%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=ef7afabf997b7fd880164ef460cb269ee943405ad98bda3abf4c4531f1455b4b",
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TI UC1525AL",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763173990179586048-C35849606-front.jpg?x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5r0Me3R3o9nj5q%2BM1H3iXM4O7hNmojBozz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qe8u6hQ3557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j%2FetZpcPbOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZUOGVwu5ch3ARqAAY500Gx8OPNp7XbOAi77U2ZuxIIWVh5sMBOgU3ltOFZ60sAUJ%2F5%2FVGKbGgt6%2BVEF6k%2FT0VGnE4bYY37ZKOjbH40tDvXF%2B0FQ3Wbx%2FTOP7Tq0iW69caI1VX1pvAU7XUMDiw2ZS9uHfWwGUtO7wQOMuQCkjGd1drvxKfbsCowSaGy3IAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYAzWe3PF8XU1wFmsm77auMjA%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9ba66856fb2bdc0f4ba5056b2202034d94b812a12ab270d166408e1dc03db59f",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LCCC-20",
+     "describe": "LCCC-20 AC-DC Controllers and Regulators ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "AC-DC Controllers and Regulators",
+     "secondSortName": "Power Management (PMIC)",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "U<span class='lucene_highlight_class'>C1525</span>AL",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 24120111,
+     "componentLibraryType": "expand",
+     "stockCount": 5,
+     "componentTypeEn": "AC-DC Controllers and Regulators",
+     "erpComponentName": "8V~35V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 52.9237
+      },
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 52.9237
+      },
+      {
+       "startNumber": 5,
+       "endNumber": 29,
+       "productPrice": 52.9237
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 31,
+       "productPrice": 51.1139
+      },
+      {
+       "startNumber": 32,
+       "endNumber": 33,
+       "productPrice": 51.1139
+      },
+      {
+       "startNumber": 34,
+       "endNumber": -1,
+       "productPrice": 51.1139
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 50.9815
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 31,
+       "productPrice": 49.2382
+      },
+      {
+       "startNumber": 34,
+       "endNumber": -1,
+       "productPrice": 49.2382
+      },
+      {
+       "startNumber": 32,
+       "endNumber": 33,
+       "productPrice": 49.2382
+      },
+      {
+       "startNumber": 5,
+       "endNumber": 29,
+       "productPrice": 50.9815
+      },
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 50.9815
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 5,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-UC1525AL883B/C22451596",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 55,
+     "shopCostPrice": 276.18,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 52.9237,
+     "componentCode": "C22451596",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "UC1525AL883B",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com.cn/cn/lit/ds/symlink/uc1525a.pdf",
+     "componentName": "TI UC1525AL883B",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LCCC-20(8.9x8.9)",
+     "describe": "-55\u2103~+125\u2103 100Hz~400kHz 49% 8V~35V Push-Pull LCCC-20(8.9x8.9) AC-DC Controllers and Regulators ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Frequency - Switching",
+       "attribute_value_name": "100Hz~400kHz"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "8V~35V"
+      },
+      {
+       "attribute_name_en": "Output Current",
+       "attribute_value_name": "400mA"
+      },
+      {
+       "attribute_name_en": "Duty Cycle(Max)",
+       "attribute_value_name": "49%"
+      },
+      {
+       "attribute_name_en": "Working Mode",
+       "attribute_value_name": "PWM Modulation"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Under Voltage Protection\u3001Soft-start"
+      },
+      {
+       "attribute_name_en": "Topology",
+       "attribute_value_name": "Push-Pull"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "1000mW"
+      },
+      {
+       "attribute_name_en": "Output Voltage",
+       "attribute_value_name": "5.1V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "AC-DC Controllers and Regulators",
+     "secondSortName": "Power Management (PMIC)",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "U<span class='lucene_highlight_class'>C1525</span>AL883B",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3335665,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SRAM",
+     "erpComponentName": "CY7C1525V18-200BZC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/sram_infineon-cypress-semicon-cy7c1525v18-200bzc_C2949389.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 11.7381
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 11.7381
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 203,
+       "productPrice": 11.7381
+      },
+      {
+       "startNumber": 204,
+       "endNumber": 509,
+       "productPrice": 4.5433
+      },
+      {
+       "startNumber": 510,
+       "endNumber": 1019,
+       "productPrice": 4.3844
+      },
+      {
+       "startNumber": 1020,
+       "endNumber": -1,
+       "productPrice": 4.3042
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 203,
+       "productPrice": 11.3074
+      },
+      {
+       "startNumber": 204,
+       "endNumber": 509,
+       "productPrice": 4.3766
+      },
+      {
+       "startNumber": 510,
+       "endNumber": 1019,
+       "productPrice": 4.2235
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 11.3074
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 11.3074
+      },
+      {
+       "startNumber": 1020,
+       "endNumber": -1,
+       "productPrice": 4.1462
+      }
+     ],
+     "firstSortAccessId": "9b9f940a554b41dfbb16725c834c0a0b",
+     "secondSortAccessId": "e5f33687c82c4ff291f410dddcbaedd5",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "3335665-CY7C1525V18200BZC/C2949389",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 102,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 11.7381,
+     "componentCode": "C2949389",
+     "componentBrandEn": "Infineon/Cypress Semicon",
+     "componentModelEn": "CY7C1525V18-200BZC",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2401241115_Infineon-Cypress-Semicon-CY7C1525V18-200BZC_C2949389.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590221148022734848-C2949389.pdf?response-content-disposition=attachment%3B%20filename%3DC2949389.pdf%3B%20filename%2A%3DUTF-8%27%27C2949389.pdf&x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d6c4938a40ead3e6651b1e96d3f06d2aa65cad84e7446f4bee7fcdac70d13382",
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon/CYPRESS CY7C1525V18-200BZC",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LBGA-165",
+     "describe": "0\u2103~+70\u2103 1.7V~1.9V 72Mbit 750mA Boundary scan (JTAG) function\u3001Built-in delay-locked loop Parallel Port (Parallel) LBGA-165 SRAM",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Access Time",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Memory Size",
+       "attribute_value_name": "72Mbit"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.7V~1.9V"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Boundary scan (JTAG) function\u3001Built-in delay-locked loop"
+      },
+      {
+       "attribute_name_en": "Standby Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Parallel Port (Parallel)"
+      },
+      {
+       "attribute_name_en": "Supply Current (Icc)",
+       "attribute_value_name": "750mA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "SRAM",
+     "secondSortName": "Memory",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "CY7<span class='lucene_highlight_class'>C1525</span>V18-200BZC",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 0,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3335664,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SRAM",
+     "erpComponentName": "CY7C1525V18-200BZXC \u505c\u4ea7",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/sram_infineon-cypress-semicon-cy7c1525v18-200bzxc_C2949388.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 11.7381
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 11.7381
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 11.7381
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 4.5433
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.3844
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 4.3042
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 4.1462
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 4.3766
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 11.3074
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 11.3074
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.2235
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 11.3074
+      }
+     ],
+     "firstSortAccessId": "9b9f940a554b41dfbb16725c834c0a0b",
+     "secondSortAccessId": "e5f33687c82c4ff291f410dddcbaedd5",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "3335664-CY7C1525V18200BZXC/C2949388",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 102,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 11.7381,
+     "componentCode": "C2949388",
+     "componentBrandEn": "Infineon/Cypress Semicon",
+     "componentModelEn": "CY7C1525V18-200BZXC",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon/CYPRESS CY7C1525V18-200BZXC",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LBGA-165",
+     "describe": "LBGA-165 SRAM ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SRAM",
+     "secondSortName": "Memory",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "CY7<span class='lucene_highlight_class'>C1525</span>V18-200BZXC",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3335667,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SRAM",
+     "erpComponentName": "CY7C1525KV18-333BZC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/sram_infineon-cypress-semicon-cy7c1525kv18-333bzc_C2949391.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 13.4856
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 13.4856
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 135,
+       "productPrice": 13.4856
+      },
+      {
+       "startNumber": 136,
+       "endNumber": 543,
+       "productPrice": 5.2197
+      },
+      {
+       "startNumber": 544,
+       "endNumber": 951,
+       "productPrice": 5.0363
+      },
+      {
+       "startNumber": 952,
+       "endNumber": -1,
+       "productPrice": 4.9445
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 135,
+       "productPrice": 12.9907
+      },
+      {
+       "startNumber": 952,
+       "endNumber": -1,
+       "productPrice": 4.7631
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 12.9907
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.9907
+      },
+      {
+       "startNumber": 544,
+       "endNumber": 951,
+       "productPrice": 4.8514
+      },
+      {
+       "startNumber": 136,
+       "endNumber": 543,
+       "productPrice": 5.0281
+      }
+     ],
+     "firstSortAccessId": "9b9f940a554b41dfbb16725c834c0a0b",
+     "secondSortAccessId": "e5f33687c82c4ff291f410dddcbaedd5",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "3335667-CY7C1525KV18333BZC/C2949391",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 136,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 13.4856,
+     "componentCode": "C2949391",
+     "componentBrandEn": "Infineon/Cypress Semicon",
+     "componentModelEn": "CY7C1525KV18-333BZC",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2401241115_Infineon-Cypress-Semicon-CY7C1525KV18-333BZC_C2949391.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590221132592160768-C2949391.pdf?response-content-disposition=attachment%3B%20filename%3DC2949391.pdf%3B%20filename%2A%3DUTF-8%27%27C2949391.pdf&x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=cc113a5d7aaebaae4707794df3072f930e1e9e143615a031916c021b2ed01277",
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon/CYPRESS CY7C1525KV18-333BZC",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LBGA-165",
+     "describe": "0\u2103~+70\u2103 1.7V~1.9V 290mA 72Mbit 790mA Boundary scan (JTAG) function Parallel Port (Parallel) LBGA-165 SRAM ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Memory Size",
+       "attribute_value_name": "72Mbit"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.7V~1.9V"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Boundary scan (JTAG) function"
+      },
+      {
+       "attribute_name_en": "Standby Current (Iq)",
+       "attribute_value_name": "290mA"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Parallel Port (Parallel)"
+      },
+      {
+       "attribute_name_en": "Supply Current (Icc)",
+       "attribute_value_name": "790mA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "SRAM",
+     "secondSortName": "Memory",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "CY7<span class='lucene_highlight_class'>C1525</span>KV18-333BZC",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3335668,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SRAM",
+     "erpComponentName": "CY7C1525KV18-300BZC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/sram_infineon-cypress-semicon-cy7c1525kv18-300bzc_C2949392.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 15.1709
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 15.1709
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 15.1709
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 679,
+       "productPrice": 5.8715
+      },
+      {
+       "startNumber": 680,
+       "endNumber": 1359,
+       "productPrice": 5.6652
+      },
+      {
+       "startNumber": 1360,
+       "endNumber": -1,
+       "productPrice": 5.5636
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 680,
+       "endNumber": 1359,
+       "productPrice": 5.4573
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 14.6142
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 14.6142
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 679,
+       "productPrice": 5.6561
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 14.6142
+      },
+      {
+       "startNumber": 1360,
+       "endNumber": -1,
+       "productPrice": 5.3595
+      }
+     ],
+     "firstSortAccessId": "9b9f940a554b41dfbb16725c834c0a0b",
+     "secondSortAccessId": "e5f33687c82c4ff291f410dddcbaedd5",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "3335668-CY7C1525KV18300BZC/C2949392",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 680,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 15.1709,
+     "componentCode": "C2949392",
+     "componentBrandEn": "Infineon/Cypress Semicon",
+     "componentModelEn": "CY7C1525KV18-300BZC",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590221241367240704-C2949392.pdf?response-content-disposition=attachment%3B%20filename%3DC2949392.pdf%3B%20filename%2A%3DUTF-8%27%27C2949392.pdf&x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=5efd7f3dec2d70c68f525d0967761fc7fc9973923481f934d7066bf2af5cbe57",
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon/CYPRESS CY7C1525KV18-300BZC",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LBGA-165",
+     "describe": "0\u2103~+70\u2103 1.7V~1.9V 72Mbit 730mA Boundary scan (JTAG) function Parallel Port (Parallel) LBGA-165 SRAM ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Memory Size",
+       "attribute_value_name": "72Mbit"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.7V~1.9V"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Boundary scan (JTAG) function"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Parallel Port (Parallel)"
+      },
+      {
+       "attribute_name_en": "Supply Current (Icc)",
+       "attribute_value_name": "730mA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "SRAM",
+     "secondSortName": "Memory",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "CY7<span class='lucene_highlight_class'>C1525</span>KV18-300BZC",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3335671,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SRAM",
+     "erpComponentName": "CY7C1525JV18-250BZC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/sram_infineon-cypress-semicon-cy7c1525jv18-250bzc_C2949395.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 13.7952
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 13.7952
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 209,
+       "productPrice": 13.7952
+      },
+      {
+       "startNumber": 210,
+       "endNumber": 524,
+       "productPrice": 5.3393
+      },
+      {
+       "startNumber": 525,
+       "endNumber": 1049,
+       "productPrice": 5.1509
+      },
+      {
+       "startNumber": 1050,
+       "endNumber": -1,
+       "productPrice": 5.0592
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 210,
+       "endNumber": 524,
+       "productPrice": 5.1433
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 13.2889
+      },
+      {
+       "startNumber": 1050,
+       "endNumber": -1,
+       "productPrice": 4.8735
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 13.2889
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 209,
+       "productPrice": 13.2889
+      },
+      {
+       "startNumber": 525,
+       "endNumber": 1049,
+       "productPrice": 4.9619
+      }
+     ],
+     "firstSortAccessId": "9b9f940a554b41dfbb16725c834c0a0b",
+     "secondSortAccessId": "e5f33687c82c4ff291f410dddcbaedd5",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "3335671-CY7C1525JV18250BZC/C2949395",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 105,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 13.7952,
+     "componentCode": "C2949395",
+     "componentBrandEn": "Infineon/Cypress Semicon",
+     "componentModelEn": "CY7C1525JV18-250BZC",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2401241115_Infineon-Cypress-Semicon-CY7C1525JV18-250BZC_C2949395.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590220617800200192-C2949395.pdf?response-content-disposition=attachment%3B%20filename%3DC2949395.pdf%3B%20filename%2A%3DUTF-8%27%27C2949395.pdf&x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=5b1a1709c61bc99dd02ef7bd5f71c6523cb1d43542df86c8b02c9a5257e79755",
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon/CYPRESS CY7C1525JV18-250BZC",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LBGA-165",
+     "describe": "0\u2103~+70\u2103 1.255A 1.7V~1.9V 365mA 72Mbit Auto power-down function\u3001Boundary scan (JTAG) function\u3001Built-in delay-locked loop Parallel Port (Parallel) LBGA-165 SRAM",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Access Time",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Memory Size",
+       "attribute_value_name": "72Mbit"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.7V~1.9V"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Auto power-down function\u3001Boundary scan (JTAG) function\u3001Built-in delay-locked loop"
+      },
+      {
+       "attribute_name_en": "Standby Current (Iq)",
+       "attribute_value_name": "365mA"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Parallel Port (Parallel)"
+      },
+      {
+       "attribute_name_en": "Supply Current (Icc)",
+       "attribute_value_name": "1.255A"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "SRAM",
+     "secondSortName": "Memory",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "CY7<span class='lucene_highlight_class'>C1525</span>JV18-250BZC",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 0,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3335666,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SRAM",
+     "erpComponentName": "CY7C1525KV18-333BZXC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/sram_infineon-cypress-semicon-cy7c1525kv18-333bzxc_C2949390.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 16.0815
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 16.0815
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 16.0815
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 6.2237
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1359,
+       "productPrice": 6.0058
+      },
+      {
+       "startNumber": 1360,
+       "endNumber": -1,
+       "productPrice": 5.8977
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 500,
+       "endNumber": 1359,
+       "productPrice": 5.7854
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 5.9953
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 15.4914
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 15.4914
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 15.4914
+      },
+      {
+       "startNumber": 1360,
+       "endNumber": -1,
+       "productPrice": 5.6813
+      }
+     ],
+     "firstSortAccessId": "9b9f940a554b41dfbb16725c834c0a0b",
+     "secondSortAccessId": "e5f33687c82c4ff291f410dddcbaedd5",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "3335666-CY7C1525KV18333BZXC/C2949390",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1360,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 16.0815,
+     "componentCode": "C2949390",
+     "componentBrandEn": "Infineon/Cypress Semicon",
+     "componentModelEn": "CY7C1525KV18-333BZXC",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2401241115_Infineon-Cypress-Semicon-CY7C1525KV18-333BZXC_C2949390.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590222366078111744-C2949390.pdf?response-content-disposition=attachment%3B%20filename%3DC2949390.pdf%3B%20filename%2A%3DUTF-8%27%27C2949390.pdf&x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3a9835ec35d6ea64da05955065d8c93148a52933fc85d733a6a025a64b9e733b",
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon/CYPRESS CY7C1525KV18-333BZXC",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "FBGA-165(13x15)",
+     "describe": "0\u2103~+70\u2103 1.7V~1.9V 290mA 72Mbit 790mA Boundary scan (JTAG) function Parallel Port (Parallel) FBGA-165(13x15) SRAM ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Access Time",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Memory Size",
+       "attribute_value_name": "72Mbit"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.7V~1.9V"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Boundary scan (JTAG) function"
+      },
+      {
+       "attribute_name_en": "Standby Current (Iq)",
+       "attribute_value_name": "290mA"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Parallel Port (Parallel)"
+      },
+      {
+       "attribute_name_en": "Supply Current (Icc)",
+       "attribute_value_name": "790mA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "SRAM",
+     "secondSortName": "Memory",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "CY7<span class='lucene_highlight_class'>C1525</span>KV18-333BZXC",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3335669,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SRAM",
+     "erpComponentName": "CY7C1525KV18-250BZXC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/sram_infineon-cypress-semicon-cy7c1525kv18-250bzxc_C2949393.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.6438
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 12.6438
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 135,
+       "productPrice": 12.6438
+      },
+      {
+       "startNumber": 136,
+       "endNumber": 543,
+       "productPrice": 4.8938
+      },
+      {
+       "startNumber": 544,
+       "endNumber": 951,
+       "productPrice": 4.7218
+      },
+      {
+       "startNumber": 952,
+       "endNumber": -1,
+       "productPrice": 4.6366
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 135,
+       "productPrice": 12.1798
+      },
+      {
+       "startNumber": 952,
+       "endNumber": -1,
+       "productPrice": 4.4665
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 12.1798
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.1798
+      },
+      {
+       "startNumber": 544,
+       "endNumber": 951,
+       "productPrice": 4.5485
+      },
+      {
+       "startNumber": 136,
+       "endNumber": 543,
+       "productPrice": 4.7142
+      }
+     ],
+     "firstSortAccessId": "9b9f940a554b41dfbb16725c834c0a0b",
+     "secondSortAccessId": "e5f33687c82c4ff291f410dddcbaedd5",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "3335669-CY7C1525KV18250BZXC/C2949393",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 136,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 12.6438,
+     "componentCode": "C2949393",
+     "componentBrandEn": "Infineon/Cypress Semicon",
+     "componentModelEn": "CY7C1525KV18-250BZXC",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590222412227768320-C2949393.pdf?response-content-disposition=attachment%3B%20filename%3DC2949393.pdf%3B%20filename%2A%3DUTF-8%27%27C2949393.pdf&x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=bb9dac2f383d5663244fb25a3c2442c232069e5ab5a8ce833464b45db23dc45d",
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon/CYPRESS CY7C1525KV18-250BZXC",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LBGA-165",
+     "describe": "0\u2103~+70\u2103 1.7V~1.9V 640mA 72Mbit Boundary scan (JTAG) function Parallel Port (Parallel) LBGA-165 SRAM ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Access Time",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Memory Size",
+       "attribute_value_name": "72Mbit"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.7V~1.9V"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Boundary scan (JTAG) function"
+      },
+      {
+       "attribute_name_en": "Standby Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Parallel Port (Parallel)"
+      },
+      {
+       "attribute_name_en": "Supply Current (Icc)",
+       "attribute_value_name": "640mA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "SRAM",
+     "secondSortName": "Memory",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "CY7<span class='lucene_highlight_class'>C1525</span>KV18-250BZXC",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3335670,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SRAM",
+     "erpComponentName": "CY7C1525JV18-250BZXC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/sram_infineon-cypress-semicon-cy7c1525jv18-250bzxc_C2949394.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 11.0355
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 11.0355
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 209,
+       "productPrice": 11.0355
+      },
+      {
+       "startNumber": 210,
+       "endNumber": 524,
+       "productPrice": 4.2714
+      },
+      {
+       "startNumber": 525,
+       "endNumber": 1049,
+       "productPrice": 4.1207
+      },
+      {
+       "startNumber": 1050,
+       "endNumber": -1,
+       "productPrice": 4.047
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 210,
+       "endNumber": 524,
+       "productPrice": 4.1147
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 10.6305
+      },
+      {
+       "startNumber": 1050,
+       "endNumber": -1,
+       "productPrice": 3.8985
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 10.6305
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 209,
+       "productPrice": 10.6305
+      },
+      {
+       "startNumber": 525,
+       "endNumber": 1049,
+       "productPrice": 3.9695
+      }
+     ],
+     "firstSortAccessId": "9b9f940a554b41dfbb16725c834c0a0b",
+     "secondSortAccessId": "e5f33687c82c4ff291f410dddcbaedd5",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "3335670-CY7C1525JV18250BZXC/C2949394",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 105,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 11.0355,
+     "componentCode": "C2949394",
+     "componentBrandEn": "Infineon/Cypress Semicon",
+     "componentModelEn": "CY7C1525JV18-250BZXC",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2401241115_Infineon-Cypress-Semicon-CY7C1525JV18-250BZXC_C2949394.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590220617787617280-C2949394.pdf?response-content-disposition=attachment%3B%20filename%3DC2949394.pdf%3B%20filename%2A%3DUTF-8%27%27C2949394.pdf&x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=949043a7f4a41864b5d137f9f94293a577f18eebc01dec0c9c8c197fdb33f74a",
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon/CYPRESS CY7C1525JV18-250BZXC",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LBGA-165",
+     "describe": "0\u2103~+70\u2103 1.255A 1.7V~1.9V 365mA 72Mbit Auto power-down function\u3001Boundary scan (JTAG) function\u3001Built-in delay-locked loop Parallel Port (Parallel) LBGA-165 SRAM ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Access Time",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Memory Size",
+       "attribute_value_name": "72Mbit"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.7V~1.9V"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Auto power-down function\u3001Boundary scan (JTAG) function\u3001Built-in delay-locked loop"
+      },
+      {
+       "attribute_name_en": "Standby Current (Iq)",
+       "attribute_value_name": "365mA"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Parallel Port (Parallel)"
+      },
+      {
+       "attribute_name_en": "Supply Current (Icc)",
+       "attribute_value_name": "1.255A"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "SRAM",
+     "secondSortName": "Memory",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "CY7<span class='lucene_highlight_class'>C1525</span>JV18-250BZXC",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3336905,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SRAM",
+     "erpComponentName": "CY7C1525KV18-300BZXC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/sram_infineon-cypress-semicon-cy7c1525kv18-300bzxc_C2950628.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 14.0982
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 14.0982
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 135,
+       "productPrice": 14.0982
+      },
+      {
+       "startNumber": 136,
+       "endNumber": 543,
+       "productPrice": 5.4572
+      },
+      {
+       "startNumber": 544,
+       "endNumber": 951,
+       "productPrice": 5.2639
+      },
+      {
+       "startNumber": 952,
+       "endNumber": -1,
+       "productPrice": 5.1706
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 135,
+       "productPrice": 13.5808
+      },
+      {
+       "startNumber": 952,
+       "endNumber": -1,
+       "productPrice": 4.9808
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 13.5808
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 13.5808
+      },
+      {
+       "startNumber": 544,
+       "endNumber": 951,
+       "productPrice": 5.0707
+      },
+      {
+       "startNumber": 136,
+       "endNumber": 543,
+       "productPrice": 5.2569
+      }
+     ],
+     "firstSortAccessId": "9b9f940a554b41dfbb16725c834c0a0b",
+     "secondSortAccessId": "e5f33687c82c4ff291f410dddcbaedd5",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "3336905-CY7C1525KV18300BZXC/C2950628",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 136,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 14.0982,
+     "componentCode": "C2950628",
+     "componentBrandEn": "Infineon/Cypress Semicon",
+     "componentModelEn": "CY7C1525KV18-300BZXC",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2401241123_Infineon-Cypress-Semicon-CY7C1525KV18-300BZXC_C2950628.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590220648384389120-C2950628.pdf?response-content-disposition=attachment%3B%20filename%3DC2950628.pdf%3B%20filename%2A%3DUTF-8%27%27C2950628.pdf&x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9b510cef1791b3cd4e03804191649a00e60ff0abd77cd20eddcbaac374aa1d92",
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon/CYPRESS CY7C1525KV18-300BZXC",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LBGA-165",
+     "describe": "0\u2103~+70\u2103 1.7V~1.9V 280mA 72Mbit 730mA Boundary scan (JTAG) function Parallel Port (Parallel) LBGA-165 SRAM ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Memory Size",
+       "attribute_value_name": "72Mbit"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.7V~1.9V"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Boundary scan (JTAG) function"
+      },
+      {
+       "attribute_name_en": "Standby Current (Iq)",
+       "attribute_value_name": "280mA"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Parallel Port (Parallel)"
+      },
+      {
+       "attribute_name_en": "Supply Current (Icc)",
+       "attribute_value_name": "730mA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "SRAM",
+     "secondSortName": "Memory",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "CY7<span class='lucene_highlight_class'>C1525</span>KV18-300BZXC",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3339117,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SRAM",
+     "erpComponentName": "CY7C1525KV18-250BZXIT",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/sram_infineon-cypress-semicon-cy7c1525kv18-250bzxit_C2952839.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.6438
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 12.6438
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 12.6438
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 4.8938
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.7218
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 4.6366
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 4.4665
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 4.7142
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 12.1798
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 12.1798
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.1798
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.5485
+      }
+     ],
+     "firstSortAccessId": "9b9f940a554b41dfbb16725c834c0a0b",
+     "secondSortAccessId": "e5f33687c82c4ff291f410dddcbaedd5",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "3339117-CY7C1525KV18250BZXIT/C2952839",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 12.6438,
+     "componentCode": "C2952839",
+     "componentBrandEn": "Infineon/Cypress Semicon",
+     "componentModelEn": "CY7C1525KV18-250BZXIT",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2401241123_Infineon-Cypress-Semicon-CY7C1525KV18-250BZXIT_C2952839.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590221223633182720-C2952839.pdf?response-content-disposition=attachment%3B%20filename%3DC2952839.pdf%3B%20filename%2A%3DUTF-8%27%27C2952839.pdf&x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fa24d60279655b137c7006b504a2004dfc036ef5a657fd97d066a55d5fe305db",
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon/CYPRESS CY7C1525KV18-250BZXIT",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "FBGA-165(13x15)",
+     "describe": "-40\u2103~+85\u2103 1.7V~1.9V 270mA 640mA 72Mbit Boundary scan (JTAG) function Parallel Port (Parallel) FBGA-165(13x15) SRAM ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Memory Size",
+       "attribute_value_name": "72Mbit"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.7V~1.9V"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Boundary scan (JTAG) function"
+      },
+      {
+       "attribute_name_en": "Standby Current (Iq)",
+       "attribute_value_name": "270mA"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Parallel Port (Parallel)"
+      },
+      {
+       "attribute_name_en": "Supply Current (Icc)",
+       "attribute_value_name": "640mA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "SRAM",
+     "secondSortName": "Memory",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "CY7<span class='lucene_highlight_class'>C1525</span>KV18-250BZXIT",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3341310,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SRAM",
+     "erpComponentName": "CY7C1525JV18-250BZCES",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/sram_infineon-cypress-semicon-cy7c1525jv18-250bzces_C2955032.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.5178
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 5.5178
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 5.5178
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 2.1357
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.0604
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.0244
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.9501
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 2.0574
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 5.3153
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.3153
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.9848
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 5.3153
+      }
+     ],
+     "firstSortAccessId": "9b9f940a554b41dfbb16725c834c0a0b",
+     "secondSortAccessId": "e5f33687c82c4ff291f410dddcbaedd5",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "3341310-CY7C1525JV18250BZCES/C2955032",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 25,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 5.5178,
+     "componentCode": "C2955032",
+     "componentBrandEn": "Infineon/Cypress Semicon",
+     "componentModelEn": "CY7C1525JV18-250BZCES",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590222462400573440-C2955032.pdf?response-content-disposition=attachment%3B%20filename%3DC2955032.pdf%3B%20filename%2A%3DUTF-8%27%27C2955032.pdf&x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d3f733e1351d71fcf3eb0b7b421e7e5bbd5768e6013e8099446b8980bfeb8b0b",
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon/CYPRESS CY7C1525JV18-250BZCES",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "FBGA-165(15x17)",
+     "describe": "0\u2103~+70\u2103 1.255A 1.7V~1.9V 365mA 72Mbit Boundary scan (JTAG) function\u3001Built-in delay-locked loop Parallel Port (Parallel) FBGA-165(15x17) SRAM ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Access Time",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Memory Size",
+       "attribute_value_name": "72Mbit"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.7V~1.9V"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Boundary scan (JTAG) function\u3001Built-in delay-locked loop"
+      },
+      {
+       "attribute_name_en": "Standby Current (Iq)",
+       "attribute_value_name": "365mA"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Parallel Port (Parallel)"
+      },
+      {
+       "attribute_name_en": "Supply Current (Icc)",
+       "attribute_value_name": "1.255A"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "SRAM",
+     "secondSortName": "Memory",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "CY7<span class='lucene_highlight_class'>C1525</span>JV18-250BZCES",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21617689,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Programmable Oscillators",
+     "erpComponentName": "DSC1525JL2A-24M00000T",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/programmable-oscillators_microchip-tech-dsc1525jl2a-24m00000t_C20291151.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.4715
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 2.4715
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 2.4715
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.986
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.9532
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.9369
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.9025
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.9498
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 2.3808
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 2.3808
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.3808
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.9183
+      }
+     ],
+     "firstSortAccessId": "fef7fb84489e4849acf8e6b9cb97ff9f",
+     "secondSortAccessId": "ab8cef3ec523481d8a33f964ba4a093c",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "21617689-DSC1525JL2A24M00000T/C20291151",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 4,
+     "minPurchaseNum": 4,
+     "initialPrice": 2.4715,
+     "componentCode": "C20291151",
+     "componentBrandEn": "Microchip Tech",
+     "componentModelEn": "DSC1525JL2A-24M00000T",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401240917_Microchip-Tech-DSC1525JL2A-24M00000T_C20291151.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8604326067901374464-C20291151.pdf?response-content-disposition=attachment%3B%20filename%3DC20291151.pdf%3B%20filename%2A%3DUTF-8%27%27C20291151.pdf&x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a3b2bcf067bdb8321fa070103aecbfc3a566794e46c6ee0fdadc6fc7a6651b5c",
+     "dataManualOfficialLink": "",
+     "componentName": "MICROCHIP DSC1525JL2A-24M00000T",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Programmable Oscillators ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Programmable Oscillators",
+     "secondSortName": "Crystals, Oscillators, Resonators",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "DS<span class='lucene_highlight_class'>C1525</span>JL2A-24M00000T",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21617690,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Programmable Oscillators",
+     "erpComponentName": "DSC1525JL2A-25M00000T",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/programmable-oscillators_microchip-tech-dsc1525jl2a-25m00000t_C20291152.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.4715
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 2.4715
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 2.4715
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.986
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.9532
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.9369
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.9025
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.9498
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 2.3808
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 2.3808
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.3808
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.9183
+      }
+     ],
+     "firstSortAccessId": "fef7fb84489e4849acf8e6b9cb97ff9f",
+     "secondSortAccessId": "ab8cef3ec523481d8a33f964ba4a093c",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "21617690-DSC1525JL2A25M00000T/C20291152",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 4,
+     "minPurchaseNum": 4,
+     "initialPrice": 2.4715,
+     "componentCode": "C20291152",
+     "componentBrandEn": "Microchip Tech",
+     "componentModelEn": "DSC1525JL2A-25M00000T",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401240917_Microchip-Tech-DSC1525JL2A-25M00000T_C20291152.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8604337556272672768-C20291152.pdf?response-content-disposition=attachment%3B%20filename%3DC20291152.pdf%3B%20filename%2A%3DUTF-8%27%27C20291152.pdf&x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=332a29908ee6ecb51d6506bacf02f83649bc57d89a8d09d32520f20c4da1b8a9",
+     "dataManualOfficialLink": "",
+     "componentName": "MICROCHIP DSC1525JL2A-25M00000T",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Programmable Oscillators ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Programmable Oscillators",
+     "secondSortName": "Crystals, Oscillators, Resonators",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "DS<span class='lucene_highlight_class'>C1525</span>JL2A-25M00000T",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21617691,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Programmable Oscillators",
+     "erpComponentName": "DSC1525JL2A-27M00000T",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/programmable-oscillators_microchip-tech-dsc1525jl2a-27m00000t_C20291153.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.4715
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 2.4715
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 2.4715
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.986
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.9532
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.9369
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.9025
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.9498
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 2.3808
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 2.3808
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.3808
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.9183
+      }
+     ],
+     "firstSortAccessId": "fef7fb84489e4849acf8e6b9cb97ff9f",
+     "secondSortAccessId": "ab8cef3ec523481d8a33f964ba4a093c",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "21617691-DSC1525JL2A27M00000T/C20291153",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 4,
+     "minPurchaseNum": 4,
+     "initialPrice": 2.4715,
+     "componentCode": "C20291153",
+     "componentBrandEn": "Microchip Tech",
+     "componentModelEn": "DSC1525JL2A-27M00000T",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401240917_Microchip-Tech-DSC1525JL2A-27M00000T_C20291153.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8604326935003099136-C20291153.pdf?response-content-disposition=attachment%3B%20filename%3DC20291153.pdf%3B%20filename%2A%3DUTF-8%27%27C20291153.pdf&x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=7a593e3595430c4e2eea443ab70b85da532ac1f6dbc1f23c9e33765dece52b53",
+     "dataManualOfficialLink": "",
+     "componentName": "MICROCHIP DSC1525JL2A-27M00000T",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Programmable Oscillators ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Programmable Oscillators",
+     "secondSortName": "Crystals, Oscillators, Resonators",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "DS<span class='lucene_highlight_class'>C1525</span>JL2A-27M00000T",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21617692,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Programmable Oscillators",
+     "erpComponentName": "DSC1525JL2A-50M00000T",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/programmable-oscillators_microchip-tech-dsc1525jl2a-50m00000t_C20291154.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.4715
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 2.4715
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 2.4715
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.986
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.9532
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.9369
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.9025
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.9498
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 2.3808
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 2.3808
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.3808
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.9183
+      }
+     ],
+     "firstSortAccessId": "fef7fb84489e4849acf8e6b9cb97ff9f",
+     "secondSortAccessId": "ab8cef3ec523481d8a33f964ba4a093c",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "21617692-DSC1525JL2A50M00000T/C20291154",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 4,
+     "minPurchaseNum": 4,
+     "initialPrice": 2.4715,
+     "componentCode": "C20291154",
+     "componentBrandEn": "Microchip Tech",
+     "componentModelEn": "DSC1525JL2A-50M00000T",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401240917_Microchip-Tech-DSC1525JL2A-50M00000T_C20291154.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8604340106933522432-C20291154.pdf?response-content-disposition=attachment%3B%20filename%3DC20291154.pdf%3B%20filename%2A%3DUTF-8%27%27C20291154.pdf&x-oss-date=20261118T114439Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=bc847dffc118b7573e911d87428bcdf60062f36bf810863228b748d585541466",
+     "dataManualOfficialLink": "",
+     "componentName": "MICROCHIP DSC1525JL2A-50M00000T",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Programmable Oscillators ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Programmable Oscillators",
+     "secondSortName": "Crystals, Oscillators, Resonators",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "DS<span class='lucene_highlight_class'>C1525</span>JL2A-50M00000T",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C1525"
+ },
+ "message": null
+}
