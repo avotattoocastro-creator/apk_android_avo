@@ -1,31 +1,35 @@
 # AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `d87d7c18813bd65e966bc6e4411af8de7e182b60` · ejecución de CI: 44338247204
+- Commit: `93ed5cda600819c088dc2ec78357b0b3df9f7301` · ejecución de CI: 44340278313
 - Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 56 × 56 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo bajo la URTK1.2, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 129 en total, 106 para montar, 1 sin montar (DNP: C69), 22 a mano (pads de hilo y de prueba)
-- Pistas: 1005 · vías: 167 · ruteado INCOMPLETO (6 conexiones)
+- Pistas: 1009 · vías: 168 · ruteado INCOMPLETO (4 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | **FALLA** | 3 |
-| DRC: conexiones incompletas | **FALLA** | 6 |
+| DRC: conexiones incompletas | **FALLA** | 4 |
 | DRC: cortocircuitos | correcto | 0 |
-| DRC: paridad esquema ↔ placa | correcto | 0 |
+| DRC: paridad esquema ↔ placa | **FALLA** | 4 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
 Errores de DRC por tipo: copper_edge_clearance 3
 
 ### Conexiones incompletas
-- Pad 2 [+3V3] of R9 on F.Cu ↔ Pad 2 [+3V3] of R10 on F.Cu
-- Track [+3V3] on F.Cu, length 0.9178 mm ↔ Pad 2 [+3V3] of R10 on F.Cu
-- Track [+3V3] on F.Cu, length 0.3138 mm ↔ Pad 5 [+3V3] of U13 on F.Cu
+- Track [+3V3] on F.Cu, length 0.5445 mm ↔ Pad 5 [+3V3] of U13 on F.Cu
+- Track [VSYS] on In2.Cu, length 1.6467 mm ↔ Track [VSYS] on F.Cu, length 0.2510 mm
 - Pad 3 [LED_D4] of D12 on F.Cu ↔ Pad 1 [LED_D4] of D13 on F.Cu
-- Track [VLED] on F.Cu, length 0.0183 mm ↔ Track [VLED] on F.Cu, length 0.8781 mm
-- Track [VLED] on F.Cu, length 1.0324 mm ↔ Track [VLED] on F.Cu, length 1.0324 mm
+- Pad 1 [VLED] of C96 on F.Cu ↔ Track [VLED] on F.Cu, length 0.9345 mm
+
+### Paridad esquema ↔ placa
+- extra_footprint: Extra footprint
+- extra_footprint: Extra footprint
+- extra_footprint: Extra footprint
+- extra_footprint: Extra footprint
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 3

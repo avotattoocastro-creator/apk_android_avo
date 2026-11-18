@@ -1,72 +1,87 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-11-18T15:46:38+0000",
+    "date": "2026-11-18T15:54:52+0000",
     "included_severities": [
         "error",
         "warning",
         "exclusion"
     ],
     "kicad_version": "9.0.9",
-    "schematic_parity": [],
+    "schematic_parity": [
+        {
+            "description": "Extra footprint",
+            "items": [
+                {
+                    "description": "Footprint J14",
+                    "pos": {
+                        "x": 80.0,
+                        "y": 123.0
+                    },
+                    "uuid": "ac6b9774-88b6-5172-9dca-dc32d12aef7b"
+                }
+            ],
+            "severity": "warning",
+            "type": "extra_footprint"
+        },
+        {
+            "description": "Extra footprint",
+            "items": [
+                {
+                    "description": "Footprint J12",
+                    "pos": {
+                        "x": 120.0,
+                        "y": 77.0
+                    },
+                    "uuid": "b35aa71e-3409-57e1-94b1-2fec82e608c1"
+                }
+            ],
+            "severity": "warning",
+            "type": "extra_footprint"
+        },
+        {
+            "description": "Extra footprint",
+            "items": [
+                {
+                    "description": "Footprint J15",
+                    "pos": {
+                        "x": 120.0,
+                        "y": 123.0
+                    },
+                    "uuid": "d4732f94-bdbb-5e10-a1ec-b03a7a097123"
+                }
+            ],
+            "severity": "warning",
+            "type": "extra_footprint"
+        },
+        {
+            "description": "Extra footprint",
+            "items": [
+                {
+                    "description": "Footprint J13",
+                    "pos": {
+                        "x": 80.0,
+                        "y": 77.0
+                    },
+                    "uuid": "ec73e22a-cf38-5e80-b782-4751abdbd3aa"
+                }
+            ],
+            "severity": "warning",
+            "type": "extra_footprint"
+        }
+    ],
     "source": "AVO_BACK_V5P_PCB.kicad_pcb",
     "unconnected_items": [
         {
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 2 [+3V3] of R9 on F.Cu",
+                    "description": "Track [+3V3] on F.Cu, length 0.5445 mm",
                     "pos": {
-                        "x": 109.55,
-                        "y": 95.36
+                        "x": 113.1066,
+                        "y": 90.4334
                     },
-                    "uuid": "8b8082cb-1bf9-5ec9-b0a3-158a035f7de1"
-                },
-                {
-                    "description": "Pad 2 [+3V3] of R10 on F.Cu",
-                    "pos": {
-                        "x": 109.5,
-                        "y": 93.12
-                    },
-                    "uuid": "d325dbbd-fe55-5cc7-a4ab-7c61eeb56b04"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Track [+3V3] on F.Cu, length 0.9178 mm",
-                    "pos": {
-                        "x": 113.029,
-                        "y": 90.511
-                    },
-                    "uuid": "5558b994-55e9-4c29-9387-97191c388216"
-                },
-                {
-                    "description": "Pad 2 [+3V3] of R10 on F.Cu",
-                    "pos": {
-                        "x": 109.5,
-                        "y": 93.12
-                    },
-                    "uuid": "d325dbbd-fe55-5cc7-a4ab-7c61eeb56b04"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Track [+3V3] on F.Cu, length 0.3138 mm",
-                    "pos": {
-                        "x": 114.0527,
-                        "y": 90.7329
-                    },
-                    "uuid": "b34e381a-a3cd-4af8-96eb-05b7c9c80df4"
+                    "uuid": "760bec6e-45a9-42ec-bbe2-ea0663fbd7c1"
                 },
                 {
                     "description": "Pad 5 [+3V3] of U13 on F.Cu",
@@ -75,6 +90,29 @@
                         "y": 89.9125
                     },
                     "uuid": "2bc2cfe8-dce5-5594-960a-feab13086669"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [VSYS] on In2.Cu, length 1.6467 mm",
+                    "pos": {
+                        "x": 85.7567,
+                        "y": 83.8253
+                    },
+                    "uuid": "f2b50d0f-40d9-41e8-a064-09374ceb86d6"
+                },
+                {
+                    "description": "Track [VSYS] on F.Cu, length 0.2510 mm",
+                    "pos": {
+                        "x": 112.8625,
+                        "y": 83.05
+                    },
+                    "uuid": "399ddb12-4ecd-43d9-9a8f-de505a4e0d54"
                 }
             ],
             "severity": "error",
@@ -107,43 +145,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Track [VLED] on F.Cu, length 0.0183 mm",
+                    "description": "Pad 1 [VLED] of C96 on F.Cu",
                     "pos": {
-                        "x": 75.1417,
+                        "x": 75.16,
                         "y": 112.03
                     },
-                    "uuid": "b4ba4bc1-7dc5-4e88-ac8f-30951d491649"
+                    "uuid": "857cdd65-7da6-56a2-b2b7-b0cceaf73d27"
                 },
                 {
-                    "description": "Track [VLED] on F.Cu, length 0.8781 mm",
+                    "description": "Track [VLED] on F.Cu, length 0.9345 mm",
                     "pos": {
-                        "x": 89.8409,
-                        "y": 124.2291
+                        "x": 87.8808,
+                        "y": 124.1892
                     },
-                    "uuid": "7fb57802-c1be-499f-9abc-2fbed765c990"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Track [VLED] on F.Cu, length 1.0324 mm",
-                    "pos": {
-                        "x": 87.72,
-                        "y": 75.14
-                    },
-                    "uuid": "b12cb67e-70b1-4c9d-9a22-dd4cad911d88"
-                },
-                {
-                    "description": "Track [VLED] on F.Cu, length 1.0324 mm",
-                    "pos": {
-                        "x": 111.72,
-                        "y": 75.14
-                    },
-                    "uuid": "96515283-61d6-4ff6-825b-e82838865d0f"
+                    "uuid": "6708c9d2-46fe-496b-b037-6eda4d71ae1c"
                 }
             ],
             "severity": "error",
@@ -163,12 +178,35 @@
                     "uuid": "d3ebe89f-8dd2-5fd1-accc-5f07109addbe"
                 },
                 {
+                    "description": "Track [LED_D2] on F.Cu, length 25.1062 mm",
+                    "pos": {
+                        "x": 113.0556,
+                        "y": 72.3889
+                    },
+                    "uuid": "2eb5554d-6509-4460-a1f0-cf09537e5b0f"
+                }
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+        },
+        {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2889 mm)",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 125.0,
+                        "y": 72.0
+                    },
+                    "uuid": "d3ebe89f-8dd2-5fd1-accc-5f07109addbe"
+                },
+                {
                     "description": "Track [LED_D2] on F.Cu, length 0.7345 mm",
                     "pos": {
                         "x": 113.575,
                         "y": 72.9083
                     },
-                    "uuid": "09a2ae35-2c79-41bb-bf3d-58a99195452f"
+                    "uuid": "31932de6-2fd6-4506-b7b6-76091b542a34"
                 }
             ],
             "severity": "error",
@@ -191,30 +229,7 @@
                         "x": 87.9494,
                         "y": 72.3889
                     },
-                    "uuid": "2ea75aaa-0a3f-45e0-ac2a-22f76de3ff2b"
-                }
-            ],
-            "severity": "error",
-            "type": "copper_edge_clearance"
-        },
-        {
-            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2889 mm)",
-            "items": [
-                {
-                    "description": "Segment on Edge.Cuts",
-                    "pos": {
-                        "x": 125.0,
-                        "y": 72.0
-                    },
-                    "uuid": "d3ebe89f-8dd2-5fd1-accc-5f07109addbe"
-                },
-                {
-                    "description": "Track [LED_D2] on F.Cu, length 25.1062 mm",
-                    "pos": {
-                        "x": 113.0556,
-                        "y": 72.3889
-                    },
-                    "uuid": "485a8faf-52f9-4a69-8a0b-9b16c616aae4"
+                    "uuid": "96f307b6-3e94-4de6-912a-88c5da67b99b"
                 }
             ],
             "severity": "error",
@@ -256,8 +271,8 @@
                 {
                     "description": "Circle of L71 on F.Silkscreen",
                     "pos": {
-                        "x": 82.49,
-                        "y": 85.6
+                        "x": 82.61,
+                        "y": 85.21
                     },
                     "uuid": "1ec29901-7234-5476-b473-5ac1a478a2e4"
                 }
