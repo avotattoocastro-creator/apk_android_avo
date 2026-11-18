@@ -24,6 +24,19 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-18 — Casco BETA BACK V5 — PCB REV B: salida de la microSD libre y CPL corregido para JLC
+**Autor:** Claude · Rama `feature/back-v5-casco`
+**Qué cambia:**
+- El LED D14 estaba delante de la ranura de la microSD (DM3AT «push-pull»: la tarjeta sobresale hasta el canto).
+  D14 pasa al lateral derecho (23,75; −17), los pads del pogo se desplazan 1 mm a la izquierda y la franja de la
+  tarjeta queda reservada (el generador da error si alguna pieza entra en ella). Se vuelve a rutear en el CI.
+- CPL: `fuente/jlc_correcciones.py` (método de la cincha REV D) + `jlc.py` aplica giro y centro de la huella de JLC.
+  ZED-F9P +270°, LSM6DSV16X +180°, SOT-23 +180°, SOT-23-5/6 +270°, WROOM-1U desplazamiento de 0,63 mm.
+**Por qué:** vista previa de JLC del usuario (18/11, 08:58–08:59): ZED girado, IMU girada y SD tapada por el LED.
+**Validación:** colocación local sin errores; ruteado y DRC en el CI (ver el PR). **NO VERIFICADO.**
+
+---
+
 ## 2026-11-17 — Casco BETA BACK V5 — PCB REV B (PSRAM, apagado total por táctil, anillo a 4,3 V, medidor, IMU) y CAD REV B
 **Autor:** Claude · Rama `feature/back-v5-casco` (sale de `develop` `c3a9778`) · **Commits:** `2e46518` … ver PR
 **CI:** PCB `build-back-v5-pcb.yml`: rondas de Freerouting 44171321366 … 44210170067 (correcciones abajo) y **puerta

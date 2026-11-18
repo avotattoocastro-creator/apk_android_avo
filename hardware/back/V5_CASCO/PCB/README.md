@@ -20,6 +20,14 @@ incompletas, paridad 0, ERC 0/0. Ficheros en `out/FINAL/`. **No fabricada. No ve
 ≈ 1,5 µA + XC6206 ≈ 1 µA + BQ24072 ≈ 6,5 µA + divisor del ADC ≈ 2 µA. Del orden de 50 µA: años de reposo con 2000 mAh.
 Hay que medirlo.
 
+### Montaje y JLC (18/11/2026)
+- **microSD «push-pull»:** la tarjeta sobresale del conector hasta el canto inferior de la placa. Esa franja queda sin
+  piezas (comprobación en el generador). El LED D14 pasa al lateral derecho (23,75; −17) y los pads del pogo se
+  desplazan 1 mm a la izquierda (P5 quedaba delante de la tarjeta). La tarjeta se pone con la placa fuera de la cápsula.
+- **CPL corregido** con `fuente/jlc_correcciones.py` (como la cincha REV D): ZED-F9P +270°, IMU +180°, SOT-23 +180°,
+  SOT-23-5/6 +270°, WROOM con su origen desplazado 0,63 mm. Ver `fuente/jlc_correcciones.json` (notas de los ajustes a
+  mano). Comprobar igualmente la vista previa de JLC antes de pagar.
+
 ### Firmware (BACK 5.x, sin escribir)
 - Al arrancar: subir **POWER_HOLD (GPIO46)** cuanto antes y comprobar la pulsación larga en **TOUCH_SENSE (GPIO11)**; si
   no llega a ~2 s, soltar POWER_HOLD (apagado). Mantener GPIO46 con `gpio_hold` en el sueño profundo.

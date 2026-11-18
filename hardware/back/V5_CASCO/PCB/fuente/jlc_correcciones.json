@@ -1,0 +1,866 @@
+{
+ "C18": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C19": {
+  "err": 0.075,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C20": {
+  "err": 0.075,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C21": {
+  "err": 0.075,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C22": {
+  "err": 0.05,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C24": {
+  "err": 0.05,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C25": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C26": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C27": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C34": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C35": {
+  "err": 0.05,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C36": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C37": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C38": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C40": {
+  "err": 0.075,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C41": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C60": {
+  "err": 0.075,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C61": {
+  "err": 0.05,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C62": {
+  "err": 0.05,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C63": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C64": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C65": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C66": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C67": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C68": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C71": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C80": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C90": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C91": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C92": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C93": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C94": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C95": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C96": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C97": {
+  "err": 0.06,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C98": {
+  "err": 0.075,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "C99": {
+  "err": 0.05,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "D10": {
+  "err": 0.225,
+  "nota": "huella propia del SK6812SIDE-A según la hoja; diferencia de 0,2 en el tamaño de los pads, sin giro",
+  "off": [
+   0.0,
+   -0.005
+  ],
+  "rot": 0
+ },
+ "D11": {
+  "err": 0.225,
+  "nota": "huella propia del SK6812SIDE-A según la hoja; diferencia de 0,2 en el tamaño de los pads, sin giro",
+  "off": [
+   0.0,
+   -0.005
+  ],
+  "rot": 0
+ },
+ "D12": {
+  "err": 0.225,
+  "nota": "huella propia del SK6812SIDE-A según la hoja; diferencia de 0,2 en el tamaño de los pads, sin giro",
+  "off": [
+   0.0,
+   -0.005
+  ],
+  "rot": 0
+ },
+ "D13": {
+  "err": 0.225,
+  "nota": "huella propia del SK6812SIDE-A según la hoja; diferencia de 0,2 en el tamaño de los pads, sin giro",
+  "off": [
+   0.0,
+   -0.005
+  ],
+  "rot": 0
+ },
+ "D14": {
+  "err": 0.225,
+  "nota": "huella propia del SK6812SIDE-A según la hoja; diferencia de 0,2 en el tamaño de los pads, sin giro",
+  "off": [
+   0.0,
+   -0.005
+  ],
+  "rot": 0
+ },
+ "D15": {
+  "err": 0.225,
+  "nota": "huella propia del SK6812SIDE-A según la hoja; diferencia de 0,2 en el tamaño de los pads, sin giro",
+  "off": [
+   0.0,
+   -0.005
+  ],
+  "rot": 0
+ },
+ "D16": {
+  "err": 0.225,
+  "nota": "huella propia del SK6812SIDE-A según la hoja; diferencia de 0,2 en el tamaño de los pads, sin giro",
+  "off": [
+   0.0,
+   -0.005
+  ],
+  "rot": 0
+ },
+ "D17": {
+  "err": 0.225,
+  "nota": "huella propia del SK6812SIDE-A según la hoja; diferencia de 0,2 en el tamaño de los pads, sin giro",
+  "off": [
+   0.0,
+   -0.005
+  ],
+  "rot": 0
+ },
+ "D2": {
+  "err": 0.15,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "D3": {
+  "err": 0.15,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "D4": {
+  "err": 0.02,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "D5": {
+  "err": 0.32,
+  "nota": "SOT-23: EasyEDA pone 1-2 a la derecha y 3 a la izquierda; +180 cuadra los 3 pads (el error es la longitud distinta de los pads)",
+  "off": [
+   0.08,
+   0.0
+  ],
+  "rot": 180
+ },
+ "D6": {
+  "err": 0.32,
+  "nota": "SOT-23: EasyEDA pone 1-2 a la derecha y 3 a la izquierda; +180 cuadra los 3 pads (el error es la longitud distinta de los pads)",
+  "off": [
+   0.08,
+   0.0
+  ],
+  "rot": 180
+ },
+ "F1": {
+  "err": 0.05,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "F2": {
+  "err": 0.05,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "L70": {
+  "err": 0.09,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "L71": {
+  "err": 0.0,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "Q4": {
+  "err": 0.2,
+  "nota": "SOT-23: EasyEDA pone 1-2 a la derecha y 3 a la izquierda; +180 cuadra los 3 pads (el error es la longitud distinta de los pads)",
+  "off": [
+   0.05,
+   0.0
+  ],
+  "rot": 180
+ },
+ "Q7": {
+  "err": 0.2,
+  "nota": "SOT-23: EasyEDA pone 1-2 a la derecha y 3 a la izquierda; +180 cuadra los 3 pads (el error es la longitud distinta de los pads)",
+  "off": [
+   0.05,
+   0.0
+  ],
+  "rot": 180
+ },
+ "R10": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R11": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R12": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R13": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R14": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R15": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R16": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R17": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R18": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R19": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R20": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R21": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R22": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R23": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R26": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R27": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R28": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R29": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R32": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R33": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R40": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R41": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R42": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R43": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R44": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R45": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R46": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R50": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R51": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R52": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R6": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R60": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R7": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R70": {
+  "err": 0.005,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R71": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R8": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "R9": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "RT2": {
+  "err": 0.08,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "U1": {
+  "err": 0.05,
+  "nota": "ajuste a mano con los pads del perímetro (1, 2, 26, 42): EasyEDA numera distinto los pads centrales de masa",
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 270
+ },
+ "U10": {
+  "err": 0.012,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 270
+ },
+ "U11": {
+  "err": 0.0,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "U12": {
+  "err": 0.0,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "U13": {
+  "err": 0.008,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 180
+ },
+ "U2": {
+  "err": 0.038,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 0
+ },
+ "U3": {
+  "err": 0.045,
+  "off": [
+   -0.007,
+   0.0
+  ],
+  "rot": 270
+ },
+ "U4": {
+  "err": 0.02,
+  "nota": "ajuste a mano con los pads 1–40: el EPAD (41) tiene varios cuadrados con el mismo número; el origen de EasyEDA está 0,63 mm más arriba",
+  "off": [
+   0.0,
+   0.63
+  ],
+  "rot": 0
+ },
+ "U6": {
+  "err": 0.012,
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 270
+ },
+ "U7": {
+  "err": 0.015,
+  "off": [
+   0.002,
+   0.0
+  ],
+  "rot": 270
+ },
+ "U8": {
+  "err": 0.3,
+  "nota": "sin huella EasyEDA (la API falló): mismo SOT-23 que Q4/Q7/U9/D5/D6, todos +180 en EasyEDA",
+  "off": [
+   0.0,
+   0.0
+  ],
+  "rot": 180
+ },
+ "U9": {
+  "err": 0.32,
+  "nota": "SOT-23: EasyEDA pone 1-2 a la derecha y 3 a la izquierda; +180 cuadra los 3 pads (el error es la longitud distinta de los pads)",
+  "off": [
+   0.08,
+   0.0
+  ],
+  "rot": 180
+ }
+}

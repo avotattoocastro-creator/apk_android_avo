@@ -529,7 +529,11 @@ for p in PARTS:
         x, y, r = POS[p["ref"]]
         p["pos"], p["rot"] = (x, y), r
 MECH = [p for p in PARTS if p["fp"] in ("HOLE", "CABLE")]
-KEEPOUT_RECTS = []
+# REV B (18/11/2026): la DM3AT es «push-pull»: la tarjeta sobresale del cuerpo (hasta y local +13,7, casi el canto de la
+# placa) y se mete y se saca por el canto inferior. Franja de la tarjeta (11 mm, x local −5,925…5,075) + 0,3 sin piezas.
+_j3 = next(p for p in PARTS if p["ref"] == "J3")
+KEEPOUT_RECTS = [("salida de la tarjeta microSD", _j3["pos"][0] - 5.925 - 0.3, -SIZE / 2 - 1.0,
+                  _j3["pos"][0] + 5.075 + 0.3, _j3["pos"][1] - 8.9)]
 
 # =============================================================================== redes
 NETS = []
@@ -625,6 +629,14 @@ def check_placement():
                         if math.hypot(dx, dy) >= r:
                             continue
                     errs.append("solape de patio %s–%s (%.2f × %.2f)" % (a, b, ox, oy))
+    for nm, x0, y0, x1, y1 in KEEPOUT_RECTS:      # REV B: ninguna pieza en la salida de la tarjeta
+        for ref, bb in boxes:
+            p = next(q for q in PARTS if q["ref"] == ref)
+            if ref == "J3" or p["fp"] in CIRC:
+                continue
+            cx0, cx1, cy0, cy1 = bb[0] - 100, bb[2] - 100, 100 - bb[3], 100 - bb[1]
+            if cx0 < x1 and x0 < cx1 and cy0 < y1 and y0 < cy1:
+                errs.append("%s en la %s" % (ref, nm))
     poly = [K(x, y) for x, y in outline_pts(3)]
     for ref, bb in boxes:
         p = next(q for q in PARTS if q["ref"] == ref)
