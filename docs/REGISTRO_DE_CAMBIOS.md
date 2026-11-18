@@ -24,6 +24,18 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-18 — Motor 2.0.0-dev3 — fixtures JSON regeneradas tras KB-1
+**Autor:** Claude · **Rama:** `claude/fixtures-motor-dev3`
+**Qué cambia:** `core/src/test/resources/equine/synthetic_analysis.json` y `sample_analysis.json` regeneradas con
+`check_fixtures.py --update`. Diferencias, todas esperadas: versión del motor (2.0.0-dev1 → 2.0.0-dev3), bloque
+`trabajo_pista.base_cientifica`, `perfil.v_carrera` y `procedencia.algoritmos.base_cientifica`.
+**Por qué:** tras fusionar los PR #74 y #75, la ejecución manual del workflow del motor (run 44297079489) falló solo en
+la comprobación de fixtures. Las pruebas del motor pasaron: 95 casos, 1627 comprobaciones, 0 fallos (ASan/UBSan).
+Android, Windows y las 3 ABI de Android compilaron en verde.
+**Nota:** `build-equine-engine.yml` no se dispara con push a `develop` (solo en ramas antiguas), así que hay que lanzarlo
+a mano. No se ha cambiado el workflow; avisado al usuario.
+**Validación:** comprobación local de fixtures OK. **NO VERIFICADO** con caballos reales.
+
 ## 2026-11-18 — Motor 2.0.0-dev3 — KB-1 1.1.0: investigación nocturna (σ0, Verheyen, árabes, cincha, ECG, V200) y velocidad de los últimos 600 m
 **Autor:** Claude (tarea programada nocturna) · **Rama:** `claude/kb-noche-2026-11-18` (sale de `claude/base-cientifica-cuadra`, PR #74) · **CI:** pendiente del push a `develop`
 **Qué cambia:**
