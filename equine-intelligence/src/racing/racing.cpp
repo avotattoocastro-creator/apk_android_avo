@@ -14,9 +14,11 @@ bool breed_profile(const std::string& name, BreedProfile* p) {
   if (name == "PSI" || name == "PURA_SANGRE_INGLES" || name == "THOROUGHBRED") {
     b.name = "PSI"; b.work_speed = 11.0; b.fast_speed = 14.5; b.high_speed = 15.0;
     b.ref_speed[0] = 14.0; b.ref_speed[1] = 16.0; b.sf_min = 1.6; b.sf_max = 2.9; b.sl_min = 3.0; b.sl_max = 9.0;
+    b.race_pace = 16.7;   // KB-1: media de 25.259 salidas en Victoria y Tasmania, 16,63 m/s (Morrice-West 2020) [E]
   } else if (name == "ARABE" || name == "PURA_SANGRE_ARABE" || name == "ARABIAN") {
     b.name = "ARABE"; b.work_speed = 10.0; b.fast_speed = 13.0; b.high_speed = 13.5;
-    b.ref_speed[0] = 13.0; b.ref_speed[1] = 15.0; b.sf_min = 1.6; b.sf_max = 3.0; b.sl_min = 3.0; b.sl_max = 8.5;
+    b.ref_speed[0] = 13.0; b.ref_speed[1] = 14.0; b.sf_min = 1.6; b.sf_max = 3.0; b.sl_min = 3.0; b.sl_max = 8.5;
+    b.race_pace = 14.5;   // KB-1: Gr1 de Longchamp 2024 a 14,70 m/s y carreras polacas de 2.000 m a 14,2 m/s [I]
   } else if (name != "GENERICO" && !name.empty()) {
     return false;
   }
@@ -539,6 +541,10 @@ RacingResult analyse_racing(const GnssResult& g, const std::vector<ImuSeries>& i
 
   // ================================================================ D. efforts (GNSS)
   size_t n = g.t.size();
+  SpeedBandConfig kb_bands;
+  kb_bands.work_speed = c.breed.work_speed;
+  kb_bands.race_pace = std::isnan(c.race_pace_override) ? c.breed.race_pace : c.race_pace_override;
+  r.race_pace_used = kb_bands.race_pace;
   if (n > 2) {
     for (size_t i = 1; i < n; i++) {
       double v0 = g.speed[i - 1], v1 = g.speed[i];
@@ -546,6 +552,8 @@ RacingResult analyse_racing(const GnssResult& g, const std::vector<ImuSeries>& i
       double dd = g.dist[i] - g.dist[i - 1], vm = 0.5 * (v0 + v1);
       if (vm >= c.breed.work_speed) r.dist_work_m += dd;
       if (vm >= c.breed.fast_speed) r.dist_fast_m += dd;
+      double dt = g.t[i] - g.t[i - 1];
+      if (dt > 0 && dt <= 5.0) r.kb.add(dt, dd, vm, kb_bands, c.bone);   // KB-1 (huecos GNSS > 5 s no cuentan)
     }
     size_t i = c.manual_efforts_set ? n : 0;   // manual list: no automatic detection
     int id = 0;
@@ -780,7 +788,7 @@ std::string racing_json(const RacingResult& r, const RacingConfig& c) {
   std::ostringstream o;
   const BreedProfile& b = c.breed;
   o << "{\"modulo\":\"AVO_TRACK_WORK\",\"version\":\"" << RACING_VERSION << "\",\"perfil\":{\"raza\":" << q(b.name) << ",\"v_trabajo\":" << num(b.work_speed) << ",\"v_rapido\":" << num(b.fast_speed)
-    << ",\"v_alta\":" << num(b.high_speed) << ",\"v_referencia\":[" << num(b.ref_speed[0]) << "," << num(b.ref_speed[1]) << "],\"frecuencia_zancada_hz\":["
+    << ",\"v_alta\":" << num(b.high_speed) << ",\"v_carrera\":" << num(r.race_pace_used) << ",\"v_referencia\":[" << num(b.ref_speed[0]) << "," << num(b.ref_speed[1]) << "],\"frecuencia_zancada_hz\":["
     << num(b.sf_min) << "," << num(b.sf_max) << "],\"longitud_zancada_m\":[" << num(b.sl_min) << "," << num(b.sl_max) << "],\"parcial_m\":" << num(c.split_m) << "}";
   o << ",\"cincha\":{\"disponible\":" << (r.has_imu ? "true" : "false") << ",\"escala\":" << q(r.scale) << ",\"lsb_por_g\":" << num(r.g_lsb)
     << ",\"calidad_vertical\":" << num(r.frame_quality) << ",\"sentido_avance_confirmado\":" << (r.forward_sign_known ? "true" : "false")
@@ -869,7 +877,28 @@ std::string racing_json(const RacingResult& r, const RacingConfig& c) {
     o << (i ? "," : "") << "{\"tipo\":" << q(r.events[i].type) << ",\"t\":" << num(r.events[i].t) << ",\"valor\":" << num(r.events[i].value) << ",\"detalle\":" << q(r.events[i].detail) << "}";
   o << "],\"avisos\":[";
   for (size_t i = 0; i < r.warnings.size(); i++) o << (i ? "," : "") << q(r.warnings[i]);
-  o << "],\"nota\":\"entrenamiento de caballos de carreras; exploratorio, sin validar con caballos reales; perfiles de raza = valores de partida\"}";
+  o << "],\"base_cientifica\":";
+  {
+    const KbSessionLoad& K = r.kb;
+    const BoneModelConfig& M = c.bone;
+    SpeedBandConfig bb; bb.work_speed = b.work_speed; bb.race_pace = r.race_pace_used;
+    bool rp = !std::isnan(r.race_pace_used);
+    double lo[KB_BANDS] = {b.work_speed, rp ? bb.b2_lo() : kNaN, rp ? bb.b3_lo() : kNaN};
+    double hi[KB_BANDS] = {rp ? bb.b2_lo() : kNaN, rp ? bb.b3_lo() : kNaN, kNaN};
+    o << "{\"base\":\"" << KNOWLEDGE_ID << "\",\"version\":\"" << KNOWLEDGE_VERSION << "\",\"v_carrera_m_s\":" << num(r.race_pace_used)
+      << ",\"v_carrera_origen\":" << q(std::isnan(c.race_pace_override) ? (rp ? "RAZA" : "SIN_REFERENCIA") : "CABALLO") << ",\"bandas\":[";
+    for (int k = 0; k < KB_BANDS; k++)
+      o << (k ? "," : "") << "{\"banda\":" << q(kb_band_name(k)) << ",\"v_min\":" << num(lo[k]) << ",\"v_max\":" << num(hi[k])
+        << ",\"distancia_m\":" << num(K.band_m[k]) << ",\"tiempo_s\":" << num(K.band_s[k]) << "}";
+    o << "],\"verheyen\":{\"canter_v_min\":" << num(rp ? bb.canter_lo() : kNaN) << ",\"corte_galope_m_s\":" << num(rp ? bb.gallop_lo() : kNaN)
+      << ",\"canter_m\":" << (rp ? num(K.canter_m) : std::string("null")) << ",\"galope_rapido_m\":" << (rp ? num(K.gallop_m) : std::string("null")) << "}"
+      << ",\"fatiga_osea\":{\"algoritmo\":\"" << BONE_MODEL_ALGORITHM << "\",\"sigma_max_mpa\":" << num(M.sigma_max_mpa) << ",\"sigma0_mpa\":" << num(M.sn_a_mpa)
+      << ",\"v_min_validada\":" << num(M.valid_min_speed) << ",\"pct\":" << num(100.0 * K.bone_fl) << ",\"zancadas_estimadas\":" << num(K.strides)
+      << ",\"pct_extrapolado_lento\":" << num(100.0 * K.bone_fl_low) << ",\"zancadas_lentas_estimadas\":" << num(K.strides_low)
+      << ",\"frecuencia_zancada\":\"MODELO_PAN_2025\",\"calibrado\":" << (b.name == "PSI" ? "true" : "false")
+      << ",\"nota\":\"indice relativo de carga osea (Morrice-West 2022); no es una probabilidad de lesion" << (b.name == "PSI" ? "" : "; parametros de PSI sin calibrar en esta raza") << "\"}}";
+  }
+  o << ",\"nota\":\"entrenamiento de caballos de carreras; exploratorio, sin validar con caballos reales; perfiles de raza = valores de partida\"}";
   return o.str();
 }
 

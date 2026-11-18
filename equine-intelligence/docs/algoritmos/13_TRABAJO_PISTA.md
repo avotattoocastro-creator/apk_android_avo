@@ -148,3 +148,7 @@ La historia incluye:
 - **«Distancia de trabajo»** (`distancia_trabajo_m`, `t0_trabajo`–`t1_trabajo`): suma de los trabajos rápidos completos, o
   de todos los trabajos si no hay ninguno rápido. Es lo que el entrenador llama «el trabajo», y las apps lo seleccionan tal cual.
 - `distancia_rapida_m` (metros por encima del umbral rápido) se mantiene en el JSON.
+
+## Base científica KB-1 (18/11/2026)
+- El perfil árabe compara la zancada a **13 y 14 m/s** (antes 13 y 15) y los perfiles llevan `v_carrera` (PSI 16,7; árabe 14,5).
+- Bloque nuevo `base_cientifica`: bandas relativas al ritmo de carrera, contadores de Verheyen y fatiga ósea por zancada. Ficha 14.

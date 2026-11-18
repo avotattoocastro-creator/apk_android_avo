@@ -91,3 +91,6 @@ Es **orientativo, no es un diagnóstico veterinario**, y no usa términos clíni
 - La distancia a alta velocidad usa el umbral de la raza.
 - La historia añade la carga VeDBA (aguda, crónica semanal y ACWR) y las líneas base y tendencias `TRABAJO.*` y `CINCHA.*`.
 - Los impactos atípicos suben a VIGILAR.
+
+## Base científica KB-1 (ficha 14)
+- El resumen guarda `trabajo_pista.base_cientifica`. La historia añade `estado.base_cientifica` y `sesiones[].base_cientifica` con las ventanas de 7, 30 y 60 días y las reglas A1–A6 y de fatiga ósea. Las reglas VIGILAR suben el estado.

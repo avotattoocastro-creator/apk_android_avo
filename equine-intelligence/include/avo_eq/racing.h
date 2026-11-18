@@ -15,6 +15,7 @@
 // E. Eventos de la cincha (EXPERIMENTAL): impactos atípicos, movimientos laterales bruscos, saturación.
 // Todo es exploratorio y NO VERIFICADO con caballos reales; los perfiles de raza son valores de partida.
 #pragma once
+#include "avo_eq/knowledge.h"
 #include <cmath>
 #include <string>
 #include <vector>
@@ -35,6 +36,7 @@ struct BreedProfile {
   double ref_speed[2] = {10.0, 12.0};// m/s: velocidades de referencia para comparar la zancada entre sesiones
   double sf_min = 1.5, sf_max = 3.0; // Hz: frecuencia de zancada plausible en galope
   double sl_min = 2.5, sl_max = 9.0; // m: longitud de zancada plausible
+  double race_pace = NAN;            // m/s: ritmo de carrera de referencia (base científica KB-1); NaN en GENERICO
 };
 // "PSI" (pura sangre inglés), "ARABE" (pura sangre árabe) o "GENERICO". false si no se conoce.
 bool breed_profile(const std::string& name, BreedProfile* p);
@@ -81,6 +83,9 @@ struct RacingConfig {
   bool manual_efforts_set = false;   // true: los trabajos son exactamente estos (lista vacía = ninguno)
   std::vector<std::pair<double, double>> manual_efforts_itow;
   double manual_work_start_itow = NAN, manual_work_end_itow = NAN;   // límites de la fase de trabajo
+  // Base científica KB-1 (knowledge.h): ritmo de carrera propio del caballo (NaN = el de la raza) y modelo óseo
+  double race_pace_override = NAN;
+  BoneModelConfig bone;
 };
 
 struct Stride {
@@ -181,6 +186,9 @@ struct RacingResult {
   bool warmup_short = false;
   // E. eventos
   std::vector<RacingEvent> events;
+  // H. base científica KB-1: distancias por banda, contadores de Verheyen y fatiga ósea por zancada
+  double race_pace_used = NAN;
+  KbSessionLoad kb;
   std::vector<std::string> warnings;
 };
 
