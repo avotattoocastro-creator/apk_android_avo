@@ -19,6 +19,7 @@ este prototipo o se pasa a la REV B con el ZED integrado como BETA final.
 | Arranque en caliente del ZED | V_BCKP desde el carril siempre encendido | pila de respaldo de la URTK1.2 (J6) |
 | Piezas quitadas | — | U1, R70, C71, L70, R71, D4, J5, C62, C64, C65 y el paso del coaxial H5 |
 | Colocación | microSD a la derecha, pogo en el canto inferior | **WROOM a la izquierda, microSD abajo en el centro (tarjeta por el canto inferior, entre D15 y D14), pogo en el canto SUPERIOR** (copa del pogo en la franja +Y del suelo de la cápsula) |
+| LED y masa de la antena | 7 LED | **8 LED alineados** (D15/D14 bajo D10/D11; D17/D12 y D16/D13 a la misma altura) · **4 pines de masa J12–J15** en las esquinas, junto a la URTK1.2, soldados a la placa de masa |
 | Resto | | igual: ESP32-S3-WROOM-1U-N16R8, cargador, táctil, anillo (**8 LED**: D14 vuelve, a la derecha de la salida de la tarjeta), MAX17048, LSM6DSV16X, microSD, pogo, Hall |
 
 Firmware: **sin cambios de GPIO** (UART1 GPIO5/6, UART2 GPIO3/8, PPS GPIO7, RST GPIO9, ZED_EN GPIO10). El 3,3 V de la
@@ -37,8 +38,9 @@ URTK1.2 lo da el RT9080 (se apaga con ZED_EN), como el prototipo de la espalda d
 1. Desoldar el SMA J2 de la URTK1.2 (no cabe en la cápsula); la antena va a su U.FL **J4**.
 2. Tiras de pines con el plástico **entre** las dos placas; soldar primero a la PCB, luego la URTK1.2 encima
    (componentes hacia arriba). Cortar las puntas a ras por las dos caras (≤ 1,5 mm en la cara F, a ras arriba).
-3. Kapton sobre el blindaje del ZED, placa de masa encima (los recortes dejan libres J1, J3, J4, J6 y las tiras) y un
-   hilo corto de su pad GND al pin GND de la tira de 9.
+3. Pines de masa J12–J15 (tira larga o hilo de cobre de 1 mm, ≥ 12 mm) soldados en la PCB. Kapton sobre el blindaje
+   del ZED y placa de masa encima (los recortes dejan libres J1, J3, J4, J6 y las tiras), con los 4 pines soldados a
+   sus pads de las esquinas.
 4. Antena Taoglas AHP2258 sobre la placa de masa, en el cuadrado serigrafiado, con su cable al U.FL J4.
 
 ## Comprobaciones antes de pedir nada (con la URTK1.2 en la mano)

@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-18 — Casco V5 PROTOTIPO A — nueva colocación, LED alineados y 4 pines de masa de la antena
+**Autor:** Claude · **Commits:** `d87d7c1`, `93ed5cd`, `57393e1` · **CI:** PCB run 44341720561 (puerta superada), CAD (éxito, 0 interferencias)
+**Qué cambia (peticiones del usuario):** WROOM a la izquierda; microSD abajo en el centro (tarjeta por el canto
+inferior); pogo al canto superior (en la cápsula la copa del pogo pasa a la franja +Y del suelo y los imanes a ±16);
+8 LED alineados (D15/D14 bajo D10/D11); pines de masa J12–J15 en las esquinas que suben a la placa de masa de la antena
+(4 pads GND en lugar de 1).
+**Validación:** COMPILADO / CI. **NO VERIFICADO** en hardware.
+
 ## 2026-11-18 — Casco V5 PROTOTIPO A — PCB de 56 mm con la URTK1.2 (ZED-F9P) por tiras de pines
 **Autor:** Claude · **Commits:** `f9c4a5d`, `f816381`, `a377ae0`, `8da50c8` (rama `feature/back-v5-casco`) · **CI:** PCB run 44333638870 (puerta superada), CAD (éxito)
 **Qué cambia:** nueva carpeta `hardware/back/V5_CASCO_PROTOTIPO` (decisión del usuario: probar el casco con un módulo
