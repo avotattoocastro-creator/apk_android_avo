@@ -157,6 +157,10 @@ void fill_effort(Effort* E, const Track& T, const RacingResult& r, const RacingC
   };
   tail(200, &e.last_200_s, &e.v_last_200);
   tail(400, &e.last_400_s, &e.v_last_400);
+  if (e.distance_m >= KB_FINAL_DISTANCE_M - 1e-6) {
+    std::vector<double> tt(T.t.begin() + i0, T.t.begin() + i1 + 1), dd(T.d.begin() + i0, T.d.begin() + i1 + 1);
+    kb_final_speed(tt, dd, KB_FINAL_DISTANCE_M, &e.last_600_s, &e.v_last_600);
+  }
   if (e.distance_m >= 400 && !std::isnan(e.v_last_200) && e.vmax > 0) e.fatigue_pct = 100.0 * (e.vmax - e.v_last_200) / e.vmax;
   const double Ds[] = {200, 400, 600, 800, 1000, 1200, 1600};
   for (double D : Ds) {
@@ -820,6 +824,7 @@ std::string racing_json(const RacingResult& r, const RacingConfig& c) {
       << ",\"distancia_m\":" << num(e.distance_m) << ",\"v_media\":" << num(e.speed_mean) << ",\"v_max\":" << num(e.vmax) << ",\"t_hasta_v_max_s\":" << num(e.t_to_vmax_s)
       << ",\"distancia_90_pct_m\":" << num(e.dist_above_90_m) << ",\"aceleracion_max\":" << num(e.accel_max) << ",\"ultimos_200m_s\":" << num(e.last_200_s)
       << ",\"ultimos_400m_s\":" << num(e.last_400_s) << ",\"v_ultimos_200m\":" << num(e.v_last_200) << ",\"v_ultimos_400m\":" << num(e.v_last_400)
+      << ",\"ultimos_600m_s\":" << num(e.last_600_s) << ",\"v_ultimos_600m\":" << num(e.v_last_600)
       << ",\"indice_caida_pct\":" << num(e.fatigue_pct) << ",\"parciales\":[";
     for (size_t k = 0; k < e.sectionals.size(); k++)
       o << (k ? "," : "") << "{\"desde_m\":" << num(e.sectionals[k].from_m) << ",\"hasta_m\":" << num(e.sectionals[k].to_m) << ",\"tiempo_s\":" << num(e.sectionals[k].time_s) << ",\"v\":" << num(e.sectionals[k].speed) << "}";

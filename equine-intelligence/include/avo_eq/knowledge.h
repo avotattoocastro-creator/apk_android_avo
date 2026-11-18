@@ -20,14 +20,15 @@
 
 namespace avoeq {
 
-static const char* const KNOWLEDGE_VERSION = "1.0.0";
+static const char* const KNOWLEDGE_VERSION = "1.1.0";
 static const char* const KNOWLEDGE_ID = "AVO_KB_1";
 static const char* const BONE_MODEL_ALGORITHM = "SBFL_MORRICE_WEST_2022";
 
 struct BoneModelConfig {
-  double sigma_max_mpa = 90.0;   // escenario de 90 MPa (9,34 % de media por carrera en Morrice-West 2022); rango 54–90
+  double sigma_max_mpa = 90.0;   // escenario de 90 MPa (9,34 % de media por carrera en Morrice-West 2022); 54–90 son los niveles del ensayo de Martig 2013
   double f_max_n_kg = 24.13;
-  double sn_a_mpa = 134.2;       // σ0 de Martig 2013 (Anwar 2026 da 139,0 en una tabla truncada: [NV])
+  double sn_a_mpa = 134.2;       // σ0 de Martig 2013 (curva de sensibilidad, R² 0,72), la de Morrice-West 2022; 139,0 es la
+                                 // calibración in vivo de Pan 2025 para el modelo B con reparación (estudio 2026-11-18 noche)
   double sn_b_mpa = 14.1;
   double valid_min_speed = 12.57;// filtro de zancadas de Morrice-West 2022
   double low_min_speed = 4.0;    // por debajo no se cuenta nada (paso y trote)
@@ -38,6 +39,12 @@ double bone_vertical_force_n_kg(double v);           // saturada en 24,13 N/kg
 // Fracción de vida a fatiga consumida por una zancada a v m/s (0 con v NaN, ≤ 0 o > max_speed).
 double bone_stride_damage(double v, const BoneModelConfig& c);
 double model_stride_frequency_hz(double v);          // Hz
+
+// Velocidad media de los últimos D metros de un esfuerzo (Schrurs 2024: «average speed over the last 600 m»), como
+// D / tiempo, con el tiempo interpolado sobre la distancia acumulada (t en s, d en m, crecientes; NaN se saltan).
+// Devuelve false si el esfuerzo es más corto que D o falta el dato; time_s y speed quedan intactos.
+static const double KB_FINAL_DISTANCE_M = 600.0;
+bool kb_final_speed(const std::vector<double>& t, const std::vector<double>& d, double D, double* time_s, double* speed);
 
 static const int KB_BANDS = 3;
 const char* kb_band_name(int b);                     // B1_TRABAJO, B2_INTERMEDIA, B3_ALTA

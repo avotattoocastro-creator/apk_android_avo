@@ -24,6 +24,31 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-18 — Motor 2.0.0-dev3 — KB-1 1.1.0: investigación nocturna (σ0, Verheyen, árabes, cincha, ECG, V200) y velocidad de los últimos 600 m
+**Autor:** Claude (tarea programada nocturna) · **Rama:** `claude/kb-noche-2026-11-18` (sale de `claude/base-cientifica-cuadra`, PR #74) · **CI:** pendiente del push a `develop`
+**Qué cambia:**
+- **Estudio** `equine-intelligence/knowledge/estudios/2026-11-18_noche_sigma0_verheyen_arabes_cincha_ecg_v200.md`, con
+  cada cifra etiquetada [E]/[E-r]/[I]/[NV] y las decisiones de la noche al principio.
+- **σ0 aclarado:** 134,2 MPa es la curva de sensibilidad de Martig 2013 (la de Morrice-West 2022, modelo A); 139,0 MPa
+  es la calibración in vivo de Pan 2025 para el modelo B. El modelo A **no cambia**. Corregida la nota de σ_max
+  (54–90 MPa eran los niveles del ensayo).
+- **Motor (un pendiente):** `kb_final_speed` y campos `v_ultimos_600m` / `ultimos_600m_s` en cada trabajo de ≥ 600 m
+  (definición de Schrurs 2024). La regla A8 pasa a PARCIAL (falta umbral). `KNOWLEDGE_VERSION` 1.0.0 → 1.1.0;
+  `ENGINE_VERSION` 2.0.0-dev2 → 2.0.0-dev3.
+- **`base_cientifica.json` 1.1.0:** 16 fuentes nuevas; parámetros nuevos (velocidad final, constantes del modelo B,
+  rango del acelerómetro de la cincha [I], definiciones de ECG, corte de VHRmax del PSI); notas corregidas (σ0, σ_max,
+  Verheyen, v_carrera del árabe: los 14,2 m/s polacos eran de 3.000 m); regla pendiente A1A2_VERHEYEN_COMBINADO; cola
+  de investigación renovada. El archivo pasa a formato con sangría (mismo contenido de los campos anteriores).
+- Ficha `docs/algoritmos/14_BASE_CIENTIFICA.md` actualizada.
+**Por qué:** investigación nocturna programada de la base científica de la cuadra.
+**No se ha tocado:** firmware, workflows, firmas, `Info.plist`, TestFlight y contratos binarios. La API C no cambia: los
+campos nuevos van dentro del JSON. Las reglas A1 y A2 no cambian (evidencia no cerrada).
+**Validación:** IMPLEMENTADO · pruebas locales con `-DAVO_EQ_SANITIZE=ON` (ASan/UBSan): 95 casos y 1.627 comprobaciones
+sin fallos (nueva `kb.final_speed_last_600m`; `pista.base_cientifica_kb1` ampliada). CI: pendiente. **NO VERIFICADO**
+con caballos reales.
+**Pendiente:** regla A8 con línea base; modelo B (faltan 5 constantes); A11 con el texto completo de Van Erck 2026;
+V200/VHRmax; regla combinada de Verheyen; pantallas de las apps para la velocidad final.
+
 ## 2026-11-18 — Motor 2.0.0-dev2 — Base científica de la cuadra KB-1 1.0.0 (PSI y árabe de carreras)
 **Autor:** Claude · **Rama:** `claude/base-cientifica-cuadra` · **CI:** pendiente del push a `develop`
 **Qué cambia:**

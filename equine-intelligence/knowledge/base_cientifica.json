@@ -2,9 +2,12 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "fecha": "2026-11-18",
-  "razas": ["PSI", "ARABE"],
+  "razas": [
+    "PSI",
+    "ARABE"
+  ],
   "disciplina": "carreras en llano (no raid)",
   "niveles_evidencia": {
     "E": "dato o ecuación publicada con fuente",
@@ -12,79 +15,582 @@
     "NV": "sin verificar; no debe entrar en el código sin contrastar"
   },
   "estudios": [
-    {"fecha": "2026-11-17", "titulo": "Base científica PSI y árabes", "archivo": "estudios/2026-11-17_base_cientifica_PSI_arabe.md"},
-    {"fecha": "2026-11-18", "titulo": "Estudio ampliado PSI y árabe de carreras (especificación del motor)", "archivo": "estudios/2026-11-18_estudio_ampliado_PSI_arabe.md"}
+    {
+      "fecha": "2026-11-17",
+      "titulo": "Base científica PSI y árabes",
+      "archivo": "estudios/2026-11-17_base_cientifica_PSI_arabe.md"
+    },
+    {
+      "fecha": "2026-11-18",
+      "titulo": "Estudio ampliado PSI y árabe de carreras (especificación del motor)",
+      "archivo": "estudios/2026-11-18_estudio_ampliado_PSI_arabe.md"
+    },
+    {
+      "fecha": "2026-11-18",
+      "titulo": "Noche: σ0 y modelo B, Verheyen, árabes Gr1, cincha, ECG y V200",
+      "archivo": "estudios/2026-11-18_noche_sigma0_verheyen_arabes_cincha_ecg_v200.md"
+    }
   ],
   "fuentes": [
-    {"id": "MORRICE_WEST_2022", "cita": "Morrice-West et al. 2022, Scientific Reports", "url": "https://www.nature.com/articles/s41598-022-14274-y"},
-    {"id": "MORRICE_WEST_2020", "cita": "Morrice-West et al. 2020, Equine Vet J (25.259 salidas; prácticas de entrenamiento en Victoria)", "url": "https://www.pubmed.gov/31386764/"},
-    {"id": "MORRICE_WEST_2021", "cita": "Morrice-West et al. 2021, Animals (cargas y éxito del entrenador)", "url": "https://madbarn.com/research/association-of-thoroughbred-racehorse-workloads-and-rest-practices-with-trainer-success"},
-    {"id": "MORRICE_WEST_2023", "cita": "Morrice-West et al. 2023, Frontiers in Veterinary Science", "url": "https://www.frontiersin.org/journals/veterinary-science/articles/10.3389/fvets.2023.1260554/pdf"},
-    {"id": "MORRICE_WEST_2025", "cita": "Morrice-West et al. 2025, Veterinary Journal (fatiga ósea acumulada)", "url": "https://madbarn.com/research/the-impact-of-cumulative-bone-fatigue-on-musculoskeletal-injury-risk-in-racing-thoroughbreds"},
-    {"id": "ICRAV_2026_HK", "cita": "ICRAV 2026, resumen de congreso (Hong Kong, 5.215 caballos)", "url": "https://icrav-2025.p.asnevents.com.au/days/2026-03-26/abstract/130413"},
-    {"id": "PAN_2025", "cita": "Pan et al. 2025, J R Soc Interface / bioRxiv (modelo óseo con adaptación y reparación)", "url": "https://www.biorxiv.org/content/10.1101/2025.04.06.646486v1.full"},
-    {"id": "ANWAR_2026", "cita": "Anwar et al. 2026, R Soc Open Sci 13:260818", "url": "https://arxiv.org/html/2603.22680"},
-    {"id": "VERHEYEN_2006", "cita": "Verheyen et al. 2006, Bone (1.178 caballos, 148 fracturas)", "url": "https://www.sciencedirect.com/science/article/abs/pii/S8756328206005497"},
-    {"id": "ESTBERG_1996", "cita": "Estberg et al. 1996 (California, fracturas catastróficas)", "url": "https://madbarn.com/research/high-speed-exercise-history-and-catastrophic-racing-fracture-in-thoroughbreds"},
-    {"id": "CARRIER_1998", "cita": "Carrier et al. 1998 (fracturas de húmero y pelvis tras descanso)", "url": "https://madbarn.com/research/association-between-long-periods-without-high-speed-workouts-and-risk-of-complete-humeral-or-pelvic-fracture-in-thoroughbred-racehorses-54-cases-1991-1994"},
-    {"id": "CHOI_PARKIN_2025", "cita": "Choi & Parkin 2025 (tendón flexor superficial, Seúl)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12699112/"},
-    {"id": "FRANCE_GALOP_2024_LON", "cita": "France Galop, parciales GPS Qatar Arabian World Cup 2024", "url": "https://www7.france-galop.com/Casaques/Tracking//20241006LON04_last_times_fr.pdf"},
-    {"id": "PRINCE_KER", "cita": "Prince et al. (KER/WALTHAM), árabe frente a PSI en cinta", "url": "https://ker.com/wp-content/uploads/Comparison-Of-The-Metabolic-Responses-Of-Trained-Arabian-And-Thoroughbred-Horses-During-Low-And-High-Intensity-Exerices.pdf"},
-    {"id": "YILDIRIM_2025", "cita": "Yildirim et al. 2025, Equine Vet J (553 lesiones PSI y árabes, Turquía)", "url": "https://madbarn.com/research/distribution-of-race-and-training-related-musculoskeletal-injuries-by-track-and-location-in-thoroughbred-and-arabian-racehorses"},
-    {"id": "VAN_ERCK_2026", "cita": "Van Erck-Westergren et al. 2026, JVIM (ECG de una derivación en 71 PSI)", "url": "https://academic.oup.com/jvim/article/40/2/aalag044/8539596"},
-    {"id": "VERMEULEN_EVANS_2006", "cita": "Vermeulen & Evans 2006, Equine Vet J Suppl (V200 con GPS y FC)", "url": "https://www.researchgate.net/publication/51384035"},
-    {"id": "WONG_2023", "cita": "Wong et al. 2023, Equine Vet J (zancada y velocidad antes de la lesión)", "url": "https://minerva-access.unimelb.edu.au/server/api/core/bitstreams/45ea7c0b-7de5-4213-961a-0750167243c1/content"},
-    {"id": "SCHRURS_2024", "cita": "Schrurs et al. 2024, Animals (485 caballos; velocidad de los últimos 600 m)", "url": "https://madbarn.com/research/cardiovascular-fitness-and-stride-acceleration-in-race-pace-workouts-for-the-prediction-of-performance-in-thoroughbreds"}
+    {
+      "id": "MORRICE_WEST_2022",
+      "cita": "Morrice-West et al. 2022, Scientific Reports",
+      "url": "https://www.nature.com/articles/s41598-022-14274-y"
+    },
+    {
+      "id": "MORRICE_WEST_2020",
+      "cita": "Morrice-West et al. 2020, Equine Vet J (25.259 salidas; prácticas de entrenamiento en Victoria)",
+      "url": "https://www.pubmed.gov/31386764/"
+    },
+    {
+      "id": "MORRICE_WEST_2021",
+      "cita": "Morrice-West et al. 2021, Animals (cargas y éxito del entrenador)",
+      "url": "https://madbarn.com/research/association-of-thoroughbred-racehorse-workloads-and-rest-practices-with-trainer-success"
+    },
+    {
+      "id": "MORRICE_WEST_2023",
+      "cita": "Morrice-West et al. 2023, Frontiers in Veterinary Science",
+      "url": "https://www.frontiersin.org/journals/veterinary-science/articles/10.3389/fvets.2023.1260554/pdf"
+    },
+    {
+      "id": "MORRICE_WEST_2025",
+      "cita": "Morrice-West et al. 2025, Veterinary Journal (fatiga ósea acumulada)",
+      "url": "https://madbarn.com/research/the-impact-of-cumulative-bone-fatigue-on-musculoskeletal-injury-risk-in-racing-thoroughbreds"
+    },
+    {
+      "id": "ICRAV_2026_HK",
+      "cita": "ICRAV 2026, resumen de congreso (Hong Kong, 5.215 caballos)",
+      "url": "https://icrav-2025.p.asnevents.com.au/days/2026-03-26/abstract/130413"
+    },
+    {
+      "id": "PAN_2025",
+      "cita": "Pan et al. 2025, J R Soc Interface / bioRxiv (modelo óseo con adaptación y reparación)",
+      "url": "https://www.biorxiv.org/content/10.1101/2025.04.06.646486v1.full"
+    },
+    {
+      "id": "ANWAR_2026",
+      "cita": "Anwar et al. 2026, R Soc Open Sci 13:260818",
+      "url": "https://arxiv.org/html/2603.22680"
+    },
+    {
+      "id": "VERHEYEN_2006",
+      "cita": "Verheyen et al. 2006, Bone (1.178 caballos, 148 fracturas)",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S8756328206005497"
+    },
+    {
+      "id": "ESTBERG_1996",
+      "cita": "Estberg et al. 1996 (California, fracturas catastróficas)",
+      "url": "https://madbarn.com/research/high-speed-exercise-history-and-catastrophic-racing-fracture-in-thoroughbreds"
+    },
+    {
+      "id": "CARRIER_1998",
+      "cita": "Carrier et al. 1998 (fracturas de húmero y pelvis tras descanso)",
+      "url": "https://madbarn.com/research/association-between-long-periods-without-high-speed-workouts-and-risk-of-complete-humeral-or-pelvic-fracture-in-thoroughbred-racehorses-54-cases-1991-1994"
+    },
+    {
+      "id": "CHOI_PARKIN_2025",
+      "cita": "Choi & Parkin 2025 (tendón flexor superficial, Seúl)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12699112/"
+    },
+    {
+      "id": "FRANCE_GALOP_2024_LON",
+      "cita": "France Galop, parciales GPS Qatar Arabian World Cup 2024",
+      "url": "https://www7.france-galop.com/Casaques/Tracking//20241006LON04_last_times_fr.pdf"
+    },
+    {
+      "id": "PRINCE_KER",
+      "cita": "Prince et al. (KER/WALTHAM), árabe frente a PSI en cinta",
+      "url": "https://ker.com/wp-content/uploads/Comparison-Of-The-Metabolic-Responses-Of-Trained-Arabian-And-Thoroughbred-Horses-During-Low-And-High-Intensity-Exerices.pdf"
+    },
+    {
+      "id": "YILDIRIM_2025",
+      "cita": "Yildirim et al. 2025, Equine Vet J (553 lesiones PSI y árabes, Turquía)",
+      "url": "https://madbarn.com/research/distribution-of-race-and-training-related-musculoskeletal-injuries-by-track-and-location-in-thoroughbred-and-arabian-racehorses"
+    },
+    {
+      "id": "VAN_ERCK_2026",
+      "cita": "Van Erck-Westergren et al. 2026, JVIM (ECG de una derivación en 71 PSI)",
+      "url": "https://academic.oup.com/jvim/article/40/2/aalag044/8539596"
+    },
+    {
+      "id": "VERMEULEN_EVANS_2006",
+      "cita": "Vermeulen & Evans 2006, Equine Vet J Suppl (V200 con GPS y FC)",
+      "url": "https://www.researchgate.net/publication/51384035"
+    },
+    {
+      "id": "WONG_2023",
+      "cita": "Wong et al. 2023, Equine Vet J (zancada y velocidad antes de la lesión)",
+      "url": "https://minerva-access.unimelb.edu.au/server/api/core/bitstreams/45ea7c0b-7de5-4213-961a-0750167243c1/content"
+    },
+    {
+      "id": "SCHRURS_2024",
+      "cita": "Schrurs et al. 2024, Animals (485 caballos; velocidad de los últimos 600 m)",
+      "url": "https://madbarn.com/research/cardiovascular-fitness-and-stride-acceleration-in-race-pace-workouts-for-the-prediction-of-performance-in-thoroughbreds"
+    },
+    {
+      "id": "MARTIG_2013",
+      "cita": "Martig et al. 2013, Bone 57:392–398 (curva S-N del hueso subcondral del MC3; resumen)",
+      "url": "https://madbarn.com/research/compressive-fatigue-life-of-subchondral-bone-of-the-metacarpal-condyle-in-thoroughbred-racehorses"
+    },
+    {
+      "id": "PAN_2025_PREPRINT",
+      "cita": "Pan et al. 2025, preprint bioRxiv (PDF)",
+      "url": "https://www.biorxiv.org/content/10.1101/2025.04.06.646486.full.pdf"
+    },
+    {
+      "id": "VERHEYEN_2006_RESUMEN",
+      "cita": "Verheyen et al. 2006, Bone 39:1322–1330, resumen completo (PMID 16926125)",
+      "url": "https://research-information.bris.ac.uk/en/publications/exercise-distance-and-speed-affect-the-risk-of-fracture-in-raceho/"
+    },
+    {
+      "id": "ONDER_2022",
+      "cita": "Önder et al. 2022, Animals 12:2630 (233.491 registros de árabes en Turquía)",
+      "url": "https://mdpi.com/2076-2615/12/19/2630"
+    },
+    {
+      "id": "QAWC_2023_PARCIALES",
+      "cita": "Jour de Galop, parciales oficiales QAWC 2023",
+      "url": "https://jourdegalop.com/2023/10/qawc-01-10-gb"
+    },
+    {
+      "id": "WITTE_2006",
+      "cita": "Witte, Hirst & Wilson 2006, J Exp Biol 209:4389 (zancada y duty factor)",
+      "url": "https://cob.silverchair.com/jeb/article-pdf/209/21/4389/1541743/4389.pdf"
+    },
+    {
+      "id": "PARSONS_2008",
+      "cita": "Parsons, Pfau & Wilson 2008, J Exp Biol 211:945 (IMU en T4–T6, ±10 g)",
+      "url": "https://cob.silverchair.com/jeb/article-pdf/211/6/945/1265211/jeb006692p945.pdf"
+    },
+    {
+      "id": "BOSCH_2018",
+      "cita": "Bosch et al. 2018, Sensors 18:850 (EquiMoves, ±16 g)",
+      "url": "https://www.mdpi.com/1424-8220/18/3/850"
+    },
+    {
+      "id": "PFAU_2022",
+      "cita": "Pfau et al. 2022, J Biomech 145:111364 (frecuencia de zancada desde GPS)",
+      "url": "https://madbarn.com/research/stride-frequency-derived-from-gps-speed-fluctuations-in-galloping-horses"
+    },
+    {
+      "id": "NAVAS_DE_SOLIS_2026",
+      "cita": "Navas de Solis et al. 2026, Equine Vet J, doi 10.1002/evj.70166 (ECG y muerte súbita)",
+      "url": "https://wevaonline.org/wp-content/uploads/2026/07/2026-Aug-Equine-Veterinary-Journal-2026-Navas-de-Solis-Exercising-electrocardiograms-from-Thoroughbred-racehorses-with.pdf"
+    },
+    {
+      "id": "REEF_2014",
+      "cita": "Reef et al. 2014, JVIM (consenso ACVIM/ECEIM, atletas con alteraciones cardiovasculares)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4895474"
+    },
+    {
+      "id": "FRICK_2019",
+      "cita": "Frick et al. 2019, JVIM 33:212 (variación RR en cinta; resumen)",
+      "url": "https://madbarn.com/research/the-use-of-heart-rate-variability-analysis-to-detect-arrhythmias-in-horses-undergoing-a-standard-treadmill-exercise-test"
+    },
+    {
+      "id": "TER_WOORT_2023",
+      "cita": "Ter Woort et al. 2023, Equine Vet J 55:336 (validación de ECG vestible; resumen)",
+      "url": "https://madbarn.com/research/validation-of-an-equine-fitness-tracker-ecg-quality-and-arrhythmia-detection"
+    },
+    {
+      "id": "GRAMKOW_EVANS_2006",
+      "cita": "Gramkow & Evans 2006, Equine Vet J Suppl 36 (VHRmax y ganancias; resumen)",
+      "url": "https://madbarn.com/research/correlation-of-race-earnings-with-velocity-at-maximal-heart-rate-during-a-field-exercise-test-in-thoroughbred-racehorses"
+    },
+    {
+      "id": "SCHRURS_2024_TEXTO",
+      "cita": "Schrurs et al. 2024, Animals 14:1342, texto completo",
+      "url": "https://www.mdpi.com/2076-2615/14/9/1342/htm"
+    },
+    {
+      "id": "POINSARD_2026",
+      "cita": "Poinsard, Anson & Billat 2026, Animals 16:1598 (repetibilidad de V200 y recuperación de FC en trotones)",
+      "url": "https://www.mdpi.com/2076-2615/16/11/1598"
+    }
   ],
   "parametros": [
-    {"id": "fuerza_vertical", "valor": "F = 2,778 + 2,1376·v − 0,0535·v² (N/kg), saturada en 24,13 por encima de 19,98 m/s", "evidencia": "E", "fuentes": ["MORRICE_WEST_2022"], "estado": "IMPLEMENTADO", "codigo": "bone_vertical_force_n_kg"},
-    {"id": "sigma_max_mpa", "valor": 90, "rango": [54, 90], "evidencia": "E", "fuentes": ["MORRICE_WEST_2022"], "estado": "IMPLEMENTADO", "opcion": "sigma_max_mpa"},
-    {"id": "sigma0_mpa", "valor": 134.2, "alternativa": 139.0, "evidencia": "E", "nota": "Anwar 2026 da 139,0 en una tabla truncada [NV]; con 139,0 la carrera de prueba baja de 8,64 % a 3,94 %", "fuentes": ["MORRICE_WEST_2022", "ANWAR_2026"], "estado": "IMPLEMENTADO", "opcion": "sigma0_mpa"},
-    {"id": "curva_sn", "valor": "Nf = 10^((σ0 − σ)/14,1)", "evidencia": "E", "fuentes": ["MORRICE_WEST_2022"], "estado": "IMPLEMENTADO"},
-    {"id": "frecuencia_zancada_modelo", "valor": "f = 1,7052 + 0,0305·v + 0,0004·v² (Hz)", "evidencia": "E", "fuentes": ["ANWAR_2026"], "estado": "IMPLEMENTADO", "pendiente": "sustituir por la duración de zancada medida por la cincha"},
-    {"id": "rango_validado_sbfl_m_s", "valor": [12.57, 21], "evidencia": "E", "fuentes": ["MORRICE_WEST_2022"], "estado": "IMPLEMENTADO", "nota": "por debajo se acumula aparte como extrapolado (sobrestima el trabajo lento frente a Hong Kong: 0,41 % por sesión)"},
-    {"id": "v_carrera_psi_m_s", "valor": 16.7, "evidencia": "E", "fuentes": ["MORRICE_WEST_2020"], "estado": "IMPLEMENTADO", "opcion": "v_carrera_m_s (por caballo)"},
-    {"id": "v_carrera_arabe_m_s", "valor": 14.5, "evidencia": "I", "fuentes": ["FRANCE_GALOP_2024_LON"], "nota": "Gr1 de Longchamp 2024 a 14,70 m/s; carreras polacas de 2.000 m a 14,2 m/s", "estado": "IMPLEMENTADO"},
-    {"id": "bandas_fraccion_v_carrera", "valor": {"B1": "v_trabajo–0,80", "B2": "0,80–0,93", "B3": "≥0,93"}, "evidencia": "I", "fuentes": ["MORRICE_WEST_2023"], "estado": "IMPLEMENTADO"},
-    {"id": "corte_verheyen", "valor": "canter 0,40–0,838·v_carrera (PSI 6,7–14 m/s); galope > 0,838·v_carrera (PSI > 14 m/s)", "evidencia": "E", "nota": "corte de 14 m/s en PSI [E]; escalado al árabe [I]; definición exacta de canter por confirmar en el texto completo [NV]", "fuentes": ["VERHEYEN_2006"], "estado": "IMPLEMENTADO"},
-    {"id": "zancada_referencia_arabe_m_s", "valor": [13, 14], "anterior": [13, 15], "evidencia": "I", "fuentes": ["FRANCE_GALOP_2024_LON"], "estado": "IMPLEMENTADO"}
+    {
+      "id": "fuerza_vertical",
+      "valor": "F = 2,778 + 2,1376·v − 0,0535·v² (N/kg), saturada en 24,13 por encima de 19,98 m/s",
+      "evidencia": "E",
+      "fuentes": [
+        "MORRICE_WEST_2022"
+      ],
+      "estado": "IMPLEMENTADO",
+      "codigo": "bone_vertical_force_n_kg"
+    },
+    {
+      "id": "sigma_max_mpa",
+      "valor": 90,
+      "evidencia": "E",
+      "fuentes": [
+        "MORRICE_WEST_2022",
+        "MARTIG_2013",
+        "PAN_2025_PREPRINT"
+      ],
+      "estado": "IMPLEMENTADO",
+      "opcion": "sigma_max_mpa",
+      "nota": "54, 66, 78 y 90 MPa son los niveles del ensayo de Martig 2013, no un rango de σ_max; Pan 2025 usa 90 en trabajo rápido y carrera y 30 como aproximación del reposo"
+    },
+    {
+      "id": "sigma0_mpa",
+      "valor": 134.2,
+      "alternativa": 139.0,
+      "evidencia": "E",
+      "nota": "134,2 = curva de sensibilidad de Martig 2013 (sin 3 caballos con lesión, R² 0,72; la principal es 112,2 − 9,6·log10 Nf, R² 0,52), usada por Morrice-West 2022 y por el modelo A; 139,0 = calibración in vivo de Pan 2025 para el modelo B (−54,5 % de daño), tabla 9 de Anwar 2026 [E]. El modelo A se queda en 134,2",
+      "fuentes": [
+        "MARTIG_2013",
+        "MORRICE_WEST_2022",
+        "PAN_2025_PREPRINT",
+        "ANWAR_2026"
+      ],
+      "estado": "IMPLEMENTADO",
+      "opcion": "sigma0_mpa"
+    },
+    {
+      "id": "curva_sn",
+      "valor": "Nf = 10^((σ0 − σ)/14,1)",
+      "evidencia": "E",
+      "fuentes": [
+        "MORRICE_WEST_2022"
+      ],
+      "estado": "IMPLEMENTADO"
+    },
+    {
+      "id": "frecuencia_zancada_modelo",
+      "valor": "f = 1,7052 + 0,0305·v + 0,0004·v² (Hz)",
+      "evidencia": "E",
+      "fuentes": [
+        "ANWAR_2026",
+        "WITTE_2006"
+      ],
+      "estado": "IMPLEMENTADO",
+      "pendiente": "sustituir por la duración de zancada medida por la cincha",
+      "nota": "Witte 2006: 2,02 Hz a 9 m/s y 2,41 Hz a 17 m/s en el texto; duty factor 0,18/0,22 a 17 m/s; Pfau 2024: 2,47 Hz a 16,5 m/s"
+    },
+    {
+      "id": "rango_validado_sbfl_m_s",
+      "valor": [
+        12.57,
+        21
+      ],
+      "evidencia": "E",
+      "fuentes": [
+        "MORRICE_WEST_2022"
+      ],
+      "estado": "IMPLEMENTADO",
+      "nota": "por debajo se acumula aparte como extrapolado (sobrestima el trabajo lento frente a Hong Kong: 0,41 % por sesión)"
+    },
+    {
+      "id": "v_carrera_psi_m_s",
+      "valor": 16.7,
+      "evidencia": "E",
+      "fuentes": [
+        "MORRICE_WEST_2020"
+      ],
+      "estado": "IMPLEMENTADO",
+      "opcion": "v_carrera_m_s (por caballo)"
+    },
+    {
+      "id": "v_carrera_arabe_m_s",
+      "valor": 14.5,
+      "evidencia": "I",
+      "fuentes": [
+        "FRANCE_GALOP_2024_LON",
+        "QAWC_2023_PARCIALES",
+        "ONDER_2022"
+      ],
+      "nota": "Ganadores Gr1 PA en 2.000 m 2023–2026: 14,56–15,13 m/s (mediana ~14,95; élite: v_carrera_m_s ≈ 14,9); media de población en césped en Turquía 14,34 m/s [E]; los 14,2 m/s polacos son del Derby de 3.000 m, no de 2.000 m",
+      "estado": "IMPLEMENTADO"
+    },
+    {
+      "id": "bandas_fraccion_v_carrera",
+      "valor": {
+        "B1": "v_trabajo–0,80",
+        "B2": "0,80–0,93",
+        "B3": "≥0,93"
+      },
+      "evidencia": "I",
+      "fuentes": [
+        "MORRICE_WEST_2023"
+      ],
+      "estado": "IMPLEMENTADO"
+    },
+    {
+      "id": "corte_verheyen",
+      "valor": "canter 0,40–0,838·v_carrera (PSI 6,7–14 m/s); galope > 0,838·v_carrera (PSI > 14 m/s)",
+      "evidencia": "E",
+      "nota": "≤ 14 / > 14 m/s confirmados en el resumen [E]; sin límite inferior del canter en el resumen (0,40·v_carrera es I); el resumen enuncia 44 km de canter Y 6 km de galope (posible interacción, por confirmar en el texto completo); Verheyen 2005 usaría 13,4 m/s [NV]",
+      "fuentes": [
+        "VERHEYEN_2006",
+        "VERHEYEN_2006_RESUMEN"
+      ],
+      "estado": "IMPLEMENTADO"
+    },
+    {
+      "id": "zancada_referencia_arabe_m_s",
+      "valor": [
+        13,
+        14
+      ],
+      "anterior": [
+        13,
+        15
+      ],
+      "evidencia": "I",
+      "fuentes": [
+        "FRANCE_GALOP_2024_LON"
+      ],
+      "estado": "IMPLEMENTADO"
+    },
+    {
+      "id": "velocidad_final_600m",
+      "valor": "v = 600 m / tiempo de los últimos 600 m del trabajo (interpolado sobre la distancia acumulada)",
+      "evidencia": "E",
+      "fuentes": [
+        "SCHRURS_2024_TEXTO"
+      ],
+      "estado": "IMPLEMENTADO",
+      "codigo": "kb_final_speed; JSON trabajos.lista[].v_ultimos_600m y ultimos_600m_s"
+    },
+    {
+      "id": "modelo_B_constantes",
+      "valor": {
+        "E_nom_mpa": 1714.1,
+        "E0_mpa": 2500,
+        "alfa": 0.19,
+        "F_s": 5,
+        "gamma_E": 0.06,
+        "a_mm-1": 11.42,
+        "b": 0.02,
+        "gamma_C": 2,
+        "delta_C_mpa": 1.0,
+        "A_OCL_min_mm_dia": 0.001,
+        "sigma0_mpa": 139.0,
+        "sigma1_mpa": 14.1
+      },
+      "evidencia": "E",
+      "fuentes": [
+        "ANWAR_2026",
+        "PAN_2025_PREPRINT"
+      ],
+      "estado": "PENDIENTE",
+      "falta": "A_OBL_min/max, δ_B, γ_B y A_OCL_max (tabla 1 de Pan, tabla 9 completa de Anwar)"
+    },
+    {
+      "id": "rango_acelerometro_cincha",
+      "valor": "BETA LSM6DSV16X ±16 g; PROTOTIPO BNO085 ±8 g con contador de muestras saturadas y ≥ 200 Hz",
+      "evidencia": "I",
+      "fuentes": [
+        "PARSONS_2008",
+        "BOSCH_2018",
+        "WITTE_2006"
+      ],
+      "estado": "PROPUESTA",
+      "nota": "no hay picos de aceleración del tronco publicados a ≥ 12 m/s; afecta al firmware, no al motor"
+    },
+    {
+      "id": "ecg_prematuro",
+      "valor": "RR ≥ 5 % más corto que el RR anterior (probable entre 5 y 6 %)",
+      "evidencia": "E (5 %) / I (banda 5–6 %)",
+      "fuentes": [
+        "NAVAS_DE_SOLIS_2026",
+        "FRICK_2019"
+      ],
+      "estado": "PENDIENTE"
+    },
+    {
+      "id": "ecg_fases",
+      "valor": "ejercicio de alta intensidad (con la aceleración) · recuperación temprana 0–2 min · recuperación tardía",
+      "evidencia": "E",
+      "fuentes": [
+        "NAVAS_DE_SOLIS_2026"
+      ],
+      "estado": "PENDIENTE"
+    },
+    {
+      "id": "ecg_no_interpretable",
+      "valor": "artefacto > 10 % de la duración del ejercicio",
+      "evidencia": "E",
+      "fuentes": [
+        "TER_WOORT_2023"
+      ],
+      "estado": "PENDIENTE"
+    },
+    {
+      "id": "vhrmax_psi_corte_m_s",
+      "valor": 14.5,
+      "evidencia": "E",
+      "fuentes": [
+        "GRAMKOW_EVANS_2006"
+      ],
+      "estado": "PENDIENTE",
+      "nota": "solo PSI; por debajo, menos ganancias por salida (r = 0,41); en árabes solo comparación intra-caballo"
+    }
   ],
   "reglas": [
-    {"id": "A1_CANTER_30D", "umbral": "canter > 40 km en 30 d: AVISO; > 44 km: LIMITAR", "evidencia": "E (44 km) / I (aviso al 90 %)", "fuentes": ["VERHEYEN_2006"], "estado": "IMPLEMENTADO"},
-    {"id": "A2_GALOPE_30D", "umbral": "galope > 14 m/s (PSI) > 6 km en 30 d: LIMITAR", "evidencia": "E", "fuentes": ["VERHEYEN_2006"], "estado": "IMPLEMENTADO"},
-    {"id": "A3_RAMPA", "umbral": "galope rápido 30 d > 1,4 × 30 d anteriores (con ≥ 1 km y 60 d de historia): LIMITAR", "evidencia": "E (+40 % → OR 3,9) / I (ventanas)", "fuentes": ["ESTBERG_1996"], "estado": "IMPLEMENTADO"},
-    {"id": "A4_CARGA_BAJA_PRECARRERA", "umbral": "< 2 sesiones rápidas en los 28 d previos a una carrera prevista", "evidencia": "E (OR 2,89) / I (corte)", "fuentes": ["MORRICE_WEST_2025"], "estado": "PENDIENTE", "falta": "fecha de la carrera prevista en la ficha del caballo; hoy solo hay el aviso informativo KB_SIN_RAPIDO_30D"},
-    {"id": "A5_VUELTA_DESCANSO", "umbral": "≥ 60 d sin trabajo rápido: 21 d vigilados", "evidencia": "E (RR 71 a 10 d, 45 a 21 d)", "fuentes": ["CARRIER_1998"], "estado": "IMPLEMENTADO"},
-    {"id": "A6_VUELTA_TENDON", "umbral": "≥ 90 d sin trabajo rápido: aviso y sugerencia de ecografía del TFDS", "evidencia": "E (OR 3,10)", "fuentes": ["CHOI_PARKIN_2025"], "estado": "IMPLEMENTADO", "falta": "cociente de días de galope 60/90 d ≤ 1,6 (definición por confirmar)"},
-    {"id": "A7_CAIDA_ZANCADA", "umbral": "SL a velocidad de referencia ≥ 10 cm bajo la línea base en ≥ 2 de 3 sesiones comparables", "evidencia": "E (HR 1,11/10 cm) / I", "fuentes": ["WONG_2023"], "estado": "PARCIAL", "nota": "Training Analytics ya vigila TRABAJO.l_v1_m y l_v2_m con z robusto; falta la regla en cm y por superficie"},
-    {"id": "A8_CAIDA_VELOCIDAD_FINAL", "umbral": "últimos 600 m del trabajo de referencia ≥ 0,1–0,2 m/s bajo la línea base", "evidencia": "E / I", "fuentes": ["WONG_2023", "SCHRURS_2024"], "estado": "PENDIENTE"},
-    {"id": "A9_PERDIDA_FORMA", "umbral": "V200/VHRmax bajo max(√2·TE, SWC) en ≥ 2 sesiones", "evidencia": "E / I", "fuentes": ["VERMEULEN_EVANS_2006"], "estado": "PENDIENTE", "falta": "ECG de la cincha 0.5.x en el análisis"},
-    {"id": "A11_ECG", "umbral": "ectopia en fase máxima, FA paroxística, arritmia compleja (definiciones de Van Erck-Westergren 2026)", "evidencia": "E", "fuentes": ["VAN_ERCK_2026"], "estado": "PENDIENTE"},
-    {"id": "KB_FATIGA_OSEA_7D", "umbral": "fatiga ósea 7 d > 1,5 × mediana semanal propia (≥ 4 semanas)", "evidencia": "E (acumulación rápida) / I (umbral)", "fuentes": ["MORRICE_WEST_2025", "ICRAV_2026_HK"], "estado": "IMPLEMENTADO"}
+    {
+      "id": "A1_CANTER_30D",
+      "umbral": "canter > 40 km en 30 d: AVISO; > 44 km: LIMITAR",
+      "evidencia": "E (44 km) / I (aviso al 90 %)",
+      "fuentes": [
+        "VERHEYEN_2006"
+      ],
+      "estado": "IMPLEMENTADO",
+      "nota": "el resumen de Verheyen enuncia los dos umbrales juntos; regla combinada pendiente del texto completo"
+    },
+    {
+      "id": "A2_GALOPE_30D",
+      "umbral": "galope > 14 m/s (PSI) > 6 km en 30 d: LIMITAR",
+      "evidencia": "E",
+      "fuentes": [
+        "VERHEYEN_2006"
+      ],
+      "estado": "IMPLEMENTADO",
+      "nota": "el resumen de Verheyen enuncia los dos umbrales juntos; regla combinada pendiente del texto completo"
+    },
+    {
+      "id": "A3_RAMPA",
+      "umbral": "galope rápido 30 d > 1,4 × 30 d anteriores (con ≥ 1 km y 60 d de historia): LIMITAR",
+      "evidencia": "E (+40 % → OR 3,9) / I (ventanas)",
+      "fuentes": [
+        "ESTBERG_1996"
+      ],
+      "estado": "IMPLEMENTADO"
+    },
+    {
+      "id": "A4_CARGA_BAJA_PRECARRERA",
+      "umbral": "< 2 sesiones rápidas en los 28 d previos a una carrera prevista",
+      "evidencia": "E (OR 2,89) / I (corte)",
+      "fuentes": [
+        "MORRICE_WEST_2025"
+      ],
+      "estado": "PENDIENTE",
+      "falta": "fecha de la carrera prevista en la ficha del caballo; hoy solo hay el aviso informativo KB_SIN_RAPIDO_30D"
+    },
+    {
+      "id": "A5_VUELTA_DESCANSO",
+      "umbral": "≥ 60 d sin trabajo rápido: 21 d vigilados",
+      "evidencia": "E (RR 71 a 10 d, 45 a 21 d)",
+      "fuentes": [
+        "CARRIER_1998"
+      ],
+      "estado": "IMPLEMENTADO"
+    },
+    {
+      "id": "A6_VUELTA_TENDON",
+      "umbral": "≥ 90 d sin trabajo rápido: aviso y sugerencia de ecografía del TFDS",
+      "evidencia": "E (OR 3,10)",
+      "fuentes": [
+        "CHOI_PARKIN_2025"
+      ],
+      "estado": "IMPLEMENTADO",
+      "falta": "cociente de días de galope 60/90 d ≤ 1,6 (definición por confirmar)"
+    },
+    {
+      "id": "A7_CAIDA_ZANCADA",
+      "umbral": "SL a velocidad de referencia ≥ 10 cm bajo la línea base en ≥ 2 de 3 sesiones comparables",
+      "evidencia": "E (HR 1,11/10 cm) / I",
+      "fuentes": [
+        "WONG_2023"
+      ],
+      "estado": "PARCIAL",
+      "nota": "Training Analytics ya vigila TRABAJO.l_v1_m y l_v2_m con z robusto; falta la regla en cm y por superficie"
+    },
+    {
+      "id": "A8_CAIDA_VELOCIDAD_FINAL",
+      "umbral": "últimos 600 m del trabajo de referencia ≥ 0,1–0,2 m/s bajo la línea base",
+      "evidencia": "E / I",
+      "fuentes": [
+        "WONG_2023",
+        "SCHRURS_2024_TEXTO"
+      ],
+      "estado": "PARCIAL",
+      "nota": "la métrica de los últimos 600 m ya está en el motor (KB 1.1.0); falta umbral (0,1–0,2 m/s es I), trabajo de referencia y superficie; la velocidad puntual a 600 m no predice (Schrurs 2024)"
+    },
+    {
+      "id": "A9_PERDIDA_FORMA",
+      "umbral": "V200/VHRmax bajo max(√2·TE, SWC) en ≥ 2 sesiones",
+      "evidencia": "E / I",
+      "fuentes": [
+        "VERMEULEN_EVANS_2006",
+        "GRAMKOW_EVANS_2006",
+        "POINSARD_2026"
+      ],
+      "estado": "PENDIENTE",
+      "falta": "ECG de la cincha 0.5.x en el análisis",
+      "nota": "Vermeulen: medias de 5 s y diferencias test-retest ≤ 2 % (no hay TE ni SWC formal publicado); ICC de V200 0,50 en trotones (Poinsard 2026)"
+    },
+    {
+      "id": "A11_ECG",
+      "umbral": "prematuro RR ≥ 5 % más corto; compleja = multiformes, triplete, racha o FA; recuento por fase (OR 1,15 por ectópico adicional en Van Erck 2026)",
+      "evidencia": "E",
+      "fuentes": [
+        "NAVAS_DE_SOLIS_2026",
+        "VAN_ERCK_2026",
+        "REEF_2014",
+        "TER_WOORT_2023"
+      ],
+      "estado": "PENDIENTE",
+      "nota": "las definiciones operativas son de Navas de Solis 2026; el texto completo de Van Erck 2026 no se pudo leer"
+    },
+    {
+      "id": "KB_FATIGA_OSEA_7D",
+      "umbral": "fatiga ósea 7 d > 1,5 × mediana semanal propia (≥ 4 semanas)",
+      "evidencia": "E (acumulación rápida) / I (umbral)",
+      "fuentes": [
+        "MORRICE_WEST_2025",
+        "ICRAV_2026_HK"
+      ],
+      "estado": "IMPLEMENTADO"
+    },
+    {
+      "id": "A1A2_VERHEYEN_COMBINADO",
+      "umbral": "canter > 44 km Y galope > 6 km en 30 d",
+      "evidencia": "E (resumen) / NV (forma de la interacción)",
+      "fuentes": [
+        "VERHEYEN_2006_RESUMEN"
+      ],
+      "estado": "PENDIENTE",
+      "falta": "texto completo de Verheyen 2006 (ORs por categoría y cortes) antes de decidir si A1 y A2 aislados bajan a AVISO"
+    }
   ],
   "pendiente_motor": [
-    "Modelo óseo B (Pan/Anwar) con adaptación y reparación, para comparar escenarios de reposo; antes confirmar σ0 y E_nom en los PDF",
-    "V200/VHRmax por regresión FC–velocidad y recuperación de FC (cuando el análisis lea el ECG)",
-    "Ectopia y calidad del ECG por fase (≥ 500 SPS)",
+    "Modelo óseo B (Pan/Anwar) con adaptación y reparación (σ0 = 139,0 resuelto; faltan A_OBL_min/max, δ_B, γ_B y A_OCL_max)",
+    "V200/VHRmax por regresión FC–velocidad en medias de 5 s, con retraso de FC calibrable, R² ≥ 0,90 y sin extrapolar; recuperación de FC a 1, 2, 3, 5, 10 y 15 min solo informativa",
+    "ECG por fase (≥ 250 SPS, preferible 500): prematuro ≥ 5 %, par, triplete, racha, FA, % de artefacto; validar el detector QRS con anotación manual",
     "Líneas base con shrinkage hacia la cuadra, SWC/TE propios y CUSUM",
-    "Velocidad de los últimos 600 m del trabajo de referencia",
+    "Regla A8 sobre v_ultimos_600m (la métrica ya existe): línea base por trabajo de referencia y superficie",
     "Índice de desaceleración final (IDF) de las carreras importadas de France Galop",
     "Índice tendinoso heurístico",
     "Planificador semanal por restricciones (capa 2) y explicación con confianza (capa 3)",
-    "Línea base separada para la playa (arena seca, húmeda, orilla y marea)"
+    "Línea base separada para la playa (arena seca, húmeda, orilla y marea)",
+    "Regla combinada A1+A2 de Verheyen cuando se lea el texto completo",
+    "Contador de muestras saturadas de la cincha en el análisis (si el firmware lo envía)"
   ],
   "cola_investigacion": [
-    "PDF de Anwar 2026 (RSOS) y Pan 2025 (JRSI): σ0, región ósea de f_BM y tablas 1–2",
-    "Martig 2013/2014: curva S-N original (n, R²)",
-    "Verheyen 2006 (Bone): definición exacta de canter ≤ 14 m/s",
-    "Parciales oficiales de árabes: Reino Unido, EAU, Qatar, Polonia; programas AFAC/IFAHR 2026",
+    "Texto completo de Verheyen 2006 (Bone, DOI 10.1016/j.bone.2006.05.025): ORs, cortes, límite inferior del canter, ventana de 60 d",
+    "Tabla 1 de Pan 2025 (JRSI) y tabla 9 completa de Anwar 2026 (RSOS): constantes de adaptación del modelo B",
+    "Texto completo de Van Erck-Westergren 2026 (JVIM): definiciones de fases, prematuridad, FA paroxística y % no interpretable",
+    "Vermeulen & Evans 2006 y Gramkow & Evans 2006 completos: rango de la regresión FC–velocidad y retraso de la FC",
+    "Martig 2013 completo: confirmar que 134,2/14,1 es la curva de sensibilidad",
+    "PDF de tracking de France Galop (QAWC 2023–2025, Saint-Cloud) y resultados árabes del Reino Unido (Newbury, Doncaster) y Amir Sword 2026",
+    "Frecuencia de zancada en árabes de carreras (no encontrada)",
+    "Picos de aceleración del tronco en g a ≥ 12 m/s (Pfau 2006 y Barrey 2001 completos; no hay datos publicados accesibles)",
     "Yildirim 2025 completo (lesiones de árabes por localización y pista)",
-    "Picos de aceleración del tronco en g a 16–18 m/s (Pfau 2006, Witte 2004, Barrey 2001)",
     "Galope sobre arena de playa (fuerzas, zancada)",
-    "Gramkow & Evans 2006 y Schrurs 2024 completos",
-    "Navas de Solis 2025 (muerte súbita, DOI 10.1002/evj.70166)"
+    "Ryan 2005, Slack 2015 y Barbesgaard 2010 (prevalencia de prematuros en PSI sanos)"
   ],
   "historial": [
-    {"version": "1.0.0", "fecha": "2026-11-18", "cambio": "Primera base: modelo óseo A, bandas relativas al ritmo de carrera, contadores de Verheyen, reglas A1, A2, A3, A5, A6 y fatiga ósea semanal; zancada árabe a 13 y 14 m/s"}
+    {
+      "version": "1.0.0",
+      "fecha": "2026-11-18",
+      "cambio": "Primera base: modelo óseo A, bandas relativas al ritmo de carrera, contadores de Verheyen, reglas A1, A2, A3, A5, A6 y fatiga ósea semanal; zancada árabe a 13 y 14 m/s"
+    },
+    {
+      "version": "1.1.0",
+      "fecha": "2026-11-18",
+      "cambio": "Noche: σ0 aclarado (134,2 modelo A, 139,0 calibración del modelo B), notas de σ_max y Verheyen corregidas, tabla de árabes Gr1, definiciones de ECG de Navas de Solis 2026, V200 y Schrurs; métrica nueva v_ultimos_600m en el motor (KNOWLEDGE_VERSION 1.1.0, motor 2.0.0-dev3)"
+    }
   ]
 }
