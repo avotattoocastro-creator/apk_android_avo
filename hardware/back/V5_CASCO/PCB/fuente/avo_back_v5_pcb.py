@@ -236,7 +236,7 @@ LC = {
     # REV B (17/11/2026; existencias consultadas en el CI: out_stock/stock_jlc.json)
     "WROOM1U": "C3013946", "TPS61023": "C919459", "MAX17048": "C2682616", "1uH 0806": "C97016", "TTP223": "C42422127",
     "XC6206": "C5446", "BAT54C": "C2135", "LSM6DSV16X": "C5267406", "68k": "C36871", "2k2": "C25879", "22p": "C1555",
-    "620k": "C137952",
+    "620k": "C137952", "150k": "C25755",
 }
 
 
@@ -277,8 +277,10 @@ part("U6", "SOT23-6", "USBLC6-2SC6", (0, 0), 0,
      sym=dict(L=[(1, "IO1"), (6, "IO1"), (3, "IO2"), (4, "IO2")], R=[(5, "VBUS"), (2, "GND")]))
 R("R18", "22R", "USB_DP_C", "USB_DP", block="Pogo")
 R("R19", "22R", "USB_DM_C", "USB_DM", block="Pogo")
-R("R22", "100k", VBUS, "VBUS_DET", block="Pogo", note="divisor 1:2 → GPIO18 (despierta al conectar el cable)")
-R("R23", "100k", "VBUS_DET", GND, block="Pogo")
+R("R22", "100k", VBUS, "VBUS_DET", block="Pogo", note="divisor 100k/150k → GPIO18 (despierta al conectar el cable)")
+R("R23", "150k", "VBUS_DET", GND, block="Pogo",
+  note="REV B (revisión 18/11): 100k/150k → 2,85–3,15 V con VBUS 4,75–5,25 V. Con 100k/100k daba 2,4–2,6 V, por debajo "
+       "de VIH = 0,75 × VDD = 2,475 V del ESP32-S3 (hoja del WROOM, DC characteristics): lectura no fiable")
 
 # ---------------------------------------------------------------------------------------- cargador (U2)
 part("U2", "RGT16", "BQ24072RGTR", (0, 0), 0,
@@ -291,7 +293,8 @@ part("U2", "RGT16", "BQ24072RGTR", (0, 0), 0,
 C("C18", "1u", VBUS, GND, block="Cargador")
 C("C19", "10u 25V", VSYS, GND, block="Cargador", fp="C0603")
 C("C20", "10u 25V", VBAT, GND, block="Cargador", fp="C0603")
-C("C35", "47u 6V3", VSYS, GND, block="Cargador", fp="C0805", note="reserva de VSYS para los picos de radio y del ZED")
+C("C35", "22u 10V", VSYS, GND, block="Cargador", fp="C0805",
+  note="REV B (revisión 18/11): 47 → 22 µF. El BQ24072 pide 4,7–47 µF en OUT y VSYS suma C19, C21, C60 y C98")
 R("R6", "1k5", "CHG_ISET", GND, block="Cargador", note="I_carga = 890/1k5 ≈ 590 mA (0,3 C de 2000 mAh; ≈ 4 h)")
 R("R7", "2k", "CHG_ILIM", GND, block="Cargador", note="I_entrada = K_ILIM/R_ILIM ≈ 1600/2k ≈ 800 mA (BQ24072T, SLUS937)")
 part("RT2", "R0402", "NTC 10k B3380", (0, 0), 0, {1: "CHG_TS", 2: GND}, LC["NTC10k"], "NCP15XH103F03RC", "Cargador", sym="R",
@@ -331,6 +334,10 @@ part("D6", "SOT23", "BAT54C", (0, 0), 0, {1: VBUS, 2: None, 3: "EN_3V3"}, LC["BA
      sym=dict(L=[(1, "A1"), (2, "A2")], R=[(3, "K")]),
      note="VBUS del pogo (cargador o DOCK) al EN: una cápsula apagada se enciende al cargar (decisión D1 de la auditoría)")
 R("R14", "1M", "EN_3V3", GND, block="Encendido", note="EN a 0 sin ninguna fuente: apagado (fuga ≈ 0)")
+C("C28", "1u", "EN_3V3", GND, block="Encendido",
+  note="REV B (revisión 18/11): mantiene EN ≈ 1 s (1 MΩ · 1 µF) cuando el micro se reinicia (OTA, watchdog, reset): GPIO46 "
+       "vuelve a 0 en el reinicio y sin esto el casco se apagaba en cada reinicio. El firmware sube POWER_HOLD en el "
+       "arranque (gancho del bootloader). Apagar tarda ≈ 1–1,5 s tras soltar POWER_HOLD")
 R("R15", "100k", "PWR_HOLD", GND, block="Encendido",
   note="GPIO46 (de arranque: bajo por defecto) — el firmware lo sube nada más arrancar y lo retiene en el sueño")
 # --- REV B: 3,3 V siempre encendido (µA) desde la batería: V_BCKP del ZED + táctil
@@ -477,9 +484,13 @@ part("J3", "MICROSD", "microSD DM3AT", (0, 0), 0,
      sym=dict(L=[(4, "VDD"), (5, "CLK"), (3, "CMD"), (7, "DAT0"), (8, "DAT1"), (1, "DAT2"), (2, "CD/DAT3")],
               R=[(6, "VSS"), (9, "DET"), (10, "DET_COM"), (11, "SHELL")]),
      note="sin detección de tarjeta (caja estanca: la tarjeta va siempre puesta)")
-part("Q4", "SOT23", "AO3401A", (0, 0), 0, {1: "SD_PWR_N", 2: V3, 3: VSD}, LC["AO3401A"], block="microSD",
+part("Q4", "SOT23", "AO3401A", (0, 0), 0, {1: "SD_G", 2: V3, 3: VSD}, LC["AO3401A"], block="microSD",
      sym=dict(L=[(1, "G")], R=[(2, "S"), (3, "D")]), note="alimentación de la tarjeta: GPIO21 = 0 la enciende")
-R("R40", "100k", "SD_PWR_N", V3, block="microSD", note="tarjeta apagada mientras arranca el ESP32")
+R("R40", "100k", "SD_G", V3, block="microSD", note="tarjeta apagada mientras arranca el ESP32")
+R("R47", "10k", "SD_PWR_N", "SD_G", block="microSD",
+  note="REV B (revisión 18/11): arranque suave con C42 (τ ≈ 0,9 ms). Sin él, los 10 µF de C40 + la tarjeta se cargaban de golpe "
+       "desde el 3,3 V y podían hundirlo hasta reiniciar el ESP32 (≈ 40 mA de pico en vez de varios amperios)")
+C("C42", "100n", "SD_G", V3, block="microSD", note="puerta–fuente de Q4: rampa de encendido de la tarjeta")
 C("C40", "10u 25V", VSD, GND, block="microSD", fp="C0603")
 C("C41", "100n", VSD, GND, block="microSD")
 for i, n in enumerate(("SD_CMD", "SD_D0", "SD_D1", "SD_D2", "SD_D3")):

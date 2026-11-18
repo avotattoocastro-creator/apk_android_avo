@@ -203,7 +203,7 @@
   "block": "Pogo",
   "dnp": false,
   "no_assembly": false,
-  "note": "divisor 1:2 → GPIO18 (despierta al conectar el cable)",
+  "note": "divisor 100k/150k → GPIO18 (despierta al conectar el cable)",
   "jlc_rot": 0,
   "x": -2.28,
   "y": -10.96,
@@ -211,14 +211,14 @@
  },
  {
   "ref": "R23",
-  "value": "100k",
+  "value": "150k",
   "footprint": "R_0402_1005Metric",
-  "lcsc": "C25741",
+  "lcsc": "C25755",
   "mpn": "",
   "block": "Pogo",
   "dnp": false,
   "no_assembly": false,
-  "note": "",
+  "note": "REV B (revisión 18/11): 100k/150k → 2,85–3,15 V con VBUS 4,75–5,25 V. Con 100k/100k daba 2,4–2,6 V, por debajo de VIH = 0,75 × VDD = 2,475 V del ESP32-S3 (hoja del WROOM, DC characteristics): lectura no fiable",
   "jlc_rot": 0,
   "x": -13.44,
   "y": 12.96,
@@ -286,14 +286,14 @@
  },
  {
   "ref": "C35",
-  "value": "47u 6V3",
+  "value": "22u 10V",
   "footprint": "C_0805_2012Metric",
-  "lcsc": "C16780",
+  "lcsc": "C45783",
   "mpn": "",
   "block": "Cargador",
   "dnp": false,
   "no_assembly": false,
-  "note": "reserva de VSYS para los picos de radio y del ZED",
+  "note": "REV B (revisión 18/11): 47 → 22 µF. El BQ24072 pide 4,7–47 µF en OUT y VSYS suma C19, C21, C60 y C98",
   "jlc_rot": 0,
   "x": 2.05,
   "y": -8.52,
@@ -583,6 +583,21 @@
   "x": -7.39,
   "y": -16.83,
   "rot": 0
+ },
+ {
+  "ref": "C28",
+  "value": "1u",
+  "footprint": "C_0402_1005Metric",
+  "lcsc": "C52923",
+  "mpn": "",
+  "block": "Encendido",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "REV B (revisión 18/11): mantiene EN ≈ 1 s (1 MΩ · 1 µF) cuando el micro se reinicia (OTA, watchdog, reset): GPIO46 vuelve a 0 en el reinicio y sin esto el casco se apagaba en cada reinicio. El firmware sube POWER_HOLD en el arranque (gancho del bootloader). Apagar tarda ≈ 1–1,5 s tras soltar POWER_HOLD",
+  "jlc_rot": 0,
+  "x": -8.76,
+  "y": -14.67,
+  "rot": 90
  },
  {
   "ref": "R15",
@@ -1525,9 +1540,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 22.93,
-  "y": -0.71,
-  "rot": 0
+  "x": 23.75,
+  "y": -2.24,
+  "rot": 90
  },
  {
   "ref": "J3",
@@ -1570,8 +1585,38 @@
   "no_assembly": false,
   "note": "tarjeta apagada mientras arranca el ESP32",
   "jlc_rot": 0,
+  "x": 20.6,
+  "y": -9.42,
+  "rot": 0
+ },
+ {
+  "ref": "R47",
+  "value": "10k",
+  "footprint": "R_0402_1005Metric",
+  "lcsc": "C25744",
+  "mpn": "",
+  "block": "microSD",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "REV B (revisión 18/11): arranque suave con C42 (τ ≈ 0,9 ms). Sin él, los 10 µF de C40 + la tarjeta se cargaban de golpe desde el 3,3 V y podían hundirlo hasta reiniciar el ESP32 (≈ 40 mA de pico en vez de varios amperios)",
+  "jlc_rot": 0,
   "x": 23.7,
   "y": -6.03,
+  "rot": 90
+ },
+ {
+  "ref": "C42",
+  "value": "100n",
+  "footprint": "C_0402_1005Metric",
+  "lcsc": "C1525",
+  "mpn": "",
+  "block": "microSD",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "puerta–fuente de Q4: rampa de encendido de la tarjeta",
+  "jlc_rot": 0,
+  "x": 23.7,
+  "y": -8.13,
   "rot": 90
  },
  {
@@ -1585,8 +1630,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 24.09,
-  "y": -3.4,
+  "x": 20.82,
+  "y": -11.55,
   "rot": 90
  },
  {
@@ -1675,8 +1720,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 20.08,
-  "y": -9.95,
+  "x": 22.39,
+  "y": -0.23,
   "rot": 90
  },
  {
@@ -1825,8 +1870,8 @@
   "no_assembly": true,
   "note": "GPIO0 a GND al arrancar = descarga (también por USB nativo)",
   "jlc_rot": 0,
-  "x": 22.65,
-  "y": 1.05,
+  "x": 22.77,
+  "y": 1.64,
   "rot": 0
  },
  {
@@ -1885,8 +1930,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -9.03,
-  "y": -14.05,
+  "x": -14.97,
+  "y": -12.15,
   "rot": 0
  },
  {
@@ -1915,8 +1960,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -15.0,
-  "y": -12.06,
+  "x": -16.13,
+  "y": -13.95,
   "rot": 0
  },
  {
@@ -1930,8 +1975,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -16.22,
-  "y": -13.75,
+  "x": -16.09,
+  "y": -15.57,
   "rot": 0
  },
  {

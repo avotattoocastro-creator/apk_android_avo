@@ -24,6 +24,24 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-18 — Casco BETA BACK V5 — PCB REV B: correcciones de la revisión previa a fabricación
+**Autor:** Claude · Rama `feature/back-v5-casco`
+**Qué cambia (revisión pin a pin contra hojas de datos, antes de pedir):**
+- **Enclavamiento ante reinicios:** C28 1 µF en EN_3V3 (con R14 1 MΩ, τ ≈ 1 s). GPIO46 vuelve a 0 en cualquier reinicio
+  del ESP32 (OTA, watchdog, reset): sin el condensador el casco se apagaba en cada reinicio. El firmware debe subir
+  POWER_HOLD en el arranque (gancho del bootloader).
+- **microSD:** arranque suave del PMOS Q4 (R47 10 kΩ + C42 100 nF): la carga de golpe de C40 y la tarjeta podía
+  hundir el 3,3 V y reiniciar el ESP32.
+- **VBUS_DET:** divisor 100k/150k (antes 100k/100k: 2,4–2,6 V, por debajo de VIH = 0,75 × VDD del ESP32-S3).
+- **VSYS:** C35 47 → 22 µF (el BQ24072 pide 4,7–47 µF en OUT; VSYS suma varios condensadores).
+- Comprobado sin cambios: GPIO46 es entrada/salida (hoja del WROOM, tabla de pines: I/O/T); TS del BQ24072 con NTC
+  de 10 kΩ directo; patillajes de TLV75733P y RT9080; EN del TLV757P hasta 6 V.
+- **Corrección de la documentación:** el MAX17048 entra en reposo cuando el bus I²C está a 0 más de 2,5 s (casco
+  apagado): no mide con el casco apagado y sigue al encender.
+**Validación:** colocación local sin errores; ruteado y DRC en el CI (ver PR). **NO VERIFICADO.**
+
+---
+
 ## 2026-11-18 — Casco BETA BACK V5 — PCB REV B: salida de la microSD libre y CPL corregido para JLC
 **Autor:** Claude · Rama `feature/back-v5-casco`
 **Qué cambia:**
