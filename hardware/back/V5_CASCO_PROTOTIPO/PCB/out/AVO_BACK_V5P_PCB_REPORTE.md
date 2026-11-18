@@ -1,30 +1,22 @@
-# AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de diagnóstico
+# AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de fabricación
 
-- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `445609029e05cdc88234f0676a439fdffa9fe9b4` · ejecución de CI: 44387821725
-- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
+- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
+- Commit: `e8f629c1b36148f399751e204756863b3880a3ac` · ejecución de CI: 44390248378
+- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 56 × 56 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo bajo la URTK1.2, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 133 en total, 106 para montar, 1 sin montar (DNP: C69), 26 a mano (pads de hilo y de prueba)
-- Pistas: 1041 · vías: 164 · ruteado INCOMPLETO (5 conexiones)
+- Pistas: 1061 · vías: 172 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | **FALLA** | 3 |
-| DRC: conexiones incompletas | **FALLA** | 5 |
+| DRC: errores | correcto | 0 |
+| DRC: conexiones incompletas | correcto | 0 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
-Errores de DRC por tipo: copper_edge_clearance 3
-
-### Conexiones incompletas
-- Track [+3V3] on F.Cu, length 1.2492 mm ↔ Pad 2 [+3V3] of R10 on F.Cu
-- Track [+3V3] on F.Cu, length 0.9237 mm ↔ Pad 5 [+3V3] of U13 on F.Cu
-- Track [VSYS] on F.Cu, length 2.4914 mm ↔ Pad 3 [VSYS] of U11 on F.Cu
-- Pad 3 [LED_D4] of D12 on F.Cu ↔ Pad 1 [LED_D4] of D13 on F.Cu
-- Track [VLED] on F.Cu, length 0.0183 mm ↔ Track [VLED] on F.Cu, length 0.9324 mm
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 3
@@ -80,8 +72,8 @@ Errores de DRC por tipo: copper_edge_clearance 3
 - Piezas sin existencias para 5 placas: C5378721
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **no**
-- Apto para solicitar prototipos: **no**
+- Diseño verificado por software (KiCad 9 en el CI): **sí**
+- Apto para solicitar prototipos: **sí, pendiente de validación física**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)

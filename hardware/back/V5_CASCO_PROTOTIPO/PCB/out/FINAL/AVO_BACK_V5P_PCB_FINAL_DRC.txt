@@ -1,0 +1,24 @@
+** Drc report for AVO_BACK_V5P_PCB.kicad_pcb **
+** Created on 2026-11-18T20:23:03+0000 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 4 DRC violations **
+[connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0280 mm) (F.Cu)
+    Rule: board setup constraints; warning
+    @(87.0000 mm, 80.0000 mm): Pad 3 [VBAT] of U9 on F.Cu
+    @(88.3159 mm, 80.4800 mm): Track [VBAT] on F.Cu, length 0.7536 mm
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(100.0000 mm, 75.7000 mm): PCB text 'AVO Performance' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(113.0000 mm, 95.0000 mm): Circle of U12 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(82.6100 mm, 85.2100 mm): Circle of L71 on F.Silkscreen
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** End of Report **
