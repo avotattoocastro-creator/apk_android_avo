@@ -24,6 +24,18 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-19 — Casco V5 PROTOTIPO A — USB-C de programación y empalme de la batería en línea
+**Autor:** Claude · **CI:** pendiente (PCB se vuelve a rutear entera; CAD con el empalme de la batería)
+**Qué cambia:** USB-C J16 (HRO TYPE-C-31-M-12, C165948) en el canto superior de la cara F, en paralelo con los pads
+del pogo (POGO_VBUS antes del PTC F2; USB_DP_C/USB_DM_C antes del USBLC6) con Rd 5,1 kΩ en CC1/CC2 (R30/R31, C25905):
+programar y cargar en el banco con la placa fuera de la cápsula, sin soldar el pogo. Va fuera de la huella de la
+batería (3,3 mm de alto; el resto de la cara F sigue ≤ 3,2). Pads del pogo en 3 + 2 a su izquierda. Batería: sin
+conector en la PCB (el PH 2.0 acodado choca con la batería o la pared); coleta JST PH 2.0 soldada a BAT+/BAT− y empalme
+tumbado en la franja libre del fondo (envolvente 14 × 6,2 × 4,6 añadida al CAD y a sus interferencias). Coste: +1
+componente extendido (≈ 2,5 € por pedido). Las R25 1M / R26 150k (anillo a ≈ 4,56 V) y la placa de masa maciza ya
+estaban en `e8f629c`. **Hay que volver a subir Gerber, BOM y CPL a JLC.**
+**Validación:** IMPLEMENTADO. **NO VERIFICADO** en hardware.
+
 ## 2026-11-18 — Casco V5 PROTOTIPO A — correcciones de la revisión independiente
 **Autor:** Claude · **Commits:** `9fbd92a`, `4ce0f18` · **CI:** PCB run 44370108286 (puerta superada), CAD (éxito, 0 interferencias)
 **Qué cambia:** revisión por un agente independiente (sin ver el diseño). Corregido: cabecera TF inválida en los Gerber

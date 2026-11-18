@@ -365,6 +365,8 @@ def write_board(r, path, outer_pours=True):
             x_, y_ = p_["pos"]
             # REV B: los del pogo (P1–P5) debajo del pad, entre el pad y el canto (encima quedaban tapados por piezas)
             dy = 1.55 if p_["ref"].startswith("P") else 1.9          # PROTO A: pogo en el canto superior: rótulo hacia el canto
+            if p_["ref"] in ("P4", "P5"):
+                dy = -1.55                                           # 19/11: segunda fila del pogo: rótulo por debajo
             tree.append(B.gr_text(p_["value"].replace("POGO ", "").replace("BAT ", "B"), *D.K(x_, y_ + dy), "F.SilkS", 0.6,
                                   mirror=False, bold=False))
     B.write(path, tree)

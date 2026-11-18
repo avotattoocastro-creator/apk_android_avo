@@ -10,7 +10,7 @@
   "no_assembly": true,
   "note": "5 V del cable USB magnético",
   "jlc_rot": 0,
-  "x": -6.08,
+  "x": -8.65,
   "y": 25.5,
   "rot": 0
  },
@@ -25,7 +25,7 @@
   "no_assembly": true,
   "note": "USB D−",
   "jlc_rot": 0,
-  "x": -3.54,
+  "x": -6.3,
   "y": 25.5,
   "rot": 0
  },
@@ -40,7 +40,7 @@
   "no_assembly": true,
   "note": "USB D+",
   "jlc_rot": 0,
-  "x": -1.0,
+  "x": -3.95,
   "y": 25.5,
   "rot": 0
  },
@@ -55,8 +55,8 @@
   "no_assembly": true,
   "note": "masa",
   "jlc_rot": 0,
-  "x": 1.54,
-  "y": 25.5,
+  "x": -8.65,
+  "y": 23.05,
   "rot": 0
  },
  {
@@ -70,8 +70,8 @@
   "no_assembly": true,
   "note": "contacto libre (reservado: base o accesorio)",
   "jlc_rot": 0,
-  "x": 4.08,
-  "y": 25.5,
+  "x": -6.3,
+  "y": 23.05,
   "rot": 0
  },
  {
@@ -85,9 +85,9 @@
   "no_assembly": false,
   "note": "fusible rearmable del VBUS expuesto",
   "jlc_rot": 0,
-  "x": -6.0,
+  "x": -12.0,
   "y": 21.0,
-  "rot": 0
+  "rot": 90
  },
  {
   "ref": "D2",
@@ -100,8 +100,8 @@
   "no_assembly": false,
   "note": "ESD en VBUS del pogo",
   "jlc_rot": 0,
-  "x": -8.43,
-  "y": 26.0,
+  "x": -9.2,
+  "y": 20.13,
   "rot": 90
  },
  {
@@ -115,9 +115,9 @@
   "no_assembly": false,
   "note": "ESD en el contacto AUX",
   "jlc_rot": 0,
-  "x": 7.68,
-  "y": 25.5,
-  "rot": 90
+  "x": -14.86,
+  "y": 23.85,
+  "rot": 0
  },
  {
   "ref": "R20",
@@ -130,9 +130,9 @@
   "no_assembly": false,
   "note": "serie del contacto AUX → GPIO40. Revisión 18/11: 10 kΩ (0,4 mA como máximo hacia el 3,3 V si la base pusiera 5 V con el casco apagado)",
   "jlc_rot": 0,
-  "x": 5.88,
-  "y": 25.5,
-  "rot": 90
+  "x": -6.5,
+  "y": 21.26,
+  "rot": 0
  },
  {
   "ref": "R21",
@@ -145,8 +145,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 4.28,
-  "y": 23.71,
+  "x": -7.1,
+  "y": 19.95,
   "rot": 0
  },
  {
@@ -160,8 +160,53 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 3.0,
-  "y": 21.0,
+  "x": -2.99,
+  "y": 21.1,
+  "rot": 90
+ },
+ {
+  "ref": "J16",
+  "value": "USB-C programación",
+  "footprint": "USB_C_Receptacle_HRO_TYPE-C-31-M-12",
+  "lcsc": "C165948",
+  "mpn": "TYPE-C-31-M-12 (HRO)",
+  "block": "Pogo",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "USB-C de programación y carga en el banco (placa fuera de la cápsula); en paralelo con el pogo",
+  "jlc_rot": 0,
+  "x": 4.2,
+  "y": 24.35,
+  "rot": 180
+ },
+ {
+  "ref": "R30",
+  "value": "5k1",
+  "footprint": "R_0402_1005Metric",
+  "lcsc": "C25905",
+  "mpn": "",
+  "block": "Pogo",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "Rd: la placa es consumidora (sink): cualquier cargador da 5 V",
+  "jlc_rot": 0,
+  "x": 4.76,
+  "y": 18.43,
+  "rot": 0
+ },
+ {
+  "ref": "R31",
+  "value": "5k1",
+  "footprint": "R_0402_1005Metric",
+  "lcsc": "C25905",
+  "mpn": "",
+  "block": "Pogo",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "",
+  "jlc_rot": 0,
+  "x": 1.76,
+  "y": 18.43,
   "rot": 0
  },
  {
@@ -175,9 +220,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 2.02,
-  "y": 23.34,
-  "rot": 0
+  "x": -5.49,
+  "y": 19.56,
+  "rot": 90
  },
  {
   "ref": "R19",
@@ -190,8 +235,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 1.61,
-  "y": 18.67,
+  "x": -2.82,
+  "y": 18.34,
   "rot": 0
  },
  {
@@ -205,9 +250,9 @@
   "no_assembly": false,
   "note": "divisor 100k/150k → GPIO18 (despierta al conectar el cable)",
   "jlc_rot": 0,
-  "x": -11.61,
-  "y": 1.3,
-  "rot": 90
+  "x": -12.04,
+  "y": 5.03,
+  "rot": 0
  },
  {
   "ref": "R23",
@@ -220,8 +265,8 @@
   "no_assembly": false,
   "note": "REV B (revisión 18/11): 100k/150k → 2,85–3,15 V con VBUS 4,75–5,25 V. Con 100k/100k daba 2,4–2,6 V, por debajo de VIH = 0,75 × VDD = 2,475 V del ESP32-S3 (hoja del WROOM, DC characteristics): lectura no fiable",
   "jlc_rot": 0,
-  "x": -11.43,
-  "y": 5.76,
+  "x": -11.45,
+  "y": 6.81,
   "rot": 90
  },
  {
@@ -490,8 +535,8 @@
   "no_assembly": false,
   "note": "divisor 1:2 → GPIO2 (ADC1_CH1)",
   "jlc_rot": 0,
-  "x": 10.67,
-  "y": 5.22,
+  "x": 10.75,
+  "y": 5.23,
   "rot": 90
  },
  {
@@ -505,8 +550,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 10.56,
-  "y": 1.69,
+  "x": -11.47,
+  "y": 1.29,
   "rot": 90
  },
  {
@@ -520,9 +565,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 10.68,
-  "y": 7.39,
-  "rot": 90
+  "x": -8.85,
+  "y": -3.9,
+  "rot": 0
  },
  {
   "ref": "U3",
@@ -625,8 +670,8 @@
   "no_assembly": false,
   "note": "LDO de ≈ 1 µA: mantiene V_BCKP del ZED (efemérides) con el casco apagado y alimenta el táctil",
   "jlc_rot": 0,
-  "x": -14.0,
-  "y": 20.0,
+  "x": -14.99,
+  "y": 20.1,
   "rot": 0
  },
  {
@@ -640,9 +685,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -11.6,
-  "y": 20.0,
-  "rot": 90
+  "x": -12.18,
+  "y": 17.97,
+  "rot": 0
  },
  {
   "ref": "C67",
@@ -655,9 +700,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -16.37,
-  "y": 19.35,
-  "rot": 90
+  "x": -15.89,
+  "y": 17.55,
+  "rot": 0
  },
  {
   "ref": "U10",
@@ -685,9 +730,9 @@
   "no_assembly": false,
   "note": "obligatorio y pegado a VDD/VSS (hoja del TTP223)",
   "jlc_rot": 0,
-  "x": -16.41,
-  "y": 21.59,
-  "rot": 90
+  "x": -18.26,
+  "y": 17.42,
+  "rot": 0
  },
  {
   "ref": "C69",
@@ -1000,8 +1045,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -9.2,
-  "y": 18.05,
+  "x": -12.7,
+  "y": 10.25,
   "rot": 0
  },
  {
@@ -1015,8 +1060,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -12.08,
-  "y": 10.79,
+  "x": -8.85,
+  "y": 17.57,
   "rot": 0
  },
  {
@@ -1030,8 +1075,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -6.25,
-  "y": 17.58,
+  "x": -6.5,
+  "y": 17.54,
   "rot": 0
  },
  {
@@ -1345,8 +1390,8 @@
   "no_assembly": false,
   "note": "1 µH, I_sat 3 A, 50 mΩ (≈ 0,4 A de pico con los 7 LED a tope desde 3 V)",
   "jlc_rot": 0,
-  "x": -16.59,
-  "y": 15.79,
+  "x": -16.74,
+  "y": 15.2,
   "rot": 90
  },
  {
@@ -1360,8 +1405,8 @@
   "no_assembly": false,
   "note": "entrada del elevador",
   "jlc_rot": 0,
-  "x": -14.92,
-  "y": 11.0,
+  "x": -16.21,
+  "y": 10.51,
   "rot": 0
  },
  {
@@ -1375,8 +1420,8 @@
   "no_assembly": false,
   "note": "salida del elevador (≥ 10 µF efectivos)",
   "jlc_rot": 0,
-  "x": -15.53,
-  "y": 12.88,
+  "x": -15.67,
+  "y": 12.5,
   "rot": 0
  },
  {
@@ -1765,8 +1810,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -12.19,
-  "y": 9.43,
+  "x": -12.92,
+  "y": 8.42,
   "rot": 0
  },
  {
@@ -1795,8 +1840,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -11.74,
-  "y": 7.77,
+  "x": -12.87,
+  "y": 6.7,
   "rot": 0
  },
  {
@@ -1840,8 +1885,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -9.92,
-  "y": -4.41,
+  "x": -8.88,
+  "y": -9.81,
   "rot": 0
  },
  {
@@ -1900,8 +1945,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -13.86,
-  "y": 22.68,
+  "x": -17.59,
+  "y": 22.6,
   "rot": 0
  },
  {
@@ -1915,8 +1960,8 @@
   "no_assembly": true,
   "note": "4,3 V del anillo (solo con LED_PWR = 1)",
   "jlc_rot": 0,
-  "x": -17.45,
-  "y": 11.02,
+  "x": -15.4,
+  "y": 8.94,
   "rot": 0
  },
  {

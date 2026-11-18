@@ -44,6 +44,15 @@ URTK1.2 lo da el RT9080 (se apaga con ZED_EN), como el prototipo de la espalda d
    hueco entre la placa y la pared (≈ 2,3 mm).
 4. Antena Taoglas AHP2258 sobre la placa de masa, en el cuadrado serigrafiado, con su cable al U.FL J4.
 
+## Programar y desmontar sin soldar (19/11)
+- **USB-C J16** (canto superior, cara F): programar y cargar con la placa **fuera de la cápsula**. El S3 entra solo en
+  descarga por USB nativo; si un firmware lo desactiva, puentear TP2 (BOOT) a GND al arrancar. **No conectar el USB-C y
+  el pogo a la vez.**
+- **Batería por coleta:** soldar una vez a BAT+ (J2) / BAT− (J6) un cable corto con conector JST PH 2.0 (el de la celda).
+  El empalme va tumbado en la franja del fondo entre la batería y la pared, junto al costado por donde salen los hilos
+  de la celda; sujetarlo con una gota de silicona o kapton (el PH no tiene pestillo). **Medir la polaridad** de la
+  celda antes de enchufar: en las celdas chinas el rojo no siempre está en el mismo pin.
+
 ## Precauciones (revisión independiente 18/11)
 - **Kapton** sobre la cara B de la PCB bajo la URTK1.2: las patas de J1, J6 y del SMA quitado apoyarían en la máscara
   sobre el plano de masa.

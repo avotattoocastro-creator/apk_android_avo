@@ -82,6 +82,7 @@ SCREW = dict(hole=2.8, cb_d=5.0, cb_h=2.6, boss=6.6, post=6.0, insert_d=3.6, ins
 GASKET = dict(c=WALL / 2, w_groove=1.0, depth=0.8, w=0.9, h_free=1.1)
 POGO = dict(n=5, pitch=2.3, f_l=21.7, f_w=6.25, f_t=3.5, face_l=20.1, face_w=4.65, face_h=1.7, clear=0.2,
             y=+(IN / 2 - 6.25 / 2 - 0.2 + 0.05), cup_wall=0.6, cup_z=5.5)    # (E) hasta tener el STEP real
+BAT_CON = dict(l=14.0, w=6.2, h=4.6, x=-13.5, y=-(IN / 2 - 6.2 / 2 - 1.2), z0=2.8)   # (E) PH 2.0 macho + hembra
 MAG = dict(d=6.0, t=2.0, skin=0.3, pos=[(-16.0, -25.0), (16.0, -25.0), (-16.0, 25.0), (16.0, 25.0)])   # PROTO A: +2,5 y ±16 (copa del pogo en +Y)
 U8 = next(e for e in MEC["envolventes"] if e[0] == "U8")
 HALL_XY = (-(U8[1] + U8[3]) / 2, (U8[2] + U8[4]) / 2)
@@ -266,6 +267,10 @@ def refs():
         c = cyl(x, y, MAG["skin"] + 0.02, MAG["d"], MAG["t"])
         m = c if m is None else m.union(c)
     r["imanes_capsula"] = m
+    # 19/11/2026: empalme de la batería en línea (coleta JST PH 2.0 soldada a BAT+/BAT− y el conector de la celda),
+    # tumbado en la franja libre del fondo entre la batería y la pared, junto al costado por donde salen sus hilos.
+    # Envolvente del par acoplado + curva del hilo (E): 14 × 6,2 × 4,6, apoyado por encima de las bases de los imanes.
+    r["empalme_bateria"] = box(BAT_CON["x"], BAT_CON["y"], BAT_CON["z0"], BAT_CON["l"], BAT_CON["w"], BAT_CON["h"])
     return r
 
 
@@ -299,7 +304,9 @@ def main():
             if v > 0.01:
                 rep["interferencias"]["%s × %s" % (rn, pn)] = round(v, 3)
     for a_, b_ in (("antena", "pila_J6"), ("placa_masa", "pila_J6"), ("antena", "urtk"), ("placa_masa", "zed"),
-                   ("pines_masa", "urtk"), ("placa_masa", "usb_J1"), ("placa_masa", "gh_J3")):
+                   ("pines_masa", "urtk"), ("placa_masa", "usb_J1"), ("placa_masa", "gh_J3"),
+                   ("empalme_bateria", "bateria"), ("empalme_bateria", "componentes_cara_F"),
+                   ("empalme_bateria", "pcb")):
         try:
             v = rf[a_].intersect(rf[b_]).val().Volume()
         except Exception:  # noqa: BLE001

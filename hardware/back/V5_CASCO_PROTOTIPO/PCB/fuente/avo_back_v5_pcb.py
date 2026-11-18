@@ -248,6 +248,8 @@ FP = {
     "LEDSIDE": sk6812_side(),
     "TP": test_pad(1.0),
     "WIRE": wire_pad("(hilo)", drill=0.9, d=1.7),
+    "USBC": load("USB_C_Receptacle_HRO_TYPE-C-31-M-12.kicad_mod",
+                 M3 + "Connector_USB.3dshapes/USB_C_Receptacle_HRO_TYPE-C-31-M-12.step", 3.3),
     "HOLE": npth_hole(HOLE_D, HOLE_KEEP, "Taladro del tornillo M2,5 de la caja"),
     "CABLE": npth_hole(3.0, 1.9, "Paso del cable coaxial de la antena GNSS (cara B → U.FL en F)"),
 }
@@ -281,6 +283,8 @@ LC = {
     "WROOM1U": "C3013946", "TPS61023": "C919459", "MAX17048": "C2682616", "1uH 0806": "C97016", "TTP223": "C42422127",
     "XC6206": "C5446", "BAT54C": "C2135", "LSM6DSV16X": "C5267406", "68k": "C36871", "2k2": "C25879", "22p": "C1555",
     "620k": "C137952", "150k": "C25755",
+    # PROTO A (19/11/2026): USB-C de programación (el mismo HRO del DOCK V1) y sus Rd de 5,1 kΩ
+    "TYPEC": "C165948", "5k1": "C25905",
 }
 
 
@@ -320,6 +324,19 @@ R("R21", "100k", "POGO_AUX", GND, block="Pogo")
 part("U6", "SOT23-6", "USBLC6-2SC6", (0, 0), 0,
      {1: "USB_DP_C", 6: "USB_DP_C", 3: "USB_DM_C", 4: "USB_DM_C", 2: GND, 5: VBUS}, LC["USBLC6"], block="Pogo",
      sym=dict(L=[(1, "IO1"), (6, "IO1"), (3, "IO2"), (4, "IO2")], R=[(5, "VBUS"), (2, "GND")]))
+# PROTO A (19/11/2026, petición del usuario): USB-C solo para programar en el banco, en paralelo con los pads del pogo
+# (mismo VBUS antes del PTC F2 y mismo D+/D− antes del USBLC6). Va en el canto superior, en la cara F (hacia la
+# batería, fuera de su huella): se usa con la placa sacada de la cápsula. No conectar a la vez que el pogo.
+part("J16", "USBC", "USB-C programación", (0, 0), 0,
+     {"A1": GND, "B12": GND, "B1": GND, "A12": GND, "A4": "POGO_VBUS", "B9": "POGO_VBUS", "B4": "POGO_VBUS",
+      "A9": "POGO_VBUS", "A5": "USBC_CC1", "B5": "USBC_CC2", "A6": "USB_DP_C", "B6": "USB_DP_C", "A7": "USB_DM_C",
+      "B7": "USB_DM_C", "A8": None, "B8": None, "S1": GND}, LC["TYPEC"], "TYPE-C-31-M-12 (HRO)", "Pogo",
+     sym=dict(L=[("A4", "VBUS"), ("A9", "VBUS"), ("B4", "VBUS"), ("B9", "VBUS"), ("A5", "CC1"), ("B5", "CC2"),
+                 ("A6", "D+"), ("B6", "D+"), ("A7", "D-"), ("B7", "D-"), ("A8", "SBU1"), ("B8", "SBU2")],
+              R=[("A1", "GND"), ("A12", "GND"), ("B1", "GND"), ("B12", "GND"), ("S1", "SHIELD")]),
+     note="USB-C de programación y carga en el banco (placa fuera de la cápsula); en paralelo con el pogo")
+R("R30", "5k1", "USBC_CC1", GND, block="Pogo", note="Rd: la placa es consumidora (sink): cualquier cargador da 5 V")
+R("R31", "5k1", "USBC_CC2", GND, block="Pogo")
 R("R18", "22R", "USB_DP_C", "USB_DP", block="Pogo")
 R("R19", "22R", "USB_DM_C", "USB_DM", block="Pogo")
 R("R22", "100k", VBUS, "VBUS_DET", block="Pogo", note="divisor 100k/150k → GPIO18 (despierta al conectar el cable)")
@@ -646,6 +663,11 @@ def courtyard_casing(p):
     return x0 - 100, 100 - y1, x1 - 100, 100 - y0
 
 
+A_RAS_DEL_CANTO = {"J16"}           # PROTO A: USB-C de programación, frente a ras del canto superior
+FUERA_BATERIA = {"J16"}             # piezas de más de Z_MAX_F permitidas solo fuera de la huella de la batería
+BAT_Y_MAX = 37.0 / 2 + 0.5          # la batería (≤ 50 × 37) ocupa |y| ≤ 18,5 bajo la cara F
+
+
 def zone_limit(x, y):
     """altura máxima de componente sobre la cara F en (x, y): hueco hasta la batería"""
     return Z_MAX_F
@@ -689,6 +711,15 @@ def check_placement():
         p = next(q for q in PARTS if q["ref"] == ref)
         if p["fp"] in CIRC:
             continue
+        if ref in A_RAS_DEL_CANTO:    # el frente del conector va a ras del canto (patio fuera): comprobar el frente
+            fy = p["pos"][1] + 3.65
+            if not (SIZE / 2 - 0.3 <= fy <= SIZE / 2 + 0.5):
+                errs.append("%s: frente a %.2f (canto en %.2f)" % (ref, fy, SIZE / 2))
+            if fp_of(p).height > Z_MAX_F + 1e-6 and ref not in FUERA_BATERIA:
+                errs.append("%s demasiado alto" % ref)
+            if ref in FUERA_BATERIA and 100 - bb[3] < BAT_Y_MAX:
+                errs.append("%s invade la huella de la batería" % ref)
+            continue
         samples = []
         for k in range(9):
             t = k / 8
@@ -699,6 +730,10 @@ def check_placement():
                 errs.append("%s se sale de la placa en (%.2f, %.2f)" % (ref, x - 100, 100 - y)); break
             if dist_to_poly(x, y, poly) < 0.25:
                 errs.append("%s a %.2f del borde" % (ref, dist_to_poly(x, y, poly))); break
+        if ref in FUERA_BATERIA:      # PROTO A: fuera de la huella de la batería (y > 18,5 + 0,5): hay ≥ 4 mm libres
+            if 100 - bb[3] < BAT_Y_MAX:
+                errs.append("%s (%.2f de alto) invade la huella de la batería" % (ref, fp_of(p).height))
+            continue
         if fp_of(p).height > Z_MAX_F + 1e-6:
             errs.append("%s demasiado alto: %.2f > %.2f" % (ref, fp_of(p).height, Z_MAX_F))
     return errs
