@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-19 — Casco V5 PROTOTIPO A — USB-C de programación y empalme de la batería en línea
-**Autor:** Claude · **CI:** pendiente (PCB se vuelve a rutear entera; CAD con el empalme de la batería)
+**Autor:** Claude · **CI:** puerta superada en `816c26e` (0 errores DRC/ERC, 0 sin conectar; avisos solo de serigrafía) · CAD 0 interferencias, cápsula 61,4 × 61,4 × 35,1 · revisado con la skill `avo-revision-pcb-cad` (tramo colgante de USB_DP_C quitado, rótulos del pogo y logotipo fuera del cobre)
 **Qué cambia:** USB-C J16 (HRO TYPE-C-31-M-12, C165948) en el canto superior de la cara F, en paralelo con los pads
 del pogo (POGO_VBUS antes del PTC F2; USB_DP_C/USB_DM_C antes del USBLC6) con Rd 5,1 kΩ en CC1/CC2 (R30/R31, C25905):
 programar y cargar en el banco con la placa fuera de la cápsula, sin soldar el pogo. Va fuera de la huella de la
