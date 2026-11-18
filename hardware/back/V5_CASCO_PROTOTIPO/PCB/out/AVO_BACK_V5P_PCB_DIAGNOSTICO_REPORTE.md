@@ -1,30 +1,39 @@
-# AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de fabricación
+# AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de diagnóstico
 
-- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `57393e16ceeb4f05552f6ba2fbe55b1af48ae0c4` · ejecución de CI: 44341720561
-- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
+- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
+- Commit: `9fbd92a36ee28d7b1f92db4bdfe18d522a2b232a` · ejecución de CI: 44368290729
+- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 56 × 56 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo bajo la URTK1.2, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 133 en total, 106 para montar, 1 sin montar (DNP: C69), 26 a mano (pads de hilo y de prueba)
-- Pistas: 1038 · vías: 180 · ruteado completo (0 conexiones incompletas)
+- Pistas: 1041 · vías: 164 · ruteado INCOMPLETO (5 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | correcto | 0 |
+| DRC: errores | **FALLA** | 3 |
+| DRC: conexiones incompletas | **FALLA** | 5 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
+Errores de DRC por tipo: copper_edge_clearance 3
+
+### Conexiones incompletas
+- Track [+3V3] on F.Cu, length 1.2492 mm ↔ Pad 2 [+3V3] of R10 on F.Cu
+- Track [+3V3] on F.Cu, length 0.3138 mm ↔ Pad 5 [+3V3] of U13 on F.Cu
+- Track [VSYS] on F.Cu, length 2.4914 mm ↔ Pad 3 [VSYS] of U11 on F.Cu
+- Pad 3 [LED_D4] of D12 on F.Cu ↔ Pad 1 [LED_D4] of D13 on F.Cu
+- Pad 1 [VLED] of C96 on F.Cu ↔ Track [VLED] on F.Cu, length 0.9324 mm
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 3
+- connection_width: 1
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: ninguna
 - Los ficheros BOM y CPL se generan desde la misma lista que el esquema y la placa (`kicad/piezas.json`).
-- Revisar el giro de cada pieza en la vista previa de JLCPCB: el CPL sale de KiCad sin correcciones.
+- Revisar el giro de cada pieza en la vista previa de JLCPCB: el CPL lleva las correcciones de fuente/jlc_correcciones.json; J3 (microSD) y U8 no tienen huella EasyEDA con la que comprobarlas.
 
 ## Modelo 3D (STEP y renders, no afecta a la fabricación)
 - Modelos de la librería de KiCad 9.0.0 descargados: 10; sin descargar: Package_DFN_QFN.3dshapes/VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm.step
@@ -72,8 +81,8 @@
 - Piezas sin existencias para 5 placas: C5378721, C137952
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **sí**
-- Apto para solicitar prototipos: **sí, pendiente de validación física**
+- Diseño verificado por software (KiCad 9 en el CI): **no**
+- Apto para solicitar prototipos: **no**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)

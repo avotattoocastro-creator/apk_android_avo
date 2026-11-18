@@ -1,15 +1,15 @@
 {
- "ok": true,
+ "ok": false,
  "checks": [
   {
    "name": "DRC: errores",
-   "ok": true,
-   "n": 0
+   "ok": false,
+   "n": 3
   },
   {
    "name": "DRC: conexiones incompletas",
-   "ok": true,
-   "n": 0
+   "ok": false,
+   "n": 5
   },
   {
    "name": "DRC: cortocircuitos",
@@ -32,8 +32,11 @@
    "n": 0
   }
  ],
- "drc_errors": {},
+ "drc_errors": {
+  "copper_edge_clearance": 3
+ },
  "drc_warnings": {
+  "connection_width": 1,
   "silk_over_copper": 3
  }
 }
