@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C17168
+       Symbol name : 0402WGF0000TCE
+       Library path : lib_easyeda/C17168.kicad_sym
+[INFO] Created Kicad footprint for ID: C17168
+       Footprint name: R0402
+       Footprint path: lib_easyeda/C17168.pretty/R0402.kicad_mod
+[INFO] Created 3D model for ID: C17168
+       3D model name: R0402_L1.0-W0.5-H0.4
+       3D model path (wrl): lib_easyeda/C17168.3dshapes/R0402_L1.0-W0.5-H0.4.wrl
+       3D model path (step): lib_easyeda/C17168.3dshapes/R0402_L1.0-W0.5-H0.4.step
+-- easyeda2kicad.py v1.0.1 --

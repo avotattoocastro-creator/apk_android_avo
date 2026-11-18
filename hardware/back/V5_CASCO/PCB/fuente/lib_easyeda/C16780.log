@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C16780
+       Symbol name : CL21A476MQYNNNE
+       Library path : lib_easyeda/C16780.kicad_sym
+[INFO] Created Kicad footprint for ID: C16780
+       Footprint name: C0805
+       Footprint path: lib_easyeda/C16780.pretty/C0805.kicad_mod
+[INFO] Created 3D model for ID: C16780
+       3D model name: C0805_L2.0-W1.3-H1.3
+       3D model path (wrl): lib_easyeda/C16780.3dshapes/C0805_L2.0-W1.3-H1.3.wrl
+       3D model path (step): lib_easyeda/C16780.3dshapes/C0805_L2.0-W1.3-H1.3.step
+-- easyeda2kicad.py v1.0.1 --

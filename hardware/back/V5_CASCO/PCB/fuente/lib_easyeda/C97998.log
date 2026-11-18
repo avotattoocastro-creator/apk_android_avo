@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C97998
+       Symbol name : LQG15HS47NJ02D
+       Library path : lib_easyeda/C97998.kicad_sym
+[INFO] Created Kicad footprint for ID: C97998
+       Footprint name: L0402
+       Footprint path: lib_easyeda/C97998.pretty/L0402.kicad_mod
+[INFO] Created 3D model for ID: C97998
+       3D model name: L0402_L1.0-W0.5-H0.5_BEAD
+       3D model path (wrl): lib_easyeda/C97998.3dshapes/L0402_L1.0-W0.5-H0.5_BEAD.wrl
+       3D model path (step): lib_easyeda/C97998.3dshapes/L0402_L1.0-W0.5-H0.5_BEAD.step
+-- easyeda2kicad.py v1.0.1 --

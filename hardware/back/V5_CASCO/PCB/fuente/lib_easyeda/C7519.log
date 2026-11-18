@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C7519
+       Symbol name : USBLC6-2SC6
+       Library path : lib_easyeda/C7519.kicad_sym
+[INFO] Created Kicad footprint for ID: C7519
+       Footprint name: SOT-23-6_L2.9-W1.6-P0.95-LS2.8-BL
+       Footprint path: lib_easyeda/C7519.pretty/SOT-23-6_L2.9-W1.6-P0.95-LS2.8-BL.kicad_mod
+[INFO] Created 3D model for ID: C7519
+       3D model name: SOT-23-6_L2.9-W1.6-H1.5-LS2.8-P0.95
+       3D model path (wrl): lib_easyeda/C7519.3dshapes/SOT-23-6_L2.9-W1.6-H1.5-LS2.8-P0.95.wrl
+       3D model path (step): lib_easyeda/C7519.3dshapes/SOT-23-6_L2.9-W1.6-H1.5-LS2.8-P0.95.step
+-- easyeda2kicad.py v1.0.1 --

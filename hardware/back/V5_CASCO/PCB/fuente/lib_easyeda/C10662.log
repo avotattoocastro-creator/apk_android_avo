@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C10662
+       Symbol name : PESD0402-140
+       Library path : lib_easyeda/C10662.kicad_sym
+[INFO] Created Kicad footprint for ID: C10662
+       Footprint name: D0402-BI
+       Footprint path: lib_easyeda/C10662.pretty/D0402-BI.kicad_mod
+[INFO] Created 3D model for ID: C10662
+       3D model name: D0402_L1.0-W0.5-H0.5
+       3D model path (wrl): lib_easyeda/C10662.3dshapes/D0402_L1.0-W0.5-H0.5.wrl
+       3D model path (step): lib_easyeda/C10662.3dshapes/D0402_L1.0-W0.5-H0.5.step
+-- easyeda2kicad.py v1.0.1 --
