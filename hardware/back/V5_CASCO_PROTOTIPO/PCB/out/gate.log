@@ -1,31 +1,28 @@
 # AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `f9c4a5d096de2441b1a7af2887cf1c19ed04913a` · ejecución de CI: 44325683866
+- Commit: `f8163813b91e86bfd0bc974b271fd4e72ca55daf` · ejecución de CI: 44331013676
 - Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
-- Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo bajo la URTK1.2, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
-- Componentes: 127 en total, 104 para montar, 1 sin montar (DNP: C69), 22 a mano (pads de hilo y de prueba)
-- Pistas: 1015 · vías: 172 · ruteado INCOMPLETO (7 conexiones)
+- Placa: 56 × 56 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo bajo la URTK1.2, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
+- Componentes: 129 en total, 106 para montar, 1 sin montar (DNP: C69), 22 a mano (pads de hilo y de prueba)
+- Pistas: 1011 · vías: 175 · ruteado INCOMPLETO (3 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | **FALLA** | 7 |
+| DRC: errores | **FALLA** | 4 |
+| DRC: conexiones incompletas | **FALLA** | 3 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
+Errores de DRC por tipo: copper_edge_clearance 4
 
 ### Conexiones incompletas
 - Pad 5 [+3V3] of U13 on F.Cu ↔ Track [+3V3] on F.Cu, length 0.4989 mm
-- Pad 2 [+3V3] of R40 on F.Cu ↔ Track [+3V3] on F.Cu, length 0.7017 mm
 - Pad 4 [IMU_INT1] of U13 on F.Cu ↔ Pad 4 [IMU_INT1] of U4 on F.Cu
-- Pad 3 [LED_D2] of D10 on F.Cu ↔ Pad 1 [LED_D2] of D11 on F.Cu
-- Pad 3 [LED_D3] of D11 on F.Cu ↔ Pad 1 [LED_D3] of D12 on F.Cu
-- Pad 3 [LED_D4] of D12 on F.Cu ↔ Pad 1 [LED_D4] of D13 on F.Cu
-- Pad 1 [SD_CLK0] of R46 on F.Cu ↔ Pad 20 [SD_CLK0] of U4 on F.Cu
+- Pad 1 [SD_CMD] of R41 on F.Cu ↔ Track [SD_CMD] on F.Cu, length 0.5009 mm
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 3
@@ -65,7 +62,7 @@
 | C77131 | NCP15XH103F03RC | 1 | 293593 | Extended | 0.0164 US$ |
 | C52923 | CL05A105KA5NQNC | 7 | 9100317 | Basic | 0.0055 US$ |
 | C25867 | 0402WGF1501TCE | 1 | 1179471 | Basic | 0.0029 US$ |
-| C1525 | CL05B104KO5NNNC | 16 | 35317245 | Basic | 0.0024 US$ |
+| C1525 | CL05B104KO5NNNC | 17 | 35317245 | Basic | 0.0024 US$ |
 | C4109 | 0402WGF2001TCE | 1 | 9762766 | Basic | 0.0019 US$ |
 | C25744 | 0402WGF1002TCE | 9 | 36586442 | Basic | 0.0015 US$ |
 | C11702 | 0402WGF1001TCE | 4 | 30290405 | Basic | 0.0013 US$ |
@@ -76,7 +73,7 @@
 | C25879 | 0402WGF2201TCE | 2 | 2895113 | Basic | 0.0011 US$ |
 | C25092 | 0402WGF220JTCE | 3 | 4483746 | Basic | 0.0010 US$ |
 | C25741 | 0402WGF1003TCE | 11 | 8706634 | Basic | 0.0009 US$ |
-| C5378721 | ? | 7 | sin respuesta | Extended | ? |
+| C5378721 | ? | 8 | sin respuesta | Extended | ? |
 | C137952 | ? | 1 | sin respuesta | Extended | ? |
 
 - Piezas sin existencias para 5 placas: C5378721, C137952
@@ -94,6 +91,6 @@
 - Pogo de 5 contactos y batería por hilos: el modelo real del pogo está pendiente (STEP).
 - REV B: táctil TTP223-BA6-TD (TDSEMIC) con Cs sin montar: ajustar la sensibilidad con la pared adelgazada y probar con agua.
 - REV B: firmware nuevo (BACK 5.x): POWER_HOLD (GPIO46) al arrancar, pulsación larga, LED_PWR (GPIO48), I²C (MAX17048 + LSM6DSV16X).
-- REV B: con el anillo apagado, GPIO47 a 0 (no alimentar los LED por DIN).
+- Con el anillo apagado, GPIO47 a 0 (no alimentar los LED por DIN). PROTO A: 8 LED (D14 a la derecha de la salida de la microSD).
 - Nada de esto se ha fabricado ni medido: no es un prototipo validado.
 ::notice title=Puerta de fabricación::NO SUPERADA

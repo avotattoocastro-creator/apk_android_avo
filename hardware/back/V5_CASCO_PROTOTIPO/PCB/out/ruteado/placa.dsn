@@ -280,6 +280,7 @@
       (place C91 112200.000000 -75140.000000 front 0.000000 (PN 100n))
       (place C92 124870.000000 -88150.000000 front 90.000000 (PN 100n))
       (place C93 124870.000000 -112150.000000 front 90.000000 (PN 100n))
+      (place C94 118800.000000 -124850.000000 front 0.000000 (PN 100n))
       (place C95 88330.000000 -124660.000000 front 0.000000 (PN 100n))
       (place C96 75160.000000 -111550.000000 front 90.000000 (PN 100n))
       (place C97 75160.000000 -87550.000000 front 90.000000 (PN 100n))
@@ -331,6 +332,7 @@
       (place D11 112000.000000 -73750.000000 front 180.000000 (PN "SK6812SIDE-A"))
       (place D12 126250.000000 -88000.000000 front 90.000000 (PN "SK6812SIDE-A"))
       (place D13 126250.000000 -112000.000000 front 90.000000 (PN "SK6812SIDE-A"))
+      (place D14 119100.000000 -126250.000000 front 0.000000 (PN "SK6812SIDE-A"))
       (place D15 90000.000000 -126250.000000 front 0.000000 (PN "SK6812SIDE-A"))
       (place D16 73750.000000 -112000.000000 front -90.000000 (PN "SK6812SIDE-A"))
       (place D17 73750.000000 -88000.000000 front -90.000000 (PN "SK6812SIDE-A"))
@@ -1193,10 +1195,10 @@
         R13-2 R33-2 C34-2 U3-2 R14-2 C28-2 R15-2 U9-1 C66-2 C67-2 U10-2 U10-4 U10-6
         C68-2 C69-2 C21-2 C22-2 U7-2 C60-2 C61-2 R60-2 J10-1 J11-1 C63-2 U4-1 U4-40
         U4-41 U4-41@1 U4-41@2 U4-41@3 U4-41@4 U4-41@5 U4-41@6 U4-41@7 U4-41@8 C24-2
-        C25-2 C26-2 C27-2 D10-4 C90-2 D11-4 C91-2 D12-4 C92-2 D13-4 C93-2 D15-4 C95-2
-        D16-4 C96-2 D17-4 C97-2 U11-4 C98-2 C99-2 R26-2 R27-2 U8-3 C80-2 J3-6 J3-11
-        J3-11@1 J3-10 J3-11@2 J3-11@3 C40-2 C41-2 U12-1 U12-4 U12-6 U12-9 C36-2 U13-1
-        U13-2 U13-3 U13-6 U13-7 C37-2 C38-2 TP3-1)
+        C25-2 C26-2 C27-2 D10-4 C90-2 D11-4 C91-2 D12-4 C92-2 D13-4 C93-2 D14-4 C94-2
+        D15-4 C95-2 D16-4 C96-2 D17-4 C97-2 U11-4 C98-2 C99-2 R26-2 R27-2 U8-3 C80-2
+        J3-6 J3-11 J3-11@1 J3-10 J3-11@2 J3-11@3 C40-2 C41-2 U12-1 U12-4 U12-6 U12-9
+        C36-2 U13-1 U13-2 U13-3 U13-6 U13-7 C37-2 C38-2 TP3-1)
     )
     (net VBAT
       (pins U2-2 U2-3 C20-1 Q7-2 R32-1 U9-3 C66-1 U12-2 U12-3 C36-1 TP7-1)
@@ -1277,12 +1279,15 @@
       (pins D12-3 D13-1)
     )
     (net LED_D5
-      (pins D13-3 D15-1)
+      (pins D13-3 D14-1)
     )
     (net LED_D6
-      (pins D15-3 D16-1)
+      (pins D14-3 D15-1)
     )
     (net LED_D7
+      (pins D15-3 D16-1)
+    )
+    (net LED_D8
       (pins D16-3 D17-1)
     )
     (net LED_DIN_S3
@@ -1373,8 +1378,8 @@
       (pins R22-2 R23-1 D6-1 U4-11)
     )
     (net VLED
-      (pins D10-2 C90-1 D11-2 C91-1 D12-2 C92-1 D13-2 C93-1 D15-2 C95-1 D16-2 C96-1
-        D17-2 C97-1 U11-6 C99-1 R25-1 TP12-1)
+      (pins D10-2 C90-1 D11-2 C91-1 D12-2 C92-1 D13-2 C93-1 D14-2 C94-1 D15-2 C95-1
+        D16-2 C96-1 D17-2 C97-1 U11-6 C99-1 R25-1 TP12-1)
     )
     (net VLED_FB
       (pins U11-1 R25-2 R26-1)
@@ -1480,7 +1485,7 @@
     )
     (class kicad_default +3V3_AON +3V3_SD BAT_ADC BAT_G BOOT CHG_EN2 CHG_ILIM
       CHG_ISET CHG_PG CHG_STAT CHG_TMR CHG_TS EN EN_3V3 GND HALL I2C_SCL I2C_SDA
-      IMU_INT1 LED_D1 LED_D2 LED_D3 LED_D4 LED_D5 LED_D6 LED_D7 LED_DIN_S3
+      IMU_INT1 LED_D1 LED_D2 LED_D3 LED_D4 LED_D5 LED_D6 LED_D7 LED_D8 LED_DIN_S3
       LED_PWR POGO_AUX POGO_AUX_C PWR_HOLD S3_TX1 S3_TX2 S3_ZRST SD_CLK SD_CLK0
       SD_CMD SD_D0 SD_D1 SD_D2 SD_D3 SD_G SD_PWR_N TOUCH_E TOUCH_I TOUCH_OUT
       TOUCH_SENSE U0RX U0TX USB_DM USB_DM_C USB_DP USB_DP_C VBUS_DET VLED_FB
@@ -1566,6 +1571,8 @@
     (wire (path F.Cu 300  124870 -87670  124875 -87675)(net GND)(type route))
     (wire (path F.Cu 300  126240 -110425  126225 -110425)(net GND)(type route))
     (wire (path F.Cu 300  124870 -111670  124875 -111675)(net GND)(type route))
+    (wire (path F.Cu 300  120675 -126240  120675 -126225)(net GND)(type route))
+    (wire (path F.Cu 300  119280 -124850  119275 -124825)(net GND)(type route))
     (wire (path F.Cu 300  91575 -126240  91575 -126225)(net GND)(type route))
     (wire (path F.Cu 300  88810 -124660  88825 -124675)(net GND)(type route))
     (wire (path F.Cu 300  73760 -113575  73775 -113575)(net GND)(type route))
@@ -1664,6 +1671,8 @@
     (via "Via[0-3]_500:300_um"  124875 -87675 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  126225 -110425 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  124875 -111675 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  120675 -126225 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  119275 -124825 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  91575 -126225 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  88825 -124675 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  73775 -113575 (net GND)(type route))

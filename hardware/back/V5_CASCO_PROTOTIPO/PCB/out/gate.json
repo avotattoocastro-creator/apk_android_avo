@@ -3,13 +3,13 @@
  "checks": [
   {
    "name": "DRC: errores",
-   "ok": true,
-   "n": 0
+   "ok": false,
+   "n": 4
   },
   {
    "name": "DRC: conexiones incompletas",
    "ok": false,
-   "n": 7
+   "n": 3
   },
   {
    "name": "DRC: cortocircuitos",
@@ -32,7 +32,9 @@
    "n": 0
   }
  ],
- "drc_errors": {},
+ "drc_errors": {
+  "copper_edge_clearance": 4
+ },
  "drc_warnings": {
   "silk_over_copper": 3,
   "silk_overlap": 2
