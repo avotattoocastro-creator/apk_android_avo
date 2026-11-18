@@ -12,12 +12,12 @@
   },
   "AVO_CASCO_V5P_tapa": {
    "solidos": 1,
-   "volumen_mm3": 15266.5,
-   "peso_g": 19.4,
+   "volumen_mm3": 17249.4,
+   "peso_g": 21.9,
    "caja": [
     61.4,
     61.4,
-    18.1
+    21.1
    ]
   },
   "AVO_CASCO_V5P_anillo_resina": {
@@ -46,7 +46,7 @@
   "capsula_mm": [
    61.4,
    61.4,
-   32.1
+   35.1
   ],
   "interior_mm": 56.6,
   "z_cara_F": 13.5,
@@ -56,30 +56,30 @@
    14.0
   ],
   "sellado": "pegamento (tipo B-7000/T-7000) en las 2 uniones del anillo y entre sus mitades; sin juntas TPU",
-  "z_techo": 30.9,
+  "z_techo": 33.9,
   "bateria_max_mm": [
    50.0,
    37.0,
    8.5
   ],
   "base_casco": "cóncava R110 (sobre el casco)",
-  "altura_total_sobre_casco_mm": 35.6,
+  "altura_total_sobre_casco_mm": 38.6,
   "tornillos": "4 × M2,5 × 16 a ±24,5 (cabeza cilíndrica) + junta tórica 2,5 × 1 + inserto M2,5 Ø3,5 × 4",
   "urtk_z": [
    17.6,
    19.2
   ],
   "placa_masa_z": [
-   21.7,
-   22.5
+   24.7,
+   25.5
   ],
   "antena_xy": [
-   7.2,
-   1.45
+   -0.0,
+   0.0
   ],
   "antena_z": [
-   22.5,
-   30.6
+   25.5,
+   33.6
   ],
   "hall_xy": [
    -23.9,
