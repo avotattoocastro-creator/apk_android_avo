@@ -118,8 +118,13 @@ def dist_poly(poly, x, y):
 # --------------------------------------------------------------------------------------------- geometría
 OUTL = outline()
 CU = outline(EDGE_CU)
-CUTS = cutouts_sky()
-CUTS_CU = cutouts_sky(EDGE_CU)
+# Petición del usuario (18/11 20:15): placa MACIZA, sin recortes, sobre los 4 pines de masa a una altura que deja
+# pasar por debajo todo lo de la URTK1.2 (portapilas J6, USB-C J1, conector J3, clavija del U.FL J4). Solo quedan los
+# mordiscos del contorno para los postes de la tapa. El cable de la antena sale de J4 hacia el canto y sube por fuera.
+MACIZA = True
+ALTURA_SOBRE_URTK = 5.5     # cara inferior de la placa sobre la cara de componentes de la URTK1.2: J6 (≈ 5, MEDIR) + 0,5
+CUTS = [] if MACIZA else cutouts_sky()
+CUTS_CU = [] if MACIZA else cutouts_sky(EDGE_CU)
 GND_PADS = [(-x, y) for x, y in D.GND_PINS]          # vista desde arriba: x = −X de la PCB
 GND_PAD = GND_PADS[0]
 # vías de unión de las dos caras (Ø0,6 / 0,3) en rejilla de 4 mm, lejos de bordes y recortes
@@ -171,6 +176,8 @@ def mask(func):
 
 
 def merged_cuts(cuts, g=0.05):
+    if not cuts:
+        return []
     """revisión independiente 18/11: los recortes que se solapan (J6 con J3 y con la tira de 9) se unen en un solo
     contorno para el fresado (contornos cerrados que se cruzan son ambiguos para el fabricante)"""
     import numpy as np
@@ -235,7 +242,7 @@ with zipfile.ZipFile(os.path.join(OUT, NAME + "_GERBER_JLCPCB.zip"), "w", zipfil
         if f.endswith((".gtl", ".gbl", ".gts", ".gbs", ".gto", ".gm1", ".drl")):
             z.write(os.path.join(OUT, f), f)
 
-geo = dict(lado=SIDE, espesor=0.8, contorno=[list(map(lambda v: round(v, 3), p)) for p in OUTL],
+geo = dict(lado=SIDE, espesor=0.8, maciza=MACIZA, altura_sobre_urtk=ALTURA_SOBRE_URTK, contorno=[list(map(lambda v: round(v, 3), p)) for p in OUTL],
            recortes=[[list(map(lambda v: round(v, 3), p)) for p in c] for c in CUTS], pads_gnd=[list(g) for g in GND_PADS],
            vias=len(VIAS), marco="vista desde arriba (marco del CAD), mm", pedido="JLCPCB 2 capas 0,8 mm, 52 × 52, "
            "máscara en las dos caras, sin montaje")

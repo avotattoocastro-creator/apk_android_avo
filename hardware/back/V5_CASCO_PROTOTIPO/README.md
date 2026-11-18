@@ -38,9 +38,10 @@ URTK1.2 lo da el RT9080 (se apaga con ZED_EN), como el prototipo de la espalda d
 1. Desoldar el SMA J2 de la URTK1.2 (no cabe en la cápsula); la antena va a su U.FL **J4**.
 2. Tiras de pines con el plástico **entre** las dos placas; soldar primero a la PCB, luego la URTK1.2 encima
    (componentes hacia arriba). Cortar las puntas a ras por las dos caras (≤ 1,5 mm en la cara F, a ras arriba).
-3. Pines de masa J12–J15 (tira larga o hilo de cobre de 1 mm, ≥ 12 mm) soldados en la PCB. Kapton sobre el blindaje
-   del ZED y placa de masa encima (los recortes dejan libres J1, J3, J4, J6 y las tiras), con los 4 pines soldados a
-   sus pads de las esquinas.
+3. Pines de masa J12–J15 (hilo de cobre de 1 mm o pin de tira, ≈ 15 mm) soldados en la PCB. **Placa de masa MACIZA**
+   (sin recortes, 18/11 20:15) soldada a los 4 pines con su cara inferior a 5,5 mm sobre los componentes de la URTK1.2:
+   pasa por encima de J6, J1, J3 y la clavija del U.FL. El cable de la antena sale de J4 hacia el canto y sube por el
+   hueco entre la placa y la pared (≈ 2,3 mm).
 4. Antena Taoglas AHP2258 sobre la placa de masa, en el cuadrado serigrafiado, con su cable al U.FL J4.
 
 ## Precauciones (revisión independiente 18/11)

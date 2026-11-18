@@ -70,7 +70,7 @@ Z_URTK0 = Z_PCB_TOP + URTK["separador"]
 Z_URTK1 = Z_URTK0 + URTK["espesor"]
 ZED_H, KAPTON = 2.4, 0.1
 PM = json.load(open(os.path.join(HERE, "..", "PCB", "PLACA_MASA", "placa_masa.json"), encoding="utf-8"))
-Z_PM0 = Z_URTK1 + ZED_H + KAPTON
+Z_PM0 = Z_URTK1 + PM.get("altura_sobre_urtk", ZED_H + KAPTON)   # 18/11 20:15: placa maciza sobre los pines de masa
 Z_PM1 = Z_PM0 + PM["espesor"]
 ANT_C = (-MEC["antena_cara_B"]["centro"][0], MEC["antena_cara_B"]["centro"][1])
 Z_ANT0 = Z_PM1
@@ -242,6 +242,10 @@ def refs():
     r["zed"] = box((zc0[0] + zc1[0]) / 2, (zc0[1] + zc1[1]) / 2, Z_URTK1 + 0.02, abs(zc1[0] - zc0[0]), abs(zc1[1] - zc0[1]),
                    ZED_H - 0.04)
     j6 = u2cad(-10.93, 13.04)
+    j1a, j1b = u2cad(-23.9, -13.81), u2cad(-15.56, -4.27)          # (E) USB-C J1 de la URTK1.2, 3,3 de alto
+    r["usb_J1"] = box((j1a[0] + j1b[0]) / 2, (j1a[1] + j1b[1]) / 2, Z_URTK1 + 0.02, abs(j1b[0] - j1a[0]), abs(j1b[1] - j1a[1]), 3.3)
+    j3a, j3b = u2cad(-22.3, 3.78), u2cad(-17.1, 15.82)             # (E) conector GH J3, 4,5 de alto
+    r["gh_J3"] = box((j3a[0] + j3b[0]) / 2, (j3a[1] + j3b[1]) / 2, Z_URTK1 + 0.02, abs(j3b[0] - j3a[0]), abs(j3b[1] - j3a[1]), 4.5)
     r["pila_J6"] = cyl(j6[0], j6[1], Z_URTK1 + 0.02, 13.0, 5.0)      # (E) portapilas ML1220 Ø12,5 + cuerpo: MEDIR
     pm = cq.Workplane("XY").polyline([tuple(p) for p in PM["contorno"]]).close().extrude(PM["espesor"] - 0.04)
     for c in PM["recortes"]:
@@ -295,7 +299,7 @@ def main():
             if v > 0.01:
                 rep["interferencias"]["%s × %s" % (rn, pn)] = round(v, 3)
     for a_, b_ in (("antena", "pila_J6"), ("placa_masa", "pila_J6"), ("antena", "urtk"), ("placa_masa", "zed"),
-                   ("pines_masa", "urtk")):
+                   ("pines_masa", "urtk"), ("placa_masa", "usb_J1"), ("placa_masa", "gh_J3")):
         try:
             v = rf[a_].intersect(rf[b_]).val().Volume()
         except Exception:  # noqa: BLE001

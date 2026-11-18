@@ -70,7 +70,7 @@ URTK = dict(lx=43.434, ly=43.688, t=1.6, pitch=2.54, u0=12.827 - 43.434 / 2, fil
             off=(0.3, 0.0))
 FILA9 = ["GND", "5V", "3V3", "TX2", "RX2", "CS", "RX/MOSI", "TX/MISO", "SCK"]          # canto +v
 FILA10 = ["GND", "3V3", "SDA", "SCL", "FENCE", "RTK", "PPS", "RST", "SAFE", "INT"]     # canto −v
-ANT = (1.45, -7.5, 25.0)                              # antena sobre la URTK1.2 (marco U: centro y lado), lejos de J6
+ANT = (0.0, -0.3, 25.0)                              # 18/11 20:15: placa de masa maciza: antena centrada en la cápsula (marco U)
 Z_MAX_F = 3.2                                         # altura máxima en F (REV B: WROOM-1U de 3,2; antes 2,6)
 
 
