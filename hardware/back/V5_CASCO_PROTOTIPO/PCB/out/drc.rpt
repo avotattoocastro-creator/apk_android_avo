@@ -1,8 +1,11 @@
 ** Drc report for AVO_BACK_V5P_PCB.kicad_pcb **
-** Created on 2026-11-18T23:37:20+0000 **
+** Created on 2026-11-18T23:41:00+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 9 DRC violations **
+** Found 10 DRC violations **
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(96.4250 mm, 80.8750 mm): Track [USB_DP_C] on F.Cu, length 0.1414 mm
 [silk_edge_clearance]: Silkscreen clipped by board edge
     Rule: board setup constraints silk; warning
     @(125.0000 mm, 72.0000 mm): Segment on Edge.Cuts
@@ -34,19 +37,7 @@
     @(93.7000 mm, 78.5000 mm): PCB text 'AUX' on F.Silkscreen
     @(93.3464 mm, 78.3600 mm): Segment of R20 on F.Silkscreen
 
-** Found 3 unconnected pads **
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(114.0547 mm, 90.7349 mm): Track [+3V3] on F.Cu, length 0.3152 mm
-    @(113.5000 mm, 89.9125 mm): Pad 5 [+3V3] of U13 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(97.0100 mm, 77.7625 mm): Pad 5 [VBUS] of U6 on F.Cu
-    @(88.0000 mm, 77.6000 mm): Pad 2 [VBUS] of F2 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(101.2500 mm, 81.5700 mm): Pad 1 [USBC_CC2] of R31 on F.Cu
-    @(102.4500 mm, 79.6950 mm): Pad B5 [USBC_CC2] of J16 on F.Cu
+** Found 0 unconnected pads **
 
 ** Found 0 Footprint errors **
 

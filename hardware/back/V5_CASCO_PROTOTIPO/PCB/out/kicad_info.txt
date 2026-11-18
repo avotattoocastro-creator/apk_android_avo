@@ -2,47 +2,47 @@
  "zones": [
   {
    "net": "GND",
-   "layer": "F.Cu",
-   "filled_area_mm2": 1587.7
-  },
-  {
-   "net": "",
-   "layer": "F.Cu",
-   "filled_area_mm2": 0.0
-  },
-  {
-   "net": "",
-   "layer": "F.Cu",
-   "filled_area_mm2": 0.0
-  },
-  {
-   "net": "",
-   "layer": "F.Cu",
-   "filled_area_mm2": 0.0
-  },
-  {
-   "net": "",
-   "layer": "F.Cu",
-   "filled_area_mm2": 0.0
-  },
-  {
-   "net": "GND",
-   "layer": "B.Cu",
-   "filled_area_mm2": 2885.5
-  },
-  {
-   "net": "GND",
    "layer": "In1.Cu",
-   "filled_area_mm2": 2885.5
+   "filled_area_mm2": 2884.6
   },
   {
    "net": "+3V3",
    "layer": "In2.Cu",
-   "filled_area_mm2": 2212.4
+   "filled_area_mm2": 2060.6
+  },
+  {
+   "net": "GND",
+   "layer": "B.Cu",
+   "filled_area_mm2": 2884.6
+  },
+  {
+   "net": "GND",
+   "layer": "F.Cu",
+   "filled_area_mm2": 1571.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
   }
  ],
  "footprints": 140,
- "tracks": 1114,
- "vias": 186,
- "unconnected": 3
+ "tracks": 1137,
+ "vias": 192,
+ "unconnected": 0
 }
