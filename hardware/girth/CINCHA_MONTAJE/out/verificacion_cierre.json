@@ -62,33 +62,33 @@
     "puntos_del_diente_en_el_cerco": 0
    },
    "-10": {
-    "soporte_mm3": 0.0,
+    "soporte_mm3": 0.045,
     "capsula_mm3": 0.0,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-11": {
-    "soporte_mm3": 0.0,
+    "soporte_mm3": 1.606,
     "capsula_mm3": 0.0,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-12": {
-    "soporte_mm3": 0.0,
-    "capsula_mm3": 0.18,
+    "soporte_mm3": 6.209,
+    "capsula_mm3": 0.03,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-13": {
-    "soporte_mm3": 0.113,
-    "capsula_mm3": 1.069,
+    "soporte_mm3": 12.489,
+    "capsula_mm3": 0.105,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-14": {
-    "soporte_mm3": 1.688,
-    "capsula_mm3": 2.809,
+    "soporte_mm3": 19.0,
+    "capsula_mm3": 0.973,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-16": {
-    "soporte_mm3": 10.883,
-    "capsula_mm3": 8.368,
+    "soporte_mm3": 35.681,
+    "capsula_mm3": 6.283,
     "puntos_del_diente_en_el_cerco": 0
    }
   },
@@ -154,33 +154,33 @@
     "puntos_del_diente_en_el_cerco": 0
    },
    "-10": {
-    "soporte_mm3": 0.0,
+    "soporte_mm3": 0.145,
     "capsula_mm3": 0.0,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-11": {
-    "soporte_mm3": 0.0,
+    "soporte_mm3": 2.015,
     "capsula_mm3": 0.0,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-12": {
-    "soporte_mm3": 0.0,
-    "capsula_mm3": 0.03,
+    "soporte_mm3": 6.02,
+    "capsula_mm3": 0.02,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-13": {
-    "soporte_mm3": 0.154,
-    "capsula_mm3": 0.393,
+    "soporte_mm3": 11.355,
+    "capsula_mm3": 0.04,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-14": {
-    "soporte_mm3": 1.651,
-    "capsula_mm3": 1.468,
+    "soporte_mm3": 16.996,
+    "capsula_mm3": 0.325,
     "puntos_del_diente_en_el_cerco": 0
    },
    "-16": {
-    "soporte_mm3": 9.467,
-    "capsula_mm3": 5.586,
+    "soporte_mm3": 31.246,
+    "capsula_mm3": 4.074,
     "puntos_del_diente_en_el_cerco": 0
    }
   },
@@ -194,7 +194,7 @@
    8.0
   ],
   "brazo_pulsador_mm": 7.5,
-  "brazo_iman_mm": 4.3,
+  "brazo_iman_mm": 4.6,
   "brazo_diente_mm": 9.9,
   "separacion_imanes_mm": 1.5,
   "diente": "recto, entra 1.0 mm; bisel de entrada abajo; engancha en la cama del soporte",
