@@ -16,7 +16,7 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0399
+       "productPrice": 0.0398
       },
       {
        "startNumber": 100,
@@ -98,7 +98,7 @@
     {
      "componentId": 5705597,
      "componentLibraryType": "expand",
-     "stockCount": 884,
+     "stockCount": 880,
      "componentTypeEn": "GNSS Modules",
      "erpComponentName": "\u9ad8\u7cbe\u5ea6\u3001\u591a\u6ce2\u6bb5GNSS\u63a5\u6536\u673a\u6a21\u5757",
      "componentSource": "shop",
@@ -107,89 +107,89 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 76.3634
+       "productPrice": 76.3474
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 76.3634
+       "productPrice": 76.3474
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 76.3634
+       "productPrice": 76.3474
       },
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 76.3634
+       "productPrice": 76.3474
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 76.3634
+       "productPrice": 76.3474
       },
       {
        "startNumber": 1000,
        "endNumber": 1999,
-       "productPrice": 76.3634
+       "productPrice": 76.3474
       },
       {
        "startNumber": 2000,
        "endNumber": 3999,
-       "productPrice": 76.3634
+       "productPrice": 76.3474
       },
       {
        "startNumber": 4000,
        "endNumber": -1,
-       "productPrice": 76.3634
+       "productPrice": 76.3474
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 73.5611
+       "productPrice": 73.5456
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 73.5611
+       "productPrice": 73.5456
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 73.5611
+       "productPrice": 73.5456
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 73.5611
+       "productPrice": 73.5456
       },
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 73.5611
+       "productPrice": 73.5456
       },
       {
        "startNumber": 2000,
        "endNumber": 3999,
-       "productPrice": 73.5611
+       "productPrice": 73.5456
       },
       {
        "startNumber": 1000,
        "endNumber": 1999,
-       "productPrice": 73.5611
+       "productPrice": 73.5456
       },
       {
        "startNumber": 4000,
        "endNumber": -1,
-       "productPrice": 73.5611
+       "productPrice": 73.5456
       }
      ],
      "firstSortAccessId": "3f47180447344e189d9b9aa7555c0cb3",
      "secondSortAccessId": "69288e9b39414023a049d01710b48789",
-     "canPresaleNumber": 866,
+     "canPresaleNumber": 862,
      "componentProductType": 2,
      "mergedComponentCode": "",
      "urlSuffix": "UBLOX-ZED_F9P04B/C5120257",
@@ -209,21 +209,21 @@
      "shopCostPrice": 423.77936,
      "preMinPurchaseNum": 1,
      "minPurchaseNum": 1,
-     "initialPrice": 76.3634,
+     "initialPrice": 76.3474,
      "componentCode": "C5120257",
      "componentBrandEn": "U-BLOX",
      "componentModelEn": "ZED-F9P-04B",
      "componentImageUrl": "",
      "productBigImageAccessId": null,
-     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583668502154240000-C5120257/C5120257-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261117T202925Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=4b4321d67af49d2610ab920a707cdad77b454e714025ce8b1329c778f9d67472",
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583668502154240000-C5120257/C5120257-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261118T114519Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5r0Me3R3o9nj5q%2BM1H3iXM4O7hNmojBozz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qe8u6hQ3557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j%2FetZpcPbOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZUOGVwu5ch3ARqAAY500Gx8OPNp7XbOAi77U2ZuxIIWVh5sMBOgU3ltOFZ60sAUJ%2F5%2FVGKbGgt6%2BVEF6k%2FT0VGnE4bYY37ZKOjbH40tDvXF%2B0FQ3Wbx%2FTOP7Tq0iW69caI1VX1pvAU7XUMDiw2ZS9uHfWwGUtO7wQOMuQCkjGd1drvxKfbsCowSaGy3IAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYAzWe3PF8XU1wFmsm77auMjA%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=bdd9a0733e04d78d7033c76b95a60b8ba9c5c7d38126d2f0478d0485cd750cf8",
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2410010132_U-BLOX-ZED-F9P-04B_C5120257.pdf",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589784769954684929-C5120257.pdf?response-content-disposition=attachment%3B%20filename%3DC5120257.pdf%3B%20filename%2A%3DUTF-8%27%27C5120257.pdf&x-oss-date=20261117T202925Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3e391fd60201ae5f0914e85d9734a4276dee3b050995216961ecebb8b7edd6eb",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589784769954684929-C5120257.pdf?response-content-disposition=attachment%3B%20filename%3DC5120257.pdf%3B%20filename%2A%3DUTF-8%27%27C5120257.pdf&x-oss-date=20261118T114519Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=112ab16bcafe7e3cb12c2c1263c0b6cf17650bfb0c69abb7f82de8bf06b363f8",
      "dataManualOfficialLink": "",
      "componentName": "U-BLOX ZED-F9P-04B",
      "minImage": "",
      "minImageAccessId": null,
-     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583668503110541312-C5120257/C5120257-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261117T202925Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=25971db5b5b8d185b0d189cdb75819829d7960cb52e1b063b39036ffc3ce21bc",
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583668503110541312-C5120257/C5120257-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261118T114519Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5r0Me3R3o9nj5q%2BM1H3iXM4O7hNmojBozz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qe8u6hQ3557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j%2FetZpcPbOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZUOGVwu5ch3ARqAAY500Gx8OPNp7XbOAi77U2ZuxIIWVh5sMBOgU3ltOFZ60sAUJ%2F5%2FVGKbGgt6%2BVEF6k%2FT0VGnE4bYY37ZKOjbH40tDvXF%2B0FQ3Wbx%2FTOP7Tq0iW69caI1VX1pvAU7XUMDiw2ZS9uHfWwGUtO7wQOMuQCkjGd1drvxKfbsCowSaGy3IAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYAzWe3PF8XU1wFmsm77auMjA%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=055683c8442b98d045d6257cc032c8b97dcb8112658312ad4883fae33caf5b25",
      "imageList": [
       {
        "productImage": null,
@@ -317,84 +317,84 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 112.6416
+       "productPrice": 112.6179
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 112.6416
+       "productPrice": 112.6179
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 112.6416
+       "productPrice": 112.6179
       },
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 112.6416
+       "productPrice": 112.6179
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 112.6416
+       "productPrice": 112.6179
       },
       {
        "startNumber": 1000,
        "endNumber": 1999,
-       "productPrice": 112.6416
+       "productPrice": 112.6179
       },
       {
        "startNumber": 2000,
        "endNumber": 3999,
-       "productPrice": 112.6416
+       "productPrice": 112.6179
       },
       {
        "startNumber": 4000,
        "endNumber": -1,
-       "productPrice": 112.6416
+       "productPrice": 112.6179
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 108.508
+       "productPrice": 108.4852
       },
       {
        "startNumber": 2000,
        "endNumber": 3999,
-       "productPrice": 108.508
+       "productPrice": 108.4852
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 108.508
+       "productPrice": 108.4852
       },
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 108.508
+       "productPrice": 108.4852
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 108.508
+       "productPrice": 108.4852
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 108.508
+       "productPrice": 108.4852
       },
       {
        "startNumber": 1000,
        "endNumber": 1999,
-       "productPrice": 108.508
+       "productPrice": 108.4852
       },
       {
        "startNumber": 4000,
        "endNumber": -1,
-       "productPrice": 108.508
+       "productPrice": 108.4852
       }
      ],
      "firstSortAccessId": "3db4bff6cfd743f6af1575bf175e9774",
@@ -419,7 +419,7 @@
      "shopCostPrice": 648.69565,
      "preMinPurchaseNum": 1,
      "minPurchaseNum": 1,
-     "initialPrice": 112.6416,
+     "initialPrice": 112.6179,
      "componentCode": "C5240944",
      "componentBrandEn": "U-BLOX",
      "componentModelEn": "ZED-F9P-02B",
@@ -428,7 +428,7 @@
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": null,
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589836179454386176-C5240944.pdf?response-content-disposition=attachment%3B%20filename%3DC5240944.pdf%3B%20filename%2A%3DUTF-8%27%27C5240944.pdf&x-oss-date=20261117T202925Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f4c49f2c9165eb10ba5ae447a8e0f2f044094639a6d970be3999e530cdc260d4",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589836179454386176-C5240944.pdf?response-content-disposition=attachment%3B%20filename%3DC5240944.pdf%3B%20filename%2A%3DUTF-8%27%27C5240944.pdf&x-oss-date=20261118T114519Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=8ba50142d3e0a448c6b5a5727f32334eead0615483aa148a728f4e03ca3c8be6",
      "dataManualOfficialLink": "",
      "componentName": "U-BLOX ZED-F9P-02B",
      "minImage": null,
@@ -493,64 +493,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 157.1629
+       "productPrice": 157.1299
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 157.1629
+       "productPrice": 157.1299
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 157.1629
+       "productPrice": 157.1299
       },
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 157.1629
+       "productPrice": 157.1299
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 157.1629
+       "productPrice": 157.1299
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 157.1629
+       "productPrice": 157.1299
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 151.3955
+       "productPrice": 151.3636
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 151.3955
+       "productPrice": 151.3636
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 151.3955
+       "productPrice": 151.3636
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 151.3955
+       "productPrice": 151.3636
       },
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 151.3955
+       "productPrice": 151.3636
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 151.3955
+       "productPrice": 151.3636
       }
      ],
      "firstSortAccessId": "3db4bff6cfd743f6af1575bf175e9774",
@@ -575,21 +575,21 @@
      "shopCostPrice": 820.0,
      "preMinPurchaseNum": 1,
      "minPurchaseNum": 1,
-     "initialPrice": 157.1629,
+     "initialPrice": 157.1299,
      "componentCode": "C20626405",
      "componentBrandEn": "U-BLOX",
      "componentModelEn": "ZED-F9P-15B",
      "componentImageUrl": "",
      "productBigImageAccessId": null,
-     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8718079015241789440-C20626405-front.jpg?x-oss-date=20261117T202925Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=4827e072b6f4129ac43c3b2bab9de242373231d0d9e0663a0ad48f5cb55a6898",
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8718079015241789440-C20626405-front.jpg?x-oss-date=20261118T114519Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5r0Me3R3o9nj5q%2BM1H3iXM4O7hNmojBozz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qe8u6hQ3557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j%2FetZpcPbOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZUOGVwu5ch3ARqAAY500Gx8OPNp7XbOAi77U2ZuxIIWVh5sMBOgU3ltOFZ60sAUJ%2F5%2FVGKbGgt6%2BVEF6k%2FT0VGnE4bYY37ZKOjbH40tDvXF%2B0FQ3Wbx%2FTOP7Tq0iW69caI1VX1pvAU7XUMDiw2ZS9uHfWwGUtO7wQOMuQCkjGd1drvxKfbsCowSaGy3IAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYAzWe3PF8XU1wFmsm77auMjA%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=801d9bdc21b3bd6e24ddf09ed5e1db3100091f886f4c7bfdf823ca2cef47f45c",
      "dataManualUrl": null,
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8718079015803420672-C20626405.pdf?response-content-disposition=attachment%3B%20filename%3DC20626405.pdf%3B%20filename%2A%3DUTF-8%27%27C20626405.pdf&x-oss-date=20261117T202925Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=e1bf9f0686ad862ae740be9b55e0621542b79921424ef54b4f7c36c369d8b2a6",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8718079015803420672-C20626405.pdf?response-content-disposition=attachment%3B%20filename%3DC20626405.pdf%3B%20filename%2A%3DUTF-8%27%27C20626405.pdf&x-oss-date=20261118T114519Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d3b59947a5b56f3127f05d5e0258a182d401e7480c5dba9a3c1357ed1c04ac3a",
      "dataManualOfficialLink": "",
      "componentName": "U-BLOX ZED-F9P-15B",
      "minImage": "",
      "minImageAccessId": null,
-     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8718079016529305600-C20626405-front.jpg?x-oss-date=20261117T202925Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vWGenum6xp4JO7aWLChUM6f%2BRFuLHhtDz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdIUij43557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jTQsam72eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WcjK4j5ch3ARqAAaMdSplLVYOtD4VP66fMsbXAlf4848EcMWMEDhRtUXSzKRDH55hIPRH5Ee2u3R3zd3XrkvE2w9seHudyJd7cXlK%2Bi8fiQ%2BZayP4PzcUnhwWlk9mVVydeUNf%2Fv3jyqpN3FZ3nzHB3VP4u66ug0piC77kZqqVHcH7M57liwul5CivtIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXcRSZvsHWQPkDsaCoskiWtJV%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=6e8c36a586fccafa46cd2b6899c8e4a4e855238f9504bba394c8120a9d7bb863",
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8718079016529305600-C20626405-front.jpg?x-oss-date=20261118T114519Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5r0Me3R3o9nj5q%2BM1H3iXM4O7hNmojBozz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qe8u6hQ3557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j%2FetZpcPbOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZUOGVwu5ch3ARqAAY500Gx8OPNp7XbOAi77U2ZuxIIWVh5sMBOgU3ltOFZ60sAUJ%2F5%2FVGKbGgt6%2BVEF6k%2FT0VGnE4bYY37ZKOjbH40tDvXF%2B0FQ3Wbx%2FTOP7Tq0iW69caI1VX1pvAU7XUMDiw2ZS9uHfWwGUtO7wQOMuQCkjGd1drvxKfbsCowSaGy3IAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYAzWe3PF8XU1wFmsm77auMjA%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f569c06873aa4f3a6a56887307bd9dba4945e82198dc4be6854637cf91c21aa8",
      "imageList": [
       {
        "productImage": null,
@@ -770,7 +770,7 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0399
+       "productPrice": 0.0398
       },
       {
        "startNumber": 100,
@@ -861,64 +861,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 393.4265
+       "productPrice": 393.3437
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 393.4265
+       "productPrice": 393.3437
       },
       {
        "startNumber": 12,
        "endNumber": 249,
-       "productPrice": 393.4265
+       "productPrice": 393.3437
       },
       {
        "startNumber": 250,
        "endNumber": 499,
-       "productPrice": 156.9794
+       "productPrice": 156.9464
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 151.7341
+       "productPrice": 151.7022
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 149.1426
+       "productPrice": 149.1112
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 12,
        "endNumber": 249,
-       "productPrice": 378.9888
+       "productPrice": 378.9091
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 143.6695
+       "productPrice": 143.6393
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 378.9888
+       "productPrice": 378.9091
       },
       {
        "startNumber": 250,
        "endNumber": 499,
-       "productPrice": 151.2187
+       "productPrice": 151.1869
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 378.9888
+       "productPrice": 378.9091
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 146.1659
+       "productPrice": 146.1352
       }
      ],
      "firstSortAccessId": "3db4bff6cfd743f6af1575bf175e9774",
@@ -943,7 +943,7 @@
      "shopCostPrice": 0.1,
      "preMinPurchaseNum": 1,
      "minPurchaseNum": 1,
-     "initialPrice": 393.4265,
+     "initialPrice": 393.3437,
      "componentCode": "C41934277",
      "componentBrandEn": "U-BLOX",
      "componentModelEn": "ZED-F9P-05B",
@@ -992,64 +992,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 430.8923
+       "productPrice": 430.8017
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 430.8923
+       "productPrice": 430.8017
       },
       {
        "startNumber": 30,
        "endNumber": 199,
-       "productPrice": 430.8923
+       "productPrice": 430.8017
       },
       {
        "startNumber": 200,
        "endNumber": 499,
-       "productPrice": 171.9291
+       "productPrice": 171.8929
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 166.1841
+       "productPrice": 166.1492
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 163.3452
+       "productPrice": 163.3109
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 200,
        "endNumber": 499,
-       "productPrice": 165.6198
+       "productPrice": 165.5849
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 157.3509
+       "productPrice": 157.3178
       },
       {
        "startNumber": 30,
        "endNumber": 199,
-       "productPrice": 415.0798
+       "productPrice": 414.9925
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 415.0798
+       "productPrice": 414.9925
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 160.0856
+       "productPrice": 160.052
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 415.0798
+       "productPrice": 414.9925
       }
      ],
      "firstSortAccessId": null,
@@ -1074,7 +1074,7 @@
      "shopCostPrice": 0.1,
      "preMinPurchaseNum": 1,
      "minPurchaseNum": 1,
-     "initialPrice": 430.8923,
+     "initialPrice": 430.8017,
      "componentCode": "C54279790",
      "componentBrandEn": "U-BLOX",
      "componentModelEn": "ZED-F9P-01B",
@@ -1123,7 +1123,7 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0399
+       "productPrice": 0.0398
       },
       {
        "startNumber": 100,
@@ -1165,7 +1165,7 @@
      "shopCostPrice": 0.1,
      "preMinPurchaseNum": 1,
      "minPurchaseNum": 1,
-     "initialPrice": 0.0399,
+     "initialPrice": 0.0398,
      "componentCode": "C507697",
      "componentBrandEn": "U-BLOX",
      "componentModelEn": "ZED-F9P-01B-00",
@@ -1305,7 +1305,7 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0399
+       "productPrice": 0.0398
       },
       {
        "startNumber": 100,
@@ -1396,64 +1396,64 @@
       {
        "startNumber": 1,
        "endNumber": 2,
-       "productPrice": 94.6352
+       "productPrice": 94.6153
       },
       {
        "startNumber": 3,
        "endNumber": 4,
-       "productPrice": 94.6352
+       "productPrice": 94.6153
       },
       {
        "startNumber": 5,
        "endNumber": 29,
-       "productPrice": 94.6352
+       "productPrice": 94.6153
       },
       {
        "startNumber": 30,
        "endNumber": 33,
-       "productPrice": 90.3138
+       "productPrice": 90.2948
       },
       {
        "startNumber": 34,
        "endNumber": 35,
-       "productPrice": 90.3138
+       "productPrice": 90.2948
       },
       {
        "startNumber": 36,
        "endNumber": -1,
-       "productPrice": 90.3138
+       "productPrice": 90.2948
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 30,
        "endNumber": 33,
-       "productPrice": 86.9996
+       "productPrice": 86.9813
       },
       {
        "startNumber": 1,
        "endNumber": 2,
-       "productPrice": 91.1624
+       "productPrice": 91.1432
       },
       {
        "startNumber": 34,
        "endNumber": 35,
-       "productPrice": 86.9996
+       "productPrice": 86.9813
       },
       {
        "startNumber": 3,
        "endNumber": 4,
-       "productPrice": 91.1624
+       "productPrice": 91.1432
       },
       {
        "startNumber": 5,
        "endNumber": 29,
-       "productPrice": 91.1624
+       "productPrice": 91.1432
       },
       {
        "startNumber": 36,
        "endNumber": -1,
-       "productPrice": 86.9996
+       "productPrice": 86.9813
       }
      ],
      "firstSortAccessId": "b1a62a896e084350a4358222151368b0",
@@ -1478,7 +1478,7 @@
      "shopCostPrice": 440.0,
      "preMinPurchaseNum": 1,
      "minPurchaseNum": 1,
-     "initialPrice": 94.6352,
+     "initialPrice": 94.6153,
      "componentCode": "C18199340",
      "componentBrandEn": "U-BLOX",
      "componentModelEn": "ZED-F9P-04B-01",
@@ -1527,7 +1527,7 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0399
+       "productPrice": 0.0398
       },
       {
        "startNumber": 100,

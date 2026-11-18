@@ -7,7 +7,7 @@
     {
      "componentId": 7996,
      "componentLibraryType": "expand",
-     "stockCount": 37370,
+     "stockCount": 34897,
      "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
      "erpComponentName": "\u5355\u5411ESD 5.25V\u622a\u6b62 \u5cf0\u503c\u8109\u51b2\u7535\u6d41\uff1a5A",
      "componentSource": "shop",
@@ -31,7 +31,7 @@
       {
        "startNumber": 500,
        "endNumber": 2999,
-       "productPrice": 0.0861
+       "productPrice": 0.086
       },
       {
        "startNumber": 3000,
@@ -53,7 +53,7 @@
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.0984
+       "productPrice": 0.0983
       },
       {
        "startNumber": 6000,
@@ -78,7 +78,7 @@
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
      "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
-     "canPresaleNumber": 32599,
+     "canPresaleNumber": 30068,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "STMicroelectronics-USBLC62SC6/C7519",
@@ -95,7 +95,7 @@
      "estimateDate": null,
      "fullReelPrice": null,
      "encapsulationNumber": 3000,
-     "shopCostPrice": 0.44965,
+     "shopCostPrice": 0.44966,
      "preMinPurchaseNum": 76,
      "minPurchaseNum": 1,
      "initialPrice": 0.1571,
@@ -107,7 +107,7 @@
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2410121836_STMicroelectronics-USBLC6-2SC6_C7519.pdf",
      "dataManualFileAccessId": null,
-     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8579714554408067072-C7519.pdf?response-content-disposition=attachment%3B%20filename%3DC7519.pdf%3B%20filename%2A%3DUTF-8%27%27C7519.pdf&x-oss-date=20261117T202900Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qACcyFhrFk1ZaFc2KDhjMjX%2FxUnYLJhzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfpLzTk3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmplBdJGqaHD0eS19jklBdzSlusJRAJJUVBflCeKEaRNSAd3WGhEfM2%2BBt4QT30w5N2u00S8OSMITnU10qKWD5sagAGCXeNjj82Pz2%2BoDf%2FZxntWMMwcKt0vQ2unj8dnXCymkIZaDX9xkpo7s9JVFwJnfimtSK9Fdu84gBvUrfrtGUK1bzy5s4GONZksMN0qSX329wrhwkGUIGM0o%2FO9Y8EL7Aec%2B6JcfOOvYLVNang%2FBXUY2T2Gp2UCIAgsf3Z2gbiHNiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY5Bv1knEbTnqD2b3vSsxrGbe%2F20261117%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3b7d96301ddc19e8d4c41381e25061d4186a0349d602a96d549e3ac1b7f5b279",
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8579714554408067072-C7519.pdf?response-content-disposition=attachment%3B%20filename%3DC7519.pdf%3B%20filename%2A%3DUTF-8%27%27C7519.pdf&x-oss-date=20261118T114457Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rFBd3biupk7rbYbH%2F7jDklb%2Fwbq53Glzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfIVrBQ3557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWmqkT%2F4n7JSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkILglS1qKWD5sagAGPozzzg%2BYGDpWuiuKvLAgG2LkLWIQ3H2u%2FybqueMpy0Zeq3xyHBDm3W6ZGp216o%2FxCrEquTUTFblZ%2FcyyHrfcTzDedLW8l3skkpa71XBsPF4vew55O47UmV8nFDnhnla%2FBwahIgtuWMOmWziboVOA3BtBTJ7psw0MedVLMnu6JpSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYpNgog5EYt3nYJh9pcs7DXmu%2F20261118%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3d15191f2cd0dd48ac57787df044ad25fbf79cc1632e04226006d5a9611230bf",
      "dataManualOfficialLink": "",
      "componentName": "ST USBLC6-2SC6",
      "minImage": "https://assets.lcsc.com/images/lcsc/96x96/20221228_STMicroelectronics-USBLC6-2SC6_C7519_front.jpg",
