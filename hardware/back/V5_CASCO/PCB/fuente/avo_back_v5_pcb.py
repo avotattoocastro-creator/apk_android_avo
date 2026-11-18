@@ -226,7 +226,7 @@ def part(ref, fp, value, pos, rot, nets, lcsc="", mpn="", block="", sym=None, dn
 # códigos LCSC consultados en el CI (V4 29/10/2026; V5 14/11/2026, out_stock/stock_jlc.json): ZED-F9P-04B C5120257 (895 uds.,
 # 76,27 US$), U.FL C88373, 47 nH C97998, 22 Ω 1206 C17958 (Basic), ESD de RF PESD0402-140 C10662.
 LC = {
-    "0R": "C17168", "10R": "C25077", "22R": "C25092", "33R": "C25105", "22R 1206": "C17958", "330R": "C25104", "1k": "C11702", "1k5": "C25867", "2k": "C4109",
+    "0R": "C17168", "10R": "C25077", "22R": "C25092", "33R": "C25105", "22R 1206": "C17958", "56R 1206": "C17995", "330R": "C25104", "1k": "C11702", "1k5": "C25867", "2k": "C4109",
     "10k": "C25744", "100k": "C25741", "1M": "C26083",
     "100n": "C1525", "1u": "C52923", "10n": "C15195", "4u7": "C19666",
     "10u": "C96446", "22u": "C45783", "47u": "C16780",
@@ -270,7 +270,8 @@ part("D2", "SOD323", "TVS 5 V", (0, 0), 0, {1: "POGO_VBUS", 2: GND}, LC["TVS"], 
      sym=dict(L=[(1, "K")], R=[(2, "A")]), note="ESD en VBUS del pogo")
 part("D3", "SOD323", "TVS 5 V", (0, 0), 0, {1: "POGO_AUX_C", 2: GND}, LC["TVS"], "PESD5V0S1BA", "Pogo",
      sym=dict(L=[(1, "K")], R=[(2, "A")]), note="ESD en el contacto AUX")
-R("R20", "1k", "POGO_AUX_C", "POGO_AUX", block="Pogo", note="serie del contacto AUX → GPIO40")
+R("R20", "10k", "POGO_AUX_C", "POGO_AUX", block="Pogo",
+  note="serie del contacto AUX → GPIO40. Revisión 18/11: 10 kΩ (0,4 mA como máximo hacia el 3,3 V si la base pusiera 5 V con el casco apagado)")
 R("R21", "100k", "POGO_AUX", GND, block="Pogo")
 part("U6", "SOT23-6", "USBLC6-2SC6", (0, 0), 0,
      {1: "USB_DP_C", 6: "USB_DP_C", 3: "USB_DM_C", 4: "USB_DM_C", 2: GND, 5: VBUS}, LC["USBLC6"], block="Pogo",
@@ -330,9 +331,10 @@ part("U3", "SOT23-5", "TLV75733PDBVR", (0, 0), 0, {1: VSYS, 2: GND, 3: "EN_3V3",
 # confirma con el anillo, cierra la sesión y la microSD y suelta POWER_HOLD.
 part("D5", "SOT23", "BAT54C", (0, 0), 0, {1: "TOUCH_OUT", 2: "PWR_HOLD", 3: "EN_3V3"}, LC["BAT54C"], "BAT54C", "Encendido",
      sym=dict(L=[(1, "A1"), (2, "A2")], R=[(3, "K")]), note="OR del táctil y de POWER_HOLD al EN del 3,3 V")
-part("D6", "SOT23", "BAT54C", (0, 0), 0, {1: VBUS, 2: None, 3: "EN_3V3"}, LC["BAT54C"], "BAT54C", "Encendido",
+part("D6", "SOT23", "BAT54C", (0, 0), 0, {1: "VBUS_DET", 2: None, 3: "EN_3V3"}, LC["BAT54C"], "BAT54C", "Encendido",
      sym=dict(L=[(1, "A1"), (2, "A2")], R=[(3, "K")]),
-     note="VBUS del pogo (cargador o DOCK) al EN: una cápsula apagada se enciende al cargar (decisión D1 de la auditoría)")
+     note="VBUS del pogo (cargador o DOCK) al EN: una cápsula apagada se enciende al cargar (decisión D1 de la auditoría). "
+          "Revisión 18/11: desde el divisor VBUS_DET (≈ 0,6 × VBUS) y no desde VBUS: el EN del TLV757P aguanta 6,0 V como máximo")
 R("R14", "1M", "EN_3V3", GND, block="Encendido", note="EN a 0 sin ninguna fuente: apagado (fuga ≈ 0)")
 C("C28", "1u", "EN_3V3", GND, block="Encendido",
   note="REV B (revisión 18/11): mantiene EN ≈ 1 s (1 MΩ · 1 µF) cuando el micro se reinicia (OTA, watchdog, reset): GPIO46 "
@@ -385,10 +387,11 @@ part("U1", "ZED", "ZED-F9P-04B", (0, 0), 0, zed, "C5120257", "ZED-F9P-04B (u-blo
 C("C62", "47u 6V3", VZED, GND, block="ZED", fp="C0805")
 C("C63", "100n", VZED, GND, block="ZED")
 C("C65", "1u", VZED, GND, block="ZED", note="pegado a los pines VCC 33/34")
-C("C64", "100n", "+3V3_AON", GND, block="ZED", note="V_BCKP")
+C("C64", "1u", "+3V3_AON", GND, block="ZED", note="V_BCKP (revisión 18/11: 1 µF + C67 ≈ 2 µF, como pide u-blox)")
 # antena activa: VCC_RF → 10 Ω → 47 nH → línea de RF (lado de la antena); bloqueo de continua hacia RF_IN
-R("R70", "22R 1206", "VCC_RF", "VCC_RF_F", block="ZED", fp="R1206",
-  note="revisión independiente: limita un corto del coaxial a ≈ 150 mA (bobina de 300 mA); cae ≈ 0,4 V a 20 mA de LNA")
+R("R70", "56R 1206", "VCC_RF", "VCC_RF_F", block="ZED", fp="R1206",
+  note="REV B (revisión 18/11): 56 Ω (≥ 17 Ω que pide u-blox): corto del coaxial ≈ 59 mA y 0,19 W (1206 de 0,25 W; con 22 Ω "
+       "eran 0,5 W). AHP2258: 1,8–5,5 V y 5 ± 2 mA → ≈ 2,9 V en la antena")
 C("C71", "10n", "VCC_RF_F", GND, block="ZED")
 part("L70", "L0402", "47 nH", (0, 0), 0, {1: "VCC_RF_F", 2: "RF_ANT"}, "C97998", "LQG15HS47NJ02D (Murata)", "ZED", sym="R",
      note="alimentación de la antena activa por el vivo del coaxial (choque de RF)")
@@ -450,7 +453,8 @@ C("C27", "1u", "EN", GND, block="ESP32-S3", note="EN: RC 10 k / 1 µF (guía de 
 # con EN = 0 el TPS61023 desconecta la salida de la entrada («true disconnection», 0,1 µA), así que el anillo no
 # consume con el casco dormido ni apagado. DIN a 3,3 V: VIH = 0,65 × 4,3 ≈ 2,8 V (por encima de 4,3 V de VSYS, al
 # cargar, el elevador pasa la entrada: VIH ≈ 2,9 V). El firmware deja GPIO47 a 0 con el anillo apagado.
-R("R24", "33R", "LED_DIN_S3", "LED_D1", block="Anillo", note="serie de la línea de datos (GPIO47)")
+R("R24", "330R", "LED_DIN_S3", "LED_D1", block="Anillo",
+  note="serie de la línea de datos (GPIO47). Revisión 18/11: 330 Ω limita la alimentación de los LED por DIN con el anillo apagado")
 # REV B (18/11/2026, petición del usuario): sin D14 (estaba delante de la salida de la microSD): 7 LED, D13 → D15.
 LEDS = ["D%d" % (10 + k) for k in range(8) if 10 + k != 14]
 for i, ref in enumerate(LEDS):

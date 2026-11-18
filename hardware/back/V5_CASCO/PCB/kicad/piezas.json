@@ -121,14 +121,14 @@
  },
  {
   "ref": "R20",
-  "value": "1k",
+  "value": "10k",
   "footprint": "R_0402_1005Metric",
-  "lcsc": "C11702",
+  "lcsc": "C25744",
   "mpn": "",
   "block": "Pogo",
   "dnp": false,
   "no_assembly": false,
-  "note": "serie del contacto AUX → GPIO40",
+  "note": "serie del contacto AUX → GPIO40. Revisión 18/11: 10 kΩ (0,4 mA como máximo hacia el 3,3 V si la base pusiera 5 V con el casco apagado)",
   "jlc_rot": 0,
   "x": 4.28,
   "y": -21.21,
@@ -205,8 +205,8 @@
   "no_assembly": false,
   "note": "divisor 100k/150k → GPIO18 (despierta al conectar el cable)",
   "jlc_rot": 0,
-  "x": -2.28,
-  "y": -10.96,
+  "x": -2.26,
+  "y": -10.93,
   "rot": 0
  },
  {
@@ -220,9 +220,9 @@
   "no_assembly": false,
   "note": "REV B (revisión 18/11): 100k/150k → 2,85–3,15 V con VBUS 4,75–5,25 V. Con 100k/100k daba 2,4–2,6 V, por debajo de VIH = 0,75 × VDD = 2,475 V del ESP32-S3 (hoja del WROOM, DC characteristics): lectura no fiable",
   "jlc_rot": 0,
-  "x": -13.44,
-  "y": 12.96,
-  "rot": 0
+  "x": -17.93,
+  "y": -2.92,
+  "rot": 90
  },
  {
   "ref": "U2",
@@ -505,9 +505,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -13.44,
-  "y": 14.03,
-  "rot": 0
+  "x": -12.92,
+  "y": 13.42,
+  "rot": 90
  },
  {
   "ref": "C34",
@@ -520,8 +520,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -10.44,
-  "y": 17.01,
+  "x": -14.15,
+  "y": 13.38,
   "rot": 90
  },
  {
@@ -563,7 +563,7 @@
   "block": "Encendido",
   "dnp": false,
   "no_assembly": false,
-  "note": "VBUS del pogo (cargador o DOCK) al EN: una cápsula apagada se enciende al cargar (decisión D1 de la auditoría)",
+  "note": "VBUS del pogo (cargador o DOCK) al EN: una cápsula apagada se enciende al cargar (decisión D1 de la auditoría). Revisión 18/11: desde el divisor VBUS_DET (≈ 0,6 × VBUS) y no desde VBUS: el EN del TLV757P aguanta 6,0 V como máximo",
   "jlc_rot": 0,
   "x": -19.19,
   "y": -9.1,
@@ -901,14 +901,14 @@
  },
  {
   "ref": "C64",
-  "value": "100n",
+  "value": "1u",
   "footprint": "C_0402_1005Metric",
-  "lcsc": "C1525",
+  "lcsc": "C52923",
   "mpn": "",
   "block": "ZED",
   "dnp": false,
   "no_assembly": false,
-  "note": "V_BCKP",
+  "note": "V_BCKP (revisión 18/11: 1 µF + C67 ≈ 2 µF, como pide u-blox)",
   "jlc_rot": 0,
   "x": 1.0,
   "y": 2.65,
@@ -916,14 +916,14 @@
  },
  {
   "ref": "R70",
-  "value": "22R 1206",
+  "value": "56R 1206",
   "footprint": "C_1206_3216Metric",
-  "lcsc": "C17958",
+  "lcsc": "C17995",
   "mpn": "",
   "block": "ZED",
   "dnp": false,
   "no_assembly": false,
-  "note": "revisión independiente: limita un corto del coaxial a ≈ 150 mA (bobina de 300 mA); cae ≈ 0,4 V a 20 mA de LNA",
+  "note": "REV B (revisión 18/11): 56 Ω (≥ 17 Ω que pide u-blox): corto del coaxial ≈ 59 mA y 0,19 W (1206 de 0,25 W; con 22 Ω eran 0,5 W). AHP2258: 1,8–5,5 V y 5 ± 2 mA → ≈ 2,9 V en la antena",
   "jlc_rot": 0,
   "x": -18.78,
   "y": 1.85,
@@ -1186,14 +1186,14 @@
  },
  {
   "ref": "R24",
-  "value": "33R",
+  "value": "330R",
   "footprint": "R_0402_1005Metric",
-  "lcsc": "C25105",
+  "lcsc": "C25104",
   "mpn": "",
   "block": "Anillo",
   "dnp": false,
   "no_assembly": false,
-  "note": "serie de la línea de datos (GPIO47)",
+  "note": "serie de la línea de datos (GPIO47). Revisión 18/11: 330 Ω limita la alimentación de los LED por DIN con el anillo apagado",
   "jlc_rot": 0,
   "x": 18.09,
   "y": -1.84,
@@ -1990,8 +1990,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -15.35,
-  "y": 13.43,
+  "x": -16.18,
+  "y": 13.42,
   "rot": 0
  },
  {
@@ -2020,8 +2020,8 @@
   "no_assembly": true,
   "note": "SAFEBOOT_N del ZED: solo para recuperar su firmware",
   "jlc_rot": 0,
-  "x": -17.04,
-  "y": 13.4,
+  "x": -17.86,
+  "y": 13.51,
   "rot": 0
  }
 ]

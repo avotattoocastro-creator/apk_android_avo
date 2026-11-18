@@ -36,6 +36,11 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 - **VSYS:** C35 47 → 22 µF (el BQ24072 pide 4,7–47 µF en OUT; VSYS suma varios condensadores).
 - Comprobado sin cambios: GPIO46 es entrada/salida (hoja del WROOM, tabla de pines: I/O/T); TS del BQ24072 con NTC
   de 10 kΩ directo; patillajes de TLV75733P y RT9080; EN del TLV757P hasta 6 V.
+- **Revisión independiente** (otro agente, sin ver el diseño ni mis conclusiones): confirma los tres fallos anteriores y
+  añade: R70 22 → 56 Ω (corto del coaxial 0,5 W → 0,19 W en un 1206 de 0,25 W), C64 100 nF → 1 µF (V_BCKP ≈ 2 µF),
+  D6 desde VBUS_DET (EN del TLV757P ≤ 6 V), R24 33 → 330 Ω (LED alimentados por DIN) y R20 1 k → 10 kΩ (AUX).
+  Notas de firmware: gpio_hold_en(GPIO46), GPIO6/8 a 0 antes de bajar ZED_EN, líneas SD como entrada antes de cortar
+  la tarjeta, corte de batería ≥ 3,4 V, no usar RESET_N del ZED de forma rutinaria, encender por etapas.
 - **Corrección de la documentación:** el MAX17048 entra en reposo cuando el bus I²C está a 0 más de 2,5 s (casco
   apagado): no mide con el casco apagado y sigue al encender.
 **Validación:** colocación local sin errores; ruteado y DRC en el CI (ver PR). **NO VERIFICADO.**
