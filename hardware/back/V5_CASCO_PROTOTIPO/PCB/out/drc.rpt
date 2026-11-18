@@ -1,0 +1,56 @@
+** Drc report for AVO_BACK_V5P_PCB.kicad_pcb **
+** Created on 2026-11-18T14:41:46+0000 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 5 DRC violations **
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(117.3000 mm, 100.0000 mm): PCB text 'URTK1.2 (componentes arriba)' on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(88.0000 mm, 85.0000 mm): Circle of U12 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(90.6100 mm, 79.7100 mm): Circle of L71 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(122.1440 mm, 78.2830 mm): Segment on B.Silkscreen
+    @(117.3000 mm, 100.0000 mm): PCB text 'URTK1.2 (componentes arriba)' on B.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(117.3000 mm, 100.0000 mm): PCB text 'URTK1.2 (componentes arriba)' on B.Silkscreen
+    @(119.6200 mm, 109.8900 mm): Segment of J10 on B.Silkscreen
+
+** Found 7 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(99.8000 mm, 80.3425 mm): Pad 5 [+3V3] of U13 on F.Cu
+    @(98.2128 mm, 80.2973 mm): Track [+3V3] on F.Cu, length 0.7699 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(110.3500 mm, 101.8800 mm): Pad 2 [+3V3] of R40 on F.Cu
+    @(114.9500 mm, 104.1000 mm): Track [+3V3] on F.Cu, length 0.7017 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(99.1375 mm, 80.1800 mm): Pad 4 [IMU_INT1] of U13 on F.Cu
+    @(100.4500 mm, 86.2500 mm): Pad 4 [IMU_INT1] of U4 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(87.4300 mm, 73.7600 mm): Pad 3 [LED_D2] of D10 on F.Cu
+    @(113.5750 mm, 73.7600 mm): Pad 1 [LED_D2] of D11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(111.4300 mm, 73.7600 mm): Pad 3 [LED_D3] of D11 on F.Cu
+    @(126.2400 mm, 89.5750 mm): Pad 1 [LED_D3] of D12 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(126.2400 mm, 87.4300 mm): Pad 3 [LED_D4] of D12 on F.Cu
+    @(126.2400 mm, 113.5750 mm): Pad 1 [LED_D4] of D13 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(108.4300 mm, 104.2800 mm): Pad 1 [SD_CLK0] of R46 on F.Cu
+    @(108.5650 mm, 100.2000 mm): Pad 20 [SD_CLK0] of U4 on F.Cu
+
+** Found 0 Footprint errors **
+
+** End of Report **

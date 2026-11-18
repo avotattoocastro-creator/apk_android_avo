@@ -1,0 +1,269 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-18T14:41:45+0000",
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "AVO_BACK_V5P_PCB.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 5 [+3V3] of U13 on F.Cu",
+                    "pos": {
+                        "x": 99.8,
+                        "y": 80.3425
+                    },
+                    "uuid": "2bc2cfe8-dce5-5594-960a-feab13086669"
+                },
+                {
+                    "description": "Track [+3V3] on F.Cu, length 0.4989 mm",
+                    "pos": {
+                        "x": 97.86,
+                        "y": 79.9445
+                    },
+                    "uuid": "84aab995-869e-47ae-86e5-bdf24cbfeb05"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [+3V3] of R40 on F.Cu",
+                    "pos": {
+                        "x": 110.35,
+                        "y": 101.88
+                    },
+                    "uuid": "8f3b579c-cfac-5d1b-8e56-23df560798bb"
+                },
+                {
+                    "description": "Track [+3V3] on F.Cu, length 0.7017 mm",
+                    "pos": {
+                        "x": 114.95,
+                        "y": 104.1
+                    },
+                    "uuid": "cac9bd58-d7fc-47aa-99ca-e5eab94e5771"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 4 [IMU_INT1] of U13 on F.Cu",
+                    "pos": {
+                        "x": 99.1375,
+                        "y": 80.18
+                    },
+                    "uuid": "a436f69b-0937-5ee1-a25d-c13a99b8cde5"
+                },
+                {
+                    "description": "Pad 4 [IMU_INT1] of U4 on F.Cu",
+                    "pos": {
+                        "x": 100.45,
+                        "y": 86.25
+                    },
+                    "uuid": "4c7f5ef4-0ac9-5109-a73a-c5ac3ffc67be"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 3 [LED_D2] of D10 on F.Cu",
+                    "pos": {
+                        "x": 87.43,
+                        "y": 73.76
+                    },
+                    "uuid": "24fa07ac-612e-53fd-9be0-817a56023f45"
+                },
+                {
+                    "description": "Pad 1 [LED_D2] of D11 on F.Cu",
+                    "pos": {
+                        "x": 113.575,
+                        "y": 73.76
+                    },
+                    "uuid": "c84b06a8-66fc-5505-b071-32f27574a9a8"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 3 [LED_D3] of D11 on F.Cu",
+                    "pos": {
+                        "x": 111.43,
+                        "y": 73.76
+                    },
+                    "uuid": "be828334-bf0e-5685-953b-fb3666a8246c"
+                },
+                {
+                    "description": "Pad 1 [LED_D3] of D12 on F.Cu",
+                    "pos": {
+                        "x": 126.24,
+                        "y": 89.575
+                    },
+                    "uuid": "78b95dc7-bb16-5ad8-960a-42bde8101498"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 3 [LED_D4] of D12 on F.Cu",
+                    "pos": {
+                        "x": 126.24,
+                        "y": 87.43
+                    },
+                    "uuid": "ff439ca8-89bc-58a2-8ead-7557a68976af"
+                },
+                {
+                    "description": "Pad 1 [LED_D4] of D13 on F.Cu",
+                    "pos": {
+                        "x": 126.24,
+                        "y": 113.575
+                    },
+                    "uuid": "60113d28-571e-5da2-abd3-3977ed5ac6c0"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [SD_CLK0] of R46 on F.Cu",
+                    "pos": {
+                        "x": 108.43,
+                        "y": 104.28
+                    },
+                    "uuid": "4aefbf05-4b72-59ec-a838-5e523890bc21"
+                },
+                {
+                    "description": "Pad 20 [SD_CLK0] of U4 on F.Cu",
+                    "pos": {
+                        "x": 108.565,
+                        "y": 100.2
+                    },
+                    "uuid": "85918f19-896a-5220-9fb9-3b6ea9a0b43a"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'URTK1.2 (componentes arriba)' on B.Silkscreen",
+                    "pos": {
+                        "x": 117.3,
+                        "y": 100.0
+                    },
+                    "uuid": "bc409cc6-55ab-5161-ac30-cb4f858c8c83"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Circle of U12 on F.Silkscreen",
+                    "pos": {
+                        "x": 88.0,
+                        "y": 85.0
+                    },
+                    "uuid": "fa30cce5-a375-5837-a52b-4c48ce062887"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Circle of L71 on F.Silkscreen",
+                    "pos": {
+                        "x": 90.61,
+                        "y": 79.71
+                    },
+                    "uuid": "1ec29901-7234-5476-b473-5ac1a478a2e4"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "Segment on B.Silkscreen",
+                    "pos": {
+                        "x": 122.144,
+                        "y": 78.283
+                    },
+                    "uuid": "3078751f-27b9-57f2-b9aa-e1543fdf9c02"
+                },
+                {
+                    "description": "PCB text 'URTK1.2 (componentes arriba)' on B.Silkscreen",
+                    "pos": {
+                        "x": 117.3,
+                        "y": 100.0
+                    },
+                    "uuid": "bc409cc6-55ab-5161-ac30-cb4f858c8c83"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "PCB text 'URTK1.2 (componentes arriba)' on B.Silkscreen",
+                    "pos": {
+                        "x": 117.3,
+                        "y": 100.0
+                    },
+                    "uuid": "bc409cc6-55ab-5161-ac30-cb4f858c8c83"
+                },
+                {
+                    "description": "Segment of J10 on B.Silkscreen",
+                    "pos": {
+                        "x": 119.62,
+                        "y": 109.89
+                    },
+                    "uuid": "f36de0fd-6e54-59a0-9a6c-fa612aeabd12"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        }
+    ]
+}

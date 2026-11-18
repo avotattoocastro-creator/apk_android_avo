@@ -1,0 +1,18 @@
++ timeout 2400 xvfb-run -a java -jar /tmp/freerouting.jar -de hardware/back/V5_CASCO_PROTOTIPO/PCB/out/ruteado/placa.dsn -do hardware/back/V5_CASCO_PROTOTIPO/PCB/out/ruteado/placa.ses -mp 150
+2026-11-18 14:35:36.669 [main] INFO  Freerouting v1.9.0 (build-date: 2023-10-30)
+2026-11-18 14:35:37.892 [main] INFO  Opening 'hardware/back/V5_CASCO_PROTOTIPO/PCB/out/ruteado/placa.dsn'...
+2026-11-18 14:35:38.563 [ForkJoinPool.commonPool-worker-1] INFO  New version available: v2.5.0
+
+(java:2414): dbind-WARNING **: 14:35:46.504: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+2026-11-18 14:36:07.407 [Thread-28] INFO  Starting auto-routing...
+2026-11-18 14:36:07.876 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-18 14:36:07.882 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-18 14:36:07.887 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-18 14:38:32.447 [Thread-28] WARN  There were only 19.60 changes in the last 20 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-18 14:39:09.487 [Thread-28] WARN  There were only 17.82 changes in the last 40 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-18 14:39:45.427 [Thread-28] WARN  There were only 17.17 changes in the last 60 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-18 14:40:22.621 [Thread-28] WARN  There were only 16.98 changes in the last 80 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-18 14:40:54.062 [Thread-28] INFO  Auto-routing was completed in 4 minute(s) 46.65 seconds.
+2026-11-18 14:40:54.163 [Thread-28] INFO  Starting route optimization on 1 thread...
+2026-11-18 14:41:38.695 [Thread-28] INFO  Route optimization was completed in 44.53 seconds.
+2026-11-18 14:41:38.733 [Thread-28] INFO  Saving 'hardware/back/V5_CASCO_PROTOTIPO/PCB/out/ruteado/placa.ses'...
