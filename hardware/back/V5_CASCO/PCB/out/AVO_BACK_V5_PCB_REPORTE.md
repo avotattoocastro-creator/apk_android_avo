@@ -1,31 +1,25 @@
-# AVO BACK V5 CASCO · placa de la espalda para el casco · REV B (ESP32-S3-WROOM-1U-N16R8 + ZED-F9P soldado) — informe de diagnóstico
+# AVO BACK V5 CASCO · placa de la espalda para el casco · REV B (ESP32-S3-WROOM-1U-N16R8 + ZED-F9P soldado) — informe de fabricación
 
-- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `764cf8b90936f6ac8ac19b9a8c2ea8cca6cf4f51` · ejecución de CI: 44266620183
-- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
+- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
+- Commit: `e26484da2f7545fb1a6f2a4af4fd4810335c36ce` · ejecución de CI: 44267586293
+- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 132 en total, 111 para montar, 1 sin montar (DNP: C69), 20 a mano (pads de hilo y de prueba)
-- Pistas: 1240 · vías: 259 · ruteado INCOMPLETO (2 conexiones)
+- Pistas: 1246 · vías: 263 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | **FALLA** | 3 |
-| DRC: conexiones incompletas | **FALLA** | 2 |
+| DRC: errores | correcto | 0 |
+| DRC: conexiones incompletas | correcto | 0 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
-Errores de DRC por tipo: copper_edge_clearance 3
-
-### Conexiones incompletas
-- Track [+3V3] on F.Cu, length 1.1302 mm ↔ Pad 5 [+3V3] of U13 on F.Cu
-- Pad 1 [SD_PWR_N] of R40 on F.Cu ↔ Track [SD_PWR_N] on F.Cu, length 0.7017 mm
 
 ## Advertencias de DRC (no bloqueantes)
-- silk_over_copper: 6
-- silk_overlap: 1
+- silk_over_copper: 2
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: ninguna
@@ -86,8 +80,8 @@ Errores de DRC por tipo: copper_edge_clearance 3
 - Piezas sin existencias para 5 placas: C17958, C97998, C10662, C88373, C25105, C5378721, C137952
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **no**
-- Apto para solicitar prototipos: **no**
+- Diseño verificado por software (KiCad 9 en el CI): **sí**
+- Apto para solicitar prototipos: **sí, pendiente de validación física**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)
