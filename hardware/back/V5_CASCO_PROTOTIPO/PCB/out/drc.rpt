@@ -1,8 +1,8 @@
 ** Drc report for AVO_BACK_V5P_PCB.kicad_pcb **
-** Created on 2026-11-18T23:50:32+0000 **
+** Created on 2026-11-18T23:53:57+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 7 DRC violations **
+** Found 5 DRC violations **
 [silk_edge_clearance]: Silkscreen clipped by board edge
     Rule: board setup constraints silk; warning
     @(125.0000 mm, 72.0000 mm): Segment on Edge.Cuts
@@ -11,12 +11,6 @@
     Rule: board setup constraints silk; warning
     @(125.0000 mm, 72.0000 mm): Segment on Edge.Cuts
     @(108.9000 mm, 73.6500 mm): Segment of J16 on F.Silkscreen
-[text_height]: Text height out of range (board setup constraints silk text height min height 0.6000 mm; actual 0.5000 mm)
-    Rule: board setup constraints silk text height; warning
-    @(89.6500 mm, 76.9500 mm): PCB text 'GND' on F.Silkscreen
-[text_height]: Text height out of range (board setup constraints silk text height min height 0.6000 mm; actual 0.5000 mm)
-    Rule: board setup constraints silk text height; warning
-    @(95.0500 mm, 76.9500 mm): PCB text 'AUX' on F.Silkscreen
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(78.4560 mm, 78.2830 mm): Segment on B.Silkscreen

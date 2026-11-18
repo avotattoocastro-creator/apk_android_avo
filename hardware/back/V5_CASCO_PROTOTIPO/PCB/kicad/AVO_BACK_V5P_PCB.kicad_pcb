@@ -29258,28 +29258,6 @@
 		(layer "Edge.Cuts")
 		(uuid "03debd4a-8df4-504a-8a8e-a5b7d6f4056b")
 	)
-	(gr_text "GND"
-		(at 89.65 76.95 90)
-		(layer "F.SilkS")
-		(uuid "04ebf45d-e30c-5f74-b7c9-816970752aac")
-		(effects
-			(font
-				(size 0.5 0.5)
-				(thickness 0.1)
-			)
-		)
-	)
-	(gr_text "AUX"
-		(at 95.05 76.95 90)
-		(layer "F.SilkS")
-		(uuid "0bf05ff7-b6f6-5afa-8efd-06dd23d4a580")
-		(effects
-			(font
-				(size 0.5 0.5)
-				(thickness 0.1)
-			)
-		)
-	)
 	(gr_text "TÁCTIL"
 		(at 74.3 81.1 0)
 		(layer "F.SilkS")
@@ -29339,6 +29317,28 @@
 		(at 96.05 72.95 0)
 		(layer "F.SilkS")
 		(uuid "9a6998b6-b037-55f3-94e6-89329e87e808")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.12)
+			)
+		)
+	)
+	(gr_text "GND"
+		(at 89.65 76.95 90)
+		(layer "F.SilkS")
+		(uuid "04ebf45d-e30c-5f74-b7c9-816970752aac")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.12)
+			)
+		)
+	)
+	(gr_text "AUX"
+		(at 95.05 76.95 90)
+		(layer "F.SilkS")
+		(uuid "0bf05ff7-b6f6-5afa-8efd-06dd23d4a580")
 		(effects
 			(font
 				(size 0.6 0.6)
