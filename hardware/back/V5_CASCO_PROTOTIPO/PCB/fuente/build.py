@@ -356,7 +356,7 @@ def write_board(r, path, outer_pours=True):
     hx, hy = D.URTK["lx"] / 2, D.URTK["ly"] / 2
     for (u, v), (w_, z_) in ((((-1, -1), (1, -1))), (((1, -1), (1, 1))), (((1, 1), (-1, 1))), (((-1, 1), (-1, -1)))):
         tree.append(B.gr_line(D.K(*D.urtk_xy(u * hx, v * hy)), D.K(*D.urtk_xy(w_ * hx, z_ * hy)), "B.SilkS", 0.15))
-    tree.append(B.gr_text("URTK1.2 (componentes arriba)", *D.K(*D.urtk_xy(0.0, 17.0)), "B.SilkS", 0.8, mirror=True))
+    tree.append(B.gr_text("URTK1.2 (componentes arriba)", *D.K(*D.urtk_xy(12.0, 0.0)), "B.SilkS", 0.8, mirror=True))
     for p_ in D.PARTS:
         if p_["fp"] == "WIRE":
             x_, y_ = p_["pos"]
