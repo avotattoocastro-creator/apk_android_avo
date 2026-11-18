@@ -41,7 +41,10 @@
    ]
   }
  },
- "interferencias": {},
+ "interferencias": {
+  "componentes_cara_F × AVO_CASCO_V5P_base": 1.702,
+  "componentes_cara_F × AVO_CASCO_V5P_anillo_resina": 5.171
+ },
  "medidas": {
   "capsula_mm": [
    61.4,
