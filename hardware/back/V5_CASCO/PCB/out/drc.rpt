@@ -1,20 +1,8 @@
 ** Drc report for AVO_BACK_V5_PCB.kicad_pcb **
-** Created on 2026-11-18T00:53:08+0000 **
+** Created on 2026-11-18T00:57:18+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 11 DRC violations **
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2716 mm)
-    Rule: board setup constraints edge; error
-    @(122.5000 mm, 74.5000 mm): Segment on Edge.Cuts
-    @(87.9667 mm, 74.8716 mm): Track [LED_D2] on F.Cu, length 31.5280 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2716 mm)
-    Rule: board setup constraints edge; error
-    @(122.5000 mm, 74.5000 mm): Segment on Edge.Cuts
-    @(87.4300 mm, 75.4083 mm): Track [LED_D2] on F.Cu, length 0.7590 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2716 mm)
-    Rule: board setup constraints edge; error
-    @(122.5000 mm, 74.5000 mm): Segment on Edge.Cuts
-    @(119.4947 mm, 74.8716 mm): Track [LED_D2] on F.Cu, length 0.4978 mm
+** Found 8 DRC violations **
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(97.4600 mm, 121.1000 mm): PCB text 'D−' on F.Silkscreen
@@ -42,31 +30,7 @@
     @(105.0800 mm, 121.1000 mm): PCB text 'AUX' on F.Silkscreen
     @(105.3264 mm, 120.8700 mm): Segment of R21 on F.Silkscreen
 
-** Found 6 unconnected pads **
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(101.3100 mm, 83.8975 mm): Track [+3V3] on F.Cu, length 0.2086 mm
-    @(99.5000 mm, 83.9125 mm): Pad 5 [+3V3] of U13 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(102.5965 mm, 103.0935 mm): Track [+3V3_ZED] on F.Cu, length 1.4658 mm
-    @(90.9900 mm, 114.8700 mm): Track [+3V3_ZED] on F.Cu, length 1.9021 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(100.4620 mm, 116.2500 mm): Track [VSYS] on F.Cu, length 0.0628 mm
-    @(96.9800 mm, 118.7500 mm): Pad 2 [VSYS] of R8 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(100.5200 mm, 97.3500 mm): Track [+3V3_AON] on F.Cu, length 1.5200 mm
-    @(83.8200 mm, 86.5800 mm): Pad 1 [+3V3_AON] of TP10 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(88.4250 mm, 123.7400 mm): Pad 1 [LED_D6] of D15 on F.Cu
-    @(110.5700 mm, 123.7400 mm): Pad 3 [LED_D6] of D14 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(111.6140 mm, 77.7460 mm): Track [VLED] on F.Cu, length 10.9347 mm
-    @(122.6583 mm, 88.6300 mm): Track [VLED] on F.Cu, length 0.2883 mm
+** Found 0 unconnected pads **
 
 ** Found 0 Footprint errors **
 

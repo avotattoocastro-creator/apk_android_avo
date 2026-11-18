@@ -1,31 +1,22 @@
-# AVO BACK V5 CASCO · placa de la espalda para el casco · REV B (ESP32-S3-WROOM-1U-N16R8 + ZED-F9P soldado) — informe de diagnóstico
+# AVO BACK V5 CASCO · placa de la espalda para el casco · REV B (ESP32-S3-WROOM-1U-N16R8 + ZED-F9P soldado) — informe de fabricación
 
-- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `b0eef98a5fffbbc076528eb3befad4726122ee99` · ejecución de CI: 44210170067
-- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
+- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
+- Commit: `62d0fe7537b14a9224fc0d067f5137102184bf90` · ejecución de CI: 44211872811
+- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 134 en total, 113 para montar, 1 sin montar (DNP: C69), 20 a mano (pads de hilo y de prueba)
-- Pistas: 1104 · vías: 249 · ruteado INCOMPLETO (6 conexiones)
+- Pistas: 1158 · vías: 258 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | **FALLA** | 3 |
-| DRC: conexiones incompletas | **FALLA** | 6 |
+| DRC: errores | correcto | 0 |
+| DRC: conexiones incompletas | correcto | 0 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
-Errores de DRC por tipo: copper_edge_clearance 3
-
-### Conexiones incompletas
-- Pad 8 [+3V3] of U13 on F.Cu ↔ Pad 5 [+3V3] of U13 on F.Cu
-- Track [+3V3_ZED] on F.Cu, length 1.4658 mm ↔ Track [+3V3_ZED] on F.Cu, length 1.9021 mm
-- Track [VSYS] on F.Cu, length 0.0628 mm ↔ Pad 2 [VSYS] of R8 on F.Cu
-- Pad 36 [+3V3_AON] of U1 on F.Cu ↔ Pad 1 [+3V3_AON] of TP10 on F.Cu
-- Pad 1 [LED_D6] of D15 on F.Cu ↔ Pad 3 [LED_D6] of D14 on F.Cu
-- Track [VLED] on F.Cu, length 10.9347 mm ↔ Track [VLED] on F.Cu, length 0.2883 mm
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 6
@@ -90,8 +81,8 @@ Errores de DRC por tipo: copper_edge_clearance 3
 - Piezas sin existencias para 5 placas: C17958, C97998, C10662, C88373, C25105, C5378721, C137952
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **no**
-- Apto para solicitar prototipos: **no**
+- Diseño verificado por software (KiCad 9 en el CI): **sí**
+- Apto para solicitar prototipos: **sí, pendiente de validación física**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)
@@ -107,4 +98,4 @@ Errores de DRC por tipo: copper_edge_clearance 3
 - REV B: firmware nuevo (BACK 5.x): POWER_HOLD (GPIO46) al arrancar, pulsación larga, LED_PWR (GPIO48), I²C (MAX17048 + LSM6DSV16X).
 - REV B: con el anillo apagado, GPIO47 a 0 (no alimentar los LED por DIN).
 - Nada de esto se ha fabricado ni medido: no es un prototipo validado.
-::notice title=Puerta de fabricación::NO SUPERADA
+::notice title=Puerta de fabricación::SUPERADA
