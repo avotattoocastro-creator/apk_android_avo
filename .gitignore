@@ -1,1 +1,5 @@
 windows/native/
+
+# Python
+__pycache__/
+*.pyc

@@ -70,7 +70,7 @@ URTK = dict(lx=43.434, ly=43.688, t=1.6, pitch=2.54, u0=12.827 - 43.434 / 2, fil
             off=(0.3, 0.0))
 FILA9 = ["GND", "5V", "3V3", "TX2", "RX2", "CS", "RX/MOSI", "TX/MISO", "SCK"]          # canto +v
 FILA10 = ["GND", "3V3", "SDA", "SCL", "FENCE", "RTK", "PPS", "RST", "SAFE", "INT"]     # canto −v
-ANT = (1.45, -3.0, 25.0)                              # antena sobre la URTK1.2 (marco U: centro y lado), lejos de J6
+ANT = (1.45, -6.0, 25.0)                              # antena sobre la URTK1.2 (marco U: centro y lado), lejos de J6
 Z_MAX_F = 3.2                                         # altura máxima en F (REV B: WROOM-1U de 3,2; antes 2,6)
 
 
@@ -476,7 +476,9 @@ C("C27", "1u", "EN", GND, block="ESP32-S3", note="EN: RC 10 k / 1 µF (guía de 
 R("R24", "330R", "LED_DIN_S3", "LED_D1", block="Anillo",
   note="serie de la línea de datos (GPIO47). Revisión 18/11: 330 Ω limita la alimentación de los LED por DIN con el anillo apagado")
 # REV B (18/11/2026, petición del usuario): sin D14 (estaba delante de la salida de la microSD): 7 LED, D13 → D15.
-LEDS = ["D%d" % (10 + k) for k in range(8) if 10 + k != 14]
+# PROTOTIPO A (18/11/2026, petición del usuario): D14 vuelve, a la DERECHA de la salida de la tarjeta (x ≈ 19, ya no
+# delante de ella): la placa de 56 deja sitio entre la franja de la microSD y el poste del tornillo H4. 8 LED.
+LEDS = ["D%d" % (10 + k) for k in range(8)]
 for i, ref in enumerate(LEDS):
     part(ref, "LEDSIDE", "SK6812SIDE-A", (0, 0), 0,
          {1: "LED_D%d" % (i + 1), 2: "VLED", 3: ("LED_D%d" % (i + 2)) if i < len(LEDS) - 1 else None, 4: GND},

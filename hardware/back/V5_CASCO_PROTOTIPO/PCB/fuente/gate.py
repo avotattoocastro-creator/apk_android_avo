@@ -60,7 +60,7 @@ L.append("")
 L.append("- Estado: %s" % state)
 L.append("- Commit: `%s` · ejecución de CI: %s" % (sha, run))
 L.append("- Ruteado: %s" % route_src)
-L.append("- Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · "
+L.append("- Placa: 56 × 56 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · "
          "B.Cu plano GND macizo bajo la URTK1.2, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz")
 L.append("- Componentes: %d en total, %d para montar, %d sin montar (DNP: %s), %d a mano (pads de hilo y de prueba)"
          % (len(parts), len(assembled), len(dnp), ", ".join(dnp) or "—",
@@ -144,7 +144,7 @@ for t in ("PROTO A: GNSS en placa URTK1.2 (ZED-F9P-04B) soldada sobre la cara B 
           
           "REV B: táctil TTP223-BA6-TD (TDSEMIC) con Cs sin montar: ajustar la sensibilidad con la pared adelgazada y probar con agua.",
           "REV B: firmware nuevo (BACK 5.x): POWER_HOLD (GPIO46) al arrancar, pulsación larga, LED_PWR (GPIO48), I²C (MAX17048 + LSM6DSV16X).",
-          "REV B: con el anillo apagado, GPIO47 a 0 (no alimentar los LED por DIN).",
+          "Con el anillo apagado, GPIO47 a 0 (no alimentar los LED por DIN). PROTO A: 8 LED (D14 a la derecha de la salida de la microSD).",
           "Nada de esto se ha fabricado ni medido: no es un prototipo validado."):
     L.append("- " + t)
 open(os.path.join(OUT, name), "w", encoding="utf-8").write("\n".join(L) + "\n")

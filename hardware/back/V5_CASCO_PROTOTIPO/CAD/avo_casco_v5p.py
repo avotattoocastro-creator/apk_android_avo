@@ -1,4 +1,9 @@
-"""AVO BACK V5 CASCO · cápsula estanca (base + tapa + junta) y base magnética desprendible para el casco.
+"""AVO BACK V5 CASCO PROTOTIPO A (18/11/2026): cápsula de 61,4 mm para la PCB de 56 × 56 con la URTK1.2 (ZED-F9P)
+soldada sobre la cara B por tiras de pines (plástico 2,5), placa de masa de 0,8 mm sobre el ZED (con kapton) y la
+antena encima, desplazada para no pisar la pila de la URTK1.2. Tornillos a ±24,5 (fuera de la URTK1.2).
+Workflow: .github/workflows/build-back-v5p-cad.yml. Lo de debajo es la descripción heredada de la REV B.
+
+AVO BACK V5 CASCO · cápsula estanca (base + tapa + junta) y base magnética desprendible para el casco.
 
 CadQuery 2.4 (se ejecuta en el CI: .github/workflows/build-back-v5-cad.yml). Escribe out/*.step, out/*.stl, el conjunto
 y out/informe.json (sólidos, volúmenes, pesos en PETG/TPU e interferencias con las referencias).
@@ -50,7 +55,26 @@ Z_RING0 = Z_LED - RING_H / 2               # unión base/anillo (pegada)
 Z_RING1 = Z_LED + RING_H / 2               # unión anillo/tapa (pegada); la tapa baja por fuera del canto de la PCB
 GLUE = 0.05                                # holgura para el pegamento en cada unión
 ANT = dict(side=25.0, h=8.1)               # (E) Taoglas AHP2258
-Z_CEIL = Z_PCB_TOP + ANT["h"] + 0.3
+# PROTOTIPO A: URTK1.2 + placa de masa + antena encima de la PCB
+URTK = MEC["urtk"]
+U_OFF = URTK["off"]
+
+
+def u2cad(u, v):
+    """marco de la URTK1.2 (vista desde su cara de componentes) → CAD (vista desde arriba): x = −(off_x + v), y = off_y + u"""
+    return (-(U_OFF[0] + v), U_OFF[1] + u)
+
+
+URTK_C = u2cad(0.0, 0.0)
+Z_URTK0 = Z_PCB_TOP + URTK["separador"]
+Z_URTK1 = Z_URTK0 + URTK["espesor"]
+ZED_H, KAPTON = 2.4, 0.1
+PM = json.load(open(os.path.join(HERE, "..", "PCB", "PLACA_MASA", "placa_masa.json"), encoding="utf-8"))
+Z_PM0 = Z_URTK1 + ZED_H + KAPTON
+Z_PM1 = Z_PM0 + PM["espesor"]
+ANT_C = (-MEC["antena_cara_B"]["centro"][0], MEC["antena_cara_B"]["centro"][1])
+Z_ANT0 = Z_PM1
+Z_CEIL = Z_ANT0 + ANT["h"] + 0.3
 TOP_T = 1.2
 H = Z_CEIL + TOP_T
 SCREWS = [(-x, y) for x, y in MEC["taladros"]]
@@ -58,7 +82,7 @@ SCREW = dict(hole=2.8, cb_d=5.0, cb_h=2.6, boss=6.6, post=6.0, insert_d=3.6, ins
 GASKET = dict(c=WALL / 2, w_groove=1.0, depth=0.8, w=0.9, h_free=1.1)
 POGO = dict(n=5, pitch=2.3, f_l=21.7, f_w=6.25, f_t=3.5, face_l=20.1, face_w=4.65, face_h=1.7, clear=0.2,
             y=-(IN / 2 - 6.25 / 2 - 0.2 + 0.05), cup_wall=0.6, cup_z=5.5)    # (E) hasta tener el STEP real
-MAG = dict(d=6.0, t=2.0, skin=0.3, pos=[(-15.5, -22.5), (15.5, -22.5), (-15.0, 22.5), (15.0, 22.5)])
+MAG = dict(d=6.0, t=2.0, skin=0.3, pos=[(-15.5, -25.0), (15.5, -25.0), (-15.0, 25.0), (15.0, 25.0)])   # PROTO A: +2,5
 U8 = next(e for e in MEC["envolventes"] if e[0] == "U8")
 HALL_XY = (-(U8[1] + U8[3]) / 2, (U8[2] + U8[4]) / 2)
 CHAMF = 1.2                                # chaflán inferior de la cápsula = alojamiento de la base del casco
@@ -143,11 +167,12 @@ def lid():
     for (x, y) in SCREWS:
         t = t.union(cyl(x, y, Z_PCB_TOP, SCREW["post"], Z_CEIL - Z_PCB_TOP + 0.01))
         t = t.cut(cyl(x, y, Z_PCB_TOP - 0.1, SCREW["insert_d"], SCREW["insert_h"] + 0.1))
-    # 4 topes cortos que sujetan la antena contra la PCB (en sus esquinas, a 0,3 de su cara superior)
+    # 4 topes cortos que sujetan la antena contra la placa de masa (en sus esquinas, a 0,3 de su cara superior)
     a = ANT["side"] / 2
     for sx in (-1, 1):
         for sy in (-1, 1):
-            t = t.union(cyl(sx * (a - 2.0), sy * (a - 2.0), Z_PCB_TOP + ANT["h"] + 0.0, 2.0, Z_CEIL - Z_PCB_TOP - ANT["h"] + 0.01))
+            t = t.union(cyl(ANT_C[0] + sx * (a - 2.0), ANT_C[1] + sy * (a - 2.0), Z_ANT0 + ANT["h"], 2.0,
+                            Z_CEIL - Z_ANT0 - ANT["h"] + 0.01))
     return t
 
 
@@ -205,7 +230,23 @@ def refs():
         bx = box(-(x0 + x1) / 2, (y0 + y1) / 2, Z_F - h, x1 - x0, y1 - y0, h - 0.02)
         comp = bx if comp is None else comp.union(bx)
     r["componentes_cara_F"] = comp
-    r["antena"] = box(0, 0, Z_PCB_TOP + 0.02, ANT["side"], ANT["side"], ANT["h"] - 0.04)
+    r["antena"] = box(ANT_C[0], ANT_C[1], Z_ANT0 + 0.02, ANT["side"], ANT["side"], ANT["h"] - 0.04)
+    # PROTOTIPO A: URTK1.2 (en el CAD: x ↔ v, y ↔ u), tiras de pines, ZED, pila J6 y placa de masa
+    r["urtk"] = box(URTK_C[0], URTK_C[1], Z_URTK0 + 0.02, URTK["lado_y"], URTK["lado_x"], URTK["espesor"] - 0.04)
+    for v_, n_ in ((20.32, 9), (-20.32, 10)):
+        u0 = -8.89
+        c0, c1 = u2cad(u0, v_), u2cad(u0 + (n_ - 1) * 2.54, v_)
+        tira = box(c0[0], (c0[1] + c1[1]) / 2, Z_PCB_TOP + 0.02, 2.5, abs(c1[1] - c0[1]) + 2.5, URTK["separador"] - 0.04)
+        r["tira_%d" % n_] = tira
+    zc0, zc1 = u2cad(-7.4, -13.4), u2cad(10.3, 9.4)
+    r["zed"] = box((zc0[0] + zc1[0]) / 2, (zc0[1] + zc1[1]) / 2, Z_URTK1 + 0.02, abs(zc1[0] - zc0[0]), abs(zc1[1] - zc0[1]),
+                   ZED_H - 0.04)
+    j6 = u2cad(-10.93, 13.04)
+    r["pila_J6"] = cyl(j6[0], j6[1], Z_URTK1 + 0.02, 10.0, 4.5)      # (E) portapilas con pila: medir
+    pm = cq.Workplane("XY").polyline([tuple(p) for p in PM["contorno"]]).close().extrude(PM["espesor"] - 0.04)
+    for c in PM["recortes"]:
+        pm = pm.cut(cq.Workplane("XY").polyline([tuple(p) for p in c]).close().extrude(5).translate((0, 0, -1)))
+    r["placa_masa"] = pm.translate((0, 0, Z_PM0 + 0.02))
     py = POGO["y"]
     r["pogo_placa"] = (rrect(POGO["face_l"], POGO["face_w"], POGO["face_w"] / 2 - 0.01, POGO["face_h"], 0.02)
                        .union(rrect(POGO["f_l"], POGO["f_w"], POGO["f_w"] / 2 - 0.01, POGO["f_t"] - POGO["face_h"], POGO["face_h"] + 0.02))
@@ -219,9 +260,9 @@ def refs():
 
 
 def main():
-    parts = {"AVO_CASCO_V5_base": base(), "AVO_CASCO_V5_tapa": lid(), "AVO_CASCO_V5_anillo_resina": ring()}
+    parts = {"AVO_CASCO_V5P_base": base(), "AVO_CASCO_V5P_tapa": lid(), "AVO_CASCO_V5P_anillo_resina": ring()}
     hb, kind = helmet_base_safe()
-    parts["AVO_CASCO_V5_base_casco"] = hb
+    parts["AVO_CASCO_V5P_base_casco"] = hb
     rf = refs()
     rep = {"piezas": {}, "interferencias": {}, "medidas": {}}
     dens = {"junta": 1.20}
@@ -247,24 +288,34 @@ def main():
                 v = 0.0
             if v > 0.01:
                 rep["interferencias"]["%s × %s" % (rn, pn)] = round(v, 3)
+    for a_, b_ in (("antena", "pila_J6"), ("placa_masa", "pila_J6"), ("antena", "urtk"), ("placa_masa", "zed")):
+        try:
+            v = rf[a_].intersect(rf[b_]).val().Volume()
+        except Exception:  # noqa: BLE001
+            v = 0.0
+        if v > 0.01:
+            rep["interferencias"]["%s × %s" % (a_, b_)] = round(v, 3)
     rep["medidas"] = dict(capsula_mm=[round(OUTS, 2), round(OUTS, 2), round(H, 2)], interior_mm=round(IN, 2),
                           z_cara_F=round(Z_F, 2), z_junta=round(Z_PCB_TOP, 2), anillo_z=[round(Z_RING0, 2), round(Z_RING1, 2)], sellado="pegamento (tipo B-7000/T-7000) en las 2 uniones del anillo y entre sus mitades; sin juntas TPU", z_techo=round(Z_CEIL, 2),
                           bateria_max_mm=[BAT["x"], BAT["y"], BAT["t"]], base_casco=kind,
                           altura_total_sobre_casco_mm=round(H + HB["t"], 2),
-                          tornillos="4 × M2,5 × 16 (cabeza cilíndrica) + junta tórica 2,5 × 1 + inserto M2,5 Ø3,5 × 4",
+                          tornillos="4 × M2,5 × 16 a ±24,5 (cabeza cilíndrica) + junta tórica 2,5 × 1 + inserto M2,5 Ø3,5 × 4",
+                          urtk_z=[round(Z_URTK0, 2), round(Z_URTK1, 2)], placa_masa_z=[round(Z_PM0, 2), round(Z_PM1, 2)],
+                          antena_xy=[round(ANT_C[0], 2), round(ANT_C[1], 2)], antena_z=[round(Z_ANT0, 2), round(Z_ANT0 + ANT["h"], 2)],
                           hall_xy=[round(HALL_XY[0], 2), round(HALL_XY[1], 2)],
                           tactil=dict(xy=[round(TOUCH["x"], 2), round(TOUCH["y"], 2)], pared_mm=TOUCH["wall"],
                                       z=[round(TOUCH["z0"], 2), round(Z_RING0 - 1.5, 2)], largo_mm=TOUCH["len"]))
-    asm = cq.Assembly(name="AVO_CASCO_V5")
+    asm = cq.Assembly(name="AVO_CASCO_V5P")
     col = {"base": (0.12, 0.12, 0.14), "tapa": (0.85, 0.85, 0.88), "junta": (0.2, 0.2, 0.2), "base_casco": (0.8, 0.1, 0.1),
            "anillo": (0.75, 0.9, 1.0)}
     for n, s in parts.items():
         k = next((c for c in ("base_casco", "junta", "anillo", "tapa", "base") if c in n), "base")
         asm.add(s, name=n, color=cq.Color(*col[k], 1.0))
-    rc = {"pcb": (0.1, 0.45, 0.2), "antena": (0.9, 0.7, 0.1), "bateria": (0.3, 0.5, 0.8)}
+    rc = {"pcb": (0.1, 0.45, 0.2), "antena": (0.9, 0.7, 0.1), "bateria": (0.3, 0.5, 0.8), "urtk": (0.1, 0.5, 0.15),
+          "placa_masa": (0.8, 0.55, 0.2), "zed": (0.85, 0.85, 0.85)}
     for n, s in rf.items():
         asm.add(s, name="ref_" + n, color=cq.Color(*rc.get(n, (0.8, 0.5, 0.2)), 1.0))
-    asm.save(os.path.join(OUT, "AVO_CASCO_V5_CONJUNTO.step"))
+    asm.save(os.path.join(OUT, "AVO_CASCO_V5P_CONJUNTO.step"))
     json.dump(rep, open(os.path.join(OUT, "informe.json"), "w"), ensure_ascii=False, indent=1)
     print(json.dumps(rep, ensure_ascii=False, indent=1))
 

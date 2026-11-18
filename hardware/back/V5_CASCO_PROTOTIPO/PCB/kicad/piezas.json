@@ -1200,6 +1200,36 @@
   "rot": 90
  },
  {
+  "ref": "D14",
+  "value": "SK6812SIDE-A",
+  "footprint": "AVO_SK6812SIDE-A_4.0x1.6mm",
+  "lcsc": "C5378721",
+  "mpn": "SK6812SIDE-A (OPSCO)",
+  "block": "Anillo",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "RGB direccionable, emisión lateral",
+  "jlc_rot": 0,
+  "x": 19.1,
+  "y": -26.25,
+  "rot": 0
+ },
+ {
+  "ref": "C94",
+  "value": "100n",
+  "footprint": "C_0402_1005Metric",
+  "lcsc": "C1525",
+  "mpn": "",
+  "block": "Anillo",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "",
+  "jlc_rot": 0,
+  "x": 18.8,
+  "y": -24.85,
+  "rot": 0
+ },
+ {
   "ref": "D15",
   "value": "SK6812SIDE-A",
   "footprint": "AVO_SK6812SIDE-A_4.0x1.6mm",
