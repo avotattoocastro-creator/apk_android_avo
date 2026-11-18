@@ -386,10 +386,13 @@ def main():
         PRE_QI = "--pre-qi" in sys.argv
         pre = ["RF_ZED", "RF_ANT", "VCC_RF_F", "VCC_RF", "USB_DP_C", "USB_DM_C", "CHG_ILIM", "CHG_ISET", "CHG_TS"]
         # local pieces of long nets: the pin and its pull-up/neighbour (Freerouting finishes the long run)
-        pairs = [("CHG_PG", ["U2.7", "R9.1"]), ("CHG_STAT", ["U2.9", "R10.1"]), ("CHG_EN2", ["U2.5", "R8.1"])]
+        pairs = [("CHG_EN2", ["U2.5", "R8.1"])]
+        # REV B: salida OUT del BQ24072 a su condensador antes de Freerouting (con R_TMR quedaba encajonada)
+        pre_vsys = ("VSYS", ["U2.10", "U2.11", "C19.1"])
         if not PRE_QI:
             pre = [n for n in pre if not n.startswith("QI_") and n != D.VIN5]
             pairs = [pr for pr in pairs if not pr[0].startswith("QI_")]
+        pairs.append(pre_vsys)
         for net, refs in pairs:
             recs = [rec for rec in pads if rec["net"] == net and "%s.%s" % (rec["part"]["ref"], rec["pad"].num) in refs]
             if len(recs) > 1 and not route_tree(r, net, netid(net), recs, 0.2):

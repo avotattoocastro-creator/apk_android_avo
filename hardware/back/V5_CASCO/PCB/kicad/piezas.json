@@ -205,8 +205,8 @@
   "no_assembly": false,
   "note": "divisor 1:2 → GPIO18 (despierta al conectar el cable)",
   "jlc_rot": 0,
-  "x": 2.55,
-  "y": -17.66,
+  "x": 0.17,
+  "y": -10.94,
   "rot": 0
  },
  {
@@ -220,8 +220,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 2.45,
-  "y": -16.43,
+  "x": -4.01,
+  "y": 14.09,
   "rot": 0
  },
  {
@@ -280,8 +280,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -5.03,
-  "y": -11.7,
+  "x": -4.75,
+  "y": -17.36,
   "rot": 0
  },
  {
@@ -295,9 +295,9 @@
   "no_assembly": false,
   "note": "reserva de VSYS para los picos de radio y del ZED",
   "jlc_rot": 0,
-  "x": 2.11,
-  "y": -7.72,
-  "rot": 90
+  "x": -5.31,
+  "y": -11.45,
+  "rot": 0
  },
  {
   "ref": "R6",
@@ -325,8 +325,8 @@
   "no_assembly": false,
   "note": "I_entrada = K_ILIM/R_ILIM ≈ 1600/2k ≈ 800 mA (BQ24072T, SLUS937)",
   "jlc_rot": 0,
-  "x": 1.8,
-  "y": -14.85,
+  "x": 1.86,
+  "y": -15.25,
   "rot": 90
  },
  {
@@ -385,9 +385,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -4.32,
-  "y": -16.96,
-  "rot": 0
+  "x": 22.45,
+  "y": 6.13,
+  "rot": 90
  },
  {
   "ref": "R10",
@@ -400,8 +400,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 3.05,
-  "y": -14.87,
+  "x": 22.4,
+  "y": 8.37,
   "rot": 90
  },
  {
@@ -490,9 +490,9 @@
   "no_assembly": false,
   "note": "divisor 1:2 → GPIO2 (ADC1_CH1)",
   "jlc_rot": 0,
-  "x": 3.06,
-  "y": -4.51,
-  "rot": 90
+  "x": 8.81,
+  "y": 19.55,
+  "rot": 0
  },
  {
   "ref": "R33",
@@ -505,9 +505,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -2.37,
-  "y": -11.02,
-  "rot": 0
+  "x": -12.92,
+  "y": 13.42,
+  "rot": 90
  },
  {
   "ref": "C34",
@@ -520,9 +520,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -18.37,
-  "y": 5.03,
-  "rot": 0
+  "x": -14.15,
+  "y": 13.38,
+  "rot": 90
  },
  {
   "ref": "U3",
@@ -745,8 +745,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -8.2,
-  "y": -11.85,
+  "x": -8.71,
+  "y": -11.23,
   "rot": 0
  },
  {
@@ -761,7 +761,7 @@
   "note": "",
   "jlc_rot": 0,
   "x": 1.46,
-  "y": -4.06,
+  "y": -7.72,
   "rot": 90
  },
  {
@@ -850,9 +850,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -2.5,
-  "y": 13.47,
-  "rot": 0
+  "x": 1.56,
+  "y": -3.18,
+  "rot": 90
  },
  {
   "ref": "C63",
@@ -880,8 +880,8 @@
   "no_assembly": false,
   "note": "pegado a los pines VCC 33/34",
   "jlc_rot": 0,
-  "x": 3.04,
-  "y": -2.4,
+  "x": 1.24,
+  "y": 4.7,
   "rot": 90
  },
  {
@@ -1015,8 +1015,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 1.37,
-  "y": 4.81,
+  "x": 3.03,
+  "y": -6.2,
   "rot": 90
  },
  {
@@ -1030,8 +1030,8 @@
   "no_assembly": false,
   "note": "RESET_N del ZED (GPIO9 en colector abierto)",
   "jlc_rot": 0,
-  "x": 1.27,
-  "y": 6.9,
+  "x": 0.93,
+  "y": 6.7,
   "rot": 90
  },
  {
@@ -1045,9 +1045,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -5.31,
-  "y": 13.5,
-  "rot": 0
+  "x": -2.38,
+  "y": 13.7,
+  "rot": 90
  },
  {
   "ref": "R54",
@@ -1060,9 +1060,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -0.13,
-  "y": -10.97,
-  "rot": 0
+  "x": 3.03,
+  "y": -8.49,
+  "rot": 90
  },
  {
   "ref": "R55",
@@ -1075,9 +1075,9 @@
   "no_assembly": false,
   "note": "PPS → GPIO7 (REV B; REV A: GPIO4)",
   "jlc_rot": 0,
-  "x": -12.83,
-  "y": 13.47,
-  "rot": 90
+  "x": -4.78,
+  "y": 12.96,
+  "rot": 0
  },
  {
   "ref": "U4",
@@ -1810,8 +1810,8 @@
   "no_assembly": false,
   "note": "VDD del LSM6",
   "jlc_rot": 0,
-  "x": -2.42,
-  "y": 16.55,
+  "x": -1.19,
+  "y": 14.39,
   "rot": 90
  },
  {
@@ -1825,9 +1825,9 @@
   "no_assembly": false,
   "note": "VDDIO del LSM6",
   "jlc_rot": 0,
-  "x": 0.59,
-  "y": 20.35,
-  "rot": 0
+  "x": -2.46,
+  "y": 16.49,
+  "rot": 90
  },
  {
   "ref": "TP1",
@@ -1840,8 +1840,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -1.29,
-  "y": 20.65,
+  "x": 1.14,
+  "y": 20.62,
   "rot": 0
  },
  {
@@ -1870,8 +1870,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 1.22,
-  "y": -1.38,
+  "x": -18.29,
+  "y": 5.24,
   "rot": 0
  },
  {
@@ -1900,8 +1900,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 22.62,
-  "y": 9.0,
+  "x": 24.3,
+  "y": 15.28,
   "rot": 0
  },
  {
@@ -1916,7 +1916,7 @@
   "note": "",
   "jlc_rot": 0,
   "x": -9.03,
-  "y": -14.05,
+  "y": -13.05,
   "rot": 0
  },
  {
@@ -1960,8 +1960,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -16.22,
-  "y": -13.75,
+  "x": -9.01,
+  "y": -14.87,
   "rot": 0
  },
  {
@@ -1975,8 +1975,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -15.35,
-  "y": 13.43,
+  "x": -16.18,
+  "y": 13.42,
   "rot": 0
  },
  {
@@ -1990,8 +1990,8 @@
   "no_assembly": true,
   "note": "4,3 V del anillo (solo con LED_PWR = 1)",
   "jlc_rot": 0,
-  "x": -7.6,
-  "y": 20.7,
+  "x": -6.7,
+  "y": 13.4,
   "rot": 0
  },
  {
@@ -2005,8 +2005,8 @@
   "no_assembly": true,
   "note": "SAFEBOOT_N del ZED: solo para recuperar su firmware",
   "jlc_rot": 0,
-  "x": -17.04,
-  "y": 13.4,
+  "x": -17.86,
+  "y": 13.51,
   "rot": 0
  }
 ]
