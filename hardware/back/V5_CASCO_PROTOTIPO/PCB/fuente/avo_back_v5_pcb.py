@@ -768,6 +768,8 @@ def mecanica():
         h = fp_of(p).height
         if h > 0:
             x0, y0, x1, y1 = courtyard_casing(p)
+            if p["ref"] in A_RAS_DEL_CANTO:     # el patio sobresale 0,5 del canto; el cuerpo metálico acaba en el canto
+                y1 = min(y1, p["pos"][1] + 3.65); x0, x1 = p["pos"][0] - 4.47, p["pos"][0] + 4.47
             env.append([p["ref"], round(x0, 3), round(y0, 3), round(x1, 3), round(y1, 3), h])
     return dict(placa=dict(lado=SIZE, radio_esquina=CORNER_R, espesor=THICK, vista="cara F (componentes)"),
                 taladros=[list(p["pos"]) for p in PARTS if p["fp"] == "HOLE"],
