@@ -1,20 +1,8 @@
 ** Drc report for AVO_BACK_V5_PCB.kicad_pcb **
-** Created on 2026-11-18T12:14:36+0000 **
+** Created on 2026-11-18T12:17:50+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 7 DRC violations **
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2716 mm)
-    Rule: board setup constraints edge; error
-    @(122.5000 mm, 74.5000 mm): Segment on Edge.Cuts
-    @(87.9667 mm, 74.8716 mm): Track [LED_D2] on F.Cu, length 31.5280 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2716 mm)
-    Rule: board setup constraints edge; error
-    @(122.5000 mm, 74.5000 mm): Segment on Edge.Cuts
-    @(119.4947 mm, 74.8716 mm): Track [LED_D2] on F.Cu, length 0.4978 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2716 mm)
-    Rule: board setup constraints edge; error
-    @(122.5000 mm, 74.5000 mm): Segment on Edge.Cuts
-    @(87.4300 mm, 75.4083 mm): Track [LED_D2] on F.Cu, length 0.7590 mm
+** Found 4 DRC violations **
 [track_dangling]: Track has unconnected end
     Local override; warning
     @(101.2126 mm, 84.0471 mm): Track [+3V3] on F.Cu, length 0.0001 mm

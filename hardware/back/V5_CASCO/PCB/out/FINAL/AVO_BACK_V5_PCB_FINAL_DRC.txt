@@ -1,0 +1,23 @@
+** Drc report for AVO_BACK_V5_PCB.kicad_pcb **
+** Created on 2026-11-18T12:17:50+0000 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 4 DRC violations **
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(101.2126 mm, 84.0471 mm): Track [+3V3] on F.Cu, length 0.0001 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(100.8250 mm, 115.6250 mm): Track [VSYS] on F.Cu, length 0.2000 mm
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(88.0000 mm, 86.5000 mm): Circle of U12 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(90.6100 mm, 82.7100 mm): Circle of L71 on F.Silkscreen
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** End of Report **
