@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-18 — Cincha CAD REV 6.5 → 7.0 integrada en `develop`
+**Autor:** Claude · **Rama:** `claude/integrar-cad-cincha-rev7`
+**Qué cambia:** se integra en `develop` la cadena de PR del CAD de la cincha (#67 a #73, REV 6.5 → REV 7.0 con 3 IMU),
+cuyos cambios pidió o decidió el usuario. Iban apilados sobre la rama del #60, ya fusionada. El único conflicto era el
+registro de cambios: se conservan las entradas de los dos lados. Tabla de estado: fila de la cápsula BETA en REV 7.0.
+**Validación:** diseño. Las medidas del pogo de 6 pines y de las PCB del soporte y los satélites son PROVISIONALES. Nada
+fabricado.
+
 ## 2026-11-18 — Motor 2.0.0-dev3 — CI en verde en `develop`
 **Autor:** Claude · **Commits:** `e45c103` (#74), `c3dd769` (#75), `5747dbc` (#76)
 **CI:**
@@ -256,6 +264,96 @@ reparación (Pan/Anwar); V200 y ECG; CUSUM y shrinkage; últimos 600 m; IDF de c
   (`FirebaseConfig.kt`; es pública por diseño, la protección son las reglas). **Sin claves reales.** No se escanearon
   los binarios de `main`/`archivo` ni las ramas `ci/*`.
 **Validación:** fusiones con CI de `develop` · nada nuevo verificado en hardware.
+
+## 2026-11-17 — Cincha CAD REV 7.0 — arquitectura de 3 IMU en el CAD completo
+**Autor:** Claude · **Rama:** `cad/cincha-rev7-0-tres-imu` (sobre el PR #72)
+**Qué cambia (decisiones del usuario):** un solo pogo magnético de 6 pines; PCB de sensores SOP REV A encapsulada en
+un alojamiento del soporte; 2 satélites IMU (±355 mm) en la funda con cable fijo de 6 hilos; electrodos ECG+/ECG−
+bajo los satélites y REF bajo el soporte; funda 860 mm; portaimanes del balancín (sustituye a las tapas de los imanes,
+`mag_c` 3,4); lengüetas de la tapa en media caña sobre el pasador. Medidas de pogo y PCB PROVISIONALES. Archivos
+`R6_10` → `R7_0`; renders 20–22.
+**Validación:** IMPLEMENTADO · `verificar_step.py` 27/27 · vóxeles: 0 mm³ cápsula/soporte, portaimanes sin
+interferencias; cierre 4° / ~10° · **NO VERIFICADO** (nada impreso; PCB sin diseñar).
+**Pendiente:** elegir el pogo de 6 pines real y diseñar las PCB (SOP REV A, satélite, cápsula REV E); contrato de
+datos de 3 IMU (firmware + apps a la vez); prueba en PROTOTIPO.
+
+---
+
+## 2026-11-17 — Cincha CAD REV 6.10 — sin cordón de seguridad
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-10-sin-cordon` (sobre el PR #71)
+**Qué cambia (decisión del usuario):** fuera la oreja de la tapa, su agujero, el anclaje del ala del soporte y el
+cordón Dyneema; la tapa queda rectangular. La retención depende solo de los balancines y el cerco. Archivos `R6_9` →
+`R6_10`. También se guarda en el proyecto la propuesta de arquitectura con 3 IMU y PCB de sensores en el soporte
+(`AVO_CINCHA_BETA_3IMU_ARQUITECTURA_PROPUESTA_2026-11-17.md`).
+**Validación:** IMPLEMENTADO · `verificar_step.py` 26/26 · vóxeles: cierre y portaimanes sin cambios ·
+**NO VERIFICADO** (nada impreso). **Pendiente:** ensayo de tirón y caída (§8.4) sin cordón.
+
+---
+
+## 2026-11-17 — Cincha CAD REV 6.9 — soporte continuo (cuerpo a ras y cerco sin corte)
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-9-soporte-continuo` (sobre el PR #70)
+**Qué cambia (captura del usuario):** cuerpo del soporte a ras del cerco; el cerco no se corta en ±X (rebaje interior
+con piel de 1,15 mm para el balancín); `pock_out` 1,95; canto exterior del cerco R0,5. Archivos `R6_8` → `R6_9`.
+**Validación:** IMPLEMENTADO · `verificar_step.py` 26/26 · vóxeles: 0 mm³ cápsula/soporte; suelta a 4°, tope contra
+el soporte a ~10° · **NO VERIFICADO** (nada impreso).
+
+---
+
+## 2026-11-17 — Cincha CAD REV 6.8 — cápsula rectangular con aristas redondeadas (acabado comercial)
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-8-acabado-comercial` (sobre el PR #69)
+**Qué cambia (petición del usuario):** cápsula rectangular (parte baja 69,0 × 60,2 R8 con las columnas de los
+tornillos dentro; parte alta y cerco 75,5 × 66,7 R11,25, a ras); redondeos: tapa R1,5, arista del escalón R1,0,
+canto del cerco R1,0 (dentro, fuera y paso del balancín), balancines a juego. Archivos `R6_7` → `R6_8`.
+**Validación:** IMPLEMENTADO · `verificar_step.py` 26/26 · vóxeles: 0 mm³ cápsula/soporte, cierre 4° / 12°,
+portaimanes sin cambios · **NO VERIFICADO** (nada impreso).
+**Pendiente:** decidir la oreja del cordón (única pieza que sobresale).
+
+---
+
+## 2026-11-17 — Cincha CAD REV 6.7 — extremos a ras del soporte y tapa redondeada
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-7-extremos-redondeo` (sobre el PR #68)
+**Qué cambia (capturas del usuario):** los extremos ±X también quedan a ras del cerco (parte alta 75,5 × 66,6 mm,
+esquinas iguales a las del cerco); el balancín engorda 3,25 mm por encima del escalón para seguir a ras; borde
+superior de la tapa y del balancín redondeado R1,5; oreja del cordón +1 mm. Propuesta documentada: base en una pieza
+con franja translúcida (z 8,0–12,0) por cambio de filamento. Archivos `R6_6` → `R6_7`.
+**Validación:** IMPLEMENTADO · `verificar_step.py` 26/26 OK · vóxeles: 0 mm³ cápsula/soporte, suelta a 4°, tope a 12°
+(+X) / 13° (−X), portaimanes sin cambios · **NO VERIFICADO** (nada impreso).
+
+---
+
+## 2026-11-17 — Cincha CAD REV 6.6 — pared de la cápsula a ras del soporte
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-6-pared-a-ras` (sobre el PR #67)
+**Qué cambia (capturas del usuario):** por encima del cerco la base engorda hasta la cara exterior del cerco, que pasa
+a ser una envolvente convexa común (sin entrantes entre columnas); cápsula y soporte quedan a ras. Parte alta 69,0 ×
+66,6 mm; la parte que entra en el cerco no cambia. Escalón a z = 4,25 con rendija de 0,45 mm. Tapa con la misma
+envolvente. Extremos ±X sin cambios. Archivos `R6_5` → `R6_6`.
+**Archivos:** `hardware/girth/CINCHA_MONTAJE/` (fuente, out, renders 16 y 16b, DOCS).
+**Validación:** IMPLEMENTADO · `verificar_step.py` 26/26 OK · vóxeles: 0 mm³ cápsula/soporte (cerrada y empujada
+0,25), cierre (4° / 12°) y portaimanes sin cambios · **NO VERIFICADO** (nada impreso).
+**Pendiente:** luz del aro a través de ≈ 10 mm de PETG; soportes bajo el escalón al imprimir la base.
+
+---
+
+## 2026-11-17 — Cincha CAD REV 6.5 — portaimanes para los imanes de la pared
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-5-portaimanes` (sobre el PR #60)
+**Qué cambia (captura del usuario):**
+- el pozo justo de los 2 imanes Ø5 × 1 de la pared (con tapón) pasa a ser una abertura de 2,8 × 6,6 × 7,0 mm en la
+  cara inferior; dentro entra un **portaimanes** PETG de 2,6 × 6,4 × 6,9 mm con los imanes en su cuna, a ras del fondo
+  y con los imanes ocultos;
+- cuna abierta solo hacia el balancín: misma piel de 0,65 mm y misma distancia entre imanes que en la REV 6.4;
+- planta trapezoidal (chaflanes de 1 mm): una sola posición de montaje; los de +X y −X son la misma pieza;
+- fuera los 2 tapones de `tapas_imanes`; nueva pieza `AVO_CINCHA_R6_5_portaimanes_PETG_x2`; todos los archivos pasan
+  de `R6_4` a `R6_5`.
+**Archivos:** `hardware/girth/CINCHA_MONTAJE/fuente/{avo_cincha_montaje.py, render.py, verificar_cierre.py,
+verificar_portaimanes.py}`, `out/STEP`, `out/STL`, `out/informe.json`, `out/verificacion_*.json`, `renders/` (15 y
+15b nuevos), `DOCS/MONTAJE_CINCHA.md`.
+**Validación:** IMPLEMENTADO · `verificar_step.py` OK (0 aristas mal cosidas) · `verificar_portaimanes.py`: 0 mm³
+portaimanes/base e imanes/base/portaimanes · `verificar_cierre.py`: sin cambios (suelta a 4°, tope a 12°) ·
+**NO VERIFICADO** (nada impreso).
+**Pendiente:** probeta del ajuste (0,1 mm por lado) y de la pared de 0,95 mm; la fila de la tabla «Vigente» se
+actualiza a REV 6.5 al integrar el PR #60 en `develop`.
+
+---
 
 ## 2026-11-17 — Cincha CAD REV 6.4 — balancín magnético empotrado a ras en la pared
 **Autor:** Claude · **Rama:** `cad/cincha-rev6-3-balancin-magnetico` (PR #60)

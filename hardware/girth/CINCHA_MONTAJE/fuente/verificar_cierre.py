@@ -113,9 +113,9 @@ def rot_y(P, cx, cz, deg):
 def main():
     M.pieza_soporte(); M.pieza_base(); M.pieza_tapa()
     z0 = M.Z0_CAP
-    sop = Capas(CAPT["AVO_CINCHA_R6_4_soporte_PETG"], dz=-z0)      # en z de la cápsula
-    base = Capas(CAPT["AVO_CINCHA_R6_4_base_aro_luz"])
-    tapa = Capas(CAPT["AVO_CINCHA_R6_4_tapa"])
+    sop = Capas(CAPT["AVO_CINCHA_R7_0_soporte_PETG"], dz=-z0)      # en z de la cápsula
+    base = Capas(CAPT["AVO_CINCHA_R7_0_base_aro_luz"])
+    tapa = Capas(CAPT["AVO_CINCHA_R7_0_tapa"])
     K = M.bal_x()
     xl, px, yc = K["xl"], K["px"], K["yc"]
     x_rim = xl - M.BAL["back_low"]                  # pared del rebaje de la cama (el diente está dentro si x < x_rim)
