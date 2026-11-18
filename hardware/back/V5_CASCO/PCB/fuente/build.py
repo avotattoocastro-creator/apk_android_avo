@@ -349,8 +349,9 @@ def write_board(r, path, outer_pours=True):
     for k, band in enumerate(edge_bands()):
         tree.append(B.keepout(["F.Cu", "B.Cu"], kpoly(band), "BORDE_%02d" % k, copperpour=False))
     # texts
-    tree.append(B.gr_text("AVO BACK V5 CASCO · REV " + D.REV + " · " + D.DATE, *D.K(0.0, 18.0), "B.SilkS", 1.0, mirror=True))
-    tree.append(B.gr_text("4 capas 1,6 mm · ENIG · antena GNSS aquí (cara B)", *D.K(0.0, -16.5), "B.SilkS", 0.8, mirror=True, bold=False))
+    # REV B (18/11/2026, petición del usuario): marca en la cara de la antena
+    tree.append(B.gr_text("AVO Performance", *D.K(0.0, 18.0), "B.SilkS", 1.0, mirror=True))
+    tree.append(B.gr_text("--Horse Edition--", *D.K(0.0, -16.5), "B.SilkS", 1.0, mirror=True))
     a = D.ANT
     for (u, v), (w_, z_) in ((((-1, -1), (1, -1))), (((1, -1), (1, 1))), (((1, 1), (-1, 1))), (((-1, 1), (-1, -1)))):
         tree.append(B.gr_line(D.K(a[0] + u * a[2] / 2, a[1] + v * a[2] / 2), D.K(a[0] + w_ * a[2] / 2, a[1] + z_ * a[2] / 2),
@@ -358,7 +359,9 @@ def write_board(r, path, outer_pours=True):
     for p_ in D.PARTS:
         if p_["fp"] == "WIRE":
             x_, y_ = p_["pos"]
-            tree.append(B.gr_text(p_["value"].replace("POGO ", "").replace("BAT ", "B"), *D.K(x_, y_ + 1.9), "F.SilkS", 0.6,
+            # REV B: los del pogo (P1–P5) debajo del pad, entre el pad y el canto (encima quedaban tapados por piezas)
+            dy = -1.55 if p_["ref"].startswith("P") else 1.9
+            tree.append(B.gr_text(p_["value"].replace("POGO ", "").replace("BAT ", "B"), *D.K(x_, y_ + dy), "F.SilkS", 0.6,
                                   mirror=False, bold=False))
     B.write(path, tree)
 

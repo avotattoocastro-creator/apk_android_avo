@@ -29038,18 +29038,18 @@
 		)
 	)
 	(gr_text
-		"AVO BACK V5 CASCO · REV B · 2026-11-17"
+		"AVO Performance"
 		(at 100 82)
 		(layer "B.SilkS")
 		(uuid "6fc42c24-885e-5d01-8984-996284341240")
 		(effects (font (size 1 1) (thickness 0.15) (bold yes)) (justify mirror))
 	)
 	(gr_text
-		"4 capas 1,6 mm · ENIG · antena GNSS aquí (cara B)"
+		"--Horse Edition--"
 		(at 100 116.5)
 		(layer "B.SilkS")
 		(uuid "d8c15c2a-39e1-54aa-b8d3-2b23761b9d9f")
-		(effects (font (size 0.8 0.8) (thickness 0.12)) (justify mirror))
+		(effects (font (size 1 1) (thickness 0.12)) (justify mirror))
 	)
 	(gr_line
 		(start 87.5 112.5)

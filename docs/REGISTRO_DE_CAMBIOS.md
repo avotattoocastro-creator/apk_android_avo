@@ -33,7 +33,10 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
   tarjeta queda reservada (el generador da error si alguna pieza entra en ella). Se vuelve a rutear en el CI.
 - CPL: `fuente/jlc_correcciones.py` (método de la cincha REV D) + `jlc.py` aplica giro y centro de la huella de JLC.
   ZED-F9P +270°, LSM6DSV16X +180°, SOT-23 +180°, SOT-23-5/6 +270°, WROOM-1U desplazamiento de 0,63 mm.
-**Por qué:** vista previa de JLC del usuario (18/11, 08:58–08:59): ZED girado, IMU girada y SD tapada por el LED.
+- Serigrafía: los textos del pogo (VBUS, D−, D+, GND, AUX) pasan debajo de sus pads (quedaban tapados por piezas);
+  en la cara de la antena, «AVO Performance» arriba y «--Horse Edition--» abajo (petición del usuario).
+**Por qué:** vistas previas de JLC del usuario (18/11, 08:58–09:29): ZED girado, IMU girada, SD tapada por el LED,
+textos del pogo tapados y marca nueva.
 **Validación:** colocación local sin errores; ruteado y DRC en el CI (ver el PR). **NO VERIFICADO.**
 
 ---
