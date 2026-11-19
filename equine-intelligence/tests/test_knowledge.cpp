@@ -267,7 +267,7 @@ EQ_TEST(kb, final_speed_last_600m) {
   double keep = -1;
   CHECK(!kb_final_speed(t, d, 600, &keep, nullptr)); CHECK_NEAR(keep, -1, 0);
   CHECK(!kb_final_speed({}, {}, 600, &keep, nullptr));
-  CHECK(std::string(KNOWLEDGE_VERSION) == "1.3.0");
+  CHECK(std::string(KNOWLEDGE_VERSION) == "1.4.0");
 }
 
 // Líneas base (KB 1.3.0, estudio extra 2026-11-19): valores de referencia del estudio ampliado del 18/11 y de la cadena
@@ -340,4 +340,34 @@ EQ_TEST(kb, baseline_cusum_upper) {
   CHECK(kb_cusum_upper({-1.5, -1.5, -1.5, -1.5}, c).alarm_index == -1);
   CHECK(kb_cusum_upper({1.5, 1.5, 1.5, 1.5, 1.5}, c).alarm_index == 4);   // 1, 2, 3, 4, 5 → > 4 en la 5.ª
   CHECK(kb_cusum_upper({}, c).s.empty());
+}
+
+EQ_TEST(kb, baseline_self_starting_cusum) {
+  // H1: auxiliares frente a scipy 1.18 (t.cdf y norm.ppf)
+  CHECK_NEAR(kb_student_t_cdf(2.0, 3), 0.9303370157205785, 1e-10);
+  CHECK_NEAR(kb_student_t_cdf(-1.5, 7), 0.088649243494985, 1e-10);
+  CHECK_NEAR(kb_student_t_cdf(0.7, 1), 0.6944001122142147, 1e-10);
+  CHECK_NEAR(kb_normal_quantile(0.975), 1.959963984540054, 1e-9);
+  CHECK_NEAR(kb_normal_quantile(1e-10), -6.361340902404056, 1e-8);
+  CHECK(std::isnan(kb_normal_quantile(1.5)));
+  // H2: Hawkins 1987 sobre x = {10,0; 10,4; 9,8; 10,9; 10,1; 12,0} (referencia calculada con scipy)
+  std::vector<double> xi = kb_self_starting_z({10.0, 10.4, 9.8, 10.9, 10.1, 12.0});
+  CHECK(xi.size() == 6);
+  CHECK(std::isnan(xi[0]) && std::isnan(xi[1]));
+  const double ref[] = {-0.7481477355715538, 1.4683756165434736, -0.2945083832748484, 2.3292112693312133};
+  for (int i = 0; i < 4; i++) CHECK_NEAR(xi[i + 2], ref[i], 1e-8);
+  REPORT("autoiniciado: xi_6 = %.4f (referencia 2,3292)\n", xi[5]);
+  // H3: NaN se salta y no cuenta; s = 0 da NaN; vacío
+  std::vector<double> xn = kb_self_starting_z({10.0, std::nan(""), 10.4, 9.8, 10.9});
+  CHECK(std::isnan(xn[1]) && std::isnan(xn[2]));
+  CHECK_NEAR(xn[3], ref[0], 1e-8); CHECK_NEAR(xn[4], ref[1], 1e-8);
+  CHECK(std::isnan(kb_self_starting_z({5, 5, 5})[2]));
+  CHECK(kb_self_starting_z({}).empty());
+  // H4: encadenado con el CUSUM: una subida sostenida tras 8 sesiones estables acaba en alarma; sin subida, no
+  std::vector<double> base = {10.0, 10.2, 9.9, 10.1, 9.8, 10.3, 10.0, 9.9};
+  std::vector<double> up = base;
+  for (int i = 0; i < 6; i++) up.push_back(10.6 + 0.05 * i);
+  KbCusumConfig c; c.min_samples = 8;
+  CHECK(kb_cusum_upper(kb_self_starting_z(up), c).alarm_index >= 8);
+  CHECK(kb_cusum_upper(kb_self_starting_z(base), c).alarm_index == -1);
 }

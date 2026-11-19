@@ -20,7 +20,7 @@
 
 namespace avoeq {
 
-static const char* const KNOWLEDGE_VERSION = "1.3.0";
+static const char* const KNOWLEDGE_VERSION = "1.4.0";
 static const char* const KNOWLEDGE_ID = "AVO_KB_1";
 static const char* const BONE_MODEL_ALGORITHM = "SBFL_MORRICE_WEST_2022";
 
@@ -148,5 +148,17 @@ double kb_change_threshold(double te, int n, double swc);
 struct KbCusumConfig { double k = 0.5, h = 4.0; bool fir = false; int min_samples = 1; };
 struct KbCusumResult { std::vector<double> s; int alarm_index = -1; };   // índice (0-based) de la primera alarma
 KbCusumResult kb_cusum_upper(const std::vector<double>& z, const KbCusumConfig& c);
+
+// CUSUM autoiniciado (Hawkins 1987, The Statistician 36:299; descrito en van Zyl & Lombard 2018, S. Afr. Stat. J.
+// 52:93, §2.6) [E, original no leído]: con μ y σ estimadas de 5–20 sesiones el CUSUM con h = 4/5 NO tiene el ARL0
+// nominal por caballo (simulación propia, estudio extra 2 2026-11-19: con m = 10 y h = 4 el 10 % de los caballos tiene
+// ARL0 ≤ 23 sesiones). Esta función tipifica cada sesión frente a las ANTERIORES: para la n-ésima válida (n ≥ 3)
+// V = (x_n − x̄_{n−1})/s_{n−1} y ξ = Φ⁻¹(T_{n−2}(√((n−1)/n)·V)), con T la t de Student de n − 2 g.l. Bajo control los ξ son
+// N(0, 1) independientes y se pasan a kb_cusum_upper con las mismas k y h (ARL0 incondicional 339/930 en la simulación
+// propia, h = 4/5, 20 000 réplicas). NaN en las dos primeras válidas, en las entradas NaN y con s = 0. Uso [I]: no
+// alarmar en las primeras 8–10 sesiones (min_samples), no actualizar con sesiones en alarma y reiniciar tras una.
+std::vector<double> kb_self_starting_z(const std::vector<double>& x);
+double kb_student_t_cdf(double t, double nu);   // auxiliares (expuestas para las pruebas)
+double kb_normal_quantile(double p);
 
 }  // namespace avoeq

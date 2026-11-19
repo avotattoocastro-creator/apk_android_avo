@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "fecha": "2026-11-19",
   "razas": [
     "PSI",
@@ -39,6 +39,11 @@
       "fecha": "2026-11-19",
       "titulo": "Extra: índice tendinoso, V200 y recuperación de FC, líneas base (CUSUM y shrinkage), playa y France Galop",
       "archivo": "estudios/2026-11-19_extra_tendon_v200_lineas_base_playa.md"
+    },
+    {
+      "fecha": "2026-11-19",
+      "titulo": "Extra 2: CUSUM con pocas sesiones (autoiniciado de Hawkins), OR del TFDS de Ikeda 2019 y árabes, IDF de France Galop (no existe)",
+      "archivo": "estudios/2026-11-19_extra2_cusum_autoiniciado_tendon_arabes_idf.md"
     }
   ],
   "fuentes": [
@@ -356,6 +361,42 @@
     {
       "id": "FRANCE_GALOP_2025_SAI04",
       "cita": "France Galop, Qatar Arabian Trophy des Pouliches, Saint-Cloud 03/10/2025 (20251003SAI04), PDF de tracking"
+    },
+    {
+      "id": "HAWKINS_1987",
+      "cita": "Hawkins DM 1987, Self-starting CUSUM charts for location and scale, The Statistician 36:299-315 (descrito en van Zyl & Lombard 2018, S Afr Stat J 52:93; original no leído)"
+    },
+    {
+      "id": "LOMBARD_HAWKINS_ARXIV_1904_00340",
+      "cita": "Lombard F, Hawkins DM, arXiv 1904.00340 (CUSUM autoiniciado; ARL incondicional nominal)"
+    },
+    {
+      "id": "SALEH_2016_CUSUM",
+      "cita": "Saleh NA, Zwetsloot IM, Mahmoud MA, Woodall WH 2016, Qual Eng 28:402, doi 10.1080/08982112.2016.1144072 (tablas no accesibles)"
+    },
+    {
+      "id": "IKEDA_2019",
+      "cita": "Ikeda Y, Ishihara A, Nakajima M, Yamada K 2019, J Equine Sci 30:93, doi 10.1294/jes.30.93, PMC6920055"
+    },
+    {
+      "id": "KALISIAK_2012_POLJVS",
+      "cita": "Kalisiak O 2012, Pol J Vet Sci 15:111, doi 10.2478/v10181-011-0121-9"
+    },
+    {
+      "id": "YILDIRIM_KARAARSLAN_2025_TJVR",
+      "cita": "Yıldırım İG, Karaarslan S 2025, Turkish J Vet Res 9:33, doi 10.47748/tjvr.1563380"
+    },
+    {
+      "id": "CALISKAN_2020_JEVS",
+      "cita": "Çalışkan GÜ, Seyrek-İntaş D, Çelimli N 2020, J Equine Vet Sci 87:102931 (resumen)"
+    },
+    {
+      "id": "TIMEFORM_FS_PCT",
+      "cita": "Timeform, An introduction to sectional timing part 2 (Finishing Speed %)"
+    },
+    {
+      "id": "FRANCE_GALOP_MCLLOYD_ROLLOUT",
+      "cita": "France Galop, National rollout of the McLloyd tracking system (2021)"
     }
   ],
   "parametros": [
@@ -772,6 +813,59 @@
       ],
       "estado": "REFERENCIA",
       "nota": "una carrera; ±1 zancada por tramo (3–4 %). PSI en el Arc 2025: ≈2,16 Hz y 8,0 m"
+    },
+    {
+      "id": "cusum_arl0_plugin_m10_h4_p10",
+      "valor": "23 sesiones (P10 del ARL0 condicional; mediana 234; nominal 335)",
+      "evidencia": "I (simulación propia, Brook-Evans, 5000 réplicas)",
+      "fuentes": [
+        "SALEH_2016_CUSUM"
+      ],
+      "estado": "REFERENCIA",
+      "nota": "μ y σ estimadas con media y DE de 10 sesiones; con mediana/MAD P10 = 11"
+    },
+    {
+      "id": "cusum_autoiniciado",
+      "valor": "ξ = Φ⁻¹(T_{n−2}(√((n−1)/n)·(x_n − x̄_{n−1})/s_{n−1})), n ≥ 3; mismas k = 0,5 y h; ARL0 339/930 (h 4/5)",
+      "evidencia": "E-r (método) / I (ARL por simulación propia, 20000 réplicas)",
+      "fuentes": [
+        "HAWKINS_1987",
+        "LOMBARD_HAWKINS_ARXIV_1904_00340"
+      ],
+      "estado": "IMPLEMENTADO (herramienta, sin regla)",
+      "nota": "kb_self_starting_z; calentamiento 8–10 sesiones sin alarma [I]"
+    },
+    {
+      "id": "tfds_or_ikeda_2019",
+      "valor": "pista encharcada 1,69; < 1300 m 1,45; ≥ 470 kg 1,55; pérdida ≥ 5 kg 1,59; castrado 3,09; < 4000 m en 3 carreras 1,40; ≥ 90 d sin correr 1,75",
+      "evidencia": "E-r (transcripción automática del texto completo; univariables)",
+      "fuentes": [
+        "IKEDA_2019"
+      ],
+      "estado": "REFERENCIA",
+      "nota": "PSI en arena (Oi, Japón); no usar como pesos"
+    },
+    {
+      "id": "tfds_arabe_fraccion_y_edad",
+      "valor": "TFDS 82,8 % de las tendinopatías árabes (24/29); pico de lesiones de tendón a los 3 años (78 de 137)",
+      "evidencia": "E-r",
+      "fuentes": [
+        "KALISIAK_2012_POLJVS",
+        "YILDIRIM_KARAARSLAN_2025_TJVR"
+      ],
+      "estado": "REFERENCIA",
+      "nota": "sin datos de carga en árabes"
+    },
+    {
+      "id": "finishing_speed_pct",
+      "valor": "100·v(tramo final)/v media; par por pista ≈ 101–112 %; QAWC 2023–2024 últimos 600 m ≈ 109–110 % [I]",
+      "evidencia": "E-r (definición) / I (cálculo QAWC)",
+      "fuentes": [
+        "TIMEFORM_FS_PCT",
+        "FRANCE_GALOP_MCLLOYD_ROLLOUT"
+      ],
+      "estado": "REFERENCIA",
+      "nota": "France Galop no publica un IDF; la métrica de AVO será propia"
     }
   ],
   "reglas": [
@@ -931,9 +1025,9 @@
     "Modelo óseo B (Pan/Anwar) con adaptación y reparación: constantes completas (KB 1.2.0); faltan el signo de b, la f_BM inicial y reproducir la tabla 4 de Anwar",
     "V200/VHRmax por regresión FC–velocidad (medias de 5 s, trote + galope [E]); mesetas ≥ 30 s descartando 20–30 s [I], R² ≥ 0,90 [I], sin extrapolar; recuperación a 1, 2, 4, 5, 10 y 15 min solo informativa",
     "ECG por fase (≥ 250 SPS, preferible 500): prematuro ≥ 5 %, par, triplete, racha, FA, % de artefacto; validar el detector QRS con anotación manual",
-    "Conectar las líneas base (herramientas implementadas en 2.0.0-dev5: MAD_s, z 3,5, shrinkage, umbral 2·TE·√(1+1/n), CUSUM) a A7, A8 y A9: falta el TE propio por métrica y la superficie (playa por franja); h = 5 con muchas cartas",
+    "Conectar las líneas base (herramientas implementadas en 2.0.0-dev5: MAD_s, z 3,5, shrinkage, umbral 2·TE·√(1+1/n), CUSUM) a A7, A8 y A9: falta el TE propio por métrica y la superficie (playa por franja); h = 5 con muchas cartas; usar kb_self_starting_z (Hawkins) + CUSUM h = 5 con calentamiento de 8–10 sesiones: con μ y σ fijas de 5–20 sesiones el ARL0 no es el nominal (estudio extra 2)",
     "Regla A8 sobre v_ultimos_600m (la métrica ya existe): línea base por trabajo de referencia y superficie",
-    "Índice de desaceleración final (IDF) de France Galop: importador de los PDF de tracking por 200 m (con zancadas desde 2025) y estado del terreno; comprobar cobertura de carreras PA fuera de París",
+    "Velocidad final relativa propia de AVO (France Galop no publica ningún IDF; estudio extra 2 2026-11-19): v(últimos 600/400 m)/v media con par propio por pista y superficie, al estilo de la Finishing Speed % de Timeform; importador de los PDF de tracking por 200 m solo informativo",
     "Cociente de galope 60/90 d de Choi & Parkin (A6) cuando se aclare la posición del +1",
     "Índice tendinoso heurístico por bandas cualitativas (prioritario en árabes de 3–4 años): sin exponente de carga; faltan en la app la lesión previa, la CSA ecográfica y la firmeza del suelo (estudio extra 2026-11-19)",
     "Planificador semanal por restricciones (capa 2) y explicación con confianza (capa 3)",
@@ -954,11 +1048,13 @@
     "Choi & Parkin 2025, tabla S1 y fórmula exacta del cociente de galope",
     "Li et al. 2026, EVJ doi 10.1002/evj.70360 (fatiga con sensores y ML)",
     "Chateau 2011 y Crevier-Denoix 2011 completos: zancada y fuerzas por franja de playa",
-    "Lam 2007 (AJVR), Takahashi 2004 (JAVMA) e Ikeda 2019 (PMC6920055): OR de factores de riesgo del TFDS",
-    "Hawkins 1987 (CUSUM autoiniciado) y Jones, Champ & Rigdon 2004: efecto de estimar μ y σ con pocas sesiones",
+    "Lam 2007 (AJVR) y Takahashi 2004 (JAVMA): OR de factores de riesgo del TFDS",
     "Cobertura de PDF de tracking de France Galop para carreras PA fuera de ParisLongchamp y Saint-Cloud; zancadas en más carreras PA",
     "Constante de tiempo de la FC en PSI en campo (no encontrada); Hada 2007 (constante de recuperación T)",
-    "Tesis francesa DUMAS A-2024-040 (tendinopatías; bloqueada)"
+    "Tesis francesa DUMAS A-2024-040 (tendinopatías; bloqueada)",
+    "Jones, Champ & Rigdon 2004 y tablas de Saleh et al. 2016 (bloqueados); cuantificar por simulación el efecto del shrinkage hacia la cuadra y de la autocorrelación sobre el ARL0 del CUSUM autoiniciado",
+    "Revisar a mano las OR de Ikeda 2019 y los recuentos de foulées de los PDF de France Galop (Arc 2025: 7,1 frente a 8,0 m por zancada); PDF de la QAWC 2025 (probable 20251005LON04)",
+    "Datos de carga o velocidad acumulada asociados al TFDS en árabes (no encontrados en Polonia, Turquía, EAU, Qatar, Francia ni Reino Unido)"
   ],
   "historial": [
     {
@@ -980,6 +1076,11 @@
       "version": "1.3.0",
       "fecha": "2026-11-19",
       "cambio": "Estudio extra: tendón (sin curva S-N; árabes vuelven a correr 15 % frente a 41 %), V200 y recuperación (retraso de FC, 4 y 15 min), líneas base (ARL recalculados, z 3,5, umbral 2·TE·√(1+1/n)), playa por franjas (Chateau 2011) y tracking de France Galop con zancadas; herramientas de línea base y CUSUM en el motor (KNOWLEDGE_VERSION 1.3.0, motor 2.0.0-dev5), sin conectar a reglas"
+    },
+    {
+      "version": "1.4.0",
+      "fecha": "2026-11-19",
+      "cambio": "Estudio extra 2: CUSUM con parámetros estimados (simulación propia: con 10 sesiones y h = 4 el P10 del ARL0 es 23) y tipificación autoiniciada de Hawkins en el motor (kb_self_starting_z; KNOWLEDGE_VERSION 1.4.0, motor 2.0.0-dev6), sin conectar a reglas; OR univariables del TFDS de Ikeda 2019; árabes: TFDS 83 % de las tendinopatías y pico a los 3 años; France Galop no publica ningún IDF (métrica propia de AVO)"
     }
   ]
 }

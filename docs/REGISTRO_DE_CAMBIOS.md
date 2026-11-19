@@ -24,6 +24,33 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-19 — Motor 2.0.0-dev6 — KB-1 1.4.0: estudio extra 2 (CUSUM con pocas sesiones, tendón en árabes, IDF) y CUSUM autoiniciado
+**Autor:** Claude (tarea programada, estudio extra 2) · **Rama:** `claude/kb-estudio2-2026-11-19` (desde `develop`, con PR #80 y #81 fusionados) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Estudio** `equine-intelligence/knowledge/estudios/2026-11-19_extra2_cusum_autoiniciado_tendon_arabes_idf.md`,
+  con cifras etiquetadas [E]/[E-r]/[I]/[NV] y decisiones al principio. (1) CUSUM con μ y σ estimadas de 5–20
+  sesiones: el ARL0 por caballo no es el nominal (simulación propia: m = 10, h = 4 → P10 = 23 sesiones frente a 335);
+  la tipificación autoiniciada de Hawkins 1987 lo recupera (339/930). (2) TFDS: OR univariables de Ikeda 2019 (PSI,
+  Japón) y, en árabes, TFDS = 83 % de las tendinopatías (Kalisiak 2012) y pico de lesiones de tendón a los 3 años
+  (Yıldırım & Karaarslan 2025). (3) France Galop **no publica ningún IDF**: el pendiente pasa a una métrica propia de
+  velocidad final relativa con par por pista (referencia: Finishing Speed % de Timeform).
+- **Motor (un pendiente):** `kb_self_starting_z`, `kb_student_t_cdf` y `kb_normal_quantile` en `knowledge.h`, con la
+  prueba `kb.baseline_self_starting_cusum`. **No se conectan a ninguna regla**; la salida del análisis solo cambia en
+  las versiones. `KNOWLEDGE_VERSION` 1.3.0 → 1.4.0; `ENGINE_VERSION` 2.0.0-dev5 → 2.0.0-dev6.
+- **`base_cientifica.json` 1.4.0:** 5 parámetros y 9 fuentes nuevos; `pendiente_motor` (líneas base e IDF) y
+  `cola_investigacion` actualizados; historial.
+- Ficha `docs/algoritmos/14_BASE_CIENTIFICA.md`, fila del motor en la tabla de estado y `README.md`.
+- Fixtures `core/src/test/resources/equine/*.json` regeneradas con `--update` (solo cambian las versiones).
+**Por qué:** estudio extra pedido por el usuario (máx. 1 h); conectar las líneas base a Training Analytics con pocas
+sesiones exige un CUSUM que no dispare falsas alarmas de más.
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, TestFlight, apps.
+**Validación:** IMPLEMENTADO · pruebas locales con ASan/UBSan: 100 casos y 1.703 comprobaciones sin fallos; Release y
+`check_fixtures.py` en verde · CI: ver PR · **NO VERIFICADO** con caballos reales. La carga tendinosa y la fatiga ósea
+son índices de carga, nunca predicciones de lesión.
+**Pendiente:** conectar `kb_self_starting_z` + CUSUM a A7–A9 (TE por métrica, superficie); cuantificar el efecto del
+shrinkage y de la autocorrelación; textos bloqueados (Jones 2004, Saleh 2016, Hawkins 1987, Takahashi 2004, Lam 2007);
+revisar a mano las OR de Ikeda 2019 y los recuentos de *foulées* de France Galop.
+
 ## 2026-11-19 — Motor 2.0.0-dev5 — KB-1 1.3.0: estudio extra (tendón, V200, líneas base, playa, France Galop) y herramientas de línea base
 **Autor:** Claude (tarea programada, estudio extra) · **Rama:** `claude/kb-estudio-2026-11-19` (sale de `claude/kb-noche-2026-11-19`, PR #80, sin fusionar) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
 **Qué cambia:**

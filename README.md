@@ -18,7 +18,7 @@ estado actual.
 
 Resumen (17/11/2026): pecho PROTOTIPO 3.7.10 · espalda PROTOTIPO 3.14.3 · cincha PROTOTIPO 0.4.3 / 0.5.0 (ECG) ·
 cincha BETA 0.6.0 · Android 2.9 (vc 42) · Tarjetas 1.4 · AVO Update 2.3.1 · Windows V2 PRO · iPad 1.0 (TestFlight) ·
-motor 2.0.0-dev5 (base científica KB-1 1.3.0, rama `claude/kb-estudio-2026-11-19`). Todo **compilado en CI**; nada de lo integrado desde el 12/11 está **verificado en hardware**.
+motor 2.0.0-dev6 (base científica KB-1 1.4.0, rama `claude/kb-estudio2-2026-11-19`). Todo **compilado en CI**; nada de lo integrado desde el 12/11 está **verificado en hardware**.
 
 <details><summary>Tabla antigua (22/10–09/11/2026, superada)</summary>
 
