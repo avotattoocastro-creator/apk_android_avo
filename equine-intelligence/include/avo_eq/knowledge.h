@@ -20,7 +20,7 @@
 
 namespace avoeq {
 
-static const char* const KNOWLEDGE_VERSION = "1.2.0";
+static const char* const KNOWLEDGE_VERSION = "1.3.0";
 static const char* const KNOWLEDGE_ID = "AVO_KB_1";
 static const char* const BONE_MODEL_ALGORITHM = "SBFL_MORRICE_WEST_2022";
 
@@ -114,5 +114,39 @@ struct KbStatus {
 // first_day: primer día de la historia del caballo (para saber si las ventanas están cubiertas).
 KbStatus kb_evaluate(const std::vector<KbDay>& sessions, long at_day, long first_day, const KbRuleConfig& c);
 std::string kb_status_json(const KbStatus& s);
+
+// ------------------------------------------------------------------ líneas base (KB 1.3.0, estudio extra 2026-11-19)
+// Herramientas estadísticas para comparar a cada caballo consigo mismo. Matemática cerrada [E]; su uso en caballos y
+// los umbrales por métrica son [I] (no hay CUSUM publicado en caballos de carreras). Todavía no las usa ninguna regla:
+// faltan TE propios por métrica (2–3 trabajos repetidos por caballo) y anotar la superficie (playa por franja).
+//
+// Línea base robusta: mediana m y MAD_s = 1,4826·mediana(|x − m|) (1,4826 = 1/Φ⁻¹(0,75), Rousseeuw & Croux 1993) de las
+// últimas `last_n` observaciones válidas (NaN se saltan). z robusto = (x − m)/max(MAD_s, min_scale); con |z| > 3,5 es
+// atípico (z modificado de Iglewicz & Hoaglin 1993: 0,6745·(x − m)/MAD > 3,5). min_scale evita escalas nulas con
+// pocas sesiones (el MAD de 10 datos rinde como una DE de ~4) [I].
+static const double KB_MAD_SCALE = 1.4826;
+static const double KB_ROBUST_Z_OUTLIER = 3.5;
+struct KbRobustBaseline { int n = 0; double median = NAN, mad_s = NAN; };
+KbRobustBaseline kb_robust_baseline(const std::vector<double>& x, int last_n = 12);
+double kb_robust_z(double x, const KbRobustBaseline& b, double min_scale = 0.0);   // NaN con n < 3 o escala 0
+
+// Shrinkage normal-normal (Efron & Morris 1975) para el arranque en frío: media propia de n sesiones encogida hacia la
+// de la cuadra. sigma2_within = TE² (varianza dentro del caballo); tau2_between = varianza VERDADERA entre caballos
+// (la observada menos sigma2/n). μ* = (n·x̄/σ² + μ_pop/τ²)/(n/σ² + 1/τ²); con n = 0 devuelve μ_pop.
+double kb_shrink_mean(int n, double xbar, double sigma2_within, double mu_pop, double tau2_between);
+
+// Umbral de cambio real frente a una media de n sesiones: max(2·TE·√(1 + 1/n), SWC). Hopkins 2000 propone 1,5–2·TE
+// [E]; √(1 + 1/n) es el ruido de una medida frente a la media de n [cálculo]. Con n ≤ 0 usa √2 (dos medidas sueltas).
+double kb_change_threshold(double te, int n, double swc);
+
+// CUSUM unilateral superior sobre z ya tipificados con la DE dentro del caballo: S_t = max(0, S_{t−1} + z_t − k), alarma
+// cuando S_t > h. Para derivas a la baja se pasa −z. Con k = 0,5: h = 4 → ARL0 ≈ 335 sesiones y ARL1(δ = 1) ≈ 8,4;
+// h = 5 → ARL0 ≈ 931 y ARL1 ≈ 10,4 (cadena de Markov de Brook-Evans, coincide con la tabla del NIST/SEMATECH
+// e-Handbook §6.3.2.3.1). Los 168/465 que se citan a veces son del CUSUM bilateral. Con muchas cartas a la vez (caballos
+// × métricas × sentidos) conviene h = 5 [I]. fir: arranque con S0 = h/2 (Lucas & Crosier 1982), ARL1(δ = 1) 5,3 con
+// h = 4. min_samples: no se dan alarmas antes de esa muestra válida [I]. NaN: la muestra se salta (S no cambia).
+struct KbCusumConfig { double k = 0.5, h = 4.0; bool fir = false; int min_samples = 1; };
+struct KbCusumResult { std::vector<double> s; int alarm_index = -1; };   // índice (0-based) de la primera alarma
+KbCusumResult kb_cusum_upper(const std::vector<double>& z, const KbCusumConfig& c);
 
 }  // namespace avoeq

@@ -221,4 +221,61 @@ std::string kb_status_json(const KbStatus& s) {
   return o.str();
 }
 
+// ------------------------------------------------------------------ líneas base (KB 1.3.0)
+KbRobustBaseline kb_robust_baseline(const std::vector<double>& x, int last_n) {
+  KbRobustBaseline b;
+  std::vector<double> v;
+  for (size_t i = x.size(); i-- > 0;) {
+    if (std::isnan(x[i]) || std::isinf(x[i])) continue;
+    v.push_back(x[i]);
+    if (last_n > 0 && (int)v.size() >= last_n) break;
+  }
+  b.n = (int)v.size();
+  if (v.empty()) return b;
+  b.median = median_of(v);
+  std::vector<double> dev; dev.reserve(v.size());
+  for (double a : v) dev.push_back(std::fabs(a - b.median));
+  b.mad_s = KB_MAD_SCALE * median_of(dev);
+  return b;
+}
+
+double kb_robust_z(double x, const KbRobustBaseline& b, double min_scale) {
+  if (b.n < 3 || std::isnan(x) || std::isnan(b.median)) return kNaN;
+  double s = std::isnan(b.mad_s) ? 0.0 : b.mad_s;
+  if (min_scale > s) s = min_scale;
+  if (!(s > 0)) return kNaN;
+  return (x - b.median) / s;
+}
+
+double kb_shrink_mean(int n, double xbar, double sigma2_within, double mu_pop, double tau2_between) {
+  if (n <= 0 || std::isnan(xbar)) return mu_pop;
+  if (std::isnan(mu_pop) || !(tau2_between > 0)) return xbar;   // sin prior útil: solo el caballo
+  if (!(sigma2_within > 0)) return xbar;                        // sin ruido: el dato propio manda
+  double wp = n / sigma2_within, wq = 1.0 / tau2_between;
+  return (wp * xbar + wq * mu_pop) / (wp + wq);
+}
+
+double kb_change_threshold(double te, int n, double swc) {
+  double noise = (std::isnan(te) || te < 0) ? kNaN : 2.0 * te * (n > 0 ? std::sqrt(1.0 + 1.0 / n) : std::sqrt(2.0));
+  if (std::isnan(noise)) return swc;
+  if (std::isnan(swc)) return noise;
+  return std::max(noise, swc);
+}
+
+KbCusumResult kb_cusum_upper(const std::vector<double>& z, const KbCusumConfig& c) {
+  KbCusumResult r;
+  r.s.reserve(z.size());
+  double S = c.fir ? 0.5 * c.h : 0.0;
+  int valid = 0;
+  for (size_t i = 0; i < z.size(); i++) {
+    if (!std::isnan(z[i]) && !std::isinf(z[i])) {
+      S = std::max(0.0, S + z[i] - c.k);
+      valid++;
+      if (r.alarm_index < 0 && valid >= c.min_samples && S > c.h) r.alarm_index = (int)i;
+    }
+    r.s.push_back(S);
+  }
+  return r;
+}
+
 }  // namespace avoeq

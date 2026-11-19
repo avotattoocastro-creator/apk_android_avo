@@ -1,4 +1,4 @@
-# 14 · Base científica de la cuadra (KB-1) 1.2.0
+# 14 · Base científica de la cuadra (KB-1) 1.3.0
 
 Código: `include/avo_eq/knowledge.h`, `src/knowledge/knowledge.cpp`. Se calcula en Track Work (`src/racing/racing.cpp`,
 bloque `trabajo_pista.base_cientifica`) y se evalúa en Training Analytics (`src/training/training.cpp`, bloques
@@ -85,6 +85,23 @@ los 60 días previos** (frente a 3–24) tiene OR 1,842 (IC 95 % 1,073–3,162) 
 anota si el día fue de galope o de canter, sin velocidad ni distancia, así que «día de galope» = día con sesión rápida
 del motor (≥ 100 m por encima de 0,838·v_carrera) es [I]. El estado lleva `dias_galope_60d`. Solo informa (INFO,
 AVISO); no cambia el estado a VIGILAR.
+
+## 3 quater. Herramientas de línea base (KB-1 1.3.0, estudio extra del 19/11)
+Funciones de `knowledge.h` para comparar a cada caballo consigo mismo. **Todavía no las usa ninguna regla** (faltan el
+TE propio de cada métrica y la superficie anotada, incluida la playa por franja); la salida JSON no cambia.
+
+| Función | Qué hace | Evidencia |
+|---|---|---|
+| `kb_robust_baseline(x, 12)` | mediana y MAD_s = 1,4826·MAD de las últimas 12 válidas (NaN se saltan) | 1,4826 = 1/Φ⁻¹(0,75) [E] |
+| `kb_robust_z(x, b, min_scale)` | (x − m)/max(MAD_s, min_scale); atípico si > 3,5 (`KB_ROBUST_Z_OUTLIER`) | z modificado de Iglewicz & Hoaglin (NIST) [E] |
+| `kb_shrink_mean(n, x̄, σ², μ_pop, τ²)` | media encogida hacia la cuadra (σ² dentro del caballo, τ² verdadera entre caballos) | Efron & Morris 1975 [E] |
+| `kb_change_threshold(TE, n, SWC)` | max(2·TE·√(1 + 1/n), SWC) | 1,5–2·TE de Hopkins 2000 [E]; √(1 + 1/n) [cálculo] |
+| `kb_cusum_upper(z, {k, h, fir, min_samples})` | S_t = max(0, S_{t−1} + z_t − k), alarma si S_t > h | ARL recalculados = NIST [E]; uso en caballos [I] |
+
+ARL con k = 0,5 (unilateral): h = 4 → ARL0 ≈ 335 y ARL1(δ = 1) ≈ 8,4; h = 5 → 931 y 10,4; FIR (S0 = h/2) baja el ARL1
+a 5,3 con h = 4. Los 168/465 son del CUSUM bilateral. Con muchas cartas (caballos × métricas × sentidos) usar h = 5 [I].
+Valores de prueba: {6,9; 7,0; 7,1; 7,05; 6,95; 7,2; 6,85; 7,0} → mediana 7,0 y MAD_s 0,1112; shrinkage (n 3, x̄ 10,
+σ² 0,04, μ_pop 9,6, τ² 0,09) = 9,9484; CUSUM de {0,2; 1,2; 1,5; 0,8; 1,6; 1,4; 1,1} → alarma en la 7.ª muestra.
 
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se

@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "fecha": "2026-11-19",
   "razas": [
     "PSI",
@@ -34,6 +34,11 @@
       "fecha": "2026-11-19",
       "titulo": "Noche: constantes del modelo B, tendón (Choi & Parkin), lesiones de árabes y prevalencia de arritmias",
       "archivo": "estudios/2026-11-19_noche_modeloB_tendon_choi_ecg_prevalencia.md"
+    },
+    {
+      "fecha": "2026-11-19",
+      "titulo": "Extra: índice tendinoso, V200 y recuperación de FC, líneas base (CUSUM y shrinkage), playa y France Galop",
+      "archivo": "estudios/2026-11-19_extra_tendon_v200_lineas_base_playa.md"
     }
   ],
   "fuentes": [
@@ -150,7 +155,8 @@
     {
       "id": "ONDER_2022",
       "cita": "Önder et al. 2022, Animals 12:2630 (233.491 registros de árabes en Turquía)",
-      "url": "https://mdpi.com/2076-2615/12/19/2630"
+      "url": "https://mdpi.com/2076-2615/12/19/2630",
+      "nota": "velocidades medias 13,454 (arena), 14,217 (sintética) y 14,344 m/s (hierba); los ≈0,9 m/s son la resta (cálculo propio), no una cifra del artículo"
     },
     {
       "id": "QAWC_2023_PARCIALES",
@@ -256,6 +262,100 @@
       "id": "KAPUSNIAK_2026",
       "cita": "Kapusniak et al. 2026, Equine Vet J doi 10.1002/evj.70205 (ECG textil al galope; resumen)",
       "url": "https://madbarn.com/research/validation-of-a-smart-textile-electrocardiographic-monitoring-device-in-racehorses-during-high-speed-exercise/"
+    },
+    {
+      "id": "KALISIAK_2012",
+      "cita": "Kalisiak O. 2012, Pol J Vet Sci 15:111–118, doi 10.2478/v10181-011-0121-9 (tendinopatías en PSI y árabes, Varsovia; texto completo)",
+      "url": "https://journals.pan.pl//Content/99014/PDF/15_paper.pdf"
+    },
+    {
+      "id": "PERKINS_2005",
+      "cita": "Perkins NR, Reid SWJ, Morris RS 2005, NZ Vet J 53:184–192 (factores de riesgo de TFDS; resumen)",
+      "url": "https://madbarn.com/research/risk-factors-for-injury-to-the-superficial-digital-flexor-tendon-and-suspensory-apparatus-in-thoroughbred-racehorses-in-new-zealand"
+    },
+    {
+      "id": "REARDON_2012",
+      "cita": "Reardon RJM et al. 2012, Vet J 195:325 y EVJ 44:564 (TFDS en carreras de obstáculos del Reino Unido; resúmenes)",
+      "url": "https://doi.org/10.1016/j.tvjl.2012.06.033"
+    },
+    {
+      "id": "STEPHENS_1989",
+      "cita": "Stephens PR et al. 1989, Am J Vet Res 50:1089–1095 (deformación del TFDS in vivo; resumen)",
+      "url": "https://madbarn.com/research/application-of-a-hall-effect-transducer-for-measurement-of-tendon-strains-in-horses"
+    },
+    {
+      "id": "VERKADE_2020",
+      "cita": "Verkade ME, Back W, Birch HL 2020, Equine Vet J 52:320–325 (rotura del TFDS por raza; texto completo)",
+      "url": "https://discovery-pp.ucl.ac.uk/10081102/1/Verkade_et_al-2019-Equine_Veterinary_Journal.pdf"
+    },
+    {
+      "id": "THORPE_2014",
+      "cita": "Thorpe CT et al. 2014, Acta Biomaterialia, doi 10.1016/j.actbio.2014.04.008 (fatiga de fascículos; manuscrito aceptado)",
+      "url": "https://doi.org/10.1016/j.actbio.2014.04.008"
+    },
+    {
+      "id": "BEAUMONT_2025",
+      "cita": "Beaumont et al. 2025, Am J Vet Res 86(8), doi 10.2460/ajvr.24.09.0249 (CSA del TFDS en trotones jóvenes; resumen)",
+      "url": "https://madbarn.com/research/the-cross-sectional-area-of-normal-superficial-digital-flexor-tendon-of-young-french-trotters-increases-during-the-first-months-of-training"
+    },
+    {
+      "id": "EVANS_1993",
+      "cita": "Evans DL, Harris RC, Snow DH 1993, Equine Vet J 25:441 (FC de recuperación y rendimiento; resumen)",
+      "url": "https://doi.org/10.1111/j.2042-3306.1993.tb02987.x"
+    },
+    {
+      "id": "KOBAYASHI_2000",
+      "cita": "Kobayashi M et al. 2000, Equine Vet J Suppl 30:159 (V200 en PSI de 2 años; resumen)",
+      "url": "https://doi.org/10.1111/j.2042-3306.1999.tb05208.x"
+    },
+    {
+      "id": "LANGSETMO_1997",
+      "cita": "Langsetmo I et al. 1997, J Appl Physiol 83:1235 (cinética del VO2 en el caballo; resumen)",
+      "url": "https://doi.org/10.1152/jappl.1997.83.4.1235"
+    },
+    {
+      "id": "NIST_CUSUM",
+      "cita": "NIST/SEMATECH e-Handbook of Statistical Methods §6.3.2.3.1 (ARL del CUSUM) y §1.3.5.17 (z modificado)",
+      "url": "https://itl.nist.gov/div898/handbook/pmc/section3/pmc3231.htm"
+    },
+    {
+      "id": "EFRON_MORRIS_1975",
+      "cita": "Efron B, Morris C 1975, J Am Stat Assoc 70:311–319 (estimador de Stein)",
+      "url": "https://doi.org/10.1080/01621459.1975.10479864"
+    },
+    {
+      "id": "HOPKINS_2000",
+      "cita": "Hopkins WG 2000, Sports Med 30:1–15 (error típico y fiabilidad)",
+      "url": "https://doi.org/10.2165/00007256-200030010-00001"
+    },
+    {
+      "id": "CHATEAU_2011",
+      "cita": "Chateau H et al. 2011, Equine Vet J Suppl 38:488–495, doi 10.1111/j.2042-3306.2010.00277.x (trotones en tres franjas de playa; resumen)",
+      "url": "https://madbarn.com/research/biomechanical-analysis-of-hoof-landing-and-stride-parameters-in-harness-trotter-horses-running-on-different-tracks-of-a-sand-beach-from-wet-to-dry-and-on-an-asphalt-road"
+    },
+    {
+      "id": "CREVIER_DENOIX_2011",
+      "cita": "Crevier-Denoix N et al. 2011, Equine Vet J Suppl 38:544–551 (arena de playa firme y profunda; resumen)",
+      "url": "https://madbarn.com/research/ground-reaction-force-and-kinematic-analysis-of-limb-loading-on-two-different-beach-sand-tracks-in-harness-trotters"
+    },
+    {
+      "id": "PFAU_2024",
+      "cita": "Pfau T et al. 2024, Sensors 24:2441 (superficie y zancada de PSI a ≈16,5 m/s; resumen)",
+      "url": "https://doi.org/10.3390/s24082441"
+    },
+    {
+      "id": "PETERSON_2012",
+      "cita": "Peterson M et al. 2012, White Paper Racing Surfaces, Grayson-Jockey Club",
+      "url": "https://grayson-jockeyclub.org/resources/White_Paper_04272012.pdf"
+    },
+    {
+      "id": "FRANCE_GALOP_TRACKING",
+      "cita": "France Galop: parciales y tracking por 200 m (McLloyd), con número de zancadas desde 2025",
+      "url": "https://www.france-galop.com/en/content/sectional-timing-now-readily-available"
+    },
+    {
+      "id": "FRANCE_GALOP_2025_SAI04",
+      "cita": "France Galop, Qatar Arabian Trophy des Pouliches, Saint-Cloud 03/10/2025 (20251003SAI04), PDF de tracking"
     }
   ],
   "parametros": [
@@ -512,6 +612,166 @@
       ],
       "estado": "REFERENCIA",
       "nota": "Şirinyer (İzmir) 2018–2023; tendón de árabes sobre todo a 3–4 años; sin cifras por superficie (texto EVJ no accesible)"
+    },
+    {
+      "id": "linea_base_robusta",
+      "valor": "mediana y MAD_s = 1,4826·MAD de las últimas 12 sesiones válidas; atípico si |z robusto| > 3,5",
+      "evidencia": "E (matemática; Iglewicz & Hoaglin vía NIST) / I (uso en caballos)",
+      "fuentes": [
+        "NIST_CUSUM"
+      ],
+      "estado": "IMPLEMENTADO",
+      "nota": "kb_robust_baseline y kb_robust_z (motor 2.0.0-dev5); sin conectar a reglas. El estudio ampliado usaba |z| > 3"
+    },
+    {
+      "id": "shrinkage_normal",
+      "valor": "μ* = (n·x̄/σ² + μ_pop/τ²)/(n/σ² + 1/τ²), σ² = TE² dentro del caballo, τ² verdadera entre caballos",
+      "evidencia": "E (Efron & Morris 1975) / I (priors de la cuadra)",
+      "fuentes": [
+        "EFRON_MORRIS_1975"
+      ],
+      "estado": "IMPLEMENTADO",
+      "nota": "kb_shrink_mean; pesa sobre todo en las primeras 3–5 sesiones"
+    },
+    {
+      "id": "umbral_cambio_real",
+      "valor": "max(2·TE·√(1 + 1/n), SWC)",
+      "evidencia": "E (1,5–2·TE, Hopkins 2000) / I (√(1+1/n))",
+      "fuentes": [
+        "HOPKINS_2000"
+      ],
+      "estado": "IMPLEMENTADO",
+      "nota": "kb_change_threshold; sustituye a max(√2·TE, SWC) del estudio ampliado. TE por métrica: medir con 2–3 trabajos repetidos"
+    },
+    {
+      "id": "cusum_unilateral",
+      "valor": {
+        "k": 0.5,
+        "h_defecto": 4,
+        "ARL0_h4": 335,
+        "ARL1_d1_h4": 8.4,
+        "ARL0_h5": 931,
+        "ARL1_d1_h5": 10.4,
+        "FIR": "S0 = h/2 (ARL1 5,3 con h 4)"
+      },
+      "evidencia": "E (tabla del NIST, cadena de Markov recalculada) / I (uso en caballos, h = 5 con muchas cartas)",
+      "fuentes": [
+        "NIST_CUSUM"
+      ],
+      "estado": "IMPLEMENTADO",
+      "nota": "kb_cusum_upper; 168/465 son ARL0 del CUSUM bilateral. Ectopia: no usar CUSUM normal (recuentos)"
+    },
+    {
+      "id": "te_recuperacion_fc_lpm",
+      "valor": 9.4,
+      "evidencia": "I (de MDC 26 lpm, Poinsard 2026, si es MDC95)",
+      "fuentes": [
+        "POINSARD_2026"
+      ],
+      "estado": "REFERENCIA",
+      "nota": "trotones; sustituir por el TE propio"
+    },
+    {
+      "id": "tendon_rotura_deformacion_pct",
+      "valor": {
+        "PSI_rotura_ex_vivo": "25,3 ± 4,6",
+        "galope_in_vivo": "11,5 y 16,6 (2 caballos)"
+      },
+      "evidencia": "E (Verkade 2020, texto completo) / E-r (Stephens 1989)",
+      "fuentes": [
+        "VERKADE_2020",
+        "STEPHENS_1989"
+      ],
+      "estado": "REFERENCIA",
+      "nota": "margen ≈1,5–2 (I). No hay curva S-N del tendón equino: se retira el exponente de carga del índice tendinoso"
+    },
+    {
+      "id": "csa_tfds_aumento_2m",
+      "valor": "≥ +9,84 % en 2 meses (sanos +6,8 %; lesionados después +13 %)",
+      "evidencia": "E-r",
+      "fuentes": [
+        "BEAUMONT_2025"
+      ],
+      "estado": "REFERENCIA",
+      "nota": "trotones franceses jóvenes, muestra pequeña; dato de ecografía introducido a mano"
+    },
+    {
+      "id": "vuelta_carrera_tendon",
+      "valor": {
+        "ARABE": "4/26 (15,4 %)",
+        "PSI": "55/133 (41,4 %)"
+      },
+      "evidencia": "E",
+      "fuentes": [
+        "KALISIAK_2012"
+      ],
+      "estado": "REFERENCIA",
+      "nota": "Varsovia 2001–2006; TFDS 82,8 % de las lesiones tendinosas de árabes"
+    },
+    {
+      "id": "fc_retraso_s",
+      "valor": "mesetas de velocidad ≥ 30 s (CV < 5 %), descartar 20–30 s y promediar los 15 s finales",
+      "evidencia": "I (VO2 con retraso ≈20 s y τ 10–21 s, Langsetmo 1997; últimos 15 s en cinta, KER)",
+      "fuentes": [
+        "LANGSETMO_1997",
+        "PRINCE_KER"
+      ],
+      "estado": "PENDIENTE",
+      "nota": "no hay constante de tiempo de la FC publicada en PSI de campo"
+    },
+    {
+      "id": "recuperacion_fc_ventanas_min",
+      "valor": [
+        1,
+        2,
+        4,
+        5,
+        10,
+        15
+      ],
+      "evidencia": "E (4 min r −0,565, Evans 1993; ≈100 lpm a 15 min, Schrurs 2024) / I (resto)",
+      "fuentes": [
+        "EVANS_1993",
+        "SCHRURS_2024_TEXTO"
+      ],
+      "estado": "PENDIENTE",
+      "nota": "solo tendencia del propio caballo"
+    },
+    {
+      "id": "playa_franjas",
+      "valor": {
+        "orilla_firme_humedad_pct": 19,
+        "humeda_profunda_humedad_pct": 13.5,
+        "impacto_profunda_vs_firme": "≈ −59 %",
+        "frenado": "≈ −50 %"
+      },
+      "evidencia": "E-r",
+      "fuentes": [
+        "CHATEAU_2011",
+        "CREVIER_DENOIX_2011"
+      ],
+      "estado": "REFERENCIA",
+      "nota": "4 trotones al trote (7 m/s y 25 km/h); en lo blando, zancada más corta y más frecuente. Sin datos de galope de carreras en playa"
+    },
+    {
+      "id": "zancada_superficie_variacion_m",
+      "valor": 0.186,
+      "evidencia": "E-r",
+      "fuentes": [
+        "PFAU_2024"
+      ],
+      "estado": "REFERENCIA",
+      "nota": "PSI a ≈16,5 m/s; el umbral de caída de zancada debe superar la variación debida al suelo"
+    },
+    {
+      "id": "frecuencia_zancada_arabe_carrera_hz",
+      "valor": "≈ 2,4–2,5 (6,5–6,7 m) en los últimos 400 m de un Gr PA de 2.000 m",
+      "evidencia": "E (zancadas y tiempos del PDF) / I (cociente)",
+      "fuentes": [
+        "FRANCE_GALOP_2025_SAI04"
+      ],
+      "estado": "REFERENCIA",
+      "nota": "una carrera; ±1 zancada por tramo (3–4 %). PSI en el Arc 2025: ≈2,16 Hz y 8,0 m"
     }
   ],
   "reglas": [
@@ -651,19 +911,33 @@
       ],
       "estado": "PENDIENTE",
       "falta": "texto completo de Verheyen 2006 (ORs por categoría y cortes) antes de decidir si A1 y A2 aislados bajan a AVISO"
+    },
+    {
+      "id": "TENDON_INDICE_HEURISTICO",
+      "umbral": "bandas cualitativas: edad ≥ 3 (árabe 3–4), reentrada (A6/A6B), lesión previa del TFDS, suelo firme y verano, CSA ≥ +10 % en 2 meses, fatiga en la sesión",
+      "evidencia": "E-r (dirección; PSI) / I (combinación y pesos)",
+      "fuentes": [
+        "PERKINS_2005",
+        "REARDON_2012",
+        "CHOI_PARKIN_2025_TEXTO",
+        "BEAUMONT_2025",
+        "KALISIAK_2012"
+      ],
+      "estado": "PENDIENTE",
+      "falta": "campos de lesión previa, CSA y firmeza del suelo en la app; sin exponente de carga (no hay curva S-N del tendón)"
     }
   ],
   "pendiente_motor": [
     "Modelo óseo B (Pan/Anwar) con adaptación y reparación: constantes completas (KB 1.2.0); faltan el signo de b, la f_BM inicial y reproducir la tabla 4 de Anwar",
-    "V200/VHRmax por regresión FC–velocidad en medias de 5 s, con retraso de FC calibrable, R² ≥ 0,90 y sin extrapolar; recuperación de FC a 1, 2, 3, 5, 10 y 15 min solo informativa",
+    "V200/VHRmax por regresión FC–velocidad (medias de 5 s, trote + galope [E]); mesetas ≥ 30 s descartando 20–30 s [I], R² ≥ 0,90 [I], sin extrapolar; recuperación a 1, 2, 4, 5, 10 y 15 min solo informativa",
     "ECG por fase (≥ 250 SPS, preferible 500): prematuro ≥ 5 %, par, triplete, racha, FA, % de artefacto; validar el detector QRS con anotación manual",
-    "Líneas base con shrinkage hacia la cuadra, SWC/TE propios y CUSUM",
+    "Conectar las líneas base (herramientas implementadas en 2.0.0-dev5: MAD_s, z 3,5, shrinkage, umbral 2·TE·√(1+1/n), CUSUM) a A7, A8 y A9: falta el TE propio por métrica y la superficie (playa por franja); h = 5 con muchas cartas",
     "Regla A8 sobre v_ultimos_600m (la métrica ya existe): línea base por trabajo de referencia y superficie",
-    "Índice de desaceleración final (IDF) de las carreras importadas de France Galop",
+    "Índice de desaceleración final (IDF) de France Galop: importador de los PDF de tracking por 200 m (con zancadas desde 2025) y estado del terreno; comprobar cobertura de carreras PA fuera de París",
     "Cociente de galope 60/90 d de Choi & Parkin (A6) cuando se aclare la posición del +1",
-    "Índice tendinoso heurístico (prioritario en árabes de 3–4 años: el tendón es el 64 % de sus lesiones, Yildirim 2025)",
+    "Índice tendinoso heurístico por bandas cualitativas (prioritario en árabes de 3–4 años): sin exponente de carga; faltan en la app la lesión previa, la CSA ecográfica y la firmeza del suelo (estudio extra 2026-11-19)",
     "Planificador semanal por restricciones (capa 2) y explicación con confianza (capa 3)",
-    "Línea base separada para la playa (arena seca, húmeda, orilla y marea)",
+    "Línea base separada para la playa por franja (orilla firme, húmeda suelta, seca profunda, transición), marea, lluvia y nota del jinete (Chateau 2011)",
     "Regla combinada A1+A2 de Verheyen cuando se lea el texto completo",
     "Contador de muestras saturadas de la cincha en el análisis (si el firmware lo envía)"
   ],
@@ -674,13 +948,17 @@
     "Vermeulen & Evans 2006 y Gramkow & Evans 2006 completos: rango de la regresión FC–velocidad y retraso de la FC",
     "Martig 2013 completo: confirmar que 134,2/14,1 es la curva de sensibilidad",
     "PDF de tracking de France Galop (QAWC 2023–2025, Saint-Cloud) y resultados árabes del Reino Unido (Newbury, Doncaster) y Amir Sword 2026",
-    "Frecuencia de zancada en árabes de carreras (no encontrada)",
     "Picos de aceleración del tronco en g a ≥ 12 m/s (Pfau 2006 y Barrey 2001 completos; no hay datos publicados accesibles)",
-    "Galope sobre arena de playa (fuerzas, zancada)",
     "Yildirim 2025 completo (Wiley): lesiones de árabes por superficie y carrera frente a entrenamiento",
     "Ryan 2005 (EVJ 37:265) completo: prevalencia de arritmias en PSI en ejercicio máximo",
     "Choi & Parkin 2025, tabla S1 y fórmula exacta del cociente de galope",
-    "Li et al. 2026, EVJ doi 10.1002/evj.70360 (fatiga con sensores y ML)"
+    "Li et al. 2026, EVJ doi 10.1002/evj.70360 (fatiga con sensores y ML)",
+    "Chateau 2011 y Crevier-Denoix 2011 completos: zancada y fuerzas por franja de playa",
+    "Lam 2007 (AJVR), Takahashi 2004 (JAVMA) e Ikeda 2019 (PMC6920055): OR de factores de riesgo del TFDS",
+    "Hawkins 1987 (CUSUM autoiniciado) y Jones, Champ & Rigdon 2004: efecto de estimar μ y σ con pocas sesiones",
+    "Cobertura de PDF de tracking de France Galop para carreras PA fuera de ParisLongchamp y Saint-Cloud; zancadas en más carreras PA",
+    "Constante de tiempo de la FC en PSI en campo (no encontrada); Hada 2007 (constante de recuperación T)",
+    "Tesis francesa DUMAS A-2024-040 (tendinopatías; bloqueada)"
   ],
   "historial": [
     {
@@ -697,6 +975,11 @@
       "version": "1.2.0",
       "fecha": "2026-11-19",
       "cambio": "Noche: constantes del modelo B completas (sin implementar: signo de b y f_BM inicial), tabla 2 de Choi & Parkin, lesiones de árabes (tendón 64 %), prevalencia de arritmias en sanos; regla nueva A6B_POCO_GALOPE_60D (KNOWLEDGE_VERSION 1.2.0, motor 2.0.0-dev4)"
+    },
+    {
+      "version": "1.3.0",
+      "fecha": "2026-11-19",
+      "cambio": "Estudio extra: tendón (sin curva S-N; árabes vuelven a correr 15 % frente a 41 %), V200 y recuperación (retraso de FC, 4 y 15 min), líneas base (ARL recalculados, z 3,5, umbral 2·TE·√(1+1/n)), playa por franjas (Chateau 2011) y tracking de France Galop con zancadas; herramientas de línea base y CUSUM en el motor (KNOWLEDGE_VERSION 1.3.0, motor 2.0.0-dev5), sin conectar a reglas"
     }
   ]
 }
