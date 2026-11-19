@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.5.0",
+  "version": "1.7.0",
   "fecha": "2026-11-19",
   "razas": [
     "PSI",
@@ -12,7 +12,10 @@
   "niveles_evidencia": {
     "E": "dato o ecuación publicada con fuente",
     "I": "inferencia o diseño propio a partir de la evidencia",
-    "NV": "sin verificar; no debe entrar en el código sin contrastar"
+    "NV": "sin verificar; no debe entrar en el código sin contrastar",
+    "E-r": "dato publicado leído solo en el resumen, un agregador o un acta",
+    "I-raza": "dato de otra raza usado solo como método, con justificación de la transferencia; nunca sustituye a un dato de PSI o árabe",
+    "acceso": "TEXTO_COMPLETO, RESUMEN, AGREGADOR, CONGRESO, PREPRINT, COMERCIAL, PRENSA u OFICIAL; con verificado_fecha"
   },
   "estudios": [
     {
@@ -44,6 +47,16 @@
       "fecha": "2026-11-19",
       "titulo": "Extra 2: CUSUM con pocas sesiones (autoiniciado de Hawkins), OR del TFDS de Ikeda 2019 y árabes, IDF de France Galop (no existe)",
       "archivo": "estudios/2026-11-19_extra2_cusum_autoiniciado_tendon_arabes_idf.md"
+    },
+    {
+      "fecha": "2026-11-19",
+      "titulo": "Extra 3: restricciones del planificador semanal (práctica de entrenadores, descansos, intervalos) y ECG en ejercicio (detector de QRS anclado en S, prematuro 5–6 %, fases, puerta de calidad para A11)",
+      "archivo": "estudios/2026-11-19_extra3_planificador_semanal_ecg_a11.md"
+    },
+    {
+      "fecha": "2026-11-19",
+      "titulo": "Extra 4: auditoría de 9 fuentes del motor (acceso y cifras), índice tendinoso en árabes (Turquía, Polonia, Qatar) con trotones [I-raza] y V200/VHRmax con trotones, Corea y Brasil",
+      "archivo": "estudios/2026-11-19_extra4_auditoria_fuentes_tendon_arabes_v200_trotones.md"
     }
   ],
   "fuentes": [
@@ -69,8 +82,16 @@
     },
     {
       "id": "MORRICE_WEST_2025",
-      "cita": "Morrice-West et al. 2025, Veterinary Journal (fatiga ósea acumulada)",
-      "url": "https://madbarn.com/research/the-impact-of-cumulative-bone-fatigue-on-musculoskeletal-injury-risk-in-racing-thoroughbreds"
+      "cita": "Morrice-West AV, Wong ASM, Hitchens PL, Whitton RC 2025, Vet J 314:106502 (fatiga ósea acumulada; Tasmania, 405 caballos, 3.168 salidas)",
+      "url": "https://madbarn.com/research/the-impact-of-cumulative-bone-fatigue-on-musculoskeletal-injury-risk-in-racing-thoroughbreds",
+      "acceso": "AGREGADOR",
+      "pais": "Australia (Tasmania)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "doi": "10.1016/j.tvjl.2025.106502",
+      "pmid": "41271082",
+      "nota": "HR de Cox, no OR: 3,37 (1,01–11,22) una salida, 1,80 (1,53–2,11) carrera deportiva; ×2,89 (baja) y ×8,51 (alta) = fatiga ósea acumulada en las 4 salidas previas (< 0,25 / 0,25–0,75 / ≥ 0,75), no recuento de trabajos rápidos",
+      "verificado_fecha": "2026-11-19"
     },
     {
       "id": "ICRAV_2026_HK",
@@ -94,13 +115,28 @@
     },
     {
       "id": "ESTBERG_1996",
-      "cita": "Estberg et al. 1996 (California, fracturas catastróficas)",
-      "url": "https://madbarn.com/research/high-speed-exercise-history-and-catastrophic-racing-fracture-in-thoroughbreds"
+      "cita": "Estberg L et al. 1996, Am J Vet Res 57:1549–1555 (California, 64 fracturas catastróficas)",
+      "url": "https://madbarn.com/research/high-speed-exercise-history-and-catastrophic-racing-fracture-in-thoroughbreds",
+      "acceso": "RESUMEN",
+      "pais": "EE. UU. (California)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "doi": "10.2460/ajvr.1996.57.11.1549",
+      "pmid": "8915427",
+      "nota": "35 frente a 25 furlongs de carrera + trabajo cronometrado en 2 meses: 3,9 (IC 2,1–7,1); comparación entre caballos en valor absoluto, no aumento relativo propio",
+      "verificado_fecha": "2026-11-19"
     },
     {
       "id": "CARRIER_1998",
-      "cita": "Carrier et al. 1998 (fracturas de húmero y pelvis tras descanso)",
-      "url": "https://madbarn.com/research/association-between-long-periods-without-high-speed-workouts-and-risk-of-complete-humeral-or-pelvic-fracture-in-thoroughbred-racehorses-54-cases-1991-1994"
+      "cita": "Carrier TK et al. 1998, JAVMA 212:1582–1587 (fractura de húmero y pelvis tras descanso; 54 casos)",
+      "url": "https://madbarn.com/research/association-between-long-periods-without-high-speed-workouts-and-risk-of-complete-humeral-or-pelvic-fracture-in-thoroughbred-racehorses-54-cases-1991-1994",
+      "acceso": "AGREGADOR",
+      "pais": "EE. UU. (California)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "pmid": "9604029",
+      "nota": "RR 71 (10 d) y 45 (21 d) solo para fractura de HÚMERO; DOI sin confirmar",
+      "verificado_fecha": "2026-11-19"
     },
     {
       "id": "CHOI_PARKIN_2025",
@@ -130,7 +166,15 @@
     {
       "id": "VERMEULEN_EVANS_2006",
       "cita": "Vermeulen & Evans 2006, Equine Vet J Suppl (V200 con GPS y FC)",
-      "url": "https://www.researchgate.net/publication/51384035"
+      "url": "https://www.researchgate.net/publication/51384035",
+      "acceso": "RESUMEN",
+      "pais": "Australia",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "doi": "10.1111/j.2042-3306.2006.tb05525.x",
+      "pmid": "17402404",
+      "nota": "«diferencias medias ≤ 2 %» entre días (no CV); el +8 % de VHRmax es de la crónica de prensa AAEP 2005 (n 10); trote + galope, medias de 5 s",
+      "verificado_fecha": "2026-11-19"
     },
     {
       "id": "WONG_2023",
@@ -145,7 +189,15 @@
     {
       "id": "MARTIG_2013",
       "cita": "Martig et al. 2013, Bone 57:392–398 (curva S-N del hueso subcondral del MC3; resumen)",
-      "url": "https://madbarn.com/research/compressive-fatigue-life-of-subchondral-bone-of-the-metacarpal-condyle-in-thoroughbred-racehorses"
+      "url": "https://madbarn.com/research/compressive-fatigue-life-of-subchondral-bone-of-the-metacarpal-condyle-in-thoroughbred-racehorses",
+      "acceso": "AGREGADOR",
+      "pais": "Australia",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "doi": "10.1016/j.bone.2013.09.006",
+      "pmid": "24063945",
+      "nota": "134,2/14,1 es la curva del hueso sin lesión subcondral avanzada (excluye 3 caballos; R² 0,72); con todas las muestras 112,2/9,6 (R² 0,52), alternativa conservadora; ensayo a 54/66/78/90 MPa (estudio extra 4)",
+      "verificado_fecha": "2026-11-19"
     },
     {
       "id": "PAN_2025_PREPRINT",
@@ -201,7 +253,16 @@
     {
       "id": "FRICK_2019",
       "cita": "Frick et al. 2019, JVIM 33:212 (variación RR en cinta; resumen)",
-      "url": "https://madbarn.com/research/the-use-of-heart-rate-variability-analysis-to-detect-arrhythmias-in-horses-undergoing-a-standard-treadmill-exercise-test"
+      "url": "https://madbarn.com/research/the-use-of-heart-rate-variability-analysis-to-detect-arrhythmias-in-horses-undergoing-a-standard-treadmill-exercise-test",
+      "acceso": "RESUMEN",
+      "pais": "Suiza",
+      "idioma": "en",
+      "raza_fuente": "caballos de clínica (raza no verificada)",
+      "doi": "10.1111/jvim.15358",
+      "pmid": "30520119",
+      "pmcid": "PMC6335521",
+      "nota": "−6,1/+5,4 % en canter en cinta (HSET), no galope en pista; recuperación: corte 6 % S 88 %, E 97 %, LR 26; texto completo abierto en PMC pero bloqueado en la sesión",
+      "verificado_fecha": "2026-11-19"
     },
     {
       "id": "TER_WOORT_2023",
@@ -211,7 +272,15 @@
     {
       "id": "GRAMKOW_EVANS_2006",
       "cita": "Gramkow & Evans 2006, Equine Vet J Suppl 36 (VHRmax y ganancias; resumen)",
-      "url": "https://madbarn.com/research/correlation-of-race-earnings-with-velocity-at-maximal-heart-rate-during-a-field-exercise-test-in-thoroughbred-racehorses"
+      "url": "https://madbarn.com/research/correlation-of-race-earnings-with-velocity-at-maximal-heart-rate-during-a-field-exercise-test-in-thoroughbred-racehorses",
+      "acceso": "AGREGADOR",
+      "pais": "Australia",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "doi": "10.1111/j.2042-3306.2006.tb05526.x",
+      "pmid": "17402405",
+      "nota": "r 0,41 con la raíz cuadrada de las ganancias máximas por salida; galopes de prueba 15–16 m/s; un entrenador; n 25",
+      "verificado_fecha": "2026-11-19"
     },
     {
       "id": "SCHRURS_2024_TEXTO",
@@ -276,7 +345,14 @@
     {
       "id": "PERKINS_2005",
       "cita": "Perkins NR, Reid SWJ, Morris RS 2005, NZ Vet J 53:184–192 (factores de riesgo de TFDS; resumen)",
-      "url": "https://madbarn.com/research/risk-factors-for-injury-to-the-superficial-digital-flexor-tendon-and-suspensory-apparatus-in-thoroughbred-racehorses-in-new-zealand"
+      "url": "https://mro.massey.ac.nz/handle/10179/1580",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Nueva Zelanda",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "doi": "10.1080/00480169.2005.36503",
+      "nota": "capítulo 8 de la tesis de Massey (2005); IRR 6,76 (2,39–19,10) a 4 años y 15,26 (5,83–39,97) a ≥ 5; sin asociación con la distancia EN CARRERA de 30 d (p 0,4)",
+      "verificado_fecha": "2026-11-19"
     },
     {
       "id": "REARDON_2012",
@@ -397,6 +473,233 @@
     {
       "id": "FRANCE_GALOP_MCLLOYD_ROLLOUT",
       "cita": "France Galop, National rollout of the McLloyd tracking system (2021)"
+    },
+    {
+      "id": "MORRICE_WEST_2020_PRACTICAS",
+      "cita": "Morrice-West AV et al. 2020, Equine Vet J, doi 10.1111/evj.13156 (prácticas de 66 entrenadores, Victoria)"
+    },
+    {
+      "id": "MORRICE_WEST_2021_RENDIMIENTO",
+      "cita": "Morrice-West AV et al. 2021, Animals 11:3130, doi 10.3390/ani11113130"
+    },
+    {
+      "id": "WONG_2023_DESCANSOS",
+      "cita": "Wong ASM et al. 2023, Front Vet Sci 10:1260554, doi 10.3389/fvets.2023.1260554"
+    },
+    {
+      "id": "HITCHENS_2018_CALIFORNIA",
+      "cita": "Hitchens PL, Hill AE, Stover SM 2018, Front Vet Sci 5:217, doi 10.3389/fvets.2018.00217"
+    },
+    {
+      "id": "GEORGOPOULOS_PARKIN_2017",
+      "cita": "Georgopoulos SP, Parkin TDH 2017, Prev Vet Med 139:99, doi 10.1016/j.prevetmed.2016.12.006"
+    },
+    {
+      "id": "VAN_STEENKISTE_2020_QRS",
+      "cita": "Van Steenkiste G, van Loon G, Crevecoeur G 2020, Sci Rep 10:186, doi 10.1038/s41598-019-57025-2"
+    },
+    {
+      "id": "TRACHSEL_2011",
+      "cita": "Trachsel DS et al. 2011, Equine Vet J Suppl 38:208, doi 10.1111/j.2042-3306.2010.00172.x"
+    },
+    {
+      "id": "TER_WOORT_2022",
+      "cita": "Ter Woort F et al. 2022, Equine Vet J 55:336, doi 10.1111/evj.13565"
+    },
+    {
+      "id": "ESTBERG_1998",
+      "cita": "Estberg L, Gardner IA, Stover SM, Johnson BJ 1998, Prev Vet Med 33:159–170",
+      "url": "https://doi.org/10.1016/S0167-5877(97)00047-0",
+      "doi": "10.1016/S0167-5877(97)00047-0",
+      "pmid": "9500171",
+      "acceso": "AGREGADOR",
+      "pais": "EE. UU. (California)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "> P75 de distancia rápida en 60 d: RR 4,2 (3,0–5,8) en 30 d; baja ≥ 60 d RR 4,8",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "CALISKAN_2020A_JRVM",
+      "cita": "Çalışkan GÜ, Seyrek-İntaş D, Çelimli N 2020, J Res Vet Med 39(1):34–44",
+      "url": "https://doi.org/10.30782/jrvm.606021",
+      "doi": "10.30782/jrvm.606021",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Turquía",
+      "idioma": "tr",
+      "raza_fuente": "árabe y PSI",
+      "nota": "tendinitis 91,4 % en árabes; 3 años 27,5 %, 4 años 30,0 %",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "CALISKAN_2020B_JRVM",
+      "cita": "Çalışkan GÜ et al. 2020, J Res Vet Med 39(2):115–127",
+      "url": "https://doi.org/10.30782/jrvm.606025",
+      "doi": "10.30782/jrvm.606025",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Turquía",
+      "idioma": "tr",
+      "raza_fuente": "árabe y PSI",
+      "nota": "carga de 3 meses asociada a la gravedad (rs 0,225/0,190), no a la aparición",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "CELIMLI_2000_TESIS",
+      "cita": "Çelimli N 2000, tesis doctoral, Uludağ Üniversitesi (TFDS en árabes); publicada en Equine Vet Educ 16:81 (2004)",
+      "url": "https://hdl.handle.net/20.500.12812/693887",
+      "acceso": "RESUMEN",
+      "pais": "Turquía",
+      "idioma": "tr",
+      "raza_fuente": "árabe",
+      "nota": "CSA del TFDS 62,1 ± 3,2 a 93,9 ± 3,8 mm²",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "PIESZKA_2011",
+      "cita": "Pieszka M, Łuszczyński J, Baranowska A 2011, Iranian J Appl Anim Sci 1:69–71 (Służewiec 2000–2008)",
+      "url": "",
+      "acceso": "RESUMEN",
+      "pais": "Polonia",
+      "idioma": "en",
+      "raza_fuente": "árabe y PSI",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "PAP_2026_ICRAV",
+      "cita": "Pap MM 2026, 24.º ICRAV, póster 59 (Qatar Racing and Equestrian Club)",
+      "url": "",
+      "acceso": "CONGRESO",
+      "pais": "Qatar",
+      "idioma": "en",
+      "raza_fuente": "árabe y PSI",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "BERTUGLIA_2014",
+      "cita": "Bertuglia A et al. 2014, BMC Vet Res 10:11",
+      "url": "https://doi.org/10.1186/1746-6148-10-11",
+      "doi": "10.1186/1746-6148-10-11",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Italia",
+      "idioma": "en",
+      "raza_fuente": "trotón (Standardbred italiano) [I-raza]",
+      "nota": "TFDS 0,84/100 caballos-mes; más carreras/año protector; solo dirección",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "CREVIER_DENOIX_2017",
+      "cita": "Crevier-Denoix N et al. 2017, Am J Vet Res 78:1293–1304",
+      "url": "https://doi.org/10.2460/ajvr.78.11.1293",
+      "doi": "10.2460/ajvr.78.11.1293",
+      "acceso": "RESUMEN",
+      "pais": "Francia",
+      "idioma": "en",
+      "raza_fuente": "trotón francés [I-raza]",
+      "nota": "pista dura 3/6 tendinopatía TFDS frente a 0/6 blanda",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "IIMORI_2022",
+      "cita": "Iimori M, Tamura N, Seki K, Kasashima Y 2022, J Vet Med Sci 84:261–265",
+      "url": "",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Japón",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "CSA anormal 1,20–1,46 cm² por zona; lesión grave posterior 25,7 % frente a 4,9 %",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "HAMLIN_2002",
+      "cita": "Hamlin MJ, Shearman JP, Hopkins WG 2002, Equine Vet J 34:383–388",
+      "url": "https://doi.org/10.2746/042516402776249146",
+      "doi": "10.2746/042516402776249146",
+      "acceso": "RESUMEN",
+      "pais": "Nueva Zelanda",
+      "idioma": "en",
+      "raza_fuente": "Standardbred [I-raza]",
+      "nota": "8 semanas de sobrecarga: V200 baja",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "LELEU_2005",
+      "cita": "Leleu C, Cotrel C, Couroucé-Malblanc A 2005, Vet Rec 156:339–342",
+      "url": "https://doi.org/10.1136/vr.156.11.339",
+      "doi": "10.1136/vr.156.11.339",
+      "acceso": "RESUMEN",
+      "pais": "Francia",
+      "idioma": "en",
+      "raza_fuente": "trotón francés [I-raza]",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "COUROUCE_2000_2002",
+      "cita": "Couroucé A et al. 2000, EVJ Suppl 30:528 y Couroucé, Chrétien, Valette 2002, EVJ 34:91",
+      "url": "https://doi.org/10.2746/042516402776181141",
+      "acceso": "RESUMEN",
+      "pais": "Francia",
+      "idioma": "en",
+      "raza_fuente": "trotón francés [I-raza]",
+      "nota": "pistas intercambiables; cinta ≠ pista; V200 sube con edad y entrenamiento",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "RINGMARK_2015",
+      "cita": "Ringmark S et al. 2015, Acta Vet Scand 57:17",
+      "url": "https://doi.org/10.1186/s13028-015-0107-1",
+      "doi": "10.1186/s13028-015-0107-1",
+      "acceso": "RESUMEN",
+      "pais": "Suecia",
+      "idioma": "en",
+      "raza_fuente": "Standardbred sueco [I-raza]",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "LEE_2019_KOREA",
+      "cita": "Lee YW et al. 2019, J Vet Clin 36:62–67 (Corea)",
+      "url": "https://doi.org/10.17555/jvc.2019.02.36.1.62",
+      "doi": "10.17555/jvc.2019.02.36.1.62",
+      "acceso": "RESUMEN",
+      "pais": "Corea del Sur",
+      "idioma": "ko",
+      "raza_fuente": "PSI",
+      "nota": "V200 49,3 ± 4,3 km/h; VHRmax 57,4 ± 7,1 km/h; n 11 (cifras de la tesis del autor)",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "ALONSO_2013_BR",
+      "cita": "Alonso JM et al. 2013, Ciência Rural 43:722–728",
+      "url": "",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Brasil",
+      "idioma": "pt",
+      "raza_fuente": "árabe (cinta)",
+      "nota": "V200 7,4 → 7,8 m/s (+5 %) con entrenamiento, en cinta",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "FONSECA_2011",
+      "cita": "Fonseca RG, Kenny DA, Hill EW, Katz LM 2011, Equine Vet J Suppl 38:51–57",
+      "url": "https://doi.org/10.1111/j.2042-3306.2010.00272.x",
+      "doi": "10.1111/j.2042-3306.2010.00272.x",
+      "acceso": "RESUMEN",
+      "pais": "Irlanda",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "con GPS + FC de rutina, ningún parámetro de velocidad cambió claramente con el entrenamiento",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "MUKAI_2007_JES",
+      "cita": "Mukai K et al. 2007, J Equine Sci 18:153–160",
+      "url": "https://doi.org/10.1294/jes.18.153",
+      "doi": "10.1294/jes.18.153",
+      "acceso": "RESUMEN",
+      "pais": "Japón",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "95 % de la FC pico en 12,4 ± 1,8 s",
+      "verificado_fecha": "2026-11-19"
     }
   ],
   "parametros": [
@@ -428,7 +731,7 @@
       "valor": 134.2,
       "alternativa": 139.0,
       "evidencia": "E",
-      "nota": "134,2 = curva de sensibilidad de Martig 2013 (sin 3 caballos con lesión, R² 0,72; la principal es 112,2 − 9,6·log10 Nf, R² 0,52), usada por Morrice-West 2022 y por el modelo A; 139,0 = calibración in vivo de Pan 2025 para el modelo B (−54,5 % de daño), tabla 9 de Anwar 2026 [E]. El modelo A se queda en 134,2",
+      "nota": "134,2 = curva de sensibilidad de Martig 2013 (sin 3 caballos con lesión, R² 0,72; la principal es 112,2 − 9,6·log10 Nf, R² 0,52), usada por Morrice-West 2022 y por el modelo A; 139,0 = calibración in vivo de Pan 2025 para el modelo B (−54,5 % de daño), tabla 9 de Anwar 2026 [E]. El modelo A se queda en 134,2 · Extra 4: confirmado en el resumen (AGREGADOR) y en Morrice-West 2022; 134,2/14,1 es el caso menos conservador (hueso sin lesión avanzada) y 112,2/9,6 el conservador para hueso con lesión previa [E-r]",
       "fuentes": [
         "MARTIG_2013",
         "MORRICE_WEST_2022",
@@ -599,7 +902,7 @@
         "MASSIE_2023"
       ],
       "estado": "PENDIENTE",
-      "nota": "sin número aceptable publicado; en sanos 0–9 supraventriculares por prueba y ventriculares aislados (Buhl 2011, Barbesgaard 2011, Massie 2023) [E-r]; recuperación con prevalencia igual o mayor que el ejercicio"
+      "nota": "Frick 2019: −6,1/+5,4 % es canter en cinta; corte de recuperación 6 % con S 88 %, E 97 %, LR 26 [E-r] (estudio extra 4)"
     },
     {
       "id": "ecg_fases",
@@ -627,7 +930,7 @@
         "GRAMKOW_EVANS_2006"
       ],
       "estado": "PENDIENTE",
-      "nota": "solo PSI; por debajo, menos ganancias por salida (r = 0,41); en árabes solo comparación intra-caballo"
+      "nota": "Gramkow & Evans: r 0,41 con √(ganancias máximas por salida); un entrenador; n 25 [E-r]"
     },
     {
       "id": "galope_60d_dias_min",
@@ -906,17 +1209,19 @@
       "fuentes": [
         "ESTBERG_1996"
       ],
-      "estado": "IMPLEMENTADO"
+      "estado": "IMPLEMENTADO",
+      "nota": "Estberg 1996: 35 frente a 25 furlongs en 2 meses (3,9; IC 2,1–7,1) es comparación entre caballos; la rampa propia es [I] (estudio extra 4)"
     },
     {
       "id": "A4_CARGA_BAJA_PRECARRERA",
       "umbral": "< 2 sesiones rápidas en los 28 d previos a una carrera prevista",
-      "evidencia": "E (OR 2,89) / I (corte)",
+      "evidencia": "E-r (dirección, HR 2,89) / I (corte en sesiones)",
       "fuentes": [
         "MORRICE_WEST_2025"
       ],
       "estado": "PENDIENTE",
-      "falta": "fecha de la carrera prevista en la ficha del caballo; hoy solo hay el aviso informativo KB_SIN_RAPIDO_30D"
+      "falta": "fecha de la carrera prevista en la ficha del caballo; hoy solo hay el aviso informativo KB_SIN_RAPIDO_30D",
+      "nota": "Morrice-West 2025 (Tasmania, HR): «baja» = fatiga ósea acumulada < 0,25 en las 4 salidas previas, no un recuento de sesiones; el corte de 2 sesiones en 28 d es [I] (estudio extra 4)"
     },
     {
       "id": "A5_VUELTA_DESCANSO",
@@ -925,7 +1230,8 @@
       "fuentes": [
         "CARRIER_1998"
       ],
-      "estado": "IMPLEMENTADO"
+      "estado": "IMPLEMENTADO",
+      "nota": "RR 71/45 solo para fractura de húmero (Carrier 1998) (estudio extra 4)"
     },
     {
       "id": "A6_VUELTA_TENDON",
@@ -977,11 +1283,16 @@
       "fuentes": [
         "VERMEULEN_EVANS_2006",
         "GRAMKOW_EVANS_2006",
-        "POINSARD_2026"
+        "POINSARD_2026",
+        "HAMLIN_2002",
+        "COUROUCE_2000_2002",
+        "FONSECA_2011",
+        "LEE_2019_KOREA",
+        "ALONSO_2013_BR"
       ],
       "estado": "PENDIENTE",
       "falta": "ECG de la cincha 0.5.x en el análisis",
-      "nota": "Vermeulen: medias de 5 s y diferencias test-retest ≤ 2 % (no hay TE ni SWC formal publicado); ICC de V200 0,50 en trotones (Poinsard 2026); sin V200 en el análisis no se puede aplicar (la herramienta kb_drift_down sirve cuando llegue el ECG)"
+      "nota": "Vermeulen: medias de 5 s y diferencias test-retest ≤ 2 % (no hay TE ni SWC formal publicado); ICC de V200 0,50 en trotones (Poinsard 2026); sin V200 en el análisis no se puede aplicar (la herramienta kb_drift_down sirve cuando llegue el ECG) · sin TE publicado de V200 en PSI/árabe con texto legal; usar TE propio (≥ 3 sesiones/semana); no mezclar cinta y pista (Couroucé 2000 [I-raza]); V200 baja con sobrecarga (Hamlin 2002 [I-raza]); Fonseca 2011: con rutina el cambio puede no verse (estudio extra 4)"
     },
     {
       "id": "A11_ECG",
@@ -991,10 +1302,15 @@
         "NAVAS_DE_SOLIS_2026",
         "VAN_ERCK_2026",
         "REEF_2014",
-        "TER_WOORT_2023"
+        "TER_WOORT_2023",
+        "VAN_STEENKISTE_2020_QRS",
+        "FRICK_2019",
+        "TRACHSEL_2011",
+        "TER_WOORT_2022"
       ],
       "estado": "PENDIENTE",
-      "nota": "las definiciones operativas son de Navas de Solis 2026; el texto completo de Van Erck 2026 no se pudo leer; ninguna fuente fija un número aceptable de prematuros (Buhl 2011, Barbesgaard 2011, Massie 2023, Marr 2020)"
+      "nota": "las definiciones operativas son de Navas de Solis 2026; el texto completo de Van Erck 2026 no se pudo leer; ninguna fuente fija un número aceptable de prematuros (Buhl 2011, Barbesgaard 2011, Massie 2023, Marr 2020)",
+      "nota_1_6_0": "Estudio extra 3: detector anclado en el pico S (Van Steenkiste 2020 [E], reposo: VPP 99,1 %, S 98,0 %; Pan-Tompkins 81,5/91,5 por ondas T); prematuro ≥ 5–6 % de acortamiento del RR con FC > 100 lpm (Navas de Solis 2026 [E], Frick 2019 [E-r]); fases calentamiento/pico/recuperación 0–2 min/tardía (Marr 2020 [E]: 50,6 % de alteraciones en la recuperación); puerta de calidad > 10 % no interpretable por fase (Ter Woort 2022 [E-r]); niveles INFO/VIGILAR/veterinario [I]; siempre candidato a revisar (acuerdo entre observadores en ejercicio 0–13 %, Trachsel 2011 [E-r])"
     },
     {
       "id": "KB_FATIGA_OSEA_7D",
@@ -1025,21 +1341,43 @@
         "REARDON_2012",
         "CHOI_PARKIN_2025_TEXTO",
         "BEAUMONT_2025",
-        "KALISIAK_2012"
+        "KALISIAK_2012",
+        "CALISKAN_2020A_JRVM",
+        "CALISKAN_2020B_JRVM",
+        "CELIMLI_2000_TESIS",
+        "PAP_2026_ICRAV",
+        "CREVIER_DENOIX_2017",
+        "BERTUGLIA_2014",
+        "IIMORI_2022"
       ],
       "estado": "PENDIENTE",
-      "falta": "campos de lesión previa, CSA y firmeza del suelo en la app; sin exponente de carga (no hay curva S-N del tendón)"
+      "falta": "campos de lesión previa, CSA y firmeza del suelo en la app; sin exponente de carga (no hay curva S-N del tendón)",
+      "nota": "árabes: sin OR/IRR del TFDS; edad 3–4 años reforzada (Çalışkan 2020a, Pap 2026); carga de 3 meses solo con la gravedad (Çalışkan 2020b); CSA árabe 62–94 mm² (Çelimli 2000); suelo duro [I-raza] Crevier-Denoix 2017; actividad protectora [I-raza] Bertuglia 2014 (estudio extra 4)"
+    },
+    {
+      "id": "PLANIFICADOR_RESTRICCIONES_P1_P6",
+      "umbral": "P1 1–2 (2 años) / 2–3 (maduros) trabajos rápidos por semana activa, nunca 0; P2 un día libre y ≥ 2 días lentos entre rápidos; P3 carreras cada 17–21 d, aviso < 14 d; P4 tras > 60 d sin rápido ~4 semanas lentas y 21 d con 1 rápido/semana; P5 distancia rápida media 60 d > P75 propio sin penalizar el último mes; P6 ≥ 2 descansos/año de ~6 semanas",
+      "evidencia": "E (práctica de entrenadores y asociaciones) / E-r (Parkin 2004/2005, Carrier 1998, Estberg 1998) / I (forma, separación entre rápidos y árabes)",
+      "fuentes": [
+        "MORRICE_WEST_2020_PRACTICAS",
+        "MORRICE_WEST_2021_RENDIMIENTO",
+        "WONG_2023_DESCANSOS",
+        "HITCHENS_2018_CALIFORNIA",
+        "GEORGOPOULOS_PARKIN_2017"
+      ],
+      "estado": "PENDIENTE",
+      "falta": "capa 2 del planificador; sin evidencia publicada de días entre trabajos rápidos ni datos de árabes de llano"
     }
   ],
   "pendiente_motor": [
     "Modelo óseo B (Pan/Anwar) con adaptación y reparación: constantes completas (KB 1.2.0); faltan el signo de b, la f_BM inicial y reproducir la tabla 4 de Anwar",
-    "V200/VHRmax por regresión FC–velocidad (medias de 5 s, trote + galope [E]); mesetas ≥ 30 s descartando 20–30 s [I], R² ≥ 0,90 [I], sin extrapolar; recuperación a 1, 2, 4, 5, 10 y 15 min solo informativa",
-    "ECG por fase (≥ 250 SPS, preferible 500): prematuro ≥ 5 %, par, triplete, racha, FA, % de artefacto; validar el detector QRS con anotación manual",
+    "V200/VHRmax por regresión FC–velocidad (medias de 5 s, trote + galope [E]); mesetas ≥ 30 s descartando 20–30 s [I], R² ≥ 0,90 [I], sin extrapolar; recuperación a 1, 2, 4, 5, 10 y 15 min solo informativa; extra 4: TE propio por caballo (no hay TE publicado legible en PSI/árabe); misma superficie y nunca cinta con pista",
+    "ECG por fase (≥ 250 SPS con interpolación del pico, preferible 500): detector anclado en S con rechazo de T y sin ceguera tras artefacto; prematuro ≥ 6 % frente a la mediana de 8 RR con FC > 100 lpm; pareja, triplete, racha ≥ 4, FA; puerta > 10 % no interpretable por fase; validar con galope real anotado a mano (objetivo VPP ≥ 99 %, S ≥ 98 %) (estudio extra 3)",
     "Conectar las líneas base a A9 (V200) cuando el análisis traiga el ECG; A7 y A8 conectadas en 2.0.0-dev7 (KB 1.5.0) con superficie como criterio de comparables; falta el TE propio por métrica y la playa por franja",
     "Velocidad final relativa propia de AVO (France Galop no publica ningún IDF; estudio extra 2 2026-11-19): v(últimos 600/400 m)/v media con par propio por pista y superficie, al estilo de la Finishing Speed % de Timeform; importador de los PDF de tracking por 200 m solo informativo",
     "Cociente de galope 60/90 d de Choi & Parkin (A6) cuando se aclare la posición del +1",
-    "Índice tendinoso heurístico por bandas cualitativas (prioritario en árabes de 3–4 años): sin exponente de carga; faltan en la app la lesión previa, la CSA ecográfica y la firmeza del suelo (estudio extra 2026-11-19)",
-    "Planificador semanal por restricciones (capa 2) y explicación con confianza (capa 3)",
+    "Índice tendinoso heurístico por bandas cualitativas (prioritario en árabes de 3–4 años): sin exponente de carga; faltan en la app la lesión previa, la CSA ecográfica y la firmeza del suelo (estudio extra 2026-11-19); extra 4: sin OR de árabes (Golfo, Turquía, Polonia); edad 3–4 años con 3 fuentes; no añadir término de carga (Çalışkan 2020b, Perkins 2005); CSA árabe de referencia 62–94 mm²",
+    "Planificador semanal por restricciones (capa 2) con P1–P6 del estudio extra 3 (práctica [E], forma [I]) y explicación con confianza (capa 3)",
     "Línea base separada para la playa por franja (orilla firme, húmeda suelta, seca profunda, transición), marea, lluvia y nota del jinete (Chateau 2011)",
     "Regla combinada A1+A2 de Verheyen cuando se lea el texto completo",
     "Contador de muestras saturadas de la cincha en el análisis (si el firmware lo envía)"
@@ -1063,7 +1401,17 @@
     "Tesis francesa DUMAS A-2024-040 (tendinopatías; bloqueada)",
     "Jones, Champ & Rigdon 2004 y tablas de Saleh et al. 2016 (bloqueados); cuantificar por simulación el efecto del shrinkage hacia la cuadra y de la autocorrelación sobre el ARL0 del CUSUM autoiniciado",
     "Revisar a mano las OR de Ikeda 2019 y los recuentos de foulées de los PDF de France Galop (Arc 2025: 7,1 frente a 8,0 m por zancada); PDF de la QAWC 2025 (probable 20251005LON04)",
-    "Datos de carga o velocidad acumulada asociados al TFDS en árabes (no encontrados en Polonia, Turquía, EAU, Qatar, Francia ni Reino Unido)"
+    "Datos de carga o velocidad acumulada asociados al TFDS en árabes (no encontrados en Polonia, Turquía, EAU, Qatar, Francia ni Reino Unido)",
+    "PMC12699123 (Norteamérica 2009–2023, bloqueado por reCAPTCHA): días desde la última carrera y el último trabajo rápido",
+    "Días entre trabajos rápidos en PSI (Johnston 2020 los calcula sin publicarlos) y cualquier programa semanal de árabes de llano",
+    "Flethøj 2016 en PDF (signo del umbral 20/10/4 %) y Frick 2019 completo (umbral de prematuro en galope)",
+    "Textos completos bloqueados en el extra 4: Martig 2013 (n, frecuencia, criterio de fallo; vías: DOI/ScienceDirect antibots, PubMed reCAPTCHA, minerva-access sin tesis), Morrice-West 2025 (unidad de 0,25/0,75 e IC de 2,89/8,51; ScienceDirect, OpenAlex bloqueados), Estberg 1998 (velocidad umbral, P75), Vermeulen & Evans 2006 y Gramkow & Evans 2006 (Wiley de pago; ResearchGate sin texto)",
+    "Frick 2019 en PMC6335521 o BORIS desde un navegador: umbral de prematuro en la fase de ejercicio (abierto CC BY-NC, bloqueado por reCAPTCHA/Anubis en la sesión)",
+    "DOI de Carrier 1998 (JAVMA 212:1582; probable 10.2460/javma… sin confirmar)",
+    "Çelimli, Seyrek-İntaş & Kaya 2004 (Equine Vet Educ 16:81) completo: CSA del TFDS de árabes por edad; Dallas et al. 2013 (EVJ 45 S44, árabes Reino Unido); celdas de las tablas 7–12 de Çalışkan 2020a",
+    "Capítulo «Exercise testing in the field» (Couroucé-Malblanc & van Erck-Westergren, Equine Sports Medicine and Surgery, Elsevier) en el libro original: repetibilidad de V200 (la copia en línea vista no era legal; no se usó)",
+    "Hamlin 2002 completo (cuánto baja la V200 con sobrecarga) y Ringmark 2015 completo (SLU)",
+    "Golfo: no hay series publicadas de tendón ni de V200 en árabes de carreras (EAU, Arabia Saudí, Omán, Kuwait, Bahréin); probar actas ICRAV/WEVA y contacto con QREC (Pap 2026)"
   ],
   "historial": [
     {
@@ -1095,6 +1443,16 @@
       "version": "1.5.0",
       "fecha": "2026-11-19",
       "cambio": "Reglas A7 (caída de zancada ≥ 0,10 m) y A8 (velocidad de los últimos 600 m ≥ 0,20 m/s) aplicadas en Training Analytics sobre la línea base propia por superficie, con umbral 2 de 3 y CUSUM autoiniciado de Hawkins (h 5, calentamiento 8, exclusión con S > 0,8·h); motor 2.0.0-dev7"
+    },
+    {
+      "version": "1.6.0",
+      "fecha": "2026-11-19",
+      "cambio": "Estudio extra 3: restricciones P1–P6 del planificador semanal (PENDIENTE; sin evidencia de días entre rápidos ni de árabes) y especificación revisada de A11 y del detector de QRS (pico S, prematuro 5–6 %, fases, puerta de calidad); sin cambios de lógica; motor 2.0.0-dev8 solo por versión"
+    },
+    {
+      "version": "1.7.0",
+      "fecha": "2026-11-19",
+      "cambio": "Estudio extra 4: campos acceso/verificado_fecha/pais/idioma/raza_fuente; 9 fuentes auditadas (6 mejoradas) con correcciones de ámbito (Martig confirmada; Morrice-West 2025: Tasmania, HR, carga = fatiga ósea; Carrier: solo húmero; Vermeulen: diferencia media; Frick: canter en cinta); 17 fuentes nuevas; sin cambios de constantes ni de lógica; motor 2.0.0-dev9 solo por versión"
     }
   ]
 }

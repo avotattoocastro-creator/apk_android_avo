@@ -307,6 +307,45 @@ final class RacesModel {
         save()
     }
 
+    /// State of the track of a race (nil = unknown). The analyses are recomputed.
+    func setGoing(_ id: String, _ g: RaceGoing?) {
+        guard let i = races.firstIndex(where: { $0.id == id }) else { return }
+        races[i].going = g?.rawValue
+        save()
+    }
+
+    // ---------------------------------------------------------------- «Análisis motor» (Core/RaceDeepEngine.swift)
+    /// Progress of the engine run per race ("" = idle).
+    var engineProgress: [String: String] = [:]
+
+    /// Deep analysis of the race from what is already computed (report against the trainings may still be pending).
+    func deepReport(_ r: Race) -> RaceDeepReport? {
+        guard let idx = r.ourIndex else { return nil }
+        return RaceDeepEngine.analyze(race: r, ourIndex: idx, allRaces: races, report: reports[r.id])
+    }
+
+    /// Runs the current AVO engine on the trainings of the horse in the window before the race (`force` = do not reuse
+    /// the stored results, which are only reused when they come from this engine version), then recomputes the race
+    /// analysis, the form and the training vs race comparison.
+    @MainActor
+    func runEngineAnalysis(_ r: Race, force: Bool) async {
+        if engineProgress[r.id].map({ !$0.isEmpty }) ?? false { return }
+        let list: [SessionItem] = splitTrainings(for: r)
+        engineProgress[r.id] = list.isEmpty ? "Preparando…" : "Motor \(EquineEngine.version()): 0 de \(list.count) entrenamientos…"
+        for (i, s) in list.enumerated() {
+            engineProgress[r.id] = "Motor \(EquineEngine.version()): \(i + 1) de \(list.count) entrenamientos…"
+            await app.runEngine(s, force: force)
+        }
+        // the timelines may now carry the engine speed (2.0): the training summaries are recomputed too
+        trainingCache.removeAll()
+        reports.removeValue(forKey: r.id)
+        engineProgress[r.id] = "Recalculando el análisis de la carrera…"
+        requestReport(r)
+        while computing.contains(r.id) { try? await Task.sleep(nanoseconds: 100_000_000) }
+        engineProgress[r.id] = ""
+        app.log.info("carreras", "Análisis motor de la carrera", ["race": r.raceName, "trainings": list.count, "force": force] as [String: Any])
+    }
+
     func open(_ r: Race) {
         selectedRaceId = r.id
         if app.page != .races { app.page = .races }

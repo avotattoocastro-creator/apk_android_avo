@@ -61,6 +61,85 @@ Las capturas de UI fallan desde antes en casi todas las páginas («No existe na
 3. Prueba en pista: pecho + Android + iPad.
 4. Pulso y aceleración de la IMU en directo (`TELEMETRY v4`, otro lote).
 5. LIVE en Windows.
+## 2026-11-19 — iPad 1.0.0 — Botones de la pestaña Motor y «Análisis motor» de carreras
+**Autor:** Claude (a petición del usuario, capturas del build 173 marcadas) · **Rama:** `claude/motor-botones-analisis-carreras` (desde `develop` `fb9de38`) · **Commits:** `e73fca3`, `af7541c` · **PR:** #87 · **CI:** iPad run 44611181120 ✅ (sin TestFlight)
+**Qué cambia:**
+- **Pestaña Motor:** columna de botones arriba a la derecha de «Lectura del entrenamiento»: **Reprocesar** (motor
+  actual, forzado), **Reprocesar caballo** (todos los entrenamientos del mismo caballo, con confirmación y progreso),
+  **Exportar JSON** (resultado del motor a Documentos › Exportados y hoja de compartir), **Detalle técnico** (abre y
+  baja a las tablas) y **Borrar caché** (borra los `analisis_*.json` guardados; no toca entrenamientos, correcciones ni
+  valoraciones). También aparece cuando el entrenamiento aún no tiene análisis.
+- **Carreras › detalle:** botón **«Análisis motor»** entre «Informe PDF» y «PDF original». Abre una pantalla completa que
+  pasa el motor actual por los entrenamientos de los 60 días previos y recalcula informe, forma y tramo a tramo
+  («Volver a analizar» fuerza el motor). Contenido en lenguaje llano: resumen en una frase; salida, desarrollo y final
+  frente al ganador y al caballo medio; gráficas de puesto, distancia al primero (cuerpos) y velocidad por tramo;
+  rivales con su **cara a cara** en carreras anteriores del iPad y sus otras carreras; **carreras anteriores** del
+  caballo por **distancia** (±100 m), **estado de pista** e **hipódromo** con gráfica de puesto relativo;
+  entrenamientos (mejores 200/400/600 m, tendencia, caída, forma/ACWR) con gráfica; conclusiones, «para la próxima»
+  (orientativo), confianza y método.
+- **Estado de la pista** (`Race.going`, escala France Galop de *Très léger* a *Très lourd*, grupos firme/bueno/blando/
+  pesado): se anota a mano en esa pantalla porque el PDF de tracking no lo trae. Campo opcional: `carreras.json`
+  anterior se sigue leyendo.
+- Lógica en `ipad/AVOiPad/Core/RaceDeepEngine.swift` (funciones puras) con `RaceDeepEngineTests` (5 pruebas).
+  `RaceReport.fastWorkList` (aditivo). Archivos: `App/AppModel+EngineTools.swift`, `App/RacesModel.swift`,
+  `Core/RaceAnalysis.swift`, `Core/RaceModels.swift`, `Views/EngineView.swift`, `Views/RaceDetailView.swift`,
+  `Views/RaceEngineAnalysisView.swift`.
+**Por qué:** el usuario pidió botones en Motor y un análisis en profundidad de cada carrera con entrenamientos,
+carreras anteriores, mismos rivales, misma distancia y estado de pista, con gráficas y entendible.
+**No se ha tocado:** motor C++, firmware, contratos binarios, Android, Windows, workflows, firmas, `Info.plist`,
+número de build de TestFlight. Las carreras siguen siendo solo del iPad (como el resto de Carreras).
+**Validación:** IMPLEMENTADO · COMPILADO / CI: run 44611181120 en `e73fca3`, compilación ✅ y 121/121 pruebas unitarias ✅ (5 nuevas); capturas de UI con los 44 fallos que ya había en `develop` · **NO VERIFICADO** en el iPad. Las comparaciones con carreras
+anteriores solo usan las carreras importadas en el iPad; con menos de 3 son una pista, no una conclusión.
+**Pendiente:** probar en el iPad con carreras reales; leer el estado de pista de France Galop si su ficha lo muestra;
+añadir el análisis al Informe PDF si el usuario lo quiere.
+## 2026-11-19 — Motor 2.0.0-dev9 — KB-1 1.7.0: estudio extra 4 (auditoría de fuentes, tendón en árabes, V200 con trotones)
+**Autor:** Claude (tarea programada, estudio extra 4) · **Rama:** `claude/kb-estudio4-2026-11-19` (desde `claude/kb-estudio3-2026-11-19`, PR #85 abierto) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Estudio** `equine-intelligence/knowledge/estudios/2026-11-19_extra4_auditoria_fuentes_tendon_arabes_v200_trotones.md`
+  (etiquetas [E]/[E-r]/[I]/[I-raza]/[NV] y tipo de acceso). (1) **Auditoría** de 9 fuentes que sostienen reglas del
+  motor; 6 mejoradas (Perkins 2005 a texto completo, tesis de Massey). Correcciones de ámbito, sin cambiar constantes:
+  Morrice-West 2025 es de Tasmania, da HR y su «carga baja» es fatiga ósea < 0,25 en 4 salidas (el corte de A4 es [I]);
+  Carrier 1998 solo húmero; Vermeulen & Evans «diferencia media ≤ 2 %» (no CV; el +8 % es de prensa); Frick 2019 canter
+  en cinta (corte 6 %: S 88 %, E 97 %); Martig 2013 confirmada. (2) **Tendón en árabes:** sin OR/IRR publicadas (Golfo,
+  Turquía, Polonia); edad 3–4 años con tres fuentes (Çalışkan 2020 texto completo, Pap 2026 Doha); la carga solo se
+  asocia a la gravedad; CSA del TFDS árabe 62–94 mm² (Çelimli 2000); trotones solo como dirección [I-raza].
+  (3) **V200/VHRmax:** trotones (Leleu, Couroucé, Hamlin, Ringmark) como método [I-raza]; Corea (Lee 2019) y Brasil
+  (Alonso 2013, árabes en cinta); no hay TE publicado legible en PSI/árabe → TE propio del caballo.
+- `base_cientifica.json` 1.7.0: campos `acceso`, `verificado_fecha`, `pais`, `idioma`, `raza_fuente`; 17 fuentes nuevas;
+  notas de A3, A4, A5, A9, índice tendinoso, σ0, VHRmax y ECG; pendientes y cola actualizados; niveles E-r e I-raza.
+- Se descartó por legalidad una lectura en una copia no autorizada de un libro comercial (sin usar cifras).
+- **Motor sin cambios de lógica:** `KNOWLEDGE_VERSION` 1.6.0 → 1.7.0 y `ENGINE_VERSION` 2.0.0-dev8 → 2.0.0-dev9;
+  fixtures regenerados (solo versiones). Ficha 14, tabla de estado y README.
+**Por qué:** estudio extra pedido por el usuario (modo meticuloso, mundial y multirraza).
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, número de build de TestFlight, apps.
+**Validación:** IMPLEMENTADO (solo versiones) · pruebas locales con ASan/UBSan (ctest en verde) y Release: 102 casos y
+1.729 comprobaciones sin fallos; `check_fixtures.py` en verde tras `--update` (diferencias: solo versiones) · CI: ver PR ·
+**NO VERIFICADO** con caballos reales. La fatiga ósea es un índice de carga, no una predicción de lesiones.
+**Pendiente:** textos completos bloqueados (Martig 2013, Morrice-West 2025, Estberg 1998, Vermeulen/Gramkow 2006, Frick
+2019 en PMC desde un navegador), DOI de Carrier 1998, Çelimli 2004 completo; línea base de la playa.
+
+## 2026-11-19 — Motor 2.0.0-dev8 — KB-1 1.6.0: estudio extra 3 (planificador semanal y ECG / A11)
+**Autor:** Claude (tarea programada, estudio extra 3) · **Rama:** `claude/kb-estudio3-2026-11-19` (desde `develop` con PR #80–#83 fusionados) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Estudio** `equine-intelligence/knowledge/estudios/2026-11-19_extra3_planificador_semanal_ecg_a11.md`, con cifras
+  etiquetadas [E]/[E-r]/[I]/[NV]. (1) **Planificador semanal:** práctica publicada (≈ 2 trabajos rápidos/semana en PSI
+  maduros y 1,7 en 2 años; ~8 km/mes a ≥ 13,3 m/s; un día libre; ~2 descansos/año de ~6 semanas; carreras cada
+  2,3 semanas), carga del último mes protectora frente a la de 60–180 d (Hitchens 2018, Georgopoulos & Parkin 2017) y
+  seis restricciones P1–P6 propuestas. No hay evidencia publicada de días entre trabajos rápidos ni de árabes de llano.
+  (2) **ECG / A11:** detector anclado en el pico S (Van Steenkiste 2020: VPP 99,1 %, S 98,0 % en reposo; Pan-Tompkins
+  81,5/91,5), prematuro ≥ 5–6 % (Navas de Solis 2026, Frick 2019), fases (Marr 2020: 50,6 % en la recuperación), puerta
+  de calidad del 10 % y acuerdo entre observadores en ejercicio 0–13 % (Trachsel 2011).
+- `base_cientifica.json` 1.6.0: 10 fuentes, regla `PLANIFICADOR_RESTRICCIONES_P1_P6` (PENDIENTE), nota en `A11_ECG`,
+  pendientes de ECG y planificador reescritos, 4 temas nuevos en la cola. Ficha 14, tabla de estado y README.
+- **Motor sin cambios de lógica:** `KNOWLEDGE_VERSION` 1.5.0 → 1.6.0 y `ENGINE_VERSION` 2.0.0-dev7 → 2.0.0-dev8 para que
+  el análisis declare la base vigente; fixtures regenerados (solo las dos versiones).
+**Por qué:** estudio extra pedido por el usuario sobre pendientes que bloquean código (planificador y A11).
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, número de build de TestFlight, apps.
+**Validación:** IMPLEMENTADO (solo versiones) · pruebas locales con ASan/UBSan: 102 casos y 1.729 comprobaciones sin
+fallos; Release y `check_fixtures.py` en verde tras `--update` (diferencias: solo versiones) · CI: ver PR ·
+**NO VERIFICADO** con caballos reales. Las restricciones son de prudencia, no predicciones de lesión.
+**Pendiente:** validar un detector de QRS con galope real anotado (cincha PROTOTIPO REV 5.10); implementar P1–P6 cuando
+haya semanas reales de la cuadra; leer PMC12699123, Flethøj 2016 y Frick 2019 completos.
 
 ## 2026-11-19 — Motor 2.0.0-dev7 — KB-1 1.5.0: reglas A7 y A8 aplicadas (línea base propia + CUSUM autoiniciado)
 **Autor:** Claude (a petición del usuario: «fusiona y empieza a aplicar las reglas») · **Rama:** `claude/kb-reglas-lineas-base-2026-11-19` (desde `develop` con PR #82 fusionado) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
