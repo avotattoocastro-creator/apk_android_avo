@@ -7,7 +7,8 @@ compartida**: lo que no esté en la rama no existe para el siguiente asistente. 
 1. Trabaja desde **`develop/avo-performance-horse`** actualizada (`git pull`); nunca desde `main` ni ramas viejas.
 2. Lee **`docs/ESTADO_DESARROLLO_Y_VERSIONES.md`** (tabla única de lo vigente) y las últimas entradas de
    `docs/REGISTRO_DE_CAMBIOS.md`.
-3. Haz el cambio en una rama corta (`claude/<tema>`), con PR a `develop` y *merge commit*.
+3. Haz el cambio en una rama corta (`claude/<tema>`) y abre un PR a `develop`. **No lo fusiones tú**: lo fusiona el
+   chat integrador (ver «Integración centralizada»).
 4. Al terminar: entrada en el registro **y** fila actualizada en la tabla del estado. Si no está en GitHub, no existe.
 5. Descargas de lo último publicado: release `descargas` (ver «Descargas directas»).
 
@@ -36,6 +37,22 @@ compartida**: lo que no esté en la rama no existe para el siguiente asistente. 
    `docs/REGISTRO_DE_CAMBIOS.md`, y comprobar `git log` de la rama.
 5. Al cambiar una versión, actualizar también la matriz de `docs/ESTADO_DESARROLLO_Y_VERSIONES.md` y la tabla de `README.md`.
 6. No guardar credenciales NTRIP, tokens, contraseñas ni claves privadas en el repositorio (ver «Secretos»).
+
+## Integración centralizada (decisión del usuario, 20/11/2026)
+Motivo: el 19/11 los PR #84 (iPad LIVE) y #87 (botones de Motor y «Análisis motor») quedaron abiertos mientras otros
+chats fusionaban sus cambios del motor; la build 177 de TestFlight salió sin ellos y parecía que «el motor quitaba lo
+demás».
+- **Cada chat** trabaja en su rama corta desde `develop` actualizada, documenta su cambio (registro + tabla de estado)
+  y **abre el PR sin fusionarlo**. En la descripción del PR indica qué toca (apps, motor, firmware, docs) y su CI.
+- **Un único chat integrador** (el que el usuario designe; por defecto, el que el usuario abra para «integrar») es el
+  único que fusiona en `develop`:
+  1. lista los PR abiertos (`gh api repos/<owner>/<repo>/pulls`) y los fusiona **de uno en uno**, por orden de llegada;
+  2. antes de cada fusión, trae `develop` a la rama del PR, resuelve los conflictos **conservando las dos partes**
+     (en `docs/REGISTRO_DE_CAMBIOS.md`, todas las entradas; en la tabla de estado y en el `README.md`, cada fila con lo
+     de ambos) y lanza el CI de lo que toque;
+  3. fusiona con *merge commit* solo con el CI en verde, y anota en el registro qué PR entraron en cada build.
+- Ningún PR se da por terminado ante el usuario hasta que esté **fusionado**: «PR abierto» no llega a TestFlight ni a
+  las descargas.
 
 ## Ramas (desde la integración del 12/11/2026, PR #7–#17)
 - **Una sola rama de integración:** `develop/avo-performance-horse`. Todo el código vigente está en ella.

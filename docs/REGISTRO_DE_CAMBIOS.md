@@ -24,6 +24,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Proceso — Integración centralizada en un chat integrador
+**Autor:** Claude (decisión del usuario, 20/11/2026 00:32) · **Rama:** `claude/regla-chat-integrador`
+**Qué cambia:** `AGENTS.md` (sección «Integración centralizada» y paso 3 de «Empieza aquí») y `CLAUDE.md`: cada chat abre
+su PR sin fusionarlo; un único chat integrador fusiona los PR en `develop` de uno en uno, resuelve los conflictos
+conservando las dos partes y solo fusiona con el CI en verde.
+**Por qué:** la build 177 salió sin los PR #84 (LIVE) y #87 (botones de Motor y «Análisis motor»), que seguían abiertos
+mientras otros chats fusionaban sus cambios del motor.
+**No se ha tocado:** código, workflows, firmas, `Info.plist`, número de build de TestFlight.
+**Validación:** solo documentación.
+
 ## 2026-11-19 — iPad LIVE + Android 2.10-live-dev1 (vc 43) + reglas Firebase `live/` — directo desde el servidor
 **Autor:** Claude (boceto del entrenador sobre la captura de la build 171; decisión del usuario: «El iPad es Live desde el servidor») · **Rama:** `claude/live-servidor` · **CI:** los workflows solo se ejecutan al fusionar en `develop` (Android, iPad/TestFlight y reglas Firebase)
 **Qué cambia:**
