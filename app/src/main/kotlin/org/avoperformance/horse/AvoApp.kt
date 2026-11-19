@@ -54,6 +54,8 @@ class AppContainer(val app: Application) {
         s.firebase.licenseToken = { license.publicTokenB64 }
         s.firebase.verifyRoles = { code, token -> license.verifiedRoles(code, token) }
     }
+    /** LIVE: la sesión en curso, en directo en Firebase para la pantalla LIVE del iPad. */
+    val live = org.avoperformance.horse.cloud.LiveShare(this)
     // declared before init: the coroutines launched in init use them
     private val riderLock = kotlinx.coroutines.sync.Mutex()
     private val licPrefs = app.getSharedPreferences("license_rider", android.content.Context.MODE_PRIVATE)

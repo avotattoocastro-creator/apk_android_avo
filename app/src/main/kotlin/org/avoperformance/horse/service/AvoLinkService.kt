@@ -80,6 +80,10 @@ class AvoLinkService : LifecycleService() {
                 if (card != null) { c.share.schedule(); c.share.runNow(); c.share.listen(card) } else c.share.firebase.signOut()
             }
         }
+        // LIVE: cada TELEMETRY del pecho se pasa al directo (solo sube si está activado en Compartir)
+        lifecycleScope.launch {
+            c.watch.telemetry.collect { s -> if (s != null) c.live.onTelemetry(s.t, s.receivedMs) }
+        }
         lifecycleScope.launch {
             var lastText = ""
             var wasReady = false

@@ -109,6 +109,10 @@ class Settings(ctx: Context, private val secure: SecureStore) {
         set(v) { p.edit().putBoolean("share.deleteAfterWhatsApp", v).apply() }
 
     // ---- Sharing between AVO users (Firebase)
+    /** LIVE: subir en directo la sesión en curso a Firebase para verla en el iPad (desactivado por defecto). */
+    var liveShareEnabled: Boolean
+        get() = p.getBoolean("share.liveEnabled", false)
+        set(v) { p.edit().putBoolean("share.liveEnabled", v).apply() }
     /** Mode A: global recipients enabled. */
     var shareGlobalEnabled: Boolean
         get() = p.getBoolean("share.globalEnabled", true)

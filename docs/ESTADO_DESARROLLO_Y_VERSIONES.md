@@ -29,11 +29,11 @@ registrada: **NO VERIFICADO**.
 
 | Componente | Versión | Carpeta | Workflow | Descarga | Estado |
 |---|---|---|---|---|---|
-| Android AVO Performance Horse | **2.9-integrada-dev1 (vc 42)** | `app/`, `core/` | `build-android.yml` | [`AVO_ANDROID.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_ANDROID.apk) | CI ✅ · NO VERIFICADO |
+| Android AVO Performance Horse | **2.10-live-dev1 (vc 43)** (directo LIVE a Firebase) | `app/`, `core/` | `build-android.yml` | [`AVO_ANDROID.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_ANDROID.apk) | CI: al fusionar · NO VERIFICADO |
 | AVO Tarjetas | **1.4-nfc-movil-dev1 (vc 5)** | `cards/` | `build-android.yml` | [`AVO_TARJETAS.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_TARJETAS.apk) | CI ✅ |
 | AVO Update | **2.3.1 (vc 28)** | `usb-updater/` | `build-usb-updater.yml` | [`AVO_UPDATE.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_UPDATE.apk) | CI ✅ |
 | Windows | **V2 PRO 2.0.0** | `windows/` | `build-avo-windows.yml` | [`AVO_WINDOWS.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_WINDOWS.zip) | CI ✅ |
-| iPad | **1.0.0** (build automático) | `ipad/` | `build-avo-ipad.yml` | solo TestFlight | CI ✅ |
+| iPad | **1.0.0** (build automático) · página **LIVE** desde el servidor (`docs/LIVE_SERVIDOR.md`) | `ipad/` | `build-avo-ipad.yml` | solo TestFlight | CI: al fusionar · LIVE NO VERIFICADO |
 | Motor C++17 Equine | **2.0.0-dev7** (base científica KB-1 1.5.0: reglas A7 zancada y A8 velocidad final aplicadas con línea base propia y CUSUM autoiniciado) | `equine-intelligence/` | `build-equine-engine.yml` | — | pruebas locales ✅ (ASan/UBSan, 102 casos) · CI de la rama `claude/kb-reglas-lineas-base-2026-11-19`: ver PR · NO VERIFICADO |
 
 **Plan de pruebas (decisión del usuario, 17/11/2026):** hasta construir todas las PCB, las pruebas de campo se hacen
