@@ -1,4 +1,4 @@
-# 14 · Base científica de la cuadra (KB-1) 1.3.0
+# 14 · Base científica de la cuadra (KB-1) 1.4.0
 
 Código: `include/avo_eq/knowledge.h`, `src/knowledge/knowledge.cpp`. Se calcula en Track Work (`src/racing/racing.cpp`,
 bloque `trabajo_pista.base_cientifica`) y se evalúa en Training Analytics (`src/training/training.cpp`, bloques
@@ -102,6 +102,12 @@ ARL con k = 0,5 (unilateral): h = 4 → ARL0 ≈ 335 y ARL1(δ = 1) ≈ 8,4; h =
 a 5,3 con h = 4. Los 168/465 son del CUSUM bilateral. Con muchas cartas (caballos × métricas × sentidos) usar h = 5 [I].
 Valores de prueba: {6,9; 7,0; 7,1; 7,05; 6,95; 7,2; 6,85; 7,0} → mediana 7,0 y MAD_s 0,1112; shrinkage (n 3, x̄ 10,
 σ² 0,04, μ_pop 9,6, τ² 0,09) = 9,9484; CUSUM de {0,2; 1,2; 1,5; 0,8; 1,6; 1,4; 1,1} → alarma en la 7.ª muestra.
+
+**CUSUM autoiniciado (KB-1 1.4.0, estudio extra 2 del 19/11).** Con μ y σ estimadas de 5–20 sesiones, el CUSUM con
+h = 4/5 no tiene el ARL0 nominal por caballo (simulación propia: con 10 sesiones y h = 4 el P10 del ARL0 es 23).
+`kb_self_starting_z(x)` tipifica cada sesión frente a las anteriores (Hawkins 1987: ξ = Φ⁻¹(T_{n−2}(√((n−1)/n)·V)),
+V = (x_n − x̄_{n−1})/s_{n−1}, n ≥ 3) y sus ξ se pasan a `kb_cusum_upper` con k = 0,5, h = 5 y `min_samples` 8–10 [I];
+ARL0 339/930 con h = 4/5 (simulación propia). Prueba: {10,0; 10,4; 9,8; 10,9; 10,1; 12,0} → ξ_6 = 2,3292 (scipy).
 
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se

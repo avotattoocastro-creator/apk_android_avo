@@ -278,4 +278,84 @@ KbCusumResult kb_cusum_upper(const std::vector<double>& z, const KbCusumConfig& 
   return r;
 }
 
+
+namespace {
+// Fracción continua de la beta incompleta regularizada (método de Lentz).
+double betacf(double a, double b, double x) {
+  const double tiny = 1e-300;
+  double qab = a + b, qap = a + 1, qam = a - 1, cc = 1, d = 1 - qab * x / qap;
+  if (std::fabs(d) < tiny) d = tiny;
+  d = 1 / d;
+  double h = d;
+  for (int m = 1; m <= 300; m++) {
+    double m2 = 2.0 * m, aa = m * (b - m) * x / ((qam + m2) * (a + m2));
+    d = 1 + aa * d; if (std::fabs(d) < tiny) d = tiny;
+    cc = 1 + aa / cc; if (std::fabs(cc) < tiny) cc = tiny;
+    d = 1 / d; h *= d * cc;
+    aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2));
+    d = 1 + aa * d; if (std::fabs(d) < tiny) d = tiny;
+    cc = 1 + aa / cc; if (std::fabs(cc) < tiny) cc = tiny;
+    d = 1 / d;
+    double del = d * cc;
+    h *= del;
+    if (std::fabs(del - 1) < 1e-15) break;
+  }
+  return h;
+}
+double betai(double a, double b, double x) {
+  if (x <= 0) return 0;
+  if (x >= 1) return 1;
+  double lbt = std::lgamma(a + b) - std::lgamma(a) - std::lgamma(b) + a * std::log(x) + b * std::log(1 - x);
+  if (x < (a + 1) / (a + b + 2)) return std::exp(lbt) * betacf(a, b, x) / a;
+  return 1 - std::exp(lbt) * betacf(b, a, 1 - x) / b;
+}
+// Cola superior de la t de Student: P(T > t) para t ≥ 0.
+double t_upper(double t, double nu) { return 0.5 * betai(0.5 * nu, 0.5, nu / (nu + t * t)); }
+}  // namespace
+
+double kb_student_t_cdf(double t, double nu) {
+  if (std::isnan(t) || !(nu > 0)) return kNaN;
+  if (std::isinf(t)) return t > 0 ? 1.0 : 0.0;
+  return t >= 0 ? 1.0 - t_upper(t, nu) : t_upper(-t, nu);
+}
+
+double kb_normal_quantile(double p) {
+  if (std::isnan(p) || p < 0 || p > 1) return kNaN;
+  if (p == 0) return -INFINITY;
+  if (p == 1) return INFINITY;
+  if (p > 0.5) return -kb_normal_quantile(1 - p);
+  // Bisección sobre Φ(x) = erfc(−x/√2)/2 en la cola inferior (precisión relativa buena hasta p ≈ 1e-300).
+  double lo = -40, hi = 0;
+  for (int i = 0; i < 200; i++) {
+    double mid = 0.5 * (lo + hi);
+    if (0.5 * std::erfc(-mid / std::sqrt(2.0)) < p) lo = mid; else hi = mid;
+  }
+  return 0.5 * (lo + hi);
+}
+
+std::vector<double> kb_self_starting_z(const std::vector<double>& x) {
+  std::vector<double> out(x.size(), kNaN);
+  int n = 0;            // observaciones válidas ya acumuladas
+  double mean = 0, m2 = 0;   // Welford
+  for (size_t i = 0; i < x.size(); i++) {
+    double v = x[i];
+    if (std::isnan(v) || std::isinf(v)) continue;
+    if (n >= 2) {
+      double s = std::sqrt(m2 / (n - 1));
+      if (s > 0) {
+        int nn = n + 1;   // índice (1-based) de esta observación
+        double tstat = std::sqrt((double)(nn - 1) / nn) * (v - mean) / s;
+        double nu = nn - 2;
+        // Usar la cola más pequeña para no perder precisión en los extremos.
+        out[i] = tstat >= 0 ? -kb_normal_quantile(t_upper(tstat, nu)) : kb_normal_quantile(t_upper(-tstat, nu));
+      }
+    }
+    n++;
+    double d = v - mean;
+    mean += d / n;
+    m2 += d * (v - mean);
+  }
+  return out;
+}
+
 }  // namespace avoeq
