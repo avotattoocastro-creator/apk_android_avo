@@ -267,5 +267,77 @@ EQ_TEST(kb, final_speed_last_600m) {
   double keep = -1;
   CHECK(!kb_final_speed(t, d, 600, &keep, nullptr)); CHECK_NEAR(keep, -1, 0);
   CHECK(!kb_final_speed({}, {}, 600, &keep, nullptr));
-  CHECK(std::string(KNOWLEDGE_VERSION) == "1.2.0");
+  CHECK(std::string(KNOWLEDGE_VERSION) == "1.3.0");
+}
+
+// Líneas base (KB 1.3.0, estudio extra 2026-11-19): valores de referencia del estudio ampliado del 18/11 y de la cadena
+// de Markov de Brook-Evans (ARL), recalculados a mano en el estudio extra.
+EQ_TEST(kb, baseline_robust_median_mad) {
+  // L1: {6,9; 7,0; 7,1; 7,05; 6,95; 7,2; 6,85; 7,0} → mediana 7,0; MAD 0,075; MAD_s 0,1112
+  std::vector<double> x = {6.9, 7.0, 7.1, 7.05, 6.95, 7.2, 6.85, 7.0};
+  KbRobustBaseline b = kb_robust_baseline(x);
+  CHECK(b.n == 8);
+  CHECK_NEAR(b.median, 7.0, 1e-12);
+  CHECK_NEAR(b.mad_s, 1.4826 * 0.075, 1e-9);
+  REPORT("línea base: mediana %.4f, MAD_s %.4f (referencia 7,0 y 0,1112)\n", b.median, b.mad_s);
+  CHECK_NEAR(b.mad_s, 0.1112, 1e-4);
+  // L2: z robusto de 7,4 = 0,4/0,111195 = 3,597 → atípico (> 3,5); 7,3 → 2,698, no
+  CHECK_NEAR(kb_robust_z(7.4, b), 0.4 / (1.4826 * 0.075), 1e-9);
+  CHECK(kb_robust_z(7.4, b) > KB_ROBUST_Z_OUTLIER);
+  CHECK(kb_robust_z(7.3, b) < KB_ROBUST_Z_OUTLIER);
+  // L3: NaN se saltan y last_n toma las últimas válidas: {.., 1, 2, NaN, 3} con last_n 3 → {1,2,3}, mediana 2, MAD_s 1,4826
+  KbRobustBaseline b2 = kb_robust_baseline({100, 1, 2, std::nan(""), 3}, 3);
+  CHECK(b2.n == 3); CHECK_NEAR(b2.median, 2.0, 0); CHECK_NEAR(b2.mad_s, 1.4826, 1e-12);
+  // L4: menos de 3 datos o escala nula → NaN; min_scale evita la escala nula
+  CHECK(std::isnan(kb_robust_z(1.0, kb_robust_baseline({1, 2}))));
+  KbRobustBaseline flat = kb_robust_baseline({5, 5, 5, 5});
+  CHECK_NEAR(flat.mad_s, 0, 0);
+  CHECK(std::isnan(kb_robust_z(5.5, flat)));
+  CHECK_NEAR(kb_robust_z(5.5, flat, 0.25), 2.0, 1e-12);
+  CHECK(kb_robust_baseline({}).n == 0);
+}
+
+EQ_TEST(kb, baseline_shrinkage_and_threshold) {
+  // S1: n = 3, x̄ = 10,0, σ² = 0,04, μ_pop = 9,6, τ² = 0,09 → μ* = 9,9484
+  double m = kb_shrink_mean(3, 10.0, 0.04, 9.6, 0.09);
+  REPORT("shrinkage: %.4f (referencia 9,9484)\n", m);
+  CHECK_NEAR(m, (3 * 10.0 / 0.04 + 9.6 / 0.09) / (3 / 0.04 + 1 / 0.09), 1e-12);
+  CHECK_NEAR(m, 9.9484, 1e-4);
+  // S2: peso propio = n·ICC/(1 + (n−1)·ICC) con ICC = τ²/(τ² + σ²); ICC 0,6 y n = 8 → 0,923
+  double s2 = 0.4, t2 = 0.6, w = 8 * 0.6 / (1 + 7 * 0.6);
+  CHECK_NEAR(kb_shrink_mean(8, 1.0, s2, 0.0, t2), w, 1e-12);
+  // S3: casos límite: n = 0 → μ_pop; sin prior → x̄
+  CHECK_NEAR(kb_shrink_mean(0, 10.0, 0.04, 9.6, 0.09), 9.6, 0);
+  CHECK_NEAR(kb_shrink_mean(3, 10.0, 0.04, std::nan(""), 0.09), 10.0, 0);
+  CHECK_NEAR(kb_shrink_mean(3, 10.0, 0.04, 9.6, 0), 10.0, 0);
+  // T1: TE 0,15 y n = 8 → 2·0,15·√1,125 = 0,3182; con SWC 0,4 manda el SWC; n ≤ 0 → 2·TE·√2 = 0,4243
+  CHECK_NEAR(kb_change_threshold(0.15, 8, 0.1), 0.3 * std::sqrt(1.125), 1e-12);
+  CHECK_NEAR(kb_change_threshold(0.15, 8, 0.4), 0.4, 0);
+  CHECK_NEAR(kb_change_threshold(0.15, 0, 0.0), 0.3 * std::sqrt(2.0), 1e-12);
+  CHECK_NEAR(kb_change_threshold(std::nan(""), 8, 0.4), 0.4, 0);
+}
+
+EQ_TEST(kb, baseline_cusum_upper) {
+  // C1: z = {0,2; 1,2; 1,5; 0,8; 1,6; 1,4; 1,1}, k 0,5, h 4 → S = {0; 0,7; 1,7; 2,0; 3,1; 4,0; 4,6}, alarma en la 7.ª
+  KbCusumConfig c;
+  KbCusumResult r = kb_cusum_upper({0.2, 1.2, 1.5, 0.8, 1.6, 1.4, 1.1}, c);
+  const double ref[] = {0, 0.7, 1.7, 2.0, 3.1, 4.0, 4.6};
+  CHECK(r.s.size() == 7);
+  for (int i = 0; i < 7; i++) CHECK_NEAR(r.s[i], ref[i], 1e-9);
+  CHECK(r.alarm_index == 6);
+  // C2: con h = 5 no salta; con FIR (S0 = 2) salta antes, en la 5.ª (1,7 → 2,4 → 3,4 → 3,7 → 4,8)
+  KbCusumConfig c5; c5.h = 5;
+  CHECK(kb_cusum_upper({0.2, 1.2, 1.5, 0.8, 1.6, 1.4, 1.1}, c5).alarm_index == -1);
+  KbCusumConfig cf; cf.fir = true;
+  KbCusumResult rf = kb_cusum_upper({0.2, 1.2, 1.5, 0.8, 1.6, 1.4, 1.1}, cf);
+  CHECK_NEAR(rf.s[0], 1.7, 1e-12); CHECK_NEAR(rf.s[3], 3.7, 1e-9); CHECK_NEAR(rf.s[4], 4.8, 1e-9);
+  CHECK(rf.alarm_index == 4);
+  // C3: NaN no cambia S; min_samples retrasa la alarma; una deriva a la baja se vigila con −z
+  KbCusumResult rn = kb_cusum_upper({3.0, std::nan(""), 3.0}, c);
+  CHECK_NEAR(rn.s[1], 2.5, 1e-12); CHECK_NEAR(rn.s[2], 5.0, 1e-12); CHECK(rn.alarm_index == 2);
+  KbCusumConfig cm; cm.min_samples = 5;
+  CHECK(kb_cusum_upper({9, 9, 9, 9, 9}, cm).alarm_index == 4);
+  CHECK(kb_cusum_upper({-1.5, -1.5, -1.5, -1.5}, c).alarm_index == -1);
+  CHECK(kb_cusum_upper({1.5, 1.5, 1.5, 1.5, 1.5}, c).alarm_index == 4);   // 1, 2, 3, 4, 5 → > 4 en la 5.ª
+  CHECK(kb_cusum_upper({}, c).s.empty());
 }

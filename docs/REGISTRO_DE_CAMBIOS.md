@@ -24,6 +24,34 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-19 — Motor 2.0.0-dev5 — KB-1 1.3.0: estudio extra (tendón, V200, líneas base, playa, France Galop) y herramientas de línea base
+**Autor:** Claude (tarea programada, estudio extra) · **Rama:** `claude/kb-estudio-2026-11-19` (sale de `claude/kb-noche-2026-11-19`, PR #80, sin fusionar) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Estudio** `equine-intelligence/knowledge/estudios/2026-11-19_extra_tendon_v200_lineas_base_playa.md`, con cada
+  cifra etiquetada [E]/[E-r]/[I]/[NV] y las decisiones al principio. Temas: índice tendinoso (árabes: vuelven a correr
+  el 15 % frente al 41 % de PSI, Kalisiak 2012; no hay curva S-N del tendón, se retira el exponente de carga); V200 y
+  recuperación de FC (retraso de FC, ventanas de 4 y 15 min); líneas base (ARL del CUSUM recalculados: 335 unilateral
+  con h = 4, los 168 eran bilaterales; z atípico 3,5; umbral de cambio 2·TE·√(1 + 1/n)); playa por franjas (Chateau y
+  Crevier-Denoix 2011, trotones); France Galop publica parciales por 200 m y zancadas desde 2025 (árabes ≈ 2,4–2,5 Hz).
+- **Motor (un pendiente):** herramientas de línea base en `knowledge.h`: `kb_robust_baseline`, `kb_robust_z`,
+  `kb_shrink_mean`, `kb_change_threshold` y `kb_cusum_upper` (k 0,5, h 4, FIR opcional). **No se conectan a ninguna
+  regla** y la salida del análisis no cambia (solo versiones). `KNOWLEDGE_VERSION` 1.2.0 → 1.3.0; `ENGINE_VERSION`
+  2.0.0-dev4 → 2.0.0-dev5.
+- **`base_cientifica.json` 1.3.0:** 13 parámetros nuevos, regla pendiente `TENDON_INDICE_HEURISTICO`, 19 fuentes
+  nuevas, nota de Önder 2022 (los 0,9 m/s son una resta), pendientes y cola renovados.
+- Ficha 14 (apartado 3 quater), fixtures de Kotlin regeneradas (solo versiones) y fila del motor en la tabla de estado.
+**Por qué:** estudio extra pedido por el usuario sobre los temas que bloquean código.
+**Archivos:** `equine-intelligence/{include/avo_eq/knowledge.h, include/avo_eq/types.h, src/knowledge/knowledge.cpp,
+tests/test_knowledge.cpp, knowledge/base_cientifica.json, knowledge/estudios/…, docs/algoritmos/14_BASE_CIENTIFICA.md}`,
+`core/src/test/resources/equine/{sample,synthetic}_analysis.json`, `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`.
+**No se ha tocado:** firmware, workflows, firmas, `Info.plist`, TestFlight ni contratos binarios.
+**Validación:** IMPLEMENTADO · pruebas locales con ASan/UBSan: 99 casos, 1.684 comprobaciones, 0 fallos · fixtures OK
+tras `--update` · CI: ver PR · **NO VERIFICADO** con caballos reales.
+**Pendiente:** conectar las líneas base a A7/A8/A9 con TE propios; índice tendinoso; V200 (A9); IDF de France Galop;
+línea base de playa por franja.
+
+---
+
 ## 2026-11-19 — Motor 2.0.0-dev4 — KB-1 1.2.0: investigación nocturna (modelo B, tendón, árabes, arritmias) y regla A6B
 **Autor:** Claude (tarea programada nocturna) · **Rama:** `claude/kb-noche-2026-11-19` (sale de `develop`) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
 **Qué cambia:**
