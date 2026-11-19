@@ -24,6 +24,37 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-19 — iPad 1.0.0 — Botones de la pestaña Motor y «Análisis motor» de carreras
+**Autor:** Claude (a petición del usuario, capturas del build 173 marcadas) · **Rama:** `claude/motor-botones-analisis-carreras` (desde `develop` `fb9de38`) · **Commits:** `e73fca3`, `af7541c` · **PR:** #87 · **CI:** iPad run 44611181120 ✅ (sin TestFlight)
+**Qué cambia:**
+- **Pestaña Motor:** columna de botones arriba a la derecha de «Lectura del entrenamiento»: **Reprocesar** (motor
+  actual, forzado), **Reprocesar caballo** (todos los entrenamientos del mismo caballo, con confirmación y progreso),
+  **Exportar JSON** (resultado del motor a Documentos › Exportados y hoja de compartir), **Detalle técnico** (abre y
+  baja a las tablas) y **Borrar caché** (borra los `analisis_*.json` guardados; no toca entrenamientos, correcciones ni
+  valoraciones). También aparece cuando el entrenamiento aún no tiene análisis.
+- **Carreras › detalle:** botón **«Análisis motor»** entre «Informe PDF» y «PDF original». Abre una pantalla completa que
+  pasa el motor actual por los entrenamientos de los 60 días previos y recalcula informe, forma y tramo a tramo
+  («Volver a analizar» fuerza el motor). Contenido en lenguaje llano: resumen en una frase; salida, desarrollo y final
+  frente al ganador y al caballo medio; gráficas de puesto, distancia al primero (cuerpos) y velocidad por tramo;
+  rivales con su **cara a cara** en carreras anteriores del iPad y sus otras carreras; **carreras anteriores** del
+  caballo por **distancia** (±100 m), **estado de pista** e **hipódromo** con gráfica de puesto relativo;
+  entrenamientos (mejores 200/400/600 m, tendencia, caída, forma/ACWR) con gráfica; conclusiones, «para la próxima»
+  (orientativo), confianza y método.
+- **Estado de la pista** (`Race.going`, escala France Galop de *Très léger* a *Très lourd*, grupos firme/bueno/blando/
+  pesado): se anota a mano en esa pantalla porque el PDF de tracking no lo trae. Campo opcional: `carreras.json`
+  anterior se sigue leyendo.
+- Lógica en `ipad/AVOiPad/Core/RaceDeepEngine.swift` (funciones puras) con `RaceDeepEngineTests` (5 pruebas).
+  `RaceReport.fastWorkList` (aditivo). Archivos: `App/AppModel+EngineTools.swift`, `App/RacesModel.swift`,
+  `Core/RaceAnalysis.swift`, `Core/RaceModels.swift`, `Views/EngineView.swift`, `Views/RaceDetailView.swift`,
+  `Views/RaceEngineAnalysisView.swift`.
+**Por qué:** el usuario pidió botones en Motor y un análisis en profundidad de cada carrera con entrenamientos,
+carreras anteriores, mismos rivales, misma distancia y estado de pista, con gráficas y entendible.
+**No se ha tocado:** motor C++, firmware, contratos binarios, Android, Windows, workflows, firmas, `Info.plist`,
+número de build de TestFlight. Las carreras siguen siendo solo del iPad (como el resto de Carreras).
+**Validación:** IMPLEMENTADO · COMPILADO / CI: run 44611181120 en `e73fca3`, compilación ✅ y 121/121 pruebas unitarias ✅ (5 nuevas); capturas de UI con los 44 fallos que ya había en `develop` · **NO VERIFICADO** en el iPad. Las comparaciones con carreras
+anteriores solo usan las carreras importadas en el iPad; con menos de 3 son una pista, no una conclusión.
+**Pendiente:** probar en el iPad con carreras reales; leer el estado de pista de France Galop si su ficha lo muestra;
+añadir el análisis al Informe PDF si el usuario lo quiere.
 ## 2026-11-19 — Motor 2.0.0-dev9 — KB-1 1.7.0: estudio extra 4 (auditoría de fuentes, tendón en árabes, V200 con trotones)
 **Autor:** Claude (tarea programada, estudio extra 4) · **Rama:** `claude/kb-estudio4-2026-11-19` (desde `claude/kb-estudio3-2026-11-19`, PR #85 abierto) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
 **Qué cambia:**
