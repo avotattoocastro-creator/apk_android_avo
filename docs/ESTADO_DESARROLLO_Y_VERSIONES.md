@@ -34,7 +34,7 @@ registrada: **NO VERIFICADO**.
 | AVO Update | **2.3.1 (vc 28)** | `usb-updater/` | `build-usb-updater.yml` | [`AVO_UPDATE.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_UPDATE.apk) | CI ✅ |
 | Windows | **V2 PRO 2.0.0** | `windows/` | `build-avo-windows.yml` | [`AVO_WINDOWS.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_WINDOWS.zip) | CI ✅ |
 | iPad | **1.0.0** (build automático) | `ipad/` | `build-avo-ipad.yml` | solo TestFlight | CI ✅ |
-| Motor C++17 Equine | **2.0.0-dev7** (base científica KB-1 1.5.0: reglas A7 zancada y A8 velocidad final aplicadas con línea base propia y CUSUM autoiniciado) | `equine-intelligence/` | `build-equine-engine.yml` | — | pruebas locales ✅ (ASan/UBSan, 102 casos) · CI de la rama `claude/kb-reglas-lineas-base-2026-11-19`: ver PR · NO VERIFICADO |
+| Motor C++17 Equine | **2.0.0-dev8** (base científica KB-1 1.6.0: estudio extra 3, planificador P1–P6 y A11 especificados sin implementar; reglas A7 y A8 aplicadas desde dev7) | `equine-intelligence/` | `build-equine-engine.yml` | — | pruebas locales ✅ (ASan/UBSan, 102 casos) · CI de la rama `claude/kb-estudio3-2026-11-19`: ver PR · NO VERIFICADO |
 
 **Plan de pruebas (decisión del usuario, 17/11/2026):** hasta construir todas las PCB, las pruebas de campo se hacen
 solo con PROTOTIPOS; lo validado se porta a las BETA, y las pruebas de campo BETA empiezan con todas las PCB

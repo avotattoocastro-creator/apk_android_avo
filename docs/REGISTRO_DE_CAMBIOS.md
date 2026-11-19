@@ -24,6 +24,29 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-19 — Motor 2.0.0-dev8 — KB-1 1.6.0: estudio extra 3 (planificador semanal y ECG / A11)
+**Autor:** Claude (tarea programada, estudio extra 3) · **Rama:** `claude/kb-estudio3-2026-11-19` (desde `develop` con PR #80–#83 fusionados) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Estudio** `equine-intelligence/knowledge/estudios/2026-11-19_extra3_planificador_semanal_ecg_a11.md`, con cifras
+  etiquetadas [E]/[E-r]/[I]/[NV]. (1) **Planificador semanal:** práctica publicada (≈ 2 trabajos rápidos/semana en PSI
+  maduros y 1,7 en 2 años; ~8 km/mes a ≥ 13,3 m/s; un día libre; ~2 descansos/año de ~6 semanas; carreras cada
+  2,3 semanas), carga del último mes protectora frente a la de 60–180 d (Hitchens 2018, Georgopoulos & Parkin 2017) y
+  seis restricciones P1–P6 propuestas. No hay evidencia publicada de días entre trabajos rápidos ni de árabes de llano.
+  (2) **ECG / A11:** detector anclado en el pico S (Van Steenkiste 2020: VPP 99,1 %, S 98,0 % en reposo; Pan-Tompkins
+  81,5/91,5), prematuro ≥ 5–6 % (Navas de Solis 2026, Frick 2019), fases (Marr 2020: 50,6 % en la recuperación), puerta
+  de calidad del 10 % y acuerdo entre observadores en ejercicio 0–13 % (Trachsel 2011).
+- `base_cientifica.json` 1.6.0: 10 fuentes, regla `PLANIFICADOR_RESTRICCIONES_P1_P6` (PENDIENTE), nota en `A11_ECG`,
+  pendientes de ECG y planificador reescritos, 4 temas nuevos en la cola. Ficha 14, tabla de estado y README.
+- **Motor sin cambios de lógica:** `KNOWLEDGE_VERSION` 1.5.0 → 1.6.0 y `ENGINE_VERSION` 2.0.0-dev7 → 2.0.0-dev8 para que
+  el análisis declare la base vigente; fixtures regenerados (solo las dos versiones).
+**Por qué:** estudio extra pedido por el usuario sobre pendientes que bloquean código (planificador y A11).
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, número de build de TestFlight, apps.
+**Validación:** IMPLEMENTADO (solo versiones) · pruebas locales con ASan/UBSan: 102 casos y 1.729 comprobaciones sin
+fallos; Release y `check_fixtures.py` en verde tras `--update` (diferencias: solo versiones) · CI: ver PR ·
+**NO VERIFICADO** con caballos reales. Las restricciones son de prudencia, no predicciones de lesión.
+**Pendiente:** validar un detector de QRS con galope real anotado (cincha PROTOTIPO REV 5.10); implementar P1–P6 cuando
+haya semanas reales de la cuadra; leer PMC12699123, Flethøj 2016 y Frick 2019 completos.
+
 ## 2026-11-19 — Motor 2.0.0-dev7 — KB-1 1.5.0: reglas A7 y A8 aplicadas (línea base propia + CUSUM autoiniciado)
 **Autor:** Claude (a petición del usuario: «fusiona y empieza a aplicar las reglas») · **Rama:** `claude/kb-reglas-lineas-base-2026-11-19` (desde `develop` con PR #82 fusionado) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
 **Qué cambia:**

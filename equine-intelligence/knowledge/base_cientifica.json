@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "fecha": "2026-11-19",
   "razas": [
     "PSI",
@@ -44,6 +44,11 @@
       "fecha": "2026-11-19",
       "titulo": "Extra 2: CUSUM con pocas sesiones (autoiniciado de Hawkins), OR del TFDS de Ikeda 2019 y árabes, IDF de France Galop (no existe)",
       "archivo": "estudios/2026-11-19_extra2_cusum_autoiniciado_tendon_arabes_idf.md"
+    },
+    {
+      "fecha": "2026-11-19",
+      "titulo": "Extra 3: restricciones del planificador semanal (práctica de entrenadores, descansos, intervalos) y ECG en ejercicio (detector de QRS anclado en S, prematuro 5–6 %, fases, puerta de calidad para A11)",
+      "archivo": "estudios/2026-11-19_extra3_planificador_semanal_ecg_a11.md"
     }
   ],
   "fuentes": [
@@ -397,6 +402,38 @@
     {
       "id": "FRANCE_GALOP_MCLLOYD_ROLLOUT",
       "cita": "France Galop, National rollout of the McLloyd tracking system (2021)"
+    },
+    {
+      "id": "MORRICE_WEST_2020_PRACTICAS",
+      "cita": "Morrice-West AV et al. 2020, Equine Vet J, doi 10.1111/evj.13156 (prácticas de 66 entrenadores, Victoria)"
+    },
+    {
+      "id": "MORRICE_WEST_2021_RENDIMIENTO",
+      "cita": "Morrice-West AV et al. 2021, Animals 11:3130, doi 10.3390/ani11113130"
+    },
+    {
+      "id": "WONG_2023_DESCANSOS",
+      "cita": "Wong ASM et al. 2023, Front Vet Sci 10:1260554, doi 10.3389/fvets.2023.1260554"
+    },
+    {
+      "id": "HITCHENS_2018_CALIFORNIA",
+      "cita": "Hitchens PL, Hill AE, Stover SM 2018, Front Vet Sci 5:217, doi 10.3389/fvets.2018.00217"
+    },
+    {
+      "id": "GEORGOPOULOS_PARKIN_2017",
+      "cita": "Georgopoulos SP, Parkin TDH 2017, Prev Vet Med 139:99, doi 10.1016/j.prevetmed.2016.12.006"
+    },
+    {
+      "id": "VAN_STEENKISTE_2020_QRS",
+      "cita": "Van Steenkiste G, van Loon G, Crevecoeur G 2020, Sci Rep 10:186, doi 10.1038/s41598-019-57025-2"
+    },
+    {
+      "id": "TRACHSEL_2011",
+      "cita": "Trachsel DS et al. 2011, Equine Vet J Suppl 38:208, doi 10.1111/j.2042-3306.2010.00172.x"
+    },
+    {
+      "id": "TER_WOORT_2022",
+      "cita": "Ter Woort F et al. 2022, Equine Vet J 55:336, doi 10.1111/evj.13565"
     }
   ],
   "parametros": [
@@ -991,10 +1028,15 @@
         "NAVAS_DE_SOLIS_2026",
         "VAN_ERCK_2026",
         "REEF_2014",
-        "TER_WOORT_2023"
+        "TER_WOORT_2023",
+        "VAN_STEENKISTE_2020_QRS",
+        "FRICK_2019",
+        "TRACHSEL_2011",
+        "TER_WOORT_2022"
       ],
       "estado": "PENDIENTE",
-      "nota": "las definiciones operativas son de Navas de Solis 2026; el texto completo de Van Erck 2026 no se pudo leer; ninguna fuente fija un número aceptable de prematuros (Buhl 2011, Barbesgaard 2011, Massie 2023, Marr 2020)"
+      "nota": "las definiciones operativas son de Navas de Solis 2026; el texto completo de Van Erck 2026 no se pudo leer; ninguna fuente fija un número aceptable de prematuros (Buhl 2011, Barbesgaard 2011, Massie 2023, Marr 2020)",
+      "nota_1_6_0": "Estudio extra 3: detector anclado en el pico S (Van Steenkiste 2020 [E], reposo: VPP 99,1 %, S 98,0 %; Pan-Tompkins 81,5/91,5 por ondas T); prematuro ≥ 5–6 % de acortamiento del RR con FC > 100 lpm (Navas de Solis 2026 [E], Frick 2019 [E-r]); fases calentamiento/pico/recuperación 0–2 min/tardía (Marr 2020 [E]: 50,6 % de alteraciones en la recuperación); puerta de calidad > 10 % no interpretable por fase (Ter Woort 2022 [E-r]); niveles INFO/VIGILAR/veterinario [I]; siempre candidato a revisar (acuerdo entre observadores en ejercicio 0–13 %, Trachsel 2011 [E-r])"
     },
     {
       "id": "KB_FATIGA_OSEA_7D",
@@ -1029,17 +1071,31 @@
       ],
       "estado": "PENDIENTE",
       "falta": "campos de lesión previa, CSA y firmeza del suelo en la app; sin exponente de carga (no hay curva S-N del tendón)"
+    },
+    {
+      "id": "PLANIFICADOR_RESTRICCIONES_P1_P6",
+      "umbral": "P1 1–2 (2 años) / 2–3 (maduros) trabajos rápidos por semana activa, nunca 0; P2 un día libre y ≥ 2 días lentos entre rápidos; P3 carreras cada 17–21 d, aviso < 14 d; P4 tras > 60 d sin rápido ~4 semanas lentas y 21 d con 1 rápido/semana; P5 distancia rápida media 60 d > P75 propio sin penalizar el último mes; P6 ≥ 2 descansos/año de ~6 semanas",
+      "evidencia": "E (práctica de entrenadores y asociaciones) / E-r (Parkin 2004/2005, Carrier 1998, Estberg 1998) / I (forma, separación entre rápidos y árabes)",
+      "fuentes": [
+        "MORRICE_WEST_2020_PRACTICAS",
+        "MORRICE_WEST_2021_RENDIMIENTO",
+        "WONG_2023_DESCANSOS",
+        "HITCHENS_2018_CALIFORNIA",
+        "GEORGOPOULOS_PARKIN_2017"
+      ],
+      "estado": "PENDIENTE",
+      "falta": "capa 2 del planificador; sin evidencia publicada de días entre trabajos rápidos ni datos de árabes de llano"
     }
   ],
   "pendiente_motor": [
     "Modelo óseo B (Pan/Anwar) con adaptación y reparación: constantes completas (KB 1.2.0); faltan el signo de b, la f_BM inicial y reproducir la tabla 4 de Anwar",
     "V200/VHRmax por regresión FC–velocidad (medias de 5 s, trote + galope [E]); mesetas ≥ 30 s descartando 20–30 s [I], R² ≥ 0,90 [I], sin extrapolar; recuperación a 1, 2, 4, 5, 10 y 15 min solo informativa",
-    "ECG por fase (≥ 250 SPS, preferible 500): prematuro ≥ 5 %, par, triplete, racha, FA, % de artefacto; validar el detector QRS con anotación manual",
+    "ECG por fase (≥ 250 SPS con interpolación del pico, preferible 500): detector anclado en S con rechazo de T y sin ceguera tras artefacto; prematuro ≥ 6 % frente a la mediana de 8 RR con FC > 100 lpm; pareja, triplete, racha ≥ 4, FA; puerta > 10 % no interpretable por fase; validar con galope real anotado a mano (objetivo VPP ≥ 99 %, S ≥ 98 %) (estudio extra 3)",
     "Conectar las líneas base a A9 (V200) cuando el análisis traiga el ECG; A7 y A8 conectadas en 2.0.0-dev7 (KB 1.5.0) con superficie como criterio de comparables; falta el TE propio por métrica y la playa por franja",
     "Velocidad final relativa propia de AVO (France Galop no publica ningún IDF; estudio extra 2 2026-11-19): v(últimos 600/400 m)/v media con par propio por pista y superficie, al estilo de la Finishing Speed % de Timeform; importador de los PDF de tracking por 200 m solo informativo",
     "Cociente de galope 60/90 d de Choi & Parkin (A6) cuando se aclare la posición del +1",
     "Índice tendinoso heurístico por bandas cualitativas (prioritario en árabes de 3–4 años): sin exponente de carga; faltan en la app la lesión previa, la CSA ecográfica y la firmeza del suelo (estudio extra 2026-11-19)",
-    "Planificador semanal por restricciones (capa 2) y explicación con confianza (capa 3)",
+    "Planificador semanal por restricciones (capa 2) con P1–P6 del estudio extra 3 (práctica [E], forma [I]) y explicación con confianza (capa 3)",
     "Línea base separada para la playa por franja (orilla firme, húmeda suelta, seca profunda, transición), marea, lluvia y nota del jinete (Chateau 2011)",
     "Regla combinada A1+A2 de Verheyen cuando se lea el texto completo",
     "Contador de muestras saturadas de la cincha en el análisis (si el firmware lo envía)"
@@ -1063,7 +1119,11 @@
     "Tesis francesa DUMAS A-2024-040 (tendinopatías; bloqueada)",
     "Jones, Champ & Rigdon 2004 y tablas de Saleh et al. 2016 (bloqueados); cuantificar por simulación el efecto del shrinkage hacia la cuadra y de la autocorrelación sobre el ARL0 del CUSUM autoiniciado",
     "Revisar a mano las OR de Ikeda 2019 y los recuentos de foulées de los PDF de France Galop (Arc 2025: 7,1 frente a 8,0 m por zancada); PDF de la QAWC 2025 (probable 20251005LON04)",
-    "Datos de carga o velocidad acumulada asociados al TFDS en árabes (no encontrados en Polonia, Turquía, EAU, Qatar, Francia ni Reino Unido)"
+    "Datos de carga o velocidad acumulada asociados al TFDS en árabes (no encontrados en Polonia, Turquía, EAU, Qatar, Francia ni Reino Unido)",
+    "PMC12699123 (Norteamérica 2009–2023, bloqueado por reCAPTCHA): días desde la última carrera y el último trabajo rápido",
+    "Días entre trabajos rápidos en PSI (Johnston 2020 los calcula sin publicarlos) y cualquier programa semanal de árabes de llano",
+    "Flethøj 2016 en PDF (signo del umbral 20/10/4 %) y Frick 2019 completo (umbral de prematuro en galope)",
+    "Carrier 1998 y Estberg 1998 en PubMed: confirmar RR 71/45 y 4,2 y el DOI de Carrier"
   ],
   "historial": [
     {
@@ -1095,6 +1155,11 @@
       "version": "1.5.0",
       "fecha": "2026-11-19",
       "cambio": "Reglas A7 (caída de zancada ≥ 0,10 m) y A8 (velocidad de los últimos 600 m ≥ 0,20 m/s) aplicadas en Training Analytics sobre la línea base propia por superficie, con umbral 2 de 3 y CUSUM autoiniciado de Hawkins (h 5, calentamiento 8, exclusión con S > 0,8·h); motor 2.0.0-dev7"
+    },
+    {
+      "version": "1.6.0",
+      "fecha": "2026-11-19",
+      "cambio": "Estudio extra 3: restricciones P1–P6 del planificador semanal (PENDIENTE; sin evidencia de días entre rápidos ni de árabes) y especificación revisada de A11 y del detector de QRS (pico S, prematuro 5–6 %, fases, puerta de calidad); sin cambios de lógica; motor 2.0.0-dev8 solo por versión"
     }
   ]
 }
