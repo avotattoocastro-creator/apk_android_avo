@@ -47,8 +47,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 que manda el RTCM), así que el directo va por el servidor.
 **No se ha tocado:** firmware, contratos binarios (`TELEMETRY v3` igual), workflows, firmas, `Info.plist`, número de
 build de TestFlight, `google-services.json`. Sin dependencias nuevas en el iPad.
-**Validación:** IMPLEMENTADO · sin compilador Swift ni Gradle con red en la sesión: código revisado a mano; pruebas
-añadidas (reglas: 4, Kotlin: 5, Swift: 5) pendientes de CI · **NO VERIFICADO** en hardware.
+**Validación:** IMPLEMENTADO · CI lanzado a mano en la rama (commit `3b03740`):
+- reglas Firebase run 44565056559 ✅, 15/15 (4 nuevas de LIVE);
+- Android run 44565050754 ✅ (APK y pruebas core con `LiveCodecTest`);
+- iPad run 44565045768 ✅, sin TestFlight: compila y pasan 121 pruebas unitarias, 5 de ellas de `LiveCodecTests`.
+
+Las capturas de UI fallan desde antes en casi todas las páginas («No existe nav.X»: 44 fallos en el último run de
+`develop`, 44524012083). La nueva captura «Live» sufre el mismo problema, así que no hay captura de la pantalla.
+**NO VERIFICADO** en hardware.
 **Pendiente:**
 1. Publicar las reglas a mano en la consola de Firebase cuando `firebase-rules.yml` pase.
 2. Comprobar que la clave web de Firebase acepta llamadas desde el iPad. Si no, añadir una app iOS (ver `docs/LIVE_SERVIDOR.md`).
