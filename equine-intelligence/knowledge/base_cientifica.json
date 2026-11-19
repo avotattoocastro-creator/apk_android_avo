@@ -2,8 +2,8 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.1.0",
-  "fecha": "2026-11-18",
+  "version": "1.2.0",
+  "fecha": "2026-11-19",
   "razas": [
     "PSI",
     "ARABE"
@@ -29,6 +29,11 @@
       "fecha": "2026-11-18",
       "titulo": "Noche: σ0 y modelo B, Verheyen, árabes Gr1, cincha, ECG y V200",
       "archivo": "estudios/2026-11-18_noche_sigma0_verheyen_arabes_cincha_ecg_v200.md"
+    },
+    {
+      "fecha": "2026-11-19",
+      "titulo": "Noche: constantes del modelo B, tendón (Choi & Parkin), lesiones de árabes y prevalencia de arritmias",
+      "archivo": "estudios/2026-11-19_noche_modeloB_tendon_choi_ecg_prevalencia.md"
     }
   ],
   "fuentes": [
@@ -206,6 +211,51 @@
       "id": "POINSARD_2026",
       "cita": "Poinsard, Anson & Billat 2026, Animals 16:1598 (repetibilidad de V200 y recuperación de FC en trotones)",
       "url": "https://www.mdpi.com/2076-2615/16/11/1598"
+    },
+    {
+      "id": "CHOI_PARKIN_2025_TEXTO",
+      "cita": "Choi & Parkin 2025, Equine Vet J 58:31–39, doi 10.1111/evj.14493, texto completo (tabla 2)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12699112/"
+    },
+    {
+      "id": "ANWAR_2026_ARXIV_V1",
+      "cita": "Anwar et al. 2026, arXiv 2603.22680v1, tabla 9 y apéndice A.1 (extracto automático)",
+      "url": "https://arxiv.org/html/2603.22680v1"
+    },
+    {
+      "id": "YILDIRIM_KARAARSLAN_2025",
+      "cita": "Yıldırım & Karaarslan 2025, Turk J Vet Res 9:33–40 (misma serie que Yildirim 2025 EVJ)",
+      "url": "https://dergipark.org.tr/en/download/article-file/4272043"
+    },
+    {
+      "id": "BUHL_2011",
+      "cita": "Buhl, Meldgaard & Barbesgaard 2011, Equine Vet J Suppl 38:196 (arritmias en saltadores sanos; resumen)",
+      "url": "https://madbarn.com/research/cardiac-arrhythmias-in-clinically-healthy-showjumping-horses"
+    },
+    {
+      "id": "BARBESGAARD_2011",
+      "cita": "Barbesgaard, Buhl & Meldgaard 2011, Equine Vet J Suppl 38:202 (doma; resumen)",
+      "url": "https://madbarn.com/research/prevalence-of-exercise-associated-arrhythmias-in-normal-performing-dressage-horses"
+    },
+    {
+      "id": "MASSIE_2023",
+      "cita": "Massie et al. 2023, Vet J 106040 (PSI de chuckwagon, entrenamiento frente a carrera; resumen)",
+      "url": "https://madbarn.com/research/training-vs-racing-a-comparison-of-arrhythmias-and-the-repeatability-of-findings-in-thoroughbred-chuckwagon-racehorses"
+    },
+    {
+      "id": "MARR_2020",
+      "cita": "Marr et al. 2020, Equine Vet J (245 PSI con bajo rendimiento; texto completo)",
+      "url": "https://core.ac.uk/download/333648061.pdf"
+    },
+    {
+      "id": "SLACK_2015",
+      "cita": "Slack et al. 2015, Equine Vet J 47:398 (trotones tras la carrera; resumen)",
+      "url": "https://madbarn.com/research/occurrence-of-cardiac-arrhythmias-in-standardbred-racehorses"
+    },
+    {
+      "id": "KAPUSNIAK_2026",
+      "cita": "Kapusniak et al. 2026, Equine Vet J doi 10.1002/evj.70205 (ECG textil al galope; resumen)",
+      "url": "https://madbarn.com/research/validation-of-a-smart-textile-electrocardiographic-monitoring-device-in-racehorses-during-high-speed-exercise/"
     }
   ],
   "parametros": [
@@ -367,15 +417,22 @@
         "delta_C_mpa": 1.0,
         "A_OCL_min_mm_dia": 0.001,
         "sigma0_mpa": 139.0,
-        "sigma1_mpa": 14.1
+        "sigma1_mpa": 14.1,
+        "A_OBL_min_mm_dia": 0.001094,
+        "A_OBL_max_mm_dia": 0.00603,
+        "delta_B_mpa": 7,
+        "gamma_B": 1,
+        "A_OCL_max_mm_dia": 0.00358
       },
-      "evidencia": "E",
+      "evidencia": "E (Pan) / E-r (tabla 9 de Anwar, extracto automático)",
       "fuentes": [
         "ANWAR_2026",
-        "PAN_2025_PREPRINT"
+        "PAN_2025_PREPRINT",
+        "ANWAR_2026_ARXIV_V1"
       ],
       "estado": "PENDIENTE",
-      "falta": "A_OBL_min/max, δ_B, γ_B y A_OCL_max (tabla 1 de Pan, tabla 9 completa de Anwar)"
+      "falta": "signo de b (+0,02 o −0,02 según la lectura de la tabla 9), f_BM inicial y paso de integración; prueba de reproducción con la tabla 4 de Anwar (f_BM máx. 0,926/0,931/0,935; daño máx. 0,813/0,913/1,016)",
+      "nota": "Hill: A_OBL = min + (max−min)·ψ^γB/(δB^γB+ψ^γB); A_OCL = min + (max−min)·δC^γC/(δC^γC+ψ^γC); ψ = σ²/(2E)"
     },
     {
       "id": "rango_acelerometro_cincha",
@@ -395,9 +452,13 @@
       "evidencia": "E (5 %) / I (banda 5–6 %)",
       "fuentes": [
         "NAVAS_DE_SOLIS_2026",
-        "FRICK_2019"
+        "FRICK_2019",
+        "BUHL_2011",
+        "BARBESGAARD_2011",
+        "MASSIE_2023"
       ],
-      "estado": "PENDIENTE"
+      "estado": "PENDIENTE",
+      "nota": "sin número aceptable publicado; en sanos 0–9 supraventriculares por prueba y ventriculares aislados (Buhl 2011, Barbesgaard 2011, Massie 2023) [E-r]; recuperación con prevalencia igual o mayor que el ejercicio"
     },
     {
       "id": "ecg_fases",
@@ -426,6 +487,31 @@
       ],
       "estado": "PENDIENTE",
       "nota": "solo PSI; por debajo, menos ganancias por salida (r = 0,41); en árabes solo comparación intra-caballo"
+    },
+    {
+      "id": "galope_60d_dias_min",
+      "valor": "≤ 2 días de galope en 60 d (referencia 3–24): OR 1,842 (IC 95 % 1,073–3,162) de tendinopatía del TFDS",
+      "evidencia": "E (umbral y OR) / I (día de galope = sesión rápida)",
+      "fuentes": [
+        "CHOI_PARKIN_2025_TEXTO"
+      ],
+      "estado": "IMPLEMENTADO",
+      "opcion": "base_cientifica.dias_galope_60d_max",
+      "codigo": "KbRuleConfig::low_gallop_60d_max_days; JSON dias_galope_60d"
+    },
+    {
+      "id": "lesiones_arabe_tipo",
+      "valor": {
+        "ARABE": "tendón 63,7 %, fracturas 19,5 % (216 lesiones)",
+        "PSI": "fracturas 61,5 %, tendón 25,7 % (337 lesiones)"
+      },
+      "evidencia": "E",
+      "fuentes": [
+        "YILDIRIM_KARAARSLAN_2025",
+        "YILDIRIM_2025"
+      ],
+      "estado": "REFERENCIA",
+      "nota": "Şirinyer (İzmir) 2018–2023; tendón de árabes sobre todo a 3–4 años; sin cifras por superficie (texto EVJ no accesible)"
     }
   ],
   "reglas": [
@@ -482,10 +568,22 @@
       "umbral": "≥ 90 d sin trabajo rápido: aviso y sugerencia de ecografía del TFDS",
       "evidencia": "E (OR 3,10)",
       "fuentes": [
-        "CHOI_PARKIN_2025"
+        "CHOI_PARKIN_2025",
+        "CHOI_PARKIN_2025_TEXTO"
       ],
       "estado": "IMPLEMENTADO",
-      "falta": "cociente de días de galope 60/90 d ≤ 1,6 (definición por confirmar)"
+      "falta": "cociente de galope (días 60 d / días 90 d) + 1 ≤ 1,6: OR 2,19 (1,23–3,91) [E], posición del +1 ambigua [NV]",
+      "nota": "los periodos ≥ 90 d se cuentan en los 365 d previos (1–2 periodos frente a ninguno: OR 3,098, IC 1,737–5,526) [E]"
+    },
+    {
+      "id": "A6B_POCO_GALOPE_60D",
+      "umbral": "≤ 2 días con sesión rápida en los 60 d previos, con sesiones en los últimos 7 d y 60 d de historia: INFO / AVISO",
+      "evidencia": "E (umbral y OR 1,84) / I (equivalencia de día de galope; condición de caballo en entrenamiento)",
+      "fuentes": [
+        "CHOI_PARKIN_2025_TEXTO"
+      ],
+      "estado": "IMPLEMENTADO",
+      "nota": "factor asociado en casos y controles, no predicción de lesión; la KRA no registra velocidad"
     },
     {
       "id": "A7_CAIDA_ZANCADA",
@@ -532,7 +630,7 @@
         "TER_WOORT_2023"
       ],
       "estado": "PENDIENTE",
-      "nota": "las definiciones operativas son de Navas de Solis 2026; el texto completo de Van Erck 2026 no se pudo leer"
+      "nota": "las definiciones operativas son de Navas de Solis 2026; el texto completo de Van Erck 2026 no se pudo leer; ninguna fuente fija un número aceptable de prematuros (Buhl 2011, Barbesgaard 2011, Massie 2023, Marr 2020)"
     },
     {
       "id": "KB_FATIGA_OSEA_7D",
@@ -556,13 +654,14 @@
     }
   ],
   "pendiente_motor": [
-    "Modelo óseo B (Pan/Anwar) con adaptación y reparación (σ0 = 139,0 resuelto; faltan A_OBL_min/max, δ_B, γ_B y A_OCL_max)",
+    "Modelo óseo B (Pan/Anwar) con adaptación y reparación: constantes completas (KB 1.2.0); faltan el signo de b, la f_BM inicial y reproducir la tabla 4 de Anwar",
     "V200/VHRmax por regresión FC–velocidad en medias de 5 s, con retraso de FC calibrable, R² ≥ 0,90 y sin extrapolar; recuperación de FC a 1, 2, 3, 5, 10 y 15 min solo informativa",
     "ECG por fase (≥ 250 SPS, preferible 500): prematuro ≥ 5 %, par, triplete, racha, FA, % de artefacto; validar el detector QRS con anotación manual",
     "Líneas base con shrinkage hacia la cuadra, SWC/TE propios y CUSUM",
     "Regla A8 sobre v_ultimos_600m (la métrica ya existe): línea base por trabajo de referencia y superficie",
     "Índice de desaceleración final (IDF) de las carreras importadas de France Galop",
-    "Índice tendinoso heurístico",
+    "Cociente de galope 60/90 d de Choi & Parkin (A6) cuando se aclare la posición del +1",
+    "Índice tendinoso heurístico (prioritario en árabes de 3–4 años: el tendón es el 64 % de sus lesiones, Yildirim 2025)",
     "Planificador semanal por restricciones (capa 2) y explicación con confianza (capa 3)",
     "Línea base separada para la playa (arena seca, húmeda, orilla y marea)",
     "Regla combinada A1+A2 de Verheyen cuando se lea el texto completo",
@@ -570,16 +669,18 @@
   ],
   "cola_investigacion": [
     "Texto completo de Verheyen 2006 (Bone, DOI 10.1016/j.bone.2006.05.025): ORs, cortes, límite inferior del canter, ventana de 60 d",
-    "Tabla 1 de Pan 2025 (JRSI) y tabla 9 completa de Anwar 2026 (RSOS): constantes de adaptación del modelo B",
+    "PDF de Anwar 2026 (tabla 9: signo de b) y tabla 1 de Pan 2025 (JRSI, PMC12483640): cotejar las constantes de adaptación; f_BM inicial y paso de integración",
     "Texto completo de Van Erck-Westergren 2026 (JVIM): definiciones de fases, prematuridad, FA paroxística y % no interpretable",
     "Vermeulen & Evans 2006 y Gramkow & Evans 2006 completos: rango de la regresión FC–velocidad y retraso de la FC",
     "Martig 2013 completo: confirmar que 134,2/14,1 es la curva de sensibilidad",
     "PDF de tracking de France Galop (QAWC 2023–2025, Saint-Cloud) y resultados árabes del Reino Unido (Newbury, Doncaster) y Amir Sword 2026",
     "Frecuencia de zancada en árabes de carreras (no encontrada)",
     "Picos de aceleración del tronco en g a ≥ 12 m/s (Pfau 2006 y Barrey 2001 completos; no hay datos publicados accesibles)",
-    "Yildirim 2025 completo (lesiones de árabes por localización y pista)",
     "Galope sobre arena de playa (fuerzas, zancada)",
-    "Ryan 2005, Slack 2015 y Barbesgaard 2010 (prevalencia de prematuros en PSI sanos)"
+    "Yildirim 2025 completo (Wiley): lesiones de árabes por superficie y carrera frente a entrenamiento",
+    "Ryan 2005 (EVJ 37:265) completo: prevalencia de arritmias en PSI en ejercicio máximo",
+    "Choi & Parkin 2025, tabla S1 y fórmula exacta del cociente de galope",
+    "Li et al. 2026, EVJ doi 10.1002/evj.70360 (fatiga con sensores y ML)"
   ],
   "historial": [
     {
@@ -591,6 +692,11 @@
       "version": "1.1.0",
       "fecha": "2026-11-18",
       "cambio": "Noche: σ0 aclarado (134,2 modelo A, 139,0 calibración del modelo B), notas de σ_max y Verheyen corregidas, tabla de árabes Gr1, definiciones de ECG de Navas de Solis 2026, V200 y Schrurs; métrica nueva v_ultimos_600m en el motor (KNOWLEDGE_VERSION 1.1.0, motor 2.0.0-dev3)"
+    },
+    {
+      "version": "1.2.0",
+      "fecha": "2026-11-19",
+      "cambio": "Noche: constantes del modelo B completas (sin implementar: signo de b y f_BM inicial), tabla 2 de Choi & Parkin, lesiones de árabes (tendón 64 %), prevalencia de arritmias en sanos; regla nueva A6B_POCO_GALOPE_60D (KNOWLEDGE_VERSION 1.2.0, motor 2.0.0-dev4)"
     }
   ]
 }

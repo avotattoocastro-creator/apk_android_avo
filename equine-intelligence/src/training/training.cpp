@@ -460,7 +460,8 @@ bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::str
         *d.p = x.n;
       }
       const I ki[] = {{"dias_descanso_vuelta", &c->kb.return_rest_days, 7, 365}, {"dias_ventana_vuelta", &c->kb.return_window_days, 1, 90},
-                      {"dias_descanso_tendon", &c->kb.tendon_rest_days, 7, 730}, {"semanas_min_fatiga_osea", &c->kb.bone_min_weeks, 1, 8}};
+                      {"dias_descanso_tendon", &c->kb.tendon_rest_days, 7, 730}, {"semanas_min_fatiga_osea", &c->kb.bone_min_weeks, 1, 8},
+                      {"dias_galope_60d_max", &c->kb.low_gallop_60d_max_days, 0, 24}};
       for (const auto& d : ki) {
         if (!k.has(d.k)) continue;
         const json::Value& x = k[d.k];
