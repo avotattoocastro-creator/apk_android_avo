@@ -29,11 +29,11 @@ registrada: **NO VERIFICADO**.
 
 | Componente | Versión | Carpeta | Workflow | Descarga | Estado |
 |---|---|---|---|---|---|
-| Android AVO Performance Horse | **2.9-integrada-dev1 (vc 42)** | `app/`, `core/` | `build-android.yml` | [`AVO_ANDROID.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_ANDROID.apk) | CI ✅ · NO VERIFICADO |
+| Android AVO Performance Horse | **2.10-live-dev1 (vc 43)** (directo LIVE a Firebase) | `app/`, `core/` | `build-android.yml` | [`AVO_ANDROID.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_ANDROID.apk) | CI: al fusionar · NO VERIFICADO |
 | AVO Tarjetas | **1.4-nfc-movil-dev1 (vc 5)** | `cards/` | `build-android.yml` | [`AVO_TARJETAS.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_TARJETAS.apk) | CI ✅ |
 | AVO Update | **2.3.1 (vc 28)** | `usb-updater/` | `build-usb-updater.yml` | [`AVO_UPDATE.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_UPDATE.apk) | CI ✅ |
 | Windows | **V2 PRO 2.0.0** | `windows/` | `build-avo-windows.yml` | [`AVO_WINDOWS.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_WINDOWS.zip) | CI ✅ |
-| iPad | **1.0.0** (build automático; 19/11: botones de Motor y «Análisis motor» de carreras) | `ipad/` | `build-avo-ipad.yml` | solo TestFlight | CI ✅ · lo nuevo NO VERIFICADO en el iPad |
+| iPad | **1.0.0** (build automático; 19/11: botones de Motor, «Análisis motor» de carreras y página **LIVE** desde el servidor, `docs/LIVE_SERVIDOR.md`) | `ipad/` | `build-avo-ipad.yml` | solo TestFlight | CI ✅ · lo nuevo NO VERIFICADO en el iPad |
 | Motor C++17 Equine | **2.0.0-dev9** (base científica KB-1 1.7.0: estudio extra 4, auditoría de acceso de 9 fuentes sin cambios de constantes; planificador P1–P6 y A11 especificados sin implementar; reglas A7 y A8 aplicadas desde dev7) | `equine-intelligence/` | `build-equine-engine.yml` | — | pruebas locales: ver registro · CI de la rama `claude/kb-estudio4-2026-11-19`: ver PR · NO VERIFICADO |
 
 **Plan de pruebas (decisión del usuario, 17/11/2026):** hasta construir todas las PCB, las pruebas de campo se hacen

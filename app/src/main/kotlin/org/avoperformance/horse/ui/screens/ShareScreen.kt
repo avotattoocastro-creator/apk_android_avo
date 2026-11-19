@@ -74,6 +74,9 @@ fun ShareScreen(c: AppContainer) {
     var globalOn by remember { mutableStateOf(c.settings.shareGlobalEnabled) }
     var disabledHorses by remember { mutableStateOf(c.settings.shareHorsesDisabled) }
     var paused by remember { mutableStateOf(c.settings.sharePaused) }
+    var liveOn by remember { mutableStateOf(c.settings.liveShareEnabled) }
+    var showIpad by remember { mutableStateOf(false) }
+    val live by c.live.status.collectAsStateWithLifecycle()
 
     val card = me
     LaunchedEffect(card, refreshTick, recipients.size) {
@@ -85,6 +88,7 @@ fun ShareScreen(c: AppContainer) {
         } catch (e: Exception) { msg = e.message }
     }
 
+    if (showIpad) card?.let { IpadSignInDialog(it) { showIpad = false } }
     LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(bottom = 24.dp)) {
         item {
             AvoCard("Estado Firebase", trailing = {
@@ -112,6 +116,7 @@ fun ShareScreen(c: AppContainer) {
                     KV("Usuario", card.name); KV("Identificador", card.code)
                     KV("Roles", c.license.roles.takeIf { it.isNotEmpty() }?.let { org.avoperformance.horse.core.license.LicenseRole.label(it) } ?: "—")
                     KV("Cuenta", "Tarjeta NFC (sin correo)")
+                    OutlinedButton(onClick = { showIpad = true }) { Text("Entrar en el iPad (LIVE)") }
                 }
             }
         }
@@ -137,6 +142,17 @@ fun ShareScreen(c: AppContainer) {
                         }
                         HorizontalDivider(color = AvoColors.Line)
                     }
+                }
+            }
+            item {
+                AvoCard("Directo (LIVE en el iPad)", trailing = {
+                    Switch(liveOn, { liveOn = it; c.settings.liveShareEnabled = it })
+                }) {
+                    Note("Mientras el pecho graba, la sesión se sube en directo (posición, velocidad y distancia, 2 veces por segundo). " +
+                        "La ven tu iPad con tu tarjeta AVO y los usuarios que han aceptado tus envíos. Usa datos móviles: unos 0,5 MB por hora.")
+                    live.sessionId?.let { KV("Sesión en directo", it) }
+                    if (live.sent > 0) KV("Muestras enviadas", live.sent.toString())
+                    live.error?.let { Note(it, AvoColors.Bad) }
                 }
             }
             item {
@@ -403,3 +419,26 @@ fun ShareStatusLine(c: AppContainer, sessionId: String) {
 /** "Ana · Propietario, Veterinario" when the licence published by [code] has been verified with the app keys. */
 private fun withRoles(name: String, code: String, roles: Map<String, Set<org.avoperformance.horse.core.license.LicenseRole>>): String =
     roles[code]?.takeIf { it.isNotEmpty() }?.let { "$name · ${org.avoperformance.horse.core.license.LicenseRole.label(it)}" } ?: name
+
+/** Datos de la tarjeta para entrar en la pantalla LIVE del iPad (el iPad no tiene NFC). Contiene la clave: solo a petición. */
+@Composable
+private fun IpadSignInDialog(card: org.avoperformance.horse.core.identity.AvoUserCard, onDismiss: () -> Unit) {
+    val ctx = androidx.compose.ui.platform.LocalContext.current
+    AlertDialog(onDismissRequest = onDismiss, title = { Text("Entrar en el iPad") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text("En el iPad: LIVE › escribe el código y la clave, o pega el enlace. Es la clave de tu tarjeta AVO: no la compartas con nadie.",
+                    color = AvoColors.TextDim, fontSize = 13.sp)
+                KV("Código", card.code)
+                KV("Clave", card.secret.chunked(4).joinToString(" "))
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                val send = android.content.Intent(android.content.Intent.ACTION_SEND).setType("text/plain")
+                    .putExtra(android.content.Intent.EXTRA_TEXT, card.toUri())
+                ctx.startActivity(android.content.Intent.createChooser(send, "Enlace de la tarjeta para el iPad"))
+            }) { Text("Compartir enlace") }
+        },
+        dismissButton = { TextButton(onClick = onDismiss) { Text("Cerrar") } })
+}

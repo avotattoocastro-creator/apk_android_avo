@@ -34,6 +34,43 @@ mientras otros chats fusionaban sus cambios del motor.
 **No se ha tocado:** código, workflows, firmas, `Info.plist`, número de build de TestFlight.
 **Validación:** solo documentación.
 
+## 2026-11-19 — iPad LIVE + Android 2.10-live-dev1 (vc 43) + reglas Firebase `live/` — directo desde el servidor
+**Autor:** Claude (boceto del entrenador sobre la captura de la build 171; decisión del usuario: «El iPad es Live desde el servidor») · **Rama:** `claude/live-servidor` · **CI:** los workflows solo se ejecutan al fusionar en `develop` (Android, iPad/TestFlight y reglas Firebase)
+**Qué cambia:**
+- **iPad:** nueva página **LIVE** en la barra lateral, debajo de «Carreras».
+  - Arriba, datos en tiempo real: tiempo, distancia, velocidad, aceleración, aire, tiempo y distancia del aire, GNSS.
+  - El mapa centrado sigue al caballo («Centrar» / «Ver todo»).
+  - Sobre la parte baja del mapa, la velocidad en tiempo real.
+  - Debajo, las gráficas de pulso y de aceleración.
+  - Sin panel derecho y sin barra de pestañas.
+  - Entrada con la tarjeta AVO (enlace, o código y clave; se guarda en el Llavero).
+  - Firebase por REST, sin SDK: `Core/LiveCodec.swift`, `Core/LiveFirebase.swift`, `App/LiveModel.swift`, `Views/LiveView.swift`.
+  - Simulación con el entrenamiento abierto, marcada SIMULACIÓN. Captura nueva «Live» en `ScreenshotTests`.
+- **Android 2.10-live-dev1 (vc 43):** `core/.../live/LiveCodec.kt` (formato `LIVE1` + `LiveRecorder`, con pruebas) y
+  `app/.../cloud/LiveShare.kt`, que sube la `TELEMETRY` mientras el pecho graba.
+  - Interruptor «Directo (LIVE en el iPad)» en Compartir, desactivado por defecto.
+  - «Entrar en el iPad (LIVE)» en Mi cuenta, que muestra el código y la clave o comparte el enlace.
+- **Firebase:** nodo `live/{owner}/{sid}` (`meta`, `last`, `s/{n}`). Escribe solo el dueño registrado. Leen el dueño y
+  quien tenga sus envíos ACCEPTED. Cuatro pruebas nuevas en `rules.test.js`.
+- Documento `docs/LIVE_SERVIDOR.md`.
+**Por qué:** el entrenador quiere ver el entrenamiento en directo en el iPad. El pecho acepta un solo móvil (el Android,
+que manda el RTCM), así que el directo va por el servidor.
+**No se ha tocado:** firmware, contratos binarios (`TELEMETRY v3` igual), workflows, firmas, `Info.plist`, número de
+build de TestFlight, `google-services.json`. Sin dependencias nuevas en el iPad.
+**Validación:** IMPLEMENTADO · CI lanzado a mano en la rama (commit `3b03740`):
+- reglas Firebase run 44565056559 ✅, 15/15 (4 nuevas de LIVE);
+- Android run 44565050754 ✅ (APK y pruebas core con `LiveCodecTest`);
+- iPad run 44565045768 ✅, sin TestFlight: compila y pasan 121 pruebas unitarias, 5 de ellas de `LiveCodecTests`.
+
+Las capturas de UI fallan desde antes en casi todas las páginas («No existe nav.X»: 44 fallos en el último run de
+`develop`, 44524012083). La nueva captura «Live» sufre el mismo problema, así que no hay captura de la pantalla.
+**NO VERIFICADO** en hardware.
+**Pendiente:**
+1. Publicar las reglas a mano en la consola de Firebase cuando `firebase-rules.yml` pase.
+2. Comprobar que la clave web de Firebase acepta llamadas desde el iPad. Si no, añadir una app iOS (ver `docs/LIVE_SERVIDOR.md`).
+3. Prueba en pista: pecho + Android + iPad.
+4. Pulso y aceleración de la IMU en directo (`TELEMETRY v4`, otro lote).
+5. LIVE en Windows.
 ## 2026-11-19 — iPad 1.0.0 — Botones de la pestaña Motor y «Análisis motor» de carreras
 **Autor:** Claude (a petición del usuario, capturas del build 173 marcadas) · **Rama:** `claude/motor-botones-analisis-carreras` (desde `develop` `fb9de38`) · **Commits:** `e73fca3`, `af7541c` · **PR:** #87 · **CI:** iPad run 44611181120 ✅ (sin TestFlight)
 **Qué cambia:**
