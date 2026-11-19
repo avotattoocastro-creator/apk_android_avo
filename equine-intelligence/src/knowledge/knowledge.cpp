@@ -211,6 +211,9 @@ std::string kb_status_json(const KbStatus& s) {
       << ",\"dias_galope_60d\":" << s.gallop_days_60d << ",\"vuelta_descanso\":";
     if (s.return_day < 0) o << "null";
     else o << "{\"dia\":" << s.return_day << ",\"dias_sin_rapido_antes\":" << s.return_rest << "}";
+  }
+  // Las reglas A7/A8 (línea base propia) no dependen del bloque de carga: se escriben aunque no esté disponible.
+  if (s.available || !s.flags.empty()) {
     o << ",\"reglas\":[";
     for (size_t i = 0; i < s.flags.size(); i++)
       o << (i ? "," : "") << "{\"regla\":" << q(s.flags[i].rule) << ",\"nivel\":" << q(s.flags[i].level) << ",\"accion\":" << q(s.flags[i].action)
@@ -356,6 +359,53 @@ std::vector<double> kb_self_starting_z(const std::vector<double>& x) {
     m2 += d * (v - mean);
   }
   return out;
+}
+
+
+KbDriftResult kb_drift_down(const std::vector<double>& x, const KbDriftConfig& c) {
+  KbDriftResult r;
+  std::vector<double> v;
+  for (double a : x) if (!std::isnan(a) && !std::isinf(a)) v.push_back(a);
+  r.n = (int)v.size();
+  if (v.empty()) return r;
+  r.last = v.back();
+  // Umbral frente a la mediana de las anteriores a las `recent` últimas.
+  int recent = std::max(1, c.recent);
+  if (!std::isnan(c.delta) && r.n > recent) {
+    int end = r.n - recent, beg = std::max(0, end - 12);
+    std::vector<double> base(v.begin() + beg, v.begin() + end);
+    r.baseline_n = (int)base.size();
+    if (r.baseline_n >= c.min_baseline) {
+      r.baseline = median_of(base);
+      r.drop = r.baseline - r.last;
+      for (int i = end; i < r.n; i++) if (v[i] <= r.baseline - c.delta) r.hits++;
+      r.delta_alarm = r.drop >= c.delta - 1e-12 && r.hits >= c.recent_hits;
+    }
+  }
+  // CUSUM autoiniciado hacia abajo con exclusión de las sesiones en alarma.
+  int acc = 0; double mean = 0, m2 = 0, S = 0;
+  for (int i = 0; i < r.n; i++) {
+    bool alarm = false;
+    if (acc >= 2) {
+      double sd = std::sqrt(m2 / (acc - 1));
+      if (sd > 0) {
+        int nn = acc + 1;
+        double t = std::sqrt((double)(nn - 1) / nn) * (mean - v[i]) / sd;   // −x: caída = positivo
+        double nu = nn - 2;
+        double xi = t >= 0 ? -kb_normal_quantile(t_upper(t, nu)) : kb_normal_quantile(t_upper(-t, nu));
+        S = std::max(0.0, S + xi - c.k);
+        if (i + 1 > c.warmup && S > c.h) alarm = true;
+      }
+    }
+    if (i == r.n - 1) { r.s = S; r.cusum_alarm = alarm; }
+    // La base solo aprende de sesiones en control: con S > 0,8·h la sesión no entra [I]. Simulación propia (1.500
+    // series normales, h 5, calentamiento 8): falsa alarma en 100 sesiones 11,4 % (sin exclusión 10,5 %; con h/2,
+    // 23,7 %) y deriva de 3 DE detectada en ≤ 6 sesiones en el 91,5 % (sin exclusión 87,7 %).
+    if (acc >= 2 && S > 0.8 * c.h) continue;
+    acc++;
+    double d = v[i] - mean; mean += d / acc; m2 += d * (v[i] - mean);
+  }
+  return r;
 }
 
 }  // namespace avoeq

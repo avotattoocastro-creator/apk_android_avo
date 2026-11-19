@@ -267,7 +267,7 @@ EQ_TEST(kb, final_speed_last_600m) {
   double keep = -1;
   CHECK(!kb_final_speed(t, d, 600, &keep, nullptr)); CHECK_NEAR(keep, -1, 0);
   CHECK(!kb_final_speed({}, {}, 600, &keep, nullptr));
-  CHECK(std::string(KNOWLEDGE_VERSION) == "1.4.0");
+  CHECK(std::string(KNOWLEDGE_VERSION) == "1.5.0");
 }
 
 // Líneas base (KB 1.3.0, estudio extra 2026-11-19): valores de referencia del estudio ampliado del 18/11 y de la cadena
@@ -370,4 +370,76 @@ EQ_TEST(kb, baseline_self_starting_cusum) {
   KbCusumConfig c; c.min_samples = 8;
   CHECK(kb_cusum_upper(kb_self_starting_z(up), c).alarm_index >= 8);
   CHECK(kb_cusum_upper(kb_self_starting_z(base), c).alarm_index == -1);
+}
+
+// KB-1 1.5.0: reglas A7 (zancada) y A8 (velocidad final) sobre la línea base propia, con CUSUM autoiniciado.
+EQ_TEST(kb, drift_down_rule) {
+  const std::vector<double> base = {6.40, 6.42, 6.38, 6.41, 6.39, 6.43, 6.40, 6.37, 6.42, 6.41};
+  KbDriftConfig c; c.delta = 0.10;
+  // D1: serie estable → sin alarma
+  KbDriftResult r0 = kb_drift_down(base, c);
+  CHECK(!r0.delta_alarm && !r0.cusum_alarm);
+  CHECK(r0.n == 10 && r0.baseline_n == 7);
+  // D2: tres sesiones 0,2 m más cortas → umbral (3 de 3) y CUSUM
+  std::vector<double> x = base; x.push_back(6.20); x.push_back(6.18); x.push_back(6.19);
+  KbDriftResult r1 = kb_drift_down(x, c);
+  REPORT("deriva: caída %.3f m frente a %.3f (n %d), aciertos %d, S %.2f\n", r1.drop, r1.baseline, r1.baseline_n, r1.hits, r1.s);
+  CHECK(r1.delta_alarm && r1.hits == 3);
+  CHECK_NEAR(r1.baseline, 6.405, 1e-9);   // mediana de las 10 anteriores
+  CHECK_NEAR(r1.drop, 0.215, 1e-9);
+  CHECK(r1.cusum_alarm);
+  // D3: una sola sesión corta entre normales → no basta (1 de 3)
+  std::vector<double> y = base; y.push_back(6.40); y.push_back(6.41); y.push_back(6.20);
+  CHECK(!kb_drift_down(y, c).delta_alarm);
+  // D4: pocas sesiones → ni umbral (base < 5) ni CUSUM (calentamiento de 8)
+  KbDriftResult r3 = kb_drift_down({6.40, 6.41, 6.39, 6.40, 6.20, 6.18, 6.19}, c);
+  CHECK(!r3.delta_alarm && !r3.cusum_alarm && r3.baseline_n == 4);
+  // D5: NaN se saltan; una subida no es caída
+  std::vector<double> z = base; z.push_back(std::nan("")); z.push_back(6.70); z.push_back(6.72); z.push_back(6.71);
+  KbDriftResult r4 = kb_drift_down(z, c);
+  CHECK(r4.n == 13 && !r4.delta_alarm && !r4.cusum_alarm);
+  CHECK(kb_drift_down({}, c).n == 0);
+}
+
+EQ_TEST(kb, drift_rules_in_training) {
+  auto mk = [](int d, const std::string& surf, double sl, double v600) {
+    SessionSummary s; s.id = "D" + std::to_string(d); s.horse = "LUNA"; s.date_utc = training_day_text(20500 + 3 * d);
+    s.gait[2].duration_s = 300; s.moving_s = 1800; s.surface = surf;
+    s.race.present = true; s.race.breed = "PSI"; s.race.ref_speed[0] = 14; s.race.sl_ref[0] = sl; s.race.v_last_600 = v600;
+    return s;
+  };
+  const double sl[] = {6.40, 6.42, 6.38, 6.41, 6.39, 6.43, 6.40, 6.37, 6.42, 6.41};
+  const double v6[] = {15.80, 15.85, 15.78, 15.82, 15.79, 15.84, 15.81, 15.77, 15.83, 15.80};
+  std::vector<SessionSummary> ss;
+  for (int i = 0; i < 10; i++) ss.push_back(mk(i, "ARENA", sl[i], v6[i]));
+  for (int i = 10; i < 13; i++) ss.push_back(mk(i, "ARENA", 6.22, 15.50));
+  TrainingConfig c;
+  TrainingResult r = analyse_training(ss, "", c);
+  const SessionResult& last = r.sessions.back();
+  const KbFlag* a7 = flag(last.kb, "A7_CAIDA_ZANCADA");
+  const KbFlag* a8 = flag(last.kb, "A8_CAIDA_VELOCIDAD_FINAL");
+  CHECK(a7 && a7->level == "VIGILAR");
+  CHECK(a8 != nullptr);
+  CHECK(last.level != "NORMAL");
+  CHECK(flag(r.kb, "A7_CAIDA_ZANCADA") != nullptr);   // la última sesión está dentro de los 7 días
+  CHECK(flag(r.sessions[9].kb, "A7_CAIDA_ZANCADA") == nullptr);
+  bool reason = false;
+  for (const auto& m : r.reasons) if (m.find("A7_CAIDA_ZANCADA") != std::string::npos) reason = true;
+  CHECK(reason);
+  // otra superficie: no es comparable con la arena → sin línea base, sin regla
+  std::vector<SessionSummary> s2 = ss;
+  for (int i = 10; i < 13; i++) s2[i].surface = "PLAYA";
+  CHECK(flag(analyse_training(s2, "", c).sessions.back().kb, "A7_CAIDA_ZANCADA") == nullptr);
+  // ida y vuelta del resumen con v_ultimos_600m
+  json::Value v; std::string err; SessionSummary back;
+  CHECK(json::parse(training_summary_to_json(ss[12]), &v, &err) && training_summary_from_json(v, &back, &err));
+  CHECK_NEAR(back.race.v_last_600, 15.50, 1e-9);
+  // opciones: umbrales y desactivar
+  json::Value opt; CHECK(json::parse("{\"base_cientifica\":{\"caida_zancada_m\":0.3,\"cusum_h\":40}}", &opt, &err));
+  TrainingConfig c2; CHECK(!training_config_from_json(opt, &c2, &err));   // h fuera de rango
+  json::Value opt2; CHECK(json::parse("{\"base_cientifica\":{\"caida_zancada_m\":0.3,\"cusum_h\":8}}", &opt2, &err));
+  TrainingConfig c3; CHECK(training_config_from_json(opt2, &c3, &err));
+  CHECK_NEAR(c3.kb.stride_drop_m, 0.3, 1e-12); CHECK_NEAR(c3.kb.drift_h, 8, 1e-12);
+  const KbFlag* a7b = flag(analyse_training(ss, "", c3).sessions.back().kb, "A7_CAIDA_ZANCADA");
+  CHECK(a7b == nullptr || a7b->text.find("CUSUM") != std::string::npos);   // 0,22 m < 0,3 m: solo puede saltar el CUSUM
 }

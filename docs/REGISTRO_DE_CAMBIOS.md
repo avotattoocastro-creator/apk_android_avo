@@ -24,6 +24,27 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-19 — Motor 2.0.0-dev7 — KB-1 1.5.0: reglas A7 y A8 aplicadas (línea base propia + CUSUM autoiniciado)
+**Autor:** Claude (a petición del usuario: «fusiona y empieza a aplicar las reglas») · **Rama:** `claude/kb-reglas-lineas-base-2026-11-19` (desde `develop` con PR #82 fusionado) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Training Analytics aplica A7 y A8** en cada sesión y en el estado actual: `A7_CAIDA_ZANCADA` (zancada a la velocidad
+  de referencia ≥ 0,10 m bajo la línea base comparable, VIGILAR) y `A8_CAIDA_VELOCIDAD_FINAL` (últimos 600 m del trabajo
+  rápido ≥ 0,20 m/s más lentos, INFO; VIGILAR si también lo confirma el CUSUM). Comparables = misma superficie. Criterio:
+  la última y 2 de las 3 últimas bajo el umbral (≥ 5 sesiones de base), o CUSUM autoiniciado de Hawkins (k 0,5, h 5,
+  calentamiento 8). Aparecen en `base_cientifica.reglas` y en los motivos, así que las apps las muestran sin cambios.
+- `kb_drift_down` en `knowledge.h`; `RaceSummary.v_last_600` (campo `v_ultimos_600m` en el resumen de sesión, aditivo);
+  opciones JSON nuevas en `base_cientifica`; `reglas` se escribe aunque falte el bloque de carga si hay avisos A7/A8.
+- Exclusión de la base con S > 0,8·h elegida por simulación propia (falsa alarma 11,4 % en 100 sesiones frente a
+  23,7 % con h/2; detección de 3 DE en ≤ 6 sesiones 91,5 %).
+- `KNOWLEDGE_VERSION` 1.4.0 → 1.5.0; `ENGINE_VERSION` 2.0.0-dev6 → 2.0.0-dev7. `base_cientifica.json` 1.5.0 (A7 y A8
+  IMPLEMENTADO), ficha 14, tabla de estado, README y fixtures (solo versiones).
+**Por qué:** el usuario pidió que las reglas se apliquen ya; A9 sigue pendiente porque el análisis no trae V200 (ECG).
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, número de build de TestFlight, apps.
+**Validación:** IMPLEMENTADO · pruebas locales con ASan/UBSan: 102 casos y 1.729 comprobaciones sin fallos; Release y
+`check_fixtures.py` en verde · CI: ver PR · **NO VERIFICADO** con caballos reales. Los umbrales son de partida [I]; son
+avisos para revisar al caballo, no predicciones de lesión.
+**Pendiente:** TE propio por métrica con las sesiones del PROTOTIPO; playa por franja como superficie; A9 con el ECG.
+
 ## 2026-11-19 — Motor 2.0.0-dev6 — KB-1 1.4.0: estudio extra 2 (CUSUM con pocas sesiones, tendón en árabes, IDF) y CUSUM autoiniciado
 **Autor:** Claude (tarea programada, estudio extra 2) · **Rama:** `claude/kb-estudio2-2026-11-19` (desde `develop`, con PR #80 y #81 fusionados) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
 **Qué cambia:**
