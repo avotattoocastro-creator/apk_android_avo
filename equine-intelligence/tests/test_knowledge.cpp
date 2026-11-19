@@ -1,5 +1,5 @@
 // AVO Base científica KB-1: modelo de fatiga ósea (valores de referencia del estudio ampliado del 17/11/2026), bandas,
-// contadores de Verheyen, reglas A1–A6 y fatiga ósea semanal, e integración con Track Work y Training Analytics.
+// contadores de Verheyen, reglas A1–A6, A6B y fatiga ósea semanal, e integración con Track Work y Training Analytics.
 #include <cmath>
 #include <string>
 #include "avo_eq/avo_eq_c.h"
@@ -144,6 +144,37 @@ EQ_TEST(kb, rules_return_after_rest) {
   CHECK(a6 && a6->text.find("ecografía") != std::string::npos);
 }
 
+// A6B (Choi & Parkin 2025, EVJ 58:31, tabla 2): ≤ 2 días de galope en los 60 días previos, OR 1,842 (1,073–3,162) [E].
+EQ_TEST(kb, rule_low_gallop_days_60d) {
+  KbRuleConfig c;
+  CHECK(c.low_gallop_60d_max_days == 2);
+  std::vector<KbDay> h;
+  // 70 días con canter cada 2 días; galope rápido (400 m) solo los días 20 y 40
+  for (long d = 0; d < 70; d += 2) h.push_back(day_with(d, 1500, (d == 20 || d == 40) ? 400 : 0, 0.5));
+  KbStatus s = kb_evaluate(h, 68, 0, c);
+  REPORT("días de galope en 60 d: %d\n", s.gallop_days_60d);
+  CHECK(s.gallop_days_60d == 2);
+  const KbFlag* f = flag(s, "A6B_POCO_GALOPE_60D");
+  CHECK(f && f->level == "INFO" && f->action == "AVISO");
+  CHECK(f && f->evidence.find("1,84") != std::string::npos);
+  CHECK(kb_status_json(s).find("\"dias_galope_60d\":2") != std::string::npos);
+  // con un tercer día de galope ya no salta (categoría de referencia 3–24 días)
+  h[30].gallop_m = 400;   // día 60
+  KbStatus s3 = kb_evaluate(h, 68, 0, c);
+  CHECK(s3.gallop_days_60d == 3);
+  CHECK(flag(s3, "A6B_POCO_GALOPE_60D") == nullptr);
+  // dos sesiones rápidas el mismo día cuentan como un solo día
+  std::vector<KbDay> dup = h; dup[30].gallop_m = 0; dup.insert(dup.begin() + 21, day_with(40, 0, 300, 0.2));
+  CHECK(kb_evaluate(dup, 68, 0, c).gallop_days_60d == 2);
+  // sin 60 días de historia o sin sesiones en la última semana no se juzga
+  CHECK(flag(kb_evaluate(h, 68, 20, c), "A6B_POCO_GALOPE_60D") == nullptr);
+  h[30].gallop_m = 0;
+  CHECK(flag(kb_evaluate(h, 78, 0, c), "A6B_POCO_GALOPE_60D") == nullptr);   // última sesión el día 68
+  // umbral configurable
+  KbRuleConfig c0; c0.low_gallop_60d_max_days = 1;
+  CHECK(flag(kb_evaluate(h, 68, 0, c0), "A6B_POCO_GALOPE_60D") == nullptr);
+}
+
 EQ_TEST(kb, weekly_bone_fatigue_ratio) {
   KbRuleConfig c;
   std::vector<KbDay> h;
@@ -236,5 +267,5 @@ EQ_TEST(kb, final_speed_last_600m) {
   double keep = -1;
   CHECK(!kb_final_speed(t, d, 600, &keep, nullptr)); CHECK_NEAR(keep, -1, 0);
   CHECK(!kb_final_speed({}, {}, 600, &keep, nullptr));
-  CHECK(std::string(KNOWLEDGE_VERSION) == "1.1.0");
+  CHECK(std::string(KNOWLEDGE_VERSION) == "1.2.0");
 }

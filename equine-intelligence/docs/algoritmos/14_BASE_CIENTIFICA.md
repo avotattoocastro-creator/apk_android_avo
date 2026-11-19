@@ -1,4 +1,4 @@
-# 14 · Base científica de la cuadra (KB-1) 1.1.0
+# 14 · Base científica de la cuadra (KB-1) 1.2.0
 
 Código: `include/avo_eq/knowledge.h`, `src/knowledge/knowledge.cpp`. Se calcula en Track Work (`src/racing/racing.cpp`,
 bloque `trabajo_pista.base_cientifica`) y se evalúa en Training Analytics (`src/training/training.cpp`, bloques
@@ -58,6 +58,7 @@ El corte de 14 m/s es de Verheyen 2006 en PSI [E]; su escalado al árabe es [I].
 | A3_RAMPA | galope rápido 30 d > 1,4 × los 30 d anteriores (≥ 1 km; 60 d de historia) | LIMITAR | Estberg 1996, OR 3,9 [E]; ventanas [I] |
 | A5_VUELTA_DESCANSO | primera sesión rápida tras ≥ 60 d sin ella: 21 d vigilados | LIMITAR | Carrier 1998, RR 71 a 10 d [E] |
 | A6_VUELTA_TENDON | igual tras ≥ 90 d: sugiere ecografía del TFDS | LIMITAR | Choi & Parkin 2025, OR 3,10 [E] |
+| A6B_POCO_GALOPE_60D | ≤ 2 días con sesión rápida en los 60 d previos, con sesiones en los últimos 7 d (60 d de historia) | AVISO (INFO) | Choi & Parkin 2025, OR 1,84 (1,07–3,16) de TFDS [E]; día de galope = sesión rápida [I] |
 | KB_FATIGA_OSEA_7D | fatiga ósea 7 d > 1,5 × mediana semanal propia (≥ 4 semanas) | AVISO | Morrice-West 2025, Hong Kong [E]; umbral [I] |
 | KB_SIN_RAPIDO_30D | canter sin trabajo rápido en 30 d | AVISO (INFO) | Morrice-West 2025 [E]; aplicación [I] |
 
@@ -66,7 +67,7 @@ Sesión rápida = al menos 100 m de galope rápido. Las reglas VIGILAR suben el 
 
 Opciones de Training Analytics (`base_cientifica`: `true`/`false` u objeto): `activa`, `canter_30d_aviso_km`,
 `canter_30d_limite_km`, `galope_30d_limite_km`, `rampa_ratio`, `rampa_min_m`, `galope_sesion_min_m`,
-`fatiga_osea_ratio`, `dias_descanso_vuelta`, `dias_ventana_vuelta`, `dias_descanso_tendon`, `semanas_min_fatiga_osea`.
+`fatiga_osea_ratio`, `dias_descanso_vuelta`, `dias_ventana_vuelta`, `dias_descanso_tendon`, `semanas_min_fatiga_osea`, `dias_galope_60d_max` (0–24, por defecto 2).
 Opciones del análisis de sesión: `v_carrera_m_s` (8–20), `sigma_max_mpa` (30–120), `sigma0_mpa` (100–180).
 
 Los análisis anteriores sin el bloque cuentan como «sesiones sin datos» y no se juzgan.
@@ -77,6 +78,13 @@ interpolado sobre la distancia acumulada (Schrurs 2024 [E], «average speed over
 en la marca de 600 m no predice). Sale en `trabajo_pista.trabajos.lista[].v_ultimos_600m` y `ultimos_600m_s`, solo en
 trabajos de al menos 600 m. Valor de prueba: 1.000 m a 14 m/s + 400 m a 17 m/s → 37,815 s y 15,867 m/s.
 La regla A8 (caída frente a la línea base) sigue pendiente: no hay umbral publicado.
+
+## 3 ter. Pocos días de galope en 60 días (KB-1 1.2.0, regla A6B)
+Choi & Parkin 2025 (EVJ 58:31–39, Seúl, 101 casos y 304 controles) [E]: en el modelo final, **≤ 2 días de galope en
+los 60 días previos** (frente a 3–24) tiene OR 1,842 (IC 95 % 1,073–3,162) de tendinopatía del TFDS. La KRA solo
+anota si el día fue de galope o de canter, sin velocidad ni distancia, así que «día de galope» = día con sesión rápida
+del motor (≥ 100 m por encima de 0,838·v_carrera) es [I]. El estado lleva `dias_galope_60d`. Solo informa (INFO,
+AVISO); no cambia el estado a VIGILAR.
 
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se

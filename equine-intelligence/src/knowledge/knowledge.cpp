@@ -111,6 +111,8 @@ KbStatus kb_evaluate(const std::vector<KbDay>& sessions, long at_day, long first
     if (in(s.day, at_day - 29, at_day)) add(&st.w30, s);
     if (in(s.day, at_day - 59, at_day - 30)) add(&st.prev30, s);
     if (in(s.day, at_day - 59, at_day)) add(&st.w60, s);
+    if (has && in(s.day, at_day - 59, at_day) && !std::isnan(s.gallop_m) && s.gallop_m >= c.gallop_session_min_m && s.day != last_gallop)
+      st.gallop_days_60d++;
     if (has && !std::isnan(s.gallop_m) && s.gallop_m >= c.gallop_session_min_m && s.day != last_gallop) {
       long ref = last_gallop >= 0 ? last_gallop : first_kb;
       long gap = s.day - ref;
@@ -157,6 +159,14 @@ KbStatus kb_evaluate(const std::vector<KbDay>& sessions, long at_day, long first
                           tendon ? "Choi & Parkin 2025: ≥ 90 días sin trabajo rápido, OR 3,10 de lesión del TFDS [E]; Carrier 1998 [E]"
                                  : "Carrier 1998: tras ≥ 60 días sin trabajo rápido, RR 71 de fractura de húmero en 10 días y 45 en 21 [E]"});
     }
+    // A6B pocos días de galope en 60 días con el caballo en entrenamiento (con 60 días de historia)
+    if (first_day <= at_day - 59 && st.w7.sessions > 0 && st.w60.canter_m > 0 && st.gallop_days_60d <= c.low_gallop_60d_max_days) {
+      snprintf(b, sizeof(b), "%d días de galope rápido en los últimos 60 días (%d o menos): el tendón flexor pierde preparación; repartir el trabajo rápido",
+               st.gallop_days_60d, c.low_gallop_60d_max_days);
+      st.flags.push_back({"A6B_POCO_GALOPE_60D", "INFO", "AVISO", b,
+                          "Choi & Parkin 2025 (Seúl, 101 casos): ≤ 2 días de galope en 60 días, OR 1,84 (IC 95 % 1,07–3,16) de tendinopatía del TFDS [E]; "
+                          "día de galope = sesión rápida del motor [I]"});
+    }
     // Informativo: ningún trabajo rápido en 30 días con canter
     if (first_day <= at_day - 29 && st.w30.gallop_m < c.gallop_session_min_m && st.w30.canter_m > 0)
       st.flags.push_back({"KB_SIN_RAPIDO_30D", "INFO", "AVISO", "sin trabajo rápido en 30 días: el hueso pierde estímulo; al volver, subirlo poco a poco",
@@ -198,7 +208,7 @@ std::string kb_status_json(const KbStatus& s) {
     o << ",\"d7\":"; win(s.w7); o << ",\"d30\":"; win(s.w30); o << ",\"d30_anteriores\":"; win(s.prev30); o << ",\"d60\":"; win(s.w60);
     o << ",\"fatiga_osea_mediana_semanal_pct\":" << num(s.bone_weekly_median) << ",\"fatiga_osea_ratio_7d\":" << num(s.bone_ratio)
       << ",\"dias_sin_trabajo_rapido\":" << (s.days_since_gallop < 0 ? std::string("null") : std::to_string(s.days_since_gallop))
-      << ",\"vuelta_descanso\":";
+      << ",\"dias_galope_60d\":" << s.gallop_days_60d << ",\"vuelta_descanso\":";
     if (s.return_day < 0) o << "null";
     else o << "{\"dia\":" << s.return_day << ",\"dias_sin_rapido_antes\":" << s.return_rest << "}";
     o << ",\"reglas\":[";

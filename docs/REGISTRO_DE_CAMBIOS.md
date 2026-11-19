@@ -24,6 +24,31 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-19 — Motor 2.0.0-dev4 — KB-1 1.2.0: investigación nocturna (modelo B, tendón, árabes, arritmias) y regla A6B
+**Autor:** Claude (tarea programada nocturna) · **Rama:** `claude/kb-noche-2026-11-19` (sale de `develop`) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Estudio** `equine-intelligence/knowledge/estudios/2026-11-19_noche_modeloB_tendon_choi_ecg_prevalencia.md`, con
+  cada cifra etiquetada [E]/[E-r]/[I]/[NV] y las decisiones de la noche al principio.
+- **Motor (un pendiente):** regla nueva **A6B_POCO_GALOPE_60D** (Choi & Parkin 2025, texto completo, tabla 2: ≤ 2 días
+  de galope en 60 d, OR 1,842, IC 95 % 1,073–3,162 de tendinopatía del TFDS). Solo INFO / AVISO, con 60 d de historia y
+  sesiones en la última semana; «día de galope» = día con sesión rápida es [I]. Campo nuevo `dias_galope_60d` en el
+  estado de la base científica y opción `base_cientifica.dias_galope_60d_max` (0–24, por defecto 2).
+  `KNOWLEDGE_VERSION` 1.1.0 → 1.2.0; `ENGINE_VERSION` 2.0.0-dev3 → 2.0.0-dev4.
+- **`base_cientifica.json` 1.2.0:** constantes del modelo B completas (A_OBL_min/max, δ_B, γ_B, A_OCL_max; tabla 9 de
+  Anwar 2026, extracto [E-r]) pero **sin implementar** (signo de b dudoso, f_BM inicial no publicada); tabla 2 de Choi &
+  Parkin; tipos de lesión de árabes (tendón 64 %, Yildirim 2025); prevalencia de arritmias en caballos sanos (A11 sigue
+  pendiente: no hay número aceptable publicado); 9 fuentes nuevas; cola y pendientes renovados.
+- Fixtures JSON (`core/src/test/resources/equine/*.json`) regeneradas con `check_fixtures.py --update`: solo cambian
+  las versiones del motor y de la base (2.0.0-dev3 → dev4, 1.1.0 → 1.2.0).
+- Ficha `docs/algoritmos/14_BASE_CIENTIFICA.md` actualizada.
+**Por qué:** investigación nocturna programada de la base científica de la cuadra.
+**No se ha tocado:** firmware, workflows, firmas, `Info.plist`, TestFlight y contratos binarios. La API C no cambia.
+**Validación:** IMPLEMENTADO · pruebas locales con `-DAVO_EQ_SANITIZE=ON` (ASan/UBSan): 96 casos y 1.638 comprobaciones
+sin fallos (nueva `kb.rule_low_gallop_days_60d`) · fixtures OK con el CLI en Release. **NO VERIFICADO** con caballos
+reales.
+**Pendiente:** modelo B (signo de b, f_BM inicial, reproducir la tabla 4 de Anwar); cociente de galope de A6; A8; A9;
+A11; regla combinada de Verheyen; pantallas de las apps para A6B.
+
 ## 2026-11-18 — Cincha CAD REV 6.5 → 7.0 integrada en `develop`
 **Autor:** Claude · **Rama:** `claude/integrar-cad-cincha-rev7`
 **Qué cambia:** se integra en `develop` la cadena de PR del CAD de la cincha (#67 a #73, REV 6.5 → REV 7.0 con 3 IMU),
