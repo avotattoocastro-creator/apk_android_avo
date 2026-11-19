@@ -205,6 +205,22 @@ class FirebaseShare(private val ctx: Context) {
         awaitClose { ref.removeEventListener(l) }
     }
 
+    // ------------------------------------------------------------- LIVE (directo al iPad, nodo live/)
+
+    /** Escritura sin esperar respuesta: sin conexión, el SDK la guarda y la envía al volver (mismo orden). */
+    fun livePut(path: String, value: Any?) { r(path).setValue(value) }
+
+    /** Varias claves de una vez (actualización atómica en el servidor). */
+    fun liveUpdate(path: String, values: Map<String, Any?>) { r(path).updateChildren(values) }
+
+    /** Mis sesiones en directo (para borrar las caducadas). */
+    suspend fun liveSessions(me: String): List<Pair<String, Long>> = call { r("live/$me").get() }.children.mapNotNull { s ->
+        val k = s.key ?: return@mapNotNull null
+        k to (s.child("meta/expiresMs").getValue(Long::class.java) ?: 0L)
+    }
+
+    suspend fun liveRemove(me: String, sid: String) { call { r("live/$me/$sid").removeValue() } }
+
     // ------------------------------------------------------------- transfer backend (ShareEngine)
 
     fun backend(): ShareBackend = object : ShareBackend {

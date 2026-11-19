@@ -7,7 +7,7 @@ enum Page: String, CaseIterable, Identifiable {
          gps = "Gps", charts = "Charts", segments = "Segments", biomech = "Biomech", compare = "Compare", geofences = "Geofences",
          tides = "Tides", reports = "Reports", watchWifi = "WatchWifi", server = "Server", engine = "Engine",
          summary = "Summary", trackWork = "TrackWork", assistant = "Assistant",
-         calendar = "Calendar", keyData = "KeyData", settings = "Settings", camera = "Camera"
+         calendar = "Calendar", keyData = "KeyData", settings = "Settings", camera = "Camera", live = "Live"
     var id: String { rawValue }
 
     /// Pages of ONE training: shown in the top bar of the training (Análisis), not in the sidebar.
@@ -54,6 +54,7 @@ final class AppModel {
     @ObservationIgnored var raceVideo: RaceVideoModel!     // «Analizar vídeo» de una carrera (seguimiento automático)
     @ObservationIgnored var assistant: AssistantModel!    // «Asistente IA»: Claude (API, clave en el Llavero) o modelo de Apple
     @ObservationIgnored var camera: CameraModel!          // «Cámara»: vídeo con hora GPS (AVO SYNC) para juntarlo con el entrenamiento
+    @ObservationIgnored var live: LiveModel!              // «LIVE»: entrenamiento en directo desde el servidor (Firebase)
 
     // ---------------------------------------------------------------- state (names = MainViewModel, lowerCamel)
     /// «Análisis» (map + charts) is hidden for now (trainer's sketch 14/11/2026): asking for it opens «Resumen», the first
@@ -131,6 +132,7 @@ final class AppModel {
         self.stretch = StretchModel(app: self)
         self.franceGalop = FranceGalopModel(app: self)
         self.camera = CameraModel(app: self)
+        self.live = LiveModel(app: self)
         initShell()
     }
 }
