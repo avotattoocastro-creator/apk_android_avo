@@ -96,6 +96,31 @@
           ".validate": "newData.isString() && newData.val().length <= 140 && (newData.val() === 'imported' || newData.val() === 'present' || newData.val().beginsWith('error:'))"
         }
       }
+    },
+    "live": {
+      "$owner": {
+        ".read": "auth != null && (auth.token.email === $owner.toLowerCase() + '@avo-cards.app' || root.child('grants').child(auth.token.email.replace('@avo-cards.app', '').toUpperCase()).child($owner).child('state').val() === 'ACCEPTED')",
+        "$sid": {
+          ".write": "auth != null && auth.token.email === $owner.toLowerCase() + '@avo-cards.app' && root.child('users').child($owner).exists()",
+          ".validate": "$sid.matches(/^[0-9]{8}-[0-9]{6}$/)",
+          "meta": {
+            ".validate": "newData.hasChildren(['horseName', 'riderName', 'startMs', 'state', 'updatedMs', 'expiresMs'])",
+            "horseName": { ".validate": "newData.isString() && newData.val().length <= 120" },
+            "riderName": { ".validate": "newData.isString() && newData.val().length <= 120" },
+            "breed": { ".validate": "newData.isString() && newData.val().length <= 40" },
+            "startMs": { ".validate": "newData.isNumber() && newData.val() <= now + 600000" },
+            "state": { ".validate": "newData.isString() && newData.val().matches(/^(REC|PAUSE|END)$/)" },
+            "updatedMs": { ".validate": "newData.isNumber() && newData.val() <= now + 600000" },
+            "expiresMs": { ".validate": "newData.isNumber() && newData.val() <= now + 172800000" },
+            "$other": { ".validate": false }
+          },
+          "last": { ".validate": "newData.isString() && newData.val().length <= 200 && newData.val().matches(/^LIVE1,[-0-9,]+$/)" },
+          "s": {
+            "$n": { ".validate": "$n.matches(/^[0-9]{1,4}$/) && newData.isString() && newData.val().length <= 6000 && newData.val().matches(/^LIVE1,[-0-9,;]+$/)" }
+          },
+          "$other": { ".validate": false }
+        }
+      }
     }
   }
 }

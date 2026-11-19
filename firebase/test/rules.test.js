@@ -151,3 +151,52 @@ test('safe deletion: only the owner deletes the content', async () => {
   await assertFails(remove(ref(db(B), `blobs/${TID}`)));
   await assertSucceeds(remove(ref(db(A), `blobs/${TID}`)));
 });
+
+// ---------------------------------------------------------------- LIVE (directo desde el Android al iPad)
+const SID = '20261119-171500';
+const liveMeta = () => ({ horseName: 'POWER GOLD', riderName: 'Andoni', breed: 'PSA', startMs: Date.now(), state: 'REC',
+  updatedMs: Date.now(), expiresMs: Date.now() + 86400000 });
+const LAST = 'LIVE1,1500,434190000,-34540000,15200,250000,3,0,180,31,1';
+
+test('live: only the owner writes its own live session, with a valid format', async () => {
+  await users();
+  await assertSucceeds(set(ref(db(A), `live/${A}/${SID}/meta`), liveMeta()));
+  await assertSucceeds(set(ref(db(A), `live/${A}/${SID}/last`), LAST));
+  await assertSucceeds(set(ref(db(A), `live/${A}/${SID}/s/0`), LAST + ';2000,434190010,-34540010,15300,250800,3,0,180,31,1'));
+  await assertFails(set(ref(db(B), `live/${A}/${SID}/last`), LAST));                       // someone else's
+  await assertFails(set(ref(db(A), `live/${A}/hoy/last`), LAST));                           // bad session id
+  await assertFails(set(ref(db(A), `live/${A}/${SID}/last`), '<script>'));                   // bad sample
+  await assertFails(set(ref(db(A), `live/${A}/${SID}/otra`), 1));                            // unknown child
+  await assertFails(set(ref(db(A), `live/${A}/${SID}/meta`), { ...liveMeta(), state: 'X' }));
+  await assertFails(set(ref(db(A), `live/${A}/${SID}/meta`), { ...liveMeta(), expiresMs: Date.now() + 30 * 86400000 }));
+  await assertFails(set(ref(db(A), `live/${A}/${SID}/meta`), { ...liveMeta(), telefono: '600' }));
+  await assertFails(set(ref(db(A), `live/${A}/${SID}/s/abc`), LAST));
+});
+
+test('live: unregistered card cannot publish', async () => {
+  await assertFails(set(ref(db(A), `live/${A}/${SID}/last`), LAST));
+});
+
+test('live: read by the owner and by recipients with ACCEPTED, never by others', async () => {
+  await users();
+  await seed(async (d) => set(ref(d, `live/${A}/${SID}`), { meta: liveMeta(), last: LAST }));
+  await assertSucceeds(get(ref(db(A), `live/${A}`)));
+  await assertFails(get(ref(db(B), `live/${A}`)));                                           // no grant
+  await grant(B, A, 'PENDING');
+  await assertFails(get(ref(db(B), `live/${A}`)));
+  await grant(B, A, 'ACCEPTED');
+  await assertSucceeds(get(ref(db(B), `live/${A}`)));
+  await assertSucceeds(get(ref(db(B), `live/${A}/${SID}/last`)));
+  await assertFails(set(ref(db(B), `live/${A}/${SID}/last`), LAST));                       // read only
+  await assertFails(get(ref(db(C), `live/${A}`)));
+  await grant(B, A, 'BLOCKED');
+  await assertFails(get(ref(db(B), `live/${A}`)));
+  await assertFails(get(ref(db(B), 'live')));
+});
+
+test('live: only the owner deletes its live session', async () => {
+  await users(); await grant(B, A, 'ACCEPTED');
+  await seed(async (d) => set(ref(d, `live/${A}/${SID}`), { meta: liveMeta(), last: LAST }));
+  await assertFails(remove(ref(db(B), `live/${A}/${SID}`)));
+  await assertSucceeds(remove(ref(db(A), `live/${A}/${SID}`)));
+});

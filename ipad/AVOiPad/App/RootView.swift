@@ -35,6 +35,8 @@ struct RootView: View {
         RootNavEntry(page: .stable, title: "Cuadra", icon: "figure.equestrian.sports"),
         RootNavEntry(page: .riders, title: "Jinetes", icon: "person"),
         RootNavEntry(page: .races, title: "Carreras", icon: "flag.checkered"),
+        // trainer's sketch 19/11/2026: «LIVE» debajo de «Carreras» (entrenamiento en directo desde el servidor)
+        RootNavEntry(page: .live, title: "LIVE", icon: "dot.radiowaves.left.and.right"),
     ]
     static let systemEntries: [RootNavEntry] = [
         // trainer's sketch 13/11/2026: «Configuración» (maintenance, server and future settings) in place of «Servidor AVO»
@@ -357,6 +359,7 @@ struct RootView: View {
         case .calendar: CalendarView()
         case .keyData: KeyDataView()
         case .camera: CameraView()
+        case .live: LiveView()
         }
     }
 }

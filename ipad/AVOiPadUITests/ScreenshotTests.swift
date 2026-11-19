@@ -12,7 +12,7 @@ final class ScreenshotTests: XCTestCase {
                                           ("Riders", false), ("Analysis", false), ("KeyData", true), ("Summary", true), ("Charts", true), ("TrackWork", true), ("Assistant", true),
                                           ("Segments", true),
                                           ("Gps", true), ("Biomech", false), ("Compare", true), ("Tides", true), ("Reports", false),
-                                          ("Engine", true), ("Settings", false), ("Geofences", false), ("WatchWifi", false), ("Server", false)]
+                                          ("Engine", true), ("Settings", false), ("Geofences", false), ("WatchWifi", false), ("Server", false), ("Live", false)]
 
     override func setUp() { continueAfterFailure = true }
 

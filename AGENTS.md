@@ -114,7 +114,7 @@ La publica `publicar-descargas.yml` en cada push a `develop`; qué entra y con q
 ## Componentes
 | Carpeta | Qué es | Workflow |
 |---|---|---|
-| `app/`, `core/` | App Android AVO Performance Horse (2.9-integrada) | `build-android.yml` |
+| `app/`, `core/` | App Android AVO Performance Horse (2.10-live) | `build-android.yml` |
 | `cards/` | AVO Tarjetas (licencias NFC) | `build-android.yml` |
 | `usb-updater/` | AVO Update: programa pecho, espalda y cincha por USB | `build-usb-updater.yml` |
 | `avo-signer/` | Firma de paquetes OTA | `build-avo-signer.yml` |
