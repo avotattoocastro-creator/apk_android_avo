@@ -7,14 +7,24 @@ import SwiftUI
 struct EngineView: View {
     @Environment(AppModel.self) private var app
     @State private var technical: Bool = false
+    // «Botones» column (trainer's sketch 19/11/2026, build 173)
+    @State private var busyText: String = ""
+    @State private var resultText: String = ""
+    @State private var askHorse: Bool = false
+    @State private var askCache: Bool = false
+    @State private var shareURL: URL? = nil
 
     var body: some View {
         GeometryReader { geo in
             let wide: Bool = geo.size.width >= 1000
+            ScrollViewReader { proxy in
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
                     if let e = engine {
-                        readingCard(e)
+                        HStack(alignment: .top, spacing: 12) {
+                            readingCard(e).frame(maxWidth: .infinity)
+                            actionsColumn(proxy)
+                        }
                         gaitsCard(e)
                         if wide {
                             HStack(alignment: .top, spacing: 12) {
@@ -31,19 +41,124 @@ struct EngineView: View {
                             curvesCard(e)
                             reliabilityCard(e)
                         }
-                        technicalFold(e)
+                        technicalFold(e).id("motor.technical")
                     } else {
-                        AvoCard {
-                            AvoNoData(text: app.selected.map { "El motor AVO todavía no ha analizado este entrenamiento · \($0.engineState)" }
-                                      ?? "Elige un entrenamiento")
+                        HStack(alignment: .top, spacing: 12) {
+                            AvoCard {
+                                AvoNoData(text: app.selected.map { "El motor AVO todavía no ha analizado este entrenamiento · \($0.engineState)" }
+                                          ?? "Elige un entrenamiento")
+                            }
+                            .frame(maxWidth: .infinity)
+                            actionsColumn(proxy)
                         }
                     }
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
             }
+            }
         }
         .background(Avo.bg)
+        .confirmationDialog("Reprocesar todo el caballo", isPresented: $askHorse, titleVisibility: .visible) {
+            Button("Reprocesar \(horseSessions.count) entrenamientos") { reprocessHorse() }
+            Button("Cancelar", role: .cancel) {}
+        } message: {
+            Text("Se pasa el motor \(EquineEngine.version()) por todos los entrenamientos de \(app.selected?.horse ?? "este caballo") en este iPad, uno detrás de otro. Puede tardar varios minutos.")
+        }
+        .confirmationDialog("Borrar caché del motor", isPresented: $askCache, titleVisibility: .visible) {
+            Button("Borrar resultados guardados", role: .destructive) { deleteCache() }
+            Button("Cancelar", role: .cancel) {}
+        } message: {
+            Text("Se borran los resultados del motor guardados en el iPad (no los entrenamientos, ni las correcciones, ni las valoraciones). Cada entrenamiento se vuelve a calcular la próxima vez que se analice.")
+        }
+        .sheet(isPresented: Binding(get: { shareURL != nil }, set: { if !$0 { shareURL = nil } })) {
+            if let u = shareURL { ReportsActivitySheet(url: u) }
+        }
+    }
+
+    // ------------------------------------------------------------------ buttons column
+    private var horseSessions: [SessionItem] { app.selected.map { app.sessionsOfSameHorse($0) } ?? [] }
+    private var busy: Bool { !busyText.isEmpty }
+
+    private func actionsColumn(_ proxy: ScrollViewProxy) -> some View {
+        let hasSel: Bool = app.selected != nil
+        let hasResult: Bool = !(engine?.rawJson.isEmpty ?? true)
+        return VStack(alignment: .leading, spacing: 8) {
+            actionButton("Reprocesar", "arrow.clockwise", primary: true, enabled: hasSel && !busy, id: "motor.reprocess") {
+                guard let s = app.selected else { return }
+                busyText = "Reprocesando…"
+                resultText = ""
+                Task { @MainActor in
+                    await app.runEngine(s, force: true)
+                    busyText = ""
+                    resultText = s.engineState
+                }
+            }
+            actionButton("Reprocesar caballo", "arrow.triangle.2.circlepath", enabled: hasSel && !busy && !horseSessions.isEmpty,
+                         id: "motor.reprocessHorse") { askHorse = true }
+            actionButton("Exportar JSON", "square.and.arrow.up", enabled: hasResult && !busy, id: "motor.exportJson") {
+                guard let s = app.selected else { return }
+                do {
+                    shareURL = try app.exportEngineJson(s)
+                    resultText = "JSON guardado en Exportados"
+                } catch {
+                    resultText = error.localizedDescription
+                }
+            }
+            actionButton(technical ? "Ocultar detalle" : "Detalle técnico", "tablecells", enabled: engine != nil, id: "motor.technicalButton") {
+                withAnimation(.easeInOut(duration: 0.2)) { technical.toggle() }
+                if technical {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                        withAnimation { proxy.scrollTo("motor.technical", anchor: .top) }
+                    }
+                }
+            }
+            actionButton("Borrar caché", "trash", destructive: true, enabled: !busy, id: "motor.deleteCache") { askCache = true }
+            if busy {
+                HStack(spacing: 6) {
+                    ProgressView().controlSize(.small)
+                    Text(busyText).font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+                }
+            } else if !resultText.isEmpty {
+                Text(resultText).font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+            }
+            Text("Motor \(EquineEngine.version())").font(.caption2).foregroundStyle(Avo.textDim).lineLimit(2)
+        }
+        .padding(12)
+        .frame(width: 210, alignment: .topLeading)
+        .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 10))
+        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Avo.line, lineWidth: 1))
+    }
+
+    private func actionButton(_ title: String, _ icon: String, primary: Bool = false, destructive: Bool = false, enabled: Bool,
+                              id: String, _ action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Label(title, systemImage: icon).frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .buttonStyle(.avoSecondary)
+        .foregroundStyle(destructive ? Avo.bad : (primary ? Avo.red : Avo.text))
+        .disabled(!enabled)
+        .opacity(enabled ? 1 : 0.45)
+        .accessibilityIdentifier(id)
+    }
+
+    private func reprocessHorse() {
+        let list: [SessionItem] = horseSessions
+        guard !list.isEmpty else { return }
+        resultText = ""
+        busyText = "Reprocesando 0 de \(list.count)…"
+        Task { @MainActor in
+            let ok: Int = await app.reprocess(list) { (done: Int, total: Int) in
+                busyText = "Reprocesando \(min(done + 1, total)) de \(total)…"
+            }
+            busyText = ""
+            resultText = "\(ok) de \(list.count) entrenamientos reprocesados con el motor actual"
+        }
+    }
+
+    private func deleteCache() {
+        let n: Int = app.deleteEngineCache()
+        resultText = n == 1 ? "1 resultado borrado" : "\(n) resultados borrados"
     }
 
     private var engine: EquineAnalysis? { app.selected?.engine }
