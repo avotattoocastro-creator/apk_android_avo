@@ -24,6 +24,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Proceso — Integración centralizada en un chat integrador
+**Autor:** Claude (decisión del usuario, 20/11/2026 00:32) · **Rama:** `claude/regla-chat-integrador`
+**Qué cambia:** `AGENTS.md` (sección «Integración centralizada» y paso 3 de «Empieza aquí») y `CLAUDE.md`: cada chat abre
+su PR sin fusionarlo; un único chat integrador fusiona los PR en `develop` de uno en uno, resuelve los conflictos
+conservando las dos partes y solo fusiona con el CI en verde.
+**Por qué:** la build 177 salió sin los PR #84 (LIVE) y #87 (botones de Motor y «Análisis motor»), que seguían abiertos
+mientras otros chats fusionaban sus cambios del motor.
+**No se ha tocado:** código, workflows, firmas, `Info.plist`, número de build de TestFlight.
+**Validación:** solo documentación.
+
 ## 2026-11-19 — iPad 1.0.0 — Botones de la pestaña Motor y «Análisis motor» de carreras
 **Autor:** Claude (a petición del usuario, capturas del build 173 marcadas) · **Rama:** `claude/motor-botones-analisis-carreras` (desde `develop` `fb9de38`) · **Commits:** `e73fca3`, `af7541c` · **PR:** #87 · **CI:** iPad run 44611181120 ✅ (sin TestFlight)
 **Qué cambia:**
