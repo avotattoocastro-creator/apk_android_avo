@@ -1,4 +1,4 @@
-# 14 · Base científica de la cuadra (KB-1) 1.5.0
+# 14 · Base científica de la cuadra (KB-1) 1.7.0
 
 Código: `include/avo_eq/knowledge.h`, `src/knowledge/knowledge.cpp`. Se calcula en Track Work (`src/racing/racing.cpp`,
 bloque `trabajo_pista.base_cientifica`) y se evalúa en Training Analytics (`src/training/training.cpp`, bloques
@@ -123,6 +123,28 @@ Evidencia: Wong 2023 (HR 1,11 por 10 cm menos de zancada) y Schrurs 2024 (últim
 (simulación propia: falsa alarma 11,4 % en 100 sesiones; deriva de 3 DE detectada en ≤ 6 sesiones el 91,5 %).
 Opciones (`base_cientifica`): `reglas_linea_base`, `caida_zancada_m`, `caida_v_600m`, `cusum_h`,
 `cusum_calentamiento`, `sesiones_min_linea_base`. A9 (V200) sigue pendiente: el análisis no trae el ECG.
+
+**Estudio extra 3 (KB-1 1.6.0, motor 2.0.0-dev8, sin cambios de lógica).** Dos especificaciones nuevas, **PENDIENTE**:
+- **Planificador semanal (capa 2), restricciones P1–P6** (`reglas.PLANIFICADOR_RESTRICCIONES_P1_P6`): trabajos rápidos
+  por semana según la práctica (≈ 2 en maduros, 1,7 en 2 años, Morrice-West 2020 [E]), día libre, carreras cada
+  17–21 d, vuelta tras > 60 d, P75 propio de la distancia rápida de 60 d y descansos anuales. No hay evidencia publicada
+  de los días entre trabajos rápidos ni datos de árabes de llano: esas partes son [I].
+- **A11 y detector de QRS** (`reglas.A11_ECG.nota_1_6_0`): ancla en el pico S (Van Steenkiste 2020 [E], reposo),
+  prematuro ≥ 5–6 % de acortamiento del RR (Navas de Solis 2026 [E]), fases con recuperación 0–2 min, puerta de calidad
+  > 10 % no interpretable por fase y salida siempre como «candidato a revisar».
+Detalle: `knowledge/estudios/2026-11-19_extra3_planificador_semanal_ecg_a11.md`.
+
+**Estudio extra 4 (KB-1 1.7.0, motor 2.0.0-dev9, sin cambios de lógica ni de constantes).** Auditoría de acceso de 9
+fuentes (campos `acceso`, `verificado_fecha`, `pais`, `idioma`, `raza_fuente` en `base_cientifica.json`):
+- Morrice-West 2025 es de **Tasmania** y da **HR**; su «carga baja» es fatiga ósea acumulada < 0,25 en las 4 salidas
+  previas, así que el corte de A4 (2 sesiones en 28 d) es [I].
+- Carrier 1998 (A5): RR 71/45 **solo para fractura de húmero**. Estberg 1996 (A3): 35 frente a 25 furlongs entre
+  caballos; la rampa propia es [I]. Martig 2013: σ0 134,2 confirmada (caso sin lesión avanzada).
+- Vermeulen & Evans: «diferencia media ≤ 2 %», no CV. Frick 2019: −6,1/+5,4 % es canter en cinta; corte de
+  recuperación 6 % (S 88 %, E 97 %).
+- Índice tendinoso: sigue sin OR de árabes; edad 3–4 años con tres fuentes (Turquía, Qatar); la carga solo se asocia
+  a la gravedad. A9: TE propio del caballo, nunca mezclar cinta y pista ([I-raza], trotones).
+Detalle: `knowledge/estudios/2026-11-19_extra4_auditoria_fuentes_tendon_arabes_v200_trotones.md`.
 
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se
