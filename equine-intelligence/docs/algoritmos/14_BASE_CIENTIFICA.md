@@ -1,4 +1,4 @@
-# 14 · Base científica de la cuadra (KB-1) 1.4.0
+# 14 · Base científica de la cuadra (KB-1) 1.5.0
 
 Código: `include/avo_eq/knowledge.h`, `src/knowledge/knowledge.cpp`. Se calcula en Track Work (`src/racing/racing.cpp`,
 bloque `trabajo_pista.base_cientifica`) y se evalúa en Training Analytics (`src/training/training.cpp`, bloques
@@ -108,6 +108,21 @@ h = 4/5 no tiene el ARL0 nominal por caballo (simulación propia: con 10 sesione
 `kb_self_starting_z(x)` tipifica cada sesión frente a las anteriores (Hawkins 1987: ξ = Φ⁻¹(T_{n−2}(√((n−1)/n)·V)),
 V = (x_n − x̄_{n−1})/s_{n−1}, n ≥ 3) y sus ξ se pasan a `kb_cusum_upper` con k = 0,5, h = 5 y `min_samples` 8–10 [I];
 ARL0 339/930 con h = 4/5 (simulación propia). Prueba: {10,0; 10,4; 9,8; 10,9; 10,1; 12,0} → ξ_6 = 2,3292 (scipy).
+
+**Reglas A7 y A8 aplicadas (KB-1 1.5.0, motor 2.0.0-dev7).** `kb_drift_down(x, {delta, k, h, warmup})` juzga la última
+sesión frente a las **comparables** (mismo `superficie` anotado; sin anotar es otra superficie) y Training Analytics
+añade sus avisos a `base_cientifica.reglas` de la sesión (y al estado si la sesión es de los últimos 7 días):
+
+| Regla | Métrica | Umbral | Nivel |
+|---|---|---|---|
+| `A7_CAIDA_ZANCADA` | `TRABAJO.l_v1_m`, `l_v2_m` (zancada a la velocidad de referencia) | ≥ 0,10 m bajo la mediana de las ≤ 12 anteriores (≥ 5) en la última y en 2 de las 3 últimas, **o** CUSUM autoiniciado | VIGILAR · AVISO |
+| `A8_CAIDA_VELOCIDAD_FINAL` | `v_ultimos_600m` del trabajo rápido más veloz | ≥ 0,20 m/s, mismo criterio | INFO · AVISO; VIGILAR si umbral y CUSUM a la vez |
+
+Evidencia: Wong 2023 (HR 1,11 por 10 cm menos de zancada) y Schrurs 2024 (últimos 600 m) [E]; umbrales, 2 de 3 y CUSUM
+[I]. CUSUM: k 0,5, h 5, sin alarmas en las 8 primeras comparables; las sesiones con S > 0,8·h no entran en la base
+(simulación propia: falsa alarma 11,4 % en 100 sesiones; deriva de 3 DE detectada en ≤ 6 sesiones el 91,5 %).
+Opciones (`base_cientifica`): `reglas_linea_base`, `caida_zancada_m`, `caida_v_600m`, `cusum_h`,
+`cusum_calentamiento`, `sesiones_min_linea_base`. A9 (V200) sigue pendiente: el análisis no trae el ECG.
 
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se

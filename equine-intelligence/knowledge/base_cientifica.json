@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "fecha": "2026-11-19",
   "razas": [
     "PSI",
@@ -866,6 +866,16 @@
       ],
       "estado": "REFERENCIA",
       "nota": "France Galop no publica un IDF; la métrica de AVO será propia"
+    },
+    {
+      "id": "cusum_exclusion_base",
+      "valor": "la sesión no entra en la línea base con S > 0,8·h; falsa alarma 11,4 % en 100 sesiones (sin exclusión 10,5 %; h/2: 23,7 %); deriva de 3 DE detectada en ≤ 6 sesiones 91,5 %",
+      "evidencia": "I (simulación propia, 1500 series, h 5, calentamiento 8)",
+      "fuentes": [
+        "HAWKINS_1987"
+      ],
+      "estado": "IMPLEMENTADO",
+      "nota": "kb_drift_down; normalidad e independencia supuestas"
     }
   ],
   "reglas": [
@@ -941,24 +951,24 @@
     },
     {
       "id": "A7_CAIDA_ZANCADA",
-      "umbral": "SL a velocidad de referencia ≥ 10 cm bajo la línea base en ≥ 2 de 3 sesiones comparables",
-      "evidencia": "E (HR 1,11/10 cm) / I",
+      "umbral": "zancada a la velocidad de referencia (l_v1_m, l_v2_m) ≥ 0,10 m bajo la mediana de las ≤ 12 sesiones comparables anteriores (≥ 5, misma superficie) en la última y en ≥ 2 de las 3 últimas, o CUSUM autoiniciado hacia abajo (k 0,5, h 5, calentamiento 8): VIGILAR / AVISO",
+      "evidencia": "E (HR 1,11 por 10 cm, Wong 2023) / I (umbral, 2 de 3, CUSUM, comparables por superficie)",
       "fuentes": [
         "WONG_2023"
       ],
-      "estado": "PARCIAL",
-      "nota": "Training Analytics ya vigila TRABAJO.l_v1_m y l_v2_m con z robusto; falta la regla en cm y por superficie"
+      "estado": "IMPLEMENTADO",
+      "nota": "motor 2.0.0-dev7 (KB 1.5.0); indicador para revisar al caballo, no predicción de lesión; superficie sin anotar = otra superficie"
     },
     {
       "id": "A8_CAIDA_VELOCIDAD_FINAL",
-      "umbral": "últimos 600 m del trabajo de referencia ≥ 0,1–0,2 m/s bajo la línea base",
-      "evidencia": "E / I",
+      "umbral": "v_ultimos_600m del trabajo rápido más veloz ≥ 0,20 m/s bajo la línea base comparable (misma regla de 2 de 3) o CUSUM autoiniciado: INFO / AVISO; VIGILAR si se cumplen los dos",
+      "evidencia": "E (Wong 2023, Schrurs 2024) / I (umbral 0,2 m/s, CUSUM)",
       "fuentes": [
         "WONG_2023",
         "SCHRURS_2024_TEXTO"
       ],
-      "estado": "PARCIAL",
-      "nota": "la métrica de los últimos 600 m ya está en el motor (KB 1.1.0); falta umbral (0,1–0,2 m/s es I), trabajo de referencia y superficie; la velocidad puntual a 600 m no predice (Schrurs 2024)"
+      "estado": "IMPLEMENTADO",
+      "nota": "motor 2.0.0-dev7 (KB 1.5.0); la velocidad la decide el jinete: comprobar que el trabajo fue comparable; la velocidad puntual a 600 m no predice (Schrurs 2024)"
     },
     {
       "id": "A9_PERDIDA_FORMA",
@@ -971,7 +981,7 @@
       ],
       "estado": "PENDIENTE",
       "falta": "ECG de la cincha 0.5.x en el análisis",
-      "nota": "Vermeulen: medias de 5 s y diferencias test-retest ≤ 2 % (no hay TE ni SWC formal publicado); ICC de V200 0,50 en trotones (Poinsard 2026)"
+      "nota": "Vermeulen: medias de 5 s y diferencias test-retest ≤ 2 % (no hay TE ni SWC formal publicado); ICC de V200 0,50 en trotones (Poinsard 2026); sin V200 en el análisis no se puede aplicar (la herramienta kb_drift_down sirve cuando llegue el ECG)"
     },
     {
       "id": "A11_ECG",
@@ -1025,8 +1035,7 @@
     "Modelo óseo B (Pan/Anwar) con adaptación y reparación: constantes completas (KB 1.2.0); faltan el signo de b, la f_BM inicial y reproducir la tabla 4 de Anwar",
     "V200/VHRmax por regresión FC–velocidad (medias de 5 s, trote + galope [E]); mesetas ≥ 30 s descartando 20–30 s [I], R² ≥ 0,90 [I], sin extrapolar; recuperación a 1, 2, 4, 5, 10 y 15 min solo informativa",
     "ECG por fase (≥ 250 SPS, preferible 500): prematuro ≥ 5 %, par, triplete, racha, FA, % de artefacto; validar el detector QRS con anotación manual",
-    "Conectar las líneas base (herramientas implementadas en 2.0.0-dev5: MAD_s, z 3,5, shrinkage, umbral 2·TE·√(1+1/n), CUSUM) a A7, A8 y A9: falta el TE propio por métrica y la superficie (playa por franja); h = 5 con muchas cartas; usar kb_self_starting_z (Hawkins) + CUSUM h = 5 con calentamiento de 8–10 sesiones: con μ y σ fijas de 5–20 sesiones el ARL0 no es el nominal (estudio extra 2)",
-    "Regla A8 sobre v_ultimos_600m (la métrica ya existe): línea base por trabajo de referencia y superficie",
+    "Conectar las líneas base a A9 (V200) cuando el análisis traiga el ECG; A7 y A8 conectadas en 2.0.0-dev7 (KB 1.5.0) con superficie como criterio de comparables; falta el TE propio por métrica y la playa por franja",
     "Velocidad final relativa propia de AVO (France Galop no publica ningún IDF; estudio extra 2 2026-11-19): v(últimos 600/400 m)/v media con par propio por pista y superficie, al estilo de la Finishing Speed % de Timeform; importador de los PDF de tracking por 200 m solo informativo",
     "Cociente de galope 60/90 d de Choi & Parkin (A6) cuando se aclare la posición del +1",
     "Índice tendinoso heurístico por bandas cualitativas (prioritario en árabes de 3–4 años): sin exponente de carga; faltan en la app la lesión previa, la CSA ecográfica y la firmeza del suelo (estudio extra 2026-11-19)",
@@ -1081,6 +1090,11 @@
       "version": "1.4.0",
       "fecha": "2026-11-19",
       "cambio": "Estudio extra 2: CUSUM con parámetros estimados (simulación propia: con 10 sesiones y h = 4 el P10 del ARL0 es 23) y tipificación autoiniciada de Hawkins en el motor (kb_self_starting_z; KNOWLEDGE_VERSION 1.4.0, motor 2.0.0-dev6), sin conectar a reglas; OR univariables del TFDS de Ikeda 2019; árabes: TFDS 83 % de las tendinopatías y pico a los 3 años; France Galop no publica ningún IDF (métrica propia de AVO)"
+    },
+    {
+      "version": "1.5.0",
+      "fecha": "2026-11-19",
+      "cambio": "Reglas A7 (caída de zancada ≥ 0,10 m) y A8 (velocidad de los últimos 600 m ≥ 0,20 m/s) aplicadas en Training Analytics sobre la línea base propia por superficie, con umbral 2 de 3 y CUSUM autoiniciado de Hawkins (h 5, calentamiento 8, exclusión con S > 0,8·h); motor 2.0.0-dev7"
     }
   ]
 }

@@ -20,7 +20,7 @@
 
 namespace avoeq {
 
-static const char* const KNOWLEDGE_VERSION = "1.4.0";
+static const char* const KNOWLEDGE_VERSION = "1.5.0";
 static const char* const KNOWLEDGE_ID = "AVO_KB_1";
 static const char* const BONE_MODEL_ALGORITHM = "SBFL_MORRICE_WEST_2022";
 
@@ -85,6 +85,13 @@ struct KbRuleConfig {
   double gallop_session_min_m = 100.0; // metros de galope (> 14 m/s en PSI) para contar como sesión rápida
   double bone_week_ratio = 1.5;        // KB-B: fatiga ósea de 7 días frente a la mediana semanal propia [I]
   int bone_min_weeks = 4;
+  // A7 y A8 sobre la línea base propia (KB 1.5.0): sesiones comparables = misma superficie anotada [I].
+  bool drift_rules = true;
+  double stride_drop_m = 0.10;         // A7: Wong 2023, HR 1,11 por cada 10 cm menos de zancada [E]; umbral 10 cm [I]
+  double final_speed_drop = 0.20;      // A8: últimos 600 m (Schrurs 2024 [E]); 0,1–0,2 m/s es [I], se usa el alto
+  int drift_min_baseline = 5;          // sesiones comparables mínimas antes de las 3 últimas [I]
+  int drift_warmup = 8;                // CUSUM autoiniciado: sin alarmas antes de la 9.ª sesión comparable [I]
+  double drift_h = 5.0;                // h = 5 (muchas cartas a la vez) [I]
 };
 
 struct KbDay {
@@ -160,5 +167,19 @@ KbCusumResult kb_cusum_upper(const std::vector<double>& z, const KbCusumConfig& 
 std::vector<double> kb_self_starting_z(const std::vector<double>& x);
 double kb_student_t_cdf(double t, double nu);   // auxiliares (expuestas para las pruebas)
 double kb_normal_quantile(double p);
+
+// Regla de caída frente a la línea base propia (A7 zancada, A8 velocidad final), KB 1.5.0 [I]. x: valores de sesiones
+// comparables en orden cronológico; la última es la sesión que se juzga (NaN se saltan). Dos criterios:
+//  · umbral: la última y al menos `recent_hits` de las `recent` últimas están ≥ delta por debajo de la mediana de las
+//    (hasta 12) anteriores a esas `recent`, con ≥ min_baseline sesiones de base;
+//  · CUSUM autoiniciado (kb_self_starting_z sobre −x, k 0,5, h): alarma mientras S > h; las sesiones con S > 0,8·h no
+//    entran en la base (no aprende la deriva); sin alarmas en las primeras `warmup` válidas.
+struct KbDriftConfig { double delta = NAN, k = 0.5, h = 5.0; int warmup = 8, recent = 3, recent_hits = 2, min_baseline = 5; };
+struct KbDriftResult {
+  int n = 0, baseline_n = 0, hits = 0;
+  double last = NAN, baseline = NAN, drop = NAN, s = 0;   // drop = baseline − last (positivo = caída)
+  bool delta_alarm = false, cusum_alarm = false;
+};
+KbDriftResult kb_drift_down(const std::vector<double>& x, const KbDriftConfig& c);
 
 }  // namespace avoeq

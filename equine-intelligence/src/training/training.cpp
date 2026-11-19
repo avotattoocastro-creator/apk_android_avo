@@ -270,11 +270,15 @@ bool training_summary_from_analysis(const json::Value& a, const TrainingConfig& 
     R.dist_fast_m = tr["distancia_rapida_m"].num(0); R.dist_work_m = tr["distancia_galope_trabajo_m"].num(0);
     R.ref_speed[0] = nnum(rc["perfil"]["v_referencia"][0]); R.ref_speed[1] = nnum(rc["perfil"]["v_referencia"][1]);
     std::vector<double> sf[2], sl[2];
-    double best_v = -1;
+    double best_v = -1, best_fast_v = -1;
     for (const auto& e : tr["lista"].a) {
       R.efforts++;
       if (e["tipo"].str() == "TRABAJO_RAPIDO") R.fast_efforts++;
       double v = nnum(e["v_max"]);
+      if (!std::isnan(v) && e["tipo"].str() == "TRABAJO_RAPIDO" && (std::isnan(R.v_last_600) || v >= best_fast_v)) {
+        double v6 = nnum(e["v_ultimos_600m"]);
+        if (!std::isnan(v6)) { best_fast_v = v; R.v_last_600 = v6; }
+      }
       if (!std::isnan(v) && v > best_v) { best_v = v; R.fatigue_pct = nnum(e["indice_caida_pct"]); R.sf_at_vmax = nnum(e["f_en_v_max_hz"]); R.sl_at_vmax = nnum(e["l_en_v_max_m"]); }
       for (int k = 0; k < 2; k++) {
         double f = nnum(e["referencia"][k]["f_hz"]), l = nnum(e["referencia"][k]["l_m"]);
@@ -341,7 +345,7 @@ std::string training_summary_to_json(const SessionSummary& s) {
       << ",\"mano_de_fuera_en_curva_pct\":" << num(R.wrong_lead_curve_pct) << "},\"trabajos\":" << R.efforts << ",\"trabajos_rapidos\":" << R.fast_efforts
       << ",\"v_max\":" << num(R.vmax) << ",\"mejor_200m_s\":" << num(R.best_200_s) << ",\"distancia_rapida_m\":" << num(R.dist_fast_m)
       << ",\"distancia_galope_trabajo_m\":" << num(R.dist_work_m) << ",\"indice_caida_pct\":" << num(R.fatigue_pct)
-      << ",\"referencia\":[";
+      << ",\"v_ultimos_600m\":" << num(R.v_last_600) << ",\"referencia\":[";
     for (int k = 0; k < 2; k++) o << (k ? "," : "") << "{\"v\":" << num(R.ref_speed[k]) << ",\"f_hz\":" << num(R.sf_ref[k]) << ",\"l_m\":" << num(R.sl_ref[k]) << "}";
     o << "],\"f_en_v_max_hz\":" << num(R.sf_at_vmax) << ",\"l_en_v_max_m\":" << num(R.sl_at_vmax) << ",\"desplazamiento_vertical_m\":" << num(R.vert_disp_m)
       << ",\"eventos\":{\"impactos_atipicos\":" << R.impacts << ",\"laterales_bruscos\":" << R.lateral_jolts << ",\"saturacion\":" << R.saturations << "}"
@@ -393,6 +397,7 @@ bool training_summary_from_json(const json::Value& v, SessionSummary* out, std::
     R.efforts = (int)rc["trabajos"].num(0); R.fast_efforts = (int)rc["trabajos_rapidos"].num(0);
     R.vmax = nnum(rc["v_max"]); R.best_200_s = nnum(rc["mejor_200m_s"]); R.dist_fast_m = rc["distancia_rapida_m"].num(0);
     R.dist_work_m = rc["distancia_galope_trabajo_m"].num(0); R.fatigue_pct = nnum(rc["indice_caida_pct"]);
+    R.v_last_600 = nnum(rc["v_ultimos_600m"]);
     for (int k = 0; k < 2; k++) { R.ref_speed[k] = nnum(rc["referencia"][k]["v"]); R.sf_ref[k] = nnum(rc["referencia"][k]["f_hz"]); R.sl_ref[k] = nnum(rc["referencia"][k]["l_m"]); }
     R.sf_at_vmax = nnum(rc["f_en_v_max_hz"]); R.sl_at_vmax = nnum(rc["l_en_v_max_m"]); R.vert_disp_m = nnum(rc["desplazamiento_vertical_m"]);
     R.impacts = (int)rc["eventos"]["impactos_atipicos"].num(0); R.lateral_jolts = (int)rc["eventos"]["laterales_bruscos"].num(0);
@@ -449,10 +454,13 @@ bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::str
     if (k.type == json::Value::BOOL) c->kb.enabled = k.b;
     else if (k.type == json::Value::OBJ) {
       c->kb.enabled = k["activa"].boolean(true);
+      c->kb.drift_rules = k["reglas_linea_base"].boolean(true);
       const D kd[] = {{"canter_30d_aviso_km", &c->kb.canter_30d_watch_km, 1, 500}, {"canter_30d_limite_km", &c->kb.canter_30d_limit_km, 1, 500},
                       {"galope_30d_limite_km", &c->kb.gallop_30d_limit_km, 0.1, 100}, {"rampa_ratio", &c->kb.ramp_ratio, 1, 10},
                       {"rampa_min_m", &c->kb.ramp_min_m, 0, 100000}, {"galope_sesion_min_m", &c->kb.gallop_session_min_m, 0, 10000},
-                      {"fatiga_osea_ratio", &c->kb.bone_week_ratio, 1, 10}};
+                      {"fatiga_osea_ratio", &c->kb.bone_week_ratio, 1, 10},
+                      {"caida_zancada_m", &c->kb.stride_drop_m, 0.01, 1}, {"caida_v_600m", &c->kb.final_speed_drop, 0.01, 3},
+                      {"cusum_h", &c->kb.drift_h, 2, 20}};
       for (const auto& d : kd) {
         if (!k.has(d.k)) continue;
         const json::Value& x = k[d.k];
@@ -461,7 +469,8 @@ bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::str
       }
       const I ki[] = {{"dias_descanso_vuelta", &c->kb.return_rest_days, 7, 365}, {"dias_ventana_vuelta", &c->kb.return_window_days, 1, 90},
                       {"dias_descanso_tendon", &c->kb.tendon_rest_days, 7, 730}, {"semanas_min_fatiga_osea", &c->kb.bone_min_weeks, 1, 8},
-                      {"dias_galope_60d_max", &c->kb.low_gallop_60d_max_days, 0, 24}};
+                      {"dias_galope_60d_max", &c->kb.low_gallop_60d_max_days, 0, 24},
+                      {"sesiones_min_linea_base", &c->kb.drift_min_baseline, 3, 50}, {"cusum_calentamiento", &c->kb.drift_warmup, 2, 50}};
       for (const auto& d : ki) {
         if (!k.has(d.k)) continue;
         const json::Value& x = k[d.k];
@@ -569,6 +578,47 @@ double theil_sen(const std::vector<std::pair<double, double>>& xy, double* lo, d
   return median(slopes);
 }
 
+
+// A7 y A8 (KB 1.5.0): caída frente a la línea base propia en sesiones comparables (misma superficie).
+void kb_drift_flags(const std::vector<SessionSummary>& ok, size_t i, const KbRuleConfig& kc, std::vector<KbFlag>* out) {
+  if (!kc.enabled || !kc.drift_rules) return;
+  const SessionSummary& s = ok[i];
+  if (!s.race.present) return;
+  std::string surf = s.surface.empty() ? "sin anotar" : s.surface;
+  auto run = [&](std::function<double(const SessionSummary&)> get, double delta) {
+    std::vector<double> x;
+    for (size_t j = 0; j <= i; j++) if (ok[j].surface == s.surface && ok[j].race.present) x.push_back(get(ok[j]));
+    KbDriftConfig dc; dc.delta = delta; dc.h = kc.drift_h; dc.warmup = kc.drift_warmup; dc.min_baseline = kc.drift_min_baseline;
+    return kb_drift_down(x, dc);
+  };
+  char b[400];
+  for (int k = 0; k < 2; k++) {
+    if (std::isnan(s.race.sl_ref[k])) continue;
+    KbDriftResult d = run([k](const SessionSummary& z) { return z.race.sl_ref[k]; }, kc.stride_drop_m);
+    if (!d.delta_alarm && !d.cusum_alarm) continue;
+    snprintf(b, sizeof(b), "zancada a la %s velocidad de referencia %.2f m, %.2f m por debajo de su línea base (%.2f m, %d sesiones en «%s»)%s%s",
+             k == 0 ? "1.ª" : "2.ª", d.last, d.drop, d.baseline, d.baseline_n, surf.c_str(),
+             d.delta_alarm ? (", en " + std::to_string(d.hits) + " de las 3 últimas").c_str() : "",
+             d.cusum_alarm ? "; deriva confirmada por el CUSUM autoiniciado" : "");
+    out->push_back({"A7_CAIDA_ZANCADA", "VIGILAR", "AVISO", b,
+                    "Wong 2023: HR 1,11 de lesión por cada 10 cm menos de zancada [E]; umbral de 10 cm en 2 de 3 sesiones y CUSUM "
+                    "autoiniciado de Hawkins (h 5) [I]; indicador para revisar al caballo, no predicción de lesión"});
+  }
+  if (!std::isnan(s.race.v_last_600)) {
+    KbDriftResult d = run([](const SessionSummary& z) { return z.race.v_last_600; }, kc.final_speed_drop);
+    if (d.delta_alarm || d.cusum_alarm) {
+      snprintf(b, sizeof(b), "velocidad en los últimos 600 m del trabajo rápido %.2f m/s, %.2f m/s por debajo de su línea base (%.2f m/s, %d sesiones en «%s»)%s%s",
+               d.last, d.drop, d.baseline, d.baseline_n, surf.c_str(),
+               d.delta_alarm ? (", en " + std::to_string(d.hits) + " de las 3 últimas").c_str() : "",
+               d.cusum_alarm ? "; deriva confirmada por el CUSUM autoiniciado" : "");
+      bool both = d.delta_alarm && d.cusum_alarm;
+      out->push_back({"A8_CAIDA_VELOCIDAD_FINAL", both ? "VIGILAR" : "INFO", "AVISO", b,
+                      "Wong 2023 (la velocidad baja antes de la lesión) y Schrurs 2024 (últimos 600 m) [E]; umbral 0,2 m/s y CUSUM "
+                      "autoiniciado [I]; depende de lo que pida el jinete: comprobar que el trabajo fue comparable"});
+    }
+  }
+}
+
 }  // namespace
 
 TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std::string& reference_date, const TrainingConfig& c) {
@@ -672,6 +722,7 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
     else if (st == "CANSADO" || st == "RARO" || st == "MAL") { raise(&R.level, "VIGILAR"); R.reasons.push_back("el entrenador anotó: " + s.state); }
     if (!std::isnan(s.rpe) && s.rpe >= 9) R.reasons.push_back("esfuerzo percibido muy alto (RPE " + num(s.rpe) + ")");
     R.kb = kb_evaluate(kbdays, s.day, first_day, c.kb);
+    kb_drift_flags(ok, i, c.kb, &R.kb.flags);
     kb_apply(R.kb, &R.level, &R.reasons);
     r.sessions.push_back(R);
   }
@@ -696,6 +747,7 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
   }
   // base científica a la fecha de referencia (las ventanas avanzan aunque no haya sesión ese día)
   r.kb = kb_evaluate(kbdays, r.reference_day, first_day, c.kb);
+  if (r.days_since_last <= c.acute_days) kb_drift_flags(ok, ok.size() - 1, c.kb, &r.kb.flags);
   kb_apply(r.kb, &r.level, &r.reasons);
   if (!std::isnan(r.current.acwr) && r.current.acwr < c.acwr_low)
     r.reasons.push_back("carga reciente baja respecto a la habitual (ACWR " + num(r.current.acwr) + "): descarga o parada");
