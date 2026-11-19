@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-19 — iPad 1.0.0 — Botones de la pestaña Motor y «Análisis motor» de carreras
-**Autor:** Claude (a petición del usuario, capturas del build 173 marcadas) · **Rama:** `claude/motor-botones-analisis-carreras` (desde `develop` `fb9de38`) · **Commits:** `e73fca3`, … · **CI:** iPad run 44611181120 (sin TestFlight; resultado en el PR)
+**Autor:** Claude (a petición del usuario, capturas del build 173 marcadas) · **Rama:** `claude/motor-botones-analisis-carreras` (desde `develop` `fb9de38`) · **Commits:** `e73fca3`, `af7541c` · **PR:** #87 · **CI:** iPad run 44611181120 ✅ (sin TestFlight)
 **Qué cambia:**
 - **Pestaña Motor:** columna de botones arriba a la derecha de «Lectura del entrenamiento»: **Reprocesar** (motor
   actual, forzado), **Reprocesar caballo** (todos los entrenamientos del mismo caballo, con confirmación y progreso),
@@ -51,7 +51,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 carreras anteriores, mismos rivales, misma distancia y estado de pista, con gráficas y entendible.
 **No se ha tocado:** motor C++, firmware, contratos binarios, Android, Windows, workflows, firmas, `Info.plist`,
 número de build de TestFlight. Las carreras siguen siendo solo del iPad (como el resto de Carreras).
-**Validación:** IMPLEMENTADO · COMPILADO / CI: ver PR · **NO VERIFICADO** en el iPad. Las comparaciones con carreras
+**Validación:** IMPLEMENTADO · COMPILADO / CI: run 44611181120 en `e73fca3`, compilación ✅ y 121/121 pruebas unitarias ✅ (5 nuevas); capturas de UI con los 44 fallos que ya había en `develop` · **NO VERIFICADO** en el iPad. Las comparaciones con carreras
 anteriores solo usan las carreras importadas en el iPad; con menos de 3 son una pista, no una conclusión.
 **Pendiente:** probar en el iPad con carreras reales; leer el estado de pista de France Galop si su ficha lo muestra;
 añadir el análisis al Informe PDF si el usuario lo quiere.
