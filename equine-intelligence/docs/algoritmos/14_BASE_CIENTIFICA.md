@@ -1,4 +1,4 @@
-# 14 · Base científica de la cuadra (KB-1) 1.7.0
+# 14 · Base científica de la cuadra (KB-1) 1.8.0
 
 Código: `include/avo_eq/knowledge.h`, `src/knowledge/knowledge.cpp`. Se calcula en Track Work (`src/racing/racing.cpp`,
 bloque `trabajo_pista.base_cientifica`) y se evalúa en Training Analytics (`src/training/training.cpp`, bloques
@@ -145,6 +145,15 @@ fuentes (campos `acceso`, `verificado_fecha`, `pais`, `idioma`, `raza_fuente` en
 - Índice tendinoso: sigue sin OR de árabes; edad 3–4 años con tres fuentes (Turquía, Qatar); la carga solo se asocia
   a la gravedad. A9: TE propio del caballo, nunca mezclar cinta y pista ([I-raza], trotones).
 Detalle: `knowledge/estudios/2026-11-19_extra4_auditoria_fuentes_tendon_arabes_v200_trotones.md`.
+
+**Estudio extra 5 (KB-1 1.8.0, motor 2.0.0-dev10, sin cambios de lógica).**
+- **Modelo óseo B:** `modelo_B_constantes.b` se corrige a **−0,02** con S_v = a·√(1 − f)·[1 − b(1 − f)] (Anwar 2026,
+  tabla 9, y Hitchens 2018 [E]); f_BM(0) = **0,61** sin entrenar (Pan 2025 [E]). Sigue PENDIENTE: el paso de integración
+  no se publica y la tabla 4 de Anwar no se reproduce sin su código.
+- **Playa por franja** (`reglas.PLAYA_LINEA_BASE_PL1_PL6`, PENDIENTE): en PSI al galope el suelo cambia la zancada hasta
+  0,186 m a la misma velocidad (Pfau 2024 [E]), más que el umbral de A7, así que las comparables deben ser de la misma
+  franja; registro de marea, lluvia, humedad y nota del jinete.
+Detalle: `knowledge/estudios/2026-11-19_extra5_modeloB_signo_b_playa_franjas.md`.
 
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se

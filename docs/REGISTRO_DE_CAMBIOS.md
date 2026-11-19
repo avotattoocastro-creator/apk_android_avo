@@ -24,6 +24,28 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-19 — Motor 2.0.0-dev10 — KB-1 1.8.0: estudio extra 5 (modelo óseo B y playa por franja)
+**Autor:** Claude (a petición del usuario: «lanza otro estudio ahora») · **Rama:** `claude/kb-estudio5-2026-11-19` (desde `develop` con PR #85–#87 fusionados) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Estudio** `equine-intelligence/knowledge/estudios/2026-11-19_extra5_modeloB_signo_b_playa_franjas.md`, con cifras
+  etiquetadas [E]/[E-r]/[I]/[NV]. (1) **Modelo óseo B:** signo de b cerrado (−0,02 en la tabla 9 de Anwar 2026, arXiv
+  HTML, y en Hitchens 2018; convención S_v = a·√(1 − f)·[1 − b(1 − f)]) y f_BM(0) = 0,61 (Pan 2025). El paso de
+  integración no se publica y la tabla 4 de Anwar no se reproduce sin el código (Zenodo bloqueado). (2) **Playa por
+  franja:** solo hay datos de playa de trotones al trote (Chateau 2011, Crevier-Denoix 2011); en PSI al galope el suelo
+  cambia la zancada hasta 0,186 m a igual velocidad (Pfau 2024), más que el umbral de A7. Propuestas PL1–PL6.
+- `base_cientifica.json` 1.8.0: **corrección de `modelo_B_constantes.b` de +0,02 a −0,02** (no afecta a ningún
+  cálculo: el modelo B sigue PENDIENTE), f_BM inicial, regla `PLAYA_LINEA_BASE_PL1_PL6` (PENDIENTE), 7 fuentes nuevas,
+  pendientes y cola actualizados. Ficha 14, tabla de estado y README.
+- **Motor sin cambios de lógica:** `KNOWLEDGE_VERSION` 1.7.0 → 1.8.0 y `ENGINE_VERSION` 2.0.0-dev9 → 2.0.0-dev10;
+  fixtures regenerados (solo versiones).
+**Por qué:** el modelo B y la línea base de la playa son pendientes que bloquean código.
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, número de build de TestFlight, apps.
+**Validación:** IMPLEMENTADO (solo versiones) · pruebas locales con ASan/UBSan: 102 casos y 1.729 comprobaciones sin
+fallos; Release y `check_fixtures.py` en verde tras `--update` (diferencias: solo versiones) · CI: ver PR ·
+**NO VERIFICADO** con caballos reales. La fatiga ósea del modelo B no es una predicción de lesiones.
+**Pendiente:** código de Anwar/Pan para el paso de integración; campo de franja y marea en las apps; textos completos
+de Chateau 2011 y Crevier-Denoix 2011.
+
 ## 2026-11-19 — iPad 1.0.0 — Botones de la pestaña Motor y «Análisis motor» de carreras
 **Autor:** Claude (a petición del usuario, capturas del build 173 marcadas) · **Rama:** `claude/motor-botones-analisis-carreras` (desde `develop` `fb9de38`) · **Commits:** `e73fca3`, `af7541c` · **PR:** #87 · **CI:** iPad run 44611181120 ✅ (sin TestFlight)
 **Qué cambia:**
