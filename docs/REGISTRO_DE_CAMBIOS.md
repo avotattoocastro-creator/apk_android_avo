@@ -24,6 +24,32 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-19 — Motor 2.0.0-dev9 — KB-1 1.7.0: estudio extra 4 (auditoría de fuentes, tendón en árabes, V200 con trotones)
+**Autor:** Claude (tarea programada, estudio extra 4) · **Rama:** `claude/kb-estudio4-2026-11-19` (desde `claude/kb-estudio3-2026-11-19`, PR #85 abierto) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Estudio** `equine-intelligence/knowledge/estudios/2026-11-19_extra4_auditoria_fuentes_tendon_arabes_v200_trotones.md`
+  (etiquetas [E]/[E-r]/[I]/[I-raza]/[NV] y tipo de acceso). (1) **Auditoría** de 9 fuentes que sostienen reglas del
+  motor; 6 mejoradas (Perkins 2005 a texto completo, tesis de Massey). Correcciones de ámbito, sin cambiar constantes:
+  Morrice-West 2025 es de Tasmania, da HR y su «carga baja» es fatiga ósea < 0,25 en 4 salidas (el corte de A4 es [I]);
+  Carrier 1998 solo húmero; Vermeulen & Evans «diferencia media ≤ 2 %» (no CV; el +8 % es de prensa); Frick 2019 canter
+  en cinta (corte 6 %: S 88 %, E 97 %); Martig 2013 confirmada. (2) **Tendón en árabes:** sin OR/IRR publicadas (Golfo,
+  Turquía, Polonia); edad 3–4 años con tres fuentes (Çalışkan 2020 texto completo, Pap 2026 Doha); la carga solo se
+  asocia a la gravedad; CSA del TFDS árabe 62–94 mm² (Çelimli 2000); trotones solo como dirección [I-raza].
+  (3) **V200/VHRmax:** trotones (Leleu, Couroucé, Hamlin, Ringmark) como método [I-raza]; Corea (Lee 2019) y Brasil
+  (Alonso 2013, árabes en cinta); no hay TE publicado legible en PSI/árabe → TE propio del caballo.
+- `base_cientifica.json` 1.7.0: campos `acceso`, `verificado_fecha`, `pais`, `idioma`, `raza_fuente`; 17 fuentes nuevas;
+  notas de A3, A4, A5, A9, índice tendinoso, σ0, VHRmax y ECG; pendientes y cola actualizados; niveles E-r e I-raza.
+- Se descartó por legalidad una lectura en una copia no autorizada de un libro comercial (sin usar cifras).
+- **Motor sin cambios de lógica:** `KNOWLEDGE_VERSION` 1.6.0 → 1.7.0 y `ENGINE_VERSION` 2.0.0-dev8 → 2.0.0-dev9;
+  fixtures regenerados (solo versiones). Ficha 14, tabla de estado y README.
+**Por qué:** estudio extra pedido por el usuario (modo meticuloso, mundial y multirraza).
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, número de build de TestFlight, apps.
+**Validación:** IMPLEMENTADO (solo versiones) · pruebas locales con ASan/UBSan (ctest en verde) y Release: 102 casos y
+1.729 comprobaciones sin fallos; `check_fixtures.py` en verde tras `--update` (diferencias: solo versiones) · CI: ver PR ·
+**NO VERIFICADO** con caballos reales. La fatiga ósea es un índice de carga, no una predicción de lesiones.
+**Pendiente:** textos completos bloqueados (Martig 2013, Morrice-West 2025, Estberg 1998, Vermeulen/Gramkow 2006, Frick
+2019 en PMC desde un navegador), DOI de Carrier 1998, Çelimli 2004 completo; línea base de la playa.
+
 ## 2026-11-19 — Motor 2.0.0-dev8 — KB-1 1.6.0: estudio extra 3 (planificador semanal y ECG / A11)
 **Autor:** Claude (tarea programada, estudio extra 3) · **Rama:** `claude/kb-estudio3-2026-11-19` (desde `develop` con PR #80–#83 fusionados) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
 **Qué cambia:**
