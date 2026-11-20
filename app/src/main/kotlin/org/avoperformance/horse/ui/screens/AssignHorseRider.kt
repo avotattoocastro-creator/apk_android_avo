@@ -10,8 +10,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import org.avoperformance.horse.AppContainer
-import org.avoperformance.horse.data.HorseEntity
-import org.avoperformance.horse.data.RiderEntity
 import org.avoperformance.horse.data.TrainingEntity
 import org.avoperformance.horse.ui.components.Note
 import org.avoperformance.horse.ui.theme.AvoColors
@@ -22,7 +20,10 @@ import org.avoperformance.horse.ui.theme.AvoColors
  * the RAW data and the watch are not touched.
  */
 @Composable
-fun AssignHorseRiderDialog(c: AppContainer, t: TrainingEntity, onDismiss: () -> Unit, onDone: (TrainingEntity) -> Unit = {}) {
+fun AssignHorseRiderDialog(
+    c: AppContainer, t: TrainingEntity, onDismiss: () -> Unit, onDone: (TrainingEntity) -> Unit = {},
+    title: String = "Caballo y jinete", intro: String? = null, confirmText: String = "Guardar", dismissText: String = "Cancelar",
+) {
     val horses by c.db.horses().all().collectAsStateWithLifecycle(emptyList())
     val riders by c.db.riders().all().collectAsStateWithLifecycle(emptyList())
     var horse by remember(t.sessionId, horses) { mutableStateOf(horses.firstOrNull { it.code == t.horseCode }?.name.orEmpty()) }
@@ -31,9 +32,10 @@ fun AssignHorseRiderDialog(c: AppContainer, t: TrainingEntity, onDismiss: () -> 
     var riderMenu by remember { mutableStateOf(false) }
     var error by remember { mutableStateOf<String?>(null) }
     val scope = rememberCoroutineScope()
-    AlertDialog(onDismissRequest = onDismiss, title = { Text("Caballo y jinete") },
+    AlertDialog(onDismissRequest = onDismiss, title = { Text(title) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                intro?.let { Note(it) }
                 OutlinedTextField(horse, { horse = it.take(120) }, label = { Text("Caballo") }, singleLine = true, modifier = Modifier.fillMaxWidth())
                 if (horses.isNotEmpty()) {
                     OutlinedButton(onClick = { horseMenu = true }) { Text("Elegir caballo guardado") }
@@ -55,20 +57,11 @@ fun AssignHorseRiderDialog(c: AppContainer, t: TrainingEntity, onDismiss: () -> 
             Button(enabled = horse.isNotBlank() && rider.isNotBlank(), onClick = {
                 scope.launch {
                     try {
-                        val h = horse.trim(); val r = rider.trim()
-                        val eh = horses.firstOrNull { it.name.equals(h, true) }
-                        val er = riders.firstOrNull { it.name.equals(r, true) }
-                        val hc = eh?.code ?: ("H_" + java.util.UUID.randomUUID().toString().take(16))
-                        val rc = er?.code ?: ("R_" + java.util.UUID.randomUUID().toString().take(16))
-                        if (eh == null) c.db.horses().insert(HorseEntity(code = hc, name = h))
-                        if (er == null) c.db.riders().insert(RiderEntity(code = rc, name = r))
-                        val current = c.db.trainings().byId(t.sessionId) ?: t
-                        val linked = current.copy(horseCode = hc, riderCode = rc, updatedMs = System.currentTimeMillis())
-                        c.db.trainings().upsert(linked)
-                        onDone(linked)
+                        // AVO-ASSIGN-1 + Nube AVO: busca o crea las fichas, guarda cuándo se asignó y la vuelve a subir
+                        onDone(org.avoperformance.horse.share.TrainingAssign.assign(c, t.sessionId, horse, rider))
                     } catch (e: Exception) { error = e.message ?: "No se pudo guardar" }
                 }
-            }) { Text("Guardar") }
+            }) { Text(confirmText) }
         },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("Cancelar") } })
+        dismissButton = { TextButton(onClick = onDismiss) { Text(dismissText) } })
 }

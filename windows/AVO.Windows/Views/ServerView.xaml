@@ -43,14 +43,19 @@
                                         <TextBlock Text="{Binding Title}" Style="{StaticResource AvoLabel}" TextWrapping="Wrap"/>
                                         <TextBlock Text="{Binding Detail}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap"/>
                                     </StackPanel>
-                                    <Button Grid.Column="1" Content="Importar" Padding="10,4" VerticalAlignment="Center"
-                                            Command="{Binding DataContext.CloudImportCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            CommandParameter="{Binding}"/>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Button Content="Cambiar" Padding="10,4" Margin="0,0,6,0" ToolTip="Cambiar caballo y jinete (se actualiza también en la nube)"
+                                                Command="{Binding DataContext.CloudChangeCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"/>
+                                        <Button Content="Importar" Padding="10,4"
+                                                Command="{Binding DataContext.CloudImportCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"/>
+                                    </StackPanel>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                    <TextBlock Text="El Android sube cada entrenamiento verificado con el reloj (Compartir › Nube AVO). Aquí se descargan, se comprueba el SHA-256 y se importan con las mismas validaciones que un .avo. La tarjeta se guarda cifrada (DPAPI) solo para tu usuario de Windows." Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,8,0,0"/>
+                    <TextBlock Text="El Android sube cada entrenamiento verificado con el reloj (Compartir › Nube AVO). Aquí se descargan, se comprueba el SHA-256 y se importan con las mismas validaciones que un .avo. «Cambiar» abre la asignación de caballo y jinete: al guardar se actualiza también en la nube y gana el cambio más reciente en todas las apps. La tarjeta se guarda cifrada (DPAPI) solo para tu usuario de Windows." Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,8,0,0"/>
                 </StackPanel>
             </c:AvoCard>
             <c:AvoCard Header="Descargar entrenamiento (.avo por HTTPS)" Margin="0,12,0,0">

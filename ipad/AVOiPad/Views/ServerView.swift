@@ -82,11 +82,13 @@ struct ServerView: View {
                             Text(ServerView.cloudDetail(it)).font(.caption).foregroundStyle(Avo.textDim)
                         }
                         Spacer()
+                        Button("Cambiar") { Task { @MainActor in await changeCloud(it) } }
+                            .buttonStyle(.avoSecondary).disabled(cloudBusy)
                         Button("Importar") { Task { @MainActor in await downloadCloud([it]) } }
                             .buttonStyle(.avoSecondary).disabled(cloudBusy)
                     }
                 }
-                Text("El Android sube cada entrenamiento verificado con el reloj (Compartir › Nube AVO). Aquí se descargan, se comprueba el SHA-256 y se importan con las mismas validaciones que un .avo.")
+                Text("El Android sube cada entrenamiento verificado con el reloj (Compartir › Nube AVO). Aquí se descargan, se comprueba el SHA-256 y se importan con las mismas validaciones que un .avo. «Cambiar» abre la asignación de caballo y jinete: al guardar se actualiza también en la nube y gana el cambio más reciente en todas las apps.")
                     .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
             }
             AvoCard(title: "Descargar entrenamiento (.avo por HTTPS)") {
@@ -174,6 +176,19 @@ struct ServerView: View {
             cloudState = error.localizedDescription
             app.log.warn("nube", "Listado fallido", error)
         }
+    }
+
+    /// Cambiar caballo/jinete de un entrenamiento de la nube: se importa si hace falta y se abre «Asignar».
+    /// Al guardar, StableModel reescribe el .avo y LiveModel lo vuelve a subir.
+    @MainActor
+    private func changeCloud(_ it: CloudItem) async {
+        let sid: String = it.sessionId.isEmpty ? String(it.fileName.dropFirst(4).dropLast(4)) : it.sessionId
+        if app.sessions.first(where: { $0.id == sid }) == nil { await downloadCloud([it]) }
+        guard let s = app.sessions.first(where: { $0.id == sid }) else {
+            cloudState = "No se pudo abrir \(sid) en este iPad (mira el registro de importación)"
+            return
+        }
+        app.stable.openAssign(s)
     }
 
     @MainActor

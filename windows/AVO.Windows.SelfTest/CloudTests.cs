@@ -33,6 +33,19 @@ public static class CloudTests
         assert(CloudItem.Parse(JsonNode.Parse("""{"name":"trainings/A/otro.zip"}""")) is null, "Nube: solo paquetes .avo");
         var names = CloudItem.ListNames(JsonNode.Parse("""{"items":[{"name":"trainings/A/AVO_1.avo"},{"name":"trainings/A/x.txt"}],"prefixes":[]}"""));
         assert(names.Count == 1 && names[0] == "trainings/A/AVO_1.avo", "Nube: listado");
+        string fp = CloudConfig.Fingerprint("AB", "HORSE_001", "RIDER_001", "LEZAMA", "Ana");
+        assert(fp == "a242c37ddf781698761028f9ea2c649f" && fp == CloudConfig.Fingerprint("ab", "HORSE_001", "RIDER_001", "LEZAMA", "Ana"),
+            "Nube: huella igual que Android e iPad");
+        using (var doc = System.Text.Json.JsonDocument.Parse("""
+            {"format":"AVO-TRAINING-1","sessionId":"S1","sha256":"AB","horseCode":"HORSE_001","horseName":"VIEJO","riderCode":"RIDER_001","riderName":"Ana",
+             "asignacion":{"version":1,"horseCode":"H2","horseName":"LEZAMA","riderCode":"RIDER_001","riderName":"Ana","actualizadoUtc":"2026-11-20T12:00:00Z","app":"ipad"}}
+            """))
+        {
+            var id = CloudManifestIdentity.From(doc.RootElement);
+            assert(id is { HorseName: "LEZAMA", HorseCode: "H2", RawSha256: "ab", AssignedMs: 1795176000000 }, "Nube: identidad del manifiesto (gana «asignacion»)");
+        }
+        var it2 = CloudItem.Parse(JsonNode.Parse("""{"name":"trainings/A/AVO_S1.avo","metadata":{"assignedMs":"5","horseCode":"H2","fp":"x"}}"""));
+        assert(it2 is { AssignedMs: 5, HorseCode: "H2", Fp: "x" }, "Nube: metadatos de asignación");
         bool denied;
         try { AvoCloudClient.Check(System.Net.HttpStatusCode.Forbidden, "listar"); denied = false; } catch (CloudException e) { denied = e.Message.Contains("storage.rules"); }
         assert(denied, "Nube: permiso denegado explica las reglas");

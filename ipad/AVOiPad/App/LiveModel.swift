@@ -44,6 +44,33 @@ final class LiveModel {
         self.cloud = AvoCloudClient(token: { try await c.token() })
     }
 
+    /// Nube AVO: tras cambiar el caballo/jinete en este iPad, vuelve a subir el .avo si ese entrenamiento está en la nube
+    /// del usuario (gana la asignación más reciente; el Android la aplica en su siguiente comprobación).
+    @MainActor
+    func pushAssignmentToCloud(_ sessionIds: [String]) async {
+        guard !sessionIds.isEmpty, await ensureSignedIn(), let code = signedCode else { return }
+        var sent: Int = 0
+        for sid in sessionIds {
+            guard let path = app.library.storedAvoPath(sid) else { continue }
+            do {
+                guard let remote = try await cloud.item(code: code, sessionId: sid) else { continue }   // no está en la nube
+                let id: CloudManifestIdentity = try CloudManifestIdentity.read(path)
+                if id.horseName.isEmpty || id.riderName.isEmpty { continue }
+                var meta: [String: String] = [
+                    "fp": id.fingerprint, "sessionId": sid, "horseCode": id.horseCode, "horseName": id.horseName,
+                    "riderCode": id.riderCode, "riderName": id.riderName, "assignedMs": String(id.assignedMs), "app": "ipad",
+                    "startRtcMs": String(remote.startRtcMs),
+                ]
+                if let d = remote.distanceM { meta["distanceM"] = String(Int(d.rounded())) }
+                try await cloud.upload(fileAt: path, code: code, sessionId: sid, metadata: meta)
+                sent += 1
+            } catch {
+                app.log.warn("nube", "no se pudo actualizar \(sid) en la nube: \(error.localizedDescription)", error)
+            }
+        }
+        if sent > 0 { app.log.info("nube", "asignación actualizada en la nube", ["count": sent] as [String: Any]) }
+    }
+
     /// Entra con la tarjeta guardada en el Llavero si aún no hay sesión. Devuelve si hay sesión.
     @MainActor
     func ensureSignedIn() async -> Bool {

@@ -163,9 +163,11 @@ fun ShareScreen(c: AppContainer) {
                 }) {
                     Note("Cada entrenamiento verificado con el reloj (con caballo y jinete) se sube a la nube de AVO como .avo. " +
                         "Solo lo ves tú, con tu tarjeta AVO, desde el Android, el iPad o Windows (página Servidor). " +
+                        "Si cambias el caballo o el jinete en cualquier app, gana el cambio más reciente. " +
                         "Usa las mismas preferencias de red que los envíos.")
                     KV("En la nube", cloud.total.toString())
                     if (cloud.pending > 0) KV("Pendientes", cloud.pending.toString(), AvoColors.Warn)
+                    if (cloud.applied > 0) KV("Caballo/jinete cambiados desde iPad o Windows", cloud.applied.toString())
                     if (cloud.lastMs > 0) KV("Última comprobación", java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(java.util.Date(cloud.lastMs)))
                     cloud.error?.let { Note(it, AvoColors.Bad) }
                     Row {

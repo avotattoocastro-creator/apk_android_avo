@@ -400,6 +400,8 @@ public sealed partial class MainViewModel
         }
         if (failed > 0) Status = $"Asignación guardada en este PC; {failed} archivo(s) no se pudieron actualizar (ver registro)";
         else if (written > 0) Log.Info("cuadra", "asignación escrita en los archivos", new { written });
+        // Nube AVO: si estos entrenamientos están en la nube, se suben con la asignación nueva (gana la más reciente)
+        _ = CloudPushAssignmentAsync(items.Where(x => !x.IsSynthetic).Select(x => x.Id).ToList());
     }
 
     private void ApplyIdentity(SessionItem s)

@@ -28,7 +28,9 @@ import java.util.concurrent.TimeoutException
  * Contrato y reglas: docs/NUBE_SESIONES.md y firebase/storage.rules.
  */
 class CloudBackup(private val c: AppContainer, private val firebase: FirebaseShare) {
-    data class Status(val uploaded: Int = 0, val pending: Int = 0, val total: Int = 0, val lastMs: Long = 0, val error: String? = null)
+    data class Status(val uploaded: Int = 0, val pending: Int = 0, val total: Int = 0, val lastMs: Long = 0, val error: String? = null,
+        /** Cambios de caballo/jinete traídos de la nube en la última pasada (hechos en el iPad o Windows). */
+        val applied: Int = 0)
     data class Pass(val uploaded: Int, val pending: Int)
 
     private val _status = MutableStateFlow(Status(total = CloudSync.decode(c.settings.cloudUploaded).size))
@@ -39,63 +41,93 @@ class CloudBackup(private val c: AppContainer, private val firebase: FirebaseSha
             maxUploadRetryTimeMillis = 120_000
         }
 
-    /** Sube lo pendiente (como mucho [max] por pasada; el resto en la siguiente). Requiere la sesión ya abierta. */
+    private data class Local(val sessionId: String, val fp: String?, val horse: String?, val rider: String?, val startRtcMs: Long)
+
+    /**
+     * Una pasada: sube lo pendiente (como mucho [max] subidas; el resto en la siguiente) y, cada hora, mira si en la nube
+     * hay caballos/jinetes cambiados desde el iPad o Windows (gana el más reciente). Requiere la sesión ya abierta.
+     */
     suspend fun sync(card: AvoUserCard, packager: Packager, max: Int = 5): Pass = withContext(Dispatchers.IO) {
         if (!c.settings.cloudEnabled) return@withContext Pass(0, 0)
         val horses = c.db.horses().all().first().associate { it.code to it.name }
         val riders = c.db.riders().all().first().associate { it.code to it.name }
-        val candidates = c.db.trainings().snapshot().mapNotNull { t ->
+        val locals = c.db.trainings().snapshot().mapNotNull { t ->
             val sha = t.localSha256 ?: return@mapNotNull null
             if (t.watchState == "IMPORTADO" || t.localDir == null || !sha.equals(t.watchSha256, true)) return@mapNotNull null
-            val h = t.horseCode?.let(horses::get)?.takeIf { it.isNotBlank() } ?: return@mapNotNull null
-            val r = t.riderCode?.let(riders::get)?.takeIf { it.isNotBlank() } ?: return@mapNotNull null
-            CloudSync.Candidate(t.sessionId, CloudSync.fingerprint(sha, t.horseCode, t.riderCode, h, r), t.startRtcMs)
+            val h = t.horseCode?.let(horses::get)?.takeIf { it.isNotBlank() }
+            val r = t.riderCode?.let(riders::get)?.takeIf { it.isNotBlank() }
+            val fp = if (h != null && r != null) CloudSync.fingerprint(sha, t.horseCode, t.riderCode, h, r) else null
+            Local(t.sessionId, fp, h, r, t.startRtcMs)
         }
         val done = CloudSync.decode(c.settings.cloudUploaded).toMutableMap()
-        val todo = CloudSync.pending(candidates, done)
-        var uploaded = 0
-        var processed = 0
+        val now = System.currentTimeMillis()
+        val full = now - c.settings.cloudLastFullCheckMs > FULL_CHECK_MS
+        // pendientes de subir (huella nueva) y, en la comprobación completa, todos (también los que aún no tienen caballo)
+        val todo = locals.filter { full || (it.fp != null && done[it.sessionId] != it.fp) }.sortedByDescending { it.startRtcMs }
+        var uploaded = 0; var applied = 0; var processed = 0
         var lastError: String? = null
-        for (cand in todo.take(max)) {
+        for (l in todo.take(if (full) 500 else max)) {
+            if (uploaded >= max) break
             try {
-                val ref = storage.reference.child(CloudSync.path(card.code, cand.sessionId))
-                val remoteFp = try { await(ref.metadata).getCustomMetadata("fp") } catch (e: StorageException) {
+                val ref = storage.reference.child(CloudSync.path(card.code, l.sessionId))
+                val remote = try { remoteOf(await(ref.metadata)) } catch (e: StorageException) {
                     if (e.errorCode == StorageException.ERROR_OBJECT_NOT_FOUND) null else throw e
                 }
-                if (remoteFp != cand.fingerprint) {
-                    val t = c.db.trainings().byId(cand.sessionId) ?: continue
-                    val p = packager.build(cand.sessionId)
-                    try {
-                        if (p.size > CloudSync.MAX_BYTES) error("${cand.sessionId}: ${p.size / 1_048_576} MB, supera el máximo de la nube (40 MB)")
-                        val meta = StorageMetadata.Builder().setContentType("application/octet-stream")
-                            .setCustomMetadata("sha256", p.sha256).setCustomMetadata("fp", cand.fingerprint)
-                            .setCustomMetadata("sessionId", cand.sessionId).setCustomMetadata("horseName", p.horseName)
-                            .setCustomMetadata("riderName", p.riderName).setCustomMetadata("startRtcMs", t.startRtcMs.toString())
-                            .setCustomMetadata("distanceM", t.distanceM?.let { "%.0f".format(java.util.Locale.ROOT, it) } ?: "")
-                            .setCustomMetadata("app", "android ${BuildConfig.VERSION_NAME}").build()
-                        await(ref.putFile(Uri.fromFile(p.file), meta), minutes = 15)
-                        c.settings.addShareUsage(p.size, 0)
-                        uploaded++
-                        c.log.i("CLOUD", "${cand.sessionId} subido a la nube (${p.size} B)")
-                    } finally { p.file.delete() }
+                val localMs = org.avoperformance.horse.share.TrainingAssign.assignedMs(c, l.sessionId)
+                when (CloudSync.decide(l.fp, localMs, l.horse, l.rider, remote)) {
+                    CloudSync.Action.UPLOAD -> { upload(ref, l, localMs, packager); uploaded++; done[l.sessionId] = l.fp!! }
+                    CloudSync.Action.APPLY_REMOTE -> {
+                        val r = remote!!
+                        val hn = r.horseName.orEmpty().trim(); val rn = r.riderName.orEmpty().trim()
+                        val t = org.avoperformance.horse.share.TrainingAssign.assign(c, l.sessionId, hn, rn,
+                            r.horseCode, r.riderCode, atMs = r.assignedMs, pushToCloud = false)
+                        done[l.sessionId] = CloudSync.fingerprint(t.localSha256.orEmpty(), t.horseCode, t.riderCode, hn, rn)
+                        applied++
+                        c.log.i("CLOUD", "${l.sessionId}: caballo/jinete de la nube ($hn · $rn)")
+                    }
+                    CloudSync.Action.NOTHING -> l.fp?.let { done[l.sessionId] = it }
                 }
-                done[cand.sessionId] = cand.fingerprint
                 c.settings.cloudUploaded = CloudSync.encode(done)
                 processed++
             } catch (e: OfflineException) {
                 _status.value = _status.value.copy(error = null, lastMs = System.currentTimeMillis()); throw e
             } catch (e: Exception) {
-                lastError = translate(e); c.log.w("CLOUD", "${cand.sessionId}: $lastError")
+                lastError = translate(e); c.log.w("CLOUD", "${l.sessionId}: $lastError")
                 if (fatal(e)) break
             }
         }
-        val pending = todo.size - processed
-        _status.value = Status(uploaded, pending, done.size, System.currentTimeMillis(), lastError)
+        if (full && lastError == null && processed == todo.size.coerceAtMost(500)) c.settings.cloudLastFullCheckMs = now
+        val pending = locals.count { it.fp != null && done[it.sessionId] != it.fp }
+        _status.value = Status(uploaded, pending, done.size, System.currentTimeMillis(), lastError, applied)
         Pass(uploaded, pending)
     }
 
+    private fun remoteOf(m: StorageMetadata) = CloudSync.Remote(
+        m.getCustomMetadata("fp"), m.getCustomMetadata("assignedMs")?.toLongOrNull() ?: 0L,
+        m.getCustomMetadata("horseCode"), m.getCustomMetadata("horseName"), m.getCustomMetadata("riderCode"), m.getCustomMetadata("riderName"))
+
+    private suspend fun upload(ref: com.google.firebase.storage.StorageReference, l: Local, assignedMs: Long, packager: Packager) {
+        val t = c.db.trainings().byId(l.sessionId) ?: error("Entrenamiento no encontrado")
+        val p = packager.build(l.sessionId)
+        try {
+            if (p.size > CloudSync.MAX_BYTES) error("${l.sessionId}: ${p.size / 1_048_576} MB, supera el máximo de la nube (40 MB)")
+            val meta = StorageMetadata.Builder().setContentType("application/octet-stream")
+                .setCustomMetadata("sha256", p.sha256).setCustomMetadata("fp", l.fp.orEmpty())
+                .setCustomMetadata("sessionId", l.sessionId)
+                .setCustomMetadata("horseCode", t.horseCode.orEmpty()).setCustomMetadata("horseName", p.horseName)
+                .setCustomMetadata("riderCode", t.riderCode.orEmpty()).setCustomMetadata("riderName", p.riderName)
+                .setCustomMetadata("assignedMs", assignedMs.toString())
+                .setCustomMetadata("startRtcMs", t.startRtcMs.toString())
+                .setCustomMetadata("distanceM", t.distanceM?.let { "%.0f".format(java.util.Locale.ROOT, it) } ?: "")
+                .setCustomMetadata("app", "android ${BuildConfig.VERSION_NAME}").build()
+            await(ref.putFile(Uri.fromFile(p.file), meta), minutes = 15)
+            c.settings.addShareUsage(p.size, 0)
+            c.log.i("CLOUD", "${l.sessionId} subido a la nube (${p.size} B)")
+        } finally { p.file.delete() }
+    }
+
     /** Fuerza volver a comprobar todo (p. ej. tras reinstalar o cambiar de tarjeta). */
-    fun forgetUploaded() { c.settings.cloudUploaded = ""; _status.value = Status() }
+    fun forgetUploaded() { c.settings.cloudUploaded = ""; c.settings.cloudLastFullCheckMs = 0; _status.value = Status() }
 
     private fun <T> await(t: Task<T>, minutes: Long = 1): T = try { Tasks.await(t, minutes, TimeUnit.MINUTES) }
         catch (e: TimeoutException) { throw OfflineException("La nube no responde", e) }
@@ -114,4 +146,6 @@ class CloudBackup(private val c: AppContainer, private val firebase: FirebaseSha
         e is StorageException && e.errorCode == StorageException.ERROR_RETRY_LIMIT_EXCEEDED -> "Nube: sin conexión, se reintentará"
         else -> "Nube: ${e.message ?: e.javaClass.simpleName}"
     }
+
+    private companion object { const val FULL_CHECK_MS = 60 * 60_000L }
 }

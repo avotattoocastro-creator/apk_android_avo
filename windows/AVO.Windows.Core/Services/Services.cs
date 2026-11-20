@@ -159,6 +159,10 @@ public sealed class TrainingLibrary
         }
     }
 
+    /// <summary>Ruta del .avo de la biblioteca de una sesión (null si solo hay .avr o no está). Nube AVO.</summary>
+    public string? StoredAvoPath(string sessionId) =>
+        _entries.FirstOrDefault(x => x.SessionId == sessionId && File.Exists(x.StoredPath) && x.StoredPath.EndsWith(".avo", StringComparison.OrdinalIgnoreCase))?.StoredPath;
+
     /// <summary>
     /// AVO-ASSIGN-1: writes the assignment into the library copy of a session (.avo only; .avr files have no manifest).
     /// The RAW segments do not change; the file SHA-256 does, so the old one is kept for duplicate detection.
