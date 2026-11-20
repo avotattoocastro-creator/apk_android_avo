@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "fecha": "2026-11-19",
   "razas": [
     "PSI",
@@ -57,6 +57,11 @@
       "fecha": "2026-11-19",
       "titulo": "Extra 4: auditoría de 9 fuentes del motor (acceso y cifras), índice tendinoso en árabes (Turquía, Polonia, Qatar) con trotones [I-raza] y V200/VHRmax con trotones, Corea y Brasil",
       "archivo": "estudios/2026-11-19_extra4_auditoria_fuentes_tendon_arabes_v200_trotones.md"
+    },
+    {
+      "fecha": "2026-11-19",
+      "titulo": "Extra 5: modelo óseo B (signo de b = −0,02 y f_BM inicial 0,61 cerrados; paso de integración no publicado) y línea base de la playa por franja (PL1–PL6)",
+      "archivo": "estudios/2026-11-19_extra5_modeloB_signo_b_playa_franjas.md"
     }
   ],
   "fuentes": [
@@ -700,6 +705,78 @@
       "raza_fuente": "PSI",
       "nota": "95 % de la FC pico en 12,4 ± 1,8 s",
       "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "HITCHENS_2018_BMMB",
+      "cita": "Hitchens PL et al. 2018, Biomech Model Mechanobiol 17:877",
+      "url": "https://core.ac.uk/download/185522549.pdf",
+      "acceso": "TEXTO_COMPLETO",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "g(f) = b·f + 1 − b con b = −0,02; f_BM 0,5/0,8/0,9",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "CREVIER_DENOIX_2009_SEQUISOL",
+      "cita": "Crevier-Denoix N et al. 2009, Bull Acad Vét France 162(2) (programa Sequisol)",
+      "url": "https://core.ac.uk/download/15524665.pdf",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Francia",
+      "idioma": "en",
+      "raza_fuente": "trotón",
+      "nota": "arena fibrada encerada frente a triturada: 1601 frente a 3362 m/s²",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "CREVIER_DENOIX_2013_VETJ",
+      "cita": "Crevier-Denoix N et al. 2013, Vet J 198 S1:e124",
+      "doi": "10.1016/j.tvjl.2013.09.046",
+      "acceso": "RESUMEN",
+      "pais": "Francia",
+      "idioma": "en",
+      "nota": "la deceleración máxima no separa césped de sintético al galope",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "BRUCE_PFAU_2026",
+      "cita": "Bruce OL, Pfau T et al. 2026, BMC Vet Res",
+      "doi": "10.1186/s12917-026-05376-0",
+      "acceso": "RESUMEN",
+      "pais": "Canadá",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "casco +19 % medio frente a blando; caña +16 a +54 %",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "SETTERBO_2009",
+      "cita": "Setterbo JJ et al. 2009, Am J Vet Res 70:1220",
+      "doi": "10.2460/ajvr.70.10.1220",
+      "acceso": "RESUMEN",
+      "pais": "EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "WHITE_PAPER_SUPERFICIES_2012",
+      "cita": "Racing Surfaces White Paper, Grayson-Jockey Club Research Foundation 2012",
+      "url": "https://grayson-jockeyclub.org/resources/White_Paper_04272012.pdf",
+      "acceso": "OFICIAL",
+      "idioma": "en",
+      "nota": "humedad, instrumentos (Clegg, penetrómetro, TDR); cambio de superficie a máxima intensidad",
+      "verificado_fecha": "2026-11-19"
+    },
+    {
+      "id": "MORRICE_WEST_2018_ANIMALS",
+      "cita": "Morrice-West AV et al. 2018, Animals 8:221",
+      "doi": "10.3390/ani8120221",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Australia",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "12 % usa arena firme de playa y 9 % blanda",
+      "verificado_fecha": "2026-11-19"
     }
   ],
   "parametros": [
@@ -856,7 +933,7 @@
         "F_s": 5,
         "gamma_E": 0.06,
         "a_mm-1": 11.42,
-        "b": 0.02,
+        "b": -0.02,
         "gamma_C": 2,
         "delta_C_mpa": 1.0,
         "A_OCL_min_mm_dia": 0.001,
@@ -866,17 +943,19 @@
         "A_OBL_max_mm_dia": 0.00603,
         "delta_B_mpa": 7,
         "gamma_B": 1,
-        "A_OCL_max_mm_dia": 0.00358
+        "A_OCL_max_mm_dia": 0.00358,
+        "f_BM_inicial_sin_entrenar": 0.61
       },
-      "evidencia": "E (Pan) / E-r (tabla 9 de Anwar, extracto automático)",
+      "evidencia": "E (tabla 9 de Anwar en arXiv HTML; Hitchens 2018; Pan bioRxiv para f_BM inicial)",
       "fuentes": [
         "ANWAR_2026",
         "PAN_2025_PREPRINT",
-        "ANWAR_2026_ARXIV_V1"
+        "ANWAR_2026_ARXIV_V1",
+        "HITCHENS_2018_BMMB"
       ],
       "estado": "PENDIENTE",
-      "falta": "signo de b (+0,02 o −0,02 según la lectura de la tabla 9), f_BM inicial y paso de integración; prueba de reproducción con la tabla 4 de Anwar (f_BM máx. 0,926/0,931/0,935; daño máx. 0,813/0,913/1,016)",
-      "nota": "Hill: A_OBL = min + (max−min)·ψ^γB/(δB^γB+ψ^γB); A_OCL = min + (max−min)·δC^γC/(δC^γC+ψ^γC); ψ = σ²/(2E)"
+      "falta": "paso y método de integración (no publicados; código en Zenodo 19173866 bloqueado) y reproducción de la tabla 4 de Anwar (f_BM máx. 0,926/0,931/0,935; D* máx. 0,813/0,913/1,016); pruebas de tendencia de Pan: f_BM ≈ 0,85 tras la primera preparación, +0,053 por 100 d de entrenamiento y −0,131 por 100 d de descanso",
+      "nota": "Hill: A_OBL = min + (max−min)·ψ^γB/(δB^γB+ψ^γB); A_OCL = min + (max−min)·δC^γC/(δC^γC+ψ^γC); ψ = σ²/(2E); S_v = a·√(1−f)·[1 − b(1−f)] con b = −0,02 (corrección KB 1.8.0: antes +0,02; el preprint de Pan escribe 0,02 con otro corchete, diferencia 1,6 % en S_v con f = 0,61); f_BM(0) = 0,61 sin entrenar (Pan), 0,8–0,9 en entrenamiento (Hitchens) [I]"
     },
     {
       "id": "rango_acelerometro_cincha",
@@ -1087,15 +1166,21 @@
         "orilla_firme_humedad_pct": 19,
         "humeda_profunda_humedad_pct": 13.5,
         "impacto_profunda_vs_firme": "≈ −59 %",
-        "frenado": "≈ −50 %"
+        "frenado": "≈ −50 %",
+        "galope_psi_zancada_max_por_suelo_m": 0.186,
+        "humedad_cortes_pct": "seca ≤ 13, media 13–19, húmeda > 19 (Pfau 2024, tierra)"
       },
       "evidencia": "E-r",
       "fuentes": [
         "CHATEAU_2011",
-        "CREVIER_DENOIX_2011"
+        "CREVIER_DENOIX_2011",
+        "PFAU_2024",
+        "CREVIER_DENOIX_2009_SEQUISOL",
+        "BRUCE_PFAU_2026",
+        "WHITE_PAPER_SUPERFICIES_2012"
       ],
       "estado": "REFERENCIA",
-      "nota": "4 trotones al trote (7 m/s y 25 km/h); en lo blando, zancada más corta y más frecuente. Sin datos de galope de carreras en playa"
+      "nota": "4 trotones al trote (7 m/s y 25 km/h); en lo blando, zancada más corta y más frecuente. Sin datos de galope de carreras en playa; extra 5: en PSI al galope el suelo cambia la zancada hasta 0,186 m a la misma velocidad (Pfau 2024 [E]), más que el umbral de A7: comparables por franja (PL1–PL6, PENDIENTE)"
     },
     {
       "id": "zancada_superficie_variacion_m",
@@ -1367,10 +1452,23 @@
       ],
       "estado": "PENDIENTE",
       "falta": "capa 2 del planificador; sin evidencia publicada de días entre trabajos rápidos ni datos de árabes de llano"
+    },
+    {
+      "id": "PLAYA_LINEA_BASE_PL1_PL6",
+      "umbral": "PL1 franja obligatoria y comparables de A7/A8/A9 de la misma franja; PL2 marea, lluvia 24–48 h, nota del jinete, humedad TDR y penetrómetro; PL3 zancada con velocidad como covariable y franja como efecto fijo; PL4 impacto relativo a la franja; PL5 V200 por franja con 4–6 sesiones; PL6 marcar rápidos en orilla compactada y cambios bruscos de franja",
+      "evidencia": "E (Pfau 2024, White Paper 2012) / E-r (Chateau 2011, Crevier-Denoix 2011) / I (protocolo y umbrales)",
+      "fuentes": [
+        "PFAU_2024",
+        "CHATEAU_2011",
+        "CREVIER_DENOIX_2011",
+        "WHITE_PAPER_SUPERFICIES_2012"
+      ],
+      "estado": "PENDIENTE",
+      "falta": "campo de franja y marea en la app; sin datos publicados de galope de carreras ni de lesiones en playa"
     }
   ],
   "pendiente_motor": [
-    "Modelo óseo B (Pan/Anwar) con adaptación y reparación: constantes completas (KB 1.2.0); faltan el signo de b, la f_BM inicial y reproducir la tabla 4 de Anwar",
+    "Modelo óseo B (Pan/Anwar) con adaptación y reparación: constantes completas con b = −0,02 y f_BM(0) = 0,61 (KB 1.8.0, extra 5); faltan el paso de integración (no publicado) y reproducir la tabla 4 de Anwar (código en Zenodo 19173866)",
     "V200/VHRmax por regresión FC–velocidad (medias de 5 s, trote + galope [E]); mesetas ≥ 30 s descartando 20–30 s [I], R² ≥ 0,90 [I], sin extrapolar; recuperación a 1, 2, 4, 5, 10 y 15 min solo informativa; extra 4: TE propio por caballo (no hay TE publicado legible en PSI/árabe); misma superficie y nunca cinta con pista",
     "ECG por fase (≥ 250 SPS con interpolación del pico, preferible 500): detector anclado en S con rechazo de T y sin ceguera tras artefacto; prematuro ≥ 6 % frente a la mediana de 8 RR con FC > 100 lpm; pareja, triplete, racha ≥ 4, FA; puerta > 10 % no interpretable por fase; validar con galope real anotado a mano (objetivo VPP ≥ 99 %, S ≥ 98 %) (estudio extra 3)",
     "Conectar las líneas base a A9 (V200) cuando el análisis traiga el ECG; A7 y A8 conectadas en 2.0.0-dev7 (KB 1.5.0) con superficie como criterio de comparables; falta el TE propio por métrica y la playa por franja",
@@ -1378,13 +1476,12 @@
     "Cociente de galope 60/90 d de Choi & Parkin (A6) cuando se aclare la posición del +1",
     "Índice tendinoso heurístico por bandas cualitativas (prioritario en árabes de 3–4 años): sin exponente de carga; faltan en la app la lesión previa, la CSA ecográfica y la firmeza del suelo (estudio extra 2026-11-19); extra 4: sin OR de árabes (Golfo, Turquía, Polonia); edad 3–4 años con 3 fuentes; no añadir término de carga (Çalışkan 2020b, Perkins 2005); CSA árabe de referencia 62–94 mm²",
     "Planificador semanal por restricciones (capa 2) con P1–P6 del estudio extra 3 (práctica [E], forma [I]) y explicación con confianza (capa 3)",
-    "Línea base separada para la playa por franja (orilla firme, húmeda suelta, seca profunda, transición), marea, lluvia y nota del jinete (Chateau 2011)",
+    "Línea base separada para la playa por franja (PL1–PL6 del extra 5): orilla firme, húmeda profunda, seca profunda, transición; marea, lluvia, humedad y nota del jinete; comparables de A7/A8/A9 por franja (Pfau 2024: el suelo cambia la zancada hasta 0,186 m)",
     "Regla combinada A1+A2 de Verheyen cuando se lea el texto completo",
     "Contador de muestras saturadas de la cincha en el análisis (si el firmware lo envía)"
   ],
   "cola_investigacion": [
     "Texto completo de Verheyen 2006 (Bone, DOI 10.1016/j.bone.2006.05.025): ORs, cortes, límite inferior del canter, ventana de 60 d",
-    "PDF de Anwar 2026 (tabla 9: signo de b) y tabla 1 de Pan 2025 (JRSI, PMC12483640): cotejar las constantes de adaptación; f_BM inicial y paso de integración",
     "Texto completo de Van Erck-Westergren 2026 (JVIM): definiciones de fases, prematuridad, FA paroxística y % no interpretable",
     "Vermeulen & Evans 2006 y Gramkow & Evans 2006 completos: rango de la regresión FC–velocidad y retraso de la FC",
     "Martig 2013 completo: confirmar que 134,2/14,1 es la curva de sensibilidad",
@@ -1411,7 +1508,10 @@
     "Çelimli, Seyrek-İntaş & Kaya 2004 (Equine Vet Educ 16:81) completo: CSA del TFDS de árabes por edad; Dallas et al. 2013 (EVJ 45 S44, árabes Reino Unido); celdas de las tablas 7–12 de Çalışkan 2020a",
     "Capítulo «Exercise testing in the field» (Couroucé-Malblanc & van Erck-Westergren, Equine Sports Medicine and Surgery, Elsevier) en el libro original: repetibilidad de V200 (la copia en línea vista no era legal; no se usó)",
     "Hamlin 2002 completo (cuánto baja la V200 con sobrecarga) y Ringmark 2015 completo (SLU)",
-    "Golfo: no hay series publicadas de tendón ni de V200 en árabes de carreras (EAU, Arabia Saudí, Omán, Kuwait, Bahréin); probar actas ICRAV/WEVA y contacto con QREC (Pap 2026)"
+    "Golfo: no hay series publicadas de tendón ni de V200 en árabes de carreras (EAU, Arabia Saudí, Omán, Kuwait, Bahréin); probar actas ICRAV/WEVA y contacto con QREC (Pap 2026)",
+    "Código de Anwar 2026 (Zenodo 10.5281/zenodo.19173866) o de Pan 2025 (10.5281/zenodo.16557014) y la versión JRSI (PMC12483640): paso de integración y reproducción de la tabla 4",
+    "Chateau 2011 y Crevier-Denoix 2011 completos (Wiley) y Holt 2014, Northrop 2016, Hernlund 2017 (UCLan, bloqueados): valores absolutos por franja",
+    "Galope de carreras en playa (Deauville, Pornichet, Cagnes, Laytown): biomecánica, FC o lesiones (no encontrados)"
   ],
   "historial": [
     {
@@ -1453,6 +1553,11 @@
       "version": "1.7.0",
       "fecha": "2026-11-19",
       "cambio": "Estudio extra 4: campos acceso/verificado_fecha/pais/idioma/raza_fuente; 9 fuentes auditadas (6 mejoradas) con correcciones de ámbito (Martig confirmada; Morrice-West 2025: Tasmania, HR, carga = fatiga ósea; Carrier: solo húmero; Vermeulen: diferencia media; Frick: canter en cinta); 17 fuentes nuevas; sin cambios de constantes ni de lógica; motor 2.0.0-dev9 solo por versión"
+    },
+    {
+      "version": "1.8.0",
+      "fecha": "2026-11-19",
+      "cambio": "Estudio extra 5: modelo óseo B con b = −0,02 (corregido; antes +0,02) y f_BM(0) = 0,61 cerrados en texto completo, paso de integración no publicado; línea base de la playa PL1–PL6 (PENDIENTE); 7 fuentes nuevas; sin cambios de lógica; motor 2.0.0-dev10 solo por versión"
     }
   ]
 }
