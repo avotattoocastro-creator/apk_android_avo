@@ -13,8 +13,8 @@ android {
         applicationId = "org.avoperformance.horse"
         minSdk = 29          // Android 10
         targetSdk = 35
-        versionCode = 45
-        versionName = "2.12-nube-dev1"
+        versionCode = 46
+        versionName = "2.13-qr-dev1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // Public keys that sign the app licences (AVO Tarjetas). Base64 SPKI. From the CI variable
         // AVO_LICENSE_PUBLIC_KEYS or, without it, from config/license_public_keys.txt (public data, not a secret).
@@ -103,6 +103,8 @@ dependencies {
     implementation("com.google.firebase:firebase-database")
     // Nube AVO: copia de los entrenamientos en Cloud Storage (plan Blaze)
     implementation("com.google.firebase:firebase-storage")
+    // QR de la tarjeta para entrar en el iPad (solo generación; biblioteca Java pura)
+    implementation("com.google.zxing:core:3.5.3")
     testImplementation(libs.junit)
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test:runner:1.6.2")
