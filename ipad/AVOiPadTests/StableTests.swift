@@ -163,6 +163,38 @@ final class StableTests: XCTestCase {
                       "Cuadra: validación del código (23 bytes, como el reloj)")
     }
 
+    /// Trainer 20/11/2026: deleted horses and riders came back after each new build (at launch the trainings re-register
+    /// the horse and rider of their files). A deleted record stays deleted, also after reading cuadra.json again.
+    func testDeletedRecordsAreNotRecreatedFromTrainings() throws {
+        let path = (dir as NSString).appendingPathComponent("cuadra_borrados.json")
+        let st = StableStore(path: path)
+        let withCode = session("S1", horseCode: "HORSE_009", horse: "Brisa", rider: "Pedro")
+        let nameOnly = session("S2", horse: "Lucero", rider: "Sin identificar")
+        try st.registerFromTraining(withCode)
+        try st.registerFromTraining(nameOnly)
+        XCTAssertNotNil(st.find(.horse, "HORSE_009"))
+        let lucero = try XCTUnwrap(st.findByName(.horse, "Lucero"))
+        let pedro = try XCTUnwrap(st.findByName(.rider, "Pedro"))
+        try st.remove(.horse, "HORSE_009")
+        try st.remove(.horse, lucero.code)
+        try st.remove(.rider, pedro.code)
+
+        // next launch: the same trainings are registered again
+        let again = StableStore(path: path)
+        try again.registerFromTraining(withCode)
+        try again.registerFromTraining(nameOnly)
+        XCTAssertNil(again.find(.horse, "HORSE_009"), "un caballo borrado no vuelve desde su entrenamiento")
+        XCTAssertNil(again.findByName(.horse, "Lucero"), "tampoco el creado por nombre")
+        XCTAssertNil(again.findByName(.rider, "Pedro"), "ni el jinete borrado")
+        XCTAssertEqual(again.deleted(.horse).count, 2)
+        XCTAssertTrue(again.isDeleted(.rider, code: nil, name: "pedro"))
+
+        // created again on purpose: it is back and no longer «deleted»
+        try again.add(.horse, IdentityRecord(code: "HORSE_009", name: "Brisa"))
+        XCTAssertFalse(again.isDeleted(.horse, code: "HORSE_009", name: nil))
+        XCTAssertEqual(StableStore(path: path).deleted(.horse).count, 1)
+    }
+
     /// cuadra.json written by AVO Windows (System.Text.Json, PascalCase, DateTimeOffset with 7 decimals) is read as is,
     /// and what the iPad writes uses the same keys.
     func testWindowsCuadraJsonInterchange() throws {

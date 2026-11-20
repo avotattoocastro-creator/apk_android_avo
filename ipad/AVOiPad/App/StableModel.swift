@@ -339,6 +339,10 @@ final class StableModel {
         horses.rebuild(store.horses, [])
         riders.rebuild(store.riders, [])
         rebuildNames()
+        // every change of the Cuadra / Jinetes goes to the backup in AVO Horse within seconds
+        store.changed = { [weak app] in
+            DispatchQueue.main.async { app?.scheduleDocumentsSync() }
+        }
     }
 
     func page(_ kind: IdentityKind) -> StableIdentityPage { kind == .horse ? horses : riders }

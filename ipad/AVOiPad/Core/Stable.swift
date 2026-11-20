@@ -150,6 +150,20 @@ enum StableJson {
     }
 }
 
+/// A horse or rider deleted by the user (cuadra.json «DeletedHorses» / «DeletedRiders»).
+struct DeletedIdentity: Equatable {
+    var code: String
+    var name: String
+    var at: Date
+
+    func json() -> [String: Any] { ["Code": code, "Name": name, "At": AvoTime.iso(at)] }
+
+    static func from(_ o: [String: Any]) -> DeletedIdentity {
+        let at: Date = (o["At"] as? String).flatMap { ISO8601DateFormatter().date(from: $0) } ?? Date(timeIntervalSince1970: 0)
+        return DeletedIdentity(code: (o["Code"] as? String ?? "").trimmed, name: (o["Name"] as? String ?? "").trimmed, at: at)
+    }
+}
+
 /// Cuadra (horses), Jinetes (riders) and training assignments, stored as one JSON file (cuadra.json) written atomically.
 /// Rules taken from the Android app: codes ≤ 23 bytes without control characters; a tag/file never overwrites a record the
 /// user already has (same code); assigning only changes metadata, never the training file.
@@ -162,6 +176,11 @@ final class StableStore {
     private var horseList: [IdentityRecord] = []
     private var riderList: [IdentityRecord] = []
     private var assignments: [String: TrainingAssignment] = [:]
+    /// Records the user deleted (trainer 20/11/2026: deleted horses and riders came back after every new build, because
+    /// at launch the trainings re-register the horse and rider their files carry). A deleted code or name is never
+    /// re-created automatically from a training; only an explicit action (create, tag/link, France Galop) brings it back.
+    private var deletedHorses: [DeletedIdentity] = []
+    private var deletedRiders: [DeletedIdentity] = []
 
     /// C# event Changed: called after every save.
     var changed: (() -> Void)?
@@ -195,7 +214,12 @@ final class StableStore {
             }
             if kind == .horse { horseList = out } else { riderList = out }
         }
-        if let raw = o["Assignments"], !(raw is NSNull) {
+        for (key, kind) in [("DeletedHorses", IdentityKind.horse), ("DeletedRiders", IdentityKind.rider)] {
+            guard let arr = o[key] as? [Any] else { continue }
+            let l: [DeletedIdentity] = arr.compactMap { ($0 as? [String: Any]).map(DeletedIdentity.from) }.filter { !$0.code.isEmpty }
+            if kind == .horse { deletedHorses = l } else { deletedRiders = l }
+        }
+                if let raw = o["Assignments"], !(raw is NSNull) {
             guard let dict = raw as? [String: Any] else { return false }
             for (k, v) in dict {
                 guard let ao = v as? [String: Any] else { return false }
@@ -264,9 +288,32 @@ final class StableStore {
         var l = list(k)
         l.append(r)
         setList(k, l)
+        // created again on purpose: it is no longer «deleted»
+        setDeleted(k, deletedList(k).filter { !StableStore.sameCode($0.code, r.code) })
         gate.unlock()
         try save()
         return r
+    }
+
+    // must be called with the gate held
+    private func deletedList(_ k: IdentityKind) -> [DeletedIdentity] { k == .horse ? deletedHorses : deletedRiders }
+    private func setDeleted(_ k: IdentityKind, _ l: [DeletedIdentity]) { if k == .horse { deletedHorses = l } else { deletedRiders = l } }
+
+    /// Records deleted by the user (newest first).
+    func deleted(_ k: IdentityKind) -> [DeletedIdentity] {
+        gate.lock(); defer { gate.unlock() }
+        return deletedList(k).sorted { $0.at > $1.at }
+    }
+
+    /// True when the user deleted this code, or this name (records created from a file without code).
+    func isDeleted(_ k: IdentityKind, code: String?, name: String?) -> Bool {
+        gate.lock(); defer { gate.unlock() }
+        let c: String = code?.trimmed ?? ""
+        let n: String = name?.trimmed ?? ""
+        return deletedList(k).contains { d in
+            (!c.isEmpty && StableStore.sameCode(d.code, c))
+                || (!n.isEmpty && n != StableStore.unknown && d.name.compare(n, options: [.caseInsensitive], range: nil, locale: AvoFormat.es) == .orderedSame)
+        }
     }
 
     /// Saves edits of an existing record (the code cannot change: it is what the watch and the tags carry).
@@ -293,6 +340,11 @@ final class StableStore {
         let before = list(k)
         let after = before.filter { !StableStore.sameCode($0.code, code) }
         setList(k, after)
+        for r in before where StableStore.sameCode(r.code, code) {
+            var l = deletedList(k).filter { !StableStore.sameCode($0.code, r.code) }
+            l.append(DeletedIdentity(code: r.code, name: r.name, at: Date()))
+            setDeleted(k, l)
+        }
         gate.unlock()
         let done = after.count < before.count
         if done { try save() }
@@ -327,10 +379,12 @@ final class StableStore {
         let hasName = !name.trimmed.isEmpty && name != StableStore.unknown
         if StableStore.validCode(code), let c = code?.trimmed {
             if find(k, c) != nil { return false }
+            if isDeleted(k, code: c, name: nil) { return false }   // deleted by the user: not re-created at launch
             try add(k, IdentityRecord(code: c, name: hasName ? name : c, origin: "entrenamiento", demo: demo))
             return true
         }
         if !hasName || findByName(k, name) != nil { return false }
+        if isDeleted(k, code: nil, name: name) { return false }
         // file with a name but no code: same rule as Android AssignHorseRider (H_/R_ + random), matched by name afterwards
         let rnd = String(UUID().uuidString.replacingOccurrences(of: "-", with: "").lowercased().prefix(16))
         let gen = (k == .horse ? "H_" : "R_") + rnd
@@ -432,6 +486,8 @@ final class StableStore {
             "Horses": horseList.map { $0.json() },
             "Riders": riderList.map { $0.json() },
             "Assignments": assign,
+            "DeletedHorses": deletedHorses.map { $0.json() },
+            "DeletedRiders": deletedRiders.map { $0.json() },
         ]
         gate.unlock()
         let data = (try? JSONSerialization.data(withJSONObject: root, options: [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]))
