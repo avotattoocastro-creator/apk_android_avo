@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Integración (23:38): PR #112, #113, #114 y #115 en `develop`
+**Autor:** Claude (chat integrador, petición del usuario 20/11 23:38) · **Orden:** por llegada, de uno en uno, con *merge commit*.
+- **#112** motor 2.0.0-dev24 / KB-1 1.22.0 (sin conflictos).
+- **#113** espalda PROTOTIPO 3.14.4 → 3.14.7 + Android 2.15-gnss-dev2 (vc 49). Se trajo `develop` y se conservaron las dos partes
+  en `README.md` y en este registro. CI en la rama: espalda 3.14.7 44825167399 ✅, Android dev2 44820546249 ✅.
+- **#114** motor dev25 / KB-1 1.23.0 y **#115** motor dev26 / KB-1 1.24.0 (encadenados). Mismo tratamiento en `README.md` y registro;
+  motor con su CI de la rama ✅ (Linux, Windows y Android ×3 ABI).
+**Validación:** COMPILADO / CI · **NO VERIFICADO** en hardware ni con caballos reales.
+
+---
+
 ## 2026-11-20 — Espalda PROTOTIPO 3.14.7 — NAV-SIG se reactiva o se sondea si la salida periódica se para
 **Autor:** Claude · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` (PR #113) · **CI:** ver PR
 **Qué se vio (22:56):**
@@ -141,6 +152,21 @@ FIX, velocidad ±0,52 km/h) · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` 
 - ensayos de velocidad parado, en recta y en giros, con porcentaje de épocas con `sAcc` < 55 mm/s.
 
 ---
+
+## 2026-11-20 — Motor 2.0.0-dev26 / KB-1 1.24.0 — Estudio horario 22:09: lesiones de árabes de llano en Turquía y repetibilidad de campo
+**Autor:** Claude (estudio horario programado) · **Rama:** `claude/kb-estudio-2026-11-20-2209` (encadenada desde `claude/kb-estudio-2026-11-20-2108`, PR #114) · **CI:** ver PR
+**Qué cambia:** KB-1 1.23.0 → 1.24.0 y motor 2.0.0-dev25 → 2.0.0-dev26 (solo versiones, sin cambios de lógica).
+- **Árabes de llano, Turquía:** Yıldırım & Karaarslan 2025 (TJVR) leído en texto completo: tendón 137/216 (63,7 %) en
+  árabes frente a fractura 206/337 (61,5 %) en PSI; serie hospitalaria (≈ 20 % de la población), no incidencia. Misma
+  serie que el EVJ 2025 (solo resumen; superficie sin OR). Fuente reclasificada de `SIN_AUDITAR` y duplicado marcado.
+- **Repetibilidad:** Poinsard 2026: bloque de ≥ 3 sesiones con ≤ 7 d, 18 caballos, ICC ajustado por temperatura [E-r];
+  ICC de V200 0,50 no reconfirmado (texto completo sin acceso).
+- Propuestas TA1–TA2 y RB1 [I], sin implementar; 2 fuentes nuevas, 4 actualizadas, 2 parámetros de referencia.
+**Por qué:** datos de árabes de llano y auditoría de fuentes (prioridades del estudio horario).
+**Archivos:** `equine-intelligence/knowledge/base_cientifica.json`, `equine-intelligence/knowledge/estudios/2026-11-20_2209_lesiones_arabes_turquia_repetibilidad_v200.md`, `equine-intelligence/include/avo_eq/{types,knowledge}.h`, `equine-intelligence/tests/test_knowledge.cpp`, `equine-intelligence/docs/algoritmos/14_BASE_CIENTIFICA.md`, fixtures del motor y de `core` (versión), `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`, `README.md`.
+**No se ha tocado:** workflows, firmas, `Info.plist`, build de TestFlight, firmware ni contratos binarios.
+**Validación:** pruebas del motor en local (Debug con sanitizers y Release + fixtures); CI en el PR. NO VERIFICADO con caballos reales.
+**Pendiente:** EVJ 2025 y Poinsard 2026 en texto completo (Wiley, MDPI y PMC sin permiso de red en la sesión desatendida).
 
 ## 2026-11-20 — Motor 2.0.0-dev25 / KB-1 1.23.0 — Estudio horario 21:08: estado del terreno (going) y calentamiento / vuelta a la calma
 **Autor:** Claude (estudio horario programado) · **Rama:** `claude/kb-estudio-2026-11-20-2108` (encadenada desde `claude/kb-estudio-2026-11-20-2008`, PR #112) · **CI:** ver PR
