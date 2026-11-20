@@ -47,6 +47,8 @@ class FirebaseShare(private val ctx: Context) {
             .setProjectId(FirebaseConfig.PROJECT_ID).setDatabaseUrl(FirebaseConfig.DATABASE_URL).build(), NAME)
     }
     private val auth get() = FirebaseAuth.getInstance(app)
+    /** Misma app de Firebase (y sesión de la tarjeta) para la Nube AVO. */
+    internal val firebaseApp: FirebaseApp get() = app
     private val db get() = FirebaseDatabase.getInstance(app, FirebaseConfig.DATABASE_URL)
     /** Last path used (only for diagnosing permission errors). */
     @Volatile private var lastPath = ""

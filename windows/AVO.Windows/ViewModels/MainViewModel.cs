@@ -77,6 +77,7 @@ public sealed partial class MainViewModel : ObservableObject
         InitCompare();
         InitReports();
         InitServer();
+        InitCloud();
         InitEnvironment();
         InitStable();
         InitGeofences();

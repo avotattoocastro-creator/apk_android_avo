@@ -19,6 +19,40 @@
                     <Button Content="Abrir panel en el navegador" Command="{Binding OpenPanelCommand}" HorizontalAlignment="Left" Margin="0,8,0,0"/>
                 </StackPanel>
             </c:AvoCard>
+            <c:AvoCard Header="Nube AVO (mis entrenamientos)" Margin="0,12,0,0">
+                <StackPanel>
+                    <TextBlock Text="{Binding CloudAccount}" Style="{StaticResource AvoDim}"/>
+                    <TextBox Text="{Binding CloudCardText, UpdateSourceTrigger=PropertyChanged}" Margin="0,8,0,0"
+                             ToolTip="avohorse://identity/user/AVO-XXXX-XXXX?v=1&amp;name=…&amp;k=…  o  «AVO-XXXX-XXXX clave»"/>
+                    <WrapPanel Margin="0,8,0,0">
+                        <Button Content="Entrar" Command="{Binding CloudSignInCommand}" Margin="0,0,8,0"/>
+                        <Button Content="Ver mi nube" Style="{StaticResource AvoPrimaryButton}" Command="{Binding CloudRefreshCommand}" Margin="0,0,8,0"/>
+                        <Button Content="Importar todos" Command="{Binding CloudImportAllCommand}" Margin="0,0,8,0"/>
+                        <Button Content="Olvidar tarjeta" Command="{Binding CloudSignOutCommand}"/>
+                    </WrapPanel>
+                    <TextBlock Text="{Binding CloudState}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,8,0,0"/>
+                    <ItemsControl ItemsSource="{Binding CloudRows}" Margin="0,6,0,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,4,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Title}" Style="{StaticResource AvoLabel}" TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding Detail}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                    <Button Grid.Column="1" Content="Importar" Padding="10,4" VerticalAlignment="Center"
+                                            Command="{Binding DataContext.CloudImportCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock Text="El Android sube cada entrenamiento verificado con el reloj (Compartir › Nube AVO). Aquí se descargan, se comprueba el SHA-256 y se importan con las mismas validaciones que un .avo. La tarjeta se guarda cifrada (DPAPI) solo para tu usuario de Windows." Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,8,0,0"/>
+                </StackPanel>
+            </c:AvoCard>
             <c:AvoCard Header="Descargar entrenamiento (.avo por HTTPS)" Margin="0,12,0,0">
                 <StackPanel>
                     <TextBox Text="{Binding DownloadUrl, UpdateSourceTrigger=PropertyChanged}"/>
@@ -29,7 +63,7 @@
             </c:AvoCard>
             <c:AvoCard Header="Pendiente para sincronización automática" Margin="0,12,0,0">
                 <TextBlock Style="{StaticResource AvoCaption}" TextWrapping="Wrap"
-                           Text="Contrato documentado en windows/docs/SERVIDOR_CONTRATO_PENDIENTE.md: listado de sesiones del usuario autenticado, descarga por ID con hash, autenticación y gestión de errores. La interfaz IAvoServerClient ya está preparada; no se inventan endpoints ni se guardan credenciales."/>
+                           Text="La Nube AVO (Firebase Storage, docs/NUBE_SESIONES.md) ya da el listado y la descarga con hash de tus entrenamientos. El panel web propio sigue pendiente (windows/docs/SERVIDOR_CONTRATO_PENDIENTE.md)."/>
             </c:AvoCard>
         </StackPanel>
         <c:AvoCard Grid.Column="1" Margin="12,0,0,0" Header="Mis entrenamientos (biblioteca local verificada)">
