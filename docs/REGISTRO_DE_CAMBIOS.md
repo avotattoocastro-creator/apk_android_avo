@@ -24,6 +24,10 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — iPad 1.0.0 — «Análisis motor»: el puesto de rapidez («14.º») ya no se parte en dos líneas
+**Autor:** Claude (captura de TestFlight del 20/11, 01:23) · **Rama:** `claude/analisis-motor-ajustes` · **CI:** ver PR
+**Qué cambia:** la columna del puesto de rapidez en «Cómo fue la carrera» es más ancha y de una sola línea.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO** en el iPad.
 ## 2026-11-20 — Motor 2.0.0-dev11 — KB-1 1.9.0: investigación nocturna (regla A6C del cociente de galope y auditoría de fuentes)
 **Autor:** Claude (tarea programada nocturna, sin supervisión) · **Rama:** `claude/kb-noche-2026-11-20` (desde `claude/kb-estudio5-2026-11-19`, PR #89 abierto) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
 **Qué cambia:**
