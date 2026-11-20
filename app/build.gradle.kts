@@ -13,8 +13,8 @@ android {
         applicationId = "org.avoperformance.horse"
         minSdk = 29          // Android 10
         targetSdk = 35
-        versionCode = 43
-        versionName = "2.10-live-dev1"
+        versionCode = 45
+        versionName = "2.12-nube-dev1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // Public keys that sign the app licences (AVO Tarjetas). Base64 SPKI. From the CI variable
         // AVO_LICENSE_PUBLIC_KEYS or, without it, from config/license_public_keys.txt (public data, not a secret).
@@ -101,6 +101,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database")
+    // Nube AVO: copia de los entrenamientos en Cloud Storage (plan Blaze)
+    implementation("com.google.firebase:firebase-storage")
     testImplementation(libs.junit)
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test:runner:1.6.2")

@@ -111,7 +111,7 @@ class Settings(ctx: Context, private val secure: SecureStore) {
     // ---- Sharing between AVO users (Firebase)
     /** LIVE: subir en directo la sesión en curso a Firebase para verla en el iPad (desactivado por defecto). */
     var liveShareEnabled: Boolean
-        get() = p.getBoolean("share.liveEnabled", false)
+        get() = p.getBoolean("share.liveEnabled", true)   // 2.12: activado por defecto (decisión del usuario, 20/11/2026)
         set(v) { p.edit().putBoolean("share.liveEnabled", v).apply() }
     /** Mode A: global recipients enabled. */
     var shareGlobalEnabled: Boolean
@@ -134,6 +134,26 @@ class Settings(ctx: Context, private val secure: SecureStore) {
     var shareAutoRetry: Boolean
         get() = p.getBoolean("share.autoRetry", true)
         set(v) { p.edit().putBoolean("share.autoRetry", v).apply() }
+    /** Nube AVO: copia automática de cada entrenamiento verificado en Firebase Storage (docs/NUBE_SESIONES.md). */
+    var cloudEnabled: Boolean
+        get() = p.getBoolean("cloud.enabled", true)
+        set(v) { p.edit().putBoolean("cloud.enabled", v).apply() }
+    /** Huellas ya subidas a la nube (`id\tfp` por línea, ver CloudSync). */
+    var cloudUploaded: String
+        get() = p.getString("cloud.uploaded", "") ?: ""
+        set(v) { p.edit().putString("cloud.uploaded", v).apply() }
+    /** Cuándo se eligió a mano el caballo/jinete de cada entrenamiento (`id\tms`): gana el más reciente entre apps. */
+    var cloudAssigned: String
+        get() = p.getString("cloud.assigned", "") ?: ""
+        set(v) { p.edit().putString("cloud.assigned", v).apply() }
+    /** Última comprobación completa de la nube (cambios de caballo/jinete hechos en el iPad o Windows). */
+    var cloudLastFullCheckMs: Long
+        get() = p.getLong("cloud.lastFullCheck", 0)
+        set(v) { p.edit().putLong("cloud.lastFullCheck", v).apply() }
+    /** Entrenamientos ya confirmados (caballo y jinete) tras la descarga (`id` por línea). null = aún no inicializado. */
+    var assignConfirmed: String?
+        get() = p.getString("assign.confirmed", null)
+        set(v) { p.edit().putString("assign.confirmed", v).apply() }
     var sharePaused: Boolean
         get() = p.getBoolean("share.paused", false)
         set(v) { p.edit().putBoolean("share.paused", v).apply() }

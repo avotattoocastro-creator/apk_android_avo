@@ -328,6 +328,11 @@ final class TrainingLibrary {
         return sha
     }
 
+    /// Ruta del .avo de la biblioteca de una sesión (nil si solo hay .avr o no está).
+    func storedAvoPath(_ sessionId: String) -> String? {
+        entries.first(where: { $0.sessionId == sessionId && AvoFiles.exists($0.storedPath) && $0.storedPath.lowercased().hasSuffix(".avo") })?.storedPath
+    }
+
     func storedFiles() -> [String] { entries.filter { AvoFiles.exists($0.storedPath) }.map { $0.storedPath } }
 
     func remove(_ sha: String) {

@@ -11,6 +11,9 @@ struct ServerView: View {
     @State private var downloadState: String = "Sin descargas"
     @State private var downloading: Bool = false
     @State private var refreshTick: Int = 0
+    @State private var cloudItems: [CloudItem] = []
+    @State private var cloudState: String = "Pulsa «Ver mi nube»"
+    @State private var cloudBusy: Bool = false
 
     private let server: AvoServerClient = PendingContractServerClient()
 
@@ -62,6 +65,32 @@ struct ServerView: View {
                 Button("Abrir panel en el navegador") { openPanel() }
                     .buttonStyle(.avoSecondary)
             }
+            AvoCard(title: "Nube AVO (mis entrenamientos)") {
+                Text(app.live.signedCode.map { "Tarjeta AVO: " + $0 } ?? "Sin tarjeta: entra en LIVE con tu tarjeta AVO (enlace o código + clave).")
+                    .font(.footnote).foregroundStyle(Avo.textDim)
+                HStack {
+                    Button("Ver mi nube") { Task { @MainActor in await loadCloud() } }
+                        .buttonStyle(.avoPrimary).disabled(cloudBusy)
+                    Button("Descargar todos") { Task { @MainActor in await downloadCloud(cloudItems) } }
+                        .buttonStyle(.avoSecondary).disabled(cloudBusy || cloudItems.isEmpty)
+                }
+                Text(cloudState).font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+                ForEach(cloudItems) { (it: CloudItem) in
+                    HStack(alignment: .center, spacing: 8) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(ServerView.cloudTitle(it)).font(.footnote.weight(.semibold)).foregroundStyle(Avo.silver)
+                            Text(ServerView.cloudDetail(it)).font(.caption).foregroundStyle(Avo.textDim)
+                        }
+                        Spacer()
+                        Button("Cambiar") { Task { @MainActor in await changeCloud(it) } }
+                            .buttonStyle(.avoSecondary).disabled(cloudBusy)
+                        Button("Importar") { Task { @MainActor in await downloadCloud([it]) } }
+                            .buttonStyle(.avoSecondary).disabled(cloudBusy)
+                    }
+                }
+                Text("El Android sube cada entrenamiento verificado con el reloj (Compartir › Nube AVO). Aquí se descargan, se comprueba el SHA-256 y se importan con las mismas validaciones que un .avo. «Cambiar» abre la asignación de caballo y jinete: al guardar se actualiza también en la nube y gana el cambio más reciente en todas las apps.")
+                    .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+            }
             AvoCard(title: "Descargar entrenamiento (.avo por HTTPS)") {
                 TextField("https://…/entrenamiento.avo", text: $downloadUrl)
                     .textFieldStyle(.roundedBorder)
@@ -76,7 +105,7 @@ struct ServerView: View {
                     .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
             }
             AvoCard(title: "Pendiente para sincronización automática") {
-                Text("Contrato documentado en windows/docs/SERVIDOR_CONTRATO_PENDIENTE.md: listado de sesiones del usuario autenticado, descarga por ID con hash, autenticación y gestión de errores. La interfaz IAvoServerClient ya está preparada; no se inventan endpoints ni se guardan credenciales.")
+                Text("La Nube AVO (Firebase Storage, docs/NUBE_SESIONES.md) ya da el listado y la descarga con hash de tus entrenamientos. El panel web propio sigue pendiente (windows/docs/SERVIDOR_CONTRATO_PENDIENTE.md).")
                     .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
             }
         }
@@ -111,6 +140,77 @@ struct ServerView: View {
             return
         }
         openURL(u)
+    }
+
+    static func cloudTitle(_ it: CloudItem) -> String {
+        let horse: String = it.horseName.isEmpty ? "Sin caballo" : it.horseName
+        if it.startRtcMs <= 0 { return horse }
+        let f = DateFormatter()
+        f.locale = Locale(identifier: "es_ES")
+        f.dateFormat = "dd/MM/yyyy HH:mm"
+        return f.string(from: Date(timeIntervalSince1970: Double(it.startRtcMs) / 1000)) + " · " + horse
+    }
+
+    static func cloudDetail(_ it: CloudItem) -> String {
+        var parts: [String] = []
+        if !it.riderName.isEmpty { parts.append(it.riderName) }
+        if let d = it.distanceM { parts.append(DotNetFormat.custom(d / 1000, "0.00", spanish: true) + " km") }
+        parts.append(DotNetFormat.custom(Double(it.size) / 1_048_576, "0.0", spanish: true) + " MB")
+        parts.append(it.sessionId.isEmpty ? it.fileName : it.sessionId)
+        return parts.joined(separator: " · ")
+    }
+
+    @MainActor
+    private func loadCloud() async {
+        cloudBusy = true
+        defer { cloudBusy = false }
+        guard await app.live.ensureSignedIn(), let code = app.live.signedCode else {
+            cloudState = "Entra primero en LIVE con tu tarjeta AVO."
+            return
+        }
+        cloudState = "Consultando la nube…"
+        do {
+            cloudItems = try await app.live.cloud.list(code: code)
+            cloudState = cloudItems.isEmpty ? "La nube está vacía (el Android sube los entrenamientos verificados)" : "\(cloudItems.count) entrenamientos en la nube"
+        } catch {
+            cloudState = error.localizedDescription
+            app.log.warn("nube", "Listado fallido", error)
+        }
+    }
+
+    /// Cambiar caballo/jinete de un entrenamiento de la nube: se importa si hace falta y se abre «Asignar».
+    /// Al guardar, StableModel reescribe el .avo y LiveModel lo vuelve a subir.
+    @MainActor
+    private func changeCloud(_ it: CloudItem) async {
+        let sid: String = it.sessionId.isEmpty ? String(it.fileName.dropFirst(4).dropLast(4)) : it.sessionId
+        if app.sessions.first(where: { $0.id == sid }) == nil { await downloadCloud([it]) }
+        guard let s = app.sessions.first(where: { $0.id == sid }) else {
+            cloudState = "No se pudo abrir \(sid) en este iPad (mira el registro de importación)"
+            return
+        }
+        app.stable.openAssign(s)
+    }
+
+    @MainActor
+    private func downloadCloud(_ items: [CloudItem]) async {
+        guard !items.isEmpty else { return }
+        cloudBusy = true
+        defer { cloudBusy = false }
+        let target: String = AvoFiles.join(app.paths.root, "nube")
+        var files: [String] = []
+        for (i, it) in items.enumerated() {
+            cloudState = "Descargando \(i + 1)/\(items.count): " + it.fileName
+            do { files.append(try await app.live.cloud.download(it, targetDirectory: target)) }
+            catch {
+                cloudState = error.localizedDescription
+                app.log.warn("nube", "Descarga fallida", error)
+            }
+        }
+        if files.isEmpty { return }
+        cloudState = "Validando e importando \(files.count)…"
+        await app.importFiles(files)
+        cloudState = "Importados \(files.count) de la nube"
+        refreshTick += 1
     }
 
     @MainActor
