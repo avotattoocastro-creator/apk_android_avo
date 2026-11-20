@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.17.0",
+  "version": "1.18.0",
   "fecha": "2026-11-20",
   "razas": [
     "PSI",
@@ -107,6 +107,11 @@
       "fecha": "2026-11-20",
       "titulo": "Estudio horario 15:10 UTC: árabes de llano (lactato, V4, tiempos de 1.400 m) y novedades publicadas en 2026",
       "archivo": "estudios/2026-11-20_1510_arabes_lactato_novedades_2026.md"
+    },
+    {
+      "fecha": "2026-11-20",
+      "titulo": "Estudio horario 16:10 UTC: aceleración del tronco a galope (saturación ±8 g) y cinética de la FC (mesetas de V200 y recuperación)",
+      "archivo": "estudios/2026-11-20_1610_aceleracion_tronco_cinetica_fc.md"
     }
   ],
   "fuentes": [
@@ -2051,6 +2056,113 @@
       "verificado_fecha": "2026-11-20",
       "nota": "GNSS-IMU 25 Hz; asimetría de impulso al trote 31,7→38,0 % tras carrera; 25 Hz limita la sensibilidad",
       "doi": "10.3390/ani16091361"
+    },
+    {
+      "id": "PFAU_2006_COM_GALOPE",
+      "cita": "Pfau T, Witte TH, Wilson AM 2006, J Exp Biol 209:3742",
+      "url": "https://doi.org/10.1242/jeb.02439",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "MT9 ±10 g en T4–T6, 250 Hz, 7 PSI 7–17 m/s; mínimo dorsoventral ≈ −1 g sin cambio con la velocidad; picos solo en figuras [NV]",
+      "doi": "10.1242/jeb.02439"
+    },
+    {
+      "id": "PARSONS_2008_PENDIENTE",
+      "cita": "Parsons KJ, Pfau T, Ferrari M, Wilson AM 2008, J Exp Biol 211:945",
+      "url": "https://doi.org/10.1242/jeb.006692",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "PSI (National Hunt)",
+      "verificado_fecha": "2026-11-20",
+      "nota": "MT9 ±10 g en T4–T6, 9–12 m/s; escalas de figura ±20–25 m/s² (no picos)",
+      "doi": "10.1242/jeb.006692"
+    },
+    {
+      "id": "MCSWEENEY_2026_STRIDESAFE",
+      "cita": "McSweeney et al. 2026, JAVMA 264(1)",
+      "url": "https://doi.org/10.2460/javma.25.04.0268",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "StrideSAFE lumbar ±16 g por eje, 800 Hz, 11.834 PSI; sin picos",
+      "doi": "10.2460/javma.25.04.0268"
+    },
+    {
+      "id": "WALKER_2016_SIMULADOR",
+      "cita": "Walker VA et al. 2016, J Biomech",
+      "url": "https://doi.org/10.1016/j.jbiomech.2016.08.026",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "MTw ±16 g en el sacro; solo desplazamientos",
+      "doi": "10.1016/j.jbiomech.2016.08.026"
+    },
+    {
+      "id": "FERCHER_2024_SENSORS",
+      "cita": "Fercher et al. 2024, Sensors 24:8170",
+      "url": "https://doi.org/10.3390/s24248170",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Europa",
+      "idioma": "en",
+      "raza_fuente": "caballos de deporte",
+      "verificado_fecha": "2026-11-20",
+      "nota": "Xsens ±16 g en cincha y cañas; 14,03 ± 0,93 g es impacto en caña, no tronco",
+      "doi": "10.3390/s24248170"
+    },
+    {
+      "id": "BARREY_2001_CINCHA",
+      "cita": "Barrey E et al. 2001, EVJ Suppl 33:99",
+      "url": "https://doi.org/10.1111/j.2042-3306.2001.tb05369.x",
+      "acceso": "RESUMEN",
+      "pais": "Francia",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "acelerómetro en cincha, 30 PSI, vmax media 15,26 m/s; sin picos en g en el resumen",
+      "doi": "10.1111/j.2042-3306.2001.tb05369.x"
+    },
+    {
+      "id": "EVANS_ROSE_1988_CINETICA",
+      "cita": "Evans DL, Rose RJ 1988, J Comp Physiol B 157:791",
+      "url": "https://doi.org/10.1007/BF00691010",
+      "acceso": "AGREGADOR",
+      "pais": "Australia",
+      "idioma": "en",
+      "raza_fuente": "trotón (Standardbred)",
+      "verificado_fecha": "2026-11-20",
+      "nota": "deriva de FC a carga constante 5 min (188→172 al 50 %, 204→221 al 100 %); reseña automática, verificar",
+      "doi": "10.1007/BF00691010"
+    },
+    {
+      "id": "RUGH_1992_PONIS",
+      "cita": "Rugh KS et al. 1992, Biomed Sci Instrum 28:151",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Rugh+1992+Biomed+Sci+Instrum+heart+rate+recovery+ponies",
+      "acceso": "AGREGADOR",
+      "pais": "EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "ponis",
+      "verificado_fecha": "2026-11-20",
+      "nota": "recuperación biexponencial τ 15 ± 2 s y 455 ± 78 s; reseña automática, verificar"
+    },
+    {
+      "id": "LINDNER_2020_ARABES_CINTA",
+      "cita": "Lindner A et al. 2020, Animals 10:120",
+      "url": "https://doi.org/10.3390/ani10010120",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Alemania",
+      "idioma": "en",
+      "raza_fuente": "árabe (no de carreras)",
+      "verificado_fecha": "2026-11-20",
+      "nota": "FC de recuperación a 1/5/15/30 min tras 10 min a 5 y 7 m/s en cinta al 3 %",
+      "doi": "10.3390/ani10010120"
     }
   ],
   "parametros": [
@@ -2414,10 +2526,12 @@
       "evidencia": "I (VO2 con retraso ≈20 s y τ 10–21 s, Langsetmo 1997; últimos 15 s en cinta, KER)",
       "fuentes": [
         "LANGSETMO_1997",
-        "PRINCE_KER"
+        "PRINCE_KER",
+        "MUKAI_2007_JES_CARRERA",
+        "EVANS_ROSE_1988_CINETICA"
       ],
       "estado": "PENDIENTE",
-      "nota": "no hay constante de tiempo de la FC publicada en PSI de campo"
+      "nota": "no hay constante de tiempo de la FC publicada en PSI de campo; KB 1.18.0: coherente con FC de carrera al 95 % en 12,4 s (Mukai 2007 [E-r]) y deriva sobre el umbral (Evans & Rose 1988 [E-r²]); propuesta CF1"
     },
     {
       "id": "recuperacion_fc_ventanas_min",
@@ -2769,6 +2883,49 @@
       ],
       "estado": "CONTEXTO",
       "nota": "Calculada de tiempos [E] de 8 árabes en Turquía; solo plausibilidad de velocidad media, no objetivo (KB 1.17.0)"
+    },
+    {
+      "id": "rango_acelerometro_tronco_referencia_g",
+      "valor": {
+        "min": 10,
+        "max": 16
+      },
+      "evidencia": "E",
+      "fuentes": [
+        "PFAU_2006_COM_GALOPE",
+        "PARSONS_2008_PENDIENTE",
+        "MCSWEENEY_2026_STRIDESAFE",
+        "WALKER_2016_SIMULADOR"
+      ],
+      "estado": "CONTEXTO",
+      "nota": "rango elegido por los grupos de referencia en tronco/sudadero; no hay pico del tronco publicado en g a 16–18 m/s (KB 1.18.0)"
+    },
+    {
+      "id": "aceleracion_tronco_galope_pico_g_estimado",
+      "valor": {
+        "min": 2.5,
+        "max": 3.5
+      },
+      "evidencia": "I (escalas ±2–2,5 g de Parsons 2008 hasta 12 m/s; máximo dorsoventral sin aumento hasta 17 m/s, Pfau 2006 [E])",
+      "fuentes": [
+        "PARSONS_2008_PENDIENTE",
+        "PFAU_2006_COM_GALOPE"
+      ],
+      "estado": "CONTEXTO",
+      "nota": "solo movimiento del cuerpo < 50 Hz; transitorios de montaje [NV]; validar con el contador de saturación en campo"
+    },
+    {
+      "id": "fc_recuperacion_tau_s_ponis",
+      "valor": {
+        "rapida": 15,
+        "lenta": 455
+      },
+      "evidencia": "E-r² (reseña automática)",
+      "fuentes": [
+        "RUGH_1992_PONIS"
+      ],
+      "estado": "CONTEXTO",
+      "nota": "ponis en cinta; no usar como referencia de PSI; τ de PSI (Hada 2007) [NV]"
     }
   ],
   "reglas": [
@@ -3004,14 +3161,16 @@
     "Planificador semanal por restricciones (capa 2) con P1–P6 del estudio extra 3 (práctica [E], forma [I]) y explicación con confianza (capa 3)",
     "Línea base separada para la playa por franja (PL1–PL6 del extra 5): orilla firme, húmeda profunda, seca profunda, transición; marea, lluvia, humedad y nota del jinete; comparables de A7/A8/A9 por franja (Pfau 2024: el suelo cambia la zancada hasta 0,186 m); KB 1.14.0: sin cifras absolutas por franja en texto completo; anotar humedad volumétrica (sonda tipo ML3) si existe [I]",
     "Regla combinada A1+A2 de Verheyen cuando se lea el texto completo",
-    "Contador de muestras saturadas de la cincha en el análisis (si el firmware lo envía)",
+    "Contador de muestras saturadas de la cincha en el análisis (si el firmware lo envía); KB 1.18.0: umbral |a| ≥ 7,9 g por eje, invalidar picos del tramo si > 0,1 % en galope [I]; en la cincha BETA (LSM6DSV16X) usar ±16 g como StrideSAFE/MTw (estudio 20/11 16:10)",
     "A1/A2 de Verheyen: el resumen da un umbral CONJUNTO (> 44 km de canter Y > 6 km de galope en 30 d) y galope acumulado protector en añojos; con el texto completo, decidir si A2 por separado se rebaja a INFO o se sustituye por la regla combinada (KB 1.9.0)",
     "A8: añadir la velocidad del último parcial de 200 m (unidad de Wong 2023, HR 1,18 por 0,1 m/s) junto a la de 600 m, y documentar el umbral como diseño (KB 1.9.0); KB 1.14.0: mostrarlo solo junto a su dispersión propia (DE de las comparables), nunca como umbral fijo: el ruido entre carreras es ≈ 0,66 m/s [I]",
     "Planificador P7 (estudio 20/11 11:10): ventana de reincorporación de 21 d (prudente 30 d) tras ≥ 60 d sin trabajo rápido, sin dos trabajos rápidos seguidos ni picos de canter; evidencia Carrier 1998 y Choi 2026 solo por resumen; implementar con el planificador (capa 2)",
     "Comparables por temperatura y peso (estudio 20/11 13:12, KB 1.15.0): campos de temperatura, humedad/WBGT, jinete y peso cargado en Session; A9 y recuperación solo con |ΔT| ≤ 5 °C y marca «no comparable por calor» (WBGT ≥ 28 °C); A7/A8 con |Δpeso| ≤ 3 kg y mismo jinete preferente; todo [I], sin coeficiente de corrección hasta calibrarlo con datos propios",
     "VC1–VC4 (estudio 20/11 14:10, KB 1.16.0): regla combinada Verheyen (canter > 44 km Y galope > 6 km en 30 d) como LIMITAR; A1 aislada solo AVISO; A2 aislada a INFO; base: resumen [E-r] + 3 secundarios en texto completo; OR [NV]; cambia severidades de alertas existentes, implementar con aprobación del usuario",
     "VT1–VT3 (estudio 20/11 14:10): TE por defecto de V200 del 3 % marcado «no validado» hasta TE propio (≥ 3 pruebas); aviso de posible artefacto si |ΔV200| > 5 % en ≤ 31 d; V200 de árabes (Piccione 2004) solo como contexto",
-    "NV1 (estudio 20/11 15:10, KB 1.17.0): subir severidad de A7/A8 solo con persistencia en ≥ 3 sesiones comparables (Hall 2026 StrideSAFE [E-r]: VPP 0,08–0,09 de una carrera frente a 0,74 con 3 salidas seguidas); [I], sin implementar"
+    "NV1 (estudio 20/11 15:10, KB 1.17.0): subir severidad de A7/A8 solo con persistencia en ≥ 3 sesiones comparables (Hall 2026 StrideSAFE [E-r]: VPP 0,08–0,09 de una carrera frente a 0,74 con 3 salidas seguidas); [I], sin implementar",
+    "CF1 (estudio 20/11 16:10, KB 1.18.0): en mesetas cerca del galope de trabajo o tras un salto grande de velocidad, descartar 30 s y exigir meseta ≥ 45–60 s para la V200 (τ del VO₂ 10→21 s sobre el umbral, Langsetmo 1997 [E-r]; deriva 204→221 lpm, Evans & Rose 1988 [E-r²]); [I], sin implementar hasta leer las fuentes completas",
+    "CF2 (estudio 20/11 16:10): τ de recuperación de la FC solo como tendencia del propio caballo (exponencial sobre 1–10 min sin el primer minuto); nunca con valores de referencia (τ de PSI [NV]; solo ponis, Rugh 1992); velocidad de recuperación como covariable"
   ],
   "cola_investigacion": [
     "Texto completo de Verheyen 2006 (Bone, DOI 10.1016/j.bone.2006.05.025): ORs, cortes, límite inferior del canter, ventana de 60 d",
@@ -3075,7 +3234,10 @@
     "Dąbrowska 2026 (BMC Vet Res 10.1186/s12917-026-06055-w) tabla S4 y PMC12866905 (estrés oxidativo, mismo grupo) desde un navegador: lactato absoluto de árabes en galope y carrera (20/11 15:10)",
     "Anwar 2026 publicado en RSOS 13(10):260818 (royalsocietypublishing.org sin acceso en la sesión): comparar tablas con el preprint arXiv 2603.22680 (20/11 15:10)",
     "Hall 2026 (JAVMA 10.2460/javma.25.08.0556) y Espil 2026 (JVDI 10.1177/10406387261462107) en texto completo: recuentos y OR; Li 2026 (EVJ 10.1002/evj.70360) contenido (20/11 15:10)",
-    "FC máxima en galope o carrera de árabes de llano y búsqueda en francés (AFAC, pur-sang arabe) y del Golfo/Magreb: no hallado (20/11 15:10)"
+    "FC máxima en galope o carrera de árabes de llano y búsqueda en francés (AFAC, pur-sang arabe) y del Golfo/Magreb: no hallado (20/11 15:10)",
+    "Pfau 2006 (JEB 209:3742) figuras 8C y 9C: leer la mediana y el IQR del máximo dorsoventral y craneocaudal en g por velocidad; Barrey 2001 completo (picos en cincha); ficha de rango del Equimetre (20/11 16:10)",
+    "Hada 2007 (EVJ Suppl 36:141) completo: valores de τ de recuperación en PSI; Rugh 1992, Evans & Rose 1988 y Rose 1990 en la fuente (solo reseñas automáticas) (20/11 16:10)",
+    "Cualquier constante de tiempo de SUBIDA de la FC medida en caballos (no VO₂) y el error típico de la FC a 2, 5 y 10 min en PSI: no hallados (20/11 16:10)"
   ],
   "historial": [
     {
@@ -3167,6 +3329,11 @@
       "version": "1.17.0",
       "fecha": "2026-11-20",
       "cambio": "Estudio horario 15:10: primeros datos de árabes de llano (lactato post galope 1.200 m ≈2–22 mmol/L, Kędzierski 2007 [E]; 1.400 m en ≈13–14 m/s, Paksoy 2025 [E/I]; V200/V4 en cinta [E]); novedades 2026 (Anwar RSOS, Espil, Hall StrideSAFE, Legg, Eamon); 9 fuentes, 2 parámetros de contexto, pendiente NV1, 4 entradas de cola; sin cambios de lógica; motor 2.0.0-dev19"
+    },
+    {
+      "version": "1.18.0",
+      "fecha": "2026-11-20",
+      "cambio": "Estudio horario 16:10: sin pico del tronco publicado en g a 16–18 m/s; referencias usan ±10–16 g; ±8 g estimado suficiente para el cuerpo [I] y contador de saturación precisado; cinética de FC: descarte de 20–30 s coherente, propuesta de meseta ≥ 45–60 s (CF1), τ de recuperación solo propia (CF2); Fraipont es resistencia, no trotones; 9 fuentes, 3 parámetros de contexto, 2 pendientes, 3 de cola; sin cambios de lógica; motor 2.0.0-dev20"
     }
   ]
 }

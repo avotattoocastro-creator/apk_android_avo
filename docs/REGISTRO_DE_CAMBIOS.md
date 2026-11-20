@@ -24,6 +24,28 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Motor 2.0.0-dev20 / KB-1 1.18.0 — Estudio horario 16:10: aceleración del tronco a galope y cinética de la FC
+**Autor:** Claude (tarea programada, estudio horario) · **Rama:** `claude/kb-estudio-2026-11-20-1610` (sale de
+`claude/kb-estudio-2026-11-20-1510`, PR #106) · **CI:** ver PR
+**Qué cambia:** estudio `equine-intelligence/knowledge/estudios/2026-11-20_1610_aceleracion_tronco_cinetica_fc.md`.
+- No hay ningún pico de aceleración del tronco publicado en g a 16–18 m/s. Los sensores de referencia usan ±10–16 g
+  (Pfau 2006 y Parsons 2008 [E], StrideSAFE y MTw [E]). Se estima [I] que ±8 g basta para el movimiento del cuerpo.
+- Se precisa el pendiente del contador de saturación de la cincha (|a| ≥ 7,9 g, > 0,1 % en galope [I]) y se propone
+  ±16 g para la cincha BETA. No se toca el firmware.
+- Cinética de la FC: el descarte de 20–30 s en las mesetas de V200 es coherente (Mukai 2007 y Langsetmo 1997 [E-r]).
+  Se proponen CF1 (meseta ≥ 45–60 s cerca del galope de trabajo) y CF2 (τ de recuperación solo propia del caballo),
+  ambos [I] y sin implementar.
+- Fraipont 2011/2012 es de resistencia, no de trotones.
+- KB: 9 fuentes, 3 parámetros de contexto, 2 pendientes y 3 entradas de cola.
+
+**Por qué:** temas abiertos de la cola y de `pendiente_motor` no cubiertos por los estudios de hoy.
+**Archivos:** `base_cientifica.json`, el estudio, `knowledge.h`, `types.h`, `tests/test_knowledge.cpp`, ficha 14,
+tabla de estado, `README.md` y este registro.
+**No se ha tocado:** lógica, reglas, umbrales, firmware, workflows, firmas ni contratos binarios.
+**Validación:** pruebas locales (ASan/UBSan) y fixtures; CI en el PR · NO VERIFICADO con caballos reales.
+
+---
+
 ## 2026-11-20 — Android 2.13-qr-dev1 · iPad — Entrar en el iPad escaneando un QR de la tarjeta
 **Autor:** Claude (petición del usuario, 20/11 15:22: «botón para cargar el archivo de licencia» en LIVE; elegida la
 opción QR) · **Rama:** `claude/qr-tarjeta` · **CI:** ver PR

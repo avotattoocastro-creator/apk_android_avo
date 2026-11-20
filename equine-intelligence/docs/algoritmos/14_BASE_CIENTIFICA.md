@@ -243,6 +243,16 @@ Detalle: `knowledge/estudios/2026-11-20_1410_verheyen_combinada_v200_te_japon.md
   A7/A8, sin implementar.
 Detalle: `knowledge/estudios/2026-11-20_1510_arabes_lactato_novedades_2026.md`.
 
+**Estudio horario 20/11 16:10 (KB-1 1.18.0, motor 2.0.0-dev20, sin cambios de lógica).**
+- **Aceleración del tronco:** no hay ningún pico publicado en g a 16–18 m/s. Las referencias usan ±10–16 g en la cruz,
+  el sacro o el sudadero (Pfau 2006 y Parsons 2008 [E]). Se estima ≈ 2,5–3,5 g en el cuerpo [I]: ±8 g bastaría, pero
+  los golpes del montaje son [NV]. Contador de saturación: |a| ≥ 7,9 g e invalidar el tramo si > 0,1 % en galope [I].
+  En la cincha BETA, ±16 g.
+- **Cinética de la FC:** el descarte de 20–30 s en las mesetas de V200 es coherente (Mukai 2007 y Langsetmo 1997
+  [E-r]). Se proponen CF1 (meseta ≥ 45–60 s cerca del galope de trabajo) y CF2 (τ de recuperación solo como tendencia
+  propia; la de PSI de Hada 2007 es [NV] y solo hay τ de ponis), ambos [I].
+Detalle: `knowledge/estudios/2026-11-20_1610_aceleracion_tronco_cinetica_fc.md`.
+
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se
    guarda en `knowledge/estudios/AAAA-MM-DD_<tema>.md` con fuentes y etiquetas [E]/[I]/[NV].
