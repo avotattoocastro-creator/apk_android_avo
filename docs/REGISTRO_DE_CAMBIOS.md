@@ -27,7 +27,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ## 2026-11-20 — Espalda PROTOTIPO 3.14.4 · Android 2.15-gnss-dev1 — Mensajes de calidad GNSS que no llegan, cadena RTCM por etapas
 **Autor:** Claude (encargo del usuario, 20/11 21:07: «Mensajes de calidad activados, pero no llegan», 64,9 cm H, sin RTK
 FIX, velocidad ±0,52 km/h) · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` · **Commits:** `3ed96d0` (espalda), `d502568` (Android), docs en el último commit del PR
-**CI:** espalda `build-back-v380.yml` run 44810109245 ✅ (52 casos / 519 comprobaciones; imagen ESP32-S3 927 984 B, 27 % de app0) · Android `build-android.yml` run 44810606166 (lanzado a mano en la rama, ver PR)
+**CI:** espalda `build-back-v380.yml` run 44810109245 ✅ (52 casos / 519 comprobaciones; imagen ESP32-S3 927 984 B, 27 % de app0) · espalda tras traer `develop` run 44811443358 ✅ · Android `build-android.yml` run 44811442078 ✅ (lanzado a mano en la rama; core 181 pruebas, 0 fallos = 174 de `develop` + 7 de `GnssChainTest`; pruebas en emulador ✅; APK firmada con la clave estable). El intento 44810606166 falló solo al descargar `com.google.zxing:core:3.5.3` (dependencia ya existente).
 **Informe completo:** `firmware/back/V3_8_0/docs/AUDITORIA_CALIDAD_GNSS_3_14_4.md`.
 **Diagnóstico:**
 - NAV-PVT llegaba, pero NAV-SAT y NAV-SIG no: los satélites «18 / 26» de la app eran de un NAV-SAT antiguo, porque NAV-PVT daba 24.
@@ -64,7 +64,7 @@ FIX, velocidad ±0,52 km/h) · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` 
 - firmas e `Info.plist`.
 - Workflow `build-back-v380.yml`: solo nombre de versión, marcas de la imagen y la rama de esta tarea en `branches`.
 - Al fusionar, `build-avo-ipad.yml` se lanzará porque cambia `lib/avo_core` (sin cambios para el iPad).
-**Validación:** IMPLEMENTADO · CI (espalda ✅; Android ver PR) · **NO VERIFICADO** en hardware.
+**Validación:** IMPLEMENTADO · CI ✅ (espalda y Android) · **NO VERIFICADO** en hardware. PR #113.
 **Pendiente:** procedimiento del §8 del informe:
 - `FIFO desbordada` = 0 y edades de NAV-SAT/SIG ≤ 1,5 s durante 10 min;
 - cadena RTCM en verde con NTRIP;
