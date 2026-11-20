@@ -109,7 +109,7 @@
             "riderName": { ".validate": "newData.isString() && newData.val().length <= 120" },
             "breed": { ".validate": "newData.isString() && newData.val().length <= 40" },
             "startMs": { ".validate": "newData.isNumber() && newData.val() <= now + 600000" },
-            "state": { ".validate": "newData.isString() && newData.val().matches(/^(REC|PAUSE|END)$/)" },
+            "state": { ".validate": "newData.isString() && newData.val().matches(/^(IDLE|REC|PAUSE|END)$/)" },
             "updatedMs": { ".validate": "newData.isNumber() && newData.val() <= now + 600000" },
             "expiresMs": { ".validate": "newData.isNumber() && newData.val() <= now + 172800000" },
             "$other": { ".validate": false }

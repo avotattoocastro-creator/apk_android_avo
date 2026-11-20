@@ -95,6 +95,7 @@ struct LiveMeta: Equatable {
     var isEnded: Bool { state == "END" }
     var stateText: String {
         switch state {
+        case "IDLE": return "EN ESPERA"
         case "REC": return "GRABANDO"
         case "PAUSE": return "EN PAUSA"
         case "END": return "TERMINADA"

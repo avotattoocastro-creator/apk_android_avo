@@ -120,6 +120,7 @@ private struct LiveDashboard: View {
     var body: some View {
         VStack(spacing: 8) {
             LiveTopBar(model: model)
+            if model.source == .server && model.activeSessions.count > 1 { LiveHorsePicker(model: model) }
             LiveDataStrip(model: model)
             GeometryReader { geo in
                 VStack(spacing: 8) {
@@ -140,6 +141,34 @@ private struct LiveDashboard: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
+    }
+}
+
+/// Selector de caballo cuando hay más de un directo a la vez (boceto del entrenador 20/11/2026).
+private struct LiveHorsePicker: View {
+    let model: LiveModel
+
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(model.activeSessions) { (r: LiveSessionRef) in
+                    let on: Bool = model.current?.id == r.id
+                    Button { model.open(r) } label: {
+                        HStack(spacing: 6) {
+                            Circle().fill(r.meta.state == "REC" ? Avo.red : (r.meta.state == "PAUSE" ? Avo.warn : Avo.ok)).frame(width: 8, height: 8)
+                            Text(r.meta.horseName.isEmpty ? r.sid : r.meta.horseName).font(.subheadline.weight(.semibold)).lineLimit(1)
+                            if !r.meta.riderName.isEmpty { Text("· \(r.meta.riderName)").font(.caption).foregroundStyle(Avo.textDim).lineLimit(1) }
+                            Text(r.meta.stateText).font(.caption2.weight(.bold)).foregroundStyle(Avo.textDim)
+                        }
+                        .padding(.horizontal, 12).padding(.vertical, 7)
+                        .foregroundStyle(Avo.text)
+                        .background(on ? Avo.red.opacity(0.16) : Avo.surface, in: Capsule())
+                        .overlay(Capsule().stroke(on ? Avo.red : Avo.line, lineWidth: on ? 1.5 : 1))
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+        }
     }
 }
 
