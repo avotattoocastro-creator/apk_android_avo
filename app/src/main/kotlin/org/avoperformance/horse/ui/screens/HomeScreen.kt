@@ -29,6 +29,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,6 +42,10 @@ import org.avoperformance.horse.ble.LinkState
 import org.avoperformance.horse.core.ntrip.NtripState
 import org.avoperformance.horse.core.telemetry.RtkDeriver
 import org.avoperformance.horse.core.telemetry.RtcmUseTracker
+import org.avoperformance.horse.core.telemetry.GnssChain
+import org.avoperformance.horse.core.telemetry.GnssChainReport
+import org.avoperformance.horse.core.telemetry.GnssDiagSnapshot
+import org.avoperformance.horse.core.telemetry.StageState
 import org.avoperformance.horse.service.AvoLinkService
 import org.avoperformance.horse.ui.components.AvoCard
 import org.avoperformance.horse.ui.components.Fmt
@@ -68,7 +74,8 @@ private fun StatusChip(label: String, value: String, color: androidx.compose.ui.
             Spacer(Modifier.width(6.dp))
             Text(label.uppercase(), color = AvoColors.TextDim, fontSize = 10.sp, fontWeight = FontWeight.SemiBold, letterSpacing = 0.8.sp)
         }
-        Text(value, color = color, fontSize = 14.sp, fontWeight = FontWeight.Bold, maxLines = 1)
+        Text(value, color = color, fontSize = 14.sp, fontWeight = FontWeight.Bold, maxLines = 1,
+            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
     }
 }
 
@@ -110,6 +117,23 @@ fun HomeScreen(c: AppContainer, go: (String) -> Unit) {
     val rtcmTracker = remember { RtcmUseTracker() }
     LaunchedEffect(tel) { tel?.let { tt -> tt.t.v2?.let { rtcmTracker.update(it.rtcmUsedByReceiver, tt.receivedMs) } } }
     val rtcmUsedAgeMs = if (fresh) rtcmTracker.ageMs(now) else null
+    // 2.14-gnss: RTCM / UBX chain stage by stage, from the watch DIAG counters (every 5 s while this screen is open;
+    // no protocol change: DIAG_GET exists since CHEST 3.5.0).
+    var chain by remember { mutableStateOf<GnssChainReport?>(null) }
+    LaunchedEffect(link) {
+        if (link != LinkState.LISTO && link != LinkState.LISTO_SIN_AUTH) { chain = null; return@LaunchedEffect }
+        var prev: GnssDiagSnapshot? = null
+        while (true) {
+            val cl = c.watch.client
+            val m = if (cl != null) runCatching { cl.diag() }.getOrNull() else null
+            if (m != null && m.isNotEmpty()) {
+                val snap = GnssDiagSnapshot.from(m, System.currentTimeMillis(), c.ntrip.stats.value.bytesReceived, c.ntrip.path.value.sentBytes)
+                chain = GnssChain.report(prev, snap, c.ntrip.state.value is NtripState.Streaming)
+                prev = snap
+            }
+            delay(5_000)
+        }
+    }
 
     LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(vertical = 6.dp)) {
         item {
@@ -168,7 +192,7 @@ fun HomeScreen(c: AppContainer, go: (String) -> Unit) {
                 if (t?.inhibited == true) KV("Grabación", "Inhibida por el reloj (batería o SD)", AvoColors.Bad)
             }
         }
-        item { GnssQualityCard(t?.v3?.takeIf { fresh }, rtk.state, t?.v2?.rtcmUsedByReceiver) }
+        item { GnssQualityCard(t?.v3?.takeIf { fresh }, rtk.state, t?.v2?.rtcmUsedByReceiver, chain, ntripState is NtripState.Streaming) }
         item {
             AvoCard("Correcciones NTRIP", onClick = { go("ntrip") }, trailing = { StatusPill(if (ntripState is NtripState.Streaming) "Recibiendo" else ntripState.texto.take(22), ntripColor) }) {
                 val activeMount by c.ntrip.activeMount.collectAsStateWithLifecycle()
@@ -195,6 +219,10 @@ fun HomeScreen(c: AppContainer, go: (String) -> Unit) {
     }
 }
 
+private fun stageColor(s: StageState) = when (s) {
+    StageState.OK -> AvoColors.Ok; StageState.PARADO -> AvoColors.Warn; StageState.ERROR -> AvoColors.Bad; StageState.SIN_DATOS -> AvoColors.Unknown
+}
+
 fun fmtAcc(m: Double): String = if (m < 1) String.format(Locale.forLanguageTag("es-ES"), "%.1f cm", m * 100) else String.format(Locale.forLanguageTag("es-ES"), "%.2f m", m)
 
 
@@ -203,11 +231,24 @@ fun fmtAcc(m: Double): String = if (m < 1) String.format(Locale.forLanguageTag("
  * Diagnosis only: these values tell whether RTK can work and why not, they do not change the position.
  */
 @Composable
-private fun GnssQualityCard(q: org.avoperformance.horse.core.ble.TelemetryV3?, state: org.avoperformance.horse.core.telemetry.RtkState, rtcmUsed: Long?) {
+private fun GnssQualityCard(
+    q: org.avoperformance.horse.core.ble.TelemetryV3?, state: org.avoperformance.horse.core.telemetry.RtkState, rtcmUsed: Long?,
+    chain: GnssChainReport?, ntripStreaming: Boolean,
+) {
     val es = Locale.forLanguageTag("es-ES")
     AvoCard("Calidad GNSS") {
+        // 2.14-gnss: receiver state and the solution type first, always (also without the quality summary).
+        KV("Solución GNSS", state.texto, AvoColors.rtk(state))
+        KV("NTRIP", if (ntripStreaming) "recibiendo (no implica RTK)" else "sin datos", if (ntripStreaming) AvoColors.Ok else AvoColors.Unknown)
+        chain?.let { ch ->
+            KV(ch.ubx.name, ch.ubx.value, stageColor(ch.ubx.state))
+            Text(ch.rtcmVerdict, color = stageColor(ch.rtcmVerdictState), fontSize = 13.sp, fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(vertical = 4.dp))
+            ch.rtcm.forEach { st -> KV("· ${st.name}", st.value, stageColor(st.state)) }
+            Spacer(Modifier.height(6.dp))
+        }
         if (q == null || !q.backHasQuality) {
-            Text("Necesita espalda 3.9.0 y pecho 3.7.6 o posteriores.", color = AvoColors.TextDim, fontSize = 13.sp)
+            Text("Resumen de señales: necesita espalda 3.9.0 y pecho 3.7.6 o posteriores.", color = AvoColors.TextDim, fontSize = 13.sp)
             return@AvoCard
         }
         val diag = when {
@@ -245,9 +286,15 @@ private fun GnssQualityCard(q: org.avoperformance.horse.core.ble.TelemetryV3?, s
                 5 -> KV("Mensajes de calidad", "solo NAV-SIG (sin NAV-SAT)", AvoColors.Warn)
                 6 -> KV("Mensajes de calidad", "rechazados; reintentando", AvoColors.Warn)
             }
-            if (q.svTracked > 0) KV("Satélites usados / seguidos", "${q.svUsed} / ${q.svTracked}")
+            // 2.14-gnss: no satellite counts here. They belonged to the last summary that arrived, not to now (field
+            // 20/11/2026: "18 / 26" next to 24 satellites in NAV-PVT). BACK 3.14.4 already sends 0 when they are old.
         }
-        KV("Precisión de la velocidad", if (q.sAccMmS > 0) String.format(es, "%.2f km/h", q.sAccMmS * 0.0036) else null)
+        // 2.14-gnss: NAV-PVT sAcc (Doppler) against the engineering target 0.20 km/h; the value is not filtered.
+        val speedMet = GnssChain.speedTargetMet(q.sAccMmS)
+        val speedText = if (q.sAccMmS > 0) {
+            String.format(es, "%.2f km/h", q.sAccMmS * 0.0036) + (if (speedMet) " (objetivo < 0,20 cumplido)" else " (objetivo < 0,20)")
+        } else null
+        KV("Precisión de la velocidad", speedText, when { q.sAccMmS <= 0 -> AvoColors.Text; speedMet -> AvoColors.Ok; else -> AvoColors.Warn })
         KV("PDOP", if (q.pdopE2 > 0) String.format(es, "%.2f", q.pdopE2 / 100.0) else null)
         KV("Primer RTK FIX", q.firstFixS?.let { "a los ${it / 60} min ${it % 60} s del arranque" } ?: "todavía no")
         KV("Tiempo en FIX / FLOAT", "${Fmt.duration(q.fixedMs)} / ${Fmt.duration(q.floatMs)}")
