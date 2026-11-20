@@ -36,20 +36,19 @@ class CloudSyncTest {
     }
 
     @Test fun ganaLaAsignacionMasReciente() {
-        val A = CloudSync.Action
         fun r(fp: String?, ms: Long, h: String? = "LEZAMA", rd: String? = "Ana") = CloudSync.Remote(fp, ms, "H1", h, "R1", rd)
         // sin copia en la nube: se sube si está completo
-        assertEquals(A.UPLOAD, CloudSync.decide("f1", 0, "LEZAMA", "Ana", null))
-        assertEquals(A.NOTHING, CloudSync.decide(null, 0, null, null, null))
+        assertEquals(CloudSync.Action.UPLOAD, CloudSync.decide("f1", 0, "LEZAMA", "Ana", null))
+        assertEquals(CloudSync.Action.NOTHING, CloudSync.decide(null, 0, null, null, null))
         // misma huella: nada
-        assertEquals(A.NOTHING, CloudSync.decide("f1", 10, "LEZAMA", "Ana", r("f1", 10)))
+        assertEquals(CloudSync.Action.NOTHING, CloudSync.decide("f1", 10, "LEZAMA", "Ana", r("f1", 10)))
         // el iPad la cambió después: se aplica aquí, no se pisa
-        assertEquals(A.APPLY_REMOTE, CloudSync.decide("f1", 10, "OTRO", "Ana", r("f2", 20)))
+        assertEquals(CloudSync.Action.APPLY_REMOTE, CloudSync.decide("f1", 10, "OTRO", "Ana", r("f2", 20)))
         // aquí se cambió después: se sube
-        assertEquals(A.UPLOAD, CloudSync.decide("f3", 30, "OTRO", "Eva", r("f2", 20)))
+        assertEquals(CloudSync.Action.UPLOAD, CloudSync.decide("f3", 30, "OTRO", "Eva", r("f2", 20)))
         // aquí no tiene caballo: se toma el de la nube
-        assertEquals(A.APPLY_REMOTE, CloudSync.decide(null, 0, null, null, r("f2", 0)))
+        assertEquals(CloudSync.Action.APPLY_REMOTE, CloudSync.decide(null, 0, null, null, r("f2", 0)))
         // la nube es más nueva pero dice lo mismo (huella de otra app): nada
-        assertEquals(A.NOTHING, CloudSync.decide("f1", 10, "lezama", "ana", r("fX", 20)))
+        assertEquals(CloudSync.Action.NOTHING, CloudSync.decide("f1", 10, "lezama", "ana", r("fX", 20)))
     }
 }
