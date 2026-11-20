@@ -209,6 +209,17 @@ Detalle: `knowledge/estudios/2026-11-20_1110_regreso_layup_sensores_2025_2026.md
     No cambia el umbral.
 Detalle: `knowledge/estudios/2026-11-20_1210_playa_franjas_parcial_final_200m.md`.
 
+**Estudio horario 20/11 13:12 (KB-1 1.15.0, motor 2.0.0-dev17, sin cambios de lógica).**
+- **Temperatura y humedad:** no hay coeficiente publicado en lpm/°C. El calor húmedo sube la FC submáxima (≈ +12 lpm
+  a 7 m/s, Hargreaves 1999 [E-r]) sin cambiar la FC de pico (Ebisuda 2023 [E]), así que la V200 baja en calor sin
+  pérdida de forma. Se propone TC1–TC5 [I]: comparables de A9 con |ΔT| ≤ 5 °C, «no comparable por calor» con
+  WBGT ≥ 28 °C y transición de aclimatación de 10–14 d.
+- **Peso cargado:** no hay coeficiente válido de peso a velocidad. En carrera, el peso está confundido con la calidad
+  (Bugislaus 2004 [E]) y casi no cambia la zancada (Morrice-West [E]). Se propone PC1–PC4 [I]: comparables de A7/A8
+  con |Δpeso| ≤ 3 kg y mismo jinete preferente, sin corrección.
+- Árabes de carreras en llano: sin datos en ninguno de los dos temas.
+Detalle: `knowledge/estudios/2026-11-20_1312_temperatura_peso_comparables.md`.
+
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se
    guarda en `knowledge/estudios/AAAA-MM-DD_<tema>.md` con fuentes y etiquetas [E]/[I]/[NV].

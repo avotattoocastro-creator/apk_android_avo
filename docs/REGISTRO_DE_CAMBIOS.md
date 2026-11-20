@@ -24,6 +24,29 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Motor 2.0.0-dev17 / KB-1 1.15.0 — Estudio horario 13:12: temperatura y peso cargado como criterios de comparables
+**Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-1312` (encadenada desde `claude/kb-estudio-2026-11-20-1210`, PR #101, sin fusionar) · **CI:** ver PR
+**Qué cambia:**
+- Estudio nuevo: `equine-intelligence/knowledge/estudios/2026-11-20_1312_temperatura_peso_comparables.md`.
+- `base_cientifica.json` 1.15.0:
+  - 19 fuentes nuevas (temperatura: Hargreaves 1999, Schrurs 2024, Ebisuda 2023, Ohmura 2025, Nomura 2019, Geor
+    1995/1996, Marlin 1996, Art 1995, Arfuso 2025; peso: Lee & Park 2011, Bugislaus 2004, Takahashi 2015, Schrurs
+    2022, Pfau 2009, Christensen 2020, Stefánsdóttir 2017, Ekiz 2005 y Sobczyńska 2006 en árabes).
+  - 2 parámetros PROPUESTOS [I]: `temperatura_comparables` (|ΔT| ≤ 5 °C, «no comparable» con WBGT ≥ 28 °C) y
+    `peso_cargado_comparables` (|Δpeso| ≤ 3 kg, aviso informativo con CW/BW > 13 %).
+  - 1 pendiente de motor y 3 entradas de cola.
+- `KNOWLEDGE_VERSION` 1.14.0 → 1.15.0 y `ENGINE_VERSION` 2.0.0-dev16 → 2.0.0-dev17, también en
+  `tests/test_knowledge.cpp`.
+- Ficha 14, tabla de estado y README actualizados.
+
+**Por qué:** las líneas base y los comparables de A7, A8 y A9 no tenían en cuenta el calor ni el peso cargado. Ninguna
+fuente publica un coeficiente de corrección, así que se proponen como criterios de comparables, sin implementar.
+**No se ha tocado:** lógica, reglas, umbrales, firmware, contratos binarios, workflows, firmas, `Info.plist` ni
+TestFlight.
+**Validación:** probado en local (ASan/UBSan, Release y fixtures) y en CI (ver PR). **NO VERIFICADO** con caballos reales.
+**Pendiente:** campos de temperatura, jinete y peso en `Session`; textos completos de Hargreaves 1999, Geor 1995/1996 y
+Marlin 1996; ningún dato de árabes de llano.
+
 ## 2026-11-20 — Motor 2.0.0-dev16 / KB-1 1.14.0 — Estudio horario 12:10: playa por franjas y parcial final de 200 m (A8)
 **Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-1210` (encadenada desde `claude/kb-estudio-2026-11-20-1110`, PR #99, sin fusionar) · **CI:** ver PR
 **Qué cambia:**

@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.14.0",
+  "version": "1.15.0",
   "fecha": "2026-11-20",
   "razas": [
     "PSI",
@@ -92,6 +92,11 @@
       "fecha": "2026-11-20",
       "titulo": "Estudio horario 12:10 UTC: playa por franjas (atribución corregida) y parcial final de 200 m (ruido de A8)",
       "archivo": "estudios/2026-11-20_1210_playa_franjas_parcial_final_200m.md"
+    },
+    {
+      "fecha": "2026-11-20",
+      "titulo": "Estudio horario 13:12 UTC: temperatura ambiente y peso cargado como criterios de comparables (A7/A8/A9)",
+      "archivo": "estudios/2026-11-20_1312_temperatura_peso_comparables.md"
     }
   ],
   "fuentes": [
@@ -1615,6 +1620,215 @@
       "raza_fuente": "PSI",
       "nota": "≈ 20 m antes de meta, 2.400 m césped, 1.ª frente a 2.ª vuelta: 17,3 → 16,0 m/s, 2,34 → 2,21 zancadas/s, 7,42 → 7,25 m (P = 0,04); n NV",
       "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "HARGREAVES_1999_CALOR",
+      "cita": "Hargreaves BJ, Kronfeld DS, Naylor JR 1999, Equine Vet J 31:314-318 (temperatura y humedad en test de campo submáximo)",
+      "doi": "10.1111/j.2042-3306.1999.tb03823.x",
+      "acceso": "AGREGADOR",
+      "pais": "EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "NV",
+      "nota": "FC tras 4 min a 7,0 m/s: 135 ± 1 (julio) frente a 123 ± 1 lpm (septiembre), P < 0,0001; T y HR no vistas",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "SCHRURS_2024_FCR_TEMP",
+      "cita": "Schrurs C, Dubois G, Van Erck-Westergren E, Gardner DS 2024, Animals 14:1342",
+      "doi": "10.3390/ani14091342",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Australia",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "Recuperación de FC a 2 min: 124 (≥ 18 °C) frente a 128 lpm (≤ 5 °C), ≈ 4 ± 2 lpm; humedad sin efecto; sin coeficiente por °C",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "EBISUDA_2023_CALOR",
+      "cita": "Ebisuda Y, Mukai K, …, Ohmura H 2023, Front Vet Sci 10:1230212",
+      "doi": "10.3389/fvets.2023.1230212",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Japón (JRA)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "Cinta, WBGT 12,5 frente a 29,5 °C: FC pico 213 frente a 214 lpm (p = 0,78); lactato 13,1 frente a 17,5 mmol/L (p = 0,06)",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "OHMURA_2025_ENFRIAMIENTO",
+      "cita": "Ohmura H, Ebisuda Y, Takahashi Y, Mukai K 2025, J Equine Sci 36:19-23",
+      "doi": "10.1294/jes.36.19",
+      "acceso": "RESUMEN",
+      "pais": "Japón (JRA)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "WBGT 32–33 °C; preenfriamiento sin cambios en FC, lactato ni tiempo al agotamiento",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "NOMURA_2019_GOLPE_CALOR",
+      "cita": "Nomura M et al. 2019, J Equine Sci 30:17-23",
+      "doi": "10.1294/jes.30.17",
+      "acceso": "RESUMEN",
+      "pais": "Japón (JRA)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "975.247 participaciones; golpe de calor 0,04 % (0,086 % mayo–sept); carreras de verano con WBGT 28–33 °C",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "GEOR_1995_CALOR_HUMEDO",
+      "cita": "Geor RJ, McCutcheon LJ, Ecker GL, Lindinger MI 1995, Equine Vet J Suppl 20:125-132",
+      "doi": "10.1111/j.2042-3306.1995.tb05018.x",
+      "acceso": "AGREGADOR",
+      "pais": "Canadá",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "FC más alta solo con calor húmedo (32–34 °C, 80–85 % HR); cifras NV",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "GEOR_1996_ACLIMATACION",
+      "cita": "Geor RJ, McCutcheon LJ, Lindinger MI 1996, Equine Vet J Suppl 22:63-68",
+      "doi": "10.1111/j.2042-3306.1996.tb05033.x",
+      "acceso": "AGREGADOR",
+      "pais": "Canadá",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "Aclimatación: FC final de ejercicio menor el día 10 que el día 1 (33–35 °C, 80–85 %); cifras NV",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "MARLIN_1996_ATLANTA",
+      "cita": "Marlin DJ et al. 1996, Equine Vet J Suppl 22:70-84 (PMID 8894553)",
+      "doi": "",
+      "acceso": "AGREGADOR",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "varias",
+      "nota": "VO2 ≈ +5 % calor seco, ≈ +14 % calor húmedo; 1 de 4 terminó en calor húmedo",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "ART_1995_CALOR",
+      "cita": "Art T, Votion D, Lekeux P 1995, Equine Vet J Suppl 20:120-124",
+      "doi": "10.1111/j.2042-3306.1995.tb05017.x",
+      "acceso": "RESUMEN",
+      "pais": "Bélgica",
+      "idioma": "en",
+      "raza_fuente": "trotón",
+      "nota": "30 °C/75 %: FC elevada hasta 30 min tras el esfuerzo",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "ARFUSO_2025_THI",
+      "cita": "Arfuso F et al. 2025, Animals 15:1436",
+      "doi": "10.3390/ani15101436",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Italia",
+      "idioma": "en",
+      "raza_fuente": "trotón",
+      "nota": "Sin efecto del THI sobre la FC del que se informe; zona termoneutra citada 5–25 °C",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "LEE_PARK_2011_CWBW",
+      "cita": "Lee HK, Park KD 2011, Archivos de Zootecnia 60(231):281-286 (redalyc 49520788055)",
+      "doi": "",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Corea",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "155.656 tiempos; mejores tiempos con CW/BW ≈ 12,0–12,7 % en 1000 m; sin s/kg; «1 kg ≈ 2 longitudes» es premisa",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "BUGISLAUS_2004_PESO",
+      "cita": "Bugislaus A-E, Roehe R, Uphaus H, Kalm E 2004, Archiv für Tierzucht 47:505-516",
+      "doi": "",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Alemania",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "Peso 47–74,5 kg; dentro de caballo +0,049/kg en √puesto; entre caballos −0,020 (confusión handicap–calidad)",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "TAKAHASHI_2015_EDAD_PESO",
+      "cita": "Takahashi T 2015, J Equine Sci 26:43-48",
+      "doi": "10.1294/jes.26.43",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Japón (JRA)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "Efecto del aumento de peso con la edad (54→57 kg) sobre la velocidad media «pequeño»; sin regresión",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "SCHRURS_2022_JINETE",
+      "cita": "Schrurs C, Dubois G, Van Erck-Westergren E, Gardner DS 2022, PLoS ONE 17:e0273310",
+      "doi": "10.1371/journal.pone.0273310",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Australia y Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "Sexo del jinete sin efecto en velocidad ni zancada (7,62 ± 0,30 frente a 7,61 ± 0,28 m en galope fuerte); peso no registrado",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "PFAU_2009_CROUCH",
+      "cita": "Pfau T, Spence A, Starke S, Ferrari M, Wilson A 2009, Science 325:289",
+      "doi": "10.1126/science.1174605",
+      "acceso": "AGREGADOR",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "Postura agachada del jockey asociada a tiempos 5–7 % mejores",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "CHRISTENSEN_2020_PESO",
+      "cita": "Christensen JW, Bathellier S, Rhodin M, Palme R, Uldahl M 2020, Animals 10:95",
+      "doi": "10.3390/ani10010095",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Dinamarca",
+      "idioma": "en",
+      "raza_fuente": "silla (I-raza)",
+      "nota": "Relación jinete:caballo 15,3–18,5 %: FC sin cambio a baja intensidad (p = 0,72)",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "STEFANSDOTTIR_2017_PESO",
+      "cita": "Stefánsdóttir GJ et al. 2017, Animal (PMC5561439)",
+      "doi": "",
+      "acceso": "RESUMEN",
+      "pais": "Islandia/Suecia",
+      "idioma": "en",
+      "raza_fuente": "islandés (I-raza)",
+      "nota": "Relación 20–35 %: FC y lactato suben linealmente; paso a anaerobio hacia 22,7 % (17,0–27,5 %); PMC bloqueado",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "EKIZ_2005_ARABES",
+      "cita": "Ekiz B, Koçak Ö, Demir H 2005, Turk J Vet Anim Sci 29:543-549",
+      "doi": "",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Turquía",
+      "idioma": "en",
+      "raza_fuente": "árabe",
+      "nota": "65.027 registros; peso cargado fuera del modelo",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "SOBCZYNSKA_2006_ARABES",
+      "cita": "Sobczyńska M 2006, Czech J Anim Sci 51:523-528",
+      "doi": "",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Polonia",
+      "idioma": "en",
+      "raza_fuente": "árabe y PSI",
+      "nota": "Peso cargado como covariable sin coeficiente publicado; desenlace = puesto",
+      "verificado_fecha": "2026-11-20"
     }
   ],
   "parametros": [
@@ -2230,6 +2444,50 @@
       ],
       "estado": "INFORMATIVO",
       "nota": "KB 1.14.0: DE derivada (√0,43) de la varianza residual de Legg 2025, no publicada como tal; muy superior al umbral de A8 (0,20 m/s): A8 debe leer tendencias (2 de 3 o CUSUM), nunca una sesión aislada; en trabajo propio se estima por caballo"
+    },
+    {
+      "id": "temperatura_comparables",
+      "valor": {
+        "delta_T_max_C": 5,
+        "delta_WBGT_max_C": 4,
+        "no_comparable_WBGT_C": 28,
+        "no_comparable_T_C_con_HR70": 30,
+        "transicion_aclimatacion_d": [
+          10,
+          14
+        ]
+      },
+      "evidencia": "I",
+      "fuentes": [
+        "HARGREAVES_1999_CALOR",
+        "SCHRURS_2024_FCR_TEMP",
+        "EBISUDA_2023_CALOR",
+        "GEOR_1995_CALOR_HUMEDO",
+        "GEOR_1996_ACLIMATACION",
+        "NOMURA_2019_GOLPE_CALOR",
+        "POINSARD_2026"
+      ],
+      "estado": "PROPUESTO",
+      "nota": "KB 1.15.0: sin coeficiente publicado en lpm/°C; el calor húmedo sube la FC submáxima (≈ +12 lpm a 7 m/s [E-r]) sin cambiar la FC pico [E]: la V200 baja sin pérdida de forma; criterio de comparables de A9 y recuperación (TC1–TC5), sin corrección"
+    },
+    {
+      "id": "peso_cargado_comparables",
+      "valor": {
+        "delta_peso_max_kg": 3,
+        "delta_pct_peso_corporal": 0.6,
+        "aviso_cw_bw_pct": 13,
+        "mismo_jinete_preferente": true
+      },
+      "evidencia": "I",
+      "fuentes": [
+        "LEE_PARK_2011_CWBW",
+        "BUGISLAUS_2004_PESO",
+        "TAKAHASHI_2015_EDAD_PESO",
+        "SCHRURS_2022_JINETE",
+        "PFAU_2009_CROUCH"
+      ],
+      "estado": "PROPUESTO",
+      "nota": "KB 1.15.0: sin coeficiente válido de peso a velocidad en PSI ni árabes; en carrera el peso está confundido con la calidad [E]; criterio de comparables de A7/A8 y velocidad final relativa (PC1–PC4), sin corrección"
     }
   ],
   "reglas": [
@@ -2464,7 +2722,8 @@
     "Contador de muestras saturadas de la cincha en el análisis (si el firmware lo envía)",
     "A1/A2 de Verheyen: el resumen da un umbral CONJUNTO (> 44 km de canter Y > 6 km de galope en 30 d) y galope acumulado protector en añojos; con el texto completo, decidir si A2 por separado se rebaja a INFO o se sustituye por la regla combinada (KB 1.9.0)",
     "A8: añadir la velocidad del último parcial de 200 m (unidad de Wong 2023, HR 1,18 por 0,1 m/s) junto a la de 600 m, y documentar el umbral como diseño (KB 1.9.0); KB 1.14.0: mostrarlo solo junto a su dispersión propia (DE de las comparables), nunca como umbral fijo: el ruido entre carreras es ≈ 0,66 m/s [I]",
-    "Planificador P7 (estudio 20/11 11:10): ventana de reincorporación de 21 d (prudente 30 d) tras ≥ 60 d sin trabajo rápido, sin dos trabajos rápidos seguidos ni picos de canter; evidencia Carrier 1998 y Choi 2026 solo por resumen; implementar con el planificador (capa 2)"
+    "Planificador P7 (estudio 20/11 11:10): ventana de reincorporación de 21 d (prudente 30 d) tras ≥ 60 d sin trabajo rápido, sin dos trabajos rápidos seguidos ni picos de canter; evidencia Carrier 1998 y Choi 2026 solo por resumen; implementar con el planificador (capa 2)",
+    "Comparables por temperatura y peso (estudio 20/11 13:12, KB 1.15.0): campos de temperatura, humedad/WBGT, jinete y peso cargado en Session; A9 y recuperación solo con |ΔT| ≤ 5 °C y marca «no comparable por calor» (WBGT ≥ 28 °C); A7/A8 con |Δpeso| ≤ 3 kg y mismo jinete preferente; todo [I], sin coeficiente de corrección hasta calibrarlo con datos propios"
   ],
   "cola_investigacion": [
     "Texto completo de Verheyen 2006 (Bone, DOI 10.1016/j.bone.2006.05.025): ORs, cortes, límite inferior del canter, ventana de 60 d",
@@ -2518,7 +2777,10 @@
     "Riesgo por semana tras el regreso con IC (fractura en general y TFDS) y cualquier dato de árabes: no hallado (20/11 11:10)",
     "Chateau 2011 y Crevier-Denoix 2011 en texto completo (sin versión legal en HAL, Europe PMC ni theses.fr); confirmar el DOI de Chateau 2011; tesis DUMAS/ENVA de playa e informe UCLan Ground and Going 2024 (20/11 12:10)",
     "FC, lactato o coste energético a igual velocidad en arena profunda frente a firme en caballos de carreras: no hallado; tabla 1 (FC) de Porzio 2025 por leer (20/11 12:10)",
-    "Wong 2023: método (StrideMASTER, ajuste por distancia y pista) releído en minerva-access o PMC10084173 desde un navegador; DE intra-caballo publicada del último 200 m o 600 m en trabajo; agari 3F de la JRA y lesión (20/11 12:10)"
+    "Wong 2023: método (StrideMASTER, ajuste por distancia y pista) releído en minerva-access o PMC10084173 desde un navegador; DE intra-caballo publicada del último 200 m o 600 m en trabajo; agari 3F de la JRA y lesión (20/11 12:10)",
+    "Hargreaves 1999 (EVJ 31:314) completo: raza, temperatura y humedad de las pruebas; Geor 1995/1996 y Marlin 1996 completos (Wiley): FC por escalón en calor (20/11 13:12)",
+    "V200 estacional en trotones (Couroucé, Leleu) o PSI y cualquier dato de calor en árabes de carreras (Golfo, Turquía) o Hong Kong: no hallado (20/11 13:12)",
+    "Peso cargado: Oki 1994 (coeficientes), tabla S2 de Morrice-West (peso cargado o corporal), PMC12504628 (capacidad de carga en cinta) y Stefánsdóttir 2017 completo; Powell 2008 y Matsuura no hallados (20/11 13:12)"
   ],
   "historial": [
     {
@@ -2595,6 +2857,11 @@
       "version": "1.14.0",
       "fecha": "2026-11-20",
       "cambio": "Estudio horario 12:10: playa — corregida la atribución de playa_franjas (humedad 19/13,5 % de Crevier-Denoix 2011 doi …00202.x; −59/−50 % son deceleraciones del casco de Chateau 2011, DOI no confirmado), sin cifras absolutas por franja; A8 — ruido entre carreras ≈ 0,66 m/s (CV ≈ 4 %) derivado de Legg 2025 [I], sin cambio de umbral; 6 fuentes nuevas y 3 completadas; sin cambios de lógica; motor 2.0.0-dev16"
+    },
+    {
+      "version": "1.15.0",
+      "fecha": "2026-11-20",
+      "cambio": "Estudio horario 13:12: temperatura (sin coeficiente lpm/°C; calor húmedo sube la FC submáxima sin cambiar la pico, la V200 baja sin pérdida de forma) y peso cargado (sin coeficiente válido; confundido con la calidad en carrera); 2 parámetros PROPUESTOS [I] de comparables (TC1–TC5, PC1–PC4), 19 fuentes nuevas, 1 pendiente y 3 entradas de cola; sin cambios de lógica; motor 2.0.0-dev17"
     }
   ]
 }
