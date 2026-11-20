@@ -30,6 +30,19 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 sigue en el pie de cada página. En la pantalla, el método se sigue pudiendo desplegar, y el texto del estado de la pista
 dice ya que el dato se obtiene automáticamente.
 **Validación:** IMPLEMENTADO · **NO VERIFICADO** en el iPad.
+## 2026-11-20 — Motor 2.0.0-dev12 / KB-1 1.10.0 — Estudio horario 08:09: modelo óseo B y velocidad final relativa
+**Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-0809` (desde `develop`, sin PR `kb-*` abiertos) · **CI:** ver PR
+**Qué cambia:**
+- Estudio `equine-intelligence/knowledge/estudios/2026-11-20_0809_modeloB_dt_velocidad_final_relativa.md`.
+- **Modelo óseo B:** el paso de integración y el solver no aparecen en los preprints leídos en texto completo (arXiv de Anwar, bioRxiv de Pan): diario es [I]. Condiciones iniciales f_BM 0,61 y D* 0 [E]. Tablas 4 y 7 anotadas como objetivo de validación; incoherencia del preprint (D* máx. 0,911 en la tabla 7 frente a 0,852 en la Discusión). Zenodo y PMC13641913 siguen bloqueados.
+- **A8 / velocidad final:** Wong 2023 reconfirmado (v200 absoluta, longitudinal, riesgo al bajar): A8 ya tiene el sentido correcto. Finishing Speed % de Timeform (v final / v media frente al par) sin umbrales; árabes: Nielsen 2006 (desaceleración final, resumen) y PDF de France Galop.
+- `base_cientifica.json` 1.10.0: 6 fuentes nuevas, 3 completadas, notas de A8 y de dos pendientes, 2 entradas de cola. `KNOWLEDGE_VERSION` 1.10.0, `ENGINE_VERSION` 2.0.0-dev12.
+**Por qué:** estudio horario de la KB pedido por el usuario para el 20/11.
+**No se ha tocado:** lógica, reglas, parámetros ni umbrales del motor; workflows, firmas, firmware ni contratos binarios.
+**Validación:** pruebas locales (ASan/UBSan) y fixtures; CI en el PR · NO VERIFICADO con caballos reales.
+**Pendiente:** código de Zenodo 19173866 y PMC13641913 desde navegador; v200 en A8.
+
+---
 
 ## 2026-11-20 — iPad 1.0.0 — Estado de la pista automático (PDF de tracking + Equidia)
 **Autor:** Claude (petición del usuario, 20/11 08:33: «que sea automático») · **Rama:** `claude/estado-pista-france-galop` · **CI:** ver PR

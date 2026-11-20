@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "fecha": "2026-11-20",
   "razas": [
     "PSI",
@@ -67,6 +67,11 @@
       "fecha": "2026-11-20",
       "titulo": "Noche 20/11: auditoría de 11 fuentes (Choi & Parkin, Morrice-West 2020/2022, Wong 2023 ×2, Witte 2006, Verheyen, Carrier, Estberg, Schrurs, van Erck) y regla A6C del cociente de galope; Asia, Golfo, Latinoamérica y TFDS",
       "archivo": "estudios/2026-11-20_noche_auditoria_cociente_galope_asia_latam.md"
+    },
+    {
+      "fecha": "2026-11-20",
+      "titulo": "Estudio horario 08:09 UTC: modelo óseo B (dt [NV], tablas 4 y 7, 0,911 frente a 0,852) y velocidad final relativa / A8 (Wong 2023 reconfirmado, FS % de Timeform, árabes)",
+      "archivo": "estudios/2026-11-20_0809_modeloB_dt_velocidad_final_relativa.md"
     }
   ],
   "fuentes": [
@@ -242,7 +247,7 @@
       "raza_fuente": "PSI",
       "doi": "10.1111/evj.13581",
       "pmid": "35477925",
-      "nota": "manuscrito aceptado en minerva-access. 584 caballos (146 casos, 438 controles), 5.660 salidas, 2011–2016; solo el ÚLTIMO PARCIAL DE 200 m (media 15,86 m/s, zancada 6,88 m); HR 1,18 (1,09–1,28) por cada 0,1 m/s de caída y 1,11 (1,02–1,21) por cada 10 cm de caída de zancada a lo largo de las salidas; la frecuencia no se asocia; el descenso se acentúa ~6 carreras antes (solo en figura). 0,10 m y 0,1 m/s son la UNIDAD del HR, no umbrales observados",
+      "nota": "manuscrito aceptado en minerva-access. 584 caballos (146 casos, 438 controles), 5.660 salidas, 2011–2016; solo el ÚLTIMO PARCIAL DE 200 m (media 15,86 m/s, zancada 6,88 m); HR 1,18 (1,09–1,28) por cada 0,1 m/s de caída y 1,11 (1,02–1,21) por cada 10 cm de caída de zancada a lo largo de las salidas; la frecuencia no se asocia; el descenso se acentúa ~6 carreras antes (solo en figura). 0,10 m y 0,1 m/s son la UNIDAD del HR, no umbrales observados; 20/11 08:09: variable ABSOLUTA, solo carreras, modelo conjunto longitudinal + supervivencia; el riesgo sube al BAJAR la velocidad (A8 tiene el sentido correcto); ajuste por distancia/pista NV",
       "verificado_fecha": "2026-11-20"
     },
     {
@@ -274,7 +279,13 @@
     {
       "id": "PAN_2025_PREPRINT",
       "cita": "Pan et al. 2025, preprint bioRxiv (PDF)",
-      "url": "https://www.biorxiv.org/content/10.1101/2025.04.06.646486.full.pdf"
+      "url": "https://www.biorxiv.org/content/10.1101/2025.04.06.646486.full.pdf",
+      "acceso": "PREPRINT",
+      "pais": "Australia (Victoria)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "texto completo: simulaciones desde f_BM = 0,61 y D* = 0 (sensibilidad desde 0,7); tasas en mm/día, tiempo en días; sin solver ni código citado",
+      "verificado_fecha": "2026-11-20"
     },
     {
       "id": "VERHEYEN_2006_RESUMEN",
@@ -400,7 +411,13 @@
     {
       "id": "ANWAR_2026_ARXIV_V1",
       "cita": "Anwar et al. 2026, arXiv 2603.22680v1, tabla 9 y apéndice A.1 (extracto automático)",
-      "url": "https://arxiv.org/html/2603.22680v1"
+      "url": "https://arxiv.org/html/2603.22680v1",
+      "acceso": "PREPRINT",
+      "pais": "Australia (Victoria)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "texto completo: sin dt ni solver; carga v_n en ciclos/día; tabla 4 (D* máx ≈0,81/0,91/1,02) y tabla 7 (D* máx ≈1,54/0,91/0,80); la Discusión da 0,852 para 2 descansos frente a 0,911 en tabla 7 y §3.4; código en Zenodo 19173866 (licencia NV)",
+      "verificado_fecha": "2026-11-20"
     },
     {
       "id": "YILDIRIM_KARAARSLAN_2025",
@@ -568,7 +585,14 @@
     },
     {
       "id": "TIMEFORM_FS_PCT",
-      "cita": "Timeform, An introduction to sectional timing part 2 (Finishing Speed %)"
+      "cita": "Timeform, An introduction to sectional timing part 2 (Finishing Speed %)",
+      "url": "https://www.timeform.com/horse-racing/features/sectionals/an_introduction_to_sectional_timing_part_2",
+      "acceso": "COMERCIAL",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "FS % = v(parcial final)/v media ×100; se compara con el PAR de pista y distancia (Ascot milla ≈101 %, Epsom ≈108 %, Beverley <100 %); sin umbrales numéricos (estudio 2026-11-20 08:09)",
+      "verificado_fecha": "2026-11-20"
     },
     {
       "id": "FRANCE_GALOP_MCLLOYD_ROLLOUT",
@@ -1139,6 +1163,72 @@
       "idioma": "en",
       "raza_fuente": "PSI",
       "nota": "fracturas en pista de viruta en cuesta frente a llana IRR 0,359 (0,329–0,392), 2008–2022",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "MERCIER_AFTALION_2020",
+      "cita": "Mercier Q, Aftalion A 2020, PLoS ONE (Optimal speed in Thoroughbred horse racing); arXiv 2006.10530",
+      "url": "https://ar5iv.arxiv.org/html/2006.10530",
+      "acceso": "PREPRINT",
+      "pais": "Francia (Chantilly)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "PMC7710124 bloqueado; 3 carreras GPS 10 Hz: pico a 200–300 m, frenado final incluso en llano, gana el que menos desacelera; no cuantifica velocidad final relativa",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "TAKAHASHI_2021_JEVS",
+      "cita": "Takahashi Y, Takahashi T, Mukai K, Ohmura H 2021, J Equine Vet Sci 101:103447",
+      "url": "https://doi.org/10.1016/j.jevs.2021.103447",
+      "acceso": "AGREGADOR",
+      "pais": "Japón (JRA)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "2400 m hierba: 17,3→16,0 m/s, 2,34→2,21 zancadas/s, 7,42→7,25 m entre pasadas; sin relación con lesión",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "NIELSEN_2006_ARABES",
+      "cita": "Nielsen BD et al. 2006, Equine Vet J Suppl 36:128–132",
+      "url": "https://doi.org/10.1111/j.2042-3306.2006.tb05528.x",
+      "acceso": "RESUMEN",
+      "pais": "EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "Árabe",
+      "nota": "carreras de 1006 m: más rápidos en el tramo medio y desaceleración final; magnitud NV",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "ATR_SECTIONALS",
+      "cita": "At The Races, Sectionals info (Simon Rowlands)",
+      "url": "https://www.attheraces.com/sectionalsinfo",
+      "acceso": "COMERCIAL",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "parcial final = 2 f hasta la milla, 3 f en más distancia; óptimos de carreras eficientes con ajuste topográfico; grados A–F sin cortes",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "RACEIQ_PAR",
+      "cita": "Racing TV, RaceiQ par sectionals",
+      "url": "https://www.racingtv.com/raceiq/par-sectionals",
+      "acceso": "COMERCIAL",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "pares por pista (Epsom 6 f ≈103 %, 1m4f ≈112 %); cinco bandas sin cortes numéricos",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "FG_TRACKING_ARABES_2023",
+      "cita": "France Galop, PDF de tracking 20230514LON03 (Coupe d'Europe des Chevaux Arabes, 2000 m, Longchamp)",
+      "url": "https://www7.france-galop.com/Casaques/Tracking//20230514LON03_last_times_fr.pdf",
+      "acceso": "OFICIAL",
+      "pais": "Francia",
+      "idioma": "fr",
+      "raza_fuente": "Árabe",
+      "nota": "ganador 2:16,83, último 200 m 12,91 s; tracking no sincronizado con el cronometraje oficial; FS ≈106 % es cálculo propio [I] de un solo caballo",
       "verificado_fecha": "2026-11-20"
     }
   ],
@@ -1765,10 +1855,11 @@
       "evidencia": "E (dirección y HR por 0,1 m/s en los 200 m finales de carrera, Wong 2023) / E-r (Schrurs 2024) / I (600 m en trabajo, umbral 0,2 m/s, CUSUM)",
       "fuentes": [
         "WONG_2023",
-        "SCHRURS_2024_TEXTO"
+        "SCHRURS_2024_TEXTO",
+        "TIMEFORM_FS_PCT"
       ],
       "estado": "IMPLEMENTADO",
-      "nota": "motor 2.0.0-dev7 (KB 1.5.0); la velocidad la decide el jinete: comprobar que el trabajo fue comparable; la velocidad puntual a 600 m no predice (Schrurs 2024); KB 1.9.0: Wong 2023 (texto completo) usó el último parcial de 200 m de carrera: HR 1,18 (1,09–1,28) por 0,1 m/s de caída; la ventana de 600 m en trabajo y el umbral 0,20 m/s son [I]; Schrurs 2024 usa el TIEMPO de los últimos 600 m categorizado (resumen)"
+      "nota": "motor 2.0.0-dev7 (KB 1.5.0); la velocidad la decide el jinete: comprobar que el trabajo fue comparable; la velocidad puntual a 600 m no predice (Schrurs 2024); KB 1.9.0: Wong 2023 (texto completo) usó el último parcial de 200 m de carrera: HR 1,18 (1,09–1,28) por 0,1 m/s de caída; la ventana de 600 m en trabajo y el umbral 0,20 m/s son [I]; Schrurs 2024 usa el TIEMPO de los últimos 600 m categorizado (resumen); KB 1.10.0: confirmado que en Wong 2023 el riesgo sube al BAJAR la velocidad absoluta del último 200 m a lo largo de las salidas (sentido de A8 correcto); ninguna fuente publica umbral de velocidad final relativa"
     },
     {
       "id": "A9_PERDIDA_FORMA",
@@ -1887,11 +1978,11 @@
     }
   ],
   "pendiente_motor": [
-    "Modelo óseo B (Pan/Anwar) con adaptación y reparación: constantes completas con b = −0,02 y f_BM(0) = 0,61 (KB 1.8.0, extra 5); faltan el paso de integración (no publicado) y reproducir la tabla 4 de Anwar (código en Zenodo 19173866)",
+    "Modelo óseo B (Pan/Anwar) con adaptación y reparación: constantes completas con b = −0,02 y f_BM(0) = 0,61 (KB 1.8.0, extra 5); faltan el paso de integración (no publicado) y reproducir la tabla 4 de Anwar (código en Zenodo 19173866); KB 1.10.0: dt y solver no aparecen en los preprints en texto completo (diario [I]); condiciones iniciales f_BM 0,61 y D* 0 [E]; validar con tablas 4 y 7 del preprint (usar 0,911 de la tabla, no 0,852 de la Discusión)",
     "V200/VHRmax por regresión FC–velocidad (medias de 5 s, trote + galope [E]); mesetas ≥ 30 s descartando 20–30 s [I], R² ≥ 0,90 [I], sin extrapolar; recuperación a 1, 2, 4, 5, 10 y 15 min solo informativa; extra 4: TE propio por caballo (no hay TE publicado legible en PSI/árabe); misma superficie y nunca cinta con pista",
     "ECG por fase (≥ 250 SPS con interpolación del pico, preferible 500): detector anclado en S con rechazo de T y sin ceguera tras artefacto; prematuro ≥ 6 % frente a la mediana de 8 RR con FC > 100 lpm; pareja, triplete, racha ≥ 4, FA; puerta > 10 % no interpretable por fase; validar con galope real anotado a mano (objetivo VPP ≥ 99 %, S ≥ 98 %) (estudio extra 3)",
     "Conectar las líneas base a A9 (V200) cuando el análisis traiga el ECG; A7 y A8 conectadas en 2.0.0-dev7 (KB 1.5.0) con superficie como criterio de comparables; falta el TE propio por métrica y la playa por franja",
-    "Velocidad final relativa propia de AVO (France Galop no publica ningún IDF; estudio extra 2 2026-11-19): v(últimos 600/400 m)/v media con par propio por pista y superficie, al estilo de la Finishing Speed % de Timeform; importador de los PDF de tracking por 200 m solo informativo",
+    "Velocidad final relativa propia de AVO (France Galop no publica ningún IDF; estudio extra 2 2026-11-19): v(últimos 600/400 m)/v media con par propio por pista y superficie, al estilo de la Finishing Speed % de Timeform; importador de los PDF de tracking por 200 m solo informativo; KB 1.10.0: FS % de Timeform = v final/v media frente al par de pista y distancia, sin umbrales; Wong 2023 usa v200 absoluta y longitudinal; ninguna fuente da umbral de riesgo: solo métrica descriptiva con par propio",
     "Índice tendinoso heurístico por bandas cualitativas (prioritario en árabes de 3–4 años): sin exponente de carga; faltan en la app la lesión previa, la CSA ecográfica y la firmeza del suelo (estudio extra 2026-11-19); extra 4: sin OR de árabes (Golfo, Turquía, Polonia); edad 3–4 años con 3 fuentes; no añadir término de carga (Çalışkan 2020b, Perkins 2005); CSA árabe de referencia 62–94 mm²",
     "Planificador semanal por restricciones (capa 2) con P1–P6 del estudio extra 3 (práctica [E], forma [I]) y explicación con confianza (capa 3)",
     "Línea base separada para la playa por franja (PL1–PL6 del extra 5): orilla firme, húmeda profunda, seca profunda, transición; marea, lluvia, humedad y nota del jinete; comparables de A7/A8/A9 por franja (Pfau 2024: el suelo cambia la zancada hasta 0,186 m)",
@@ -1939,7 +2030,9 @@
     "Asia: PDF de Kusunose 2002 (J-STAGE, error típico de EquiPILOT), Ohmura 2002 (V200 en potros JRA), valores de T de Hada 2007; Golfo: ningún estudio de V200 ni ECG en árabes de carreras (EAU, Qatar, Arabia Saudí, Omán; inglés y árabe) (20/11)",
     "OR de Takahashi 2004 (JAVMA) y Lam 2007 (AJVR): solo de pago; Ikeda 2019 en J-STAGE (PDF oficial) para releer las OR desde la fuente legal (20/11)",
     "Latinoamérica: resto de la tesis de Zambruno 2017 (mortalidad), tabla 2 de Berkman 2015, OR de Bimson 2022; México, Perú y Colombia sin estudios hallados (20/11)",
-    "Versión publicada de Anwar 2026 (RSOS 13:260818, PMC13641913): comparar la tabla 7 con el preprint antes de usar D* en el motor (20/11)"
+    "Versión publicada de Anwar 2026 (RSOS 13:260818, PMC13641913): comparar la tabla 7 con el preprint antes de usar D* en el motor (20/11)",
+    "Zenodo 19173866 (Anwar) y 16557014 (Pan) y PMC13641913 desde un navegador con permisos: dt, solver, licencia del código y si la versión publicada corrige 0,852/0,911 (20/11 08:09)",
+    "Nielsen 2006 (EVJ Suppl 36) completo: magnitud de la desaceleración final en árabes; PDF de tracking de France Galop de carreras árabes (2023–2026) para un par propio de FS % por pista y distancia (20/11 08:09)"
   ],
   "historial": [
     {
@@ -1991,6 +2084,11 @@
       "version": "1.9.0",
       "fecha": "2026-11-20",
       "cambio": "Noche: regla A6C_COCIENTE_GALOPE implementada (Choi & Parkin 2025, (g60/g90) + 1 ≤ 1,6, OR 2,19; fórmula leída en el texto completo); auditoría de 11 fuentes (7 a texto completo) con correcciones de atribución y de ámbito (Wong 2023 Front Vet Sci era «Morrice-West 2023»; 12,57–21 m/s son criterios de exclusión; 16,7 m/s es límite de franja; fórmula de frecuencia de Witte; Verheyen umbral conjunto; A8 de Wong en 200 m); 24 fuentes nuevas (Japón, Corea, Hong Kong, Turquía, Argentina, Uruguay, Brasil); motor 2.0.0-dev11"
+    },
+    {
+      "version": "1.10.0",
+      "fecha": "2026-11-20",
+      "cambio": "Estudio horario 08:09: modelo B sin dt publicado (diario [I]), condiciones iniciales f_BM 0,61 y D* 0 confirmadas, incoherencia 0,911/0,852 del preprint de Anwar; A8 con sentido confirmado (Wong 2023: riesgo al bajar la v200 absoluta); FS % de Timeform sin umbrales; 6 fuentes nuevas y 3 completadas; sin cambios de lógica; motor 2.0.0-dev12"
     }
   ]
 }

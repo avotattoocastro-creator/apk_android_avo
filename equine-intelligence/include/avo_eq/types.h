@@ -8,7 +8,7 @@
 
 namespace avoeq {
 
-static const char* const ENGINE_VERSION = "2.0.0-dev11";
+static const char* const ENGINE_VERSION = "2.0.0-dev12";
 // Product name from 2.0 (the C API and the JSON keep the avo_eq / avo-equine identifiers for compatibility).
 static const char* const ENGINE_NAME = "AVO Performance Equine";
 
