@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.11.0",
+  "version": "1.12.0",
   "fecha": "2026-11-20",
   "razas": [
     "PSI",
@@ -77,6 +77,11 @@
       "fecha": "2026-11-20",
       "titulo": "Estudio horario 09:09 UTC: V200/VHRmax (A9) y umbrales de prematuro del ECG (A11; Flethøj 2016 en texto completo)",
       "archivo": "estudios/2026-11-20_0909_v200_a9_ecg_a11_umbrales.md"
+    },
+    {
+      "fecha": "2026-11-20",
+      "titulo": "Estudio horario 10:08 UTC: OR del TFDS (Takahashi, Lam) e índice tendinoso; árabes de carreras en llano (Polonia, Turquía)",
+      "archivo": "estudios/2026-11-20_1008_tendon_or_arabes_llano.md"
     }
   ],
   "fuentes": [
@@ -214,7 +219,14 @@
     {
       "id": "YILDIRIM_2025",
       "cita": "Yildirim et al. 2025, Equine Vet J (553 lesiones PSI y árabes, Turquía)",
-      "url": "https://madbarn.com/research/distribution-of-race-and-training-related-musculoskeletal-injuries-by-track-and-location-in-thoroughbred-and-arabian-racehorses"
+      "url": "https://madbarn.com/research/distribution-of-race-and-training-related-musculoskeletal-injuries-by-track-and-location-in-thoroughbred-and-arabian-racehorses",
+      "doi": "10.1111/evj.14457",
+      "acceso": "RESUMEN",
+      "pais": "Turquía (Şirinyer, Esmirna)",
+      "idioma": "en",
+      "raza_fuente": "PSI y árabe de carreras",
+      "verificado_fecha": "2026-11-20",
+      "nota": "553 lesiones 2018–2023: 45,3 % fracturas, 40,3 % tendinosas; anterior 92,7 % en árabes; picos a 3–4 años; fin de carrera 46,4 % árabes; OR por superficie [NV]; Wiley pdfdirect con error en la sesión (OpenAlex: acceso abierto)"
     },
     {
       "id": "VAN_ERCK_2026",
@@ -580,7 +592,14 @@
     },
     {
       "id": "IKEDA_2019",
-      "cita": "Ikeda Y, Ishihara A, Nakajima M, Yamada K 2019, J Equine Sci 30:93, doi 10.1294/jes.30.93, PMC6920055"
+      "cita": "Ikeda Y, Ishihara A, Nakajima M, Yamada K 2019, J Equine Sci 30:93, doi 10.1294/jes.30.93, PMC6920055",
+      "acceso": "RESUMEN",
+      "pais": "Japón (Oi)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "doi": "10.1294/jes.30.93",
+      "verificado_fecha": "2026-11-20",
+      "nota": "OR univariables (extra 2); añade macho frente a hembra 1,35 (1,00–1,81); vía de lectura sin confirmar, se mantiene [E-r]"
     },
     {
       "id": "KALISIAK_2012_POLJVS",
@@ -1289,6 +1308,78 @@
       "raza_fuente": "árabe de carreras (32–37 meses)",
       "nota": "n 20; solo variabilidad de la FC (Polar RS800CX), sin V200; DOI y URL del editor [NV] (solo resumen visto por el subagente)",
       "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "SNIEGUCKA_2026",
+      "cita": "Śniegucka K, Soroko-Dubrovina M, Zielińska P, Dudek KD 2026, Vet Sci 13(7):695",
+      "doi": "10.3390/vetsci13070695",
+      "url": "https://doi.org/10.3390/vetsci13070695",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Polonia (Partynice, Breslavia)",
+      "idioma": "en",
+      "raza_fuente": "árabe de carreras (n 36, 3 años)",
+      "nota": "15/36 con enfermedad dorsal del metacarpo; 6 días/semana, 1.000 m trote + 200–500 m de velocidad; láser sin efecto",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "ANTIOX_2024_SLUZEWIEC",
+      "cita": "Antioxidants 2024, 13(8):905 (autores sin anotar)",
+      "doi": "10.3390/antiox13080905",
+      "url": "https://doi.org/10.3390/antiox13080905",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Polonia (Służewiec)",
+      "idioma": "en",
+      "raza_fuente": "árabe de carreras (n 14, 3 años)",
+      "nota": "2 sesiones intensas/semana: galope de 800 m a 45–50 km/h (12,5–13,9 m/s)",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "GENES_2025_PASB",
+      "cita": "Genes 2025, 16(4):431 (autores sin anotar)",
+      "doi": "10.3390/genes16040431",
+      "url": "https://doi.org/10.3390/genes16040431",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Polonia",
+      "idioma": "en",
+      "raza_fuente": "árabe de carreras (n 16, 2,5 años al inicio)",
+      "nota": "galope 200 → 1.200 m (7.º mes), canter hasta 5.000 m y luego 2.500–3.000 m; prueba previa ≤ 2.000 m, 200–400 m más larga que la carrera; 6 salidas de media",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "DABROWSKA_2026",
+      "cita": "Dąbrowska I, Grzędzicka-Agko J, Żmigrodzka M, …, Witkowska-Piłaszewicz O 2026, BMC Vet Res",
+      "doi": "10.1186/s12917-026-06055-w",
+      "url": "https://doi.org/10.1186/s12917-026-06055-w",
+      "acceso": "TEXTO_COMPLETO_PARCIAL",
+      "pais": "Polonia (SGGW)",
+      "idioma": "en",
+      "raza_fuente": "árabe de carreras (n 18)",
+      "nota": "aclaramiento de lactato menor tras carrera que tras galopes (p 0,034); valores en tabla S4 [NV]",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "SCHURINK_2009",
+      "cita": "Schurink A et al. 2009, Livest Sci 125:97–100",
+      "doi": "10.1016/j.livsci.2009.03.004",
+      "url": "https://doi.org/10.1016/j.livsci.2009.03.004",
+      "acceso": "RESUMEN",
+      "pais": "Países Bajos (Duindigt)",
+      "idioma": "en",
+      "raza_fuente": "árabe de carreras (88 caballos, 380 actuaciones)",
+      "nota": "velocidad sube con la edad, baja a 7–9 años y con la distancia; sin cifras en el resumen",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "NIELSEN_2006",
+      "cita": "Nielsen BD, Turner KK, Ventura BA, Woodward AD, O'Connor CI 2006, Equine Vet J Suppl 36:128–132",
+      "doi": "10.1111/j.2042-3306.2006.tb05528.x",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17402407/",
+      "acceso": "RESUMEN",
+      "pais": "EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "árabe, PSI y cuarto de milla",
+      "nota": "en 1.006 m la velocidad máxima está en el tramo central y cae en el último; magnitud y n [NV]",
+      "verificado_fecha": "2026-11-20"
     }
   ],
   "parametros": [
@@ -1822,6 +1913,38 @@
       ],
       "estado": "PENDIENTE",
       "nota": "cinta, PSI Australia: la recuperación antes de 90 s es poco fiable; solo informativa en A9"
+    },
+    {
+      "id": "arabe_trabajo_rapido_velocidad_3a_polonia",
+      "valor": {
+        "min_m_s": 12.5,
+        "max_m_s": 13.9,
+        "distancia_m": 800
+      },
+      "evidencia": "E",
+      "fuentes": [
+        "ANTIOX_2024_SLUZEWIEC"
+      ],
+      "estado": "INFORMATIVO",
+      "nota": "por debajo del corte de PSI ≥ 13,3 m/s: respalda cortes relativos por caballo"
+    },
+    {
+      "id": "arabe_trabajos_intensos_por_semana",
+      "valor": {
+        "sluzewiec": 2,
+        "partynice_dias_trabajo": 6,
+        "partynice_rapido_m": [
+          200,
+          500
+        ]
+      },
+      "evidencia": "E",
+      "fuentes": [
+        "ANTIOX_2024_SLUZEWIEC",
+        "SNIEGUCKA_2026"
+      ],
+      "estado": "INFORMATIVO",
+      "nota": "práctica de cuadras polacas para P1/P2 del planificador; no es regla de riesgo"
     }
   ],
   "reglas": [
@@ -2047,7 +2170,7 @@
     "ECG por fase (≥ 250 SPS con interpolación del pico, preferible 500): detector anclado en S con rechazo de T y sin ceguera tras artefacto; prematuro ≥ 6 % frente a la mediana de 8 RR con FC > 100 lpm; pareja, triplete, racha ≥ 4, FA; puerta > 10 % no interpretable por fase; validar con galope real anotado a mano (objetivo VPP ≥ 99 %, S ≥ 98 %) (estudio extra 3); KB 1.11.0: con FC < 100 lpm usar 10 % (60–100) y 20 % (< 60) solo INFO (Flethøj 2016 [E] en árabes de raid [I-raza]) y FC pico como media de los 5 RR más cortos sin prematuros (Navas de Solis 2026 [E])",
     "Conectar las líneas base a A9 (V200) cuando el análisis traiga el ECG; A7 y A8 conectadas en 2.0.0-dev7 (KB 1.5.0) con superficie como criterio de comparables; falta el TE propio por métrica y la playa por franja",
     "Velocidad final relativa propia de AVO (France Galop no publica ningún IDF; estudio extra 2 2026-11-19): v(últimos 600/400 m)/v media con par propio por pista y superficie, al estilo de la Finishing Speed % de Timeform; importador de los PDF de tracking por 200 m solo informativo; KB 1.10.0: FS % de Timeform = v final/v media frente al par de pista y distancia, sin umbrales; Wong 2023 usa v200 absoluta y longitudinal; ninguna fuente da umbral de riesgo: solo métrica descriptiva con par propio",
-    "Índice tendinoso heurístico por bandas cualitativas (prioritario en árabes de 3–4 años): sin exponente de carga; faltan en la app la lesión previa, la CSA ecográfica y la firmeza del suelo (estudio extra 2026-11-19); extra 4: sin OR de árabes (Golfo, Turquía, Polonia); edad 3–4 años con 3 fuentes; no añadir término de carga (Çalışkan 2020b, Perkins 2005); CSA árabe de referencia 62–94 mm²",
+    "Índice tendinoso heurístico por bandas cualitativas (prioritario en árabes de 3–4 años): sin exponente de carga; faltan en la app la lesión previa, la CSA ecográfica y la firmeza del suelo (estudio extra 2026-11-19); extra 4: sin OR de árabes (Golfo, Turquía, Polonia); edad 3–4 años con 3 fuentes; no añadir término de carga (Çalışkan 2020b, Perkins 2005); CSA árabe de referencia 62–94 mm²; KB 1.12.0: OR de Takahashi 2004 y Lam 2007 AJVR siguen [NV] (AVMA 403); entradas cualitativas propuestas [I]: lesión o exploración tendinosa previa (Lam 2007) y peso en carrera alto para la cuadra (Takahashi 2004, Ikeda 2019)",
     "Planificador semanal por restricciones (capa 2) con P1–P6 del estudio extra 3 (práctica [E], forma [I]) y explicación con confianza (capa 3)",
     "Línea base separada para la playa por franja (PL1–PL6 del extra 5): orilla firme, húmeda profunda, seca profunda, transición; marea, lluvia, humedad y nota del jinete; comparables de A7/A8/A9 por franja (Pfau 2024: el suelo cambia la zancada hasta 0,186 m)",
     "Regla combinada A1+A2 de Verheyen cuando se lea el texto completo",
@@ -2098,7 +2221,11 @@
     "Nielsen 2006 (EVJ Suppl 36) completo: magnitud de la desaceleración final en árabes; PDF de tracking de France Galop de carreras árabes (2023–2026) para un par propio de FS % por pista y distancia (20/11 08:09)",
     "Frick 2019 en el resto del texto (umbral en galope y raza) solo por la vía de PMC/Europe PMC desde un navegador; Flethøj 2016 cerrado en texto completo (20/11 09:09)",
     "Vermeulen & Evans 2006 y Gramkow & Evans 2006: probar Europe PMC/Unpaywall desde un navegador (OpenAlex 403 en la sesión; Wiley sin respuesta); Massie 2021: causa de los 30 ECG excluidos de 82 (20/11 09:09)",
-    "V200/VHRmax en árabes de carreras en llano: Janów Podlaski/Służewiec (Polonia), Turquía (Gücüyener 2024 solo da FCmax) y Golfo; ninguno hallado (20/11 09:09)"
+    "V200/VHRmax en árabes de carreras en llano: Janów Podlaski/Służewiec (Polonia), Turquía (Gücüyener 2024 solo da FCmax) y Golfo; ninguno hallado (20/11 09:09)",
+    "Takahashi 2004 (JAVMA) y Lam 2007 (AJVR) desde avmajournals.avma.org (403 en la sesión): OR exactas; permitir el dominio o que el usuario aporte los PDF (20/11 10:08)",
+    "Yildirim 2025 (EVJ, doi 10.1111/evj.14457; OpenAlex lo da como abierto) desde un navegador: OR por superficie en árabes (20/11 10:08)",
+    "Tabla S4 de Dąbrowska 2026 (BMC Vet Res): lactato absoluto en galope y carrera de árabes; Nielsen 2006 completo (magnitud de la desaceleración) (20/11 10:08)",
+    "Árabes de llano: zancada, FC de carrera y V200 siguen sin publicarse (2024–2026); búsqueda en polaco, francés y del Golfo/Magreb pendiente (20/11 10:08)"
   ],
   "historial": [
     {
@@ -2160,6 +2287,11 @@
       "version": "1.11.0",
       "fecha": "2026-11-20",
       "cambio": "Estudio horario 09:09: A11 — Flethøj 2016 [E]: 20/10/4 % son acortamientos escalonados por FC y el 4 % sobredetecta; se mantiene ≥ 5–6 % con FC > 100 lpm y se propone 10/20 % [I] para FC baja y FC pico sin prematuros; A9 — sin texto completo nuevo, referencias de escala (Gramkow, Kobayashi, Hamlin) y ningún dato de V200 en árabes de llano; 4 fuentes nuevas y 5 completadas; sin cambios de lógica; motor 2.0.0-dev13"
+    },
+    {
+      "version": "1.12.0",
+      "fecha": "2026-11-20",
+      "cambio": "Estudio horario 10:08: OR de Takahashi 2004 y Lam 2007 AJVR siguen sin leerse (AVMA 403), solo el sentido de los factores; dos entradas cualitativas propuestas [I] para el índice tendinoso; árabes de llano: 4 fuentes nuevas en texto completo (Polonia, Turquía) con práctica de entrenamiento y 2 parámetros informativos; 10 fuentes nuevas y 2 completadas; sin cambios de lógica; motor 2.0.0-dev14"
     }
   ]
 }

@@ -1,4 +1,4 @@
-# 14 · Base científica de la cuadra (KB-1) 1.11.0
+# 14 · Base científica de la cuadra (KB-1) 1.12.0
 
 Código: `include/avo_eq/knowledge.h`, `src/knowledge/knowledge.cpp`. Se calcula en Track Work (`src/racing/racing.cpp`,
 bloque `trabajo_pista.base_cientifica`) y se evalúa en Training Analytics (`src/training/training.cpp`, bloques
@@ -174,6 +174,15 @@ Detalle: `knowledge/estudios/2026-11-19_extra5_modeloB_signo_b_playa_franjas.md`
 - **A9:** sin texto completo nuevo; VHRmax < 14,5 m/s (Gramkow 2006 [E-r]) solo informativo; no hay V200 publicada en
   árabes de llano, así que en árabes A9 dependerá solo de la línea base propia.
 Detalle: `knowledge/estudios/2026-11-20_0909_v200_a9_ecg_a11_umbrales.md`.
+
+**Estudio horario 20/11 10:08 (KB-1 1.12.0, motor 2.0.0-dev14, sin cambios de lógica).**
+- **Índice tendinoso:** las OR de Takahashi 2004 (*JAVMA*) y Lam 2007 (*AJVR*) siguen [NV] (AVMA 403 en la sesión). Solo
+  se conoce el sentido de los factores [E-r], que confirma A6/A6B/A6C. Se proponen [I] dos entradas cualitativas: lesión o
+  exploración tendinosa previa, y peso en carrera alto para la cuadra. No hay pesos numéricos.
+- **Árabes de llano:** fuentes en texto completo de Polonia y Turquía con trabajo rápido a 12,5–13,9 m/s en 800 m,
+  2 sesiones intensas por semana y ≈ 42 % de enfermedad dorsal del metacarpo a los 3 años. Esto respalda los cortes
+  relativos por caballo. Sin zancada, FC de carrera ni V200 publicadas.
+Detalle: `knowledge/estudios/2026-11-20_1008_tendon_or_arabes_llano.md`.
 
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se

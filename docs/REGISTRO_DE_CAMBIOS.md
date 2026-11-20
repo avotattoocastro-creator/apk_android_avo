@@ -24,6 +24,26 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Motor 2.0.0-dev14 / KB-1 1.12.0 — Estudio horario 10:08: OR del TFDS (índice tendinoso) y árabes de carreras en llano
+**Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-1008` (encadenada desde `claude/kb-estudio-2026-11-20-0909`, PR #96 sin fusionar) · **CI:** ver PR
+**Qué cambia:**
+- Estudio nuevo: `equine-intelligence/knowledge/estudios/2026-11-20_1008_tendon_or_arabes_llano.md`.
+- `base_cientifica.json` 1.12.0:
+  - 10 fuentes nuevas (Paksoy 2025, Śniegucka 2026, *Antioxidants* 2024, *Genes* 2025, Dąbrowska 2026, Schurink 2009,
+    Nielsen 2006, Takahashi 2004, Lam 2007 *EVJ* y Lam 2007 *AJVR*).
+  - Yildirim 2025 e Ikeda 2019 completadas.
+  - 2 parámetros informativos de árabes de llano: trabajo rápido a 12,5–13,9 m/s y 2 sesiones intensas por semana.
+  - Pendiente del índice tendinoso ampliado y 4 entradas nuevas en la cola.
+- Motor: `ENGINE_VERSION` 2.0.0-dev14 y `KNOWLEDGE_VERSION` 1.12.0. Fixtures regenerados, solo con las versiones.
+- Ficha 14, tabla de estado y `README.md` actualizados.
+**Por qué:** el índice tendinoso sigue sin OR legibles: AVMA, doi.org, Unpaywall y Europe PMC dieron 403 en la sesión.
+De los árabes de llano solo se publica la práctica de entrenamiento (Polonia, Turquía), no la zancada, la FC de carrera
+ni la V200.
+**No se ha tocado:** lógica, reglas, parámetros ni umbrales del motor; firmware, workflows, firmas, `Info.plist` y
+contratos binarios.
+**Validación:** pruebas locales (ASan/UBSan) y fixtures en verde; CI en el PR. **NO VERIFICADO** con caballos reales.
+**Pendiente:** OR de Takahashi y Lam *AJVR* desde AVMA, PDF de Yildirim 2025 y tabla S4 de Dąbrowska 2026.
+
 ## 2026-11-20 — Motor 2.0.0-dev13 / KB-1 1.11.0 — Estudio horario 09:09: V200/VHRmax (A9) y umbral de prematuro del ECG (A11)
 **Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-0909` (encadenada desde `claude/kb-estudio-2026-11-20-0809`, PR #94 sin fusionar) · **CI:** ver PR
 **Qué cambia:**
