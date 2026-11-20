@@ -16,7 +16,7 @@ estado actual.
 - **PROTOTIPO** = placas de desarrollo sin PCB propia (pecho Waveshare, espalda Heltec, cincha XIAO).
   **BETA** = PCB propia (cincha PCB REV D, casco V5, DOCK V1, espalda V4).
 
-Resumen (17/11/2026): pecho PROTOTIPO 3.7.10 · espalda PROTOTIPO 3.14.4 · cincha PROTOTIPO 0.4.3 / 0.5.0 (ECG) ·
+Resumen (17/11/2026): pecho PROTOTIPO 3.7.10 · espalda PROTOTIPO 3.14.6 · cincha PROTOTIPO 0.4.3 / 0.5.0 (ECG) ·
 cincha BETA 0.6.0 · Android 2.15-gnss-dev2 (vc 49) · Tarjetas 1.4 · AVO Update 2.3.1 · Windows V2 PRO · iPad 1.0 + LIVE (TestFlight) ·
 motor 2.0.0-dev23 (base científica KB-1 1.21.0, rama `claude/kb-estudio-2026-11-20-1908`). Todo **compilado en CI**; nada de lo integrado desde el 12/11 está **verificado en hardware**.
 

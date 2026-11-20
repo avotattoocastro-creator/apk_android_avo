@@ -54,7 +54,7 @@ ZedUartBudget zed_uart_budget(uint32_t baud, uint8_t nav_hz, bool quality, uint8
   if (nav_hz == 0) nav_hz = 1;
   b.line_bytes_s = baud / 10;                                    // 8N1
   const uint32_t pvt = 100, rxm = 16, comms = 16 + 40 * 5;       // MON-COMMS with 5 ports, one poll every 5 s
-  const uint32_t sat = quality ? 16 + 12u * n_sat : 0, sig = quality ? 16 + 16u * n_sig : 0;
+  const uint32_t sat = (quality && n_sat) ? 16 + 12u * n_sat : 0, sig = quality ? 16 + 16u * n_sig : 0;
   b.avg_bytes_s = pvt * nav_hz + sat + sig + rxm * rtcm_msgs_s + comms / 5;
   b.load_permille = b.line_bytes_s ? (uint16_t)(b.avg_bytes_s * 1000ull / b.line_bytes_s > 65535 ? 65535 : b.avg_bytes_s * 1000ull / b.line_bytes_s) : 65535;
   b.burst_bytes = pvt + sat + sig + rxm * ((rtcm_msgs_s + nav_hz - 1) / nav_hz);
@@ -229,7 +229,12 @@ void ZedManager::handle(const uint8_t* f, size_t n) {
   if (cls == UBX_CLS_NAV && id == UBX_ID_NAV_SIG) { n_sig_++; t_sig_ = now_ | 1; }
   if (cls == UBX_CLS_MON && id == UBX_ID_MON_COMMS) {
     ZedComms c;
-    if (ubx_decode_mon_comms(pl, plen, port_ == 2 ? 0x0201 : 0x0100, &c)) comms_ = c;
+    if (ubx_decode_mon_comms(pl, plen, port_ == 2 ? 0x0201 : 0x0100, &c)) {
+      comms_ = c;
+      // V3.14.6: txPeakUsage is since the receiver started (it includes the boot at 38400 with NMEA saturating the line);
+      // this one is the worst 1-s usage seen while the back runs the receiver at its configured speed.
+      if (st_ == RUNNING && c.tx_usage > comms_tx_max_) comms_tx_max_ = c.tx_usage;
+    }
   }
   if (cls == UBX_CLS_ACK && plen >= 2 && pl[0] == UBX_CLS_CFG && pl[1] == UBX_ID_CFG_VALSET) ack_ = (id == UBX_ID_ACK_ACK) ? 1 : 2;
   if (cls == UBX_CLS_MON && id == UBX_ID_MON_VER && plen >= 40) {   // V3.10.1: receiver firmware (FWVER=HPG x.yy)
@@ -327,13 +332,19 @@ void ZedManager::send_tune(bool full) {
   io_->zed_write(b, len);
 }
 
-// V3.9.0: UBX-NAV-SAT + NAV-SIG once per second, own VALSET (a rejection never touches the rest).
+// V3.14.6: quality output = NAV-SIG once per second, NAV-SAT switched OFF in the same VALSET (the satellite counts are
+// taken from NAV-SIG). Field 20/11/2026 (HPG 1.51, UART2 at 230400): MON-COMMS showed the receiver's TX buffer at a peak
+// of 101 %, i.e. output dropped by the receiver; NAV-SAT + NAV-SIG left in the same epoch were the largest burst
+// (~1.3 KB). NAV-SAT alone (which = 1) only when the receiver refuses NAV-SIG.
 void ZedManager::send_monitor(uint8_t which) {
   uint32_t every = rate_ ? rate_ : 1;
   ZedKV kv[2];
   size_t n = 0;
-  if (which & 1) kv[n++] = {port_ == 2 ? zedkey::MSGOUT_NAV_SAT_UART2 : zedkey::MSGOUT_NAV_SAT_UART1, every};
-  if (which & 2) kv[n++] = {port_ == 2 ? zedkey::MSGOUT_NAV_SIG_UART2 : zedkey::MSGOUT_NAV_SIG_UART1, every};
+  const uint32_t sat = port_ == 2 ? zedkey::MSGOUT_NAV_SAT_UART2 : zedkey::MSGOUT_NAV_SAT_UART1;
+  const uint32_t sig = port_ == 2 ? zedkey::MSGOUT_NAV_SIG_UART2 : zedkey::MSGOUT_NAV_SIG_UART1;
+  if (which == 2) { kv[n++] = {sig, every}; kv[n++] = {sat, 0}; }
+  else if (which == 1) kv[n++] = {sat, every};
+  else { kv[n++] = {sat, every}; kv[n++] = {sig, every}; }
   uint8_t b[48];
   size_t len = ubx_valset_ram(kv, n, b, sizeof(b));
   ack_ = 0;
@@ -360,7 +371,7 @@ void ZedManager::set_nav_rate(uint8_t hz, uint32_t now_ms) {
   uint8_t eff = hz;
   zed_gnss_for_rate(hz, &eff);
   rate_ = eff;
-  mon_ = 0; mon_t0_ = 0; mon_try_ = 3; mon_ok_ = 0; mon_rounds_ = 0;   // V3.9.0: quality output follows the new rate
+  mon_ = 0; mon_t0_ = 0; mon_try_ = 2; mon_ok_ = 0; mon_rounds_ = 0;   // V3.9.0: quality output follows the new rate
   if (st_ == RUNNING) { cfg_with_rate_ = true; go(CONFIGURE, now_ms); }
 }
 
@@ -479,13 +490,11 @@ void ZedManager::tick(uint32_t now_ms) {
         else if (!mon_t0_) { send_monitor(mon_try_); mon_t0_ = now_ms | 1; }
         else if (ack_ == 1 || ack_ == 2 || now_ms - mon_t0_ >= 1000) {
           bool ok = ack_ == 1;
-          if (ok) mon_ok_ |= mon_try_;
-          if (mon_try_ == 3 && !ok) { mon_try_ = 1; mon_t0_ = 0; }          // try NAV-SAT alone
-          else if (mon_try_ == 1) { mon_try_ = 2; mon_t0_ = 0; }            // then NAV-SIG alone
+          if (mon_try_ == 2 && !ok) { mon_try_ = 1; mon_t0_ = 0; }          // V3.14.6: NAV-SIG refused -> NAV-SAT alone
           else {
-            mon_ = mon_ok_ == 3 ? 1 : mon_ok_ == 1 ? 4 : mon_ok_ == 2 ? 5 : 2;
+            mon_ = mon_try_ == 2 ? 1 : ok ? 4 : 2;                           // 1 NAV-SIG on (NAV-SAT off), 4 only NAV-SAT
             mon_set_ms_ = now_ms;
-            if (mon_ == 2 && mon_rounds_ < 2) { mon_rounds_++; mon_try_ = 3; mon_t0_ = now_ms | 1; mon_ = 6; }   // retry in 30 s
+            if (mon_ == 2 && mon_rounds_ < 2) { mon_rounds_++; mon_try_ = 2; mon_t0_ = now_ms | 1; mon_ = 6; }   // retry in 30 s
           }
         }
       }
@@ -497,12 +506,12 @@ void ZedManager::tick(uint32_t now_ms) {
       // Signed differences: bytes fed after this tick's clock reading can carry a slightly later time.
       // V3.14.4: with both messages accepted, EACH one is watched (field 20/11/2026: the satellite counts in the app were
       // older than the NAV-PVT ones, i.e. NAV-SAT had stopped too). The oldest arrival decides; 0 = not since boot.
-      uint32_t last = mon_ == 4 ? t_sat_ : mon_ == 5 ? t_sig_ :
-                      (t_sat_ == 0 || t_sig_ == 0) ? 0 : ((int32_t)(t_sat_ - t_sig_) < 0 ? t_sat_ : t_sig_);
+      // V3.14.6: NAV-SAT is off when NAV-SIG is accepted, so only the message that should arrive is watched.
+      uint32_t last = mon_ == 4 ? t_sat_ : t_sig_;
       if ((mon_ == 1 || mon_ == 4 || mon_ == 5) && (int32_t)(now_ms - mon_set_ms_) >= (int32_t)wait &&
           (last == 0 || (int32_t)(now_ms - last) >= (int32_t)wait)) {
         mon_rearms_++; if (mon_streak_ < 255) mon_streak_++;
-        mon_ = 0; mon_t0_ = 0; mon_try_ = 3; mon_ok_ = 0; mon_rounds_ = 0; mon_last_ms_ = 0;
+        mon_ = 0; mon_t0_ = 0; mon_try_ = 2; mon_ok_ = 0; mon_rounds_ = 0; mon_last_ms_ = 0;
       }
       uint32_t quiet = now_ms - last_ubx_ms_;
       if (quiet >= 1500 && dt >= 1000) { poll_ver(); t0_ = now_ms; }
@@ -515,7 +524,7 @@ void ZedManager::tick(uint32_t now_ms) {
         comms_t_ = now_ms | 1;
         comms_polls_++;
       }
-      if (quiet >= 5000) { zed_resets_++; cand_ = 0; set_applied_ = false; tune_ = 0; mon_ = 0; mon_t0_ = 0; mon_try_ = 3; mon_ok_ = 0; mon_rounds_ = 0; go(DETECT, now_ms); }   // receiver reset or unplugged
+      if (quiet >= 5000) { comms_tx_max_ = 0; zed_resets_++; cand_ = 0; set_applied_ = false; tune_ = 0; mon_ = 0; mon_t0_ = 0; mon_try_ = 2; mon_ok_ = 0; mon_rounds_ = 0; go(DETECT, now_ms); }   // receiver reset or unplugged
       break;
     }
   }

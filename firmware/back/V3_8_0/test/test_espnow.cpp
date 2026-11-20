@@ -793,8 +793,10 @@ TEST(quality, nav_sat_sig_enabled_at_1hz_and_summarised) {
   CHECK_EQ((int)w.back->zed().monitor_state(), 1);
   CHECK_EQ(w.zed.sig_every[w.zed.port], (uint32_t)w.back->zed().nav_rate());   // once per second at any rate
   const GnssQuality& q = w.back->quality();
-  CHECK(q.have_sat && q.have_sig);
-  CHECK_EQ(q.sv_tracked, 20); CHECK_EQ(q.sv_used, 18);
+  CHECK(q.have_sig && !q.have_sat);                                             // V3.14.6: NAV-SAT off, counts from NAV-SIG
+  CHECK_EQ(w.zed.sat_every[w.zed.port], 0u);
+  CHECK_EQ(q.sig_sv_tracked, 20); CHECK_EQ(q.sig_sv_used, 18);
+  CHECK_EQ((int)w.back->status().sv_tracked, 20); CHECK_EQ((int)w.back->status().sv_used, 18);
   CHECK_EQ(q.sig_tracked, 40); CHECK_EQ(q.sig_l2, 20);
   CHECK_EQ(q.sig_used, 36); CHECK_EQ(q.sig_cr_used, 36); CHECK_EQ(q.sig_weak, 4);
   CHECK_EQ(q.cno_mean, 44); CHECK_EQ(q.cno_min, 44); CHECK_EQ(q.cno_max, 44);
@@ -1095,15 +1097,24 @@ TEST(comms, receiver_without_mon_comms_keeps_working) {
   CHECK(w.chest.gnss.size() > 200);
 }
 
-TEST(quality, lost_nav_sat_alone_is_requested_again) {
+TEST(quality, nav_sat_is_switched_off_and_counts_come_from_nav_sig) {
+  // V3.14.6: field 20/11/2026, MON-COMMS TX peak 101 % on the receiver. NAV-SAT is switched off (even if the receiver's
+  // saved configuration had it on) and the satellite counts come from NAV-SIG, so the 1 Hz burst is about half.
   World w(2);
+  w.zed.sat_every[2] = 1;                                         // saved configuration of the receiver: NAV-SAT on
   w.run_ms(15000);
   CHECK_EQ((int)w.back->zed().monitor_state(), 1);
-  w.zed.sat_every[w.zed.port] = 0;                               // NAV-SIG keeps arriving, NAV-SAT does not
-  w.run_ms(13000);
-  CHECK_EQ(w.back->zed().monitor_rearms(), 1u);
-  CHECK_EQ(w.zed.sat_every[w.zed.port], (uint32_t)w.back->zed().nav_rate());
-  CHECK(w.back->zed().nav_sat_count() > 0 && w.back->zed().nav_sig_count() > 0);
+  CHECK_EQ(w.zed.sat_every[2], 0u);
+  CHECK_EQ(w.zed.sig_every[2], (uint32_t)w.back->zed().nav_rate());
+  uint32_t sat0 = w.back->zed().nav_sat_count();
+  w.run_ms(10000);
+  CHECK_EQ(w.back->zed().nav_sat_count(), sat0);                   // nothing more
+  CHECK(w.back->zed().nav_sig_count() >= 9);
+  BackStatus st = w.back->status();
+  CHECK_EQ((int)st.sv_tracked, 20); CHECK_EQ((int)st.sv_used, 18);
+  CHECK_EQ(w.back->zed().monitor_rearms(), 0u);
+  ZedUartBudget b = w.back->zed().budget();
+  CHECK(b.burst_bytes < 2200);                                     // PVT + NAV-SIG(120) + RXM-RTCM, no NAV-SAT
 }
 
 TEST(quality, stale_counts_are_not_reported_as_current) {
@@ -1116,7 +1127,7 @@ TEST(quality, stale_counts_are_not_reported_as_current) {
   BackStatus b = w.back->status();
   CHECK_EQ((int)b.sv_tracked, 0); CHECK_EQ((int)b.sv_used, 0); CHECK_EQ((int)b.sig_tracked, 0); CHECK_EQ((int)b.cno_mean, 0);
   CHECK(b.quality_age_s >= 6 && b.quality_age_s != 255);        // the age still says how old the last one is
-  CHECK_EQ((int)w.back->quality().sv_tracked, 20);               // the monitor keeps the last values
+  CHECK_EQ((int)w.back->quality().sig_sv_tracked, 20);           // the monitor keeps the last values
 }
 
 // ---------------------------------------------------------------- V3.10.2 adaptive transmit power

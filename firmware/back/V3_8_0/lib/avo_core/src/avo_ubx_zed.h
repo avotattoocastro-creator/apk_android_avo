@@ -154,7 +154,7 @@ class ZedManager {
   bool rate_applied() const { return rate_ok_; }
   // Precision profile: 0 not sent, 1 full (model + RTK fixed + constellations + masks), 2 reduced (model + RTK fixed), 3 rejected
   uint8_t tune_state() const { return tune_; }
-  // V3.9.0: NAV-SAT/NAV-SIG output (1 Hz): 0 not requested yet, 1 both enabled, 2 rejected, 3 skipped (UART too slow),
+  // V3.9.0: NAV-SAT/NAV-SIG output (1 Hz): 0 not requested yet, 1 enabled (V3.14.6: NAV-SIG on, NAV-SAT off), 2 rejected, 3 skipped (UART too slow),
   // 4 only NAV-SAT accepted, 5 only NAV-SIG accepted (V3.10.1: each one is retried on its own after a NAK)
   uint8_t monitor_state() const { return mon_; }
   // V3.13.12: times the NAV-SAT/SIG output was asked for again because it stopped arriving for 10 s (field 02/11/2026:
@@ -172,9 +172,10 @@ class ZedManager {
   // V3.14.4: UBX-MON-COMMS of the port wired to the back, polled every 5 s while RUNNING (valid = answered).
   const ZedComms& comms() const { return comms_; }
   uint32_t comms_polls() const { return comms_polls_; }
+  uint8_t comms_tx_max_running() const { return comms_tx_max_; }   // V3.14.6: worst TX usage (%) while RUNNING
   static const uint32_t kCommsPollMs = 5000;
   // V3.14.4: budget used to decide whether NAV-SAT/NAV-SIG fit on the UART (state 3 "UART too slow" otherwise).
-  ZedUartBudget budget() const { return zed_uart_budget(baud_, rate_, true); }
+  ZedUartBudget budget() const { return zed_uart_budget(baud_, rate_, true, 0); }   // V3.14.6: NAV-SIG only (NAV-SAT off)
   const char* receiver_fw() const { return fwver_; }   // "HPG 1.32" etc. (empty until MON-VER arrives)
   const ZedGnssSet& gnss_set() const { return set_; }
   void set_dyn_model(ZedDynModel m) { dyn_ = m; }
@@ -195,13 +196,14 @@ class ZedManager {
   void send_config(bool with_rate);
   void send_tune(bool full);
   void send_monitor(uint8_t which);   // 3 both, 1 NAV-SAT, 2 NAV-SIG
-  uint8_t mon_ = 0, mon_try_ = 3, mon_ok_ = 0, mon_rounds_ = 0;
+  uint8_t mon_ = 0, mon_try_ = 2, mon_ok_ = 0, mon_rounds_ = 0;
   uint32_t mon_t0_ = 0;
   uint32_t mon_last_ms_ = 0, mon_set_ms_ = 0, mon_rearms_ = 0, zed_resets_ = 0;
   uint8_t mon_streak_ = 0;
   uint32_t n_pvt_ = 0, n_sat_ = 0, n_sig_ = 0, t_sat_ = 0, t_sig_ = 0;   // V3.14.4
   ZedComms comms_;
   uint32_t comms_t_ = 0, comms_polls_ = 0;
+  uint8_t comms_tx_max_ = 0;
   char fwver_[25] = {0};
   ZedIo* io_;
   UbxStream ubx_;

@@ -24,6 +24,28 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Espalda PROTOTIPO 3.14.6 — Solo NAV-SIG (NAV-SAT apagado): el búfer de salida del receptor llegaba al 101 %
+**Autor:** Claude · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` (PR #113) · **CI:** ver PR
+**Qué se vio (monitor de AVO Update, 22:37–22:40, espalda 3.14.5):**
+- **Arranque:** el ZED sale a 38 400 (velocidad de fábrica) y tarda más de 2 s en hablar. La primera vuelta de escucha no lo oye. En la segunda vuelta llena la línea: 3 825 B/s de los 3 840 que caben, con ~70 frases NMEA por segundo de su configuración guardada.
+  - Corrección al informe: no estaba a 460 800. Los bytes sin tramas a 230 400/460 800 eran su señal de 38 400 leída a otra velocidad.
+- **En marcha:**
+  - ZED en **UART2**, 230 400 baudios, firmware **HPG 1.51**.
+  - NAV-SAT y NAV-SIG llegando en ese momento, con 0 UBX malos y 0 desbordes de la FIFO.
+  - Calidad: 25/31 satélites, 50 señales, 0 con fase y C/N₀ media 33 dBHz.
+- **MON-COMMS:** búfer TX del receptor con **pico del 101 %**. El receptor llegó a descartar salida.
+- **Modo carga por USB:** a los 23 s la espalda detecta el USB (GPIO20 = 175 mV) y entra en modo carga, con el GPS apagado. Con el cable puesto solo se observan unos 20 s.
+**Qué cambia:**
+- Mensajes de calidad: solo **NAV-SIG** a 1 Hz.
+  - NAV-SAT se **apaga** en el mismo VALSET, aunque la configuración guardada del receptor lo tuviera activado.
+  - Los satélites seguidos y usados se cuentan con NAV-SIG (satélites distintos entre sus señales).
+  - La ráfaga de 1 Hz baja de ~1,3 KB a ~0,9 KB con 50 señales.
+  - NAV-SAT solo queda como respaldo si el receptor rechaza NAV-SIG (estado 4).
+- La vigilancia mira solo el mensaje que debe llegar.
+- Monitor: «max en marcha» de MON-COMMS (peor uso del búfer TX desde que la espalda configura el receptor), separado del pico desde el arranque, que incluye la fase saturada a 38 400.
+- `BackStatus` sin cambios de formato. Pruebas de host: 52 casos y 527 comprobaciones.
+**Validación:** IMPLEMENTADO · CI ver PR · **NO VERIFICADO**.
+
 ## 2026-11-20 — Android 2.15-gnss-dev2 (vc 49) — «No usadas por el receptor» deja de presentarse como pérdida
 **Autor:** Claude · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` (PR #113)
 **Qué se vio (usuario, 22:24, espalda 3.14.5):**

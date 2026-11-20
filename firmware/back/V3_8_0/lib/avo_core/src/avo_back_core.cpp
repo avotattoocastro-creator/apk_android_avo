@@ -259,9 +259,10 @@ BackStatus BackCore::status() const {
   // from the last NAV-SAT that had arrived, presented as current. Zero = "no fresh summary"; format unchanged.
   {
     const uint32_t now = p_->now_ms(), ts = zed_.last_nav_sat_ms();
-    const bool sat_fresh = q_.have_sat && ts && (int32_t)(now - ts) <= (int32_t)kQualityFreshMs;
     const bool sig_fresh = q_.have_sig && q_ms_ && (int32_t)(now - q_ms_) <= (int32_t)kQualityFreshMs;
+    const bool sat_fresh = q_.have_sat && ts && (int32_t)(now - ts) <= (int32_t)kQualityFreshMs;
     if (sat_fresh) { s.sv_tracked = q_.sv_tracked; s.sv_used = q_.sv_used; }
+    else if (sig_fresh) { s.sv_tracked = q_.sig_sv_tracked; s.sv_used = q_.sig_sv_used; }   // V3.14.6: NAV-SAT off
     if (sig_fresh) {
       s.sig_tracked = q_.sig_tracked; s.sig_used = q_.sig_used; s.sig_cr_used = q_.sig_cr_used; s.sig_corr = q_.sig_corr;
       s.sig_l2 = q_.sig_l2; s.sig_l2_used = q_.sig_l2_used; s.sig_weak = q_.sig_weak;
