@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-20 — CI — Workflow nuevo `testflight-centro-multimedia.yml` (app personal, fuera de AVO)
-**Autor:** Claude (petición del usuario 20/11 23:46, avisado antes de tocar workflows) · **Rama:** `tarea/centro-multimedia-testflight` · **CI:** ver la ejecución de la rama
+**Autor:** Claude (petición del usuario 20/11 23:46, avisado antes de tocar workflows) · **Rama:** `tarea/centro-multimedia-testflight` · **CI:** run 44831967871 ✅ (build 1 subida a TestFlight)
 **Qué cambia:** workflow **nuevo** que descarga el repositorio público `centro-multimedia` (app iOS personal de
 reproducción multimedia) y lo sube a TestFlight con los mismos secretos y el mismo sistema que `build-avo-ipad.yml`
 (Xcode 26, archivo sin firmar, firma en la nube al exportar). Registra el bundle id `org.avoperformance.centromultimedia`
@@ -33,7 +33,7 @@ por la API de App Store Connect si no existe y falla con instrucciones si falta 
 **Por qué:** reutilizar los secretos de App Store Connect sin copiarlos a otro repositorio.
 **Archivos:** `.github/workflows/testflight-centro-multimedia.yml`, este registro.
 **No se ha tocado:** `build-avo-ipad.yml`, el bundle id ni el número de build de la app iPad de AVO, `develop`. No hace falta fusionar en `develop`: se lanza con push a esta rama.
-**Validación:** IMPLEMENTADO · CI pendiente · NO VERIFICADO en dispositivo.
+**Validación:** COMPILADO / CI (run 44831967871, subida aceptada por App Store Connect) · NO VERIFICADO en dispositivo.
 
 ---
 
