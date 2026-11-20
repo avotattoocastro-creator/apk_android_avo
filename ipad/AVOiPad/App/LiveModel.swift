@@ -136,6 +136,21 @@ final class LiveModel {
 
     // ------------------------------------------------------------------ lista
 
+    /// Directos activos ahora (pecho encendido: en espera, grabando o en pausa), para el selector y la barra lateral.
+    var activeSessions: [LiveSessionRef] { available.filter { !$0.meta.isEnded } }
+
+    /// Lista de directos en segundo plano (barra lateral «LIVE»), cada 20 s mientras la app está abierta.
+    /// No abre ningún directo por su cuenta: solo actualiza la lista.
+    @MainActor
+    func backgroundLoop() async {
+        while !Task.isCancelled {
+            if !app.captureMode, await ensureSignedIn(), !busy {
+                if let list = try? await client.liveSessions() { available = list }
+            }
+            try? await Task.sleep(nanoseconds: 20_000_000_000)
+        }
+    }
+
     @MainActor
     func refresh() async {
         guard signedCode != nil else { return }
@@ -143,10 +158,10 @@ final class LiveModel {
         defer { busy = false }
         do {
             available = try await client.liveSessions()
-            message = available.isEmpty ? "No hay ningún directo ahora. Activa «Directo (LIVE en el iPad)» en Compartir del Android y empieza a grabar." : nil
+            message = available.isEmpty ? "No hay ningún directo ahora. Enciende el pecho conectado al Android con «Directo (LIVE en el iPad)» activado en Compartir." : nil
             error = nil
-            // si solo hay uno grabando, se abre solo
-            if source == .none, let first = available.first(where: { !$0.meta.isEnded }) { open(first) }
+            // si hay un directo activo y no se está viendo ninguno, se abre el primero (grabando antes que en espera)
+            if source == .none, let first = available.first(where: { $0.meta.state == "REC" }) ?? activeSessions.first { open(first) }
         } catch let e {
             error = e.localizedDescription
         }

@@ -24,6 +24,33 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Integración: motor 2.0.0-dev15 → dev23 (KB-1 1.13.0 → 1.21.0) en `develop`
+**Autor:** Claude (chat integrador, petición del usuario 20/11 21:02: «fusióname todos los pasos del motor pendientes»)
+**Qué entra:** PR #99, #101, #102, #104, #106, #107, #108, #109 y #110 (apilados: #110 contiene los ocho anteriores),
+fusionados con *merge commit* a través de #110. Se trajo `develop` (con el PR #111, LIVE con presencia) a la rama y se
+conservaron las dos partes en este registro y en la tabla de estado (fila del iPad de #111, fila del motor de dev23).
+**CI previo en la rama:** motor 44802462967 ✅ (Linux con JNI, Windows, Android ×3 ABI), Android 44808102888 ✅ y
+Windows 44808108216 ✅. El iPad compila y sube a TestFlight al entrar en `develop`.
+**No se ha tocado:** lógica del motor, firmware, workflows, firmas ni contratos binarios (todo es base científica).
+**Validación:** COMPILADO / CI · **NO VERIFICADO** con caballos reales.
+
+---
+
+## 2026-11-20 — Android 2.14-presencia-dev1 · iPad · reglas RTDB — Directo desde que se enciende el pecho; varios caballos en el iPad
+**Autor:** Claude (petición del usuario, 20/11 20:55, con boceto sobre la build 202: «selector para cuando hay más de 1
+caballo a la vez», «lista sistemas conectados» bajo LIVE, «que el pecho mande posición en cuanto se encienda, tiempo
+real al servidor cada segundo sin grabar; el raw es solo cuando entra en la geocerca») · **Rama:** `claude/live-presencia`
+**Qué cambia:**
+- **Android (vc 47):** `LiveRecorder` con presencia (`IDLE` 1 Hz desde la primera `TELEMETRY`; `REC` 2 Hz; fin tras 60 s
+  sin `TELEMETRY`); `LiveShare` comprueba cada 5 s.
+- **iPad:** estado «EN ESPERA»; selector de caballo (chips) cuando hay más de un directo; sección «EN DIRECTO» en la barra
+  lateral con los sistemas conectados (lista en segundo plano cada 20 s).
+- **Reglas RTDB:** `state` admite `IDLE` (prueba nueva en el emulador). Hay que publicarlas a mano.
+**No se ha tocado:** firmware (el pecho ya manda `TELEMETRY` sin grabar), contratos binarios, workflows, firmas.
+**Validación:** IMPLEMENTADO · CI: ver PR · **NO VERIFICADO** en dispositivos.
+
+---
+
 ## 2026-11-20 — Motor 2.0.0-dev23 / KB-1 1.21.0 — Estudio horario 19:08: DMD en potros de 2 años y auditoría de sobreentrenamiento (A9/A10)
 **Autor:** Claude (tarea programada, estudio horario) · **Rama:** `claude/kb-estudio-2026-11-20-1908` (sale de
 `claude/kb-estudio-2026-11-20-1809`, PR #109) · **CI:** ver PR

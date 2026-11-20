@@ -167,6 +167,45 @@ struct RootView: View {
         .accessibilityIdentifier("nav.live")
     }
 
+    /// Directos activos en el servidor (uno por pecho encendido): tocar abre LIVE con ese caballo.
+    private func serverLiveSection(_ live: LiveModel) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Circle().fill(Avo.red).frame(width: 8, height: 8)
+                Text("EN DIRECTO").font(.caption.weight(.bold)).tracking(1.2).foregroundStyle(Avo.text)
+                Spacer()
+                Text("\(live.activeSessions.count)").font(.caption2.monospacedDigit()).foregroundStyle(Avo.textDim)
+            }
+            .padding(.horizontal, 12)
+            ForEach(live.activeSessions) { (r: LiveSessionRef) in
+                let on: Bool = app.page == .live && live.current?.id == r.id
+                Button {
+                    app.page = .live
+                    if live.current?.id != r.id { live.open(r) }
+                } label: {
+                    HStack(spacing: 10) {
+                        Image(systemName: r.meta.state == "REC" ? "record.circle" : "location.circle")
+                            .font(.callout).frame(width: 22).foregroundStyle(r.meta.state == "REC" ? Avo.red : Avo.ok)
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text(r.meta.horseName.isEmpty ? "Caballo sin asignar" : r.meta.horseName)
+                                .font(.callout.weight(.semibold)).foregroundStyle(Avo.text).lineLimit(1)
+                            Text([r.meta.riderName, r.meta.stateText].filter { !$0.isEmpty }.joined(separator: " · "))
+                                .font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1)
+                        }
+                        Spacer(minLength: 0)
+                    }
+                    .padding(.horizontal, 12).padding(.vertical, 8)
+                    .background((on ? Avo.red : Avo.ok).opacity(0.12), in: RoundedRectangle(cornerRadius: 7))
+                    .overlay(RoundedRectangle(cornerRadius: 7).stroke((on ? Avo.red : Avo.ok).opacity(0.5), lineWidth: 1))
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(.top, 10)
+        .accessibilityIdentifier("nav.serverLive")
+    }
+
     private var sidebar: some View {
         VStack(spacing: 0) {
             ScrollView {
@@ -177,6 +216,8 @@ struct RootView: View {
                     // trainer's sketches 14/11/2026: hidden until the system connects by Bluetooth; «LIVE» with one row per
                     // connected equipment (caballo/jockey, máximo 4); each row opens the window that manages the hardware
                     if !app.bleLinks.isEmpty { liveSection }
+                    // boceto del entrenador 20/11/2026: debajo de LIVE, los sistemas conectados al servidor (pecho encendido)
+                    if let live = app.live, !live.activeSessions.isEmpty { serverLiveSection(live) }
                 }
                 .padding(.vertical, 10)
                 .padding(.horizontal, 8)
@@ -216,6 +257,7 @@ struct RootView: View {
             .padding(.vertical, 10)
         }
         .background(Avo.surface)
+        .task { if let live = app.live { await live.backgroundLoop() } }
         // «Equipo conectado» window (kept here: the root modifier chain is already at the type-checker limit)
         .sheet(isPresented: Binding(get: { app.hardwareVisible }, set: { app.hardwareVisible = $0 })) {
             HardwareSheet().environment(app).avoColorScheme()
