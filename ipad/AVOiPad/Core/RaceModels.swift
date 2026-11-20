@@ -97,6 +97,10 @@ struct Race: Codable, Equatable, Identifiable {
     /// State of the track (RaceGoing raw value, France Galop scale), typed by the user: the tracking PDF has none.
     /// Optional so carreras.json written by earlier builds still loads.
     var going: String? = nil
+    /// Penetrometer reading that came with the state of the track (e.g. 3,5), when known.
+    var goingPenetrometer: Double? = nil
+    /// Where the state of the track came from: "pdf" (tracking PDF), "equidia" (race page) or "manual".
+    var goingSource: String? = nil
 
     var fieldSize: Int { runners.count }
 
