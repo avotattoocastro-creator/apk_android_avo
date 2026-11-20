@@ -184,6 +184,17 @@ Detalle: `knowledge/estudios/2026-11-20_0909_v200_a9_ecg_a11_umbrales.md`.
   relativos por caballo. Sin zancada, FC de carrera ni V200 publicadas.
 Detalle: `knowledge/estudios/2026-11-20_1008_tendon_or_arabes_llano.md`.
 
+**Estudio horario 20/11 11:10 (KB-1 1.13.0, motor 2.0.0-dev15, sin cambios de lógica).**
+- **Regreso tras layup (planificador):** la evidencia está en los primeros 10–21 d de trabajo rápido tras ≥ 60 d sin él
+  y es de fractura de húmero. Carrier 1998, PMID 9604029, da RR 71 y 45 sin IC y su DOI no está confirmado. Choi 2026
+  (Corea) da OR 13,5 (5,5–33,1) en los primeros 20 d tras un layup > 60 d. Las dos fuentes solo se han leído por
+  resumen [E-r]. Se propone **P7**, una ventana de reincorporación de 21 d (prudente 30 d) [I], sin implementar. No es
+  una predicción de lesión.
+- **Sensores 2025–2026:** Poinsard 2026 da una repetibilidad baja de la V200 en campo (ICC 0,50, trotones), lo que
+  apoya que A9 siga siendo informativa. Van den Broek 2025 mide el sesgo de la curva en la zancada (LZ −2,1 %), que es
+  del orden de la señal de A8. Li 2026 (EVJ) sigue sin leerse. No hay datos nuevos de árabes de llano.
+Detalle: `knowledge/estudios/2026-11-20_1110_regreso_layup_sensores_2025_2026.md`.
+
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se
    guarda en `knowledge/estudios/AAAA-MM-DD_<tema>.md` con fuentes y etiquetas [E]/[I]/[NV].

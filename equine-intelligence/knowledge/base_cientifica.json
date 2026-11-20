@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.12.0",
+  "version": "1.13.0",
   "fecha": "2026-11-20",
   "razas": [
     "PSI",
@@ -82,6 +82,11 @@
       "fecha": "2026-11-20",
       "titulo": "Estudio horario 10:08 UTC: OR del TFDS (Takahashi, Lam) e índice tendinoso; árabes de carreras en llano (Polonia, Turquía)",
       "archivo": "estudios/2026-11-20_1008_tendon_or_arabes_llano.md"
+    },
+    {
+      "fecha": "2026-11-20",
+      "titulo": "Estudio horario 11:10 UTC: regreso tras layup para el planificador (P7) y estudios de sensores 2025–2026",
+      "archivo": "estudios/2026-11-20_1110_regreso_layup_sensores_2025_2026.md"
     }
   ],
   "fuentes": [
@@ -190,7 +195,7 @@
       "idioma": "en",
       "raza_fuente": "PSI",
       "pmid": "9604029",
-      "nota": "case-crossover; RR 71 (10 d) y 45 (21 d) tras ≥ 2 meses sin trabajos rápidos oficiales cronometrados, SOLO húmero; la pelvis tiene otro perfil sin RR en el resumen. DOI 10.2460/javma.1998.212.10.1582 sin confirmar",
+      "nota": "case-crossover; RR 71 (10 d) y 45 (21 d) tras ≥ 2 meses sin trabajos rápidos oficiales cronometrados, SOLO húmero; la pelvis tiene otro perfil sin RR en el resumen. DOI no confirmado (Crossref denegado en la sesión; probablemente sin DOI): citar por PMID 9604029",
       "verificado_fecha": "2026-11-20"
     },
     {
@@ -409,7 +414,13 @@
     {
       "id": "POINSARD_2026",
       "cita": "Poinsard, Anson & Billat 2026, Animals 16:1598 (repetibilidad de V200 y recuperación de FC en trotones)",
-      "url": "https://www.mdpi.com/2076-2615/16/11/1598"
+      "url": "https://www.mdpi.com/2076-2615/16/11/1598",
+      "acceso": "RESUMEN",
+      "pais": "Francia",
+      "idioma": "en",
+      "raza_fuente": "trotón francés",
+      "nota": "60 caballos, 483 sesiones; ICC V200 0,50 (0,28–0,66), V150 0,59; recuperación FC 60 s ICC 0,60, MDC95 26 lpm; coste cardíaco ICC 0,67, MDC95 0,04 latidos/m",
+      "verificado_fecha": "2026-11-20"
     },
     {
       "id": "CHOI_PARKIN_2025_TEXTO",
@@ -638,11 +649,23 @@
     },
     {
       "id": "WONG_2023_DESCANSOS",
-      "cita": "Wong ASM et al. 2023, Front Vet Sci 10:1260554, doi 10.3389/fvets.2023.1260554"
+      "cita": "Wong ASM et al. 2023, Front Vet Sci 10:1260554, doi 10.3389/fvets.2023.1260554",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Australia (Victoria)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "2 años, frente a descansos cortos y frecuentes: cortos e infrecuentes IRR 4,02, largos e infrecuentes 2,36, largos y frecuentes 3,44; adultos, largos y frecuentes IRR 0,66 (0,46–0,95)",
+      "verificado_fecha": "2026-11-20"
     },
     {
       "id": "HITCHENS_2018_CALIFORNIA",
-      "cita": "Hitchens PL, Hill AE, Stover SM 2018, Front Vet Sci 5:217, doi 10.3389/fvets.2018.00217"
+      "cita": "Hitchens PL, Hill AE, Stover SM 2018, Front Vet Sci 5:217, doi 10.3389/fvets.2018.00217",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "EE. UU. (California)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "univariable: tiempo desde el último layup OR 1,22 (0,96–1,54) por duplicación; pendiente tras el layup OR 0,89 (0,81–0,98); nada del layup en el modelo final; carreras/año OR 3,14 por duplicación; distancia del mes previo OR 0,84 por furlong",
+      "verificado_fecha": "2026-11-20"
     },
     {
       "id": "GEORGOPOULOS_PARKIN_2017",
@@ -1380,6 +1403,129 @@
       "raza_fuente": "árabe, PSI y cuarto de milla",
       "nota": "en 1.006 m la velocidad máxima está en el tramo central y cae en el último; magnitud y n [NV]",
       "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "CHOI_ROSANOWSKI_PARKIN_2026",
+      "cita": "Choi Y, Rosanowski SM, Parkin TD 2026, JAVMA (en línea 16/01/2026): regreso tras layup y fractura completa de húmero, Corea del Sur 2009–2022",
+      "doi": "10.2460/javma.25.08.0567",
+      "pmid": "41547036",
+      "acceso": "AGREGADOR",
+      "pais": "Corea del Sur",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "131 casos y 660 controles; primeros 20 d tras reanudar el trabajo en pista después de un layup > 60 d: OR 13,5 (5,5–33,1); sin carreras en 60 d: OR 11,6 (5,5–24,6); layup > 180 d sin OR visible [NV]; texto completo [NV]",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "MORRICE_WEST_2024_PREPARACION",
+      "cita": "Morrice-West AV, Thomas M, Wong ASM, Flash M, Whitton RC, Hitchens PL 2024, Front Vet Sci",
+      "doi": "10.3389/fvets.2024.1481016",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Australia (Victoria)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "213.569 salidas; preparación ≥ 10 sem OR 1,25 (1,05–1,49) frente a > 0–< 4 sem; primera salida OR 1,15 (0,97–1,35); corrió en 15 d OR 0,89 (0,81–0,98); lesión previa 1: OR 1,48, ≥ 2: OR 2,06",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "HISA_AVISO_HOMBRO",
+      "cita": "HISA, aviso sobre lesiones de hombro en caballos que vuelven de layup (noticia de Daily Racing Form)",
+      "url": "https://www.drf.com/news/hisa-issues-shoulder-injury-advisory-horses-returning-layups",
+      "acceso": "NOTICIA",
+      "pais": "EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "descriptivo, sin RR: 40 % de las fracturas fatales proximales del anterior sin trabajo rápido en los 60 d previos; no es fuente científica",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "UCDAVIS_VORL_HUMERO",
+      "cita": "UC Davis VORL, hoja divulgativa sobre fracturas de húmero (2012)",
+      "url": "https://vorl.vetmed.ucdavis.edu/sites/g/files/dgvnsk4731/files/inline-files/Humeral_fractures_041812_v2.pdf",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "EE. UU. (California)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "contexto sin cifras de riesgo: fracturas de estrés al iniciar el entrenamiento o al volver del layup",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "LI_2026_EVJ",
+      "cita": "Li et al. 2026, Equine Vet J: tecnologías wearables y ML para la fatiga en caballos de deporte",
+      "doi": "10.1002/evj.70360",
+      "pmid": "43035340",
+      "acceso": "NO_LEIDO",
+      "pais": "[NV]",
+      "idioma": "en",
+      "raza_fuente": "caballos de deporte (según el título)",
+      "nota": "probable revisión; Wiley y doi.org denegados en la sesión",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "TAKAHASHI_PFAU_2025_AJVR",
+      "cita": "Takahashi Y, Pfau T, Tsuruoka, Yoshida, Edwards, Mukai 2025, Am J Vet Res 87(2)",
+      "doi": "10.2460/ajvr.25.07.0273",
+      "acceso": "AGREGADOR",
+      "pais": "Japón",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "GNSS, 921 caballos, 1.189 salidas: FZ 2,36 ± 0,12 Hz, LZ 7,30 ± 0,39 m, v 17,2 ± 1,15 m/s; LZ −0,11 m en arena frente a hierba (fases 2 y 3)",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "VAN_DEN_BROEK_2025_SENSORS",
+      "cita": "van den Broek, Chan, De Bruyne, Garcia-Alamo, Skotarek Loch, Pfau 2025, Sensors 25(23):7376",
+      "url": "https://www.mdpi.com/journal/sensors",
+      "acceso": "RESUMEN",
+      "pais": "Canadá",
+      "idioma": "en",
+      "raza_fuente": "PSI de chuckwagon (no llano)",
+      "nota": "a 14,5 m/s en curva de 60°/100 m: FZ +2,4 %, LZ −2,1 % (−0,137 m); diferencia entre registradores 0,4–0,9 %",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "MC_SWEENEY_2025_JAVMA",
+      "cita": "Mc Sweeney, Wang, Palmer, … Bayly 2025, JAVMA (antes de imprenta)",
+      "doi": "10.2460/javma.25.04.0268",
+      "acceso": "AGREGADOR",
+      "pais": "EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "IMU + GPS en mantilla, 11.834 caballos, 28.481 carreras, 74 muertes; escala 1–6 sobre 120 d; nivel 6: 0,4 % de salidas, 4 % de muertes, ×44,6 frente al nivel 1; sin IC ni sensibilidad",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "MORRICE_WEST_2025_ANZCVS",
+      "cita": "Morrice-West AV 2025, artículo completo del congreso ANZCVS",
+      "url": "https://www.anzcvs.com.au/",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Australia",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "revisión: predicción de fracturas normalmente < 70 %, ML pobre (Bogossian 2024); variación sobre todo entre caballos",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "SIEGERS_2025_FRISON",
+      "cita": "Siegers et al. 2025, Front Vet Sci",
+      "doi": "10.3389/fvets.2025.1456424",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Países Bajos",
+      "idioma": "en",
+      "raza_fuente": "frisón (trote)",
+      "nota": "fatiga (lactato ≥ 4 mmol/L): duración de zancada −3,1 %, CV +2,5 puntos; solo orden de magnitud [I-raza]",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "SAVOINI_2025_ARXIV",
+      "cita": "Savoini, Bertolaccini, Montavon, Deriaz 2025, arXiv 2503.13578 (preprint)",
+      "url": "https://arxiv.org/abs/2503.13578",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Suiza",
+      "idioma": "en",
+      "raza_fuente": "no indicada",
+      "nota": "1 IMU en cincha 100 Hz, 42 caballos, CNN sano/cojo: 74 % por zancada al galope, 90 % por sesión (29/32); incoherencias internas; no se usa",
+      "verificado_fecha": "2026-11-20"
     }
   ],
   "parametros": [
@@ -1945,6 +2091,38 @@
       ],
       "estado": "INFORMATIVO",
       "nota": "práctica de cuadras polacas para P1/P2 del planificador; no es regla de riesgo"
+    },
+    {
+      "id": "reincorporacion_tras_layup",
+      "valor": {
+        "layup_minimo_d": 60,
+        "ventana_d": 21,
+        "ventana_prudente_d": 30
+      },
+      "evidencia": "E-r (Carrier 1998: 10 y 21 d; Choi 2026: 20 d tras > 60 d) / I (ventana de 21 d y extensión a 30 d)",
+      "fuentes": [
+        "CARRIER_1998",
+        "CHOI_ROSANOWSKI_PARKIN_2026",
+        "HITCHENS_2018_CALIFORNIA"
+      ],
+      "estado": "PROPUESTO",
+      "nota": "para P7 del planificador; fractura de húmero; no es predicción de lesión; árabes [I-raza]"
+    },
+    {
+      "id": "sesgo_curva_zancada",
+      "valor": {
+        "v_m_s": 14.5,
+        "curva_grados_por_100m": 60,
+        "fz_pct": 2.4,
+        "lz_pct": -2.1,
+        "lz_m": -0.137
+      },
+      "evidencia": "E-r",
+      "fuentes": [
+        "VAN_DEN_BROEK_2025_SENSORS"
+      ],
+      "estado": "INFORMATIVO",
+      "nota": "comparar zancada en recta o corregida por curva (A7/A8); chuckwagon, no llano"
     }
   ],
   "reglas": [
@@ -2176,7 +2354,8 @@
     "Regla combinada A1+A2 de Verheyen cuando se lea el texto completo",
     "Contador de muestras saturadas de la cincha en el análisis (si el firmware lo envía)",
     "A1/A2 de Verheyen: el resumen da un umbral CONJUNTO (> 44 km de canter Y > 6 km de galope en 30 d) y galope acumulado protector en añojos; con el texto completo, decidir si A2 por separado se rebaja a INFO o se sustituye por la regla combinada (KB 1.9.0)",
-    "A8: añadir la velocidad del último parcial de 200 m (unidad de Wong 2023, HR 1,18 por 0,1 m/s) junto a la de 600 m, y documentar el umbral como diseño (KB 1.9.0)"
+    "A8: añadir la velocidad del último parcial de 200 m (unidad de Wong 2023, HR 1,18 por 0,1 m/s) junto a la de 600 m, y documentar el umbral como diseño (KB 1.9.0)",
+    "Planificador P7 (estudio 20/11 11:10): ventana de reincorporación de 21 d (prudente 30 d) tras ≥ 60 d sin trabajo rápido, sin dos trabajos rápidos seguidos ni picos de canter; evidencia Carrier 1998 y Choi 2026 solo por resumen; implementar con el planificador (capa 2)"
   ],
   "cola_investigacion": [
     "Texto completo de Verheyen 2006 (Bone, DOI 10.1016/j.bone.2006.05.025): ORs, cortes, límite inferior del canter, ventana de 60 d",
@@ -2201,7 +2380,6 @@
     "Días entre trabajos rápidos en PSI (Johnston 2020 los calcula sin publicarlos) y cualquier programa semanal de árabes de llano",
     "Textos completos bloqueados en el extra 4: Martig 2013 (n, frecuencia, criterio de fallo; vías: DOI/ScienceDirect antibots, PubMed reCAPTCHA, minerva-access sin tesis), Morrice-West 2025 (unidad de 0,25/0,75 e IC de 2,89/8,51; ScienceDirect, OpenAlex bloqueados), Estberg 1998 (velocidad umbral, P75), Vermeulen & Evans 2006 y Gramkow & Evans 2006 (Wiley de pago; ResearchGate sin texto)",
     "Frick 2019 en PMC6335521 o BORIS desde un navegador: umbral de prematuro en la fase de ejercicio (abierto CC BY-NC, bloqueado por reCAPTCHA/Anubis en la sesión)",
-    "DOI de Carrier 1998 (JAVMA 212:1582; probable 10.2460/javma… sin confirmar)",
     "Çelimli, Seyrek-İntaş & Kaya 2004 (Equine Vet Educ 16:81) completo: CSA del TFDS de árabes por edad; Dallas et al. 2013 (EVJ 45 S44, árabes Reino Unido); celdas de las tablas 7–12 de Çalışkan 2020a",
     "Capítulo «Exercise testing in the field» (Couroucé-Malblanc & van Erck-Westergren, Equine Sports Medicine and Surgery, Elsevier) en el libro original: repetibilidad de V200 (la copia en línea vista no era legal; no se usó)",
     "Hamlin 2002 completo (cuánto baja la V200 con sobrecarga) y Ringmark 2015 completo (SLU)",
@@ -2225,7 +2403,10 @@
     "Takahashi 2004 (JAVMA) y Lam 2007 (AJVR) desde avmajournals.avma.org (403 en la sesión): OR exactas; permitir el dominio o que el usuario aporte los PDF (20/11 10:08)",
     "Yildirim 2025 (EVJ, doi 10.1111/evj.14457; OpenAlex lo da como abierto) desde un navegador: OR por superficie en árabes (20/11 10:08)",
     "Tabla S4 de Dąbrowska 2026 (BMC Vet Res): lactato absoluto en galope y carrera de árabes; Nielsen 2006 completo (magnitud de la desaceleración) (20/11 10:08)",
-    "Árabes de llano: zancada, FC de carrera y V200 siguen sin publicarse (2024–2026); búsqueda en polaco, francés y del Golfo/Magreb pendiente (20/11 10:08)"
+    "Árabes de llano: zancada, FC de carrera y V200 siguen sin publicarse (2024–2026); búsqueda en polaco, francés y del Golfo/Magreb pendiente (20/11 10:08)",
+    "Choi, Rosanowski & Parkin 2026 (JAVMA, 10.2460/javma.25.08.0567) en texto completo: OR del layup > 180 d, definición del regreso y si hay árabes o ventana por semanas (20/11 11:10)",
+    "Li 2026 (EVJ 10.1002/evj.70360), Takahashi/Pfau 2025 (AJVR) y Mc Sweeney 2025 (JAVMA) en texto completo; Poinsard 2026 completo (MDPI) para el TE de V200 (20/11 11:10)",
+    "Riesgo por semana tras el regreso con IC (fractura en general y TFDS) y cualquier dato de árabes: no hallado (20/11 11:10)"
   ],
   "historial": [
     {
@@ -2292,6 +2473,11 @@
       "version": "1.12.0",
       "fecha": "2026-11-20",
       "cambio": "Estudio horario 10:08: OR de Takahashi 2004 y Lam 2007 AJVR siguen sin leerse (AVMA 403), solo el sentido de los factores; dos entradas cualitativas propuestas [I] para el índice tendinoso; árabes de llano: 4 fuentes nuevas en texto completo (Polonia, Turquía) con práctica de entrenamiento y 2 parámetros informativos; 10 fuentes nuevas y 2 completadas; sin cambios de lógica; motor 2.0.0-dev14"
+    },
+    {
+      "version": "1.13.0",
+      "fecha": "2026-11-20",
+      "cambio": "Estudio horario 11:10: regreso tras layup — Carrier 1998 (10/21 d) y Choi 2026 (OR 13,5 en 20 d tras > 60 d) solo por resumen; P7 propuesto [I] sin implementar; sensores 2025–2026 (Takahashi/Pfau, van den Broek, Mc Sweeney, Poinsard completada); Li 2026 sin leer; 11 fuentes nuevas y 4 completadas; sin cambios de lógica; motor 2.0.0-dev15"
     }
   ]
 }

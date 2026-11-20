@@ -24,6 +24,28 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Motor 2.0.0-dev15 / KB-1 1.13.0 — Estudio horario 11:10: regreso tras layup (planificador) y sensores 2025–2026
+**Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-1110` (desde `develop/avo-performance-horse` 32e2706; no había PR `claude/kb-*` abierto) · **CI:** ver PR
+**Qué cambia:**
+- Estudio nuevo: `equine-intelligence/knowledge/estudios/2026-11-20_1110_regreso_layup_sensores_2025_2026.md`.
+- `base_cientifica.json` 1.13.0:
+  - 11 fuentes nuevas: Choi, Rosanowski & Parkin 2026, Morrice-West 2024, aviso de HISA, UC Davis VORL, Li 2026,
+    Takahashi/Pfau 2025, van den Broek 2025, Mc Sweeney 2025, Morrice-West 2025 (ANZCVS), Siegers 2025 y Savoini 2025.
+  - 4 fuentes completadas: Carrier 1998 (DOI no confirmado, se cita por PMID), Poinsard 2026, Wong 2023 y
+    Hitchens 2018.
+  - 2 parámetros nuevos: `reincorporacion_tras_layup` (PROPUESTO) y `sesgo_curva_zancada` (INFORMATIVO).
+  - Pendiente nuevo P7 del planificador; cola actualizada.
+- Motor: `ENGINE_VERSION` 2.0.0-dev15 y `KNOWLEDGE_VERSION` 1.13.0, con su prueba. **Sin cambios de lógica, reglas ni
+  umbrales.**
+**Por qué:** el planificador (P1–P6) no tenía evidencia sobre las primeras semanas tras un descanso. Carrier 1998 y
+Choi 2026 apuntan a los días 0–21 tras ≥ 60 d sin trabajo rápido, en fractura de húmero. Las dos solo se han leído por
+resumen, así que P7 queda como diseño [I].
+**Archivos:** el estudio, `base_cientifica.json`, `include/avo_eq/types.h`, `include/avo_eq/knowledge.h`,
+`tests/test_knowledge.cpp`, la ficha 14, `README.md` y la tabla de estado.
+**No se ha tocado:** firmware, contratos binarios, apps, workflows, firmas, `Info.plist`, build de TestFlight.
+**Validación:** IMPLEMENTADO (solo documentación y versiones) · pruebas locales con ASan/UBSan · CI: ver PR ·
+**NO VERIFICADO** con caballos reales.
+
 ## 2026-11-20 — iPad 1.0.0 — Los caballos y jinetes borrados ya no vuelven; copia de seguridad diaria y recuperación
 **Autor:** Claude (petición del usuario, 20/11 11:17: «cada vez que instalo una build nueva me saltan caballos y jinetes
 que había borrado») · **Rama:** `claude/cuadra-borrados-persistentes` · **CI:** ver PR
