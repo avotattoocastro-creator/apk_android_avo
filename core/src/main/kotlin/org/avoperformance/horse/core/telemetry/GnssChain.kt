@@ -93,8 +93,14 @@ object GnssChain {
         if (mov(bp?.backRtcmFramesBad, b?.backRtcmFramesBad)) errs += "tramas RTCM con CRC erróneo en la espalda"
         if (mov(bp?.backRtcmGap, b?.backRtcmGap)) errs += "huecos en la radio reloj → espalda"
         if (mov(bp?.backRtcmNotWritten, b?.backRtcmNotWritten)) errs += "la espalda no puede escribir al receptor (baudios sin detectar)"
-        if (mov(bp?.zedFailed, b?.zedFailed)) errs += "el receptor rechaza mensajes RTCM"
         if (errs.isNotEmpty()) stages += ChainStage("Pérdidas", errs.joinToString("; "), StageState.ERROR)
+        // RXM-RTCM msgUsed = 1 ("not used") is counted together with CRC failures by the back. With a normal caster it
+        // grows all the time (types the receiver does not need: 1033, 1230, constellations switched off), so it is
+        // information, not a loss (field 20/11/2026 22:24: DGNSS with 4.5 msg/s used and this counter growing).
+        if (mov(bp?.zedFailed, b?.zedFailed)) {
+            val r = rate(bp?.zedFailed, b?.zedFailed, dt) ?: 0.0
+            stages += ChainStage("No usadas por el receptor", String.format(java.util.Locale.US, "%.1f msg/s (tipos que no necesita o con error)", r), StageState.PARADO)
+        }
 
         val firstStop = stages.take(7).firstOrNull { it.state == StageState.PARADO }
         val (verdict, vstate) = when {

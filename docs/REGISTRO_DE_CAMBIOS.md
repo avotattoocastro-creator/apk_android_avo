@@ -24,6 +24,20 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Android 2.15-gnss-dev2 (vc 49) — «No usadas por el receptor» deja de presentarse como pérdida
+**Autor:** Claude · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` (PR #113)
+**Qué se vio (usuario, 22:24, espalda 3.14.5):**
+- Pecho y espalda enlazados.
+- Cadena RTCM completa: 1,3–1,6 kB/s en todas las etapas, 4,5 msg/s usados y solución DGNSS.
+- UBX a 13,1 tramas/s a 230 400.
+- NAV-SAT/SIG «activados, pero no llegan», con 3 o más peticiones repetidas.
+- «El receptor rechaza mensajes RTCM» en rojo.
+**Qué cambia:**
+- El contador `zed_fail` de la espalda junta RXM-RTCM con `msgUsed = 1`, es decir, tipos que el receptor no usa, con los CRC erróneos.
+- Ahora sale como «No usadas por el receptor», en ámbar y con su caudal, en lugar de error rojo.
+- Prueba JVM actualizada. vc 48 → **49**.
+**Validación:** IMPLEMENTADO · CI ver PR · NO VERIFICADO.
+
 ## 2026-11-20 — Espalda PROTOTIPO 3.14.5 — UART del ZED otra vez como en la 3.14.3 (la 3.14.4 no enlazaba con el pecho)
 **Autor:** Claude · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` (PR #113) · **CI:** ver PR
 **Qué se vio (usuario, 20/11 21:48–22:08, espalda 3.14.4):**

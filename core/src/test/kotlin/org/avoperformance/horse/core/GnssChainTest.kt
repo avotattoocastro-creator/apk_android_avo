@@ -60,9 +60,13 @@ class GnssChainTest {
         val a = snap(0, 1, 1, diag(1, 1, 1, 1, 1, 1, bad = 2, fail = 0))
         val b = snap(3_000, 2, 2, diag(2, 2, 2, 2, 2, 2, bad = 5, fail = 4))
         val r = GnssChain.report(a, b, true)!!
-        val loss = r.rtcm.last()
+        val loss = r.rtcm.first { it.name == "Pérdidas" }
         assertEquals(StageState.ERROR, loss.state)
-        assertTrue(loss.value!!.contains("CRC")); assertTrue(loss.value!!.contains("rechaza"))
+        assertTrue(loss.value!!.contains("CRC")); assertFalse(loss.value!!.contains("rechaza"))
+        val unused = r.rtcm.last()
+        assertEquals("No usadas por el receptor", unused.name)
+        assertEquals(StageState.PARADO, unused.state)          // information, not an error
+        assertTrue(unused.value!!.startsWith("1.3 msg/s"))
     }
 
     @Test fun staleBackStatusIsNotPresentedAsCurrent() {
