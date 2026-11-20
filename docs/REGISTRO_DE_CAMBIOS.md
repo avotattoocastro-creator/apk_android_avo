@@ -24,6 +24,24 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — iPad 1.0.0 — «Informe PDF» en la pantalla «Análisis motor» de carreras
+**Autor:** Claude (a petición del usuario sobre la captura de TestFlight del 20/11, 01:00) · **Rama:** `claude/analisis-motor-informe-pdf` · **CI:** ver PR
+**Qué cambia:** botón rojo **«Informe PDF»** en la barra superior de «Análisis motor». Genera el PDF con el mismo
+aspecto que los demás informes AVO y el contenido de la pantalla:
+- resumen y datos clave, incluido el estado de pista;
+- salida, desarrollo y final;
+- gráficas de puesto, distancia al primero y velocidad, y tabla por tramo;
+- rivales con su cara a cara;
+- carreras anteriores (distancia, pista, hipódromo);
+- entrenamientos y gráfica del mejor 200 m;
+- conclusiones, «para la próxima», notas y método.
+
+Se guarda en `exportaciones/` y se abre en el visor de PDF desde la propia pantalla, porque el visor general no se ve
+encima de ella. El visor permite compartirlo.
+Archivos: `Core/RaceEnginePdf.swift` (nuevo), `App/RacesModel.swift`, `Views/RaceEngineAnalysisView.swift`.
+**No se ha tocado:** motor C++, firmware, contratos, Android, Windows, workflows, firmas, `Info.plist`, build de TestFlight.
+**Validación:** IMPLEMENTADO · CI: ver PR · **NO VERIFICADO** en el iPad.
+
 ## 2026-11-20 — Proceso — Integración centralizada en un chat integrador
 **Autor:** Claude (decisión del usuario, 20/11/2026 00:32) · **Rama:** `claude/regla-chat-integrador`
 **Qué cambia:** `AGENTS.md` (sección «Integración centralizada» y paso 3 de «Empieza aquí») y `CLAUDE.md`: cada chat abre

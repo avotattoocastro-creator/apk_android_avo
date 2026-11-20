@@ -12,6 +12,8 @@ struct RaceEngineAnalysisView: View {
 
     @State private var started: Bool = false
     @State private var showMethod: Bool = false
+    @State private var pdfFile: ExportedFile? = nil
+    @State private var pdfError: String = ""
 
     private var model: RacesModel { app.races }
     private var race: Race? { model.race(raceId) }
@@ -49,6 +51,18 @@ struct RaceEngineAnalysisView: View {
                     Button("Cerrar") { dismiss() }.accessibilityIdentifier("raceEngine.close")
                 }
                 ToolbarItem(placement: .topBarTrailing) {
+                    // trainer 20/11/2026: «Botón de informe PDF» on this screen
+                    Button {
+                        guard let r = race else { return }
+                        do { pdfFile = try model.exportEnginePdf(r) } catch { pdfError = error.localizedDescription }
+                    } label: {
+                        Label("Informe PDF", systemImage: "doc.richtext")
+                    }
+                    .buttonStyle(.avoPrimary)
+                    .disabled(race?.ourRunner == nil || !progress.isEmpty)
+                    .accessibilityIdentifier("raceEngine.pdf")
+                }
+                ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         if let r = race { Task { @MainActor in await model.runEngineAnalysis(r, force: true) } }
                     } label: {
@@ -58,6 +72,15 @@ struct RaceEngineAnalysisView: View {
                     .accessibilityIdentifier("raceEngine.rerun")
                 }
             }
+        }
+        .fullScreenCover(item: $pdfFile) { (f: ExportedFile) in
+            PdfViewerSheet(file: f)
+                .avoColorScheme()
+        }
+        .alert("Informe PDF", isPresented: Binding(get: { !pdfError.isEmpty }, set: { if !$0 { pdfError = "" } })) {
+            Button("Aceptar", role: .cancel) {}
+        } message: {
+            Text(pdfError)
         }
         .onAppear {
             guard !started, let r = race else { return }
