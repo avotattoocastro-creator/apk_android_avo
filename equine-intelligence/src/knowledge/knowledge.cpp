@@ -102,6 +102,7 @@ KbStatus kb_evaluate(const std::vector<KbDay>& sessions, long at_day, long first
     w->bone_pct += s.bone_pct;
   };
   long last_gallop = -1, first_kb = -1, return_start = -1;
+  std::vector<long> gallop_days;   // días distintos con sesión rápida (A6C)
   bool verheyen = false;   // alguna sesión trae contadores de Verheyen (raza con v_carrera)
   for (const auto& s : sessions) {
     if (s.day > at_day) break;
@@ -118,11 +119,23 @@ KbStatus kb_evaluate(const std::vector<KbDay>& sessions, long at_day, long first
       long gap = s.day - ref;
       if (gap >= c.return_rest_days) { return_start = s.day; st.return_rest = (int)gap; }
       last_gallop = s.day;
+      gallop_days.push_back(s.day);
     }
   }
   if (!st.available || !c.enabled) return st;
   st.days_since_gallop = last_gallop < 0 ? -1 : (int)(at_day - last_gallop);
-  char b[300];
+  // A6C: cociente de días de galope de Choi & Parkin 2025 (sección 2.3): (g60/g90) + 1 con las ventanas de 60 y 90 días
+  // que acaban en el último trabajo rápido [E]; el propio día del último trabajo rápido entra en las dos ventanas [I].
+  if (last_gallop >= 0 && first_day <= last_gallop - 89) {
+    int g60 = 0, g90 = 0;
+    for (long d : gallop_days) {
+      if (in(d, last_gallop - 59, last_gallop)) g60++;
+      if (in(d, last_gallop - 89, last_gallop)) g90++;
+    }
+    st.gallop_days_60_last = g60; st.gallop_days_90_last = g90;
+    if (g90 > 0) st.gallop_ratio = (double)g60 / g90 + 1.0;
+  }
+  char b[420];
 
   if (verheyen) {
     // A1 canter acumulado en 30 días
@@ -167,6 +180,16 @@ KbStatus kb_evaluate(const std::vector<KbDay>& sessions, long at_day, long first
                           "Choi & Parkin 2025 (Seúl, 101 casos): ≤ 2 días de galope en 60 días, OR 1,84 (IC 95 % 1,07–3,16) de tendinopatía del TFDS [E]; "
                           "día de galope = sesión rápida del motor [I]"});
     }
+    // A6C cociente de galope bajo: el galope de los últimos 60 días es poco frente al de los 90 (frecuencia en descenso)
+    if (!std::isnan(st.gallop_ratio) && st.gallop_ratio <= c.gallop_ratio_max + 1e-9 && st.w7.sessions > 0 &&
+        st.days_since_gallop <= c.gallop_ratio_max_age_days) {
+      snprintf(b, sizeof(b), "cociente de galope %.2f (%d días de galope en 60 d frente a %d en 90 d, hasta el último trabajo rápido; "
+               "aviso con %.1f o menos): el galope se está espaciando; mantener la frecuencia o subirla poco a poco",
+               st.gallop_ratio, st.gallop_days_60_last, st.gallop_days_90_last, c.gallop_ratio_max);
+      st.flags.push_back({"A6C_COCIENTE_GALOPE", "INFO", "AVISO", b,
+                          "Choi & Parkin 2025 (Seúl, 101 casos): (días de galope 60 d / 90 d) + 1 ≤ 1,6, OR 2,19 (IC 95 % 1,23–3,91) de "
+                          "tendinopatía del TFDS [E]; día de galope = sesión rápida del motor y vigencia de 30 días [I]"});
+    }
     // Informativo: ningún trabajo rápido en 30 días con canter
     if (first_day <= at_day - 29 && st.w30.gallop_m < c.gallop_session_min_m && st.w30.canter_m > 0)
       st.flags.push_back({"KB_SIN_RAPIDO_30D", "INFO", "AVISO", "sin trabajo rápido en 30 días: el hueso pierde estímulo; al volver, subirlo poco a poco",
@@ -208,7 +231,10 @@ std::string kb_status_json(const KbStatus& s) {
     o << ",\"d7\":"; win(s.w7); o << ",\"d30\":"; win(s.w30); o << ",\"d30_anteriores\":"; win(s.prev30); o << ",\"d60\":"; win(s.w60);
     o << ",\"fatiga_osea_mediana_semanal_pct\":" << num(s.bone_weekly_median) << ",\"fatiga_osea_ratio_7d\":" << num(s.bone_ratio)
       << ",\"dias_sin_trabajo_rapido\":" << (s.days_since_gallop < 0 ? std::string("null") : std::to_string(s.days_since_gallop))
-      << ",\"dias_galope_60d\":" << s.gallop_days_60d << ",\"vuelta_descanso\":";
+      << ",\"dias_galope_60d\":" << s.gallop_days_60d << ",\"cociente_galope\":";
+    if (std::isnan(s.gallop_ratio)) o << "null";
+    else o << "{\"valor\":" << num(s.gallop_ratio) << ",\"dias_galope_60d\":" << s.gallop_days_60_last << ",\"dias_galope_90d\":" << s.gallop_days_90_last << "}";
+    o << ",\"vuelta_descanso\":";
     if (s.return_day < 0) o << "null";
     else o << "{\"dia\":" << s.return_day << ",\"dias_sin_rapido_antes\":" << s.return_rest << "}";
   }
