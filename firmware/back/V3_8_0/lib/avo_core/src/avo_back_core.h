@@ -72,6 +72,8 @@ class BackCore : public ZedIo, private GirthHub::Io {
   BackStatus status() const;
   const GnssQuality& quality() const { return q_; }
   uint16_t fix_lost() const { return fix_lost_; }
+  // V3.14.4: a NAV-SAT/NAV-SIG summary older than this is not reported in STATUS (counts sent as 0).
+  static const uint32_t kQualityFreshMs = 5000;
   // V3.8.1: battery voltage measured by the board (0 = unknown); sent to the chest in STATUS.
   void set_battery_mv(uint16_t mv) { batt_mv_ = mv; }
 
