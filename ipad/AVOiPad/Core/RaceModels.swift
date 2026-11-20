@@ -94,6 +94,9 @@ struct Race: Codable, Equatable, Identifiable {
     var notes: String
     /// Demonstration race (capture mode): always shown with the DEMOSTRACIÓN mark.
     var isDemo: Bool
+    /// State of the track (RaceGoing raw value, France Galop scale), typed by the user: the tracking PDF has none.
+    /// Optional so carreras.json written by earlier builds still loads.
+    var going: String? = nil
 
     var fieldSize: Int { runners.count }
 

@@ -20,7 +20,7 @@
 
 namespace avoeq {
 
-static const char* const KNOWLEDGE_VERSION = "1.1.0";
+static const char* const KNOWLEDGE_VERSION = "1.9.0";
 static const char* const KNOWLEDGE_ID = "AVO_KB_1";
 static const char* const BONE_MODEL_ALGORITHM = "SBFL_MORRICE_WEST_2022";
 
@@ -80,9 +80,21 @@ struct KbRuleConfig {
   int return_rest_days = 60;           // A5: Carrier 1998, ≥ 60 días sin trabajo rápido [E]
   int return_window_days = 21;         // RR 71 a 10 días y 45 a 21 días [E]
   int tendon_rest_days = 90;           // A6: Choi & Parkin 2025, ≥ 90 días sin trabajo rápido, OR 3,10 [E]
+  int low_gallop_60d_max_days = 2;     // A6B: Choi & Parkin 2025, ≤ 2 días de galope en 60 días, OR 1,84 (1,07–3,16) de
+                                       // tendinopatía del TFDS [E]; «día de galope» = día con sesión rápida [I]
+  double gallop_ratio_max = 1.6;       // A6C: Choi & Parkin 2025 (sección 2.3 y tabla 2): (g60/g90) + 1 ≤ 1,6, OR 2,190
+                                       // (1,227–3,910) [E]; ventanas anidadas que acaban en el último trabajo rápido [E]
+  int gallop_ratio_max_age_days = 30;  // A6C solo si el último trabajo rápido es de los últimos 30 días [I]
   double gallop_session_min_m = 100.0; // metros de galope (> 14 m/s en PSI) para contar como sesión rápida
   double bone_week_ratio = 1.5;        // KB-B: fatiga ósea de 7 días frente a la mediana semanal propia [I]
   int bone_min_weeks = 4;
+  // A7 y A8 sobre la línea base propia (KB 1.5.0): sesiones comparables = misma superficie anotada [I].
+  bool drift_rules = true;
+  double stride_drop_m = 0.10;         // A7: Wong 2023, HR 1,11 por cada 10 cm menos de zancada [E]; umbral 10 cm [I]
+  double final_speed_drop = 0.20;      // A8: últimos 600 m (Schrurs 2024 [E]); 0,1–0,2 m/s es [I], se usa el alto
+  int drift_min_baseline = 5;          // sesiones comparables mínimas antes de las 3 últimas [I]
+  int drift_warmup = 8;                // CUSUM autoiniciado: sin alarmas antes de la 9.ª sesión comparable [I]
+  double drift_h = 5.0;                // h = 5 (muchas cartas a la vez) [I]
 };
 
 struct KbDay {
@@ -104,6 +116,10 @@ struct KbStatus {
   int days_since_gallop = -1;          // días desde la última sesión rápida (-1: ninguna)
   int return_day = -1;                 // día de la vuelta tras descanso largo (-1: no hay vuelta en curso)
   int return_rest = 0;                 // días sin trabajo rápido antes de esa vuelta
+  int gallop_days_60d = 0;             // días con sesión rápida en los últimos 60 días (A6B)
+  int gallop_days_60_last = -1;        // A6C: días de galope en los 60 d que acaban en el último trabajo rápido (-1: sin datos)
+  int gallop_days_90_last = -1;        // A6C: ídem en 90 d
+  double gallop_ratio = NAN;           // A6C: (g60/g90) + 1, entre 1 y 2 (NAN si no se puede calcular)
   std::vector<KbFlag> flags;
 };
 
@@ -111,5 +127,65 @@ struct KbStatus {
 // first_day: primer día de la historia del caballo (para saber si las ventanas están cubiertas).
 KbStatus kb_evaluate(const std::vector<KbDay>& sessions, long at_day, long first_day, const KbRuleConfig& c);
 std::string kb_status_json(const KbStatus& s);
+
+// ------------------------------------------------------------------ líneas base (KB 1.3.0, estudio extra 2026-11-19)
+// Herramientas estadísticas para comparar a cada caballo consigo mismo. Matemática cerrada [E]; su uso en caballos y
+// los umbrales por métrica son [I] (no hay CUSUM publicado en caballos de carreras). Todavía no las usa ninguna regla:
+// faltan TE propios por métrica (2–3 trabajos repetidos por caballo) y anotar la superficie (playa por franja).
+//
+// Línea base robusta: mediana m y MAD_s = 1,4826·mediana(|x − m|) (1,4826 = 1/Φ⁻¹(0,75), Rousseeuw & Croux 1993) de las
+// últimas `last_n` observaciones válidas (NaN se saltan). z robusto = (x − m)/max(MAD_s, min_scale); con |z| > 3,5 es
+// atípico (z modificado de Iglewicz & Hoaglin 1993: 0,6745·(x − m)/MAD > 3,5). min_scale evita escalas nulas con
+// pocas sesiones (el MAD de 10 datos rinde como una DE de ~4) [I].
+static const double KB_MAD_SCALE = 1.4826;
+static const double KB_ROBUST_Z_OUTLIER = 3.5;
+struct KbRobustBaseline { int n = 0; double median = NAN, mad_s = NAN; };
+KbRobustBaseline kb_robust_baseline(const std::vector<double>& x, int last_n = 12);
+double kb_robust_z(double x, const KbRobustBaseline& b, double min_scale = 0.0);   // NaN con n < 3 o escala 0
+
+// Shrinkage normal-normal (Efron & Morris 1975) para el arranque en frío: media propia de n sesiones encogida hacia la
+// de la cuadra. sigma2_within = TE² (varianza dentro del caballo); tau2_between = varianza VERDADERA entre caballos
+// (la observada menos sigma2/n). μ* = (n·x̄/σ² + μ_pop/τ²)/(n/σ² + 1/τ²); con n = 0 devuelve μ_pop.
+double kb_shrink_mean(int n, double xbar, double sigma2_within, double mu_pop, double tau2_between);
+
+// Umbral de cambio real frente a una media de n sesiones: max(2·TE·√(1 + 1/n), SWC). Hopkins 2000 propone 1,5–2·TE
+// [E]; √(1 + 1/n) es el ruido de una medida frente a la media de n [cálculo]. Con n ≤ 0 usa √2 (dos medidas sueltas).
+double kb_change_threshold(double te, int n, double swc);
+
+// CUSUM unilateral superior sobre z ya tipificados con la DE dentro del caballo: S_t = max(0, S_{t−1} + z_t − k), alarma
+// cuando S_t > h. Para derivas a la baja se pasa −z. Con k = 0,5: h = 4 → ARL0 ≈ 335 sesiones y ARL1(δ = 1) ≈ 8,4;
+// h = 5 → ARL0 ≈ 931 y ARL1 ≈ 10,4 (cadena de Markov de Brook-Evans, coincide con la tabla del NIST/SEMATECH
+// e-Handbook §6.3.2.3.1). Los 168/465 que se citan a veces son del CUSUM bilateral. Con muchas cartas a la vez (caballos
+// × métricas × sentidos) conviene h = 5 [I]. fir: arranque con S0 = h/2 (Lucas & Crosier 1982), ARL1(δ = 1) 5,3 con
+// h = 4. min_samples: no se dan alarmas antes de esa muestra válida [I]. NaN: la muestra se salta (S no cambia).
+struct KbCusumConfig { double k = 0.5, h = 4.0; bool fir = false; int min_samples = 1; };
+struct KbCusumResult { std::vector<double> s; int alarm_index = -1; };   // índice (0-based) de la primera alarma
+KbCusumResult kb_cusum_upper(const std::vector<double>& z, const KbCusumConfig& c);
+
+// CUSUM autoiniciado (Hawkins 1987, The Statistician 36:299; descrito en van Zyl & Lombard 2018, S. Afr. Stat. J.
+// 52:93, §2.6) [E, original no leído]: con μ y σ estimadas de 5–20 sesiones el CUSUM con h = 4/5 NO tiene el ARL0
+// nominal por caballo (simulación propia, estudio extra 2 2026-11-19: con m = 10 y h = 4 el 10 % de los caballos tiene
+// ARL0 ≤ 23 sesiones). Esta función tipifica cada sesión frente a las ANTERIORES: para la n-ésima válida (n ≥ 3)
+// V = (x_n − x̄_{n−1})/s_{n−1} y ξ = Φ⁻¹(T_{n−2}(√((n−1)/n)·V)), con T la t de Student de n − 2 g.l. Bajo control los ξ son
+// N(0, 1) independientes y se pasan a kb_cusum_upper con las mismas k y h (ARL0 incondicional 339/930 en la simulación
+// propia, h = 4/5, 20 000 réplicas). NaN en las dos primeras válidas, en las entradas NaN y con s = 0. Uso [I]: no
+// alarmar en las primeras 8–10 sesiones (min_samples), no actualizar con sesiones en alarma y reiniciar tras una.
+std::vector<double> kb_self_starting_z(const std::vector<double>& x);
+double kb_student_t_cdf(double t, double nu);   // auxiliares (expuestas para las pruebas)
+double kb_normal_quantile(double p);
+
+// Regla de caída frente a la línea base propia (A7 zancada, A8 velocidad final), KB 1.5.0 [I]. x: valores de sesiones
+// comparables en orden cronológico; la última es la sesión que se juzga (NaN se saltan). Dos criterios:
+//  · umbral: la última y al menos `recent_hits` de las `recent` últimas están ≥ delta por debajo de la mediana de las
+//    (hasta 12) anteriores a esas `recent`, con ≥ min_baseline sesiones de base;
+//  · CUSUM autoiniciado (kb_self_starting_z sobre −x, k 0,5, h): alarma mientras S > h; las sesiones con S > 0,8·h no
+//    entran en la base (no aprende la deriva); sin alarmas en las primeras `warmup` válidas.
+struct KbDriftConfig { double delta = NAN, k = 0.5, h = 5.0; int warmup = 8, recent = 3, recent_hits = 2, min_baseline = 5; };
+struct KbDriftResult {
+  int n = 0, baseline_n = 0, hits = 0;
+  double last = NAN, baseline = NAN, drop = NAN, s = 0;   // drop = baseline − last (positivo = caída)
+  bool delta_alarm = false, cusum_alarm = false;
+};
+KbDriftResult kb_drift_down(const std::vector<double>& x, const KbDriftConfig& c);
 
 }  // namespace avoeq

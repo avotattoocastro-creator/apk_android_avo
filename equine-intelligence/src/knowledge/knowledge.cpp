@@ -102,6 +102,7 @@ KbStatus kb_evaluate(const std::vector<KbDay>& sessions, long at_day, long first
     w->bone_pct += s.bone_pct;
   };
   long last_gallop = -1, first_kb = -1, return_start = -1;
+  std::vector<long> gallop_days;   // días distintos con sesión rápida (A6C)
   bool verheyen = false;   // alguna sesión trae contadores de Verheyen (raza con v_carrera)
   for (const auto& s : sessions) {
     if (s.day > at_day) break;
@@ -111,16 +112,30 @@ KbStatus kb_evaluate(const std::vector<KbDay>& sessions, long at_day, long first
     if (in(s.day, at_day - 29, at_day)) add(&st.w30, s);
     if (in(s.day, at_day - 59, at_day - 30)) add(&st.prev30, s);
     if (in(s.day, at_day - 59, at_day)) add(&st.w60, s);
+    if (has && in(s.day, at_day - 59, at_day) && !std::isnan(s.gallop_m) && s.gallop_m >= c.gallop_session_min_m && s.day != last_gallop)
+      st.gallop_days_60d++;
     if (has && !std::isnan(s.gallop_m) && s.gallop_m >= c.gallop_session_min_m && s.day != last_gallop) {
       long ref = last_gallop >= 0 ? last_gallop : first_kb;
       long gap = s.day - ref;
       if (gap >= c.return_rest_days) { return_start = s.day; st.return_rest = (int)gap; }
       last_gallop = s.day;
+      gallop_days.push_back(s.day);
     }
   }
   if (!st.available || !c.enabled) return st;
   st.days_since_gallop = last_gallop < 0 ? -1 : (int)(at_day - last_gallop);
-  char b[300];
+  // A6C: cociente de días de galope de Choi & Parkin 2025 (sección 2.3): (g60/g90) + 1 con las ventanas de 60 y 90 días
+  // que acaban en el último trabajo rápido [E]; el propio día del último trabajo rápido entra en las dos ventanas [I].
+  if (last_gallop >= 0 && first_day <= last_gallop - 89) {
+    int g60 = 0, g90 = 0;
+    for (long d : gallop_days) {
+      if (in(d, last_gallop - 59, last_gallop)) g60++;
+      if (in(d, last_gallop - 89, last_gallop)) g90++;
+    }
+    st.gallop_days_60_last = g60; st.gallop_days_90_last = g90;
+    if (g90 > 0) st.gallop_ratio = (double)g60 / g90 + 1.0;
+  }
+  char b[420];
 
   if (verheyen) {
     // A1 canter acumulado en 30 días
@@ -156,6 +171,24 @@ KbStatus kb_evaluate(const std::vector<KbDay>& sessions, long at_day, long first
       st.flags.push_back({tendon ? "A6_VUELTA_TENDON" : "A5_VUELTA_DESCANSO", "VIGILAR", "LIMITAR", b,
                           tendon ? "Choi & Parkin 2025: ≥ 90 días sin trabajo rápido, OR 3,10 de lesión del TFDS [E]; Carrier 1998 [E]"
                                  : "Carrier 1998: tras ≥ 60 días sin trabajo rápido, RR 71 de fractura de húmero en 10 días y 45 en 21 [E]"});
+    }
+    // A6B pocos días de galope en 60 días con el caballo en entrenamiento (con 60 días de historia)
+    if (first_day <= at_day - 59 && st.w7.sessions > 0 && st.w60.canter_m > 0 && st.gallop_days_60d <= c.low_gallop_60d_max_days) {
+      snprintf(b, sizeof(b), "%d días de galope rápido en los últimos 60 días (%d o menos): el tendón flexor pierde preparación; repartir el trabajo rápido",
+               st.gallop_days_60d, c.low_gallop_60d_max_days);
+      st.flags.push_back({"A6B_POCO_GALOPE_60D", "INFO", "AVISO", b,
+                          "Choi & Parkin 2025 (Seúl, 101 casos): ≤ 2 días de galope en 60 días, OR 1,84 (IC 95 % 1,07–3,16) de tendinopatía del TFDS [E]; "
+                          "día de galope = sesión rápida del motor [I]"});
+    }
+    // A6C cociente de galope bajo: el galope de los últimos 60 días es poco frente al de los 90 (frecuencia en descenso)
+    if (!std::isnan(st.gallop_ratio) && st.gallop_ratio <= c.gallop_ratio_max + 1e-9 && st.w7.sessions > 0 &&
+        st.days_since_gallop <= c.gallop_ratio_max_age_days) {
+      snprintf(b, sizeof(b), "cociente de galope %.2f (%d días de galope en 60 d frente a %d en 90 d, hasta el último trabajo rápido; "
+               "aviso con %.1f o menos): el galope se está espaciando; mantener la frecuencia o subirla poco a poco",
+               st.gallop_ratio, st.gallop_days_60_last, st.gallop_days_90_last, c.gallop_ratio_max);
+      st.flags.push_back({"A6C_COCIENTE_GALOPE", "INFO", "AVISO", b,
+                          "Choi & Parkin 2025 (Seúl, 101 casos): (días de galope 60 d / 90 d) + 1 ≤ 1,6, OR 2,19 (IC 95 % 1,23–3,91) de "
+                          "tendinopatía del TFDS [E]; día de galope = sesión rápida del motor y vigencia de 30 días [I]"});
     }
     // Informativo: ningún trabajo rápido en 30 días con canter
     if (first_day <= at_day - 29 && st.w30.gallop_m < c.gallop_session_min_m && st.w30.canter_m > 0)
@@ -198,9 +231,15 @@ std::string kb_status_json(const KbStatus& s) {
     o << ",\"d7\":"; win(s.w7); o << ",\"d30\":"; win(s.w30); o << ",\"d30_anteriores\":"; win(s.prev30); o << ",\"d60\":"; win(s.w60);
     o << ",\"fatiga_osea_mediana_semanal_pct\":" << num(s.bone_weekly_median) << ",\"fatiga_osea_ratio_7d\":" << num(s.bone_ratio)
       << ",\"dias_sin_trabajo_rapido\":" << (s.days_since_gallop < 0 ? std::string("null") : std::to_string(s.days_since_gallop))
-      << ",\"vuelta_descanso\":";
+      << ",\"dias_galope_60d\":" << s.gallop_days_60d << ",\"cociente_galope\":";
+    if (std::isnan(s.gallop_ratio)) o << "null";
+    else o << "{\"valor\":" << num(s.gallop_ratio) << ",\"dias_galope_60d\":" << s.gallop_days_60_last << ",\"dias_galope_90d\":" << s.gallop_days_90_last << "}";
+    o << ",\"vuelta_descanso\":";
     if (s.return_day < 0) o << "null";
     else o << "{\"dia\":" << s.return_day << ",\"dias_sin_rapido_antes\":" << s.return_rest << "}";
+  }
+  // Las reglas A7/A8 (línea base propia) no dependen del bloque de carga: se escriben aunque no esté disponible.
+  if (s.available || !s.flags.empty()) {
     o << ",\"reglas\":[";
     for (size_t i = 0; i < s.flags.size(); i++)
       o << (i ? "," : "") << "{\"regla\":" << q(s.flags[i].rule) << ",\"nivel\":" << q(s.flags[i].level) << ",\"accion\":" << q(s.flags[i].action)
@@ -209,6 +248,190 @@ std::string kb_status_json(const KbStatus& s) {
   }
   o << ",\"nota\":\"orientativo: reglas de la literatura con umbrales de partida, sin validar con la cuadra; la fatiga ósea es un índice relativo, no una probabilidad de lesión\"}";
   return o.str();
+}
+
+// ------------------------------------------------------------------ líneas base (KB 1.3.0)
+KbRobustBaseline kb_robust_baseline(const std::vector<double>& x, int last_n) {
+  KbRobustBaseline b;
+  std::vector<double> v;
+  for (size_t i = x.size(); i-- > 0;) {
+    if (std::isnan(x[i]) || std::isinf(x[i])) continue;
+    v.push_back(x[i]);
+    if (last_n > 0 && (int)v.size() >= last_n) break;
+  }
+  b.n = (int)v.size();
+  if (v.empty()) return b;
+  b.median = median_of(v);
+  std::vector<double> dev; dev.reserve(v.size());
+  for (double a : v) dev.push_back(std::fabs(a - b.median));
+  b.mad_s = KB_MAD_SCALE * median_of(dev);
+  return b;
+}
+
+double kb_robust_z(double x, const KbRobustBaseline& b, double min_scale) {
+  if (b.n < 3 || std::isnan(x) || std::isnan(b.median)) return kNaN;
+  double s = std::isnan(b.mad_s) ? 0.0 : b.mad_s;
+  if (min_scale > s) s = min_scale;
+  if (!(s > 0)) return kNaN;
+  return (x - b.median) / s;
+}
+
+double kb_shrink_mean(int n, double xbar, double sigma2_within, double mu_pop, double tau2_between) {
+  if (n <= 0 || std::isnan(xbar)) return mu_pop;
+  if (std::isnan(mu_pop) || !(tau2_between > 0)) return xbar;   // sin prior útil: solo el caballo
+  if (!(sigma2_within > 0)) return xbar;                        // sin ruido: el dato propio manda
+  double wp = n / sigma2_within, wq = 1.0 / tau2_between;
+  return (wp * xbar + wq * mu_pop) / (wp + wq);
+}
+
+double kb_change_threshold(double te, int n, double swc) {
+  double noise = (std::isnan(te) || te < 0) ? kNaN : 2.0 * te * (n > 0 ? std::sqrt(1.0 + 1.0 / n) : std::sqrt(2.0));
+  if (std::isnan(noise)) return swc;
+  if (std::isnan(swc)) return noise;
+  return std::max(noise, swc);
+}
+
+KbCusumResult kb_cusum_upper(const std::vector<double>& z, const KbCusumConfig& c) {
+  KbCusumResult r;
+  r.s.reserve(z.size());
+  double S = c.fir ? 0.5 * c.h : 0.0;
+  int valid = 0;
+  for (size_t i = 0; i < z.size(); i++) {
+    if (!std::isnan(z[i]) && !std::isinf(z[i])) {
+      S = std::max(0.0, S + z[i] - c.k);
+      valid++;
+      if (r.alarm_index < 0 && valid >= c.min_samples && S > c.h) r.alarm_index = (int)i;
+    }
+    r.s.push_back(S);
+  }
+  return r;
+}
+
+
+namespace {
+// Fracción continua de la beta incompleta regularizada (método de Lentz).
+double betacf(double a, double b, double x) {
+  const double tiny = 1e-300;
+  double qab = a + b, qap = a + 1, qam = a - 1, cc = 1, d = 1 - qab * x / qap;
+  if (std::fabs(d) < tiny) d = tiny;
+  d = 1 / d;
+  double h = d;
+  for (int m = 1; m <= 300; m++) {
+    double m2 = 2.0 * m, aa = m * (b - m) * x / ((qam + m2) * (a + m2));
+    d = 1 + aa * d; if (std::fabs(d) < tiny) d = tiny;
+    cc = 1 + aa / cc; if (std::fabs(cc) < tiny) cc = tiny;
+    d = 1 / d; h *= d * cc;
+    aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2));
+    d = 1 + aa * d; if (std::fabs(d) < tiny) d = tiny;
+    cc = 1 + aa / cc; if (std::fabs(cc) < tiny) cc = tiny;
+    d = 1 / d;
+    double del = d * cc;
+    h *= del;
+    if (std::fabs(del - 1) < 1e-15) break;
+  }
+  return h;
+}
+double betai(double a, double b, double x) {
+  if (x <= 0) return 0;
+  if (x >= 1) return 1;
+  double lbt = std::lgamma(a + b) - std::lgamma(a) - std::lgamma(b) + a * std::log(x) + b * std::log(1 - x);
+  if (x < (a + 1) / (a + b + 2)) return std::exp(lbt) * betacf(a, b, x) / a;
+  return 1 - std::exp(lbt) * betacf(b, a, 1 - x) / b;
+}
+// Cola superior de la t de Student: P(T > t) para t ≥ 0.
+double t_upper(double t, double nu) { return 0.5 * betai(0.5 * nu, 0.5, nu / (nu + t * t)); }
+}  // namespace
+
+double kb_student_t_cdf(double t, double nu) {
+  if (std::isnan(t) || !(nu > 0)) return kNaN;
+  if (std::isinf(t)) return t > 0 ? 1.0 : 0.0;
+  return t >= 0 ? 1.0 - t_upper(t, nu) : t_upper(-t, nu);
+}
+
+double kb_normal_quantile(double p) {
+  if (std::isnan(p) || p < 0 || p > 1) return kNaN;
+  if (p == 0) return -INFINITY;
+  if (p == 1) return INFINITY;
+  if (p > 0.5) return -kb_normal_quantile(1 - p);
+  // Bisección sobre Φ(x) = erfc(−x/√2)/2 en la cola inferior (precisión relativa buena hasta p ≈ 1e-300).
+  double lo = -40, hi = 0;
+  for (int i = 0; i < 200; i++) {
+    double mid = 0.5 * (lo + hi);
+    if (0.5 * std::erfc(-mid / std::sqrt(2.0)) < p) lo = mid; else hi = mid;
+  }
+  return 0.5 * (lo + hi);
+}
+
+std::vector<double> kb_self_starting_z(const std::vector<double>& x) {
+  std::vector<double> out(x.size(), kNaN);
+  int n = 0;            // observaciones válidas ya acumuladas
+  double mean = 0, m2 = 0;   // Welford
+  for (size_t i = 0; i < x.size(); i++) {
+    double v = x[i];
+    if (std::isnan(v) || std::isinf(v)) continue;
+    if (n >= 2) {
+      double s = std::sqrt(m2 / (n - 1));
+      if (s > 0) {
+        int nn = n + 1;   // índice (1-based) de esta observación
+        double tstat = std::sqrt((double)(nn - 1) / nn) * (v - mean) / s;
+        double nu = nn - 2;
+        // Usar la cola más pequeña para no perder precisión en los extremos.
+        out[i] = tstat >= 0 ? -kb_normal_quantile(t_upper(tstat, nu)) : kb_normal_quantile(t_upper(-tstat, nu));
+      }
+    }
+    n++;
+    double d = v - mean;
+    mean += d / n;
+    m2 += d * (v - mean);
+  }
+  return out;
+}
+
+
+KbDriftResult kb_drift_down(const std::vector<double>& x, const KbDriftConfig& c) {
+  KbDriftResult r;
+  std::vector<double> v;
+  for (double a : x) if (!std::isnan(a) && !std::isinf(a)) v.push_back(a);
+  r.n = (int)v.size();
+  if (v.empty()) return r;
+  r.last = v.back();
+  // Umbral frente a la mediana de las anteriores a las `recent` últimas.
+  int recent = std::max(1, c.recent);
+  if (!std::isnan(c.delta) && r.n > recent) {
+    int end = r.n - recent, beg = std::max(0, end - 12);
+    std::vector<double> base(v.begin() + beg, v.begin() + end);
+    r.baseline_n = (int)base.size();
+    if (r.baseline_n >= c.min_baseline) {
+      r.baseline = median_of(base);
+      r.drop = r.baseline - r.last;
+      for (int i = end; i < r.n; i++) if (v[i] <= r.baseline - c.delta) r.hits++;
+      r.delta_alarm = r.drop >= c.delta - 1e-12 && r.hits >= c.recent_hits;
+    }
+  }
+  // CUSUM autoiniciado hacia abajo con exclusión de las sesiones en alarma.
+  int acc = 0; double mean = 0, m2 = 0, S = 0;
+  for (int i = 0; i < r.n; i++) {
+    bool alarm = false;
+    if (acc >= 2) {
+      double sd = std::sqrt(m2 / (acc - 1));
+      if (sd > 0) {
+        int nn = acc + 1;
+        double t = std::sqrt((double)(nn - 1) / nn) * (mean - v[i]) / sd;   // −x: caída = positivo
+        double nu = nn - 2;
+        double xi = t >= 0 ? -kb_normal_quantile(t_upper(t, nu)) : kb_normal_quantile(t_upper(-t, nu));
+        S = std::max(0.0, S + xi - c.k);
+        if (i + 1 > c.warmup && S > c.h) alarm = true;
+      }
+    }
+    if (i == r.n - 1) { r.s = S; r.cusum_alarm = alarm; }
+    // La base solo aprende de sesiones en control: con S > 0,8·h la sesión no entra [I]. Simulación propia (1.500
+    // series normales, h 5, calentamiento 8): falsa alarma en 100 sesiones 11,4 % (sin exclusión 10,5 %; con h/2,
+    // 23,7 %) y deriva de 3 DE detectada en ≤ 6 sesiones en el 91,5 % (sin exclusión 87,7 %).
+    if (acc >= 2 && S > 0.8 * c.h) continue;
+    acc++;
+    double d = v[i] - mean; mean += d / acc; m2 += d * (v[i] - mean);
+  }
+  return r;
 }
 
 }  // namespace avoeq

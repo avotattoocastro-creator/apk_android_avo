@@ -24,6 +24,325 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — iPad 1.0.0 — «Análisis motor»: el puesto de rapidez («14.º») ya no se parte en dos líneas
+**Autor:** Claude (captura de TestFlight del 20/11, 01:23) · **Rama:** `claude/analisis-motor-ajustes` · **CI:** ver PR
+**Qué cambia:** la columna del puesto de rapidez en «Cómo fue la carrera» es más ancha y de una sola línea.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO** en el iPad.
+## 2026-11-20 — Motor 2.0.0-dev11 — KB-1 1.9.0: investigación nocturna (regla A6C del cociente de galope y auditoría de fuentes)
+**Autor:** Claude (tarea programada nocturna, sin supervisión) · **Rama:** `claude/kb-noche-2026-11-20` (desde `claude/kb-estudio5-2026-11-19`, PR #89 abierto) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Estudio** `equine-intelligence/knowledge/estudios/2026-11-20_noche_auditoria_cociente_galope_asia_latam.md`, con
+  etiquetas [E]/[E-r]/[I]/[I-raza]/[NV] y tipo de acceso.
+  - Auditoría de 11 fuentes: 7 pasan a texto completo (Choi & Parkin 2025, Morrice-West 2020 y 2022, Wong 2023 ×2,
+    Witte 2006 y van Erck 2026).
+  - Correcciones de atribución y de ámbito, sin cambiar ninguna constante:
+    - «Morrice-West 2023» es Wong 2023 (Front Vet Sci), y las fracciones 0,80/0,93 son diseño propio;
+    - 12,57–21 m/s son criterios de exclusión;
+    - 16,7 m/s es un límite de franja;
+    - la fórmula de frecuencia de zancada es de Witte;
+    - el umbral de Verheyen es conjunto (canter y galope) y el galope acumulado fue protector en añojos;
+    - A8: Wong usó los 200 m finales de carrera.
+  - Cobertura de Japón, Corea, Hong Kong, Turquía, Golfo (sin datos), Argentina, Uruguay, Brasil y Chile.
+- **Motor:** regla nueva **A6C_COCIENTE_GALOPE**. Choi & Parkin 2025, sección 2.3 y tabla 2, leídas en el texto
+  completo:
+  - cociente = (días de galope en 60 d / en 90 d) + 1, con las ventanas acabadas en el último trabajo rápido;
+  - avisa con cociente ≤ 1,6, que tiene OR 2,19 (1,23–3,91) de TFDS;
+  - es INFO · AVISO;
+  - opciones `cociente_galope_max` y `dias_vigencia_cociente_galope`;
+  - campo `cociente_galope` en el JSON de `base_cientifica`.
+- **Versiones:** `KNOWLEDGE_VERSION` 1.8.0 → 1.9.0 y `ENGINE_VERSION` 2.0.0-dev10 → 2.0.0-dev11. Fixtures regenerados
+  (solo cambian las versiones).
+- **`base_cientifica.json` 1.9.0:**
+  - 24 fuentes nuevas;
+  - 3 parámetros nuevos;
+  - regla A6C;
+  - pendientes de A1/A2 y A8;
+  - 8 entradas nuevas en la cola.
+- Actualizados también la ficha 14, la tabla de estado y el README.
+**Por qué:** el cociente de A6 estaba pendiente por ambigüedad. La auditoría nocturna verifica las fuentes que sostienen
+reglas implementadas.
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, número de build de TestFlight, apps.
+**Validación:**
+- IMPLEMENTADO.
+- Pruebas locales con ASan/UBSan: 103 casos y 1.744 comprobaciones sin fallos.
+- Release y `check_fixtures.py` en verde tras `--update` (diferencias: solo versiones).
+- CI: ver PR.
+- **NO VERIFICADO** con caballos reales. A6C es un factor asociado, no una predicción de lesiones.
+**Pendiente:**
+- texto completo de Verheyen 2006 (regla combinada A1+A2);
+- velocidad de los últimos 200 m para A8;
+- tabla S1 de Choi;
+- PDF de Kusunose 2002 (J-STAGE);
+- versión publicada de Anwar 2026 (RSOS).
+
+## 2026-11-20 — iPad 1.0.0 — «Informe PDF» en la pantalla «Análisis motor» de carreras
+**Autor:** Claude (a petición del usuario sobre la captura de TestFlight del 20/11, 01:00) · **Rama:** `claude/analisis-motor-informe-pdf` · **CI:** ver PR
+**Qué cambia:** botón rojo **«Informe PDF»** en la barra superior de «Análisis motor». Genera el PDF con el mismo
+aspecto que los demás informes AVO y el contenido de la pantalla:
+- resumen y datos clave, incluido el estado de pista;
+- salida, desarrollo y final;
+- gráficas de puesto, distancia al primero y velocidad, y tabla por tramo;
+- rivales con su cara a cara;
+- carreras anteriores (distancia, pista, hipódromo);
+- entrenamientos y gráfica del mejor 200 m;
+- conclusiones, «para la próxima», notas y método.
+
+Se guarda en `exportaciones/` y se abre en el visor de PDF desde la propia pantalla, porque el visor general no se ve
+encima de ella. El visor permite compartirlo.
+Archivos: `Core/RaceEnginePdf.swift` (nuevo), `App/RacesModel.swift`, `Views/RaceEngineAnalysisView.swift`.
+**No se ha tocado:** motor C++, firmware, contratos, Android, Windows, workflows, firmas, `Info.plist`, build de TestFlight.
+**Validación:** IMPLEMENTADO · CI: ver PR · **NO VERIFICADO** en el iPad.
+
+## 2026-11-20 — Proceso — Integración centralizada en un chat integrador
+**Autor:** Claude (decisión del usuario, 20/11/2026 00:32) · **Rama:** `claude/regla-chat-integrador`
+**Qué cambia:** `AGENTS.md` (sección «Integración centralizada» y paso 3 de «Empieza aquí») y `CLAUDE.md`: cada chat abre
+su PR sin fusionarlo; un único chat integrador fusiona los PR en `develop` de uno en uno, resuelve los conflictos
+conservando las dos partes y solo fusiona con el CI en verde.
+**Por qué:** la build 177 salió sin los PR #84 (LIVE) y #87 (botones de Motor y «Análisis motor»), que seguían abiertos
+mientras otros chats fusionaban sus cambios del motor.
+**No se ha tocado:** código, workflows, firmas, `Info.plist`, número de build de TestFlight.
+**Validación:** solo documentación.
+
+## 2026-11-19 — iPad LIVE + Android 2.10-live-dev1 (vc 43) + reglas Firebase `live/` — directo desde el servidor
+**Autor:** Claude (boceto del entrenador sobre la captura de la build 171; decisión del usuario: «El iPad es Live desde el servidor») · **Rama:** `claude/live-servidor` · **CI:** los workflows solo se ejecutan al fusionar en `develop` (Android, iPad/TestFlight y reglas Firebase)
+**Qué cambia:**
+- **iPad:** nueva página **LIVE** en la barra lateral, debajo de «Carreras».
+  - Arriba, datos en tiempo real: tiempo, distancia, velocidad, aceleración, aire, tiempo y distancia del aire, GNSS.
+  - El mapa centrado sigue al caballo («Centrar» / «Ver todo»).
+  - Sobre la parte baja del mapa, la velocidad en tiempo real.
+  - Debajo, las gráficas de pulso y de aceleración.
+  - Sin panel derecho y sin barra de pestañas.
+  - Entrada con la tarjeta AVO (enlace, o código y clave; se guarda en el Llavero).
+  - Firebase por REST, sin SDK: `Core/LiveCodec.swift`, `Core/LiveFirebase.swift`, `App/LiveModel.swift`, `Views/LiveView.swift`.
+  - Simulación con el entrenamiento abierto, marcada SIMULACIÓN. Captura nueva «Live» en `ScreenshotTests`.
+- **Android 2.10-live-dev1 (vc 43):** `core/.../live/LiveCodec.kt` (formato `LIVE1` + `LiveRecorder`, con pruebas) y
+  `app/.../cloud/LiveShare.kt`, que sube la `TELEMETRY` mientras el pecho graba.
+  - Interruptor «Directo (LIVE en el iPad)» en Compartir, desactivado por defecto.
+  - «Entrar en el iPad (LIVE)» en Mi cuenta, que muestra el código y la clave o comparte el enlace.
+- **Firebase:** nodo `live/{owner}/{sid}` (`meta`, `last`, `s/{n}`). Escribe solo el dueño registrado. Leen el dueño y
+  quien tenga sus envíos ACCEPTED. Cuatro pruebas nuevas en `rules.test.js`.
+- Documento `docs/LIVE_SERVIDOR.md`.
+**Por qué:** el entrenador quiere ver el entrenamiento en directo en el iPad. El pecho acepta un solo móvil (el Android,
+que manda el RTCM), así que el directo va por el servidor.
+**No se ha tocado:** firmware, contratos binarios (`TELEMETRY v3` igual), workflows, firmas, `Info.plist`, número de
+build de TestFlight, `google-services.json`. Sin dependencias nuevas en el iPad.
+**Validación:** IMPLEMENTADO · CI lanzado a mano en la rama (commit `3b03740`):
+- reglas Firebase run 44565056559 ✅, 15/15 (4 nuevas de LIVE);
+- Android run 44565050754 ✅ (APK y pruebas core con `LiveCodecTest`);
+- iPad run 44565045768 ✅, sin TestFlight: compila y pasan 121 pruebas unitarias, 5 de ellas de `LiveCodecTests`.
+
+Las capturas de UI fallan desde antes en casi todas las páginas («No existe nav.X»: 44 fallos en el último run de
+`develop`, 44524012083). La nueva captura «Live» sufre el mismo problema, así que no hay captura de la pantalla.
+**NO VERIFICADO** en hardware.
+**Pendiente:**
+1. Publicar las reglas a mano en la consola de Firebase cuando `firebase-rules.yml` pase.
+2. Comprobar que la clave web de Firebase acepta llamadas desde el iPad. Si no, añadir una app iOS (ver `docs/LIVE_SERVIDOR.md`).
+3. Prueba en pista: pecho + Android + iPad.
+4. Pulso y aceleración de la IMU en directo (`TELEMETRY v4`, otro lote).
+5. LIVE en Windows.
+## 2026-11-19 — Motor 2.0.0-dev10 — KB-1 1.8.0: estudio extra 5 (modelo óseo B y playa por franja)
+**Autor:** Claude (a petición del usuario: «lanza otro estudio ahora») · **Rama:** `claude/kb-estudio5-2026-11-19` (desde `develop` con PR #85–#87 fusionados) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Estudio** `equine-intelligence/knowledge/estudios/2026-11-19_extra5_modeloB_signo_b_playa_franjas.md`, con cifras
+  etiquetadas [E]/[E-r]/[I]/[NV]. (1) **Modelo óseo B:** signo de b cerrado (−0,02 en la tabla 9 de Anwar 2026, arXiv
+  HTML, y en Hitchens 2018; convención S_v = a·√(1 − f)·[1 − b(1 − f)]) y f_BM(0) = 0,61 (Pan 2025). El paso de
+  integración no se publica y la tabla 4 de Anwar no se reproduce sin el código (Zenodo bloqueado). (2) **Playa por
+  franja:** solo hay datos de playa de trotones al trote (Chateau 2011, Crevier-Denoix 2011); en PSI al galope el suelo
+  cambia la zancada hasta 0,186 m a igual velocidad (Pfau 2024), más que el umbral de A7. Propuestas PL1–PL6.
+- `base_cientifica.json` 1.8.0: **corrección de `modelo_B_constantes.b` de +0,02 a −0,02** (no afecta a ningún
+  cálculo: el modelo B sigue PENDIENTE), f_BM inicial, regla `PLAYA_LINEA_BASE_PL1_PL6` (PENDIENTE), 7 fuentes nuevas,
+  pendientes y cola actualizados. Ficha 14, tabla de estado y README.
+- **Motor sin cambios de lógica:** `KNOWLEDGE_VERSION` 1.7.0 → 1.8.0 y `ENGINE_VERSION` 2.0.0-dev9 → 2.0.0-dev10;
+  fixtures regenerados (solo versiones).
+**Por qué:** el modelo B y la línea base de la playa son pendientes que bloquean código.
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, número de build de TestFlight, apps.
+**Validación:** IMPLEMENTADO (solo versiones) · pruebas locales con ASan/UBSan: 102 casos y 1.729 comprobaciones sin
+fallos; Release y `check_fixtures.py` en verde tras `--update` (diferencias: solo versiones) · CI: ver PR ·
+**NO VERIFICADO** con caballos reales. La fatiga ósea del modelo B no es una predicción de lesiones.
+**Pendiente:** código de Anwar/Pan para el paso de integración; campo de franja y marea en las apps; textos completos
+de Chateau 2011 y Crevier-Denoix 2011.
+
+## 2026-11-19 — iPad 1.0.0 — Botones de la pestaña Motor y «Análisis motor» de carreras
+**Autor:** Claude (a petición del usuario, capturas del build 173 marcadas) · **Rama:** `claude/motor-botones-analisis-carreras` (desde `develop` `fb9de38`) · **Commits:** `e73fca3`, `af7541c` · **PR:** #87 · **CI:** iPad run 44611181120 ✅ (sin TestFlight)
+**Qué cambia:**
+- **Pestaña Motor:** columna de botones arriba a la derecha de «Lectura del entrenamiento»: **Reprocesar** (motor
+  actual, forzado), **Reprocesar caballo** (todos los entrenamientos del mismo caballo, con confirmación y progreso),
+  **Exportar JSON** (resultado del motor a Documentos › Exportados y hoja de compartir), **Detalle técnico** (abre y
+  baja a las tablas) y **Borrar caché** (borra los `analisis_*.json` guardados; no toca entrenamientos, correcciones ni
+  valoraciones). También aparece cuando el entrenamiento aún no tiene análisis.
+- **Carreras › detalle:** botón **«Análisis motor»** entre «Informe PDF» y «PDF original». Abre una pantalla completa que
+  pasa el motor actual por los entrenamientos de los 60 días previos y recalcula informe, forma y tramo a tramo
+  («Volver a analizar» fuerza el motor). Contenido en lenguaje llano: resumen en una frase; salida, desarrollo y final
+  frente al ganador y al caballo medio; gráficas de puesto, distancia al primero (cuerpos) y velocidad por tramo;
+  rivales con su **cara a cara** en carreras anteriores del iPad y sus otras carreras; **carreras anteriores** del
+  caballo por **distancia** (±100 m), **estado de pista** e **hipódromo** con gráfica de puesto relativo;
+  entrenamientos (mejores 200/400/600 m, tendencia, caída, forma/ACWR) con gráfica; conclusiones, «para la próxima»
+  (orientativo), confianza y método.
+- **Estado de la pista** (`Race.going`, escala France Galop de *Très léger* a *Très lourd*, grupos firme/bueno/blando/
+  pesado): se anota a mano en esa pantalla porque el PDF de tracking no lo trae. Campo opcional: `carreras.json`
+  anterior se sigue leyendo.
+- Lógica en `ipad/AVOiPad/Core/RaceDeepEngine.swift` (funciones puras) con `RaceDeepEngineTests` (5 pruebas).
+  `RaceReport.fastWorkList` (aditivo). Archivos: `App/AppModel+EngineTools.swift`, `App/RacesModel.swift`,
+  `Core/RaceAnalysis.swift`, `Core/RaceModels.swift`, `Views/EngineView.swift`, `Views/RaceDetailView.swift`,
+  `Views/RaceEngineAnalysisView.swift`.
+**Por qué:** el usuario pidió botones en Motor y un análisis en profundidad de cada carrera con entrenamientos,
+carreras anteriores, mismos rivales, misma distancia y estado de pista, con gráficas y entendible.
+**No se ha tocado:** motor C++, firmware, contratos binarios, Android, Windows, workflows, firmas, `Info.plist`,
+número de build de TestFlight. Las carreras siguen siendo solo del iPad (como el resto de Carreras).
+**Validación:** IMPLEMENTADO · COMPILADO / CI: run 44611181120 en `e73fca3`, compilación ✅ y 121/121 pruebas unitarias ✅ (5 nuevas); capturas de UI con los 44 fallos que ya había en `develop` · **NO VERIFICADO** en el iPad. Las comparaciones con carreras
+anteriores solo usan las carreras importadas en el iPad; con menos de 3 son una pista, no una conclusión.
+**Pendiente:** probar en el iPad con carreras reales; leer el estado de pista de France Galop si su ficha lo muestra;
+añadir el análisis al Informe PDF si el usuario lo quiere.
+## 2026-11-19 — Motor 2.0.0-dev9 — KB-1 1.7.0: estudio extra 4 (auditoría de fuentes, tendón en árabes, V200 con trotones)
+**Autor:** Claude (tarea programada, estudio extra 4) · **Rama:** `claude/kb-estudio4-2026-11-19` (desde `claude/kb-estudio3-2026-11-19`, PR #85 abierto) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Estudio** `equine-intelligence/knowledge/estudios/2026-11-19_extra4_auditoria_fuentes_tendon_arabes_v200_trotones.md`
+  (etiquetas [E]/[E-r]/[I]/[I-raza]/[NV] y tipo de acceso). (1) **Auditoría** de 9 fuentes que sostienen reglas del
+  motor; 6 mejoradas (Perkins 2005 a texto completo, tesis de Massey). Correcciones de ámbito, sin cambiar constantes:
+  Morrice-West 2025 es de Tasmania, da HR y su «carga baja» es fatiga ósea < 0,25 en 4 salidas (el corte de A4 es [I]);
+  Carrier 1998 solo húmero; Vermeulen & Evans «diferencia media ≤ 2 %» (no CV; el +8 % es de prensa); Frick 2019 canter
+  en cinta (corte 6 %: S 88 %, E 97 %); Martig 2013 confirmada. (2) **Tendón en árabes:** sin OR/IRR publicadas (Golfo,
+  Turquía, Polonia); edad 3–4 años con tres fuentes (Çalışkan 2020 texto completo, Pap 2026 Doha); la carga solo se
+  asocia a la gravedad; CSA del TFDS árabe 62–94 mm² (Çelimli 2000); trotones solo como dirección [I-raza].
+  (3) **V200/VHRmax:** trotones (Leleu, Couroucé, Hamlin, Ringmark) como método [I-raza]; Corea (Lee 2019) y Brasil
+  (Alonso 2013, árabes en cinta); no hay TE publicado legible en PSI/árabe → TE propio del caballo.
+- `base_cientifica.json` 1.7.0: campos `acceso`, `verificado_fecha`, `pais`, `idioma`, `raza_fuente`; 17 fuentes nuevas;
+  notas de A3, A4, A5, A9, índice tendinoso, σ0, VHRmax y ECG; pendientes y cola actualizados; niveles E-r e I-raza.
+- Se descartó por legalidad una lectura en una copia no autorizada de un libro comercial (sin usar cifras).
+- **Motor sin cambios de lógica:** `KNOWLEDGE_VERSION` 1.6.0 → 1.7.0 y `ENGINE_VERSION` 2.0.0-dev8 → 2.0.0-dev9;
+  fixtures regenerados (solo versiones). Ficha 14, tabla de estado y README.
+**Por qué:** estudio extra pedido por el usuario (modo meticuloso, mundial y multirraza).
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, número de build de TestFlight, apps.
+**Validación:** IMPLEMENTADO (solo versiones) · pruebas locales con ASan/UBSan (ctest en verde) y Release: 102 casos y
+1.729 comprobaciones sin fallos; `check_fixtures.py` en verde tras `--update` (diferencias: solo versiones) · CI: ver PR ·
+**NO VERIFICADO** con caballos reales. La fatiga ósea es un índice de carga, no una predicción de lesiones.
+**Pendiente:** textos completos bloqueados (Martig 2013, Morrice-West 2025, Estberg 1998, Vermeulen/Gramkow 2006, Frick
+2019 en PMC desde un navegador), DOI de Carrier 1998, Çelimli 2004 completo; línea base de la playa.
+
+## 2026-11-19 — Motor 2.0.0-dev8 — KB-1 1.6.0: estudio extra 3 (planificador semanal y ECG / A11)
+**Autor:** Claude (tarea programada, estudio extra 3) · **Rama:** `claude/kb-estudio3-2026-11-19` (desde `develop` con PR #80–#83 fusionados) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Estudio** `equine-intelligence/knowledge/estudios/2026-11-19_extra3_planificador_semanal_ecg_a11.md`, con cifras
+  etiquetadas [E]/[E-r]/[I]/[NV]. (1) **Planificador semanal:** práctica publicada (≈ 2 trabajos rápidos/semana en PSI
+  maduros y 1,7 en 2 años; ~8 km/mes a ≥ 13,3 m/s; un día libre; ~2 descansos/año de ~6 semanas; carreras cada
+  2,3 semanas), carga del último mes protectora frente a la de 60–180 d (Hitchens 2018, Georgopoulos & Parkin 2017) y
+  seis restricciones P1–P6 propuestas. No hay evidencia publicada de días entre trabajos rápidos ni de árabes de llano.
+  (2) **ECG / A11:** detector anclado en el pico S (Van Steenkiste 2020: VPP 99,1 %, S 98,0 % en reposo; Pan-Tompkins
+  81,5/91,5), prematuro ≥ 5–6 % (Navas de Solis 2026, Frick 2019), fases (Marr 2020: 50,6 % en la recuperación), puerta
+  de calidad del 10 % y acuerdo entre observadores en ejercicio 0–13 % (Trachsel 2011).
+- `base_cientifica.json` 1.6.0: 10 fuentes, regla `PLANIFICADOR_RESTRICCIONES_P1_P6` (PENDIENTE), nota en `A11_ECG`,
+  pendientes de ECG y planificador reescritos, 4 temas nuevos en la cola. Ficha 14, tabla de estado y README.
+- **Motor sin cambios de lógica:** `KNOWLEDGE_VERSION` 1.5.0 → 1.6.0 y `ENGINE_VERSION` 2.0.0-dev7 → 2.0.0-dev8 para que
+  el análisis declare la base vigente; fixtures regenerados (solo las dos versiones).
+**Por qué:** estudio extra pedido por el usuario sobre pendientes que bloquean código (planificador y A11).
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, número de build de TestFlight, apps.
+**Validación:** IMPLEMENTADO (solo versiones) · pruebas locales con ASan/UBSan: 102 casos y 1.729 comprobaciones sin
+fallos; Release y `check_fixtures.py` en verde tras `--update` (diferencias: solo versiones) · CI: ver PR ·
+**NO VERIFICADO** con caballos reales. Las restricciones son de prudencia, no predicciones de lesión.
+**Pendiente:** validar un detector de QRS con galope real anotado (cincha PROTOTIPO REV 5.10); implementar P1–P6 cuando
+haya semanas reales de la cuadra; leer PMC12699123, Flethøj 2016 y Frick 2019 completos.
+
+## 2026-11-19 — Motor 2.0.0-dev7 — KB-1 1.5.0: reglas A7 y A8 aplicadas (línea base propia + CUSUM autoiniciado)
+**Autor:** Claude (a petición del usuario: «fusiona y empieza a aplicar las reglas») · **Rama:** `claude/kb-reglas-lineas-base-2026-11-19` (desde `develop` con PR #82 fusionado) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Training Analytics aplica A7 y A8** en cada sesión y en el estado actual: `A7_CAIDA_ZANCADA` (zancada a la velocidad
+  de referencia ≥ 0,10 m bajo la línea base comparable, VIGILAR) y `A8_CAIDA_VELOCIDAD_FINAL` (últimos 600 m del trabajo
+  rápido ≥ 0,20 m/s más lentos, INFO; VIGILAR si también lo confirma el CUSUM). Comparables = misma superficie. Criterio:
+  la última y 2 de las 3 últimas bajo el umbral (≥ 5 sesiones de base), o CUSUM autoiniciado de Hawkins (k 0,5, h 5,
+  calentamiento 8). Aparecen en `base_cientifica.reglas` y en los motivos, así que las apps las muestran sin cambios.
+- `kb_drift_down` en `knowledge.h`; `RaceSummary.v_last_600` (campo `v_ultimos_600m` en el resumen de sesión, aditivo);
+  opciones JSON nuevas en `base_cientifica`; `reglas` se escribe aunque falte el bloque de carga si hay avisos A7/A8.
+- Exclusión de la base con S > 0,8·h elegida por simulación propia (falsa alarma 11,4 % en 100 sesiones frente a
+  23,7 % con h/2; detección de 3 DE en ≤ 6 sesiones 91,5 %).
+- `KNOWLEDGE_VERSION` 1.4.0 → 1.5.0; `ENGINE_VERSION` 2.0.0-dev6 → 2.0.0-dev7. `base_cientifica.json` 1.5.0 (A7 y A8
+  IMPLEMENTADO), ficha 14, tabla de estado, README y fixtures (solo versiones).
+**Por qué:** el usuario pidió que las reglas se apliquen ya; A9 sigue pendiente porque el análisis no trae V200 (ECG).
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, número de build de TestFlight, apps.
+**Validación:** IMPLEMENTADO · pruebas locales con ASan/UBSan: 102 casos y 1.729 comprobaciones sin fallos; Release y
+`check_fixtures.py` en verde · CI: ver PR · **NO VERIFICADO** con caballos reales. Los umbrales son de partida [I]; son
+avisos para revisar al caballo, no predicciones de lesión.
+**Pendiente:** TE propio por métrica con las sesiones del PROTOTIPO; playa por franja como superficie; A9 con el ECG.
+
+## 2026-11-19 — Motor 2.0.0-dev6 — KB-1 1.4.0: estudio extra 2 (CUSUM con pocas sesiones, tendón en árabes, IDF) y CUSUM autoiniciado
+**Autor:** Claude (tarea programada, estudio extra 2) · **Rama:** `claude/kb-estudio2-2026-11-19` (desde `develop`, con PR #80 y #81 fusionados) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Estudio** `equine-intelligence/knowledge/estudios/2026-11-19_extra2_cusum_autoiniciado_tendon_arabes_idf.md`,
+  con cifras etiquetadas [E]/[E-r]/[I]/[NV] y decisiones al principio. (1) CUSUM con μ y σ estimadas de 5–20
+  sesiones: el ARL0 por caballo no es el nominal (simulación propia: m = 10, h = 4 → P10 = 23 sesiones frente a 335);
+  la tipificación autoiniciada de Hawkins 1987 lo recupera (339/930). (2) TFDS: OR univariables de Ikeda 2019 (PSI,
+  Japón) y, en árabes, TFDS = 83 % de las tendinopatías (Kalisiak 2012) y pico de lesiones de tendón a los 3 años
+  (Yıldırım & Karaarslan 2025). (3) France Galop **no publica ningún IDF**: el pendiente pasa a una métrica propia de
+  velocidad final relativa con par por pista (referencia: Finishing Speed % de Timeform).
+- **Motor (un pendiente):** `kb_self_starting_z`, `kb_student_t_cdf` y `kb_normal_quantile` en `knowledge.h`, con la
+  prueba `kb.baseline_self_starting_cusum`. **No se conectan a ninguna regla**; la salida del análisis solo cambia en
+  las versiones. `KNOWLEDGE_VERSION` 1.3.0 → 1.4.0; `ENGINE_VERSION` 2.0.0-dev5 → 2.0.0-dev6.
+- **`base_cientifica.json` 1.4.0:** 5 parámetros y 9 fuentes nuevos; `pendiente_motor` (líneas base e IDF) y
+  `cola_investigacion` actualizados; historial.
+- Ficha `docs/algoritmos/14_BASE_CIENTIFICA.md`, fila del motor en la tabla de estado y `README.md`.
+- Fixtures `core/src/test/resources/equine/*.json` regeneradas con `--update` (solo cambian las versiones).
+**Por qué:** estudio extra pedido por el usuario (máx. 1 h); conectar las líneas base a Training Analytics con pocas
+sesiones exige un CUSUM que no dispare falsas alarmas de más.
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, TestFlight, apps.
+**Validación:** IMPLEMENTADO · pruebas locales con ASan/UBSan: 100 casos y 1.703 comprobaciones sin fallos; Release y
+`check_fixtures.py` en verde · CI: ver PR · **NO VERIFICADO** con caballos reales. La carga tendinosa y la fatiga ósea
+son índices de carga, nunca predicciones de lesión.
+**Pendiente:** conectar `kb_self_starting_z` + CUSUM a A7–A9 (TE por métrica, superficie); cuantificar el efecto del
+shrinkage y de la autocorrelación; textos bloqueados (Jones 2004, Saleh 2016, Hawkins 1987, Takahashi 2004, Lam 2007);
+revisar a mano las OR de Ikeda 2019 y los recuentos de *foulées* de France Galop.
+
+## 2026-11-19 — Motor 2.0.0-dev5 — KB-1 1.3.0: estudio extra (tendón, V200, líneas base, playa, France Galop) y herramientas de línea base
+**Autor:** Claude (tarea programada, estudio extra) · **Rama:** `claude/kb-estudio-2026-11-19` (sale de `claude/kb-noche-2026-11-19`, PR #80, sin fusionar) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Estudio** `equine-intelligence/knowledge/estudios/2026-11-19_extra_tendon_v200_lineas_base_playa.md`, con cada
+  cifra etiquetada [E]/[E-r]/[I]/[NV] y las decisiones al principio. Temas: índice tendinoso (árabes: vuelven a correr
+  el 15 % frente al 41 % de PSI, Kalisiak 2012; no hay curva S-N del tendón, se retira el exponente de carga); V200 y
+  recuperación de FC (retraso de FC, ventanas de 4 y 15 min); líneas base (ARL del CUSUM recalculados: 335 unilateral
+  con h = 4, los 168 eran bilaterales; z atípico 3,5; umbral de cambio 2·TE·√(1 + 1/n)); playa por franjas (Chateau y
+  Crevier-Denoix 2011, trotones); France Galop publica parciales por 200 m y zancadas desde 2025 (árabes ≈ 2,4–2,5 Hz).
+- **Motor (un pendiente):** herramientas de línea base en `knowledge.h`: `kb_robust_baseline`, `kb_robust_z`,
+  `kb_shrink_mean`, `kb_change_threshold` y `kb_cusum_upper` (k 0,5, h 4, FIR opcional). **No se conectan a ninguna
+  regla** y la salida del análisis no cambia (solo versiones). `KNOWLEDGE_VERSION` 1.2.0 → 1.3.0; `ENGINE_VERSION`
+  2.0.0-dev4 → 2.0.0-dev5.
+- **`base_cientifica.json` 1.3.0:** 13 parámetros nuevos, regla pendiente `TENDON_INDICE_HEURISTICO`, 19 fuentes
+  nuevas, nota de Önder 2022 (los 0,9 m/s son una resta), pendientes y cola renovados.
+- Ficha 14 (apartado 3 quater), fixtures de Kotlin regeneradas (solo versiones) y fila del motor en la tabla de estado.
+**Por qué:** estudio extra pedido por el usuario sobre los temas que bloquean código.
+**Archivos:** `equine-intelligence/{include/avo_eq/knowledge.h, include/avo_eq/types.h, src/knowledge/knowledge.cpp,
+tests/test_knowledge.cpp, knowledge/base_cientifica.json, knowledge/estudios/…, docs/algoritmos/14_BASE_CIENTIFICA.md}`,
+`core/src/test/resources/equine/{sample,synthetic}_analysis.json`, `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`.
+**No se ha tocado:** firmware, workflows, firmas, `Info.plist`, TestFlight ni contratos binarios.
+**Validación:** IMPLEMENTADO · pruebas locales con ASan/UBSan: 99 casos, 1.684 comprobaciones, 0 fallos · fixtures OK
+tras `--update` · CI: ver PR · **NO VERIFICADO** con caballos reales.
+**Pendiente:** conectar las líneas base a A7/A8/A9 con TE propios; índice tendinoso; V200 (A9); IDF de France Galop;
+línea base de playa por franja.
+
+---
+
+## 2026-11-19 — Motor 2.0.0-dev4 — KB-1 1.2.0: investigación nocturna (modelo B, tendón, árabes, arritmias) y regla A6B
+**Autor:** Claude (tarea programada nocturna) · **Rama:** `claude/kb-noche-2026-11-19` (sale de `develop`) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Estudio** `equine-intelligence/knowledge/estudios/2026-11-19_noche_modeloB_tendon_choi_ecg_prevalencia.md`, con
+  cada cifra etiquetada [E]/[E-r]/[I]/[NV] y las decisiones de la noche al principio.
+- **Motor (un pendiente):** regla nueva **A6B_POCO_GALOPE_60D** (Choi & Parkin 2025, texto completo, tabla 2: ≤ 2 días
+  de galope en 60 d, OR 1,842, IC 95 % 1,073–3,162 de tendinopatía del TFDS). Solo INFO / AVISO, con 60 d de historia y
+  sesiones en la última semana; «día de galope» = día con sesión rápida es [I]. Campo nuevo `dias_galope_60d` en el
+  estado de la base científica y opción `base_cientifica.dias_galope_60d_max` (0–24, por defecto 2).
+  `KNOWLEDGE_VERSION` 1.1.0 → 1.2.0; `ENGINE_VERSION` 2.0.0-dev3 → 2.0.0-dev4.
+- **`base_cientifica.json` 1.2.0:** constantes del modelo B completas (A_OBL_min/max, δ_B, γ_B, A_OCL_max; tabla 9 de
+  Anwar 2026, extracto [E-r]) pero **sin implementar** (signo de b dudoso, f_BM inicial no publicada); tabla 2 de Choi &
+  Parkin; tipos de lesión de árabes (tendón 64 %, Yildirim 2025); prevalencia de arritmias en caballos sanos (A11 sigue
+  pendiente: no hay número aceptable publicado); 9 fuentes nuevas; cola y pendientes renovados.
+- Fixtures JSON (`core/src/test/resources/equine/*.json`) regeneradas con `check_fixtures.py --update`: solo cambian
+  las versiones del motor y de la base (2.0.0-dev3 → dev4, 1.1.0 → 1.2.0).
+- Ficha `docs/algoritmos/14_BASE_CIENTIFICA.md` actualizada.
+**Por qué:** investigación nocturna programada de la base científica de la cuadra.
+**No se ha tocado:** firmware, workflows, firmas, `Info.plist`, TestFlight y contratos binarios. La API C no cambia.
+**Validación:** IMPLEMENTADO · pruebas locales con `-DAVO_EQ_SANITIZE=ON` (ASan/UBSan): 96 casos y 1.638 comprobaciones
+sin fallos (nueva `kb.rule_low_gallop_days_60d`) · fixtures OK con el CLI en Release. **NO VERIFICADO** con caballos
+reales.
+**Pendiente:** modelo B (signo de b, f_BM inicial, reproducir la tabla 4 de Anwar); cociente de galope de A6; A8; A9;
+A11; regla combinada de Verheyen; pantallas de las apps para A6B.
+
 ## 2026-11-18 — Documentación — skills de Claude en `AGENTS.md`
 **Autor:** Claude · **Rama:** `claude/skills-agents`
 **Qué cambia:** `AGENTS.md` gana la sección «Skills de Claude» (qué skill cargar según la tarea: `avo-cambio-protocolo`,

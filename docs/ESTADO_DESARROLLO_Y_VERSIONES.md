@@ -1,6 +1,6 @@
 # Estado del desarrollo — tabla vigente
 
-**Actualizado:** 18/11/2026 · **Rama:** `develop/avo-performance-horse` (`daeb489`) · Repositorio
+**Actualizado:** 20/11/2026 · **Rama:** `develop/avo-performance-horse` (`daeb489`) · Repositorio
 `avotattoocastro-creator/apk_android_avo`.
 
 **Regla:** quien cambie una versión actualiza su fila en el mismo PR. **PROTOTIPO** = placas de desarrollo, sin PCB
@@ -29,12 +29,12 @@ registrada: **NO VERIFICADO**.
 
 | Componente | Versión | Carpeta | Workflow | Descarga | Estado |
 |---|---|---|---|---|---|
-| Android AVO Performance Horse | **2.9-integrada-dev1 (vc 42)** | `app/`, `core/` | `build-android.yml` | [`AVO_ANDROID.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_ANDROID.apk) | CI ✅ · NO VERIFICADO |
+| Android AVO Performance Horse | **2.10-live-dev1 (vc 43)** (directo LIVE a Firebase) | `app/`, `core/` | `build-android.yml` | [`AVO_ANDROID.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_ANDROID.apk) | CI: al fusionar · NO VERIFICADO |
 | AVO Tarjetas | **1.4-nfc-movil-dev1 (vc 5)** | `cards/` | `build-android.yml` | [`AVO_TARJETAS.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_TARJETAS.apk) | CI ✅ |
 | AVO Update | **2.3.1 (vc 28)** | `usb-updater/` | `build-usb-updater.yml` | [`AVO_UPDATE.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_UPDATE.apk) | CI ✅ |
 | Windows | **V2 PRO 2.0.0** | `windows/` | `build-avo-windows.yml` | [`AVO_WINDOWS.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_WINDOWS.zip) | CI ✅ |
-| iPad | **1.0.0** (build automático) | `ipad/` | `build-avo-ipad.yml` | solo TestFlight | CI ✅ |
-| Motor C++17 Equine | **2.0.0-dev3** (base científica KB-1 1.1.0: velocidad de los últimos 600 m) | `equine-intelligence/` | `build-equine-engine.yml` | — | CI ✅ (motor run 44299049283 a mano · iPad/TestFlight 44295513273 · Android · Windows) · NO VERIFICADO |
+| iPad | **1.0.0** (build automático; 19/11: botones de Motor, «Análisis motor» de carreras y página **LIVE** desde el servidor, `docs/LIVE_SERVIDOR.md`) | `ipad/` | `build-avo-ipad.yml` | solo TestFlight | CI ✅ · lo nuevo NO VERIFICADO en el iPad |
+| Motor C++17 Equine | **2.0.0-dev11** (base científica KB-1 1.9.0: noche del 20/11, regla **A6C_COCIENTE_GALOPE** de Choi & Parkin, auditoría de 11 fuentes; desde dev10: modelo óseo B especificado, playa PL1–PL6 sin implementar; A7 y A8 desde dev7) | `equine-intelligence/` | `build-equine-engine.yml` | — | pruebas locales ✅ (ASan/UBSan, 103 casos) · CI de la rama `claude/kb-noche-2026-11-20`: ver PR · NO VERIFICADO |
 
 **Plan de pruebas (decisión del usuario, 17/11/2026):** hasta construir todas las PCB, las pruebas de campo se hacen
 solo con PROTOTIPOS; lo validado se porta a las BETA, y las pruebas de campo BETA empiezan con todas las PCB

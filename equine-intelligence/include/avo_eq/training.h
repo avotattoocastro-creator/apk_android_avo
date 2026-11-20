@@ -60,6 +60,7 @@ struct RaceSummary {
   int efforts = 0, fast_efforts = 0;
   double vmax = NAN, best_200_s = NAN, dist_fast_m = 0, dist_work_m = 0;
   double fatigue_pct = NAN;                     // del trabajo con mayor velocidad
+  double v_last_600 = NAN;                      // últimos 600 m del trabajo rápido más veloz (A8, KB 1.5.0)
   double ref_speed[2] = {NAN, NAN}, sf_ref[2] = {NAN, NAN}, sl_ref[2] = {NAN, NAN};
   double sf_at_vmax = NAN, sl_at_vmax = NAN, vert_disp_m = NAN;
   int impacts = 0, lateral_jolts = 0, saturations = 0;

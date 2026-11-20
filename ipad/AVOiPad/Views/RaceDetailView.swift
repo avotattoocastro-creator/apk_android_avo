@@ -10,6 +10,7 @@ struct RaceDetailView: View {
     @State private var notes: String = ""
     @State private var askDelete: Bool = false
     @State private var showDeep: Bool = false
+    @State private var showEngine: Bool = false
     @State private var sectorRunner: String = ""
 
     var body: some View {
@@ -50,6 +51,11 @@ struct RaceDetailView: View {
         .background(Avo.bg)
         .onAppear { load() }
         .onChange(of: race.id) { (_: String, _: String) in load() }
+        .fullScreenCover(isPresented: $showEngine) {
+            RaceEngineAnalysisView(raceId: race.id)
+                .environment(app)
+                .avoColorScheme()
+        }
         .fullScreenCover(isPresented: $showDeep) {
             RaceDeepAnalysisView(race: race)
                 .environment(app)
@@ -100,6 +106,16 @@ struct RaceDetailView: View {
                 }
                 .buttonStyle(.avoPrimary)
                 .accessibilityIdentifier("race.reportPdf")
+            }
+            if race.ourRunner != nil {
+                // trainer's sketch 19/11/2026 (build 173): «Análisis motor» between «Informe PDF» and «PDF original»
+                Button {
+                    showEngine = true
+                } label: {
+                    Label("Análisis motor", systemImage: "cpu")
+                }
+                .buttonStyle(.avoSecondary)
+                .accessibilityIdentifier("race.engineAnalysis")
             }
             if let p = model.pdfPath(race) {
                 ShareLink(item: URL(fileURLWithPath: p)) {

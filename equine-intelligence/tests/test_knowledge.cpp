@@ -1,5 +1,5 @@
 // AVO Base científica KB-1: modelo de fatiga ósea (valores de referencia del estudio ampliado del 17/11/2026), bandas,
-// contadores de Verheyen, reglas A1–A6 y fatiga ósea semanal, e integración con Track Work y Training Analytics.
+// contadores de Verheyen, reglas A1–A6, A6B y fatiga ósea semanal, e integración con Track Work y Training Analytics.
 #include <cmath>
 #include <string>
 #include "avo_eq/avo_eq_c.h"
@@ -144,6 +144,82 @@ EQ_TEST(kb, rules_return_after_rest) {
   CHECK(a6 && a6->text.find("ecografía") != std::string::npos);
 }
 
+// A6B (Choi & Parkin 2025, EVJ 58:31, tabla 2): ≤ 2 días de galope en los 60 días previos, OR 1,842 (1,073–3,162) [E].
+EQ_TEST(kb, rule_low_gallop_days_60d) {
+  KbRuleConfig c;
+  CHECK(c.low_gallop_60d_max_days == 2);
+  std::vector<KbDay> h;
+  // 70 días con canter cada 2 días; galope rápido (400 m) solo los días 20 y 40
+  for (long d = 0; d < 70; d += 2) h.push_back(day_with(d, 1500, (d == 20 || d == 40) ? 400 : 0, 0.5));
+  KbStatus s = kb_evaluate(h, 68, 0, c);
+  REPORT("días de galope en 60 d: %d\n", s.gallop_days_60d);
+  CHECK(s.gallop_days_60d == 2);
+  const KbFlag* f = flag(s, "A6B_POCO_GALOPE_60D");
+  CHECK(f && f->level == "INFO" && f->action == "AVISO");
+  CHECK(f && f->evidence.find("1,84") != std::string::npos);
+  CHECK(kb_status_json(s).find("\"dias_galope_60d\":2") != std::string::npos);
+  // con un tercer día de galope ya no salta (categoría de referencia 3–24 días)
+  h[30].gallop_m = 400;   // día 60
+  KbStatus s3 = kb_evaluate(h, 68, 0, c);
+  CHECK(s3.gallop_days_60d == 3);
+  CHECK(flag(s3, "A6B_POCO_GALOPE_60D") == nullptr);
+  // dos sesiones rápidas el mismo día cuentan como un solo día
+  std::vector<KbDay> dup = h; dup[30].gallop_m = 0; dup.insert(dup.begin() + 21, day_with(40, 0, 300, 0.2));
+  CHECK(kb_evaluate(dup, 68, 0, c).gallop_days_60d == 2);
+  // sin 60 días de historia o sin sesiones en la última semana no se juzga
+  CHECK(flag(kb_evaluate(h, 68, 20, c), "A6B_POCO_GALOPE_60D") == nullptr);
+  h[30].gallop_m = 0;
+  CHECK(flag(kb_evaluate(h, 78, 0, c), "A6B_POCO_GALOPE_60D") == nullptr);   // última sesión el día 68
+  // umbral configurable
+  KbRuleConfig c0; c0.low_gallop_60d_max_days = 1;
+  CHECK(flag(kb_evaluate(h, 68, 0, c0), "A6B_POCO_GALOPE_60D") == nullptr);
+}
+
+// A6C (Choi & Parkin 2025, EVJ 58:31, sección 2.3 y tabla 2): (g60/g90) + 1 ≤ 1,6, OR 2,190 (1,227–3,910) [E];
+// ventanas anidadas de 60 y 90 días que acaban en el último trabajo rápido [E].
+EQ_TEST(kb, rule_gallop_ratio_60_90) {
+  KbRuleConfig c;
+  CHECK_NEAR(c.gallop_ratio_max, 1.6, 1e-12);
+  std::vector<KbDay> h;
+  // 120 días con canter cada 2 días; galope (400 m) los días 34, 40, 46, 52, 58 y después solo 80, 100 y 118
+  for (long d = 0; d <= 118; d += 2) {
+    bool g = d == 34 || d == 40 || d == 46 || d == 52 || d == 58 || d == 80 || d == 100 || d == 118;
+    h.push_back(day_with(d, 1500, g ? 400 : 0, 0.5));
+  }
+  // último trabajo rápido el día 118: ventana de 90 d = días 29–118 (8 galopes), de 60 d = días 59–118 (3 galopes)
+  KbStatus s = kb_evaluate(h, 119, 0, c);
+  REPORT("cociente de galope %.3f (g60 %d, g90 %d)\n", s.gallop_ratio, s.gallop_days_60_last, s.gallop_days_90_last);
+  CHECK(s.gallop_days_60_last == 3 && s.gallop_days_90_last == 8);
+  CHECK_NEAR(s.gallop_ratio, 3.0 / 8.0 + 1.0, 1e-12);   // 1,375
+  const KbFlag* f = flag(s, "A6C_COCIENTE_GALOPE");
+  CHECK(f && f->level == "INFO" && f->action == "AVISO");
+  CHECK(f && f->evidence.find("2,19") != std::string::npos);
+  CHECK(kb_status_json(s).find("\"cociente_galope\":{\"valor\":1.375") != std::string::npos);
+  // reparto regular (galope cada 6 días): g60 = 10, g90 = 15 → 1,667 > 1,6: no salta
+  std::vector<KbDay> r;
+  for (long d = 0; d <= 118; d += 2) r.push_back(day_with(d, 1500, (d % 6 == 4) ? 400 : 0, 0.5));
+  KbStatus sr = kb_evaluate(r, 119, 0, c);
+  REPORT("reparto regular: cociente %.3f (g60 %d, g90 %d)\n", sr.gallop_ratio, sr.gallop_days_60_last, sr.gallop_days_90_last);
+  CHECK(sr.gallop_days_60_last == 10 && sr.gallop_days_90_last == 15);
+  CHECK(flag(sr, "A6C_COCIENTE_GALOPE") == nullptr);
+  // umbral exacto: con 1,7 el reparto regular sí avisa
+  KbRuleConfig c17; c17.gallop_ratio_max = 1.7;
+  CHECK(flag(kb_evaluate(r, 119, 0, c17), "A6C_COCIENTE_GALOPE") != nullptr);
+  // sin 90 días de historia antes del último trabajo rápido no se calcula
+  KbStatus sn = kb_evaluate(h, 119, 40, c);
+  CHECK(std::isnan(sn.gallop_ratio));
+  CHECK(flag(sn, "A6C_COCIENTE_GALOPE") == nullptr);
+  CHECK(kb_status_json(sn).find("\"cociente_galope\":null") != std::string::npos);
+  // último trabajo rápido de hace más de 30 días: no se juzga (A5/A6 cubren la vuelta)
+  std::vector<KbDay> o = h;
+  for (long d = 120; d <= 154; d += 2) o.push_back(day_with(d, 1500, 0, 0.5));
+  CHECK(flag(kb_evaluate(o, 140, 0, c), "A6C_COCIENTE_GALOPE") != nullptr);   // 22 días desde el último galope
+  CHECK(flag(kb_evaluate(o, 154, 0, c), "A6C_COCIENTE_GALOPE") == nullptr);   // 36 días
+  // umbral de vigencia configurable
+  KbRuleConfig c40; c40.gallop_ratio_max_age_days = 40;
+  CHECK(flag(kb_evaluate(o, 154, 0, c40), "A6C_COCIENTE_GALOPE") != nullptr);
+}
+
 EQ_TEST(kb, weekly_bone_fatigue_ratio) {
   KbRuleConfig c;
   std::vector<KbDay> h;
@@ -236,5 +312,179 @@ EQ_TEST(kb, final_speed_last_600m) {
   double keep = -1;
   CHECK(!kb_final_speed(t, d, 600, &keep, nullptr)); CHECK_NEAR(keep, -1, 0);
   CHECK(!kb_final_speed({}, {}, 600, &keep, nullptr));
-  CHECK(std::string(KNOWLEDGE_VERSION) == "1.1.0");
+  CHECK(std::string(KNOWLEDGE_VERSION) == "1.9.0");
+}
+
+// Líneas base (KB 1.3.0, estudio extra 2026-11-19): valores de referencia del estudio ampliado del 18/11 y de la cadena
+// de Markov de Brook-Evans (ARL), recalculados a mano en el estudio extra.
+EQ_TEST(kb, baseline_robust_median_mad) {
+  // L1: {6,9; 7,0; 7,1; 7,05; 6,95; 7,2; 6,85; 7,0} → mediana 7,0; MAD 0,075; MAD_s 0,1112
+  std::vector<double> x = {6.9, 7.0, 7.1, 7.05, 6.95, 7.2, 6.85, 7.0};
+  KbRobustBaseline b = kb_robust_baseline(x);
+  CHECK(b.n == 8);
+  CHECK_NEAR(b.median, 7.0, 1e-12);
+  CHECK_NEAR(b.mad_s, 1.4826 * 0.075, 1e-9);
+  REPORT("línea base: mediana %.4f, MAD_s %.4f (referencia 7,0 y 0,1112)\n", b.median, b.mad_s);
+  CHECK_NEAR(b.mad_s, 0.1112, 1e-4);
+  // L2: z robusto de 7,4 = 0,4/0,111195 = 3,597 → atípico (> 3,5); 7,3 → 2,698, no
+  CHECK_NEAR(kb_robust_z(7.4, b), 0.4 / (1.4826 * 0.075), 1e-9);
+  CHECK(kb_robust_z(7.4, b) > KB_ROBUST_Z_OUTLIER);
+  CHECK(kb_robust_z(7.3, b) < KB_ROBUST_Z_OUTLIER);
+  // L3: NaN se saltan y last_n toma las últimas válidas: {.., 1, 2, NaN, 3} con last_n 3 → {1,2,3}, mediana 2, MAD_s 1,4826
+  KbRobustBaseline b2 = kb_robust_baseline({100, 1, 2, std::nan(""), 3}, 3);
+  CHECK(b2.n == 3); CHECK_NEAR(b2.median, 2.0, 0); CHECK_NEAR(b2.mad_s, 1.4826, 1e-12);
+  // L4: menos de 3 datos o escala nula → NaN; min_scale evita la escala nula
+  CHECK(std::isnan(kb_robust_z(1.0, kb_robust_baseline({1, 2}))));
+  KbRobustBaseline flat = kb_robust_baseline({5, 5, 5, 5});
+  CHECK_NEAR(flat.mad_s, 0, 0);
+  CHECK(std::isnan(kb_robust_z(5.5, flat)));
+  CHECK_NEAR(kb_robust_z(5.5, flat, 0.25), 2.0, 1e-12);
+  CHECK(kb_robust_baseline({}).n == 0);
+}
+
+EQ_TEST(kb, baseline_shrinkage_and_threshold) {
+  // S1: n = 3, x̄ = 10,0, σ² = 0,04, μ_pop = 9,6, τ² = 0,09 → μ* = 9,9484
+  double m = kb_shrink_mean(3, 10.0, 0.04, 9.6, 0.09);
+  REPORT("shrinkage: %.4f (referencia 9,9484)\n", m);
+  CHECK_NEAR(m, (3 * 10.0 / 0.04 + 9.6 / 0.09) / (3 / 0.04 + 1 / 0.09), 1e-12);
+  CHECK_NEAR(m, 9.9484, 1e-4);
+  // S2: peso propio = n·ICC/(1 + (n−1)·ICC) con ICC = τ²/(τ² + σ²); ICC 0,6 y n = 8 → 0,923
+  double s2 = 0.4, t2 = 0.6, w = 8 * 0.6 / (1 + 7 * 0.6);
+  CHECK_NEAR(kb_shrink_mean(8, 1.0, s2, 0.0, t2), w, 1e-12);
+  // S3: casos límite: n = 0 → μ_pop; sin prior → x̄
+  CHECK_NEAR(kb_shrink_mean(0, 10.0, 0.04, 9.6, 0.09), 9.6, 0);
+  CHECK_NEAR(kb_shrink_mean(3, 10.0, 0.04, std::nan(""), 0.09), 10.0, 0);
+  CHECK_NEAR(kb_shrink_mean(3, 10.0, 0.04, 9.6, 0), 10.0, 0);
+  // T1: TE 0,15 y n = 8 → 2·0,15·√1,125 = 0,3182; con SWC 0,4 manda el SWC; n ≤ 0 → 2·TE·√2 = 0,4243
+  CHECK_NEAR(kb_change_threshold(0.15, 8, 0.1), 0.3 * std::sqrt(1.125), 1e-12);
+  CHECK_NEAR(kb_change_threshold(0.15, 8, 0.4), 0.4, 0);
+  CHECK_NEAR(kb_change_threshold(0.15, 0, 0.0), 0.3 * std::sqrt(2.0), 1e-12);
+  CHECK_NEAR(kb_change_threshold(std::nan(""), 8, 0.4), 0.4, 0);
+}
+
+EQ_TEST(kb, baseline_cusum_upper) {
+  // C1: z = {0,2; 1,2; 1,5; 0,8; 1,6; 1,4; 1,1}, k 0,5, h 4 → S = {0; 0,7; 1,7; 2,0; 3,1; 4,0; 4,6}, alarma en la 7.ª
+  KbCusumConfig c;
+  KbCusumResult r = kb_cusum_upper({0.2, 1.2, 1.5, 0.8, 1.6, 1.4, 1.1}, c);
+  const double ref[] = {0, 0.7, 1.7, 2.0, 3.1, 4.0, 4.6};
+  CHECK(r.s.size() == 7);
+  for (int i = 0; i < 7; i++) CHECK_NEAR(r.s[i], ref[i], 1e-9);
+  CHECK(r.alarm_index == 6);
+  // C2: con h = 5 no salta; con FIR (S0 = 2) salta antes, en la 5.ª (1,7 → 2,4 → 3,4 → 3,7 → 4,8)
+  KbCusumConfig c5; c5.h = 5;
+  CHECK(kb_cusum_upper({0.2, 1.2, 1.5, 0.8, 1.6, 1.4, 1.1}, c5).alarm_index == -1);
+  KbCusumConfig cf; cf.fir = true;
+  KbCusumResult rf = kb_cusum_upper({0.2, 1.2, 1.5, 0.8, 1.6, 1.4, 1.1}, cf);
+  CHECK_NEAR(rf.s[0], 1.7, 1e-12); CHECK_NEAR(rf.s[3], 3.7, 1e-9); CHECK_NEAR(rf.s[4], 4.8, 1e-9);
+  CHECK(rf.alarm_index == 4);
+  // C3: NaN no cambia S; min_samples retrasa la alarma; una deriva a la baja se vigila con −z
+  KbCusumResult rn = kb_cusum_upper({3.0, std::nan(""), 3.0}, c);
+  CHECK_NEAR(rn.s[1], 2.5, 1e-12); CHECK_NEAR(rn.s[2], 5.0, 1e-12); CHECK(rn.alarm_index == 2);
+  KbCusumConfig cm; cm.min_samples = 5;
+  CHECK(kb_cusum_upper({9, 9, 9, 9, 9}, cm).alarm_index == 4);
+  CHECK(kb_cusum_upper({-1.5, -1.5, -1.5, -1.5}, c).alarm_index == -1);
+  CHECK(kb_cusum_upper({1.5, 1.5, 1.5, 1.5, 1.5}, c).alarm_index == 4);   // 1, 2, 3, 4, 5 → > 4 en la 5.ª
+  CHECK(kb_cusum_upper({}, c).s.empty());
+}
+
+EQ_TEST(kb, baseline_self_starting_cusum) {
+  // H1: auxiliares frente a scipy 1.18 (t.cdf y norm.ppf)
+  CHECK_NEAR(kb_student_t_cdf(2.0, 3), 0.9303370157205785, 1e-10);
+  CHECK_NEAR(kb_student_t_cdf(-1.5, 7), 0.088649243494985, 1e-10);
+  CHECK_NEAR(kb_student_t_cdf(0.7, 1), 0.6944001122142147, 1e-10);
+  CHECK_NEAR(kb_normal_quantile(0.975), 1.959963984540054, 1e-9);
+  CHECK_NEAR(kb_normal_quantile(1e-10), -6.361340902404056, 1e-8);
+  CHECK(std::isnan(kb_normal_quantile(1.5)));
+  // H2: Hawkins 1987 sobre x = {10,0; 10,4; 9,8; 10,9; 10,1; 12,0} (referencia calculada con scipy)
+  std::vector<double> xi = kb_self_starting_z({10.0, 10.4, 9.8, 10.9, 10.1, 12.0});
+  CHECK(xi.size() == 6);
+  CHECK(std::isnan(xi[0]) && std::isnan(xi[1]));
+  const double ref[] = {-0.7481477355715538, 1.4683756165434736, -0.2945083832748484, 2.3292112693312133};
+  for (int i = 0; i < 4; i++) CHECK_NEAR(xi[i + 2], ref[i], 1e-8);
+  REPORT("autoiniciado: xi_6 = %.4f (referencia 2,3292)\n", xi[5]);
+  // H3: NaN se salta y no cuenta; s = 0 da NaN; vacío
+  std::vector<double> xn = kb_self_starting_z({10.0, std::nan(""), 10.4, 9.8, 10.9});
+  CHECK(std::isnan(xn[1]) && std::isnan(xn[2]));
+  CHECK_NEAR(xn[3], ref[0], 1e-8); CHECK_NEAR(xn[4], ref[1], 1e-8);
+  CHECK(std::isnan(kb_self_starting_z({5, 5, 5})[2]));
+  CHECK(kb_self_starting_z({}).empty());
+  // H4: encadenado con el CUSUM: una subida sostenida tras 8 sesiones estables acaba en alarma; sin subida, no
+  std::vector<double> base = {10.0, 10.2, 9.9, 10.1, 9.8, 10.3, 10.0, 9.9};
+  std::vector<double> up = base;
+  for (int i = 0; i < 6; i++) up.push_back(10.6 + 0.05 * i);
+  KbCusumConfig c; c.min_samples = 8;
+  CHECK(kb_cusum_upper(kb_self_starting_z(up), c).alarm_index >= 8);
+  CHECK(kb_cusum_upper(kb_self_starting_z(base), c).alarm_index == -1);
+}
+
+// KB-1 1.5.0: reglas A7 (zancada) y A8 (velocidad final) sobre la línea base propia, con CUSUM autoiniciado.
+EQ_TEST(kb, drift_down_rule) {
+  const std::vector<double> base = {6.40, 6.42, 6.38, 6.41, 6.39, 6.43, 6.40, 6.37, 6.42, 6.41};
+  KbDriftConfig c; c.delta = 0.10;
+  // D1: serie estable → sin alarma
+  KbDriftResult r0 = kb_drift_down(base, c);
+  CHECK(!r0.delta_alarm && !r0.cusum_alarm);
+  CHECK(r0.n == 10 && r0.baseline_n == 7);
+  // D2: tres sesiones 0,2 m más cortas → umbral (3 de 3) y CUSUM
+  std::vector<double> x = base; x.push_back(6.20); x.push_back(6.18); x.push_back(6.19);
+  KbDriftResult r1 = kb_drift_down(x, c);
+  REPORT("deriva: caída %.3f m frente a %.3f (n %d), aciertos %d, S %.2f\n", r1.drop, r1.baseline, r1.baseline_n, r1.hits, r1.s);
+  CHECK(r1.delta_alarm && r1.hits == 3);
+  CHECK_NEAR(r1.baseline, 6.405, 1e-9);   // mediana de las 10 anteriores
+  CHECK_NEAR(r1.drop, 0.215, 1e-9);
+  CHECK(r1.cusum_alarm);
+  // D3: una sola sesión corta entre normales → no basta (1 de 3)
+  std::vector<double> y = base; y.push_back(6.40); y.push_back(6.41); y.push_back(6.20);
+  CHECK(!kb_drift_down(y, c).delta_alarm);
+  // D4: pocas sesiones → ni umbral (base < 5) ni CUSUM (calentamiento de 8)
+  KbDriftResult r3 = kb_drift_down({6.40, 6.41, 6.39, 6.40, 6.20, 6.18, 6.19}, c);
+  CHECK(!r3.delta_alarm && !r3.cusum_alarm && r3.baseline_n == 4);
+  // D5: NaN se saltan; una subida no es caída
+  std::vector<double> z = base; z.push_back(std::nan("")); z.push_back(6.70); z.push_back(6.72); z.push_back(6.71);
+  KbDriftResult r4 = kb_drift_down(z, c);
+  CHECK(r4.n == 13 && !r4.delta_alarm && !r4.cusum_alarm);
+  CHECK(kb_drift_down({}, c).n == 0);
+}
+
+EQ_TEST(kb, drift_rules_in_training) {
+  auto mk = [](int d, const std::string& surf, double sl, double v600) {
+    SessionSummary s; s.id = "D" + std::to_string(d); s.horse = "LUNA"; s.date_utc = training_day_text(20500 + 3 * d);
+    s.gait[2].duration_s = 300; s.moving_s = 1800; s.surface = surf;
+    s.race.present = true; s.race.breed = "PSI"; s.race.ref_speed[0] = 14; s.race.sl_ref[0] = sl; s.race.v_last_600 = v600;
+    return s;
+  };
+  const double sl[] = {6.40, 6.42, 6.38, 6.41, 6.39, 6.43, 6.40, 6.37, 6.42, 6.41};
+  const double v6[] = {15.80, 15.85, 15.78, 15.82, 15.79, 15.84, 15.81, 15.77, 15.83, 15.80};
+  std::vector<SessionSummary> ss;
+  for (int i = 0; i < 10; i++) ss.push_back(mk(i, "ARENA", sl[i], v6[i]));
+  for (int i = 10; i < 13; i++) ss.push_back(mk(i, "ARENA", 6.22, 15.50));
+  TrainingConfig c;
+  TrainingResult r = analyse_training(ss, "", c);
+  const SessionResult& last = r.sessions.back();
+  const KbFlag* a7 = flag(last.kb, "A7_CAIDA_ZANCADA");
+  const KbFlag* a8 = flag(last.kb, "A8_CAIDA_VELOCIDAD_FINAL");
+  CHECK(a7 && a7->level == "VIGILAR");
+  CHECK(a8 != nullptr);
+  CHECK(last.level != "NORMAL");
+  CHECK(flag(r.kb, "A7_CAIDA_ZANCADA") != nullptr);   // la última sesión está dentro de los 7 días
+  CHECK(flag(r.sessions[9].kb, "A7_CAIDA_ZANCADA") == nullptr);
+  bool reason = false;
+  for (const auto& m : r.reasons) if (m.find("A7_CAIDA_ZANCADA") != std::string::npos) reason = true;
+  CHECK(reason);
+  // otra superficie: no es comparable con la arena → sin línea base, sin regla
+  std::vector<SessionSummary> s2 = ss;
+  for (int i = 10; i < 13; i++) s2[i].surface = "PLAYA";
+  CHECK(flag(analyse_training(s2, "", c).sessions.back().kb, "A7_CAIDA_ZANCADA") == nullptr);
+  // ida y vuelta del resumen con v_ultimos_600m
+  json::Value v; std::string err; SessionSummary back;
+  CHECK(json::parse(training_summary_to_json(ss[12]), &v, &err) && training_summary_from_json(v, &back, &err));
+  CHECK_NEAR(back.race.v_last_600, 15.50, 1e-9);
+  // opciones: umbrales y desactivar
+  json::Value opt; CHECK(json::parse("{\"base_cientifica\":{\"caida_zancada_m\":0.3,\"cusum_h\":40}}", &opt, &err));
+  TrainingConfig c2; CHECK(!training_config_from_json(opt, &c2, &err));   // h fuera de rango
+  json::Value opt2; CHECK(json::parse("{\"base_cientifica\":{\"caida_zancada_m\":0.3,\"cusum_h\":8}}", &opt2, &err));
+  TrainingConfig c3; CHECK(training_config_from_json(opt2, &c3, &err));
+  CHECK_NEAR(c3.kb.stride_drop_m, 0.3, 1e-12); CHECK_NEAR(c3.kb.drift_h, 8, 1e-12);
+  const KbFlag* a7b = flag(analyse_training(ss, "", c3).sessions.back().kb, "A7_CAIDA_ZANCADA");
+  CHECK(a7b == nullptr || a7b->text.find("CUSUM") != std::string::npos);   // 0,22 m < 0,3 m: solo puede saltar el CUSUM
 }

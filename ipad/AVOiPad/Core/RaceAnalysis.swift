@@ -175,6 +175,8 @@ struct RaceReport {
     var best200Kmh: Double?
     var best400Kmh: Double?
     var best600Kmh: Double?
+    /// Fast works of the trainings, oldest first («Análisis motor» chart).
+    var fastWorkList: [TrainingFastWork] = []
     var trainingFade: Double?
     /// best600 / best200 in training.
     var trainingSustain: Double?
@@ -321,6 +323,7 @@ enum RaceAnalysis {
             return da != db ? da < db : a.t0 < b.t0
         }
         rep.fastWorks = works.count
+        rep.fastWorkList = works
         let fades: [Double] = works.compactMap { $0.fade }
         rep.worksWithFade = fades.count
         rep.trainingFade = median(fades)
