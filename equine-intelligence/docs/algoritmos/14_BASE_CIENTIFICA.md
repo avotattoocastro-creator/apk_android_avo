@@ -264,6 +264,14 @@ Detalle: `knowledge/estudios/2026-11-20_1610_aceleracion_tronco_cinetica_fc.md`.
   como riesgo.
 Detalle: `knowledge/estudios/2026-11-20_1709_exactitud_gnss_mano_de_galope.md`.
 
+**Estudio horario 20/11 20:08 (KB-1 1.22.0, motor 2.0.0-dev24, sin cambios de lógica).**
+- **Recuperación tras el trabajo rápido:** el glucógeno tarda 48–72 h en reponerse (revisión [E], Hyyppä/Lacombe
+  [E-r]; Minami 2009 discrepa con 24 h); CK/AST normales en ≤ 24 h, también en árabes de llano; propuesta RT1–RT3 [I]
+  (≥ 72 h entre trabajos rápidos, día siguiente suave, aviso si otra carrera < 14 d).
+- **Peso corporal:** pérdida aguda ≈ 2,7 % tras carrera y ≈ 1–1,3 % a 24 h (otras razas/disciplinas); el 2 % de SO1
+  no está validado; propuesta PE1–PE3 [I] (solo pesaje matinal, persistencia ≥ 3 d, ALTO ≥ 4 %).
+Detalle: `knowledge/estudios/2026-11-20_2008_recuperacion_trabajo_rapido_peso_corporal.md`.
+
 **Estudio horario 20/11 19:08 (KB-1 1.21.0, motor 2.0.0-dev23, sin cambios de lógica).**
 - **DMD (bucked shins) en 2 años:** la distancia rápida corta acumulada se asocia a menos DMD (Crawford 2021 [E]: HR
   0,89 por km a ~15 m/s; Boston & Nunamaker 2000 [E-r]) y los picos cortos de canter o galope largo a más (Verheyen
