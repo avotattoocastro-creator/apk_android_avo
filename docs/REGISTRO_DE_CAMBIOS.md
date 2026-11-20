@@ -24,6 +24,23 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Espalda PROTOTIPO 3.14.5 — UART del ZED otra vez como en la 3.14.3 (la 3.14.4 no enlazaba con el pecho)
+**Autor:** Claude · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` (PR #113) · **CI:** ver PR
+**Qué se vio (usuario, 20/11 21:48–22:08, espalda 3.14.4):**
+- La espalda no enlaza con el reloj ni entra en el modo sin pecho.
+- El monitor de AVO Update mostró el arranque normal (`POWERON`, sin bucle) y el diagnóstico del GPS: 38 400 y 9 600 sin bytes; 115 200 y 230 400 con bytes pero sin tramas válidas, lo propio de un ZED a 460 800 leído a otra velocidad.
+- Tras la línea de 230 400 no salió nada más.
+**Revisión:** el parser nuevo pasó 2 000 flujos aleatorios con ASan/UBSan, sin bloqueos ni errores. En la placa solo cambiaban dos cosas:
+- la tarea de eventos de la UART que crea `onReceiveError`, con prioridad máxima;
+- el umbral de la FIFO RX.
+Causa **no confirmada**.
+**Qué cambia:**
+- La UART del ZED vuelve a configurarse exactamente como en la 3.14.3: solo `setRxTimeout(1)`, sin `onReceiveError` y con el umbral FIFO del núcleo.
+- El ajuste de la 3.14.4 queda en el código tras `AVO_ZED_UART_TUNE` (0), para probarlo en banco.
+- Se conserva el resto de la 3.14.4: parser con resincronización, vigilancia de NAV-SAT/SIG por separado, solo recuentos frescos, presupuesto UART y MON-COMMS.
+- Pruebas de host: 52 casos y 519 comprobaciones.
+**Validación:** IMPLEMENTADO · CI ver PR · **NO VERIFICADO**. Si la 3.14.5 tampoco enlaza, el fallo no está en la UART: volver a la 3.14.3 y comparar.
+
 ## 2026-11-20 — Espalda PROTOTIPO 3.14.4 · Android 2.15-gnss-dev1 — Mensajes de calidad GNSS que no llegan, cadena RTCM por etapas
 **Autor:** Claude (encargo del usuario, 20/11 21:07: «Mensajes de calidad activados, pero no llegan», 64,9 cm H, sin RTK
 FIX, velocidad ±0,52 km/h) · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` · **Commits:** `3ed96d0` (espalda), `d502568` (Android), docs en el último commit del PR
