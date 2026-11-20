@@ -143,7 +143,8 @@ struct RaceEngineAnalysisView: View {
                 HStack(alignment: .top, spacing: 10) {
                     Text(p.timeRank.map { "\($0).º" } ?? "—")
                         .font(.headline.monospacedDigit()).foregroundStyle(rankColor(p.timeRank, p.fieldSize))
-                        .frame(width: 40, alignment: .leading)
+                        .lineLimit(1).fixedSize()
+                        .frame(minWidth: 52, alignment: .leading)
                     Text(p.sentence).font(.callout).foregroundStyle(Avo.text).fixedSize(horizontal: false, vertical: true)
                 }
             }

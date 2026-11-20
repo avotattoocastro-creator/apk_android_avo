@@ -24,6 +24,11 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — iPad 1.0.0 — «Análisis motor»: el puesto de rapidez («14.º») ya no se parte en dos líneas
+**Autor:** Claude (captura de TestFlight del 20/11, 01:23) · **Rama:** `claude/analisis-motor-ajustes` · **CI:** ver PR
+**Qué cambia:** la columna del puesto de rapidez en «Cómo fue la carrera» es más ancha y de una sola línea.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO** en el iPad.
+
 ## 2026-11-20 — iPad 1.0.0 — «Informe PDF» en la pantalla «Análisis motor» de carreras
 **Autor:** Claude (a petición del usuario sobre la captura de TestFlight del 20/11, 01:00) · **Rama:** `claude/analisis-motor-informe-pdf` · **CI:** ver PR
 **Qué cambia:** botón rojo **«Informe PDF»** en la barra superior de «Análisis motor». Genera el PDF con el mismo
