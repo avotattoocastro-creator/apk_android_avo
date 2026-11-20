@@ -24,6 +24,8 @@ struct GnssQuality {
   uint8_t cno_mean = 0;       // mean C/N0 (dBHz) of the signals used
   uint8_t cno_min = 0, cno_max = 0;
   bool have_sat = false, have_sig = false;
+  // V3.14.6: distinct satellites of the NAV-SIG signals (tracked / with pseudorange used). Used when NAV-SAT is off.
+  uint8_t sig_sv_tracked = 0, sig_sv_used = 0;
 };
 
 // True for first-band signals (L1 / E1 / B1 / L1OF). gnssId/sigId as in UBX-NAV-SIG.
