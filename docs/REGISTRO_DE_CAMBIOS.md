@@ -38,6 +38,15 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — iPad 1.0.0 — Informe PDF de «Análisis motor» sin «Cómo se calcula»
+**Autor:** Claude (captura del PDF marcada por el usuario, 20/11 10:06) · **Rama:** `claude/pdf-sin-como-se-calcula` · **CI:** ver PR
+**Qué cambia:** el PDF ya no incluye la sección «Cómo se calcula» ni la línea «Generado el…». La versión del motor
+sigue en el pie de cada página. En la pantalla, el método se sigue pudiendo desplegar, y el texto del estado de la pista
+dice ya que el dato se obtiene automáticamente.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO** en el iPad.
+
+---
+
 ## 2026-11-20 — Motor 2.0.0-dev12 / KB-1 1.10.0 — Estudio horario 08:09: modelo óseo B y velocidad final relativa
 **Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-0809` (desde `develop`, sin PR `kb-*` abiertos) · **CI:** ver PR
 **Qué cambia:**
