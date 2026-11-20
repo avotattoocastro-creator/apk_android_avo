@@ -386,6 +386,27 @@ final class RacesModel {
         }
     }
 
+    /// «Informe PDF» of the «Análisis motor» screen (Core/RaceEnginePdf.swift), saved in paths.root/exportaciones. The
+    /// caller shows it: the screen is itself full screen, so the app-wide viewer (app.pdfViewer) would not appear over it.
+    func exportEnginePdf(_ r: Race) throws -> ExportedFile {
+        guard let us = r.ourRunner, let rep = deepReport(r) else {
+            throw AvoError.invalidOperation("El caballo no está identificado entre los participantes.")
+        }
+        let data = RaceEnginePdfData(race: r, us: us, report: rep, engineVersion: EquineEngine.version())
+        let dir: String = AvoFiles.join(app.paths.root, "exportaciones")
+        AvoFiles.ensureDir(dir)
+        var horse: String = ExportNaming.clean(r.horseName ?? us.name)
+        if horse.isEmpty { horse = "Caballo" }
+        let when: String = r.date.map { AvoTime.text($0, "yyyy-MM-dd") } ?? "sin-fecha"
+        let name: String = horse + "_" + when + "_Analisis-motor_" + ExportNaming.clean(r.title) + ".pdf"
+        let path: String = AvoFiles.join(dir, name)
+        try AvoFiles.writeAtomic(ReportBuilder.raceEnginePdf(data), to: path)
+        app.log.info("carreras", "Informe PDF del análisis motor: " + name)
+        app.scheduleDocumentsSync()
+        return ExportedFile(id: path + "|" + String(Date().timeIntervalSince1970), url: URL(fileURLWithPath: path),
+                            name: name, kind: .pdf, time: MadridTime.format(Date(), "dd/MM/yyyy HH:mm"))
+    }
+
     func pdfPath(_ r: Race) -> String? {
         if r.isDemo { return Bundle.main.path(forResource: "demo_race_20261029BOU03", ofType: "pdf") }
         if r.sourceFile.isEmpty { return nil }
