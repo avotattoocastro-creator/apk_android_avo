@@ -14,7 +14,7 @@ registrada: **NO VERIFICADO**.
 | Línea | Componente | Versión | Carpeta | Workflow | Descarga | Estado |
 |---|---|---|---|---|---|---|
 | PROTOTIPO | Pecho · Waveshare ESP32-S3 AMOLED 2.06" | **3.7.10** (carga apagado) | `firmware/chest/V3_7_10_CARGA_APAGADO` | `build-chest-v377-despertar.yml` | [`AVO_PECHO_PROTOTIPO_FW.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_PECHO_PROTOTIPO_FW.zip) | CI ✅ · NO VERIFICADO |
-| PROTOTIPO | Espalda · Heltec + ZED-F9P | **3.14.3** (incluye 3.13.12) | `firmware/back/V3_8_0` | `build-back-v380.yml` | [`AVO_ESPALDA_PROTOTIPO_FW.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_ESPALDA_PROTOTIPO_FW.zip) | CI ✅ · NO VERIFICADO |
+| PROTOTIPO | Espalda · Heltec + ZED-F9P | **3.14.4** (recepción fiable de NAV-SAT/SIG, contadores UART, MON-COMMS; PR `claude/gnss-calidad-rtcm-back-3-14-4`) | `firmware/back/V3_8_0` | `build-back-v380.yml` | [`AVO_ESPALDA_PROTOTIPO_FW.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_ESPALDA_PROTOTIPO_FW.zip) | CI ✅ · NO VERIFICADO |
 | PROTOTIPO | Cincha · XIAO ESP32-C6 + BNO085 | **0.4.3** | `firmware/girth/V0_4_0` | `build-girth-v040.yml` (no se lanza en `develop`) | [`AVO_CINCHA_PROTOTIPO_FW.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_CINCHA_PROTOTIPO_FW.zip) | CI ✅ · NO VERIFICADO |
 | PROTOTIPO | Cincha + ECG MAX30003 | **0.5.0** | `firmware/girth/V0_5_0` | `build-girth-v050.yml` | [`AVO_CINCHA_PROTOTIPO_ECG_FW.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_CINCHA_PROTOTIPO_ECG_FW.zip) | CI ✅ · NO VERIFICADO |
 | PROTOTIPO | Caja pecho REV D · carcasa espalda V2.2H Rev E.5 | — | **no están en el repositorio** | — | pendiente de subir | impresas (fuera de GitHub) |
@@ -29,7 +29,7 @@ registrada: **NO VERIFICADO**.
 
 | Componente | Versión | Carpeta | Workflow | Descarga | Estado |
 |---|---|---|---|---|---|
-| Android AVO Performance Horse | **2.13-qr-dev1 (vc 46)** (QR de la tarjeta para entrar en el iPad; LIVE activado por defecto + **Nube AVO** con cambio de caballo/jinete desde cualquier app + confirmación tras la descarga, `docs/NUBE_SESIONES.md`) | `app/`, `core/` | `build-android.yml` | [`AVO_ANDROID.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_ANDROID.apk) | CI: al fusionar · NO VERIFICADO |
+| Android AVO Performance Horse | **2.14-gnss-dev1 (vc 47)** (cadena UBX/RTCM por etapas en Calidad GNSS, sin satélites caducados, textos sin solapes) · antes 2.13-qr-dev1 (QR de la tarjeta para entrar en el iPad; LIVE activado por defecto + **Nube AVO** con cambio de caballo/jinete desde cualquier app + confirmación tras la descarga, `docs/NUBE_SESIONES.md`) | `app/`, `core/` | `build-android.yml` | [`AVO_ANDROID.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_ANDROID.apk) | CI: al fusionar · NO VERIFICADO |
 | AVO Tarjetas | **1.4-nfc-movil-dev1 (vc 5)** | `cards/` | `build-android.yml` | [`AVO_TARJETAS.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_TARJETAS.apk) | CI ✅ |
 | AVO Update | **2.3.1 (vc 28)** | `usb-updater/` | `build-usb-updater.yml` | [`AVO_UPDATE.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_UPDATE.apk) | CI ✅ |
 | Windows | **V2 PRO 2.0.0** (20/11: Servidor › Nube AVO con «Cambiar» caballo/jinete, NO VERIFICADO) | `windows/` | `build-avo-windows.yml` | [`AVO_WINDOWS.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_WINDOWS.zip) | CI ✅ |
@@ -40,7 +40,7 @@ registrada: **NO VERIFICADO**.
 solo con PROTOTIPOS; lo validado se porta a las BETA, y las pruebas de campo BETA empiezan con todas las PCB
 construidas. PCB BETA construidas hoy: **ninguna**.
 
-**Siguiente prueba física prevista:** Android 2.9 + pecho 3.7.10 + espalda 3.14.3 + cincha PROTOTIPO 0.5.0.
+**Siguiente prueba física prevista:** Android 2.14-gnss-dev1 + pecho 3.7.10 + espalda 3.14.4 + cincha PROTOTIPO 0.5.0 (procedimiento GNSS: `firmware/back/V3_8_0/docs/AUDITORIA_CALIDAD_GNSS_3_14_4.md` §8).
 
 ---
 

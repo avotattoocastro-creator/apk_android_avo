@@ -24,6 +24,52 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Espalda PROTOTIPO 3.14.4 · Android 2.14-gnss-dev1 — Mensajes de calidad GNSS que no llegan, cadena RTCM por etapas
+**Autor:** Claude (encargo del usuario, 20/11 21:07: «Mensajes de calidad activados, pero no llegan», 64,9 cm H, sin RTK
+FIX, velocidad ±0,52 km/h) · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` · **Commits:** `3ed96d0` (espalda), `d502568` (Android), docs en el último commit del PR
+**CI:** espalda `build-back-v380.yml` run 44810109245 ✅ (52 casos / 519 comprobaciones; imagen ESP32-S3 927 984 B, 27 % de app0) · Android `build-android.yml` run 44810606166 (lanzado a mano en la rama, ver PR)
+**Informe completo:** `firmware/back/V3_8_0/docs/AUDITORIA_CALIDAD_GNSS_3_14_4.md`.
+**Diagnóstico:**
+- NAV-PVT llegaba, pero NAV-SAT y NAV-SIG no: los satélites «18 / 26» de la app eran de un NAV-SAT antiguo, porque NAV-PVT daba 24.
+- Causa probable, **sin medir**: desbordamiento de la FIFO RX de 128 B del ESP32-S3.
+  - Con el umbral por defecto (~120 B) quedaban 0,35 ms de margen a 230 400 y 0,17 ms a 460 800.
+  - Al desbordarse se pierde un bloque entero: destruye las tramas largas y casi nunca un NAV-PVT de 100 B.
+- Defectos confirmados con pruebas:
+  - el parser UBX perdía también la trama siguiente a una mala;
+  - la vigilancia de la 3.13.12 solo miraba NAV-SIG;
+  - los recuentos caducados se enviaban y se mostraban como actuales;
+  - la activación de los mensajes no calculaba la carga de la UART.
+- **Pines verificados:** el código usa RX=GPIO35 / TX=GPIO33, cableado confirmado el 31/10. El encargo los daba al revés,
+  que es justo el fallo de la 3.9.0. No se tocan.
+**Qué cambia:**
+- **Espalda 3.14.4:**
+  - umbral de la FIFO RX a 32 B;
+  - contadores de errores de la UART;
+  - el parser resincroniza tras una trama mala;
+  - NAV-SAT y NAV-SIG se vigilan por separado;
+  - en `STATUS` solo van recuentos con ≤ 5 s (formato de 108 B sin cambios);
+  - presupuesto UART antes de activar la calidad;
+  - UBX-MON-COMMS cada 5 s (búfer TX del receptor y desbordes de RTCM);
+  - líneas nuevas en el monitor serie: `MENSAJES ZED`, `UART ESP32 (ZED)`, `PRESUPUESTO UART`, `MON-COMMS`.
+- **Android 2.14-gnss-dev1 (vc 47):**
+  - `GnssChain` lee la cadena RTCM (caster → móvil → reloj → espalda → UART → usadas) y la recepción UBX a partir de
+    `DIAG_GET` (ya existente), cada 5 s con INICIO abierta. Dice en qué etapa se paran las correcciones.
+  - «NTRIP recibiendo» no se presenta como RTK.
+  - Calidad GNSS: ya no muestra satélites caducados; la precisión de velocidad se compara con el objetivo de 0,20 km/h.
+  - `KV` y `MetricTile` sin solapes.
+**No se ha tocado:**
+- pecho, ni contratos binarios (`BackStatus` v3, `TELEMETRY` v3, `DIAG_GET`);
+- iPad y Windows, que decodifican igual;
+- pines, alimentación, sueño, carga USB, RTCM, ESP-NOW, modelo dinámico, frecuencia ni máscaras;
+- firmas e `Info.plist`.
+- Workflow `build-back-v380.yml`: solo nombre de versión, marcas de la imagen y la rama de esta tarea en `branches`.
+- Al fusionar, `build-avo-ipad.yml` se lanzará porque cambia `lib/avo_core` (sin cambios para el iPad).
+**Validación:** IMPLEMENTADO · CI (espalda ✅; Android ver PR) · **NO VERIFICADO** en hardware.
+**Pendiente:** procedimiento del §8 del informe:
+- `FIFO desbordada` = 0 y edades de NAV-SAT/SIG ≤ 1,5 s durante 10 min;
+- cadena RTCM en verde con NTRIP;
+- ensayos de velocidad parado, en recta y en giros, con porcentaje de épocas con `sAcc` < 55 mm/s.
+
 ## 2026-11-20 — Android 2.13-qr-dev1 · iPad — Entrar en el iPad escaneando un QR de la tarjeta
 **Autor:** Claude (petición del usuario, 20/11 15:22: «botón para cargar el archivo de licencia» en LIVE; elegida la
 opción QR) · **Rama:** `claude/qr-tarjeta` · **CI:** ver PR
