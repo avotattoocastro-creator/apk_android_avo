@@ -254,11 +254,23 @@ BackStatus BackCore::status() const {
   s.ubx_frames = zed_.stream().frames();
   s.nmea_sentences = zed_.stream().nmea_sentences();
   s.v3 = true;
-  s.sv_tracked = q_.sv_tracked; s.sv_used = q_.sv_used;
-  s.sig_tracked = q_.sig_tracked; s.sig_used = q_.sig_used; s.sig_cr_used = q_.sig_cr_used; s.sig_corr = q_.sig_corr;
-  s.sig_l2 = q_.sig_l2; s.sig_l2_used = q_.sig_l2_used; s.sig_weak = q_.sig_weak;
-  s.cno_mean = q_.cno_mean; s.cno_min = q_.cno_min; s.cno_max = q_.cno_max;
-  uint32_t qa = q_ms_ ? (p_->now_ms() - q_ms_) / 1000 : 255;
+  // V3.14.4: only FRESH summaries are reported (<= 5 s, the same limit the app uses). Before, the last NAV-SAT counts
+  // stayed in STATUS forever: field 20/11/2026 the app showed "18 / 26" satellites next to 24 in NAV-PVT, i.e. values
+  // from the last NAV-SAT that had arrived, presented as current. Zero = "no fresh summary"; format unchanged.
+  {
+    const uint32_t now = p_->now_ms(), ts = zed_.last_nav_sat_ms();
+    const bool sig_fresh = q_.have_sig && q_ms_ && (int32_t)(now - q_ms_) <= (int32_t)kQualityFreshMs;
+    const bool sat_fresh = q_.have_sat && ts && (int32_t)(now - ts) <= (int32_t)kQualityFreshMs;
+    if (sat_fresh) { s.sv_tracked = q_.sv_tracked; s.sv_used = q_.sv_used; }
+    else if (sig_fresh) { s.sv_tracked = q_.sig_sv_tracked; s.sv_used = q_.sig_sv_used; }   // V3.14.6: NAV-SAT off
+    if (sig_fresh) {
+      s.sig_tracked = q_.sig_tracked; s.sig_used = q_.sig_used; s.sig_cr_used = q_.sig_cr_used; s.sig_corr = q_.sig_corr;
+      s.sig_l2 = q_.sig_l2; s.sig_l2_used = q_.sig_l2_used; s.sig_weak = q_.sig_weak;
+      s.cno_mean = q_.cno_mean; s.cno_min = q_.cno_min; s.cno_max = q_.cno_max;
+    }
+  }
+  int32_t qd = q_ms_ ? (int32_t)(p_->now_ms() - q_ms_) : 0;
+  uint32_t qa = q_ms_ ? (qd > 0 ? (uint32_t)qd : 0u) / 1000 : 255;
   s.quality_age_s = (uint8_t)(qa > 254 ? 255 : qa);
   // V3.13.12: low nibble = output state (0..6), bits 4-5 = NAV-SAT/SIG re-requests, bits 6-7 = receiver re-detections
   // (both saturate at 3). Chest 3.7.6 forwards the byte unchanged; Android 2.6-ntrip-auto-dev3 shows both counters.

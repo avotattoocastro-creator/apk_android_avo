@@ -199,6 +199,7 @@ struct SimZed {
   bool in_ubx[3] = {false, true, true}, in_rtcm[3] = {false, true, true};
   bool out_ubx[3] = {false, true, false}, out_nmea[3] = {false, true, false};
   bool pvt[3] = {false, false, false}, rxm[3] = {false, false, false};
+  bool out_rtcm[3] = {false, true, true};                      // V3.14.7 (factory: RTCM3 output protocol on)
   uint16_t meas_ms = 1000;
   bool nak_rate = false;
   bool old_fw = false;                           // V3.8.0: firmware that does not know the precision keys
@@ -208,6 +209,8 @@ struct SimZed {
   uint32_t sat_every[3] = {0, 0, 0}, sig_every[3] = {0, 0, 0};   // V3.9.0 NAV-SAT/SIG output rate
   bool l2_antenna = true;
   bool no_sig_key = false;   // older receiver firmware: NAV-SIG key unknown
+  bool sig_stuck = false; uint32_t sig_polls = 0; bool sig_kick = false;   // V3.14.7: periodic NAV-SIG stuck (firmware), polls still answered; OFF->ON restarts it if sig_kick
+  bool comms_answer = true; uint8_t comms_tx_peak = 41, comms_tx_err = 0; uint16_t comms_overruns = 0; uint32_t comms_polls = 0;   // V3.14.4
   uint8_t carr = 2;                                           // carrSoln reported in NAV-PVT
   bool alive = true;
   std::deque<std::pair<uint32_t, uint8_t>> out;   // (baud it was sent at, byte)
@@ -270,10 +273,12 @@ struct SimZed {
       else if (k == zedkey::UART1INPROT_RTCM3X) in_rtcm[1] = v; else if (k == zedkey::UART2INPROT_RTCM3X) in_rtcm[2] = v;
       else if (k == zedkey::UART1OUTPROT_UBX) out_ubx[1] = v; else if (k == zedkey::UART2OUTPROT_UBX) out_ubx[2] = v;
       else if (k == zedkey::UART1OUTPROT_NMEA) out_nmea[1] = v; else if (k == zedkey::UART2OUTPROT_NMEA) out_nmea[2] = v;
+      else if (k == zedkey::UART1OUTPROT_RTCM3X) out_rtcm[1] = v; else if (k == zedkey::UART2OUTPROT_RTCM3X) out_rtcm[2] = v;
       else if (k == zedkey::MSGOUT_NAV_PVT_UART1) pvt[1] = v; else if (k == zedkey::MSGOUT_NAV_PVT_UART2) pvt[2] = v;
       else if (k == zedkey::MSGOUT_RXM_RTCM_UART1) rxm[1] = v; else if (k == zedkey::MSGOUT_RXM_RTCM_UART2) rxm[2] = v;
       else if (k == zedkey::MSGOUT_NAV_SAT_UART1) sat_every[1] = v; else if (k == zedkey::MSGOUT_NAV_SAT_UART2) sat_every[2] = v;
       else if (k == zedkey::MSGOUT_NAV_SIG_UART1) sig_every[1] = v; else if (k == zedkey::MSGOUT_NAV_SIG_UART2) sig_every[2] = v;
+      if ((k == zedkey::MSGOUT_NAV_SIG_UART1 || k == zedkey::MSGOUT_NAV_SIG_UART2) && v == 0 && sig_kick) sig_stuck = false;
     }
     if (sig) signal_restarts++;
   }
@@ -296,6 +301,15 @@ struct SimZed {
         if (in_ubx[port] && ubx_check_frame(in.data(), len, &cls, &id, &pl, &plen)) {
           if (cls == UBX_CLS_CFG && id == UBX_ID_CFG_VALSET) valset(pl, plen);
           else if (cls == UBX_CLS_MON && id == UBX_ID_MON_VER && plen == 0) { uint8_t v[40] = {'R', 'O', 'M'}; send_ubx(UBX_CLS_MON, UBX_ID_MON_VER, v, 40); }
+          else if (cls == UBX_CLS_NAV && id == UBX_ID_NAV_SIG && plen == 0) { sig_polls++; send_sig(); }   // V3.14.7 poll
+          else if (cls == UBX_CLS_MON && id == UBX_ID_MON_COMMS && plen == 0 && comms_answer) {   // V3.14.4
+            std::vector<uint8_t> c(8 + 2 * 40, 0); c[0] = 0; c[1] = 2; c[2] = comms_tx_err;
+            put_u16(&c[8], 0x0100); put_u16(&c[48], 0x0201);
+            uint8_t* q = &c[port == 2 ? 48 : 8];
+            q[8] = 3; q[9] = comms_tx_peak; put_u16(q + 18, comms_overruns); put_u32(q + 36, 7);
+            send_ubx(UBX_CLS_MON, UBX_ID_MON_COMMS, c.data(), (uint16_t)c.size());
+            comms_polls++;
+          }
         }
         in.erase(in.begin(), in.begin() + len);
       } else {
@@ -334,7 +348,11 @@ struct SimZed {
       for (int i = 0; i < 20; i++) { uint8_t* q = &b[8 + i * 12]; q[0] = (uint8_t)(i % 4 == 3 ? 6 : i % 4); q[1] = (uint8_t)(i + 1); q[2] = 40; if (i < 18) q[8] = 1 << 3; }
       send_ubx(UBX_CLS_NAV, UBX_ID_NAV_SAT, b.data(), (uint16_t)b.size());
     }
-    if (sig_every[port] && epochs % sig_every[port] == 0) {   // 20 L1 + 20 second-band signals (if the antenna has L2)
+    if (sig_every[port] && epochs % sig_every[port] == 0 && !sig_stuck) send_sig();
+    if (out_nmea[port]) send_text("$GNGSA,A,3,,,,,,,,,,,,,1.0,0.5,0.8,1*00\r\n$GPTXT,01,01,02,u-blox*00\r\n");   // bad checksums: noise only
+  }
+  void send_sig() {
+    {   // 20 L1 + 20 second-band signals (if the antenna has L2)
       int nsig = l2_antenna ? 40 : 20;
       std::vector<uint8_t> b(8 + nsig * 16, 0); b[5] = (uint8_t)nsig;
       for (int i = 0; i < nsig; i++) {
@@ -347,7 +365,6 @@ struct SimZed {
       }
       send_ubx(UBX_CLS_NAV, UBX_ID_NAV_SIG, b.data(), (uint16_t)b.size());
     }
-    if (out_nmea[port]) send_text("$GNGSA,A,3,,,,,,,,,,,,,1.0,0.5,0.8,1*00\r\n$GPTXT,01,01,02,u-blox*00\r\n");   // bad checksums: noise only
   }
   void power_cycle() {            // RAM configuration lost
     SimZed fresh; fresh.port = port;
@@ -784,8 +801,10 @@ TEST(quality, nav_sat_sig_enabled_at_1hz_and_summarised) {
   CHECK_EQ((int)w.back->zed().monitor_state(), 1);
   CHECK_EQ(w.zed.sig_every[w.zed.port], (uint32_t)w.back->zed().nav_rate());   // once per second at any rate
   const GnssQuality& q = w.back->quality();
-  CHECK(q.have_sat && q.have_sig);
-  CHECK_EQ(q.sv_tracked, 20); CHECK_EQ(q.sv_used, 18);
+  CHECK(q.have_sig && !q.have_sat);                                             // V3.14.6: NAV-SAT off, counts from NAV-SIG
+  CHECK_EQ(w.zed.sat_every[w.zed.port], 0u);
+  CHECK_EQ(q.sig_sv_tracked, 20); CHECK_EQ(q.sig_sv_used, 18);
+  CHECK_EQ((int)w.back->status().sv_tracked, 20); CHECK_EQ((int)w.back->status().sv_used, 18);
   CHECK_EQ(q.sig_tracked, 40); CHECK_EQ(q.sig_l2, 20);
   CHECK_EQ(q.sig_used, 36); CHECK_EQ(q.sig_cr_used, 36); CHECK_EQ(q.sig_weak, 4);
   CHECK_EQ(q.cno_mean, 44); CHECK_EQ(q.cno_min, 44); CHECK_EQ(q.cno_max, 44);
@@ -970,6 +989,195 @@ TEST(quality, receiver_without_nav_sig_keeps_nav_sat) {
   CHECK_EQ((int)w.back->zed().monitor_state(), 4);
   CHECK(w.back->quality().have_sat);
   CHECK(!w.back->quality().have_sig);
+}
+
+
+// ======================================================================= V3.14.4 UBX parser, UART budget, MON-COMMS
+static std::vector<uint8_t> ubx_frame(uint8_t cls, uint8_t id, size_t plen, uint8_t fill) {
+  std::vector<uint8_t> pl(plen, fill), f(plen + 8);
+  for (size_t i = 0; i < plen; i++) pl[i] = (uint8_t)(fill + i * 7);
+  f.resize(ubx_build(cls, id, pl.data(), (uint16_t)plen, f.data(), f.size()));
+  return f;
+}
+struct FrameLog { std::vector<std::pair<uint8_t, uint8_t>> ids; std::vector<size_t> lens; };
+static void log_frame(const uint8_t* f, size_t n, void* ctx) { ((FrameLog*)ctx)->ids.push_back({f[2], f[3]}); ((FrameLog*)ctx)->lens.push_back(n); }
+
+TEST(ubx, bytes_lost_inside_nav_sig_do_not_take_the_next_nav_pvt_with_them) {
+  // Field symptom: big frames (NAV-SAT/SIG) lost while NAV-PVT keeps flowing. When UART bytes are lost inside a NAV-SIG,
+  // its length field makes the parser swallow the start of the next frame. Before 3.14.4 that NAV-PVT was lost too.
+  auto sig = ubx_frame(UBX_CLS_NAV, UBX_ID_NAV_SIG, 8 + 60 * 16, 0x11);
+  auto pvt = ubx_frame(UBX_CLS_NAV, UBX_ID_NAV_PVT, 92, 0x22);
+  std::vector<uint8_t> st;
+  st.insert(st.end(), sig.begin(), sig.begin() + 300);          // 128 bytes lost (one ESP32 RX FIFO reset)
+  st.insert(st.end(), sig.begin() + 428, sig.end());
+  st.insert(st.end(), pvt.begin(), pvt.end());
+  st.insert(st.end(), pvt.begin(), pvt.end());
+  FrameLog lg; UbxStream u(log_frame, &lg);
+  u.feed(st.data(), st.size());
+  CHECK_EQ(lg.ids.size(), (size_t)2);                           // both NAV-PVT, nothing invented
+  for (auto& x : lg.ids) CHECK(x.first == UBX_CLS_NAV && x.second == UBX_ID_NAV_PVT);
+  CHECK(u.bad_checksum() + u.oversize() >= 1);
+  CHECK(u.resyncs() >= 1);
+}
+
+TEST(ubx, checksum_errors_are_counted_and_good_frames_survive) {
+  auto a = ubx_frame(UBX_CLS_NAV, UBX_ID_NAV_PVT, 92, 1), b = ubx_frame(UBX_CLS_NAV, UBX_ID_NAV_SAT, 8 + 30 * 12, 2);
+  std::vector<uint8_t> st;
+  for (int i = 0; i < 10; i++) { auto x = (i % 2) ? b : a; if (i == 3 || i == 6) x[20] ^= 0x40; if (i == 8) x[x.size() - 1] ^= 1; st.insert(st.end(), x.begin(), x.end()); }
+  FrameLog lg; UbxStream u(log_frame, &lg);
+  u.feed(st.data(), st.size());
+  CHECK_EQ(lg.ids.size(), (size_t)7);
+  CHECK_EQ(u.bad_checksum(), 3u);
+  CHECK_EQ(u.frames(), 7u);
+}
+
+TEST(ubx, false_sync_and_oversize_length_resync) {
+  auto pvt = ubx_frame(UBX_CLS_NAV, UBX_ID_NAV_PVT, 92, 5);
+  std::vector<uint8_t> st = {0xB5, 0x62, 0x01, 0x07, 0xFF, 0x7F, 0x00};   // length 32767: cannot be ours
+  st.insert(st.end(), pvt.begin(), pvt.end());
+  std::vector<uint8_t> noise = {0xB5, 0xB5, 0x62, 0x01};                   // sync pair followed by too few bytes
+  st.insert(st.end(), noise.begin(), noise.end());
+  st.insert(st.end(), pvt.begin(), pvt.end());
+  FrameLog lg; UbxStream u(log_frame, &lg);
+  u.feed(st.data(), st.size());
+  CHECK_EQ(u.oversize(), 1u);
+  CHECK(lg.ids.size() >= 1);                                     // the first PVT always; the second unless the noise ate it
+  CHECK_EQ(lg.lens[0], pvt.size());
+}
+
+TEST(ubx, any_fragmentation_gives_the_same_frames) {
+  std::mt19937 rng(42);
+  std::vector<uint8_t> st; size_t want = 0;
+  for (int i = 0; i < 200; i++) {
+    auto f = i % 9 == 0 ? ubx_frame(UBX_CLS_NAV, UBX_ID_NAV_SIG, 8 + (i % 90) * 16, (uint8_t)i) : ubx_frame(UBX_CLS_NAV, UBX_ID_NAV_PVT, 92, (uint8_t)i);
+    st.insert(st.end(), f.begin(), f.end()); want++;
+    if (i % 13 == 0) { const char* nm = "$GNRMC,,V,,,,,,,,,,N*4D\r\n"; st.insert(st.end(), nm, nm + strlen(nm)); }
+  }
+  for (int trial = 0; trial < 5; trial++) {
+    FrameLog lg; UbxStream u(log_frame, &lg);
+    std::uniform_int_distribution<int> L(1, trial == 0 ? 1 : 300);
+    for (size_t i = 0; i < st.size();) { size_t n = std::min<size_t>((size_t)L(rng), st.size() - i); u.feed(st.data() + i, n); i += n; }
+    CHECK_EQ(lg.ids.size(), want);
+    CHECK_EQ(u.bad_checksum(), 0u);
+    CHECK_EQ(u.nmea_sentences(), 16u);
+  }
+}
+
+TEST(budget, uart_load_of_the_quality_messages) {
+  // 38400: the quality pair alone needs ~70 % of the line -> skipped. 115200, 230400 and 460800 at 8 Hz: fit.
+  ZedUartBudget b38 = zed_uart_budget(38400, 8, true), b115 = zed_uart_budget(115200, 8, true);
+  ZedUartBudget b230 = zed_uart_budget(230400, 8, true), b460 = zed_uart_budget(460800, 8, true);
+  CHECK(!b38.ok); CHECK(b115.ok); CHECK(b230.ok); CHECK(b460.ok);
+  CHECK_EQ(b230.line_bytes_s, 23040u);
+  CHECK_EQ(b230.avg_bytes_s, 100u * 8 + (16 + 12 * 60) + (16 + 16 * 120) + 16 * 12 + 216 / 5);
+  CHECK(b230.load_permille < 200);                               // ~16 % at 230400
+  CHECK(b230.burst_us < b230.epoch_us);                          // the 1 Hz burst fits in one 8 Hz epoch
+  CHECK(b115.burst_us > b115.epoch_us);                          // at 115200 it spills into the next one (allowed once/s)
+  CHECK(!zed_uart_budget(115200, 12, true).ok);                  // 12 Hz at 115200: no
+  CHECK(zed_uart_budget(38400, 8, false).load_permille < 300);   // NAV-PVT + RXM-RTCM alone are fine even at 38400
+  printf("    budget 8 Hz: 115200 %u permille burst %u us | 230400 %u permille burst %u us | 460800 %u permille (epoch %u us)\n",
+         b115.load_permille, b115.burst_us, b230.load_permille, b230.burst_us, b460.load_permille, b230.epoch_us);
+}
+
+TEST(comms, mon_comms_is_polled_every_5_s_and_decoded) {
+  World w(2);
+  w.zed.comms_tx_peak = 87; w.zed.comms_overruns = 3; w.zed.comms_tx_err = 2;
+  w.run_ms(15000);
+  CHECK_EQ((int)w.back->zed().state(), (int)ZedManager::RUNNING);
+  uint32_t p0 = w.zed.comms_polls;
+  CHECK(p0 >= 1);
+  w.run_ms(20000);
+  CHECK(w.zed.comms_polls >= p0 + 3 && w.zed.comms_polls <= p0 + 5);
+  const ZedComms& c = w.back->zed().comms();
+  CHECK(c.valid); CHECK_EQ((int)c.tx_peak, 87); CHECK_EQ((int)c.overrun_errs, 3); CHECK_EQ((int)c.tx_errors, 2); CHECK_EQ(c.skipped, 7u);
+  // decoder: other port only -> not valid
+  std::vector<uint8_t> pl(8 + 40, 0); pl[1] = 1; put_u16(&pl[8], 0x0300);
+  ZedComms z; CHECK(!ubx_decode_mon_comms(pl.data(), pl.size(), 0x0100, &z)); CHECK(!z.valid);
+  CHECK(!ubx_decode_mon_comms(pl.data(), 20, 0x0300, &z));      // truncated
+}
+
+TEST(comms, receiver_without_mon_comms_keeps_working) {
+  World w(2);
+  w.zed.comms_answer = false;
+  w.run_ms(30000);
+  CHECK(!w.back->zed().comms().valid);
+  CHECK_EQ((int)w.back->zed().monitor_state(), 1);
+  CHECK(w.chest.gnss.size() > 200);
+}
+
+TEST(quality, nav_sat_is_switched_off_and_counts_come_from_nav_sig) {
+  // V3.14.6: field 20/11/2026, MON-COMMS TX peak 101 % on the receiver. NAV-SAT is switched off (even if the receiver's
+  // saved configuration had it on) and the satellite counts come from NAV-SIG, so the 1 Hz burst is about half.
+  World w(2);
+  w.zed.sat_every[2] = 1;                                         // saved configuration of the receiver: NAV-SAT on
+  w.run_ms(15000);
+  CHECK_EQ((int)w.back->zed().monitor_state(), 1);
+  CHECK_EQ(w.zed.sat_every[2], 0u);
+  CHECK_EQ(w.zed.sig_every[2], (uint32_t)w.back->zed().nav_rate());
+  uint32_t sat0 = w.back->zed().nav_sat_count();
+  w.run_ms(10000);
+  CHECK_EQ(w.back->zed().nav_sat_count(), sat0);                   // nothing more
+  CHECK(w.back->zed().nav_sig_count() >= 9);
+  BackStatus st = w.back->status();
+  CHECK_EQ((int)st.sv_tracked, 20); CHECK_EQ((int)st.sv_used, 18);
+  CHECK_EQ(w.back->zed().monitor_rearms(), 0u);
+  ZedUartBudget b = w.back->zed().budget();
+  CHECK(b.burst_bytes < 2200);                                     // PVT + NAV-SIG(120) + RXM-RTCM, no NAV-SAT
+}
+
+TEST(quality, stale_counts_are_not_reported_as_current) {
+  World w(2);
+  w.run_ms(15000);
+  BackStatus a = w.back->status();
+  CHECK_EQ((int)a.sv_tracked, 20); CHECK_EQ((int)a.sig_tracked, 40);
+  w.zed.sat_every[w.zed.port] = 0; w.zed.sig_every[w.zed.port] = 0;
+  w.run_ms(6500);                                                // before the 10 s watchdog
+  BackStatus b = w.back->status();
+  CHECK_EQ((int)b.sv_tracked, 0); CHECK_EQ((int)b.sv_used, 0); CHECK_EQ((int)b.sig_tracked, 0); CHECK_EQ((int)b.cno_mean, 0);
+  CHECK(b.quality_age_s >= 6 && b.quality_age_s != 255);        // the age still says how old the last one is
+  CHECK_EQ((int)w.back->quality().sig_sv_tracked, 20);           // the monitor keeps the last values
+}
+
+
+// V3.14.7: field 20/11/2026 22:56, NAV-SIG stopped while every repeated VALSET was ACKed (periodic output stuck).
+TEST(quality, stuck_nav_sig_is_restarted_off_on) {
+  World w(2);
+  w.run_ms(15000);
+  CHECK_EQ((int)w.back->zed().monitor_state(), 1);
+  w.zed.sig_stuck = true; w.zed.sig_kick = true;                 // OFF->ON restarts it
+  w.run_ms(13000);
+  CHECK_EQ(w.back->zed().sig_toggles(), 1u);
+  CHECK(!w.back->zed().sig_polling());
+  CHECK(!w.zed.sig_stuck);
+  w.run_ms(3000);
+  CHECK(w.back->status().quality_age_s <= 2);
+}
+
+TEST(quality, stuck_nav_sig_falls_back_to_polling) {
+  World w(2);
+  w.run_ms(15000);
+  w.zed.sig_stuck = true;                                        // OFF->ON does not help
+  size_t pvt0 = w.chest.gnss.size();
+  w.run_ms(25000);
+  CHECK(w.back->zed().sig_polling());
+  CHECK(w.zed.sig_polls >= 2);
+  w.run_ms(10000);
+  BackStatus st = w.back->status();
+  CHECK(st.quality_age_s <= 2);                                  // summary fresh again, from polls
+  CHECK_EQ((int)st.sv_tracked, 20);
+  CHECK_EQ(st.quality_mon & 0x0F, 1);
+  uint32_t r = w.back->zed().monitor_rearms();
+  w.run_ms(30000);
+  CHECK_EQ(w.back->zed().monitor_rearms(), r);                   // no more re-requests while polls are answered
+  CHECK(w.zed.sig_polls >= 35);                                  // ~1 per second
+  CHECK(w.chest.gnss.size() > pvt0 + 500);                       // positions never stopped
+  CHECK_EQ(w.back->zed().receiver_resets(), 0u);
+}
+
+TEST(quality, rtcm_output_of_the_receiver_is_switched_off_on_our_port) {
+  World w(2);
+  w.run_ms(15000);
+  CHECK(!w.zed.out_rtcm[2]);
 }
 
 // ---------------------------------------------------------------- V3.10.2 adaptive transmit power
