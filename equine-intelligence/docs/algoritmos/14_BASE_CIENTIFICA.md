@@ -1,4 +1,4 @@
-# 14 · Base científica de la cuadra (KB-1) 1.9.0
+# 14 · Base científica de la cuadra (KB-1) 1.10.0
 
 Código: `include/avo_eq/knowledge.h`, `src/knowledge/knowledge.cpp`. Se calcula en Track Work (`src/racing/racing.cpp`,
 bloque `trabajo_pista.base_cientifica`) y se evalúa en Training Analytics (`src/training/training.cpp`, bloques
@@ -79,7 +79,7 @@ Los análisis anteriores sin el bloque cuentan como «sesiones sin datos» y no 
 interpolado sobre la distancia acumulada (Schrurs 2024 [E], «average speed over the last 600 m»; la velocidad puntual
 en la marca de 600 m no predice). Sale en `trabajo_pista.trabajos.lista[].v_ultimos_600m` y `ultimos_600m_s`, solo en
 trabajos de al menos 600 m. Valor de prueba: 1.000 m a 14 m/s + 400 m a 17 m/s → 37,815 s y 15,867 m/s.
-La regla A8 (caída frente a la línea base) sigue pendiente: no hay umbral publicado. **KB 1.9.0:** Wong 2023 (texto completo, Tasmania) usó el último parcial de 200 m de carrera (HR 1,18 por cada 0,1 m/s de caída); los 600 m en trabajo y el umbral de 0,20 m/s son [I].
+La regla A8 (caída frente a la línea base) sigue pendiente: no hay umbral publicado. **KB 1.9.0:** Wong 2023 (texto completo, Tasmania) usó el último parcial de 200 m de carrera (HR 1,18 por cada 0,1 m/s de caída); los 600 m en trabajo y el umbral de 0,20 m/s son [I]. **KB 1.10.0:** reconfirmado que el riesgo sube al **bajar** la velocidad absoluta del último 200 m a lo largo de las salidas del caballo (A8, que vigila la caída frente a la línea base, tiene el sentido correcto). El «Finishing Speed %» de Timeform (v final / v media frente al par de pista y distancia) no tiene umbrales publicados: en AVO será solo descriptivo con par propio [I]. Modelo óseo B: dt y solver siguen sin publicarse; f_BM(0) 0,61 y D*(0) 0 [E]; usar 0,911 (tabla 7) y no 0,852 (Discusión) del preprint de Anwar (estudio 2026-11-20 08:09).
 
 ## 3 ter. Pocos días de galope en 60 días (KB-1 1.2.0, regla A6B)
 Choi & Parkin 2025 (EVJ 58:31–39, Seúl, 101 casos y 304 controles) [E]: en el modelo final, **≤ 2 días de galope en
