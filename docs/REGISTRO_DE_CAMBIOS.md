@@ -24,6 +24,31 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Motor 2.0.0-dev16 / KB-1 1.14.0 — Estudio horario 12:10: playa por franjas y parcial final de 200 m (A8)
+**Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-1210` (encadenada desde `claude/kb-estudio-2026-11-20-1110`, PR #99, sin fusionar) · **CI:** ver PR
+**Qué cambia:**
+- Estudio nuevo: `equine-intelligence/knowledge/estudios/2026-11-20_1210_playa_franjas_parcial_final_200m.md`.
+- `base_cientifica.json` 1.14.0:
+  - **Corrección de cifra/atribución** en `playa_franjas`: la humedad del 19 % y el 13,5 % es de Crevier-Denoix 2011
+    (se añaden el DOI …00202.x y el PMID 21059058).
+  - Las cifras de −59 % y −50 % de Chateau 2011 son deceleraciones del casco. Su DOI …00277.x pasa a provisional, sin
+    confirmar.
+  - 6 fuentes nuevas: Porzio 2025, Graydon 2023, Crevier-Denoix 2013 (AVF), Morrice-West 2020, Legg 2025 y Takahashi
+    2021.
+  - 3 fuentes completadas: Chateau 2011, Crevier-Denoix 2011 y Morrice-West 2018; además, una nota en Wong 2023.
+  - Parámetro informativo nuevo `ruido_velocidad_final_carrera`: ≈ 0,66 m/s, CV ≈ 4 % [I].
+  - Se amplía la nota de A8 y de dos pendientes, y se añaden 3 entradas a la cola de investigación.
+- `KNOWLEDGE_VERSION` 1.13.0 → 1.14.0 y `ENGINE_VERSION` 2.0.0-dev15 → 2.0.0-dev16, también en
+  `tests/test_knowledge.cpp`.
+- Ficha 14, tabla de estado y README actualizados.
+
+**Por qué:** la playa por franja y el parcial final de A8 son pendientes que bloquean código. La atribución de la playa
+mezclaba dos artículos.
+**No se ha tocado:** lógica, reglas, umbrales, firmware, contratos binarios, workflows, firmas, `Info.plist` ni
+TestFlight.
+**Validación:** probado en local (ASan/UBSan, Release y fixtures) y en CI (ver PR). **NO VERIFICADO** con caballos reales.
+**Pendiente:** texto completo de Chateau/Crevier-Denoix 2011, método de Wong 2023 y DE del último 200 m en trabajo.
+
 ## 2026-11-20 — Motor 2.0.0-dev15 / KB-1 1.13.0 — Estudio horario 11:10: regreso tras layup (planificador) y sensores 2025–2026
 **Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-1110` (desde `develop/avo-performance-horse` 32e2706; no había PR `claude/kb-*` abierto) · **CI:** ver PR
 **Qué cambia:**

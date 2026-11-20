@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.13.0",
+  "version": "1.14.0",
   "fecha": "2026-11-20",
   "razas": [
     "PSI",
@@ -87,6 +87,11 @@
       "fecha": "2026-11-20",
       "titulo": "Estudio horario 11:10 UTC: regreso tras layup para el planificador (P7) y estudios de sensores 2025–2026",
       "archivo": "estudios/2026-11-20_1110_regreso_layup_sensores_2025_2026.md"
+    },
+    {
+      "fecha": "2026-11-20",
+      "titulo": "Estudio horario 12:10 UTC: playa por franjas (atribución corregida) y parcial final de 200 m (ruido de A8)",
+      "archivo": "estudios/2026-11-20_1210_playa_franjas_parcial_final_200m.md"
     }
   ],
   "fuentes": [
@@ -269,7 +274,7 @@
       "raza_fuente": "PSI",
       "doi": "10.1111/evj.13581",
       "pmid": "35477925",
-      "nota": "manuscrito aceptado en minerva-access. 584 caballos (146 casos, 438 controles), 5.660 salidas, 2011–2016; solo el ÚLTIMO PARCIAL DE 200 m (media 15,86 m/s, zancada 6,88 m); HR 1,18 (1,09–1,28) por cada 0,1 m/s de caída y 1,11 (1,02–1,21) por cada 10 cm de caída de zancada a lo largo de las salidas; la frecuencia no se asocia; el descenso se acentúa ~6 carreras antes (solo en figura). 0,10 m y 0,1 m/s son la UNIDAD del HR, no umbrales observados; 20/11 08:09: variable ABSOLUTA, solo carreras, modelo conjunto longitudinal + supervivencia; el riesgo sube al BAJAR la velocidad (A8 tiene el sentido correcto); ajuste por distancia/pista NV",
+      "nota": "manuscrito aceptado en minerva-access. 584 caballos (146 casos, 438 controles), 5.660 salidas, 2011–2016; solo el ÚLTIMO PARCIAL DE 200 m (media 15,86 m/s, zancada 6,88 m); HR 1,18 (1,09–1,28) por cada 0,1 m/s de caída y 1,11 (1,02–1,21) por cada 10 cm de caída de zancada a lo largo de las salidas; la frecuencia no se asocia; el descenso se acentúa ~6 carreras antes (solo en figura). 0,10 m y 0,1 m/s son la UNIDAD del HR, no umbrales observados; 20/11 08:09: variable ABSOLUTA, solo carreras, modelo conjunto longitudinal + supervivencia; el riesgo sube al BAJAR la velocidad (A8 tiene el sentido correcto); ajuste por distancia/pista NV; 20/11 12:10: el modelo no considera el intervalo entre salidas (resumen); dispositivo y ajuste por distancia no releídos (minerva-access y PMC10084173 sin respuesta en la sesión)",
       "verificado_fecha": "2026-11-20"
     },
     {
@@ -562,13 +567,28 @@
     },
     {
       "id": "CHATEAU_2011",
-      "cita": "Chateau H et al. 2011, Equine Vet J Suppl 38:488–495, doi 10.1111/j.2042-3306.2010.00277.x (trotones en tres franjas de playa; resumen)",
-      "url": "https://madbarn.com/research/biomechanical-analysis-of-hoof-landing-and-stride-parameters-in-harness-trotter-horses-running-on-different-tracks-of-a-sand-beach-from-wet-to-dry-and-on-an-asphalt-road"
+      "cita": "Chateau H et al. 2011, Equine Vet J Suppl 38:488–495 (deceleración del casco y zancada de trotones en franjas de playa de húmeda a seca y en asfalto; resumen)",
+      "url": "https://madbarn.com/research/biomechanical-analysis-of-hoof-landing-and-stride-parameters-in-harness-trotter-horses-running-on-different-tracks-of-a-sand-beach-from-wet-to-dry-and-on-an-asphalt-road",
+      "acceso": "RESUMEN",
+      "pais": "Francia",
+      "idioma": "en",
+      "raza_fuente": "trotón francés [I-raza]",
+      "doi_provisional": "10.1111/j.2042-3306.2010.00277.x (NO confirmado, 20/11 12:10)",
+      "nota": "n = 4; acelerómetro de casco 10 kHz; −59 % deceleración vertical del impacto (húmeda profunda frente a firme, 25 km/h), −95 % (seca profunda frente a asfalto, 15 km/h); frenado −50 % y −55 %; son DECELERACIONES del casco, no fuerzas; humedad por franja no en el resumen",
+      "verificado_fecha": "2026-11-20"
     },
     {
       "id": "CREVIER_DENOIX_2011",
-      "cita": "Crevier-Denoix N et al. 2011, Equine Vet J Suppl 38:544–551 (arena de playa firme y profunda; resumen)",
-      "url": "https://madbarn.com/research/ground-reaction-force-and-kinematic-analysis-of-limb-loading-on-two-different-beach-sand-tracks-in-harness-trotters"
+      "cita": "Crevier-Denoix N, Robin D, Pourcelot P, et al., Chateau H 2011, Equine Vet J Suppl 38:544–551 (fuerza de reacción y cinemática en dos franjas de arena de playa)",
+      "url": "https://madbarn.com/research/ground-reaction-force-and-kinematic-analysis-of-limb-loading-on-two-different-beach-sand-tracks-in-harness-trotters",
+      "doi": "10.1111/j.2042-3306.2010.00202.x",
+      "pmid": "21059058",
+      "acceso": "RESUMEN",
+      "pais": "Francia",
+      "idioma": "en",
+      "raza_fuente": "trotón francés [I-raza]",
+      "nota": "n = 4 (3 cinemática), 7 m/s; humedad firme 19 % frente a profunda 13,5 % (estos valores son de ESTE artículo, no de Chateau 2011); en profunda: apoyo más largo, picos vertical y longitudinal menores y tardíos, impulso propulsivo mayor; cifras absolutas NV",
+      "verificado_fecha": "2026-11-20"
     },
     {
       "id": "PFAU_2024",
@@ -947,8 +967,8 @@
       "pais": "Australia",
       "idioma": "en",
       "raza_fuente": "PSI",
-      "nota": "12 % usa arena firme de playa y 9 % blanda",
-      "verificado_fecha": "2026-11-19"
+      "nota": "12 % usa arena firme de playa y 9 % blanda; 20/11 12:10: arena en el 97 % del trabajo lento (media 83,4 % de ese trabajo) y 33 % del rápido (media 71,3 %)",
+      "verificado_fecha": "2026-11-20"
     },
     {
       "id": "BENNET_PARKIN_2025",
@@ -1526,6 +1546,75 @@
       "raza_fuente": "no indicada",
       "nota": "1 IMU en cincha 100 Hz, 42 caballos, CNN sano/cojo: 74 % por zancada al galope, 90 % por sesión (29/32); incoherencias internas; no se usa",
       "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "PORZIO_2025_DUBAI",
+      "cita": "Porzio E, …, Beccati F 2025, Vet Sci 12(11):1028 (árabes y angloárabes de resistencia en arena profunda, GNSS/IMU)",
+      "doi": "10.3390/vetsci12111028",
+      "url": "https://www.mdpi.com/2306-7381/12/11/1028",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Emiratos Árabes Unidos (Dubái)",
+      "idioma": "en",
+      "raza_fuente": "árabe y angloárabe de raid [I-raza]",
+      "nota": "n = 18; 7 km a ≈ 21 km/h en arena profunda; a 20 km/h 1,77 ± 0,05 zancadas/s y 3,14 ± 0,08 m; a Vmáx 22,8 ± 1,3 km/h 1,85 zancadas/s y 3,44 m; sin control en firme; leído ~70 %",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "GRAYDON_2023_SUELO",
+      "cita": "Graydon R et al. (Hobbs SJ) 2023, Biomechanics 3(3):343–361 (medición de terrenos: OBST, Going Stick, penetrómetro, humedad ML3)",
+      "doi": "10.3390/biomechanics3030029",
+      "url": "https://www.mdpi.com/2673-7078/3/3/29",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Reino Unido/Europa",
+      "idioma": "en",
+      "raza_fuente": "concurso completo (terreno, no caballos) [I]",
+      "nota": "humedad volumétrica 10–63 %, firmeza OBST 13–151 g, amortiguación 5–16 kN, Going Stick 5,87–11,9; rangos observados sin cortes validados; leído parcial",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "CREVIER_DENOIX_2013_AVF",
+      "cita": "Crevier-Denoix N et al. 2013, diapositivas Académie Vétérinaire de France (pistas de arena)",
+      "url": "https://qualif.avf.educagri.fr/fileadmin/user_upload/Seances/Archives/Seance2013/Crevier-Denoix3.pdf",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Francia",
+      "idioma": "fr",
+      "raza_fuente": "trotón [I-raza]",
+      "nota": "n = 3; Clegg 2,25 kg; pista B ≈ 2,3× más dura que A; ≈ 35 km/h; no es playa",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "MORRICE_WEST_2020_VARIACION",
+      "cita": "Morrice-West AV, Hitchens PL, Walmsley EA, Stevenson MA, Wong ASM, Whitton RC 2020, Equine Vet J (variación de velocidad y zancada GPS/acelerómetro en galope de carrera)",
+      "doi": "10.1111/evj.13370",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Australia (Tasmania)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "manuscrito aceptado en minerva-access; 2.678 caballos, 25.259 salidas; StrideMASTER por parciales de 200 m; 16,63 ± 1,04 m/s, 7,08 ± 0,39 m, 28,32 ± 1,56 zancadas/200 m; R² velocidad–nº zancadas en fase final 0,536; ICC caballo 0,658 (nº zancadas) y 0,655 (duración); sin DE intra-caballo del último parcial",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "LEGG_2025_NZ",
+      "cita": "Legg KA, Gibson MJ, Gee EK, Rogers CW 2025, Equine Vet J (estado de pista de césped, velocidad y lesión, Nueva Zelanda)",
+      "doi": "10.1111/evj.70003",
+      "url": "https://mro.massey.ac.nz",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Nueva Zelanda",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "437.506 salidas, 433 lesiones; último 600 m oficial: mediana 16,4 m/s (RIC 15,6–16,9), verano 16,7, invierno 15,1; modelo mixto: ICC caballo 0,15, varianza entre caballos 0,08, residual 0,43 (DE ≈ 0,66 m/s, CV ≈ 4 %: cálculo propio [I]); relación lesión–velocidad escasa; incoherencias internas de signos e intervalos",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "TAKAHASHI_2021_FATIGA",
+      "cita": "Takahashi Y, Takahashi T, Mukai K, Ohmura H 2021, J Equine Vet Sci 101:103447 (fatiga y zancada en carrera)",
+      "doi": "10.1016/j.jevs.2021.103447",
+      "acceso": "RESUMEN",
+      "pais": "Japón (JRA)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "nota": "≈ 20 m antes de meta, 2.400 m césped, 1.ª frente a 2.ª vuelta: 17,3 → 16,0 m/s, 2,34 → 2,21 zancadas/s, 7,42 → 7,25 m (P = 0,04); n NV",
+      "verificado_fecha": "2026-11-20"
     }
   ],
   "parametros": [
@@ -1924,15 +2013,17 @@
       },
       "evidencia": "E-r",
       "fuentes": [
-        "CHATEAU_2011",
-        "CREVIER_DENOIX_2011",
-        "PFAU_2024",
-        "CREVIER_DENOIX_2009_SEQUISOL",
         "BRUCE_PFAU_2026",
+        "CHATEAU_2011",
+        "CREVIER_DENOIX_2009_SEQUISOL",
+        "CREVIER_DENOIX_2011",
+        "GRAYDON_2023_SUELO",
+        "PFAU_2024",
+        "PORZIO_2025_DUBAI",
         "WHITE_PAPER_SUPERFICIES_2012"
       ],
       "estado": "REFERENCIA",
-      "nota": "4 trotones al trote (7 m/s y 25 km/h); en lo blando, zancada más corta y más frecuente. Sin datos de galope de carreras en playa; extra 5: en PSI al galope el suelo cambia la zancada hasta 0,186 m a la misma velocidad (Pfau 2024 [E]), más que el umbral de A7: comparables por franja (PL1–PL6, PENDIENTE)"
+      "nota": "4 trotones al trote (7 m/s y 25 km/h); en lo blando, zancada más corta y más frecuente. Sin datos de galope de carreras en playa; extra 5: en PSI al galope el suelo cambia la zancada hasta 0,186 m a la misma velocidad (Pfau 2024 [E]), más que el umbral de A7: comparables por franja (PL1–PL6, PENDIENTE); KB 1.14.0: atribución corregida — humedad 19/13,5 % es de Crevier-Denoix 2011 (doi …00202.x); −59 % impacto y −50 % frenado son DECELERACIONES del casco de Chateau 2011 (doi …00277.x no confirmado); sin cifras absolutas por franja ni coste fisiológico medido"
     },
     {
       "id": "zancada_superficie_variacion_m",
@@ -2123,6 +2214,22 @@
       ],
       "estado": "INFORMATIVO",
       "nota": "comparar zancada en recta o corregida por curva (A7/A8); chuckwagon, no llano"
+    },
+    {
+      "id": "ruido_velocidad_final_carrera",
+      "valor": {
+        "de_residual_m_s": 0.66,
+        "cv_pct": 4,
+        "mediana_600m_m_s": 16.4,
+        "media_parciales_200m_m_s": 16.63
+      },
+      "evidencia": "I",
+      "fuentes": [
+        "LEGG_2025_NZ",
+        "MORRICE_WEST_2020_VARIACION"
+      ],
+      "estado": "INFORMATIVO",
+      "nota": "KB 1.14.0: DE derivada (√0,43) de la varianza residual de Legg 2025, no publicada como tal; muy superior al umbral de A8 (0,20 m/s): A8 debe leer tendencias (2 de 3 o CUSUM), nunca una sesión aislada; en trabajo propio se estima por caballo"
     }
   ],
   "reglas": [
@@ -2214,12 +2321,14 @@
       "umbral": "v_ultimos_600m del trabajo rápido más veloz ≥ 0,20 m/s bajo la línea base comparable (misma regla de 2 de 3) o CUSUM autoiniciado: INFO / AVISO; VIGILAR si se cumplen los dos",
       "evidencia": "E (dirección y HR por 0,1 m/s en los 200 m finales de carrera, Wong 2023) / E-r (Schrurs 2024) / I (600 m en trabajo, umbral 0,2 m/s, CUSUM)",
       "fuentes": [
-        "WONG_2023",
+        "LEGG_2025_NZ",
         "SCHRURS_2024_TEXTO",
-        "TIMEFORM_FS_PCT"
+        "TIMEFORM_FS_PCT",
+        "WONG_2023"
       ],
       "estado": "IMPLEMENTADO",
-      "nota": "motor 2.0.0-dev7 (KB 1.5.0); la velocidad la decide el jinete: comprobar que el trabajo fue comparable; la velocidad puntual a 600 m no predice (Schrurs 2024); KB 1.9.0: Wong 2023 (texto completo) usó el último parcial de 200 m de carrera: HR 1,18 (1,09–1,28) por 0,1 m/s de caída; la ventana de 600 m en trabajo y el umbral 0,20 m/s son [I]; Schrurs 2024 usa el TIEMPO de los últimos 600 m categorizado (resumen); KB 1.10.0: confirmado que en Wong 2023 el riesgo sube al BAJAR la velocidad absoluta del último 200 m a lo largo de las salidas (sentido de A8 correcto); ninguna fuente publica umbral de velocidad final relativa"
+      "nota": "motor 2.0.0-dev7 (KB 1.5.0); la velocidad la decide el jinete: comprobar que el trabajo fue comparable; la velocidad puntual a 600 m no predice (Schrurs 2024); KB 1.9.0: Wong 2023 (texto completo) usó el último parcial de 200 m de carrera: HR 1,18 (1,09–1,28) por 0,1 m/s de caída; la ventana de 600 m en trabajo y el umbral 0,20 m/s son [I]; Schrurs 2024 usa el TIEMPO de los últimos 600 m categorizado (resumen); KB 1.10.0: confirmado que en Wong 2023 el riesgo sube al BAJAR la velocidad absoluta del último 200 m a lo largo de las salidas (sentido de A8 correcto); ninguna fuente publica umbral de velocidad final relativa",
+      "nota_1_14_0": "Estudio 12:10: ruido entre carreras ≈ 0,66 m/s (CV ≈ 4 %, [I] desde Legg 2025) frente al umbral 0,20 m/s: se mantiene el diseño por tendencia; sin cambio de umbral"
     },
     {
       "id": "A9_PERDIDA_FORMA",
@@ -2350,11 +2459,11 @@
     "Velocidad final relativa propia de AVO (France Galop no publica ningún IDF; estudio extra 2 2026-11-19): v(últimos 600/400 m)/v media con par propio por pista y superficie, al estilo de la Finishing Speed % de Timeform; importador de los PDF de tracking por 200 m solo informativo; KB 1.10.0: FS % de Timeform = v final/v media frente al par de pista y distancia, sin umbrales; Wong 2023 usa v200 absoluta y longitudinal; ninguna fuente da umbral de riesgo: solo métrica descriptiva con par propio",
     "Índice tendinoso heurístico por bandas cualitativas (prioritario en árabes de 3–4 años): sin exponente de carga; faltan en la app la lesión previa, la CSA ecográfica y la firmeza del suelo (estudio extra 2026-11-19); extra 4: sin OR de árabes (Golfo, Turquía, Polonia); edad 3–4 años con 3 fuentes; no añadir término de carga (Çalışkan 2020b, Perkins 2005); CSA árabe de referencia 62–94 mm²; KB 1.12.0: OR de Takahashi 2004 y Lam 2007 AJVR siguen [NV] (AVMA 403); entradas cualitativas propuestas [I]: lesión o exploración tendinosa previa (Lam 2007) y peso en carrera alto para la cuadra (Takahashi 2004, Ikeda 2019)",
     "Planificador semanal por restricciones (capa 2) con P1–P6 del estudio extra 3 (práctica [E], forma [I]) y explicación con confianza (capa 3)",
-    "Línea base separada para la playa por franja (PL1–PL6 del extra 5): orilla firme, húmeda profunda, seca profunda, transición; marea, lluvia, humedad y nota del jinete; comparables de A7/A8/A9 por franja (Pfau 2024: el suelo cambia la zancada hasta 0,186 m)",
+    "Línea base separada para la playa por franja (PL1–PL6 del extra 5): orilla firme, húmeda profunda, seca profunda, transición; marea, lluvia, humedad y nota del jinete; comparables de A7/A8/A9 por franja (Pfau 2024: el suelo cambia la zancada hasta 0,186 m); KB 1.14.0: sin cifras absolutas por franja en texto completo; anotar humedad volumétrica (sonda tipo ML3) si existe [I]",
     "Regla combinada A1+A2 de Verheyen cuando se lea el texto completo",
     "Contador de muestras saturadas de la cincha en el análisis (si el firmware lo envía)",
     "A1/A2 de Verheyen: el resumen da un umbral CONJUNTO (> 44 km de canter Y > 6 km de galope en 30 d) y galope acumulado protector en añojos; con el texto completo, decidir si A2 por separado se rebaja a INFO o se sustituye por la regla combinada (KB 1.9.0)",
-    "A8: añadir la velocidad del último parcial de 200 m (unidad de Wong 2023, HR 1,18 por 0,1 m/s) junto a la de 600 m, y documentar el umbral como diseño (KB 1.9.0)",
+    "A8: añadir la velocidad del último parcial de 200 m (unidad de Wong 2023, HR 1,18 por 0,1 m/s) junto a la de 600 m, y documentar el umbral como diseño (KB 1.9.0); KB 1.14.0: mostrarlo solo junto a su dispersión propia (DE de las comparables), nunca como umbral fijo: el ruido entre carreras es ≈ 0,66 m/s [I]",
     "Planificador P7 (estudio 20/11 11:10): ventana de reincorporación de 21 d (prudente 30 d) tras ≥ 60 d sin trabajo rápido, sin dos trabajos rápidos seguidos ni picos de canter; evidencia Carrier 1998 y Choi 2026 solo por resumen; implementar con el planificador (capa 2)"
   ],
   "cola_investigacion": [
@@ -2406,7 +2515,10 @@
     "Árabes de llano: zancada, FC de carrera y V200 siguen sin publicarse (2024–2026); búsqueda en polaco, francés y del Golfo/Magreb pendiente (20/11 10:08)",
     "Choi, Rosanowski & Parkin 2026 (JAVMA, 10.2460/javma.25.08.0567) en texto completo: OR del layup > 180 d, definición del regreso y si hay árabes o ventana por semanas (20/11 11:10)",
     "Li 2026 (EVJ 10.1002/evj.70360), Takahashi/Pfau 2025 (AJVR) y Mc Sweeney 2025 (JAVMA) en texto completo; Poinsard 2026 completo (MDPI) para el TE de V200 (20/11 11:10)",
-    "Riesgo por semana tras el regreso con IC (fractura en general y TFDS) y cualquier dato de árabes: no hallado (20/11 11:10)"
+    "Riesgo por semana tras el regreso con IC (fractura en general y TFDS) y cualquier dato de árabes: no hallado (20/11 11:10)",
+    "Chateau 2011 y Crevier-Denoix 2011 en texto completo (sin versión legal en HAL, Europe PMC ni theses.fr); confirmar el DOI de Chateau 2011; tesis DUMAS/ENVA de playa e informe UCLan Ground and Going 2024 (20/11 12:10)",
+    "FC, lactato o coste energético a igual velocidad en arena profunda frente a firme en caballos de carreras: no hallado; tabla 1 (FC) de Porzio 2025 por leer (20/11 12:10)",
+    "Wong 2023: método (StrideMASTER, ajuste por distancia y pista) releído en minerva-access o PMC10084173 desde un navegador; DE intra-caballo publicada del último 200 m o 600 m en trabajo; agari 3F de la JRA y lesión (20/11 12:10)"
   ],
   "historial": [
     {
@@ -2478,6 +2590,11 @@
       "version": "1.13.0",
       "fecha": "2026-11-20",
       "cambio": "Estudio horario 11:10: regreso tras layup — Carrier 1998 (10/21 d) y Choi 2026 (OR 13,5 en 20 d tras > 60 d) solo por resumen; P7 propuesto [I] sin implementar; sensores 2025–2026 (Takahashi/Pfau, van den Broek, Mc Sweeney, Poinsard completada); Li 2026 sin leer; 11 fuentes nuevas y 4 completadas; sin cambios de lógica; motor 2.0.0-dev15"
+    },
+    {
+      "version": "1.14.0",
+      "fecha": "2026-11-20",
+      "cambio": "Estudio horario 12:10: playa — corregida la atribución de playa_franjas (humedad 19/13,5 % de Crevier-Denoix 2011 doi …00202.x; −59/−50 % son deceleraciones del casco de Chateau 2011, DOI no confirmado), sin cifras absolutas por franja; A8 — ruido entre carreras ≈ 0,66 m/s (CV ≈ 4 %) derivado de Legg 2025 [I], sin cambio de umbral; 6 fuentes nuevas y 3 completadas; sin cambios de lógica; motor 2.0.0-dev16"
     }
   ]
 }

@@ -195,6 +195,20 @@ Detalle: `knowledge/estudios/2026-11-20_1008_tendon_or_arabes_llano.md`.
   del orden de la señal de A8. Li 2026 (EVJ) sigue sin leerse. No hay datos nuevos de árabes de llano.
 Detalle: `knowledge/estudios/2026-11-20_1110_regreso_layup_sensores_2025_2026.md`.
 
+**Estudio horario 20/11 12:10 (KB-1 1.14.0, motor 2.0.0-dev16, sin cambios de lógica).**
+- **Playa por franjas:** se corrige la atribución del parámetro `playa_franjas`.
+  - La humedad del 19 % frente al 13,5 % es de Crevier-Denoix 2011 (doi 10.1111/j.2042-3306.2010.00202.x).
+  - El −59 % de impacto y el −50 % de frenado de Chateau 2011 son deceleraciones del casco, no fuerzas. El DOI de
+    Chateau 2011 no está confirmado.
+  - No hay cifras absolutas por franja ni coste fisiológico medido. PL1–PL6 siguen como diseño.
+  - Fuentes nuevas: Porzio 2025 (árabes de raid en arena, Dubái, [I-raza]) y Graydon 2023 (cómo medir el suelo).
+- **Parcial final (A8):** Legg 2025 (Nueva Zelanda) y Morrice-West 2020 dan la escala de la velocidad final, de
+  16,4–16,6 m/s.
+  - El ruido residual entre carreras es de ≈ 0,66 m/s (CV ≈ 4 %). Es un cálculo propio [I].
+  - Ese ruido es mucho mayor que el umbral de 0,20 m/s, así que A8 sigue leyendo tendencias y no sesiones aisladas.
+    No cambia el umbral.
+Detalle: `knowledge/estudios/2026-11-20_1210_playa_franjas_parcial_final_200m.md`.
+
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se
    guarda en `knowledge/estudios/AAAA-MM-DD_<tema>.md` con fuentes y etiquetas [E]/[I]/[NV].
