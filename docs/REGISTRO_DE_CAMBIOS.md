@@ -24,6 +24,19 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Android 2.14-presencia-dev1 · iPad · reglas RTDB — Directo desde que se enciende el pecho; varios caballos en el iPad
+**Autor:** Claude (petición del usuario, 20/11 20:55, con boceto sobre la build 202: «selector para cuando hay más de 1
+caballo a la vez», «lista sistemas conectados» bajo LIVE, «que el pecho mande posición en cuanto se encienda, tiempo
+real al servidor cada segundo sin grabar; el raw es solo cuando entra en la geocerca») · **Rama:** `claude/live-presencia`
+**Qué cambia:**
+- **Android (vc 47):** `LiveRecorder` con presencia (`IDLE` 1 Hz desde la primera `TELEMETRY`; `REC` 2 Hz; fin tras 60 s
+  sin `TELEMETRY`); `LiveShare` comprueba cada 5 s.
+- **iPad:** estado «EN ESPERA»; selector de caballo (chips) cuando hay más de un directo; sección «EN DIRECTO» en la barra
+  lateral con los sistemas conectados (lista en segundo plano cada 20 s).
+- **Reglas RTDB:** `state` admite `IDLE` (prueba nueva en el emulador). Hay que publicarlas a mano.
+**No se ha tocado:** firmware (el pecho ya manda `TELEMETRY` sin grabar), contratos binarios, workflows, firmas.
+**Validación:** IMPLEMENTADO · CI: ver PR · **NO VERIFICADO** en dispositivos.
+
 ## 2026-11-20 — Android 2.13-qr-dev1 · iPad — Entrar en el iPad escaneando un QR de la tarjeta
 **Autor:** Claude (petición del usuario, 20/11 15:22: «botón para cargar el archivo de licencia» en LIVE; elegida la
 opción QR) · **Rama:** `claude/qr-tarjeta` · **CI:** ver PR
