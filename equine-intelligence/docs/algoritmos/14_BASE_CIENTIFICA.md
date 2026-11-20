@@ -264,6 +264,16 @@ Detalle: `knowledge/estudios/2026-11-20_1610_aceleracion_tronco_cinetica_fc.md`.
   como riesgo.
 Detalle: `knowledge/estudios/2026-11-20_1709_exactitud_gnss_mano_de_galope.md`.
 
+**Estudio horario 20/11 21:08 (KB-1 1.23.0, motor 2.0.0-dev25, sin cambios de lógica).**
+- **Estado del terreno (going):** terreno firme = más riesgo (OR 1,29–1,73, Rosanowski 2018 y Morrice-West 2025 [E]) y
+  más fatiga ósea por salida (Morrice-West 2022 [E]); blando = más zancadas a igual velocidad (Morrice-West [E]); el going
+  oficial solo coincide el 51 % con el deducido del rendimiento (Northrop 2024 [E]); árabes de llano 14,45 m/s en césped
+  frente a 13,52 en tierra (Yıldırım 2019 [E]). Propuesta GO1–GO4 [I] (estrato y covariable de comparables A7/A8).
+- **Calentamiento y vuelta a la calma:** el calentamiento acelera la cinética del VO₂ y sube la FC a igual esfuerzo
+  (Mukai 2010 en PSI [E-r]); su efecto en la V200 de campo no está publicado [NV]; la vuelta a la calma activa aclara antes
+  el lactato con FC más alta. Propuesta WU1–WU4 [I] para A9 y CF2.
+Detalle: `knowledge/estudios/2026-11-20_2108_going_terreno_calentamiento_vuelta_calma.md`.
+
 **Estudio horario 20/11 20:08 (KB-1 1.22.0, motor 2.0.0-dev24, sin cambios de lógica).**
 - **Recuperación tras el trabajo rápido:** el glucógeno tarda 48–72 h en reponerse (revisión [E], Hyyppä/Lacombe
   [E-r]; Minami 2009 discrepa con 24 h); CK/AST normales en ≤ 24 h, también en árabes de llano; propuesta RT1–RT3 [I]
