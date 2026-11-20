@@ -339,10 +339,7 @@ private final class RaceEnginePdfWriter {
             title("Notas", keep: 30)
             paragraph(r.notes)
         }
-        title("Cómo se calcula", keep: 40)
-        bullets(rep.method, size: 7.8, dot: ReportBuilder.dim)
-        paragraph("Generado el \(AvoTime.text(d.createdAt, "dd/MM/yyyy HH:mm")) con AVO Performance Equine \(d.engineVersion).",
-                  size: 7.5, color: ReportBuilder.dim)
+        // trainer 20/11/2026: «Elimina del PDF el cómo se calcula» (the method stays only on the screen)
         return pdf.save()
     }
 }
