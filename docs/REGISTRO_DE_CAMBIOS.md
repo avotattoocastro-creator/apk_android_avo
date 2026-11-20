@@ -24,6 +24,32 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — iPad 1.0.0 — Los caballos y jinetes borrados ya no vuelven; copia de seguridad diaria y recuperación
+**Autor:** Claude (petición del usuario, 20/11 11:17: «cada vez que instalo una build nueva me saltan caballos y jinetes
+que había borrado») · **Rama:** `claude/cuadra-borrados-persistentes` · **CI:** ver PR
+**Causa:** el problema no era la build. En cada arranque, la app vuelve a cargar los entrenamientos de la biblioteca y
+de «AVO Horse», y `registerFromTraining` da de alta el caballo y el jinete que trae cada archivo si no están en la
+Cuadra. Un caballo o jinete borrado con entrenamientos volvía a crearse. Una build nueva fuerza un arranque, por eso se
+notaba al actualizar.
+**Qué cambia:**
+- `cuadra.json` guarda los registros borrados (`DeletedHorses` / `DeletedRiders`: código, nombre y fecha). Un código o
+  nombre borrado **no se vuelve a crear automáticamente** desde un entrenamiento.
+- Solo vuelve si se crea a propósito: alta manual, etiqueta o enlace, o France Galop. Al crearlo así deja de estar
+  marcado como borrado.
+- Los entrenamientos de un caballo borrado no se tocan: muestran el nombre que trae el archivo, como antes.
+- **Copia de seguridad:**
+  - cada cambio de la Cuadra o de Jinetes lanza la copia a «AVO Horse › Copia de seguridad» en segundos (antes, como
+    mucho cada 2 minutos);
+  - nueva carpeta **«Historial/AAAA-MM-DD»** con los datos de cada día, para deshacer un error copiando el archivo
+    de vuelta;
+  - **al arrancar**, si falta un archivo de datos de la app (por ejemplo `cuadra.json` o `carreras.json`), se
+    recupera de «Copia de seguridad/Datos» antes de cargar nada. Los archivos existentes no se tocan nunca.
+- Archivos: `Core/Stable.swift`, `App/StableModel.swift`, `App/AppModel.swift`, `App/AppModel+DocumentsSync.swift`;
+  prueba `testDeletedRecordsAreNotRecreatedFromTrainings`.
+**Límite:** «AVO Horse» está dentro de la app en el iPad. Sobrevive a las actualizaciones de TestFlight y de la App Store,
+pero **no a borrar la app**. Para eso hace falta una copia fuera: iCloud Drive o la carpeta Compartir.
+**No se ha tocado:** motor, firmware, contratos, Android, Windows, workflows, firmas, `Info.plist`, build de TestFlight.
+**Validación:** IMPLEMENTADO · CI: ver PR · **NO VERIFICADO** en el iPad.
 ## 2026-11-20 — Motor 2.0.0-dev14 / KB-1 1.12.0 — Estudio horario 10:08: OR del TFDS (índice tendinoso) y árabes de carreras en llano
 **Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-1008` (encadenada desde `claude/kb-estudio-2026-11-20-0909`, PR #96 sin fusionar) · **CI:** ver PR
 **Qué cambia:**

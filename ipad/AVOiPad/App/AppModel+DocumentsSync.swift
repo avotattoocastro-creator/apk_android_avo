@@ -13,6 +13,21 @@ import Foundation
 /// Runs at launch, every 2 minutes, when the app goes to the background and right after a report is written. It only adds
 /// or updates files: it never deletes anything in AVO Horse.
 enum DocumentsSync {
+    /// Data files missing in the app (first launch after a reinstall, or a damaged/lost file) are copied back from
+    /// «AVO Horse › Copia de seguridad › Datos» before anything is loaded. Existing files are never replaced.
+    @discardableResult
+    static func restoreMissingData(root: String) -> [String] {
+        let fm = FileManager.default
+        let backup: String = AvoFiles.join(AvoFiles.join(documents, "Copia de seguridad"), "Datos")
+        var restored: [String] = []
+        for name in files(backup) where name.hasSuffix(".json") {
+            let dst: String = AvoFiles.join(root, name)
+            if fm.fileExists(atPath: dst) { continue }
+            if (try? fm.copyItem(atPath: AvoFiles.join(backup, name), toPath: dst)) != nil { restored.append(name) }
+        }
+        return restored
+    }
+
     static let folders: [String] = ["Entrenamientos", "Informes", "Informes IA", "Carreras", "Copia de seguridad", "Exportados"]
     static var running: Bool = false
     static var pending: Task<Void, Never>? = nil
@@ -161,7 +176,14 @@ extension AppModel {
         for name in DocumentsSync.files(paths.root) where name.hasSuffix(".json") {
             jobs.append(DocumentsSync.Job(src: AvoFiles.join(paths.root, name), dst: AvoFiles.join(AvoFiles.join(backup, "Datos"), name), replace: true))
         }
-        for name in DocumentsSync.files(paths.notes) {
+        // daily history (trainer 20/11/2026: «que la app guarde siempre una copia de seguridad»): one folder per day with
+        // the data as it was at the last copy of that day, so a mistake can be undone by copying the file back
+        let day: String = AvoTime.text(Date(), "yyyy-MM-dd")
+        for name in DocumentsSync.files(paths.root) where name.hasSuffix(".json") {
+            jobs.append(DocumentsSync.Job(src: AvoFiles.join(paths.root, name),
+                                          dst: AvoFiles.join(AvoFiles.join(AvoFiles.join(backup, "Historial"), day), name), replace: true))
+        }
+                for name in DocumentsSync.files(paths.notes) {
             jobs.append(DocumentsSync.Job(src: AvoFiles.join(paths.notes, name), dst: AvoFiles.join(AvoFiles.join(backup, "Notas"), name), replace: true))
         }
         return jobs

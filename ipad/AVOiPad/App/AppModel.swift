@@ -108,6 +108,10 @@ final class AppModel {
         AvoFiles.ensureDir(paths.root)
         self.log = AppLog(paths.logs)
         AppLog.current = log
+        if paths.root == AppPaths.defaultRoot {
+            let restored: [String] = DocumentsSync.restoreMissingData(root: paths.root)
+            if !restored.isEmpty { log.warn("copia", "Datos recuperados de la copia de seguridad: " + restored.joined(separator: ", ")) }
+        }
         self.settings = AppSettings.load(paths.settingsFile)
         self.library = TrainingLibrary(paths)
         self.segmentStore = SegmentStore(paths.segments)
