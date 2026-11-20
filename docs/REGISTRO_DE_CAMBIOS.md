@@ -142,6 +142,24 @@ FIX, velocidad ±0,52 km/h) · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` 
 
 ---
 
+## 2026-11-20 — Motor 2.0.0-dev25 / KB-1 1.23.0 — Estudio horario 21:08: estado del terreno (going) y calentamiento / vuelta a la calma
+**Autor:** Claude (estudio horario programado) · **Rama:** `claude/kb-estudio-2026-11-20-2108` (encadenada desde `claude/kb-estudio-2026-11-20-2008`, PR #112) · **CI:** ver PR
+**Qué cambia:** KB-1 1.22.0 → 1.23.0 y motor 2.0.0-dev24 → 2.0.0-dev25 (solo versiones, sin cambios de lógica).
+- **Going:** firme/bueno-firme más riesgo (OR 1,29 muerte, Rosanowski 2018 PLoS ONE [E]; OR 1,27–1,73, Morrice-West 2025
+  [E]) y más fatiga ósea por salida (Morrice-West 2022 [E]); blando más zancadas a igual velocidad (Morrice-West [E]); going
+  oficial con 51 % de concordancia y CV 14 % del GoingStick (Northrop 2024 [E]); árabes de llano 14,45 frente a 13,52 m/s
+  en césped/tierra (Yıldırım 2019 [E]). Propuesta GO1–GO4 [I].
+- **Calentamiento / vuelta a la calma:** FC más alta a igual esfuerzo tras calentamiento intenso (Mukai 2010, PSI [E-r]);
+  sin dato publicado del efecto en la V200 de campo [NV]; vuelta a la calma activa aclara antes el lactato (trotones y PSI
+  en cinta [E-r]). Propuesta WU1–WU4 [I].
+- 20 fuentes, 4 parámetros (3 de contexto, 1 propuesto), 2 reglas PROPUESTAS, 1 pendiente, 2 entradas de cola; fixtures solo con versiones.
+**Archivos:** `equine-intelligence/knowledge/estudios/2026-11-20_2108_going_terreno_calentamiento_vuelta_calma.md`,
+`base_cientifica.json`, `knowledge.h`, `types.h`, `tests/test_knowledge.cpp`, fixtures de `core/src/test/resources/equine/`,
+ficha 14, tabla de estado, `README.md`.
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, TestFlight.
+**Validación:** IMPLEMENTADO (solo versiones) · pruebas locales con `-DAVO_EQ_SANITIZE=ON` en verde y fixtures OK · CI: ver PR · NO VERIFICADO con caballos reales.
+**Pendiente:** implementar GO1–GO4 y WU1–WU4 (campo going/penetración en `Session`); textos completos de Hobbs 2024, Mukai 2008/2010 y Jansson 2005.
+
 ## 2026-11-20 — Motor 2.0.0-dev24 / KB-1 1.22.0 — Estudio horario 20:08: recuperación tras el trabajo rápido y pérdida de peso corporal (umbral del 2 %)
 **Autor:** Claude (estudio horario programado) · **Rama:** `claude/kb-estudio-2026-11-20-2008` (encadenada desde `claude/kb-estudio-2026-11-20-1908`, PR #110) · **CI:** ver PR
 **Qué cambia:** KB-1 1.21.0 → 1.22.0 y motor 2.0.0-dev23 → 2.0.0-dev24 (solo versiones, sin cambios de lógica).
