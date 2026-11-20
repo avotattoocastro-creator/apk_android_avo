@@ -173,6 +173,11 @@ class ZedManager {
   const ZedComms& comms() const { return comms_; }
   uint32_t comms_polls() const { return comms_polls_; }
   uint8_t comms_tx_max_running() const { return comms_tx_max_; }   // V3.14.6: worst TX usage (%) while RUNNING
+  // V3.14.7: NAV-SIG recovery: times the periodic output was switched off and on again, whether the back is polling
+  // NAV-SIG itself (after a second loss in a row), and polls sent.
+  uint32_t sig_toggles() const { return sig_toggles_; }
+  bool sig_polling() const { return sig_poll_; }
+  uint32_t sig_polls() const { return sig_polls_; }
   static const uint32_t kCommsPollMs = 5000;
   // V3.14.4: budget used to decide whether NAV-SAT/NAV-SIG fit on the UART (state 3 "UART too slow" otherwise).
   ZedUartBudget budget() const { return zed_uart_budget(baud_, rate_, true, 0); }   // V3.14.6: NAV-SIG only (NAV-SAT off)
@@ -204,6 +209,8 @@ class ZedManager {
   ZedComms comms_;
   uint32_t comms_t_ = 0, comms_polls_ = 0;
   uint8_t comms_tx_max_ = 0;
+  bool sig_poll_ = false;
+  uint32_t sig_poll_t_ = 0, sig_polls_ = 0, sig_toggles_ = 0;
   char fwver_[25] = {0};
   ZedIo* io_;
   UbxStream ubx_;

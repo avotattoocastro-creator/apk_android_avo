@@ -24,6 +24,23 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Espalda PROTOTIPO 3.14.7 — NAV-SIG se reactiva o se sondea si la salida periódica se para
+**Autor:** Claude · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` (PR #113) · **CI:** ver PR
+**Qué se vio (22:56):**
+- Cadena RTCM completa a ~1,3 kB/s, con 5,5 msg/s usados.
+- NAV-SIG «activados, pero no llegan (último hace 144 s)», con la petición repetida 3 o más veces y todas aceptadas por el receptor.
+- Llega al arrancar y se para con las correcciones en marcha, mientras NAV-PVT sigue.
+**Lectura:** con 13 tramas UBX/s completas (8 NAV-PVT + RXM-RTCM) y 0 tramas malas, no es pérdida en el cable ni en la espalda. Es el receptor, que deja de generar el mensaje periódico. El pico del 101 % de MON-COMMS puede venir del arranque a 38 400 con la línea saturada de NMEA. Repetir el mismo VALSET no cambia nada en el receptor.
+**Qué cambia:**
+- Primera pérdida (10 s): NAV-SIG se **apaga y se vuelve a encender**, para reiniciar el mensaje periódico.
+- Segunda pérdida seguida: la espalda **sondea NAV-SIG una vez por segundo** (petición de 8 B, respuesta inmediata), sin depender de la salida periódica.
+- Salida RTCM3 del receptor apagada en el puerto de la espalda, en RAM: la espalda nunca la usa.
+- Monitor: `NAV-SIG apagado/encendido N | sondeo NAV-SIG ACTIVO/no (peticiones)`.
+- Pruebas de host: 55 casos y 542 comprobaciones.
+  - Un ZED simulado con la salida periódica atascada se recupera, unas veces con apagar y encender y otras con el sondeo.
+  - Las posiciones no se interrumpen.
+**Validación:** IMPLEMENTADO · CI ver PR · **NO VERIFICADO**.
+
 ## 2026-11-20 — Espalda PROTOTIPO 3.14.6 — Solo NAV-SIG (NAV-SAT apagado): el búfer de salida del receptor llegaba al 101 %
 **Autor:** Claude · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` (PR #113) · **CI:** ver PR
 **Qué se vio (monitor de AVO Update, 22:37–22:40, espalda 3.14.5):**

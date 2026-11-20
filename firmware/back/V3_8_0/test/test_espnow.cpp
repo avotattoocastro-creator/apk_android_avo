@@ -199,6 +199,7 @@ struct SimZed {
   bool in_ubx[3] = {false, true, true}, in_rtcm[3] = {false, true, true};
   bool out_ubx[3] = {false, true, false}, out_nmea[3] = {false, true, false};
   bool pvt[3] = {false, false, false}, rxm[3] = {false, false, false};
+  bool out_rtcm[3] = {false, true, true};                      // V3.14.7 (factory: RTCM3 output protocol on)
   uint16_t meas_ms = 1000;
   bool nak_rate = false;
   bool old_fw = false;                           // V3.8.0: firmware that does not know the precision keys
@@ -208,6 +209,7 @@ struct SimZed {
   uint32_t sat_every[3] = {0, 0, 0}, sig_every[3] = {0, 0, 0};   // V3.9.0 NAV-SAT/SIG output rate
   bool l2_antenna = true;
   bool no_sig_key = false;   // older receiver firmware: NAV-SIG key unknown
+  bool sig_stuck = false; uint32_t sig_polls = 0; bool sig_kick = false;   // V3.14.7: periodic NAV-SIG stuck (firmware), polls still answered; OFF->ON restarts it if sig_kick
   bool comms_answer = true; uint8_t comms_tx_peak = 41, comms_tx_err = 0; uint16_t comms_overruns = 0; uint32_t comms_polls = 0;   // V3.14.4
   uint8_t carr = 2;                                           // carrSoln reported in NAV-PVT
   bool alive = true;
@@ -271,10 +273,12 @@ struct SimZed {
       else if (k == zedkey::UART1INPROT_RTCM3X) in_rtcm[1] = v; else if (k == zedkey::UART2INPROT_RTCM3X) in_rtcm[2] = v;
       else if (k == zedkey::UART1OUTPROT_UBX) out_ubx[1] = v; else if (k == zedkey::UART2OUTPROT_UBX) out_ubx[2] = v;
       else if (k == zedkey::UART1OUTPROT_NMEA) out_nmea[1] = v; else if (k == zedkey::UART2OUTPROT_NMEA) out_nmea[2] = v;
+      else if (k == zedkey::UART1OUTPROT_RTCM3X) out_rtcm[1] = v; else if (k == zedkey::UART2OUTPROT_RTCM3X) out_rtcm[2] = v;
       else if (k == zedkey::MSGOUT_NAV_PVT_UART1) pvt[1] = v; else if (k == zedkey::MSGOUT_NAV_PVT_UART2) pvt[2] = v;
       else if (k == zedkey::MSGOUT_RXM_RTCM_UART1) rxm[1] = v; else if (k == zedkey::MSGOUT_RXM_RTCM_UART2) rxm[2] = v;
       else if (k == zedkey::MSGOUT_NAV_SAT_UART1) sat_every[1] = v; else if (k == zedkey::MSGOUT_NAV_SAT_UART2) sat_every[2] = v;
       else if (k == zedkey::MSGOUT_NAV_SIG_UART1) sig_every[1] = v; else if (k == zedkey::MSGOUT_NAV_SIG_UART2) sig_every[2] = v;
+      if ((k == zedkey::MSGOUT_NAV_SIG_UART1 || k == zedkey::MSGOUT_NAV_SIG_UART2) && v == 0 && sig_kick) sig_stuck = false;
     }
     if (sig) signal_restarts++;
   }
@@ -297,6 +301,7 @@ struct SimZed {
         if (in_ubx[port] && ubx_check_frame(in.data(), len, &cls, &id, &pl, &plen)) {
           if (cls == UBX_CLS_CFG && id == UBX_ID_CFG_VALSET) valset(pl, plen);
           else if (cls == UBX_CLS_MON && id == UBX_ID_MON_VER && plen == 0) { uint8_t v[40] = {'R', 'O', 'M'}; send_ubx(UBX_CLS_MON, UBX_ID_MON_VER, v, 40); }
+          else if (cls == UBX_CLS_NAV && id == UBX_ID_NAV_SIG && plen == 0) { sig_polls++; send_sig(); }   // V3.14.7 poll
           else if (cls == UBX_CLS_MON && id == UBX_ID_MON_COMMS && plen == 0 && comms_answer) {   // V3.14.4
             std::vector<uint8_t> c(8 + 2 * 40, 0); c[0] = 0; c[1] = 2; c[2] = comms_tx_err;
             put_u16(&c[8], 0x0100); put_u16(&c[48], 0x0201);
@@ -343,7 +348,11 @@ struct SimZed {
       for (int i = 0; i < 20; i++) { uint8_t* q = &b[8 + i * 12]; q[0] = (uint8_t)(i % 4 == 3 ? 6 : i % 4); q[1] = (uint8_t)(i + 1); q[2] = 40; if (i < 18) q[8] = 1 << 3; }
       send_ubx(UBX_CLS_NAV, UBX_ID_NAV_SAT, b.data(), (uint16_t)b.size());
     }
-    if (sig_every[port] && epochs % sig_every[port] == 0) {   // 20 L1 + 20 second-band signals (if the antenna has L2)
+    if (sig_every[port] && epochs % sig_every[port] == 0 && !sig_stuck) send_sig();
+    if (out_nmea[port]) send_text("$GNGSA,A,3,,,,,,,,,,,,,1.0,0.5,0.8,1*00\r\n$GPTXT,01,01,02,u-blox*00\r\n");   // bad checksums: noise only
+  }
+  void send_sig() {
+    {   // 20 L1 + 20 second-band signals (if the antenna has L2)
       int nsig = l2_antenna ? 40 : 20;
       std::vector<uint8_t> b(8 + nsig * 16, 0); b[5] = (uint8_t)nsig;
       for (int i = 0; i < nsig; i++) {
@@ -356,7 +365,6 @@ struct SimZed {
       }
       send_ubx(UBX_CLS_NAV, UBX_ID_NAV_SIG, b.data(), (uint16_t)b.size());
     }
-    if (out_nmea[port]) send_text("$GNGSA,A,3,,,,,,,,,,,,,1.0,0.5,0.8,1*00\r\n$GPTXT,01,01,02,u-blox*00\r\n");   // bad checksums: noise only
   }
   void power_cycle() {            // RAM configuration lost
     SimZed fresh; fresh.port = port;
@@ -1128,6 +1136,48 @@ TEST(quality, stale_counts_are_not_reported_as_current) {
   CHECK_EQ((int)b.sv_tracked, 0); CHECK_EQ((int)b.sv_used, 0); CHECK_EQ((int)b.sig_tracked, 0); CHECK_EQ((int)b.cno_mean, 0);
   CHECK(b.quality_age_s >= 6 && b.quality_age_s != 255);        // the age still says how old the last one is
   CHECK_EQ((int)w.back->quality().sig_sv_tracked, 20);           // the monitor keeps the last values
+}
+
+
+// V3.14.7: field 20/11/2026 22:56, NAV-SIG stopped while every repeated VALSET was ACKed (periodic output stuck).
+TEST(quality, stuck_nav_sig_is_restarted_off_on) {
+  World w(2);
+  w.run_ms(15000);
+  CHECK_EQ((int)w.back->zed().monitor_state(), 1);
+  w.zed.sig_stuck = true; w.zed.sig_kick = true;                 // OFF->ON restarts it
+  w.run_ms(13000);
+  CHECK_EQ(w.back->zed().sig_toggles(), 1u);
+  CHECK(!w.back->zed().sig_polling());
+  CHECK(!w.zed.sig_stuck);
+  w.run_ms(3000);
+  CHECK(w.back->status().quality_age_s <= 2);
+}
+
+TEST(quality, stuck_nav_sig_falls_back_to_polling) {
+  World w(2);
+  w.run_ms(15000);
+  w.zed.sig_stuck = true;                                        // OFF->ON does not help
+  size_t pvt0 = w.chest.gnss.size();
+  w.run_ms(25000);
+  CHECK(w.back->zed().sig_polling());
+  CHECK(w.zed.sig_polls >= 2);
+  w.run_ms(10000);
+  BackStatus st = w.back->status();
+  CHECK(st.quality_age_s <= 2);                                  // summary fresh again, from polls
+  CHECK_EQ((int)st.sv_tracked, 20);
+  CHECK_EQ(st.quality_mon & 0x0F, 1);
+  uint32_t r = w.back->zed().monitor_rearms();
+  w.run_ms(30000);
+  CHECK_EQ(w.back->zed().monitor_rearms(), r);                   // no more re-requests while polls are answered
+  CHECK(w.zed.sig_polls >= 35);                                  // ~1 per second
+  CHECK(w.chest.gnss.size() > pvt0 + 500);                       // positions never stopped
+  CHECK_EQ(w.back->zed().receiver_resets(), 0u);
+}
+
+TEST(quality, rtcm_output_of_the_receiver_is_switched_off_on_our_port) {
+  World w(2);
+  w.run_ms(15000);
+  CHECK(!w.zed.out_rtcm[2]);
 }
 
 // ---------------------------------------------------------------- V3.10.2 adaptive transmit power

@@ -274,6 +274,7 @@ static size_t config_keys(uint8_t port, bool with_rate, uint8_t rate, uint32_t b
     kv[n++] = {zedkey::UART1INPROT_RTCM3X, 1};
     kv[n++] = {zedkey::UART1OUTPROT_UBX, 1};
     if (port == 1) kv[n++] = {zedkey::UART1OUTPROT_NMEA, 0};   // the back does not use NMEA: frees bandwidth
+    if (port == 1) kv[n++] = {zedkey::UART1OUTPROT_RTCM3X, 0}; // V3.14.7: nor RTCM from the receiver (saved base config)
     kv[n++] = {zedkey::MSGOUT_NAV_PVT_UART1, 1};
     kv[n++] = {zedkey::MSGOUT_RXM_RTCM_UART1, 1};
   }
@@ -282,6 +283,7 @@ static size_t config_keys(uint8_t port, bool with_rate, uint8_t rate, uint32_t b
     kv[n++] = {zedkey::UART2INPROT_RTCM3X, 1};
     kv[n++] = {zedkey::UART2OUTPROT_UBX, 1};
     if (port == 2) kv[n++] = {zedkey::UART2OUTPROT_NMEA, 0};
+    if (port == 2) kv[n++] = {zedkey::UART2OUTPROT_RTCM3X, 0};   // V3.14.7
     kv[n++] = {zedkey::MSGOUT_NAV_PVT_UART2, 1};
     kv[n++] = {zedkey::MSGOUT_RXM_RTCM_UART2, 1};
   }
@@ -510,8 +512,31 @@ void ZedManager::tick(uint32_t now_ms) {
       uint32_t last = mon_ == 4 ? t_sat_ : t_sig_;
       if ((mon_ == 1 || mon_ == 4 || mon_ == 5) && (int32_t)(now_ms - mon_set_ms_) >= (int32_t)wait &&
           (last == 0 || (int32_t)(now_ms - last) >= (int32_t)wait)) {
+        // V3.14.7: field 20/11/2026 22:56 (3.14.6, HPG 1.51): NAV-SIG arrived after boot, then stopped for 144 s while
+        // NAV-PVT kept flowing and every repeated VALSET was ACKed. Re-sending the same value may change nothing in the
+        // receiver, so the escalation is: 1st loss -> output OFF then ON again (restarts the periodic message);
+        // 2nd loss in a row -> the back POLLS NAV-SIG once per second itself (8-byte request, answered at once,
+        // independent of the periodic output).
+        if (mon_ == 1 && port_ != 0) {
+          if (mon_streak_ == 0) {
+            ZedKV kv = {port_ == 2 ? zedkey::MSGOUT_NAV_SIG_UART2 : zedkey::MSGOUT_NAV_SIG_UART1, 0};
+            uint8_t b[24];
+            size_t n = ubx_valset_ram(&kv, 1, b, sizeof(b));
+            io_->zed_write(b, n);
+            sig_toggles_++;
+          } else if (!sig_poll_) {
+            sig_poll_ = true;
+          }
+        }
         mon_rearms_++; if (mon_streak_ < 255) mon_streak_++;
         mon_ = 0; mon_t0_ = 0; mon_try_ = 2; mon_ok_ = 0; mon_rounds_ = 0; mon_last_ms_ = 0;
+      }
+      if (sig_poll_ && mon_ == 1 && (sig_poll_t_ == 0 || now_ms - sig_poll_t_ >= 1000)) {   // V3.14.7
+        uint8_t b[8];
+        size_t n = ubx_poll(UBX_CLS_NAV, UBX_ID_NAV_SIG, b, sizeof(b));
+        io_->zed_write(b, n);
+        sig_poll_t_ = now_ms | 1;
+        sig_polls_++;
       }
       uint32_t quiet = now_ms - last_ubx_ms_;
       if (quiet >= 1500 && dt >= 1000) { poll_ver(); t0_ = now_ms; }
@@ -524,7 +549,7 @@ void ZedManager::tick(uint32_t now_ms) {
         comms_t_ = now_ms | 1;
         comms_polls_++;
       }
-      if (quiet >= 5000) { comms_tx_max_ = 0; zed_resets_++; cand_ = 0; set_applied_ = false; tune_ = 0; mon_ = 0; mon_t0_ = 0; mon_try_ = 2; mon_ok_ = 0; mon_rounds_ = 0; go(DETECT, now_ms); }   // receiver reset or unplugged
+      if (quiet >= 5000) { sig_poll_ = false; comms_tx_max_ = 0; zed_resets_++; cand_ = 0; set_applied_ = false; tune_ = 0; mon_ = 0; mon_t0_ = 0; mon_try_ = 2; mon_ok_ = 0; mon_rounds_ = 0; go(DETECT, now_ms); }   // receiver reset or unplugged
       break;
     }
   }
