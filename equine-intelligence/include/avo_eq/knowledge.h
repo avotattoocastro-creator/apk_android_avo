@@ -20,7 +20,7 @@
 
 namespace avoeq {
 
-static const char* const KNOWLEDGE_VERSION = "1.8.0";
+static const char* const KNOWLEDGE_VERSION = "1.9.0";
 static const char* const KNOWLEDGE_ID = "AVO_KB_1";
 static const char* const BONE_MODEL_ALGORITHM = "SBFL_MORRICE_WEST_2022";
 
@@ -82,6 +82,9 @@ struct KbRuleConfig {
   int tendon_rest_days = 90;           // A6: Choi & Parkin 2025, ≥ 90 días sin trabajo rápido, OR 3,10 [E]
   int low_gallop_60d_max_days = 2;     // A6B: Choi & Parkin 2025, ≤ 2 días de galope en 60 días, OR 1,84 (1,07–3,16) de
                                        // tendinopatía del TFDS [E]; «día de galope» = día con sesión rápida [I]
+  double gallop_ratio_max = 1.6;       // A6C: Choi & Parkin 2025 (sección 2.3 y tabla 2): (g60/g90) + 1 ≤ 1,6, OR 2,190
+                                       // (1,227–3,910) [E]; ventanas anidadas que acaban en el último trabajo rápido [E]
+  int gallop_ratio_max_age_days = 30;  // A6C solo si el último trabajo rápido es de los últimos 30 días [I]
   double gallop_session_min_m = 100.0; // metros de galope (> 14 m/s en PSI) para contar como sesión rápida
   double bone_week_ratio = 1.5;        // KB-B: fatiga ósea de 7 días frente a la mediana semanal propia [I]
   int bone_min_weeks = 4;
@@ -114,6 +117,9 @@ struct KbStatus {
   int return_day = -1;                 // día de la vuelta tras descanso largo (-1: no hay vuelta en curso)
   int return_rest = 0;                 // días sin trabajo rápido antes de esa vuelta
   int gallop_days_60d = 0;             // días con sesión rápida en los últimos 60 días (A6B)
+  int gallop_days_60_last = -1;        // A6C: días de galope en los 60 d que acaban en el último trabajo rápido (-1: sin datos)
+  int gallop_days_90_last = -1;        // A6C: ídem en 90 d
+  double gallop_ratio = NAN;           // A6C: (g60/g90) + 1, entre 1 y 2 (NAN si no se puede calcular)
   std::vector<KbFlag> flags;
 };
 

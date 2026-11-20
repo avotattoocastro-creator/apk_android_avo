@@ -459,6 +459,7 @@ bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::str
                       {"galope_30d_limite_km", &c->kb.gallop_30d_limit_km, 0.1, 100}, {"rampa_ratio", &c->kb.ramp_ratio, 1, 10},
                       {"rampa_min_m", &c->kb.ramp_min_m, 0, 100000}, {"galope_sesion_min_m", &c->kb.gallop_session_min_m, 0, 10000},
                       {"fatiga_osea_ratio", &c->kb.bone_week_ratio, 1, 10},
+                      {"cociente_galope_max", &c->kb.gallop_ratio_max, 1, 2},
                       {"caida_zancada_m", &c->kb.stride_drop_m, 0.01, 1}, {"caida_v_600m", &c->kb.final_speed_drop, 0.01, 3},
                       {"cusum_h", &c->kb.drift_h, 2, 20}};
       for (const auto& d : kd) {
@@ -470,6 +471,7 @@ bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::str
       const I ki[] = {{"dias_descanso_vuelta", &c->kb.return_rest_days, 7, 365}, {"dias_ventana_vuelta", &c->kb.return_window_days, 1, 90},
                       {"dias_descanso_tendon", &c->kb.tendon_rest_days, 7, 730}, {"semanas_min_fatiga_osea", &c->kb.bone_min_weeks, 1, 8},
                       {"dias_galope_60d_max", &c->kb.low_gallop_60d_max_days, 0, 24},
+                      {"dias_vigencia_cociente_galope", &c->kb.gallop_ratio_max_age_days, 1, 365},
                       {"sesiones_min_linea_base", &c->kb.drift_min_baseline, 3, 50}, {"cusum_calentamiento", &c->kb.drift_warmup, 2, 50}};
       for (const auto& d : ki) {
         if (!k.has(d.k)) continue;

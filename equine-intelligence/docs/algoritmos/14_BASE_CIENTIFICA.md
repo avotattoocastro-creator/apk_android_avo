@@ -1,4 +1,4 @@
-# 14 · Base científica de la cuadra (KB-1) 1.8.0
+# 14 · Base científica de la cuadra (KB-1) 1.9.0
 
 Código: `include/avo_eq/knowledge.h`, `src/knowledge/knowledge.cpp`. Se calcula en Track Work (`src/racing/racing.cpp`,
 bloque `trabajo_pista.base_cientifica`) y se evalúa en Training Analytics (`src/training/training.cpp`, bloques
@@ -19,9 +19,11 @@ F(v) = 2,778 + 2,1376·v − 0,0535·v²      N/kg; saturada en 24,13 por encima
 σ    = σ_max · F / 24,13                  MPa; σ_max = 90 por defecto (rango publicado 54–90) [E]
 Nf   = 10^((σ0 − σ) / 14,1)               σ0 = 134,2 MPa (Martig 2013, curva de sensibilidad, R² 0,72) [E]
 %SBFL = 100 · Σ 1/Nf                      regla de Miner, sin reparación [E]
-zancadas por época GNSS = f(v)·dt,  f(v) = 1,7052 + 0,0305·v + 0,0004·v² Hz [E, Anwar 2026]
+zancadas por época GNSS = f(v)·dt,  f(v) = 1,7052 + 0,0305·v + 0,0004·v² Hz [E, Witte 2006 fig. 5; reutilizada por Anwar 2026]
 ```
-- Rango validado de 12,57 a 21 m/s (filtro de Morrice-West). Entre 4 y 12,57 m/s el daño se suma aparte en
+- Rango de cálculo de 12,57 a 21 m/s. **KB 1.9.0:** en Morrice-West 2022 son los criterios de exclusión de datos, no un
+  rango validado [E]; la ecuación de fuerza se ajustó en Witte 2006 solo entre 9 y 17 m/s, y la saturación en el
+  vértice (19,98 m/s) es elección nuestra [I]. Entre 4 y 12,57 m/s el daño se suma aparte en
   `pct_extrapolado_lento`, porque el modelo sobrestima el trabajo lento (calculado 1,2–3,3 % por canter frente a 0,41 %
   de mediana en Hong Kong).
 - Huecos GNSS de más de 5 s no cuentan.
@@ -54,7 +56,7 @@ El corte de 14 m/s es de Verheyen 2006 en PSI [E]; su escalado al árabe es [I].
 | Regla | Umbral por defecto | Acción | Evidencia |
 |---|---|---|---|
 | A1_CANTER_30D | canter > 40 km en 30 d (aviso) / > 44 km (límite) | AVISO / LIMITAR | Verheyen 2006 [E]; aviso al 90 % [I] |
-| A2_GALOPE_30D | galope rápido > 6 km en 30 d | LIMITAR | Verheyen 2006 [E] |
+| A2_GALOPE_30D | galope rápido > 6 km en 30 d | LIMITAR | Verheyen 2006 [E-r]; **KB 1.9.0:** el umbral publicado es conjunto con A1 y el galope acumulado fue protector en añojos: A1 y A2 por separado son derivadas [I] |
 | A3_RAMPA | galope rápido 30 d > 1,4 × los 30 d anteriores (≥ 1 km; 60 d de historia) | LIMITAR | Estberg 1996, OR 3,9 [E]; ventanas [I] |
 | A5_VUELTA_DESCANSO | primera sesión rápida tras ≥ 60 d sin ella: 21 d vigilados | LIMITAR | Carrier 1998, RR 71 a 10 d [E] |
 | A6_VUELTA_TENDON | igual tras ≥ 90 d: sugiere ecografía del TFDS | LIMITAR | Choi & Parkin 2025, OR 3,10 [E] |
@@ -77,7 +79,7 @@ Los análisis anteriores sin el bloque cuentan como «sesiones sin datos» y no 
 interpolado sobre la distancia acumulada (Schrurs 2024 [E], «average speed over the last 600 m»; la velocidad puntual
 en la marca de 600 m no predice). Sale en `trabajo_pista.trabajos.lista[].v_ultimos_600m` y `ultimos_600m_s`, solo en
 trabajos de al menos 600 m. Valor de prueba: 1.000 m a 14 m/s + 400 m a 17 m/s → 37,815 s y 15,867 m/s.
-La regla A8 (caída frente a la línea base) sigue pendiente: no hay umbral publicado.
+La regla A8 (caída frente a la línea base) sigue pendiente: no hay umbral publicado. **KB 1.9.0:** Wong 2023 (texto completo, Tasmania) usó el último parcial de 200 m de carrera (HR 1,18 por cada 0,1 m/s de caída); los 600 m en trabajo y el umbral de 0,20 m/s son [I].
 
 ## 3 ter. Pocos días de galope en 60 días (KB-1 1.2.0, regla A6B)
 Choi & Parkin 2025 (EVJ 58:31–39, Seúl, 101 casos y 304 controles) [E]: en el modelo final, **≤ 2 días de galope en
@@ -85,6 +87,16 @@ los 60 días previos** (frente a 3–24) tiene OR 1,842 (IC 95 % 1,073–3,162) 
 anota si el día fue de galope o de canter, sin velocidad ni distancia, así que «día de galope» = día con sesión rápida
 del motor (≥ 100 m por encima de 0,838·v_carrera) es [I]. El estado lleva `dias_galope_60d`. Solo informa (INFO,
 AVISO); no cambia el estado a VIGILAR.
+
+**Regla A6C_COCIENTE_GALOPE (KB-1 1.9.0, motor 2.0.0-dev11).** Choi & Parkin 2025, sección 2.3 (fórmula leída en el
+texto completo) [E]: cociente = (días de galope en los 60 d / días de galope en los 90 d) + 1, con el +1 fuera de la
+fracción, recuentos brutos y las dos ventanas anidadas acabando en el **último trabajo rápido**. Va de 1 a 2; ≤ 1,6
+(frente a > 1,6) tiene OR 2,190 (1,227–3,910) de tendinopatía del TFDS en el modelo final (tabla 2) [E]. ≤ 1,6 quiere decir
+que menos del 60 % de los galopes de 90 días caen en los 60 últimos: el galope se está espaciando. En el motor [I]:
+el día del último trabajo rápido entra en las dos ventanas; hace falta historia de 90 días antes de él, alguna sesión
+en los últimos 7 días y que el último trabajo rápido sea de los últimos 30 días (`dias_vigencia_cociente_galope`).
+Opciones: `cociente_galope_max` (1–2, por defecto 1,6). Salida: `cociente_galope {valor, dias_galope_60d,
+dias_galope_90d}` o `null`. INFO · AVISO; es un factor asociado en casos y controles, no una predicción de lesión.
 
 ## 3 quater. Herramientas de línea base (KB-1 1.3.0, estudio extra del 19/11)
 Funciones de `knowledge.h` para comparar a cada caballo consigo mismo. **Todavía no las usa ninguna regla** (faltan el

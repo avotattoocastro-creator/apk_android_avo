@@ -24,6 +24,53 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Motor 2.0.0-dev11 — KB-1 1.9.0: investigación nocturna (regla A6C del cociente de galope y auditoría de fuentes)
+**Autor:** Claude (tarea programada nocturna, sin supervisión) · **Rama:** `claude/kb-noche-2026-11-20` (desde `claude/kb-estudio5-2026-11-19`, PR #89 abierto) · **CI:** motor lanzado a mano en la rama (resultado en el PR)
+**Qué cambia:**
+- **Estudio** `equine-intelligence/knowledge/estudios/2026-11-20_noche_auditoria_cociente_galope_asia_latam.md`, con
+  etiquetas [E]/[E-r]/[I]/[I-raza]/[NV] y tipo de acceso.
+  - Auditoría de 11 fuentes: 7 pasan a texto completo (Choi & Parkin 2025, Morrice-West 2020 y 2022, Wong 2023 ×2,
+    Witte 2006 y van Erck 2026).
+  - Correcciones de atribución y de ámbito, sin cambiar ninguna constante:
+    - «Morrice-West 2023» es Wong 2023 (Front Vet Sci), y las fracciones 0,80/0,93 son diseño propio;
+    - 12,57–21 m/s son criterios de exclusión;
+    - 16,7 m/s es un límite de franja;
+    - la fórmula de frecuencia de zancada es de Witte;
+    - el umbral de Verheyen es conjunto (canter y galope) y el galope acumulado fue protector en añojos;
+    - A8: Wong usó los 200 m finales de carrera.
+  - Cobertura de Japón, Corea, Hong Kong, Turquía, Golfo (sin datos), Argentina, Uruguay, Brasil y Chile.
+- **Motor:** regla nueva **A6C_COCIENTE_GALOPE**. Choi & Parkin 2025, sección 2.3 y tabla 2, leídas en el texto
+  completo:
+  - cociente = (días de galope en 60 d / en 90 d) + 1, con las ventanas acabadas en el último trabajo rápido;
+  - avisa con cociente ≤ 1,6, que tiene OR 2,19 (1,23–3,91) de TFDS;
+  - es INFO · AVISO;
+  - opciones `cociente_galope_max` y `dias_vigencia_cociente_galope`;
+  - campo `cociente_galope` en el JSON de `base_cientifica`.
+- **Versiones:** `KNOWLEDGE_VERSION` 1.8.0 → 1.9.0 y `ENGINE_VERSION` 2.0.0-dev10 → 2.0.0-dev11. Fixtures regenerados
+  (solo cambian las versiones).
+- **`base_cientifica.json` 1.9.0:**
+  - 24 fuentes nuevas;
+  - 3 parámetros nuevos;
+  - regla A6C;
+  - pendientes de A1/A2 y A8;
+  - 8 entradas nuevas en la cola.
+- Actualizados también la ficha 14, la tabla de estado y el README.
+**Por qué:** el cociente de A6 estaba pendiente por ambigüedad. La auditoría nocturna verifica las fuentes que sostienen
+reglas implementadas.
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, número de build de TestFlight, apps.
+**Validación:**
+- IMPLEMENTADO.
+- Pruebas locales con ASan/UBSan: 103 casos y 1.744 comprobaciones sin fallos.
+- Release y `check_fixtures.py` en verde tras `--update` (diferencias: solo versiones).
+- CI: ver PR.
+- **NO VERIFICADO** con caballos reales. A6C es un factor asociado, no una predicción de lesiones.
+**Pendiente:**
+- texto completo de Verheyen 2006 (regla combinada A1+A2);
+- velocidad de los últimos 200 m para A8;
+- tabla S1 de Choi;
+- PDF de Kusunose 2002 (J-STAGE);
+- versión publicada de Anwar 2026 (RSOS).
+
 ## 2026-11-20 — Proceso — Integración centralizada en un chat integrador
 **Autor:** Claude (decisión del usuario, 20/11/2026 00:32) · **Rama:** `claude/regla-chat-integrador`
 **Qué cambia:** `AGENTS.md` (sección «Integración centralizada» y paso 3 de «Empieza aquí») y `CLAUDE.md`: cada chat abre

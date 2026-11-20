@@ -175,6 +175,51 @@ EQ_TEST(kb, rule_low_gallop_days_60d) {
   CHECK(flag(kb_evaluate(h, 68, 0, c0), "A6B_POCO_GALOPE_60D") == nullptr);
 }
 
+// A6C (Choi & Parkin 2025, EVJ 58:31, sección 2.3 y tabla 2): (g60/g90) + 1 ≤ 1,6, OR 2,190 (1,227–3,910) [E];
+// ventanas anidadas de 60 y 90 días que acaban en el último trabajo rápido [E].
+EQ_TEST(kb, rule_gallop_ratio_60_90) {
+  KbRuleConfig c;
+  CHECK_NEAR(c.gallop_ratio_max, 1.6, 1e-12);
+  std::vector<KbDay> h;
+  // 120 días con canter cada 2 días; galope (400 m) los días 34, 40, 46, 52, 58 y después solo 80, 100 y 118
+  for (long d = 0; d <= 118; d += 2) {
+    bool g = d == 34 || d == 40 || d == 46 || d == 52 || d == 58 || d == 80 || d == 100 || d == 118;
+    h.push_back(day_with(d, 1500, g ? 400 : 0, 0.5));
+  }
+  // último trabajo rápido el día 118: ventana de 90 d = días 29–118 (8 galopes), de 60 d = días 59–118 (3 galopes)
+  KbStatus s = kb_evaluate(h, 119, 0, c);
+  REPORT("cociente de galope %.3f (g60 %d, g90 %d)\n", s.gallop_ratio, s.gallop_days_60_last, s.gallop_days_90_last);
+  CHECK(s.gallop_days_60_last == 3 && s.gallop_days_90_last == 8);
+  CHECK_NEAR(s.gallop_ratio, 3.0 / 8.0 + 1.0, 1e-12);   // 1,375
+  const KbFlag* f = flag(s, "A6C_COCIENTE_GALOPE");
+  CHECK(f && f->level == "INFO" && f->action == "AVISO");
+  CHECK(f && f->evidence.find("2,19") != std::string::npos);
+  CHECK(kb_status_json(s).find("\"cociente_galope\":{\"valor\":1.375") != std::string::npos);
+  // reparto regular (galope cada 6 días): g60 = 10, g90 = 15 → 1,667 > 1,6: no salta
+  std::vector<KbDay> r;
+  for (long d = 0; d <= 118; d += 2) r.push_back(day_with(d, 1500, (d % 6 == 4) ? 400 : 0, 0.5));
+  KbStatus sr = kb_evaluate(r, 119, 0, c);
+  REPORT("reparto regular: cociente %.3f (g60 %d, g90 %d)\n", sr.gallop_ratio, sr.gallop_days_60_last, sr.gallop_days_90_last);
+  CHECK(sr.gallop_days_60_last == 10 && sr.gallop_days_90_last == 15);
+  CHECK(flag(sr, "A6C_COCIENTE_GALOPE") == nullptr);
+  // umbral exacto: con 1,7 el reparto regular sí avisa
+  KbRuleConfig c17; c17.gallop_ratio_max = 1.7;
+  CHECK(flag(kb_evaluate(r, 119, 0, c17), "A6C_COCIENTE_GALOPE") != nullptr);
+  // sin 90 días de historia antes del último trabajo rápido no se calcula
+  KbStatus sn = kb_evaluate(h, 119, 40, c);
+  CHECK(std::isnan(sn.gallop_ratio));
+  CHECK(flag(sn, "A6C_COCIENTE_GALOPE") == nullptr);
+  CHECK(kb_status_json(sn).find("\"cociente_galope\":null") != std::string::npos);
+  // último trabajo rápido de hace más de 30 días: no se juzga (A5/A6 cubren la vuelta)
+  std::vector<KbDay> o = h;
+  for (long d = 120; d <= 154; d += 2) o.push_back(day_with(d, 1500, 0, 0.5));
+  CHECK(flag(kb_evaluate(o, 140, 0, c), "A6C_COCIENTE_GALOPE") != nullptr);   // 22 días desde el último galope
+  CHECK(flag(kb_evaluate(o, 154, 0, c), "A6C_COCIENTE_GALOPE") == nullptr);   // 36 días
+  // umbral de vigencia configurable
+  KbRuleConfig c40; c40.gallop_ratio_max_age_days = 40;
+  CHECK(flag(kb_evaluate(o, 154, 0, c40), "A6C_COCIENTE_GALOPE") != nullptr);
+}
+
 EQ_TEST(kb, weekly_bone_fatigue_ratio) {
   KbRuleConfig c;
   std::vector<KbDay> h;
@@ -267,7 +312,7 @@ EQ_TEST(kb, final_speed_last_600m) {
   double keep = -1;
   CHECK(!kb_final_speed(t, d, 600, &keep, nullptr)); CHECK_NEAR(keep, -1, 0);
   CHECK(!kb_final_speed({}, {}, 600, &keep, nullptr));
-  CHECK(std::string(KNOWLEDGE_VERSION) == "1.8.0");
+  CHECK(std::string(KNOWLEDGE_VERSION) == "1.9.0");
 }
 
 // Líneas base (KB 1.3.0, estudio extra 2026-11-19): valores de referencia del estudio ampliado del 18/11 y de la cadena
