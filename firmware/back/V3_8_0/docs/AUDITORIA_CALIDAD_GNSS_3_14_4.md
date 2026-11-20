@@ -1,4 +1,4 @@
-# Auditoría GNSS 20/11/2026 — mensajes de calidad, RTCM y precisión de velocidad (espalda 3.14.4 + Android 2.14-gnss-dev1)
+# Auditoría GNSS 20/11/2026 — mensajes de calidad, RTCM y precisión de velocidad (espalda 3.14.4 + Android 2.15-gnss-dev1)
 
 Estado: **IMPLEMENTADO · COMPILADO EN CI · NO VERIFICADO** en la espalda, el reloj ni el móvil.
 Rama `claude/gnss-calidad-rtcm-back-3-14-4`, desde `develop/avo-performance-horse` (`daab9d1`).
@@ -106,7 +106,7 @@ MON-COMMS es un sondeo de 8 B cada 5 s, con una respuesta de unos 216 B.
 ### Pecho
 Sin cambios. Reenvía el byte `quality_mon`, la edad del resumen y los contadores RTCM, como en la 3.7.6+.
 
-### Android 2.14-gnss-dev1 (vc 47)
+### Android 2.15-gnss-dev1 (vc 48)
 - `core/.../telemetry/GnssChain.kt`: lee la cadena completa a partir del texto de `DIAG_GET`, que el reloj ya
   devuelve desde la 3.5.0. **Sin cambio de protocolo.** Toma dos lecturas separadas 5 s:
   - Etapas de RTCM: caster → móvil → reloj → espalda → UART del receptor → usadas por el receptor (RXM-RTCM).
@@ -143,7 +143,7 @@ Sin cambios. Reenvía el byte `quality_mon`, la edad del resumen y los contadore
 | En hardware: espalda, reloj y móvil | **pendiente** | — |
 
 ## 8. Validación en vuestro hardware
-1. Instalar la espalda 3.14.4 con AVO Update y la app 2.14-gnss-dev1. El pecho no cambia (3.7.10).
+1. Instalar la espalda 3.14.4 con AVO Update y la app 2.15-gnss-dev1. El pecho no cambia (3.7.10).
 2. Monitor serie de la espalda (115 200) al aire libre, 10 min:
    - `UART ESP32 (ZED): FIFO desbordada` debe quedarse en **0**. Si sube, la causa era esa y el umbral no basta:
      probar a fijar el ZED en 230 400.

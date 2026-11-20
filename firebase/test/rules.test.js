@@ -167,6 +167,7 @@ test('live: only the owner writes its own live session, with a valid format', as
   await assertFails(set(ref(db(A), `live/${A}/hoy/last`), LAST));                           // bad session id
   await assertFails(set(ref(db(A), `live/${A}/${SID}/last`), '<script>'));                   // bad sample
   await assertFails(set(ref(db(A), `live/${A}/${SID}/otra`), 1));                            // unknown child
+  await assertSucceeds(set(ref(db(A), `live/${A}/${SID}/meta`), { ...liveMeta(), state: 'IDLE' }));   // presencia: pecho encendido sin grabar
   await assertFails(set(ref(db(A), `live/${A}/${SID}/meta`), { ...liveMeta(), state: 'X' }));
   await assertFails(set(ref(db(A), `live/${A}/${SID}/meta`), { ...liveMeta(), expiresMs: Date.now() + 30 * 86400000 }));
   await assertFails(set(ref(db(A), `live/${A}/${SID}/meta`), { ...liveMeta(), telefono: '600' }));

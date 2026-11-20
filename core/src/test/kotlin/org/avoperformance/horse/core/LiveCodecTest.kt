@@ -42,19 +42,30 @@ class LiveCodecTest {
 
     @Test fun recorderLifecycle() {
         val r = LiveRecorder(chunkMs = 10_000)
-        assertEquals(0, r.onTelemetry(tel(WatchSessionState.IDLE), 0).size)
-        val first = r.onTelemetry(tel(WatchSessionState.RECORDING), 1_000)
+        // presencia: en cuanto llega TELEMETRY (pecho encendido), aunque no grabe
+        val first = r.onTelemetry(tel(WatchSessionState.IDLE), 0)
         val sid = (first[0] as LiveAction.Start).sid
-        assertTrue(first[1] is LiveAction.Last)
-        assertEquals("LIVE1,0,", (first[1] as LiveAction.Last).line.substring(0, 8))
-        // 2 Hz durante 10 s: un bloque
-        var chunks = 0
-        for (i in 1..20) chunks += r.onTelemetry(tel(WatchSessionState.RECORDING), 1_000 + i * 500L).count { it is LiveAction.Chunk }
-        assertEquals(1, chunks)
+        assertEquals(LiveAction.State(sid, "IDLE"), first[1])
+        assertTrue(first[2] is LiveAction.Last)
+        // en espera: 1 muestra por segundo aunque el pecho mande 2 Hz
+        assertEquals(0, r.onTelemetry(tel(WatchSessionState.IDLE), 500).count { it is LiveAction.Last })
+        assertEquals(1, r.onTelemetry(tel(WatchSessionState.IDLE), 1_000).count { it is LiveAction.Last })
+        // entra en la geocerca: graba (2 Hz)
+        val rec = r.onTelemetry(tel(WatchSessionState.RECORDING), 1_500)
+        assertTrue(rec.any { it is LiveAction.State && it.state == "REC" })
+        assertEquals("LIVE1,1500,", (rec.first { it is LiveAction.Last } as LiveAction.Last).line.substring(0, 11))
+        var lasts = 0
+        for (i in 1..20) lasts += r.onTelemetry(tel(WatchSessionState.RECORDING), 1_500 + i * 500L).count { it is LiveAction.Last }
+        assertEquals(20, lasts)
         val p = r.onTelemetry(tel(WatchSessionState.PAUSED), 12_000)
         assertTrue(p.any { it is LiveAction.State && it.state == "PAUSE" })
-        val end = r.onTelemetry(tel(WatchSessionState.STOPPED_WAITING_UPLOAD), 13_000)
-        assertTrue(end.any { it is LiveAction.Chunk && it.index == 1 })
+        // sale de la geocerca: el directo sigue, en espera
+        val idle = r.onTelemetry(tel(WatchSessionState.STOPPED_WAITING_UPLOAD), 13_000)
+        assertTrue(idle.any { it is LiveAction.State && it.state == "IDLE" })
+        assertEquals(sid, r.activeSessionId)
+        // pecho apagado o fuera de alcance: termina tras 60 s sin TELEMETRY
+        assertEquals(0, r.onTick(60_000).size)
+        val end = r.onTick(73_001)
         assertEquals(LiveAction.End(sid), end.last())
         assertEquals(null, r.activeSessionId)
         assertEquals(0, r.finish().size)

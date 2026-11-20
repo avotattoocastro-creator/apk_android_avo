@@ -24,7 +24,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
-## 2026-11-20 — Espalda PROTOTIPO 3.14.4 · Android 2.14-gnss-dev1 — Mensajes de calidad GNSS que no llegan, cadena RTCM por etapas
+## 2026-11-20 — Espalda PROTOTIPO 3.14.4 · Android 2.15-gnss-dev1 — Mensajes de calidad GNSS que no llegan, cadena RTCM por etapas
 **Autor:** Claude (encargo del usuario, 20/11 21:07: «Mensajes de calidad activados, pero no llegan», 64,9 cm H, sin RTK
 FIX, velocidad ±0,52 km/h) · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` · **Commits:** `3ed96d0` (espalda), `d502568` (Android), docs en el último commit del PR
 **CI:** espalda `build-back-v380.yml` run 44810109245 ✅ (52 casos / 519 comprobaciones; imagen ESP32-S3 927 984 B, 27 % de app0) · Android `build-android.yml` run 44810606166 (lanzado a mano en la rama, ver PR)
@@ -51,7 +51,7 @@ FIX, velocidad ±0,52 km/h) · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` 
   - presupuesto UART antes de activar la calidad;
   - UBX-MON-COMMS cada 5 s (búfer TX del receptor y desbordes de RTCM);
   - líneas nuevas en el monitor serie: `MENSAJES ZED`, `UART ESP32 (ZED)`, `PRESUPUESTO UART`, `MON-COMMS`.
-- **Android 2.14-gnss-dev1 (vc 47):**
+- **Android 2.15-gnss-dev1 (vc 48;** commits del Android con el nombre provisional 2.14-gnss-dev1 / vc 47, renumerada al traer `develop`, donde vc 47 ya es 2.14-presencia-dev1**):**
   - `GnssChain` lee la cadena RTCM (caster → móvil → reloj → espalda → UART → usadas) y la recepción UBX a partir de
     `DIAG_GET` (ya existente), cada 5 s con INICIO abierta. Dice en qué etapa se paran las correcciones.
   - «NTRIP recibiendo» no se presenta como RTK.
@@ -70,6 +70,116 @@ FIX, velocidad ±0,52 km/h) · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` 
 - cadena RTCM en verde con NTRIP;
 - ensayos de velocidad parado, en recta y en giros, con porcentaje de épocas con `sAcc` < 55 mm/s.
 
+---
+
+## 2026-11-20 — Integración: motor 2.0.0-dev15 → dev23 (KB-1 1.13.0 → 1.21.0) en `develop`
+**Autor:** Claude (chat integrador, petición del usuario 20/11 21:02: «fusióname todos los pasos del motor pendientes»)
+**Qué entra:** PR #99, #101, #102, #104, #106, #107, #108, #109 y #110 (apilados: #110 contiene los ocho anteriores),
+fusionados con *merge commit* a través de #110. Se trajo `develop` (con el PR #111, LIVE con presencia) a la rama y se
+conservaron las dos partes en este registro y en la tabla de estado (fila del iPad de #111, fila del motor de dev23).
+**CI previo en la rama:** motor 44802462967 ✅ (Linux con JNI, Windows, Android ×3 ABI), Android 44808102888 ✅ y
+Windows 44808108216 ✅. El iPad compila y sube a TestFlight al entrar en `develop`.
+**No se ha tocado:** lógica del motor, firmware, workflows, firmas ni contratos binarios (todo es base científica).
+**Validación:** COMPILADO / CI · **NO VERIFICADO** con caballos reales.
+
+---
+
+## 2026-11-20 — Android 2.14-presencia-dev1 · iPad · reglas RTDB — Directo desde que se enciende el pecho; varios caballos en el iPad
+**Autor:** Claude (petición del usuario, 20/11 20:55, con boceto sobre la build 202: «selector para cuando hay más de 1
+caballo a la vez», «lista sistemas conectados» bajo LIVE, «que el pecho mande posición en cuanto se encienda, tiempo
+real al servidor cada segundo sin grabar; el raw es solo cuando entra en la geocerca») · **Rama:** `claude/live-presencia`
+**Qué cambia:**
+- **Android (vc 47):** `LiveRecorder` con presencia (`IDLE` 1 Hz desde la primera `TELEMETRY`; `REC` 2 Hz; fin tras 60 s
+  sin `TELEMETRY`); `LiveShare` comprueba cada 5 s.
+- **iPad:** estado «EN ESPERA»; selector de caballo (chips) cuando hay más de un directo; sección «EN DIRECTO» en la barra
+  lateral con los sistemas conectados (lista en segundo plano cada 20 s).
+- **Reglas RTDB:** `state` admite `IDLE` (prueba nueva en el emulador). Hay que publicarlas a mano.
+**No se ha tocado:** firmware (el pecho ya manda `TELEMETRY` sin grabar), contratos binarios, workflows, firmas.
+**Validación:** IMPLEMENTADO · CI: ver PR · **NO VERIFICADO** en dispositivos.
+
+---
+
+## 2026-11-20 — Motor 2.0.0-dev23 / KB-1 1.21.0 — Estudio horario 19:08: DMD en potros de 2 años y auditoría de sobreentrenamiento (A9/A10)
+**Autor:** Claude (tarea programada, estudio horario) · **Rama:** `claude/kb-estudio-2026-11-20-1908` (sale de
+`claude/kb-estudio-2026-11-20-1809`, PR #109) · **CI:** ver PR
+**Qué cambia:** estudio `equine-intelligence/knowledge/estudios/2026-11-20_1908_dmd_potros_auditoria_sobreentrenamiento.md`.
+- DMD: Crawford 2021 [E] (HR 0,89 por km rápido acumulado; inicio tardío y machos con más riesgo), Boston & Nunamaker
+  2000 [E-r], Verheyen 2005 [E-ag], Oliveira 2006 [E]; propuesta DM1–DM4 [I] para el planificador, sin implementar.
+- Sobreentrenamiento: **cifra corregida** «14–19 %» → 19 % de tiempo hasta la fatiga en trotones (de Graaf-Roelfsema
+  2009, Wijnberg 2008 [E]); Tyler-McGowan 1999 (no 1998); umbral de peso del 2 % declarado diseño; Martin 2000
+  confirmado; propuesta SO1–SO3 [I].
+- 12 fuentes, 2 parámetros de contexto, 2 reglas PROPUESTA, 2 pendientes y 2 temas de cola.
+
+**Por qué:** el planificador de potros no tenía base sobre DMD y A9/A10 se apoyaban en cifras de agregador.
+**Archivos:** `base_cientifica.json`, el estudio, `knowledge.h`, `types.h`, `tests/test_knowledge.cpp`, fixtures de
+`core/src/test/resources/equine/` (solo versiones), ficha 14, tabla de estado, `README.md` y este registro.
+**No se ha tocado:** lógica, reglas implementadas, umbrales, firmware, workflows, firmas ni contratos binarios.
+**Validación:** pruebas locales (ASan/UBSan) y fixtures; CI en el PR · NO VERIFICADO con caballos reales.
+
+---
+
+## 2026-11-20 — Motor 2.0.0-dev22 / KB-1 1.20.0 — Estudio horario 18:09: modelo óseo B (tabla 4, signo de b) y auditoría de fuentes
+**Autor:** Claude (tarea programada, estudio horario) · **Rama:** `claude/kb-estudio-2026-11-20-1809` (sale de
+`claude/kb-estudio-2026-11-20-1709`, PR #108) · **CI:** ver PR
+**Qué cambia:** estudio `equine-intelligence/knowledge/estudios/2026-11-20_1809_modeloB_tabla4_auditoria_fuentes.md`.
+- Modelo B: dt y solver siguen [NV] (Zenodo, Europe PMC y PMC sin permiso de acceso en la sesión). La tabla 4 exacta
+  del preprint de Anwar se guarda como vector de validación (`modelo_b_tabla4_anwar_preprint`); 0,852 frente a 0,911 es
+  una incoherencia interna del preprint; el signo de b difiere entre Pan (0,02) y Anwar (−0,02).
+- Auditoría de la KB: 15 obras duplicadas (17 entradas con `duplicado_de`, 7 con `acceso` incoherente) y 52 fuentes
+  sin campos obligatorios, completadas como `SIN_AUDITAR`/`[NV]` sin releerlas. Pendiente AU1 [I].
+- Li 2026 probable revisión de caballos de deporte; Hall 2026: 53 frente a 54 fracturas [I].
+
+**Por qué:** el modelo B es el pendiente que más bloquea código y la base tenía fuentes duplicadas con acceso dispar.
+**Archivos:** `base_cientifica.json`, el estudio, `knowledge.h`, `types.h`, `tests/test_knowledge.cpp`, fixtures de
+`core/src/test/resources/equine/` (solo versiones), ficha 14, tabla de estado, `README.md` y este registro.
+**No se ha tocado:** lógica, reglas, umbrales, firmware, workflows, firmas ni contratos binarios.
+**Validación:** pruebas locales (ASan/UBSan) y fixtures; CI en el PR · NO VERIFICADO con caballos reales.
+
+---
+
+## 2026-11-20 — Motor 2.0.0-dev21 / KB-1 1.19.0 — Estudio horario 17:09: exactitud del GNSS/IMU a galope y mano de galope
+**Autor:** Claude (tarea programada, estudio horario) · **Rama:** `claude/kb-estudio-2026-11-20-1709` (sale de
+`claude/kb-estudio-2026-11-20-1610`, PR #107) · **CI:** ver PR
+**Qué cambia:** estudio `equine-intelligence/knowledge/estudios/2026-11-20_1709_exactitud_gnss_mano_de_galope.md`.
+- No hay exactitud publicada de RTK a galope. La referencia es ±0,15 m/s en carrera (TurfTrax [E-r]) y France Galop
+  exige ≤ 25 cm de posición. Las curvas y las aceleraciones degradan la velocidad GNSS [E].
+- Se propone GN1 [I]: menor confianza en tramos con curva o aceleración, A8 solo con la misma geometría y la longitud
+  de zancada solo por tramos de ≥ 100–200 m.
+- Mano de galope: el 18,6 % de las zancadas en curva va en mano incorrecta (Parkes 2020 [E]) y, en pistas antihorarias,
+  la mano izquierda tiene RR 1,14 de fractura (Peterson 2021 [E]). No hay exactitud publicada de detección con un solo
+  sensor en el tronco. Se propone ML1 [I] como métrica experimental, nunca como riesgo.
+- KB: 14 fuentes, 3 parámetros de contexto, 2 pendientes y 3 entradas de cola.
+
+**Por qué:** temas no cubiertos por ningún estudio anterior que afectan a V200, A8, la velocidad final y la cincha.
+**Archivos:** `base_cientifica.json`, el estudio, `knowledge.h`, `types.h`, `tests/test_knowledge.cpp`, ficha 14,
+tabla de estado, `README.md` y este registro.
+**No se ha tocado:** lógica, reglas, umbrales, firmware, workflows, firmas ni contratos binarios.
+**Validación:** pruebas locales (ASan/UBSan) y fixtures; CI en el PR · NO VERIFICADO con caballos reales.
+
+---
+
+## 2026-11-20 — Motor 2.0.0-dev20 / KB-1 1.18.0 — Estudio horario 16:10: aceleración del tronco a galope y cinética de la FC
+**Autor:** Claude (tarea programada, estudio horario) · **Rama:** `claude/kb-estudio-2026-11-20-1610` (sale de
+`claude/kb-estudio-2026-11-20-1510`, PR #106) · **CI:** ver PR
+**Qué cambia:** estudio `equine-intelligence/knowledge/estudios/2026-11-20_1610_aceleracion_tronco_cinetica_fc.md`.
+- No hay ningún pico de aceleración del tronco publicado en g a 16–18 m/s. Los sensores de referencia usan ±10–16 g
+  (Pfau 2006 y Parsons 2008 [E], StrideSAFE y MTw [E]). Se estima [I] que ±8 g basta para el movimiento del cuerpo.
+- Se precisa el pendiente del contador de saturación de la cincha (|a| ≥ 7,9 g, > 0,1 % en galope [I]) y se propone
+  ±16 g para la cincha BETA. No se toca el firmware.
+- Cinética de la FC: el descarte de 20–30 s en las mesetas de V200 es coherente (Mukai 2007 y Langsetmo 1997 [E-r]).
+  Se proponen CF1 (meseta ≥ 45–60 s cerca del galope de trabajo) y CF2 (τ de recuperación solo propia del caballo),
+  ambos [I] y sin implementar.
+- Fraipont 2011/2012 es de resistencia, no de trotones.
+- KB: 9 fuentes, 3 parámetros de contexto, 2 pendientes y 3 entradas de cola.
+
+**Por qué:** temas abiertos de la cola y de `pendiente_motor` no cubiertos por los estudios de hoy.
+**Archivos:** `base_cientifica.json`, el estudio, `knowledge.h`, `types.h`, `tests/test_knowledge.cpp`, ficha 14,
+tabla de estado, `README.md` y este registro.
+**No se ha tocado:** lógica, reglas, umbrales, firmware, workflows, firmas ni contratos binarios.
+**Validación:** pruebas locales (ASan/UBSan) y fixtures; CI en el PR · NO VERIFICADO con caballos reales.
+
+---
+
 ## 2026-11-20 — Android 2.13-qr-dev1 · iPad — Entrar en el iPad escaneando un QR de la tarjeta
 **Autor:** Claude (petición del usuario, 20/11 15:22: «botón para cargar el archivo de licencia» en LIVE; elegida la
 opción QR) · **Rama:** `claude/qr-tarjeta` · **CI:** ver PR
@@ -84,6 +194,101 @@ clave: no sirve para entrar en Firebase (y así un archivo reenviado no da acces
 **No se ha tocado:** firmware, contratos, workflows, firmas, `Info.plist` (ya tenía el permiso de cámara).
 **Validación:** IMPLEMENTADO · CI: ver PR · **NO VERIFICADO** en dispositivos.
 
+## 2026-11-20 — Motor 2.0.0-dev19 / KB-1 1.17.0 — Estudio horario 15:10: árabes de llano (lactato, velocidad) y novedades 2026
+**Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-1510` (encadenada desde `claude/kb-estudio-2026-11-20-1410`, PR #104, sin fusionar) · **CI:** ver PR
+**Qué cambia:**
+- Estudio nuevo: `equine-intelligence/knowledge/estudios/2026-11-20_1510_arabes_lactato_novedades_2026.md`.
+- `base_cientifica.json` 1.17.0: 9 fuentes nuevas (Kędzierski 2007, Paksoy 2025, Thomassian 2005, Prince/KER, Dąbrowska 2026 BMC, Espil 2026, Hall 2026, Legg 2026, Eamon 2026), 2 parámetros de contexto (`lactato_post_galope_arabe_llano`, `velocidad_carrera_arabe_llano_1400m`), pendiente NV1, 4 entradas de cola, estudio e historial.
+- `KNOWLEDGE_VERSION` 1.17.0 y `ENGINE_VERSION` 2.0.0-dev19 (y su prueba); ficha 14, README y tabla de estado.
+**Por qué:** faltaban datos fisiológicos de árabes de carreras en llano y revisar lo publicado en 2026.
+**No se ha tocado:** lógica, reglas, umbrales, firmware, apps, workflows, contratos binarios.
+**Validación:** pruebas locales (ASan/UBSan) y fixtures; CI en el PR · NO VERIFICADO con caballos reales.
+**Pendiente:** tabla S4 de Dąbrowska 2026, versión RSOS de Anwar, textos completos de Hall y Espil 2026; NV1 sin implementar.
+
+## 2026-11-20 — Motor 2.0.0-dev18 / KB-1 1.16.0 — Estudio horario 14:10: regla combinada de Verheyen y TE por defecto de la V200
+**Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-1410` (encadenada desde `claude/kb-estudio-2026-11-20-1312`, PR #102, sin fusionar) · **CI:** ver PR
+**Qué cambia:**
+- Estudio nuevo: `equine-intelligence/knowledge/estudios/2026-11-20_1410_verheyen_combinada_v200_te_japon.md`.
+- `base_cientifica.json` 1.15.0 → 1.16.0: 9 fuentes, 2 parámetros (`v200_te_por_defecto` PROPUESTO [I],
+  `v200_arabes_referencia` CONTEXTO [E]), regla `A1A2_VERHEYEN_COMBINADO` pasa a PROPUESTO con 3 fuentes secundarias,
+  2 pendientes (VC1–VC4, VT1–VT3), 3 entradas de cola, estudio e historial.
+- `KNOWLEDGE_VERSION` 1.16.0 y `ENGINE_VERSION` 2.0.0-dev18 (y la línea de `tests/test_knowledge.cpp`).
+- Ficha 14, tabla de estado y `README.md`.
+**Por qué:** la regla combinada A1+A2 y el TE de la V200 bloquean código. Verheyen 2006 se describe como interacción
+canter × galope en tres secundarios en texto completo; sigue sin OR, así que no se cambian severidades.
+**No se ha tocado:** lógica, reglas y umbrales del motor; firmware; contratos binarios; workflows; firmas; `Info.plist`.
+**Validación:** IMPLEMENTADO (solo versiones) · probado en local con ASan/UBSan y fixtures; CI en el PR · **NO VERIFICADO** con caballos reales.
+**Pendiente:** OR de Verheyen 2006; aprobar o no VC1–VC4; TE numérico de V200 (Vermeulen & Evans 2006, Wiley); disciplina de los árabes de Piccione 2004.
+
+## 2026-11-20 — Motor 2.0.0-dev17 / KB-1 1.15.0 — Estudio horario 13:12: temperatura y peso cargado como criterios de comparables
+**Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-1312` (encadenada desde `claude/kb-estudio-2026-11-20-1210`, PR #101, sin fusionar) · **CI:** ver PR
+**Qué cambia:**
+- Estudio nuevo: `equine-intelligence/knowledge/estudios/2026-11-20_1312_temperatura_peso_comparables.md`.
+- `base_cientifica.json` 1.15.0:
+  - 19 fuentes nuevas (temperatura: Hargreaves 1999, Schrurs 2024, Ebisuda 2023, Ohmura 2025, Nomura 2019, Geor
+    1995/1996, Marlin 1996, Art 1995, Arfuso 2025; peso: Lee & Park 2011, Bugislaus 2004, Takahashi 2015, Schrurs
+    2022, Pfau 2009, Christensen 2020, Stefánsdóttir 2017, Ekiz 2005 y Sobczyńska 2006 en árabes).
+  - 2 parámetros PROPUESTOS [I]: `temperatura_comparables` (|ΔT| ≤ 5 °C, «no comparable» con WBGT ≥ 28 °C) y
+    `peso_cargado_comparables` (|Δpeso| ≤ 3 kg, aviso informativo con CW/BW > 13 %).
+  - 1 pendiente de motor y 3 entradas de cola.
+- `KNOWLEDGE_VERSION` 1.14.0 → 1.15.0 y `ENGINE_VERSION` 2.0.0-dev16 → 2.0.0-dev17, también en
+  `tests/test_knowledge.cpp`.
+- Ficha 14, tabla de estado y README actualizados.
+
+**Por qué:** las líneas base y los comparables de A7, A8 y A9 no tenían en cuenta el calor ni el peso cargado. Ninguna
+fuente publica un coeficiente de corrección, así que se proponen como criterios de comparables, sin implementar.
+**No se ha tocado:** lógica, reglas, umbrales, firmware, contratos binarios, workflows, firmas, `Info.plist` ni
+TestFlight.
+**Validación:** probado en local (ASan/UBSan, Release y fixtures) y en CI (ver PR). **NO VERIFICADO** con caballos reales.
+**Pendiente:** campos de temperatura, jinete y peso en `Session`; textos completos de Hargreaves 1999, Geor 1995/1996 y
+Marlin 1996; ningún dato de árabes de llano.
+
+## 2026-11-20 — Motor 2.0.0-dev16 / KB-1 1.14.0 — Estudio horario 12:10: playa por franjas y parcial final de 200 m (A8)
+**Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-1210` (encadenada desde `claude/kb-estudio-2026-11-20-1110`, PR #99, sin fusionar) · **CI:** ver PR
+**Qué cambia:**
+- Estudio nuevo: `equine-intelligence/knowledge/estudios/2026-11-20_1210_playa_franjas_parcial_final_200m.md`.
+- `base_cientifica.json` 1.14.0:
+  - **Corrección de cifra/atribución** en `playa_franjas`: la humedad del 19 % y el 13,5 % es de Crevier-Denoix 2011
+    (se añaden el DOI …00202.x y el PMID 21059058).
+  - Las cifras de −59 % y −50 % de Chateau 2011 son deceleraciones del casco. Su DOI …00277.x pasa a provisional, sin
+    confirmar.
+  - 6 fuentes nuevas: Porzio 2025, Graydon 2023, Crevier-Denoix 2013 (AVF), Morrice-West 2020, Legg 2025 y Takahashi
+    2021.
+  - 3 fuentes completadas: Chateau 2011, Crevier-Denoix 2011 y Morrice-West 2018; además, una nota en Wong 2023.
+  - Parámetro informativo nuevo `ruido_velocidad_final_carrera`: ≈ 0,66 m/s, CV ≈ 4 % [I].
+  - Se amplía la nota de A8 y de dos pendientes, y se añaden 3 entradas a la cola de investigación.
+- `KNOWLEDGE_VERSION` 1.13.0 → 1.14.0 y `ENGINE_VERSION` 2.0.0-dev15 → 2.0.0-dev16, también en
+  `tests/test_knowledge.cpp`.
+- Ficha 14, tabla de estado y README actualizados.
+
+**Por qué:** la playa por franja y el parcial final de A8 son pendientes que bloquean código. La atribución de la playa
+mezclaba dos artículos.
+**No se ha tocado:** lógica, reglas, umbrales, firmware, contratos binarios, workflows, firmas, `Info.plist` ni
+TestFlight.
+**Validación:** probado en local (ASan/UBSan, Release y fixtures) y en CI (ver PR). **NO VERIFICADO** con caballos reales.
+**Pendiente:** texto completo de Chateau/Crevier-Denoix 2011, método de Wong 2023 y DE del último 200 m en trabajo.
+
+## 2026-11-20 — Motor 2.0.0-dev15 / KB-1 1.13.0 — Estudio horario 11:10: regreso tras layup (planificador) y sensores 2025–2026
+**Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-1110` (desde `develop/avo-performance-horse` 32e2706; no había PR `claude/kb-*` abierto) · **CI:** ver PR
+**Qué cambia:**
+- Estudio nuevo: `equine-intelligence/knowledge/estudios/2026-11-20_1110_regreso_layup_sensores_2025_2026.md`.
+- `base_cientifica.json` 1.13.0:
+  - 11 fuentes nuevas: Choi, Rosanowski & Parkin 2026, Morrice-West 2024, aviso de HISA, UC Davis VORL, Li 2026,
+    Takahashi/Pfau 2025, van den Broek 2025, Mc Sweeney 2025, Morrice-West 2025 (ANZCVS), Siegers 2025 y Savoini 2025.
+  - 4 fuentes completadas: Carrier 1998 (DOI no confirmado, se cita por PMID), Poinsard 2026, Wong 2023 y
+    Hitchens 2018.
+  - 2 parámetros nuevos: `reincorporacion_tras_layup` (PROPUESTO) y `sesgo_curva_zancada` (INFORMATIVO).
+  - Pendiente nuevo P7 del planificador; cola actualizada.
+- Motor: `ENGINE_VERSION` 2.0.0-dev15 y `KNOWLEDGE_VERSION` 1.13.0, con su prueba. **Sin cambios de lógica, reglas ni
+  umbrales.**
+**Por qué:** el planificador (P1–P6) no tenía evidencia sobre las primeras semanas tras un descanso. Carrier 1998 y
+Choi 2026 apuntan a los días 0–21 tras ≥ 60 d sin trabajo rápido, en fractura de húmero. Las dos solo se han leído por
+resumen, así que P7 queda como diseño [I].
+**Archivos:** el estudio, `base_cientifica.json`, `include/avo_eq/types.h`, `include/avo_eq/knowledge.h`,
+`tests/test_knowledge.cpp`, la ficha 14, `README.md` y la tabla de estado.
+**No se ha tocado:** firmware, contratos binarios, apps, workflows, firmas, `Info.plist`, build de TestFlight.
+**Validación:** IMPLEMENTADO (solo documentación y versiones) · pruebas locales con ASan/UBSan · CI: ver PR ·
+**NO VERIFICADO** con caballos reales.
 ## 2026-11-20 — Android 2.12-nube-dev1 · iPad · Windows — Cambiar caballo/jinete en la nube desde las tres apps; confirmar tras descargar; directo por defecto
 **Autor:** Claude (petición del usuario, 20/11 14:00–14:10: «opción de modificar caballo y jinete en la nube desde iOS,
 Windows y apk», «sí» a la confirmación tras la descarga y al directo activado) · **Rama:** `claude/nube-asignacion` · **CI:** ver PR

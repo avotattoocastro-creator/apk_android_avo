@@ -76,37 +76,50 @@ sealed class LiveAction {
 
 /**
  * Máquina de estados pura (sin Android ni Firebase, con pruebas): recibe cada `TELEMETRY` y decide qué subir.
- * - Empieza al pasar el pecho a GRABANDO; sigue en PAUSA; termina con cualquier otro estado.
- * - `last` en cada muestra (2 Hz); bloque `s/{n}` cada [chunkMs] o al llegar a [maxPerChunk] muestras, y al terminar.
+ * - **Presencia (20/11/2026, decisión del usuario):** el directo empieza en cuanto llega la primera `TELEMETRY` del pecho
+ *   (pecho encendido y conectado al móvil), aunque no grabe: estado `IDLE` («en espera»), 1 muestra por segundo.
+ *   El RAW sigue grabándose solo cuando el pecho entra en la geocerca (o a mano): entonces `REC` (2 Hz) y `PAUSE`.
+ * - Termina con [finish]: directo desactivado, o sin `TELEMETRY` durante [lostMs] (pecho apagado o fuera de alcance),
+ *   ver [onTick].
+ * - `last` en cada muestra; bloque `s/{n}` cada [chunkMs] o al llegar a [maxPerChunk] muestras, y al terminar.
  */
-class LiveRecorder(private val chunkMs: Long = 10_000L, private val maxPerChunk: Int = 40) {
+class LiveRecorder(
+    private val chunkMs: Long = 10_000L, private val maxPerChunk: Int = 40,
+    private val idleEveryMs: Long = 1_000L, private val lostMs: Long = 60_000L,
+) {
     private var sid: String? = null
     private var startMs = 0L
     private var state = ""
     private var chunkIndex = 0
     private var chunkStartMs = 0L
+    private var lastSampleMs = Long.MIN_VALUE
+    private var lastRxMs = 0L
     private val pending = ArrayList<LiveSample>()
 
     val activeSessionId: String? get() = sid
 
     fun onTelemetry(t: Telemetry, nowMs: Long): List<LiveAction> {
         val out = ArrayList<LiveAction>()
+        lastRxMs = nowMs
         val st = when (t.session) {
             WatchSessionState.RECORDING -> "REC"
             WatchSessionState.PAUSED -> "PAUSE"
-            else -> null
+            else -> "IDLE"
         }
-        if (st == null) { out += finish(); return out }
         var id = sid
         if (id == null) {
             id = LiveCodec.sessionId(nowMs)
-            sid = id; startMs = nowMs; chunkIndex = 0; chunkStartMs = nowMs; pending.clear(); state = st
+            sid = id; startMs = nowMs; chunkIndex = 0; chunkStartMs = nowMs; pending.clear(); state = st; lastSampleMs = Long.MIN_VALUE
             out += LiveAction.Start(id, nowMs)
             if (st != "REC") out += LiveAction.State(id, st)
         } else if (st != state) {
             state = st
             out += LiveAction.State(id, st)
+            lastSampleMs = Long.MIN_VALUE   // la primera muestra del nuevo estado sale siempre
         }
+        // en espera, una muestra por segundo (el pecho manda 2 Hz)
+        if (st == "IDLE" && lastSampleMs != Long.MIN_VALUE && nowMs - lastSampleMs < idleEveryMs - 100) return out
+        lastSampleMs = nowMs
         val s = LiveCodec.fromTelemetry(t, (nowMs - startMs).coerceAtLeast(0))
         out += LiveAction.Last(id, LiveCodec.encode(s))
         pending += s
@@ -114,7 +127,10 @@ class LiveRecorder(private val chunkMs: Long = 10_000L, private val maxPerChunk:
         return out
     }
 
-    /** Fin de la sesión (también si se pierde el enlace con el pecho durante mucho tiempo). */
+    /** Llamar cada pocos segundos: si el pecho deja de mandar `TELEMETRY` durante [lostMs], el directo termina. */
+    fun onTick(nowMs: Long): List<LiveAction> = if (sid != null && nowMs - lastRxMs > lostMs) finish() else emptyList()
+
+    /** Fin de la sesión (directo desactivado, o pecho apagado / fuera de alcance). */
     fun finish(): List<LiveAction> {
         val id = sid ?: return emptyList()
         val out = ArrayList<LiveAction>()
