@@ -24,6 +24,31 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — iPad 1.0.0 — Estado de la pista automático (PDF de tracking + Equidia)
+**Autor:** Claude (petición del usuario, 20/11 08:33: «que sea automático») · **Rama:** `claude/estado-pista-france-galop` · **CI:** ver PR
+**Qué cambia:**
+- **PDF de tracking:** algunos traen el terreno bajo la fecha, por ejemplo Auteuil, 31/03/2024: «Lourd (4,7)». El
+  parser lo lee al importar, con el penetrómetro. Los de plat que hemos visto no lo traen.
+- **Equidia:** si el PDF no lo trae, la app busca la página de la carrera
+  (`www.equidia.fr/courses/AAAA-MM-DD/R<n>/C<n>`) y lee «Terrain Souple 3.5».
+  - La reunión sale del hipódromo y la carrera del nombre.
+  - Si el nombre del PDF trae el número de carrera (`AAAAMMDDHHHCC_…`), se usa ese número.
+  - Las peticiones van de una en una y solo para carreras sin estado de pista. Cada carrera se intenta una vez por
+    sesión de la app.
+- **Cuándo busca:** al importar una carrera, al abrir su ficha, al entrar en Carreras (todas las que falten) y al abrir
+  «Análisis motor». Un valor puesto a mano no se sustituye nunca.
+- **Bajo el selector** se ve de dónde sale el dato: «del PDF», «de Equidia (automático)» o «indicado a mano», con el
+  penetrómetro.
+- `Race.goingPenetrometer` y `Race.goingSource` son opcionales: los `carreras.json` anteriores se siguen leyendo.
+- Archivos:
+  - `Core/RaceGoingLookup.swift` (nuevo, funciones puras);
+  - `Core/RaceTrackingParser.swift`, `Core/RaceModels.swift`, `App/RacesModel.swift`, `Views/RaceEngineAnalysisView.swift`;
+  - pruebas `RaceGoingLookupTests` (4).
+**No se ha tocado:** motor, firmware, contratos, Android, Windows, workflows, firmas, `Info.plist`, build de TestFlight.
+**Validación:** IMPLEMENTADO · CI: ver PR · **NO VERIFICADO** en el iPad. La estructura de Equidia se ha comprobado
+leyendo una página real desde aquí, pero desde esta sesión no se puede hacer una petición desde el iPad. Si Equidia
+cambia su página o bloquea la petición, el estado queda «No encontrado» y se elige a mano.
+
 ## 2026-11-20 — iPad 1.0.0 — «Análisis motor»: el puesto de rapidez («14.º») ya no se parte en dos líneas
 **Autor:** Claude (captura de TestFlight del 20/11, 01:23) · **Rama:** `claude/analisis-motor-ajustes` · **CI:** ver PR
 **Qué cambia:** la columna del puesto de rapidez en «Cómo fue la carrera» es más ancha y de una sola línea.

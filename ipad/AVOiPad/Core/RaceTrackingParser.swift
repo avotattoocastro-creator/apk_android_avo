@@ -47,7 +47,8 @@ enum RaceTrackingParser {
         return Race(id: UUID().uuidString, hippodrome: header.hippodrome, raceName: header.raceName, category: header.category,
                     distanceM: header.distanceM, date: header.date, winnerRedk: header.winnerRedk, sourceFile: sourceFile,
                     runners: runners, horseRecordCode: nil, horseName: nil, ourRunnerName: nil, importedAt: Date(),
-                    notes: "", isDemo: false)
+                    notes: "", isDemo: false, going: header.going?.rawValue, goingPenetrometer: header.penetrometer,
+                    goingSource: header.going == nil ? nil : "pdf")
     }
 
     // ------------------------------------------------------------------ header
@@ -58,6 +59,9 @@ enum RaceTrackingParser {
         var distanceM: Double = 0
         var date: Date? = nil
         var winnerRedk: Double? = nil
+        /// State of the track printed under the date in some PDFs («Lourd (4,7)», «Collant (4,4)»).
+        var going: RaceGoing? = nil
+        var penetrometer: Double? = nil
     }
 
     static func parseHeader(_ page: String) -> RaceHeader {
@@ -85,6 +89,13 @@ enum RaceTrackingParser {
         h.date = parseFrenchDate(joined)
         if let g = RaceRegex.groups(#"Redk du 1er\s*:?\s*(\d+)'(\d{2})"(\d{2})"#, joined) {
             h.winnerRedk = officialSeconds(g[1], g[2], g[3])
+        }
+        for l in lines {
+            if let found = RaceGoingLookup.goingLine(l) {
+                h.going = found.going
+                h.penetrometer = found.penetrometer
+                break
+            }
         }
         return h
     }

@@ -85,6 +85,7 @@ struct RaceEngineAnalysisView: View {
         .onAppear {
             guard !started, let r = race else { return }
             started = true
+            model.autoGoing(r)
             Task { @MainActor in await model.runEngineAnalysis(r, force: false) }
         }
     }
@@ -132,9 +133,21 @@ struct RaceEngineAnalysisView: View {
                     .font(.callout.weight(.semibold)).foregroundStyle(Avo.red)
             }
             .accessibilityIdentifier("raceEngine.going")
-            Text(r.goingValue?.french ?? "No viene en el PDF").font(.caption2).foregroundStyle(Avo.textDim)
+            Text(goingCaption(r)).font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    /// Where the state of the track came from (automatic: tracking PDF or Equidia; or typed by hand).
+    private func goingCaption(_ r: Race) -> String {
+        if model.goingSearching.contains(r.id) { return "Buscando en el PDF y en Equidia…" }
+        guard let g = r.goingValue else { return "No encontrado: elígelo a mano" }
+        let pen: String = r.goingPenetrometer.map { " · penetrómetro " + AvoFormat.f($0, 1) } ?? ""
+        switch r.goingSource {
+        case "pdf": return g.french + " · del PDF de la carrera" + pen
+        case "equidia": return g.french + " · de Equidia (automático)" + pen
+        default: return g.french + " · indicado a mano"
+        }
     }
 
     private func storyCard(_ rep: RaceDeepReport) -> some View {

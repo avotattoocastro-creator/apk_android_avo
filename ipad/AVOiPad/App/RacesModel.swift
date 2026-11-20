@@ -1,4 +1,5 @@
 import SwiftUI
+import PDFKit
 import Observation
 
 /// Race waiting for the user to confirm the horse of the Cuadra and the runner of the PDF.
@@ -70,6 +71,7 @@ final class RacesModel {
     }
 
     func pageShown() {
+        autoGoing()
         if let id = selectedRaceId, races.contains(where: { $0.id == id }) {
             if let r = race(id) { requestReport(r) }
         } else {
@@ -278,6 +280,7 @@ final class RacesModel {
         selectedRaceId = r.id
         if app.page != .races { app.page = .races }
         requestReport(r)
+        autoGoing(r)
     }
 
     /// Race estimated from the video (RaceVideoModel): saved like an imported race and opened in «Carreras».
@@ -311,7 +314,91 @@ final class RacesModel {
     func setGoing(_ id: String, _ g: RaceGoing?) {
         guard let i = races.firstIndex(where: { $0.id == id }) else { return }
         races[i].going = g?.rawValue
+        races[i].goingPenetrometer = nil
+        races[i].goingSource = g == nil ? nil : "manual"
         save()
+    }
+
+    // ---------------------------------------------------------------- state of the track, automatic (RaceGoingLookup)
+    /// Races already looked up in this run of the app (found or not), so a race is not asked for twice.
+    @ObservationIgnored private var goingTried: Set<String> = []
+    @ObservationIgnored private var goingBusy: Bool = false
+    /// Races being looked up now (the picker shows «Buscando…»).
+    var goingSearching: Set<String> = []
+
+    /// Looks up the state of the track of every race that has none (tracking PDF first, then Equidia), one by one in the
+    /// background. A value typed by hand is never replaced.
+    func autoGoing(_ only: Race? = nil) {
+        let list: [Race] = (only.map { [$0] } ?? races).filter { r in
+            r.going == nil && !r.isDemo && !r.isVideo && !goingTried.contains(r.id)
+        }
+        if list.isEmpty { return }
+        for r in list { goingTried.insert(r.id) }
+        Task { @MainActor [weak self] in
+            while self?.goingBusy == true { try? await Task.sleep(nanoseconds: 200_000_000) }
+            guard let self = self else { return }
+            self.goingBusy = true
+            defer { self.goingBusy = false }
+            for r in list {
+                self.goingSearching.insert(r.id)
+                let found: (going: RaceGoing, penetrometer: Double?, source: String)? = await self.findGoing(r)
+                self.goingSearching.remove(r.id)
+                guard let f = found, let i = self.races.firstIndex(where: { $0.id == r.id }), self.races[i].going == nil else {
+                    if found == nil { self.app.log.info("carreras", "Estado de pista no encontrado", ["race": r.raceName] as [String: Any]) }
+                    continue
+                }
+                self.races[i].going = f.going.rawValue
+                self.races[i].goingPenetrometer = f.penetrometer
+                self.races[i].goingSource = f.source
+                self.save()
+                self.app.log.info("carreras", "Estado de pista automático",
+                                  ["race": r.raceName, "going": f.going.french, "source": f.source] as [String: Any])
+            }
+        }
+    }
+
+    /// 1) the stored tracking PDF; 2) the Equidia page of the race.
+    private func findGoing(_ r: Race) async -> (going: RaceGoing, penetrometer: Double?, source: String)? {
+        if let p = pdfPath(r) {
+            let header: RaceTrackingParser.RaceHeader? = await Task.detached(priority: .utility) { () -> RaceTrackingParser.RaceHeader? in
+                guard let doc = PDFDocument(url: URL(fileURLWithPath: p)), let text = doc.page(at: 0)?.string else { return nil }
+                return RaceTrackingParser.parseHeader(text)
+            }.value
+            if let h = header, let g = h.going { return (g, h.penetrometer, "pdf") }
+        }
+        guard let date = r.date, !r.hippodrome.isEmpty, !r.raceName.isEmpty else { return nil }
+        let day: String = AvoTime.formatter("yyyy-MM-dd").string(from: date)
+        let known: Int? = RaceGoingLookup.courseNumber(fromFile: r.sourceFile)
+        for reunion in 1...12 {
+            guard let text = await equidiaText(day, reunion, known ?? 1) else { continue }
+            guard let h = RaceGoingLookup.heading(text, reunion: reunion),
+                  RaceGoingLookup.sameHippodrome(h.hippodrome, r.hippodrome) else { continue }
+            // right meeting: the race is the known course number, or the one whose page names the race
+            if RaceGoingLookup.namesRace(text, r.raceName), let g = RaceGoingLookup.goingFromEquidia(text) {
+                return (g.going, g.penetrometer, "equidia")
+            }
+            for course in 1...16 where course != (known ?? 1) {
+                guard let t = await equidiaText(day, reunion, course) else { break }
+                if RaceGoingLookup.namesRace(t, r.raceName) {
+                    return RaceGoingLookup.goingFromEquidia(t).map { ($0.going, $0.penetrometer, "equidia") }
+                }
+            }
+            return nil
+        }
+        return nil
+    }
+
+    private func equidiaText(_ day: String, _ reunion: Int, _ course: Int) async -> String? {
+        guard let url = RaceGoingLookup.equidiaURL(day: day, reunion: reunion, course: course) else { return nil }
+        var req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 12)
+        req.setValue("Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
+                     forHTTPHeaderField: "User-Agent")
+        req.setValue("fr-FR,fr;q=0.9", forHTTPHeaderField: "Accept-Language")
+        guard let result = try? await URLSession.shared.data(for: req),
+              let http = result.1 as? HTTPURLResponse, http.statusCode == 200,
+              let html = String(data: result.0, encoding: .utf8) else { return nil }
+        let text: String = RaceGoingLookup.pageText(html)
+        return text.isEmpty ? nil : text
     }
 
     // ---------------------------------------------------------------- «Análisis motor» (Core/RaceDeepEngine.swift)
@@ -350,6 +437,7 @@ final class RacesModel {
         selectedRaceId = r.id
         if app.page != .races { app.page = .races }
         requestReport(r)
+        autoGoing(r)
     }
 
     /// «Informe PDF» of the race card: race, sectors, the chosen training vs the race piece by piece and the analysis
