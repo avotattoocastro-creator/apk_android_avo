@@ -32,6 +32,7 @@ private struct LiveSignInView: View {
     @State private var code: String = ""
     @State private var key: String = ""
     @State private var localError: String? = nil
+    @State private var scanning: Bool = false
 
     var body: some View {
         ScrollView {
@@ -40,8 +41,12 @@ private struct LiveSignInView: View {
                 AvoCard(title: "Entrar con tu tarjeta AVO") {
                     Text("El iPad recibe el directo por internet: el Android conectado al pecho lo sube mientras graba. Entra con la misma tarjeta AVO personal del Android, o con la tuya si el dueño te envía sus entrenamientos (invitación aceptada en Compartir).")
                         .font(.footnote).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
-                    Text("En el Android: Compartir › Mi cuenta › «Entrar en el iPad» muestra el código y la clave, o comparte el enlace.")
+                    Text("En el Android: Compartir › Mi cuenta › «Entrar en el iPad» muestra un código QR: pulsa «Escanear QR» y apunta la cámara. También puedes pegar el enlace o escribir el código y la clave.")
                         .font(.footnote).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+                    Button("Escanear QR de la tarjeta") { localError = nil; scanning = true }
+                        .buttonStyle(.avoPrimary)
+                        .disabled(model.busy)
+                        .padding(.top, 4)
                     Text("Enlace de la tarjeta").font(.caption.weight(.semibold)).foregroundStyle(Avo.silver).padding(.top, 6)
                     TextField("avohorse://identity/user/AVO-…", text: $link)
                         .textFieldStyle(.roundedBorder).textInputAutocapitalization(.never).autocorrectionDisabled()
@@ -71,6 +76,26 @@ private struct LiveSignInView: View {
             }
             .padding(16)
             .frame(maxWidth: 760, alignment: .leading)
+        }
+        .sheet(isPresented: $scanning) {
+            NavigationStack {
+                QrScannerView(onCode: { text in
+                    scanning = false
+                    do {
+                        let card: AvoUserCard = try AvoUserCard.parse(text)
+                        Task { @MainActor in await model.signIn(card, save: true) }
+                    } catch let e {
+                        localError = "El QR no es de una tarjeta AVO: " + e.localizedDescription
+                    }
+                }, onError: { m in
+                    scanning = false
+                    localError = m
+                })
+                .ignoresSafeArea()
+                .navigationTitle("Escanea el QR del Android")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Cancelar") { scanning = false } } }
+            }
         }
     }
 

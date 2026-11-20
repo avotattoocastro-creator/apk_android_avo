@@ -8,6 +8,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -448,8 +449,10 @@ private fun IpadSignInDialog(card: org.avoperformance.horse.core.identity.AvoUse
     AlertDialog(onDismissRequest = onDismiss, title = { Text("Entrar en el iPad") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text("En el iPad: LIVE › escribe el código y la clave, o pega el enlace. Es la clave de tu tarjeta AVO: no la compartas con nadie.",
+                Text("En el iPad: LIVE › «Escanear QR de la tarjeta» y apunta la cámara a este código. También puedes escribir el código y la clave, o compartir el enlace. Es la clave de tu tarjeta AVO: no la compartas con nadie.",
                     color = AvoColors.TextDim, fontSize = 13.sp)
+                val qr = remember(card) { qrBitmap(card.toUri(), 640) }
+                androidx.compose.foundation.Image(qr, "QR de la tarjeta AVO", modifier = Modifier.size(240.dp).align(Alignment.CenterHorizontally))
                 KV("Código", card.code)
                 KV("Clave", card.secret.chunked(4).joinToString(" "))
             }
@@ -462,4 +465,14 @@ private fun IpadSignInDialog(card: org.avoperformance.horse.core.identity.AvoUse
             }) { Text("Compartir enlace") }
         },
         dismissButton = { TextButton(onClick = onDismiss) { Text("Cerrar") } })
+}
+
+/** QR (zxing) en blanco y negro, con margen, para que la cámara del iPad lo lea a distancia. */
+private fun qrBitmap(text: String, px: Int): androidx.compose.ui.graphics.ImageBitmap {
+    val hints = mapOf(com.google.zxing.EncodeHintType.MARGIN to 2,
+        com.google.zxing.EncodeHintType.ERROR_CORRECTION to com.google.zxing.qrcode.decoder.ErrorCorrectionLevel.M)
+    val m = com.google.zxing.qrcode.QRCodeWriter().encode(text, com.google.zxing.BarcodeFormat.QR_CODE, px, px, hints)
+    val pixels = IntArray(m.width * m.height) { i -> if (m.get(i % m.width, i / m.width)) android.graphics.Color.BLACK else android.graphics.Color.WHITE }
+    val bmp = android.graphics.Bitmap.createBitmap(pixels, m.width, m.height, android.graphics.Bitmap.Config.ARGB_8888)
+    return bmp.asImageBitmap()
 }
