@@ -24,6 +24,23 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Motor 2.0.0-dev24 / KB-1 1.22.0 — Estudio horario 20:08: recuperación tras el trabajo rápido y pérdida de peso corporal (umbral del 2 %)
+**Autor:** Claude (estudio horario programado) · **Rama:** `claude/kb-estudio-2026-11-20-2008` (encadenada desde `claude/kb-estudio-2026-11-20-1908`, PR #110) · **CI:** ver PR
+**Qué cambia:** KB-1 1.21.0 → 1.22.0 y motor 2.0.0-dev23 → 2.0.0-dev24 (solo versiones, sin cambios de lógica).
+- **Recuperación:** glucógeno 48–72 h tras un esfuerzo rápido (Jose-Cunilleras & Hinchcliff 2004 [E]; Hyyppä 1997 y
+  Lacombe 2004 [E-r]; Minami 2009 discrepa con 24 h [E-r]); CK/AST con pico a 1–6 h y normales en ≤ 24 h, también en
+  árabes de llano (Mami 2019 [E-r], Pourmohammad 2019 [E]); días entre carreras/trabajos sin efecto independiente en
+  lesión catastrófica (Hitchens 2018 [E]). Propuesta RT1–RT3 [I] (≥ 72 h entre trabajos rápidos).
+- **Peso corporal:** −2,7 % agudo tras carrera y −1–1,3 % a 24 h (trotones [I-raza], PSI de carretas [E-r]); el 2 % de
+  SO1 no está validado. Propuesta PE1–PE3 [I] (pesaje matinal, persistencia ≥ 3 d, ALTO ≥ 4 %, gracia tras transporte).
+- 17 fuentes, 3 parámetros de contexto, 2 reglas PROPUESTAS, 1 pendiente, 2 entradas de cola; fixtures solo con versiones.
+**Archivos:** `equine-intelligence/knowledge/estudios/2026-11-20_2008_recuperacion_trabajo_rapido_peso_corporal.md`,
+`base_cientifica.json`, `knowledge.h`, `types.h`, `tests/test_knowledge.cpp`, fixtures de `core/src/test/resources/equine/`,
+ficha 14, tabla de estado, `README.md`.
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, TestFlight.
+**Validación:** pruebas locales ✅ (ASan/UBSan) y fixtures ✅ · CI: ver PR · NO VERIFICADO con caballos reales.
+**Pendiente:** implementar RT1–RT3 y PE1–PE3 cuando haya error típico propio del peso; glucógeno tras breeze en pista.
+
 ## 2026-11-20 — Motor 2.0.0-dev23 / KB-1 1.21.0 — Estudio horario 19:08: DMD en potros de 2 años y auditoría de sobreentrenamiento (A9/A10)
 **Autor:** Claude (tarea programada, estudio horario) · **Rama:** `claude/kb-estudio-2026-11-20-1908` (sale de
 `claude/kb-estudio-2026-11-20-1809`, PR #109) · **CI:** ver PR

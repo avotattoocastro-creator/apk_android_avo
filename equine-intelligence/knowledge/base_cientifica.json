@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.21.0",
+  "version": "1.22.0",
   "fecha": "2026-11-20",
   "razas": [
     "PSI",
@@ -127,6 +127,11 @@
       "fecha": "2026-11-20",
       "titulo": "Estudio horario 19:08 UTC: DMD (bucked shins) y carga en PSI de 2 años para el planificador; auditoría de las fuentes de sobreentrenamiento de A9/A10",
       "archivo": "estudios/2026-11-20_1908_dmd_potros_auditoria_sobreentrenamiento.md"
+    },
+    {
+      "fecha": "2026-11-20",
+      "titulo": "Estudio horario 20:08 UTC: recuperación tras el trabajo rápido (glucógeno, CK/AST, intervalos) y pérdida de peso corporal (auditoría del umbral del 2 %)",
+      "archivo": "estudios/2026-11-20_2008_recuperacion_trabajo_rapido_peso_corporal.md"
     }
   ],
   "fuentes": [
@@ -2821,6 +2826,210 @@
       "pais": "Reino Unido [NV]",
       "raza_fuente": "revisión",
       "nota": "ningún marcador aislado identifica el síndrome de sobreentrenamiento"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "JOSE_CUNILLERAS_HINCHCLIFF_2004",
+      "cita": "Jose-Cunilleras E, Hinchcliff KW 2004, Equine Comp Exerc Physiol 1:23–32",
+      "doi": "10.1079/ECEP20031",
+      "url": "https://ddd.uab.cat",
+      "acceso": "COMPLETO",
+      "pais": "EE. UU.",
+      "raza_fuente": "revisión (PSI y trotones)",
+      "nota": "reposición del glucógeno 48–72 h tras esfuerzo rápido; primarios citados [NV]"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "HYYPPA_1997",
+      "cita": "Hyyppä S, Räsänen LA, Pösö AR 1997, Am J Vet Res 58:162–166",
+      "doi": "",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/9028482/",
+      "acceso": "RESUMEN",
+      "pais": "Finlandia",
+      "raza_fuente": "trotón",
+      "nota": "resíntesis despreciable a 24 h, basal a 72 h; 2.ª sesión a los 3 d sin basal a 72 h"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "LACOMBE_2004",
+      "cita": "Lacombe VA et al. 2004, Am J Vet Res 65:916–923",
+      "doi": "10.2460/ajvr.2004.65.916",
+      "url": "https://doi.org/10.2460/ajvr.2004.65.916",
+      "acceso": "RESUMEN",
+      "pais": "EE. UU.",
+      "raza_fuente": "[NV]",
+      "nota": "dieta rica en almidón: basal a 72 h"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "LACOMBE_2001",
+      "cita": "Lacombe VA et al. 2001, J Appl Physiol 91:1782–1790",
+      "doi": "",
+      "url": "https://journals.physiology.org/",
+      "acceso": "RESUMEN",
+      "pais": "EE. UU.",
+      "raza_fuente": "[NV]",
+      "nota": "glucógeno bajo: −22 % déficit de O2 y −27 % tiempo hasta la fatiga"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "MINAMI_2009",
+      "cita": "Minami Y et al. 2009, J Equine Sci 20:33–40",
+      "doi": "10.1294/jes.20.33",
+      "url": "https://doi.org/10.1294/jes.20.33",
+      "acceso": "RESUMEN",
+      "pais": "Japón",
+      "raza_fuente": "PSI",
+      "nota": "discrepante: glucógeno al nivel previo a 24 h (cinta)"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "LUNGU_2026",
+      "cita": "Lungu GM et al. 2026, J Anim Sci 104:skag063",
+      "doi": "10.1093/jas/skag063",
+      "url": "https://doi.org/10.1093/jas/skag063",
+      "acceso": "RESUMEN",
+      "pais": "EE. UU.",
+      "raza_fuente": "PSI",
+      "nota": "pruebas cada 48 h: efecto acumulado solo sin acondicionar"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "MAMI_2019",
+      "cita": "Mami S et al. 2019, J Equine Vet Sci 78:74–78",
+      "doi": "10.1016/j.jevs.2019.04.007",
+      "url": "https://doi.org/10.1016/j.jevs.2019.04.007",
+      "acceso": "RESUMEN",
+      "pais": "Irán",
+      "raza_fuente": "árabe de carreras de llano",
+      "nota": "CK y LDH con pico a 1 h tras carrera de 1.250–1.400 m"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "ARFUSO_2022",
+      "cita": "Arfuso F et al. 2022, Antioxidants 11:1176",
+      "doi": "10.3390/antiox11061176",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9220350/",
+      "acceso": "COMPLETO",
+      "pais": "Italia",
+      "raza_fuente": "PSI",
+      "nota": "CK y AST altas a 120 min tras carrera; solo hasta 2 h"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "POURMOHAMMAD_2019",
+      "cita": "Pourmohammad R et al. 2019, Turk J Vet Anim Sci 43:791–799",
+      "doi": "10.3906/vet-1905-82",
+      "url": "https://doi.org/10.3906/vet-1905-82",
+      "acceso": "COMPLETO",
+      "pais": "Irán/Turquía",
+      "raza_fuente": "árabe de carreras",
+      "nota": "entrenamiento ordinario sin cambio significativo de CK/AST a 5 y 18 h"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "HARRIS_MARLIN_GRAY_1998",
+      "cita": "Harris PA, Marlin DJ, Gray J 1998, Vet J 155:295–304",
+      "doi": "10.1016/s1090-0233(05)80026-7",
+      "url": "https://doi.org/10.1016/s1090-0233(05)80026-7",
+      "acceso": "RESUMEN",
+      "pais": "Reino Unido",
+      "raza_fuente": "PSI",
+      "nota": "CK > 2× a 2 h más frecuente en potras"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "HITCHENS_2018",
+      "cita": "Hitchens PL, Hill AE, Stover SM 2018, Front Vet Sci 5:217",
+      "doi": "10.3389/fvets.2018.00217",
+      "url": "https://doi.org/10.3389/fvets.2018.00217",
+      "acceso": "COMPLETO",
+      "pais": "EE. UU.",
+      "raza_fuente": "PSI",
+      "nota": "días entre carreras OR 0,99/d, entre trabajos OR 1,03/d; fuera del modelo multivariable"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "MORRICE_WEST_2021_INTERVALO",
+      "cita": "Morrice-West AV et al. 2021, Animals (entrenadores de Victoria)",
+      "doi": "",
+      "url": "https://core.ac.uk/download/491269454.pdf",
+      "acceso": "COMPLETO",
+      "pais": "Australia",
+      "raza_fuente": "PSI",
+      "nota": "rendimiento óptimo ≈ 3 semanas entre carreras; cifras de TIR [NV] por tabla ambigua"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "COLEMAN_2002",
+      "cita": "Coleman et al. 2002, Equine Vet J Suppl 34:165",
+      "doi": "10.1111/j.2042-3306.2002.tb05411.x",
+      "url": "https://doi.org/10.1111/j.2042-3306.2002.tb05411.x",
+      "acceso": "RESUMEN",
+      "pais": "EE. UU.",
+      "raza_fuente": "trotón",
+      "nota": "−2,71 % tras carrera, −1,24 % a la mañana siguiente (sin furosemida)"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "WARREN_WHELEN_2002",
+      "cita": "Warren LK, Whelen 2002, Equine Vet J Suppl 34:173",
+      "doi": "10.1111/j.2042-3306.2002.tb05413.x",
+      "url": "https://doi.org/10.1111/j.2042-3306.2002.tb05413.x",
+      "acceso": "RESUMEN",
+      "pais": "Canadá",
+      "raza_fuente": "PSI (carreras de carretas)",
+      "nota": "−3,5 kg por carrera; máximo −5,3 kg (1,0 %) a 24 h"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "MCCUTCHEON_GEOR_1996",
+      "cita": "McCutcheon LJ, Geor RJ 1996, Equine Vet J Suppl 22:54",
+      "doi": "10.1111/j.2042-3306.1996.tb05032.x",
+      "url": "https://doi.org/10.1111/j.2042-3306.1996.tb05032.x",
+      "acceso": "RESUMEN",
+      "pais": "Canadá",
+      "raza_fuente": "PSI",
+      "nota": "sudor 19,2 L en calor seco frente a 11,7 L en frío"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "ja",
+      "id": "OIKAWA_MAEDA_2011",
+      "cita": "Oikawa M, Maeda 2011, 産業動物臨床医学雑誌 2(4):205",
+      "doi": "",
+      "url": "https://agriknowledge.affrc.go.jp/RN/2030830300.pdf",
+      "acceso": "COMPLETO",
+      "pais": "Japón",
+      "raza_fuente": "PSI (transporte)",
+      "nota": "0,45–0,55 %/h de transporte; recuperación 3–7 d; Leadon 1994 citado: ≥ 20 kg asociado a malos resultados [NV]"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "TAKAHASHI_TAKAHASHI_2017",
+      "cita": "Takahashi Y, Takahashi T 2017, BMC Vet Res 13:257",
+      "doi": "10.1186/s12917-017-1184-3",
+      "url": "https://doi.org/10.1186/s12917-017-1184-3",
+      "acceso": "RESUMEN",
+      "pais": "Japón",
+      "raza_fuente": "PSI",
+      "nota": "variación estacional del peso en 632.540 pesajes JRA; amplitud [NV]"
     }
   ],
   "parametros": [
@@ -3710,6 +3919,48 @@
       ],
       "estado": "CONTEXTO",
       "nota": "corrige «14–19 %» del estudio ampliado 18/11 (el 14 % no aparece en ninguna fuente leída); trotones en cinta [I-raza]; no es V200"
+    },
+    {
+      "id": "glucogeno_reposicion_h",
+      "valor": [
+        48,
+        72
+      ],
+      "unidad": "h tras esfuerzo rápido",
+      "evidencia": "E (revisión) / E-r",
+      "fuentes": [
+        "JOSE_CUNILLERAS_HINCHCLIFF_2004",
+        "HYYPPA_1997",
+        "LACOMBE_2004"
+      ],
+      "estado": "CONTEXTO",
+      "nota": "Minami 2009 (PSI, cinta, E-r) discrepa con 24 h; sin datos tras breeze en pista"
+    },
+    {
+      "id": "peso_perdida_aguda_carrera_pct",
+      "valor": 2.71,
+      "unidad": "% del peso justo tras la carrera",
+      "evidencia": "E-r / I-raza",
+      "fuentes": [
+        "COLEMAN_2002"
+      ],
+      "estado": "CONTEXTO",
+      "nota": "trotones sin furosemida; −1,24 % a la mañana siguiente"
+    },
+    {
+      "id": "peso_perdida_24h_pct",
+      "valor": [
+        1.0,
+        1.3
+      ],
+      "unidad": "% del peso a 12–24 h tras carrera",
+      "evidencia": "E-r / I-raza",
+      "fuentes": [
+        "COLEMAN_2002",
+        "WARREN_WHELEN_2002"
+      ],
+      "estado": "CONTEXTO",
+      "nota": "el 2 % de SO no está validado; ver PE1–PE3"
     }
   ],
   "reglas": [
@@ -3965,6 +4216,32 @@
       "estado": "PROPUESTA",
       "falta": "V200 en el análisis (ECG de la cincha); A10 no implementada",
       "nota": "estudio 20/11 19:08; trotones [I-raza]; no diagnóstico"
+    },
+    {
+      "id": "RECUPERACION_RT1_RT3",
+      "umbral": "RT1 ≥ 72 h entre trabajos rápidos (≤ 2/semana), 48 h solo como excepción en caballos acondicionados; RT2 día siguiente suave; RT3 aviso si otra carrera < 14 d",
+      "evidencia": "E (revisión) / E-r / I",
+      "fuentes": [
+        "JOSE_CUNILLERAS_HINCHCLIFF_2004",
+        "HYYPPA_1997",
+        "LUNGU_2026",
+        "HITCHENS_2018",
+        "MORRICE_WEST_2021_INTERVALO"
+      ],
+      "estado": "PROPUESTA",
+      "nota": "estudio 20/11 20:08; cifras exactas de diseño [I]"
+    },
+    {
+      "id": "PESO_PE1_PE3",
+      "umbral": "PE1 solo pesaje matinal en ayunas y nunca < 12 h tras trabajo rápido; PE2 AVISO ≥ 2 % frente a mediana de 7 d durante ≥ 3 mañanas, ALTO ≥ 4 %; PE3 gracia de 3 d tras transporte",
+      "evidencia": "E-r / I-raza / I",
+      "fuentes": [
+        "COLEMAN_2002",
+        "WARREN_WHELEN_2002",
+        "OIKAWA_MAEDA_2011"
+      ],
+      "estado": "PROPUESTA",
+      "nota": "sustituye la interpretación del 2 % instantáneo de SO1; error típico propio del peso pendiente"
     }
   ],
   "pendiente_motor": [
@@ -3991,7 +4268,8 @@
     "ML1 (estudio 20/11 17:09): mano de galope EXPERIMENTAL desde la IMU de la cincha (fase de balanceo/guiñada respecto al pico vertical, curvatura RTK como a priori) hasta validar con vídeo ≥ 120 fps; % de zancadas en mano incorrecta en curva y % de tiempo por mano, recta y curva por separado; sentido de la pista como campo y criterio de comparables; nunca como riesgo de lesión",
     "AU1 (estudio 20/11 18:09, KB 1.20.0): no citar fuentes con duplicado_de en reglas nuevas (usar la canónica) ni fuentes con acceso SIN_AUDITAR como base de un cambio de lógica hasta reclasificarlas; prueba futura que lo compruebe al empaquetar la KB [I]",
     "DM1–DM4 (estudio 20/11 19:08, KB 1.21.0): pautas de carga del planificador para potros de 2 años frente a la DMD (rápido corto y frecuente, sin picos agudos de canter, escalones de distancia); [I], sin implementar con la capa 2",
-    "SO1–SO3 (estudio 20/11 19:08): A9 con caída de V200/rendimiento y dos señales coincidentes; VLa4 al alza con rendimiento a la baja = sospechoso; A10 relativa a la tendencia de crecimiento en 2 años; [I], sin implementar"
+    "SO1–SO3 (estudio 20/11 19:08): A9 con caída de V200/rendimiento y dos señales coincidentes; VLa4 al alza con rendimiento a la baja = sospechoso; A10 relativa a la tendencia de crecimiento en 2 años; [I], sin implementar",
+    "RT1–RT3 y PE1–PE3 (estudio 20/11 20:08, KB 1.22.0): separación ≥ 72 h entre trabajos rápidos en el planificador; peso solo matinal con persistencia ≥ 3 d (AVISO ≥ 2 %, ALTO ≥ 4 %) y gracia tras transporte; [I], sin implementar"
   ],
   "cola_investigacion": [
     "Texto completo de Verheyen 2006 (Bone, DOI 10.1016/j.bone.2006.05.025): ORs, cortes, límite inferior del canter, ventana de 60 d",
@@ -4066,7 +4344,9 @@
     "Zenodo 19173866/16557014 por su API REST (zenodo.org/api/records/…) y Europe PMC fullTextXML de PMC13641913/PMC12483640: permiso de WebFetch no concedido en la sesión desatendida de 18:09; dt, solver, licencia, lenguaje y signo de b",
     "Li 2026 (EVJ 10.1002/evj.70360): confirmar si es revisión y si incluye algún estudio de PSI o árabes de llano (Wiley, PubMed y Europe PMC sin acceso 20/11 18:09)",
     "Verheyen 2005 (EVJ 37:442) texto completo: HR y cortes en km por ventana para DMD; PMC12699115 (hueso subcondral y trabajo rápido en 2 años, permiso caducado); Nunamaker 1990 y Cogger 2006/2008 en la fuente; DMD en árabes de llano (no hallado) (20/11 19:08)",
-    "Tyler 1996 (journals.physiology.org) y Tyler-McGowan 1999 completos: kg perdidos y magnitud de la caída de rendimiento; Hamlin 2002 completo (% de V200); Golland 2003 (Vet J); Europe PMC REST 403 desde el proxy (20/11 19:08)"
+    "Tyler 1996 (journals.physiology.org) y Tyler-McGowan 1999 completos: kg perdidos y magnitud de la caída de rendimiento; Hamlin 2002 completo (% de V200); Golland 2003 (Vet J); Europe PMC REST 403 desde el proxy (20/11 19:08)",
+    "Error típico día a día del peso corporal en PSI de carreras con báscula de cuadra (no publicado) y peso antes/después de carrera de llano en PSI o árabes (no hallado) (20/11 20:08)",
+    "Glucógeno tras un breeze de 400–800 m en pista en PSI (Minami 2009 da 24 h en cinta frente a 48–72 h de la revisión); textos primarios de Snow & Harris 1991, Davie 1994–96 y Lacombe 1999/2001; PMC7696103 (metaanálisis alta velocidad) (20/11 20:08)"
   ],
   "historial": [
     {
@@ -4178,6 +4458,11 @@
       "version": "1.21.0",
       "fecha": "2026-11-20",
       "cambio": "Estudio horario 19:08: DMD en 2 años (Crawford 2021 [E] HR 0,89 por km rápido acumulado; Boston & Nunamaker [E-r]; Verheyen 2005 [E-ag]; Oliveira 2006 [E]); DM1–DM4 [I]; auditoría de sobreentrenamiento: «14–19 %» corregido a 19 % de tiempo hasta la fatiga (trotones), Tyler-McGowan 1999 (no 1998), umbral de peso del 2 % es diseño, Martin 2000 confirmado; SO1–SO3 [I]; 12 fuentes, 2 parámetros de contexto, 2 reglas propuestas, 2 pendientes, 2 de cola; sin cambios de lógica; motor 2.0.0-dev23"
+    },
+    {
+      "version": "1.22.0",
+      "fecha": "2026-11-20",
+      "cambio": "Estudio horario 20:08: glucógeno 48–72 h tras esfuerzo rápido (revisión [E], Hyyppä/Lacombe [E-r]; Minami 2009 discrepa); CK/AST normales en ≤ 24 h, también en árabes de llano; intervalos sin efecto independiente en lesión catastrófica (Hitchens 2018); peso: −2,7 % agudo y −1–1,3 % a 24 h (trotones/PSI de carretas), el 2 % de SO no validado; RT1–RT3 y PE1–PE3 [I]; 17 fuentes, 3 parámetros de contexto, 2 reglas propuestas, 1 pendiente, 2 de cola; sin cambios de lógica; motor 2.0.0-dev24"
     }
   ]
 }
