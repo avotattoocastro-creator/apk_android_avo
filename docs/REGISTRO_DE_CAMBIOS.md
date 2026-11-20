@@ -24,6 +24,25 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Motor 2.0.0-dev22 / KB-1 1.20.0 — Estudio horario 18:09: modelo óseo B (tabla 4, signo de b) y auditoría de fuentes
+**Autor:** Claude (tarea programada, estudio horario) · **Rama:** `claude/kb-estudio-2026-11-20-1809` (sale de
+`claude/kb-estudio-2026-11-20-1709`, PR #108) · **CI:** ver PR
+**Qué cambia:** estudio `equine-intelligence/knowledge/estudios/2026-11-20_1809_modeloB_tabla4_auditoria_fuentes.md`.
+- Modelo B: dt y solver siguen [NV] (Zenodo, Europe PMC y PMC sin permiso de acceso en la sesión). La tabla 4 exacta
+  del preprint de Anwar se guarda como vector de validación (`modelo_b_tabla4_anwar_preprint`); 0,852 frente a 0,911 es
+  una incoherencia interna del preprint; el signo de b difiere entre Pan (0,02) y Anwar (−0,02).
+- Auditoría de la KB: 15 obras duplicadas (17 entradas con `duplicado_de`, 7 con `acceso` incoherente) y 52 fuentes
+  sin campos obligatorios, completadas como `SIN_AUDITAR`/`[NV]` sin releerlas. Pendiente AU1 [I].
+- Li 2026 probable revisión de caballos de deporte; Hall 2026: 53 frente a 54 fracturas [I].
+
+**Por qué:** el modelo B es el pendiente que más bloquea código y la base tenía fuentes duplicadas con acceso dispar.
+**Archivos:** `base_cientifica.json`, el estudio, `knowledge.h`, `types.h`, `tests/test_knowledge.cpp`, fixtures de
+`core/src/test/resources/equine/` (solo versiones), ficha 14, tabla de estado, `README.md` y este registro.
+**No se ha tocado:** lógica, reglas, umbrales, firmware, workflows, firmas ni contratos binarios.
+**Validación:** pruebas locales (ASan/UBSan) y fixtures; CI en el PR · NO VERIFICADO con caballos reales.
+
+---
+
 ## 2026-11-20 — Motor 2.0.0-dev21 / KB-1 1.19.0 — Estudio horario 17:09: exactitud del GNSS/IMU a galope y mano de galope
 **Autor:** Claude (tarea programada, estudio horario) · **Rama:** `claude/kb-estudio-2026-11-20-1709` (sale de
 `claude/kb-estudio-2026-11-20-1610`, PR #107) · **CI:** ver PR

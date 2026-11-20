@@ -264,6 +264,14 @@ Detalle: `knowledge/estudios/2026-11-20_1610_aceleracion_tronco_cinetica_fc.md`.
   como riesgo.
 Detalle: `knowledge/estudios/2026-11-20_1709_exactitud_gnss_mano_de_galope.md`.
 
+**Estudio horario 20/11 18:09 (KB-1 1.20.0, motor 2.0.0-dev22, sin cambios de lógica).**
+- **Modelo óseo B:** el dt y el solver siguen [NV] (código de Zenodo sin leer). La tabla 4 exacta del preprint de
+  Anwar queda como vector de validación (`modelo_b_tabla4_anwar_preprint`) [E]; se mantiene 0,911 (0,852 solo en la
+  Discusión) y el signo de b queda por confirmar (Pan 0,02 sin signo, Anwar −0,02).
+- **Auditoría de fuentes:** 15 obras duplicadas marcadas con `duplicado_de` y 52 fuentes con campos obligatorios
+  ausentes completadas como `SIN_AUDITAR`/`[NV]`; AU1 [I]: ninguna regla nueva se apoya en fuentes sin auditar.
+Detalle: `knowledge/estudios/2026-11-20_1809_modeloB_tabla4_auditoria_fuentes.md`.
+
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se
    guarda en `knowledge/estudios/AAAA-MM-DD_<tema>.md` con fuentes y etiquetas [E]/[I]/[NV].
