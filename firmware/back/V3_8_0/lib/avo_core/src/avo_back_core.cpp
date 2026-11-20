@@ -163,6 +163,7 @@ void BackCore::ubx(uint8_t cls, uint8_t id, const uint8_t* pl, uint16_t plen) {
       last_carr_ = carr;
       last_pvt_ms_ = now;
     }
+    if (g.gnss_fix_ok() && g.fix_type >= 3) { pos_ok_ = true; lat_e7_ = g.lat_e7; lon_e7_ = g.lon_e7; height_mm_ = g.height_mm; }   // V3.15.0
     g.pps_locked = 0;
     g.nav_rate_hz = zed_.rate_applied() ? zed_.nav_rate() : (uint8_t)((rate_x10_ + 5) / 10);
     uint8_t b[GNSS_SAMPLE_V1_LEN + 8];
@@ -175,7 +176,7 @@ void BackCore::ubx(uint8_t cls, uint8_t id, const uint8_t* pl, uint16_t plen) {
   } else if (cls == UBX_CLS_RXM && id == UBX_ID_RXM_RTCM) {
     RxmRtcm r;
     if (ubx_decode_rxm_rtcm(pl, plen, &r)) {
-      if (r.msg_used == 2 && !r.crc_failed) st_.rxm_used++;
+      if (r.msg_used == 2 && !r.crc_failed) { st_.rxm_used++; used_types_ |= rtcm_type_bits(r.msg_type); }   // V3.15.0
       else if (r.crc_failed || r.msg_used == 1) st_.rxm_failed++;
     }
   }
@@ -279,12 +280,38 @@ BackStatus BackCore::status() const {
     s.quality_mon = (uint8_t)((zed_.monitor_state() & 0x0F) | ((ra > 3 ? 3 : ra) << 4) | ((rr > 3 ? 3 : rr) << 6));
   }
   s.fix_lost = fix_lost_; s.ttff_fix_s = ttff_fix_s_; s.fixed_ms = fixed_ms_; s.float_ms = float_ms_;
+  // V3.15.0 (v4): why there is no RTK FIX — antenna / RF, what the corrections carry and what the receiver uses, base.
+  s.v4 = true;
+  {
+    const uint32_t now = p_->now_ms(), tr = zed_.last_rf_ms();
+    const ZedRf& rf = zed_.rf();
+    if (rf.valid && tr) {
+      s.rf_ant_status = rf.ant_status; s.rf_ant_power = rf.ant_power; s.rf_jam_state = rf.jam_state;
+      s.rf_jam_l1 = rf.jam_l1; s.rf_jam_l2 = rf.jam_l2; s.rf_agc_l1 = rf.agc_l1; s.rf_agc_l2 = rf.agc_l2;
+      s.rf_noise_l1 = rf.noise_l1; s.rf_noise_l2 = rf.noise_l2;
+      const uint32_t a = (now - tr) / 1000;
+      s.rf_age_s = (uint8_t)(a > 254 ? 254 : a);
+    }
+    s.rtcm_types = (uint16_t)(types_prev_ | obs_.peek_types());
+    s.rtcm_used_types = (uint16_t)(used_prev_ | used_types_);
+    const RtcmStats& rs = obs_.stats();
+    if (rs.base_valid) {
+      s.base_id = rs.base_id;
+      if (pos_ok_) {
+        const double d = ecef_distance_m(rs.base_x, rs.base_y, rs.base_z, lat_e7_, lon_e7_, height_mm_) / 10.0;
+        s.base_dist_dam = (uint16_t)(d >= 65534.0 ? 65534 : (d < 0 ? 0 : d + 0.5));
+      }
+    }
+    s.dyn_model = (uint8_t)zed_.dyn_model();
+    const ZedGnssSet& g = zed_.gnss_set();
+    s.gnss_set = (uint8_t)((g.gps ? 1 : 0) | (g.glo ? 2 : 0) | (g.gal ? 4 : 0) | (g.bds ? 8 : 0));
+  }
   return s;
 }
 
 void BackCore::send_status() {
   BackStatus s = status();
-  uint8_t b[BACK_STATUS_V3_LEN + 8];
+  uint8_t b[BACK_STATUS_V4_LEN + 8];
   size_t n = encode_status(s, b, sizeof(b));
   if (n) queue_frame(FrameType::STATUS, 0, b, n, false);
 }
@@ -321,6 +348,9 @@ void BackCore::tick() {
     uint8_t b[HEARTBEAT_V1_LEN];
     if (encode_heartbeat(hb, b, sizeof(b))) queue_frame(FrameType::HEARTBEAT, 0, b, HEARTBEAT_V1_LEN, false);
   }
+  // V3.15.0: RTCM families in a 30-60 s window (what came in the last full 30 s plus what is coming now)
+  if (types_t0_ == 0) types_t0_ = now | 1;
+  if (now - types_t0_ >= 30000) { types_t0_ = now | 1; types_prev_ = obs_.take_types(); used_prev_ = used_types_; used_types_ = 0; }
   if (now - last_status_ >= 1000) { last_status_ = now; send_status(); }
   if (!caps_sent_ || now - last_caps_ >= 30000) { last_caps_ = now; send_caps(); }
   flush();

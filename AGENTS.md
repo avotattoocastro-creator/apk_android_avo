@@ -101,7 +101,7 @@ demás».
 - Las PCB REV B (ESP32-C3) y REV C de la cincha quedan como historia. Antes de pedir placas, confirmar con el usuario.
 
 ## Contratos binarios (cambiar a la vez en firmware y en todas las apps)
-`BackStatus` v3 (108 B) · lotes de la cincha por ESP-NOW (220 B) · `TELEMETRY` v3 por BLE (116 B) · USB `AVO1`
+`BackStatus` v4 (130 B; espalda ≥ 3.15.0, la v3 de 108 B sigue admitida) · lotes de la cincha por ESP-NOW (220 B) · `TELEMETRY` v3 por BLE (116 B) · USB `AVO1`
 (bloques de 4 KB con CRC-32 y SHA-256) · RTCM3 con CRC-24Q · RAW `.avr` · configuración TLV `AVOC` · licencias
 `.avolic`. **OTA firmada del pecho:** la versión instalada debe ser `X.Y.Z` sin sufijo (`-rc`, `-usb`…), o el reloj
 rechaza el paquete.

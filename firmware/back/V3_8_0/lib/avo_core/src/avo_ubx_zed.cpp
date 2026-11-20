@@ -66,6 +66,31 @@ ZedUartBudget zed_uart_budget(uint32_t baud, uint8_t nav_hz, bool quality, uint8
   return b;
 }
 
+// UBX-MON-RF: version U1, nBlocks U1, reserved 2, then 24 bytes per block: blockId U1, flags X1 (b0-1 jammingState),
+// antStatus U1, antPower U1, postStatus U4, reserved 4, noisePerMS U2, agcCnt U2, jamInd U1, ofsI I1, magI U1, ofsQ I1,
+// magQ U1, reserved 3.
+bool ubx_decode_mon_rf(const uint8_t* p, size_t n, ZedRf* r) {
+  if (n < 4) return false;
+  const uint8_t blocks = p[1];
+  if (blocks == 0 || n < 4 + (size_t)blocks * 24) return false;
+  ZedRf o;
+  for (uint8_t i = 0; i < blocks; i++) {
+    const uint8_t* q = p + 4 + (size_t)i * 24;
+    const uint8_t id = q[0];
+    const uint16_t noise = get_u16(q + 12), agc = get_u16(q + 14);
+    const uint8_t agc_pct = (uint8_t)(agc >= 8191 ? 100 : (agc * 100u + 4095u) / 8191u);
+    if (id == 0) {
+      o.jam_state = (uint8_t)(q[1] & 0x03); o.ant_status = q[2]; o.ant_power = q[3];
+      o.noise_l1 = noise; o.agc_l1 = agc_pct; o.jam_l1 = q[16];
+    } else if (id == 1) {
+      o.noise_l2 = noise; o.agc_l2 = agc_pct; o.jam_l2 = q[16];
+    }
+  }
+  o.valid = true;
+  *r = o;
+  return true;
+}
+
 bool ubx_decode_mon_comms(const uint8_t* p, size_t n, uint16_t port_id, ZedComms* c) {
   if (n < 8) return false;
   uint8_t ports = p[1];
@@ -236,6 +261,7 @@ void ZedManager::handle(const uint8_t* f, size_t n) {
       if (st_ == RUNNING && c.tx_usage > comms_tx_max_) comms_tx_max_ = c.tx_usage;
     }
   }
+  if (cls == UBX_CLS_MON && id == UBX_ID_MON_RF) { ZedRf r; if (ubx_decode_mon_rf(pl, plen, &r)) { rf_ = r; t_rf_ = now_ | 1; } }
   if (cls == UBX_CLS_ACK && plen >= 2 && pl[0] == UBX_CLS_CFG && pl[1] == UBX_ID_CFG_VALSET) ack_ = (id == UBX_ID_ACK_ACK) ? 1 : 2;
   if (cls == UBX_CLS_MON && id == UBX_ID_MON_VER && plen >= 40) {   // V3.10.1: receiver firmware (FWVER=HPG x.yy)
     for (size_t off = 40; off + 30 <= plen; off += 30) {
@@ -549,7 +575,15 @@ void ZedManager::tick(uint32_t now_ms) {
         comms_t_ = now_ms | 1;
         comms_polls_++;
       }
-      if (quiet >= 5000) { sig_poll_ = false; comms_tx_max_ = 0; zed_resets_++; cand_ = 0; set_applied_ = false; tune_ = 0; mon_ = 0; mon_t0_ = 0; mon_try_ = 2; mon_ok_ = 0; mon_rounds_ = 0; go(DETECT, now_ms); }   // receiver reset or unplugged
+      // V3.15.0: MON-RF every 5 s, half a period after MON-COMMS (8-byte poll, ~60-byte answer)
+      if (port_ != 0 && quiet < 1500 && comms_t_ && now_ms - comms_t_ >= kCommsPollMs / 2 &&
+          (rf_t_ == 0 || now_ms - rf_t_ >= kCommsPollMs)) {
+        uint8_t b[8];
+        size_t n = ubx_poll(UBX_CLS_MON, UBX_ID_MON_RF, b, sizeof(b));
+        io_->zed_write(b, n);
+        rf_t_ = now_ms | 1;
+      }
+      if (quiet >= 5000) { sig_poll_ = false; comms_tx_max_ = 0; rf_ = ZedRf(); t_rf_ = 0; rf_t_ = 0; zed_resets_++; cand_ = 0; set_applied_ = false; tune_ = 0; mon_ = 0; mon_t0_ = 0; mon_try_ = 2; mon_ok_ = 0; mon_rounds_ = 0; go(DETECT, now_ms); }   // receiver reset or unplugged
       break;
     }
   }

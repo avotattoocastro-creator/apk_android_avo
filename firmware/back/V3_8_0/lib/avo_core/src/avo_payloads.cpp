@@ -85,6 +85,12 @@ size_t encode_status(const BackStatus& s, uint8_t* out, size_t cap) {
       w.u8(s.sv_tracked); w.u8(s.sv_used); w.u8(s.sig_tracked); w.u8(s.sig_used); w.u8(s.sig_cr_used); w.u8(s.sig_corr);
       w.u8(s.sig_l2); w.u8(s.sig_l2_used); w.u8(s.sig_weak); w.u8(s.cno_mean); w.u8(s.cno_min); w.u8(s.cno_max);
       w.u8(s.quality_age_s); w.u8(s.quality_mon); w.u16(s.fix_lost); w.u16(s.ttff_fix_s); w.u32(s.fixed_ms); w.u32(s.float_ms);
+      if (s.v4) {
+        w.u8(s.rf_ant_status); w.u8(s.rf_ant_power); w.u8(s.rf_jam_state); w.u8(s.rf_jam_l1); w.u8(s.rf_jam_l2);
+        w.u8(s.rf_agc_l1); w.u8(s.rf_agc_l2); w.u16(s.rf_noise_l1); w.u16(s.rf_noise_l2); w.u8(s.rf_age_s);
+        w.u16(s.rtcm_types); w.u16(s.rtcm_used_types); w.u16(s.base_id); w.u16(s.base_dist_dam);
+        w.u8(s.dyn_model); w.u8(s.gnss_set);
+      }
     }
   }
   return w.ok() ? w.size() : 0;
@@ -114,7 +120,34 @@ bool decode_status(const uint8_t* p, size_t n, BackStatus* s) {
     s->fix_lost = r.u16(); s->ttff_fix_s = r.u16(); s->fixed_ms = r.u32(); s->float_ms = r.u32();
     s->v3 = r.ok();
   }
+  s->v4 = false;
+  if (s->v3 && r.remaining() >= BACK_STATUS_V4_LEN - BACK_STATUS_V3_LEN) {
+    s->rf_ant_status = r.u8(); s->rf_ant_power = r.u8(); s->rf_jam_state = r.u8(); s->rf_jam_l1 = r.u8(); s->rf_jam_l2 = r.u8();
+    s->rf_agc_l1 = r.u8(); s->rf_agc_l2 = r.u8(); s->rf_noise_l1 = r.u16(); s->rf_noise_l2 = r.u16(); s->rf_age_s = r.u8();
+    s->rtcm_types = r.u16(); s->rtcm_used_types = r.u16(); s->base_id = r.u16(); s->base_dist_dam = r.u16();
+    s->dyn_model = r.u8(); s->gnss_set = r.u8();
+    s->v4 = r.ok();
+  }
   return true;
+}
+
+uint16_t rtcm_type_bits(uint16_t t) {
+  uint16_t b = 0;
+  if (t == 1005 || t == 1006) b |= RTCM_B_BASE_POS;
+  else if (t >= 1001 && t <= 1004) b |= RTCM_B_GPS_LEGACY;
+  else if (t >= 1009 && t <= 1012) b |= RTCM_B_GLO_LEGACY;
+  else if (t == 1007 || t == 1008 || t == 1033) b |= RTCM_B_ANT_DESC;
+  else if (t == 1019 || t == 1020 || t == 1042 || t == 1044 || t == 1045 || t == 1046) b |= RTCM_B_EPHEM;
+  else if (t == 1230) b |= RTCM_B_GLO_BIAS;
+  else if (t >= 1071 && t <= 1127) {
+    const uint16_t sys = (uint16_t)((t - 1071) / 10), m = (uint16_t)((t - 1070) % 10);
+    if (m >= 1 && m <= 7) {
+      static const uint16_t kSys[] = {RTCM_B_GPS_MSM, RTCM_B_GLO_MSM, RTCM_B_GAL_MSM, RTCM_B_SBS_MSM, RTCM_B_QZS_MSM, RTCM_B_BDS_MSM};
+      if (sys < 6) b |= kSys[sys];
+      b |= m == 7 ? RTCM_B_MSM7 : m == 4 ? RTCM_B_MSM4 : (m == 5 || m == 6) ? RTCM_B_MSM56 : RTCM_B_MSM123;
+    }
+  }
+  return b;
 }
 
 size_t encode_caps(const Caps& c, uint8_t* out, size_t cap) {
