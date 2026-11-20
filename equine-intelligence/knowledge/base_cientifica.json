@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.18.0",
+  "version": "1.19.0",
   "fecha": "2026-11-20",
   "razas": [
     "PSI",
@@ -112,6 +112,11 @@
       "fecha": "2026-11-20",
       "titulo": "Estudio horario 16:10 UTC: aceleración del tronco a galope (saturación ±8 g) y cinética de la FC (mesetas de V200 y recuperación)",
       "archivo": "estudios/2026-11-20_1610_aceleracion_tronco_cinetica_fc.md"
+    },
+    {
+      "fecha": "2026-11-20",
+      "titulo": "Estudio horario 17:09 UTC: exactitud del GNSS/IMU a galope (velocidad, curvas, zancada) y mano de galope en curva",
+      "archivo": "estudios/2026-11-20_1709_exactitud_gnss_mano_de_galope.md"
     }
   ],
   "fuentes": [
@@ -2163,6 +2168,172 @@
       "verificado_fecha": "2026-11-20",
       "nota": "FC de recuperación a 1/5/15/30 min tras 10 min a 5 y 7 m/s en cinta al 3 %",
       "doi": "10.3390/ani10010120"
+    },
+    {
+      "id": "SPENCE_2008_TURFTRAX",
+      "cita": "Spence AJ, Tan H, Wilson A 2008, Equine Vet J 40(7):680–683",
+      "url": "https://doi.org/10.2746/042516408X330338",
+      "acceso": "RESUMEN",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "TurfTrax frente a GPS topográfico: velocidad ±0,15 m/s; posición ±11 cm longitudinal, ±64 cm lateral; n [NV]",
+      "doi": "10.2746/042516408X330338"
+    },
+    {
+      "id": "BLACHE_2019_FRANCE_GALOP",
+      "cita": "Blache F et al. 2019, Ann Telecommun 74:287–298",
+      "url": "https://doi.org/10.1007/s12243-018-0685-9",
+      "acceso": "RESUMEN",
+      "pais": "Francia",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "especificación ≤ 25 cm de error de posición > 98 % del tiempo; candidatos GNSS RTK; exactitud lograda no publicada",
+      "doi": "10.1007/s12243-018-0685-9"
+    },
+    {
+      "id": "PARKES_2019_ANIMALS",
+      "cita": "Parkes RSV, Weller R, Pfau T, Witte TH 2019, Animals 9:466",
+      "url": "https://doi.org/10.3390/ani9070466",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "GPS 10 Hz infraestima la velocidad en curvas cerradas (cualitativo); FZ = 1/duración desde IMU 300 Hz; 40 PSI de 2–3 años",
+      "doi": "10.3390/ani9070466"
+    },
+    {
+      "id": "LINDNER_BRAND_2019_GPS",
+      "cita": "Lindner A, Brand T 2019, J Equine Vet Sci 84:102871",
+      "url": "https://doi.org/10.1016/j.jevs.2019.102871",
+      "acceso": "AGREGADOR",
+      "pais": "Alemania",
+      "idioma": "en",
+      "raza_fuente": "no indicada",
+      "verificado_fecha": "2026-11-20",
+      "nota": "GPS da menos velocidad que el cronómetro y la diferencia crece con la velocidad; cifras [NV]",
+      "doi": "10.1016/j.jevs.2019.102871"
+    },
+    {
+      "id": "SCHMUTZ_2020_IMU_VELOCIDAD",
+      "cita": "Schmutz A, Chèze L, Jacques J, Martin P 2020, Sensors 20:518",
+      "url": "https://doi.org/10.3390/s20020518",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Francia",
+      "idioma": "en",
+      "raza_fuente": "caballos de salto",
+      "verificado_fecha": "2026-11-20",
+      "nota": "velocidad por zancada con 1 IMU y SVM: RMSE 0,43 m/s a ≈ 5,8 m/s",
+      "doi": "10.3390/s20020518"
+    },
+    {
+      "id": "GUYARD_2023_ALOGO",
+      "cita": "Guyard KC et al. 2023, Sensors 23:4196",
+      "url": "https://doi.org/10.3390/s23094196",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Suiza",
+      "idioma": "en",
+      "raza_fuente": "warmblood",
+      "verificado_fecha": "2026-11-20",
+      "nota": "GNSS ≈ 20 Hz + IMU en círculo frente a óptico: velocidad −0,81 m/s (−15 %), longitud −59 cm",
+      "doi": "10.3390/s23094196"
+    },
+    {
+      "id": "PORTAS_2010_GPS_GIROS",
+      "cita": "Portas MD et al. 2010, Int J Sports Physiol Perform 5:448",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "humano (otra especie)",
+      "verificado_fecha": "2026-11-20",
+      "nota": "distancia GPS 1/5 Hz: SEE 1,3–3,1 % en recta, 1,8–6,9 % con giros; hasta −11 % a 1 Hz en giros de 180°"
+    },
+    {
+      "id": "THOME_2023_GPS_RADAR",
+      "cita": "Thome et al. 2023, J Strength Cond Res 37:2438",
+      "url": "https://doi.org/10.1519/JSC.0000000000004567",
+      "acceso": "RESUMEN",
+      "pais": "Australia",
+      "idioma": "en",
+      "raza_fuente": "humano (otra especie)",
+      "verificado_fecha": "2026-11-20",
+      "nota": "GPS 10 Hz frente a radar: +0,11 m/s (≈ 1 %) en velocidad máxima; CCI 0,99",
+      "doi": "10.1519/JSC.0000000000004567"
+    },
+    {
+      "id": "PARKES_2020_CURVAS_MANO",
+      "cita": "Parkes RSV, Pfau T, Weller R, Witte TH 2020, PLoS One 15:e0244105",
+      "url": "https://doi.org/10.1371/journal.pone.0244105",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "18,6 % de zancadas en mano incorrecta (359/1.931); duty factor mayor en el miembro interior con mano correcta; −0,61 % por m/s² centrípeto; 7 PSI, 6–13,7 m/s",
+      "doi": "10.1371/journal.pone.0244105"
+    },
+    {
+      "id": "PETERSON_2021_SUSTAINABILITY",
+      "cita": "Peterson M et al. 2021, Sustainability 13:539",
+      "url": "https://doi.org/10.3390/su13020539",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "EE. UU./Canadá",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "fracturas mortales mano izquierda 0,930 vs derecha 0,819/1.000 salidas (RR 1,14) en pistas antihorarias; mano derecha RR 1,18/1,16 en curvas cerradas; tabla 4 con inconsistencias declaradas",
+      "doi": "10.3390/su13020539"
+    },
+    {
+      "id": "PARKIN_2006_VIDEO",
+      "cita": "Parkin TDH et al. 2006, Prev Vet Med 74:44–55",
+      "url": "https://doi.org/10.1016/j.prevetmed.2006.01.006",
+      "acceso": "AGREGADOR",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "66 % (44/67) de las fracturas de mano en la mano que lideraba; vídeo de 109 fracturas distales mortales",
+      "doi": "10.1016/j.prevetmed.2006.01.006"
+    },
+    {
+      "id": "MAEDA_2016_JRA",
+      "cita": "Maeda Y, Hanada M, Oikawa M 2016, J Equine Sci 27:81–97",
+      "url": "https://doi.org/10.1294/jes.27.81",
+      "acceso": "RESUMEN",
+      "pais": "Japón",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "fracturas más frecuentes en el cambio de mano, curvas 3.ª–4.ª y recta final (cualitativo)",
+      "doi": "10.1294/jes.27.81"
+    },
+    {
+      "id": "FORBES_2024_SENTIDO_PISTA",
+      "cita": "Forbes B et al. 2024, Animals 14:1086",
+      "url": "https://doi.org/10.3390/ani14071086",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Hong Kong/Singapur",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "asimetría al trote distinta según el sentido de entrenamiento (horario HKJC frente a antihorario STC); 307 PSI",
+      "doi": "10.3390/ani14071086"
+    },
+    {
+      "id": "SERRA_BRAGANCA_2020_AIRES",
+      "cita": "Serra Bragança FM et al. 2020, Sci Rep",
+      "url": "https://doi.org/10.1038/s41598-020-73215-9",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Países Bajos",
+      "idioma": "en",
+      "raza_fuente": "varias razas",
+      "verificado_fecha": "2026-11-20",
+      "nota": "clasificación de aires con galope izquierdo/derecho: 96,7 % global con 7 IMU; exactitud por mano solo en la matriz de confusión",
+      "doi": "10.1038/s41598-020-73215-9"
     }
   ],
   "parametros": [
@@ -2926,6 +3097,49 @@
       ],
       "estado": "CONTEXTO",
       "nota": "ponis en cinta; no usar como referencia de PSI; τ de PSI (Hada 2007) [NV]"
+    },
+    {
+      "id": "velocidad_carrera_exactitud_referencia_ms",
+      "valor": 0.15,
+      "evidencia": "E-r",
+      "fuentes": [
+        "SPENCE_2008_TURFTRAX"
+      ],
+      "estado": "CONTEXTO",
+      "nota": "mejor exactitud publicada de un sistema de seguimiento en carrera; objetivo AVO RTK ≤ 0,15 m/s por validar en campo con fotocélulas [I]"
+    },
+    {
+      "id": "zancada_carrera_rango_plausible",
+      "valor": {
+        "velocidad_ms": [
+          12.6,
+          21.0
+        ],
+        "longitud_m": [
+          5.3,
+          9.2
+        ],
+        "duracion_s": [
+          0.37,
+          0.49
+        ]
+      },
+      "evidencia": "E",
+      "fuentes": [
+        "MORRICE_WEST_2020_VARIACION"
+      ],
+      "estado": "CONTEXTO",
+      "nota": "rango de PSI en carrera (StrideMASTER, Tasmania); para filtros de plausibilidad, no para trabajo"
+    },
+    {
+      "id": "mano_incorrecta_curva_fraccion",
+      "valor": 0.186,
+      "evidencia": "E",
+      "fuentes": [
+        "PARKES_2020_CURVAS_MANO"
+      ],
+      "estado": "CONTEXTO",
+      "nota": "7 PSI retirados, 6–13,7 m/s, sin pedir cambios; no extrapolar a carrera"
     }
   ],
   "reglas": [
@@ -3170,7 +3384,9 @@
     "VT1–VT3 (estudio 20/11 14:10): TE por defecto de V200 del 3 % marcado «no validado» hasta TE propio (≥ 3 pruebas); aviso de posible artefacto si |ΔV200| > 5 % en ≤ 31 d; V200 de árabes (Piccione 2004) solo como contexto",
     "NV1 (estudio 20/11 15:10, KB 1.17.0): subir severidad de A7/A8 solo con persistencia en ≥ 3 sesiones comparables (Hall 2026 StrideSAFE [E-r]: VPP 0,08–0,09 de una carrera frente a 0,74 con 3 salidas seguidas); [I], sin implementar",
     "CF1 (estudio 20/11 16:10, KB 1.18.0): en mesetas cerca del galope de trabajo o tras un salto grande de velocidad, descartar 30 s y exigir meseta ≥ 45–60 s para la V200 (τ del VO₂ 10→21 s sobre el umbral, Langsetmo 1997 [E-r]; deriva 204→221 lpm, Evans & Rose 1988 [E-r²]); [I], sin implementar hasta leer las fuentes completas",
-    "CF2 (estudio 20/11 16:10): τ de recuperación de la FC solo como tendencia del propio caballo (exponencial sobre 1–10 min sin el primer minuto); nunca con valores de referencia (τ de PSI [NV]; solo ponis, Rugh 1992); velocidad de recuperación como covariable"
+    "CF2 (estudio 20/11 16:10): τ de recuperación de la FC solo como tendencia del propio caballo (exponencial sobre 1–10 min sin el primer minuto); nunca con valores de referencia (τ de PSI [NV]; solo ponis, Rugh 1992); velocidad de recuperación como covariable",
+    "GN1 (estudio 20/11 17:09, KB 1.19.0): calidad de la velocidad GNSS: menor confianza en tramos con radio < 200 m o aceleración longitudinal alta; no usarlos como mesetas de V200; comparar parciales de 200 m (A8) solo con igual geometría; longitud de zancada solo promediada por tramos ≥ 100–200 m (error ≈ 1–1,5 % [I]); velocidad solo-IMU únicamente como relleno de cortes cortos",
+    "ML1 (estudio 20/11 17:09): mano de galope EXPERIMENTAL desde la IMU de la cincha (fase de balanceo/guiñada respecto al pico vertical, curvatura RTK como a priori) hasta validar con vídeo ≥ 120 fps; % de zancadas en mano incorrecta en curva y % de tiempo por mano, recta y curva por separado; sentido de la pista como campo y criterio de comparables; nunca como riesgo de lesión"
   ],
   "cola_investigacion": [
     "Texto completo de Verheyen 2006 (Bone, DOI 10.1016/j.bone.2006.05.025): ORs, cortes, límite inferior del canter, ventana de 60 d",
@@ -3237,7 +3453,10 @@
     "FC máxima en galope o carrera de árabes de llano y búsqueda en francés (AFAC, pur-sang arabe) y del Golfo/Magreb: no hallado (20/11 15:10)",
     "Pfau 2006 (JEB 209:3742) figuras 8C y 9C: leer la mediana y el IQR del máximo dorsoventral y craneocaudal en g por velocidad; Barrey 2001 completo (picos en cincha); ficha de rango del Equimetre (20/11 16:10)",
     "Hada 2007 (EVJ Suppl 36:141) completo: valores de τ de recuperación en PSI; Rugh 1992, Evans & Rose 1988 y Rose 1990 en la fuente (solo reseñas automáticas) (20/11 16:10)",
-    "Cualquier constante de tiempo de SUBIDA de la FC medida en caballos (no VO₂) y el error típico de la FC a 2, 5 y 10 min en PSI: no hallados (20/11 16:10)"
+    "Cualquier constante de tiempo de SUBIDA de la FC medida en caballos (no VO₂) y el error típico de la FC a 2, 5 y 10 min en PSI: no hallados (20/11 16:10)",
+    "Witte & Wilson 2004 (J Biomech 37:1891) y 2005 (J Biomech 38:1717) completos: exactitud del GPS en velocidad; validación independiente de RTK, Equimetre o Equinity a galope (no hallada) (20/11 17:09)",
+    "Exactitud de detección de la mano de galope y de los cambios con un solo sensor en el tronco; cambios de mano por carrera o curva en PSI/árabes (JRA, HKJC, Hill/Stover California): no hallados (20/11 17:09)",
+    "Parkin 2006 (Prev Vet Med 74:44) y Lindner & Brand 2019 (JEVS 84:102871) en texto completo (solo agregador); Williams 2002 (tesis CSU San Marcos, mano de salida de árabes) en la fuente (20/11 17:09)"
   ],
   "historial": [
     {
@@ -3334,6 +3553,11 @@
       "version": "1.18.0",
       "fecha": "2026-11-20",
       "cambio": "Estudio horario 16:10: sin pico del tronco publicado en g a 16–18 m/s; referencias usan ±10–16 g; ±8 g estimado suficiente para el cuerpo [I] y contador de saturación precisado; cinética de FC: descarte de 20–30 s coherente, propuesta de meseta ≥ 45–60 s (CF1), τ de recuperación solo propia (CF2); Fraipont es resistencia, no trotones; 9 fuentes, 3 parámetros de contexto, 2 pendientes, 3 de cola; sin cambios de lógica; motor 2.0.0-dev20"
+    },
+    {
+      "version": "1.19.0",
+      "fecha": "2026-11-20",
+      "cambio": "Estudio horario 17:09: no hay exactitud publicada de RTK a galope (referencia ±0,15 m/s TurfTrax, especificación France Galop 25 cm); curvas y aceleraciones degradan la velocidad GNSS; longitud de zancada solo por tramos ≥ 100–200 m (GN1 [I]); 18,6 % de zancadas en mano incorrecta en curva (Parkes 2020), RR 1,14 mano izquierda en pistas antihorarias (Peterson 2021); sin exactitud publicada de detección de la mano con un solo sensor (ML1 [I], experimental); 14 fuentes, 3 parámetros de contexto, 2 pendientes, 3 de cola; sin cambios de lógica; motor 2.0.0-dev21"
     }
   ]
 }

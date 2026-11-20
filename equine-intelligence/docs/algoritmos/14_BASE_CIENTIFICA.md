@@ -253,6 +253,17 @@ Detalle: `knowledge/estudios/2026-11-20_1510_arabes_lactato_novedades_2026.md`.
   propia; la de PSI de Hada 2007 es [NV] y solo hay τ de ponis), ambos [I].
 Detalle: `knowledge/estudios/2026-11-20_1610_aceleracion_tronco_cinetica_fc.md`.
 
+**Estudio horario 20/11 17:09 (KB-1 1.19.0, motor 2.0.0-dev21, sin cambios de lógica).**
+- **Exactitud del GNSS/IMU a galope:** no hay ninguna cifra publicada de RTK a galope. La mejor referencia en carrera
+  es ±0,15 m/s (TurfTrax, Spence 2008 [E-r]) y France Galop exige ≤ 25 cm de posición (Blache 2019 [E-r]). Las curvas y
+  las aceleraciones degradan la velocidad GNSS (Parkes 2019 y Witte 2006 [E]). La longitud de zancada arrastra un error
+  de ≈ 1–1,5 % [I], así que solo se compara por tramos de ≥ 100–200 m. Se propone GN1 [I].
+- **Mano de galope:** en curva, el 18,6 % de las zancadas va en mano incorrecta y el miembro interior pierde su mayor
+  apoyo (Parkes 2020 [E]). En pistas antihorarias se fractura más la mano izquierda (RR 1,14, Peterson 2021 [E]). No hay
+  ninguna exactitud publicada de detección con un solo sensor en el tronco: se propone ML1, experimental [I], y nunca
+  como riesgo.
+Detalle: `knowledge/estudios/2026-11-20_1709_exactitud_gnss_mano_de_galope.md`.
+
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se
    guarda en `knowledge/estudios/AAAA-MM-DD_<tema>.md` con fuentes y etiquetas [E]/[I]/[NV].

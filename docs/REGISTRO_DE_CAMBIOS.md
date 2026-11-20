@@ -24,6 +24,27 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Motor 2.0.0-dev21 / KB-1 1.19.0 — Estudio horario 17:09: exactitud del GNSS/IMU a galope y mano de galope
+**Autor:** Claude (tarea programada, estudio horario) · **Rama:** `claude/kb-estudio-2026-11-20-1709` (sale de
+`claude/kb-estudio-2026-11-20-1610`, PR #107) · **CI:** ver PR
+**Qué cambia:** estudio `equine-intelligence/knowledge/estudios/2026-11-20_1709_exactitud_gnss_mano_de_galope.md`.
+- No hay exactitud publicada de RTK a galope. La referencia es ±0,15 m/s en carrera (TurfTrax [E-r]) y France Galop
+  exige ≤ 25 cm de posición. Las curvas y las aceleraciones degradan la velocidad GNSS [E].
+- Se propone GN1 [I]: menor confianza en tramos con curva o aceleración, A8 solo con la misma geometría y la longitud
+  de zancada solo por tramos de ≥ 100–200 m.
+- Mano de galope: el 18,6 % de las zancadas en curva va en mano incorrecta (Parkes 2020 [E]) y, en pistas antihorarias,
+  la mano izquierda tiene RR 1,14 de fractura (Peterson 2021 [E]). No hay exactitud publicada de detección con un solo
+  sensor en el tronco. Se propone ML1 [I] como métrica experimental, nunca como riesgo.
+- KB: 14 fuentes, 3 parámetros de contexto, 2 pendientes y 3 entradas de cola.
+
+**Por qué:** temas no cubiertos por ningún estudio anterior que afectan a V200, A8, la velocidad final y la cincha.
+**Archivos:** `base_cientifica.json`, el estudio, `knowledge.h`, `types.h`, `tests/test_knowledge.cpp`, ficha 14,
+tabla de estado, `README.md` y este registro.
+**No se ha tocado:** lógica, reglas, umbrales, firmware, workflows, firmas ni contratos binarios.
+**Validación:** pruebas locales (ASan/UBSan) y fixtures; CI en el PR · NO VERIFICADO con caballos reales.
+
+---
+
 ## 2026-11-20 — Motor 2.0.0-dev20 / KB-1 1.18.0 — Estudio horario 16:10: aceleración del tronco a galope y cinética de la FC
 **Autor:** Claude (tarea programada, estudio horario) · **Rama:** `claude/kb-estudio-2026-11-20-1610` (sale de
 `claude/kb-estudio-2026-11-20-1510`, PR #106) · **CI:** ver PR
