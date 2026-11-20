@@ -24,6 +24,25 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Motor 2.0.0-dev23 / KB-1 1.21.0 — Estudio horario 19:08: DMD en potros de 2 años y auditoría de sobreentrenamiento (A9/A10)
+**Autor:** Claude (tarea programada, estudio horario) · **Rama:** `claude/kb-estudio-2026-11-20-1908` (sale de
+`claude/kb-estudio-2026-11-20-1809`, PR #109) · **CI:** ver PR
+**Qué cambia:** estudio `equine-intelligence/knowledge/estudios/2026-11-20_1908_dmd_potros_auditoria_sobreentrenamiento.md`.
+- DMD: Crawford 2021 [E] (HR 0,89 por km rápido acumulado; inicio tardío y machos con más riesgo), Boston & Nunamaker
+  2000 [E-r], Verheyen 2005 [E-ag], Oliveira 2006 [E]; propuesta DM1–DM4 [I] para el planificador, sin implementar.
+- Sobreentrenamiento: **cifra corregida** «14–19 %» → 19 % de tiempo hasta la fatiga en trotones (de Graaf-Roelfsema
+  2009, Wijnberg 2008 [E]); Tyler-McGowan 1999 (no 1998); umbral de peso del 2 % declarado diseño; Martin 2000
+  confirmado; propuesta SO1–SO3 [I].
+- 12 fuentes, 2 parámetros de contexto, 2 reglas PROPUESTA, 2 pendientes y 2 temas de cola.
+
+**Por qué:** el planificador de potros no tenía base sobre DMD y A9/A10 se apoyaban en cifras de agregador.
+**Archivos:** `base_cientifica.json`, el estudio, `knowledge.h`, `types.h`, `tests/test_knowledge.cpp`, fixtures de
+`core/src/test/resources/equine/` (solo versiones), ficha 14, tabla de estado, `README.md` y este registro.
+**No se ha tocado:** lógica, reglas implementadas, umbrales, firmware, workflows, firmas ni contratos binarios.
+**Validación:** pruebas locales (ASan/UBSan) y fixtures; CI en el PR · NO VERIFICADO con caballos reales.
+
+---
+
 ## 2026-11-20 — Motor 2.0.0-dev22 / KB-1 1.20.0 — Estudio horario 18:09: modelo óseo B (tabla 4, signo de b) y auditoría de fuentes
 **Autor:** Claude (tarea programada, estudio horario) · **Rama:** `claude/kb-estudio-2026-11-20-1809` (sale de
 `claude/kb-estudio-2026-11-20-1709`, PR #108) · **CI:** ver PR

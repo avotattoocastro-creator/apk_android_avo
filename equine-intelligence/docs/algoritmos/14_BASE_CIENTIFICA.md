@@ -264,6 +264,15 @@ Detalle: `knowledge/estudios/2026-11-20_1610_aceleracion_tronco_cinetica_fc.md`.
   como riesgo.
 Detalle: `knowledge/estudios/2026-11-20_1709_exactitud_gnss_mano_de_galope.md`.
 
+**Estudio horario 20/11 19:08 (KB-1 1.21.0, motor 2.0.0-dev23, sin cambios de lógica).**
+- **DMD (bucked shins) en 2 años:** la distancia rápida corta acumulada se asocia a menos DMD (Crawford 2021 [E]: HR
+  0,89 por km a ~15 m/s; Boston & Nunamaker 2000 [E-r]) y los picos cortos de canter o galope largo a más (Verheyen
+  2005 [E-ag]). Propuesta DM1–DM4 [I] para el planificador; sin datos de árabes; nunca predicción de lesiones.
+- **Sobreentrenamiento (A9/A10):** «14–19 %» corregido a 19 % de tiempo hasta la fatiga (Utrecht, trotones [E]);
+  Tyler-McGowan es 1999; el umbral de peso del 2 % es diseño [I]; VHRmax/FCmax no cambian con sobrecarga (Hamlin
+  [E-ag]). Propuesta SO1–SO3 [I].
+Detalle: `knowledge/estudios/2026-11-20_1908_dmd_potros_auditoria_sobreentrenamiento.md`.
+
 **Estudio horario 20/11 18:09 (KB-1 1.20.0, motor 2.0.0-dev22, sin cambios de lógica).**
 - **Modelo óseo B:** el dt y el solver siguen [NV] (código de Zenodo sin leer). La tabla 4 exacta del preprint de
   Anwar queda como vector de validación (`modelo_b_tabla4_anwar_preprint`) [E]; se mantiene 0,911 (0,852 solo en la

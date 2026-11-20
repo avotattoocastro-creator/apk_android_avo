@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.20.0",
+  "version": "1.21.0",
   "fecha": "2026-11-20",
   "razas": [
     "PSI",
@@ -122,6 +122,11 @@
       "fecha": "2026-11-20",
       "titulo": "Estudio horario 18:09 UTC: modelo óseo B (tabla 4 exacta como vector de validación, signo de b) y auditoría de integridad de las fuentes de la KB (DOI duplicados, campos obligatorios)",
       "archivo": "estudios/2026-11-20_1809_modeloB_tabla4_auditoria_fuentes.md"
+    },
+    {
+      "fecha": "2026-11-20",
+      "titulo": "Estudio horario 19:08 UTC: DMD (bucked shins) y carga en PSI de 2 años para el planificador; auditoría de las fuentes de sobreentrenamiento de A9/A10",
+      "archivo": "estudios/2026-11-20_1908_dmd_potros_auditoria_sobreentrenamiento.md"
     }
   ],
   "fuentes": [
@@ -2672,6 +2677,150 @@
       "verificado_fecha": "2026-11-20",
       "nota": "clasificación de aires con galope izquierdo/derecho: 96,7 % global con 7 IMU; exactitud por mano solo en la matriz de confusión",
       "doi": "10.1038/s41598-020-73215-9"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "CRAWFORD_2021_DMD",
+      "cita": "Crawford KL et al. 2021, Front Vet Sci 8:698298",
+      "doi": "10.3389/fvets.2021.698298",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8593238",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Australia",
+      "raza_fuente": "PSI",
+      "nota": "477 caballos, 936 preparaciones, 39 DMD; HR 0,89 (0,82–0,97) por km acumulado a 15 m/s; 0,96 por día de gallop; 0,43 preparación adicional; 1,17 por mes de edad de inicio; macho 2,58"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "CRAWFORD_2020_LESIONES",
+      "cita": "Crawford KL et al. 2020, Animals 10:2046",
+      "doi": "10.3390/ani10112046",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7694396",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Australia",
+      "raza_fuente": "PSI",
+      "nota": "lectura parcial; 42/47 DMD en 2 años; DMD 41 % de lesiones musculoesqueléticas a los 2 años"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "VERHEYEN_2005_DMD",
+      "cita": "Verheyen KLP, Henley WE, Price JS, Wood JLN 2005, Equine Vet J 37:442–448",
+      "doi": "10.2746/042516405774480085",
+      "url": "https://madbarn.com/research/training-related-factors-associated-with-dorsometacarpal-disease-in-young-thoroughbred-racehorses-in-the-uk",
+      "acceso": "AGREGADOR",
+      "pais": "Reino Unido",
+      "raza_fuente": "PSI",
+      "nota": "335 PSI, 79 episodios, 1,87/100 caballo-mes; picos cortos de canter/rápido → riesgo; acumulado → protector; HR [NV]"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "BOSTON_NUNAMAKER_2000",
+      "cita": "Boston RC, Nunamaker DM 2000, Am J Vet Res 61:602–608",
+      "doi": "10.2460/ajvr.2000.61.602",
+      "url": "https://doi.org/10.2460/ajvr.2000.61.602",
+      "acceso": "RESUMEN",
+      "pais": "EE. UU.",
+      "raza_fuente": "PSI",
+      "nota": "226 potros de 2 años, 56 casos; log-HR −4,2 por milla/sem de breeze, +0,3 por milla/sem de galope; jog sin efecto"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "pt",
+      "id": "OLIVEIRA_2006_DMD_BR",
+      "cita": "Oliveira PR et al. 2006, Braz J Vet Res Anim Sci 43:233–241",
+      "doi": "10.11606/issn.1678-4456.bjvras.2006.26504",
+      "url": "https://revistas.usp.br/bjvras/article/download/26504/28287/30775",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Brasil",
+      "raza_fuente": "PSI",
+      "nota": "42 potros, 45 % DMD; más rápidos en 500/700 m; 10/19 casos en la fase de 700 m; sin tabla 1 ni figura 1"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "DEGRAAF_ROELFSEMA_2009",
+      "cita": "de Graaf-Roelfsema E et al. 2009, Am J Physiol Regul Integr Comp Physiol 297:R403–R411",
+      "doi": "10.1152/ajpregu.90778.2008",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4062293",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Países Bajos",
+      "raza_fuente": "Standardbred [I-raza]",
+      "nota": "tiempo hasta la fatiga 15,8 ± 2,1 frente a 19,2 ± 1,6 min tras 6 sem intensificadas (−19 % según resumen); sin FC ni V200 publicadas"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "WIJNBERG_2008",
+      "cita": "Wijnberg ID et al. 2008, J Appl Physiol 105:1746–1753",
+      "doi": "10.1152/japplphysiol.01272.2007",
+      "url": "https://dspace.library.uu.nl/handle/1874/22898",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Países Bajos",
+      "raza_fuente": "Standardbred [I-raza]",
+      "nota": "mismo experimento de Utrecht; −19 % tiempo hasta la fatiga; lactato máx. 4,3 frente a 8,3 mmol/L; peso sube 392 → 427 kg en ambos grupos"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "TYLER_1996_VO2",
+      "cita": "Tyler CM, Golland LC, Evans DL, Hodgson DR, Rose RJ 1996, J Appl Physiol 81:2244–2249",
+      "doi": "10.1152/jappl.1996.81.5.2244",
+      "url": "https://madbarn.com/research/changes-in-maximum-oxygen-uptake-during-prolonged-training-overtraining-and-detraining-in-horses",
+      "acceso": "AGREGADOR",
+      "pais": "Australia",
+      "raza_fuente": "Standardbred [I-raza]",
+      "nota": "VO2max 117 → 151 mL/kg/min en control y sobrecarga (no cae); 13 trotones"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "TYLER_MCGOWAN_1999",
+      "cita": "Tyler-McGowan CM et al. 1999, Equine Vet J Suppl 30:621–625",
+      "doi": "10.1111/j.2042-3306.1999.tb05297.x",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/10659331/",
+      "acceso": "RESUMEN",
+      "pais": "Australia",
+      "raza_fuente": "Standardbred [I-raza]",
+      "nota": "pérdida de peso desde la semana 28, sobreentreno tras 31; ingesta sin cambio; magnitud [NV]; antes citado como 1998"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "BRUIN_1994",
+      "cita": "Bruin G, Kuipers H, Keizer HA, Vander Vusse GJ 1994, J Appl Physiol 76:1908–1913",
+      "doi": "10.1152/jappl.1994.76.5.1908",
+      "url": "https://madbarn.com/research/adaptation-and-overtraining-in-horses-subjected-to-increasing-training-loads",
+      "acceso": "AGREGADOR",
+      "pais": "Países Bajos",
+      "raza_fuente": "caballos de carreras [NV]",
+      "nota": "272 d de carga creciente sin caída de rendimiento pese a pérdida de peso"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "MARTIN_2000_BAJO_RENDIMIENTO",
+      "cita": "Martin BB Jr, Reef VB, Parente EJ, Sage AD 2000, JAVMA 216:554–558",
+      "doi": "10.2460/javma.2000.216.554",
+      "url": "https://madbarn.com/research/causes-of-poor-performance-of-horses-during-training-racing-or-showing-348-cases-1992-1996",
+      "acceso": "AGREGADOR",
+      "pais": "EE. UU.",
+      "raza_fuente": "varias razas",
+      "nota": "148/348 (42,5 %) vías altas solas, 33/348 (9,5 %) arritmias solas, 92/348 (26,4 %) sin diagnóstico"
+    },
+    {
+      "verificado_fecha": "2026-11-20",
+      "idioma": "en",
+      "id": "MCGOWAN_WHITWORTH_2008",
+      "cita": "McGowan CM, Whitworth DJ 2008, Comp Exerc Physiol 5:57–65",
+      "doi": "10.1017/S1478061508979202",
+      "url": "https://doi.org/10.1017/S1478061508979202",
+      "acceso": "RESUMEN",
+      "pais": "Reino Unido [NV]",
+      "raza_fuente": "revisión",
+      "nota": "ningún marcador aislado identifica el síndrome de sobreentrenamiento"
     }
   ],
   "parametros": [
@@ -3534,6 +3683,33 @@
       ],
       "estado": "VALIDACION",
       "nota": "vectores de referencia para reproducir el modelo B cuando se conozca el dt; preparación final de tres programas progresivos; preprint v1 (la versión RSOS no se ha comparado). Fatiga ósea: nunca predicción de lesiones"
+    },
+    {
+      "id": "dmd_hr_km_rapido_acumulado_crawford",
+      "valor": 0.89,
+      "ic95": [
+        0.82,
+        0.97
+      ],
+      "unidad": "HR por km acumulado a ~15 m/s",
+      "evidencia": "E",
+      "fuentes": [
+        "CRAWFORD_2021_DMD"
+      ],
+      "estado": "CONTEXTO",
+      "nota": "PSI de 2 años, Australia; protector dentro del rango observado; no es umbral; nunca predicción de lesiones"
+    },
+    {
+      "id": "sobreentreno_caida_tiempo_fatiga_trotones",
+      "valor": 0.19,
+      "unidad": "fracción del tiempo hasta la fatiga en test estandarizado",
+      "evidencia": "E",
+      "fuentes": [
+        "DEGRAAF_ROELFSEMA_2009",
+        "WIJNBERG_2008"
+      ],
+      "estado": "CONTEXTO",
+      "nota": "corrige «14–19 %» del estudio ampliado 18/11 (el 14 % no aparece en ninguna fuente leída); trotones en cinta [I-raza]; no es V200"
     }
   ],
   "reglas": [
@@ -3646,12 +3822,15 @@
         "COUROUCE_2000_2002",
         "FONSECA_2011",
         "LEE_2019_KOREA",
-        "ALONSO_2013_BR"
+        "ALONSO_2013_BR",
+        "DEGRAAF_ROELFSEMA_2009",
+        "WIJNBERG_2008"
       ],
       "estado": "PENDIENTE",
       "falta": "ECG de la cincha 0.5.x en el análisis",
       "nota": "Vermeulen: medias de 5 s y diferencias test-retest ≤ 2 % (no hay TE ni SWC formal publicado); ICC de V200 0,50 en trotones (Poinsard 2026); sin V200 en el análisis no se puede aplicar (la herramienta kb_drift_down sirve cuando llegue el ECG) · sin TE publicado de V200 en PSI/árabe con texto legal; usar TE propio (≥ 3 sesiones/semana); no mezclar cinta y pista (Couroucé 2000 [I-raza]); V200 baja con sobrecarga (Hamlin 2002 [I-raza]); Fonseca 2011: con rutina el cambio puede no verse (estudio extra 4)",
-      "nota_1_11_0": "Estudio 09:09: sin texto completo nuevo; VHRmax < 14,5 m/s ↔ ganancias bajas en un entrenador (Gramkow [E-r], no es umbral); +10,9 % de V200 en 5 meses en potros (Kobayashi [E-r]); ningún dato de V200 en árabes de llano: solo línea base propia; superficie y jinete como covariables"
+      "nota_1_11_0": "Estudio 09:09: sin texto completo nuevo; VHRmax < 14,5 m/s ↔ ganancias bajas en un entrenador (Gramkow [E-r], no es umbral); +10,9 % de V200 en 5 meses en potros (Kobayashi [E-r]); ningún dato de V200 en árabes de llano: solo línea base propia; superficie y jinete como covariables",
+      "nota_1_21_0": "Estudio 19:08: «14–19 %» corregido a 19 % de tiempo hasta la fatiga (Utrecht, trotones [E]); el 14 % no tiene fuente; VHRmax/FCmax no cambian claramente con sobrecarga (Hamlin [E-ag]); propuesta SO1–SO3 [I]"
     },
     {
       "id": "A11_ECG",
@@ -3757,6 +3936,35 @@
       ],
       "estado": "IMPLEMENTADO",
       "nota": "motor 2.0.0-dev11 (KB 1.9.0); factor asociado en casos y controles de Seúl, no predicción de lesión; la KRA no registra velocidad"
+    },
+    {
+      "id": "PLANIFICADOR_DMD_DM1_DM4",
+      "umbral": "DM1 trabajos rápidos cortos (≈ 200–400 m) 1–2/sem desde el inicio en 2 años; DM2 aviso por subida brusca de canter/rápido en 7/14/30 d frente a la media acumulada propia; DM3 menos canter el día de rápido; DM4 aviso al pasar de ≈ 500 a ≥ 700 m antes de 12–16 sem",
+      "evidencia": "E (Crawford 2021, Oliveira 2006) / E-r (Boston & Nunamaker 2000) / E-ag (Verheyen 2005) / I (forma y cortes)",
+      "fuentes": [
+        "CRAWFORD_2021_DMD",
+        "BOSTON_NUNAMAKER_2000",
+        "VERHEYEN_2005_DMD",
+        "OLIVEIRA_2006_DMD_BR"
+      ],
+      "estado": "PROPUESTA",
+      "falta": "capa 2 del planificador; HR de Verheyen 2005 en texto completo; sin datos de árabes [I-raza]",
+      "nota": "estudio 20/11 19:08; pautas de carga, nunca predicción de DMD"
+    },
+    {
+      "id": "SOBREENTRENO_SO1_SO3",
+      "umbral": "SO1 A9 dispara por caída de V200 o del rendimiento de referencia; VHRmax/FCmax solo apoyo; severidad alta solo con 2 señales (V200/rendimiento, peso, comportamiento); SO2 VLa4 que sube con rendimiento que cae = sospechoso; SO3 A10 heurístico y relativo a la tendencia de crecimiento en 2 años",
+      "evidencia": "E (Utrecht 2008–2009) / E-r (Tyler-McGowan 1999, McGowan 2008) / E-ag (Hamlin 2002, Tyler 1996) / I",
+      "fuentes": [
+        "DEGRAAF_ROELFSEMA_2009",
+        "WIJNBERG_2008",
+        "HAMLIN_2002",
+        "TYLER_MCGOWAN_1999",
+        "MCGOWAN_WHITWORTH_2008"
+      ],
+      "estado": "PROPUESTA",
+      "falta": "V200 en el análisis (ECG de la cincha); A10 no implementada",
+      "nota": "estudio 20/11 19:08; trotones [I-raza]; no diagnóstico"
     }
   ],
   "pendiente_motor": [
@@ -3781,7 +3989,9 @@
     "CF2 (estudio 20/11 16:10): τ de recuperación de la FC solo como tendencia del propio caballo (exponencial sobre 1–10 min sin el primer minuto); nunca con valores de referencia (τ de PSI [NV]; solo ponis, Rugh 1992); velocidad de recuperación como covariable",
     "GN1 (estudio 20/11 17:09, KB 1.19.0): calidad de la velocidad GNSS: menor confianza en tramos con radio < 200 m o aceleración longitudinal alta; no usarlos como mesetas de V200; comparar parciales de 200 m (A8) solo con igual geometría; longitud de zancada solo promediada por tramos ≥ 100–200 m (error ≈ 1–1,5 % [I]); velocidad solo-IMU únicamente como relleno de cortes cortos",
     "ML1 (estudio 20/11 17:09): mano de galope EXPERIMENTAL desde la IMU de la cincha (fase de balanceo/guiñada respecto al pico vertical, curvatura RTK como a priori) hasta validar con vídeo ≥ 120 fps; % de zancadas en mano incorrecta en curva y % de tiempo por mano, recta y curva por separado; sentido de la pista como campo y criterio de comparables; nunca como riesgo de lesión",
-    "AU1 (estudio 20/11 18:09, KB 1.20.0): no citar fuentes con duplicado_de en reglas nuevas (usar la canónica) ni fuentes con acceso SIN_AUDITAR como base de un cambio de lógica hasta reclasificarlas; prueba futura que lo compruebe al empaquetar la KB [I]"
+    "AU1 (estudio 20/11 18:09, KB 1.20.0): no citar fuentes con duplicado_de en reglas nuevas (usar la canónica) ni fuentes con acceso SIN_AUDITAR como base de un cambio de lógica hasta reclasificarlas; prueba futura que lo compruebe al empaquetar la KB [I]",
+    "DM1–DM4 (estudio 20/11 19:08, KB 1.21.0): pautas de carga del planificador para potros de 2 años frente a la DMD (rápido corto y frecuente, sin picos agudos de canter, escalones de distancia); [I], sin implementar con la capa 2",
+    "SO1–SO3 (estudio 20/11 19:08): A9 con caída de V200/rendimiento y dos señales coincidentes; VLa4 al alza con rendimiento a la baja = sospechoso; A10 relativa a la tendencia de crecimiento en 2 años; [I], sin implementar"
   ],
   "cola_investigacion": [
     "Texto completo de Verheyen 2006 (Bone, DOI 10.1016/j.bone.2006.05.025): ORs, cortes, límite inferior del canter, ventana de 60 d",
@@ -3854,7 +4064,9 @@
     "Parkin 2006 (Prev Vet Med 74:44) y Lindner & Brand 2019 (JEVS 84:102871) en texto completo (solo agregador); Williams 2002 (tesis CSU San Marcos, mano de salida de árabes) en la fuente (20/11 17:09)",
     "Reclasificar a mano el acceso de las fuentes SIN_AUDITAR (auditoría 20/11 18:09) releyendo su URL/DOI; prioridad las citadas por reglas IMPLEMENTADO",
     "Zenodo 19173866/16557014 por su API REST (zenodo.org/api/records/…) y Europe PMC fullTextXML de PMC13641913/PMC12483640: permiso de WebFetch no concedido en la sesión desatendida de 18:09; dt, solver, licencia, lenguaje y signo de b",
-    "Li 2026 (EVJ 10.1002/evj.70360): confirmar si es revisión y si incluye algún estudio de PSI o árabes de llano (Wiley, PubMed y Europe PMC sin acceso 20/11 18:09)"
+    "Li 2026 (EVJ 10.1002/evj.70360): confirmar si es revisión y si incluye algún estudio de PSI o árabes de llano (Wiley, PubMed y Europe PMC sin acceso 20/11 18:09)",
+    "Verheyen 2005 (EVJ 37:442) texto completo: HR y cortes en km por ventana para DMD; PMC12699115 (hueso subcondral y trabajo rápido en 2 años, permiso caducado); Nunamaker 1990 y Cogger 2006/2008 en la fuente; DMD en árabes de llano (no hallado) (20/11 19:08)",
+    "Tyler 1996 (journals.physiology.org) y Tyler-McGowan 1999 completos: kg perdidos y magnitud de la caída de rendimiento; Hamlin 2002 completo (% de V200); Golland 2003 (Vet J); Europe PMC REST 403 desde el proxy (20/11 19:08)"
   ],
   "historial": [
     {
@@ -3961,6 +4173,11 @@
       "version": "1.20.0",
       "fecha": "2026-11-20",
       "cambio": "Estudio horario 18:09: Zenodo/PMC/RSOS siguen sin leer (dt y solver [NV]); tabla 4 exacta del preprint de Anwar guardada como vector de validación; signo de b discrepante entre bioRxiv (0,02) y Anwar (−0,02) anotado; Li 2026 probable revisión de caballos de deporte; Hall 2026 53 frente a 54 fracturas explicado [I]; auditoría: 15 obras duplicadas (17 entradas marcadas duplicado_de) y 52 fuentes con campos obligatorios ausentes completadas como SIN_AUDITAR/[NV]; sin cambios de lógica; motor 2.0.0-dev22"
+    },
+    {
+      "version": "1.21.0",
+      "fecha": "2026-11-20",
+      "cambio": "Estudio horario 19:08: DMD en 2 años (Crawford 2021 [E] HR 0,89 por km rápido acumulado; Boston & Nunamaker [E-r]; Verheyen 2005 [E-ag]; Oliveira 2006 [E]); DM1–DM4 [I]; auditoría de sobreentrenamiento: «14–19 %» corregido a 19 % de tiempo hasta la fatiga (trotones), Tyler-McGowan 1999 (no 1998), umbral de peso del 2 % es diseño, Martin 2000 confirmado; SO1–SO3 [I]; 12 fuentes, 2 parámetros de contexto, 2 reglas propuestas, 2 pendientes, 2 de cola; sin cambios de lógica; motor 2.0.0-dev23"
     }
   ]
 }
