@@ -24,6 +24,20 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Android 2.13-qr-dev1 · iPad — Entrar en el iPad escaneando un QR de la tarjeta
+**Autor:** Claude (petición del usuario, 20/11 15:22: «botón para cargar el archivo de licencia» en LIVE; elegida la
+opción QR) · **Rama:** `claude/qr-tarjeta` · **CI:** ver PR
+**Por qué no el `.avolic`:** el archivo de licencia lleva el token cifrado con la clave de la tarjeta, pero **no** la
+clave: no sirve para entrar en Firebase (y así un archivo reenviado no da acceso a la cuenta).
+**Qué cambia:**
+- **Android:** Compartir › Mi cuenta › «Entrar en el iPad» muestra un **QR** del enlace de la tarjeta
+  (`avohorse://identity/user/…`), generado con `com.google.zxing:core:3.5.3` (dependencia nueva). vc 45 → **46**.
+- **iPad:** LIVE › **«Escanear QR de la tarjeta»** (cámara trasera, AVFoundation); al leerlo entra y guarda la tarjeta en
+  el Llavero, como con el enlace. La Nube AVO usa la misma sesión.
+- Windows sigue entrando pegando el enlace o «código clave» (sin escáner de QR).
+**No se ha tocado:** firmware, contratos, workflows, firmas, `Info.plist` (ya tenía el permiso de cámara).
+**Validación:** IMPLEMENTADO · CI: ver PR · **NO VERIFICADO** en dispositivos.
+
 ## 2026-11-20 — Android 2.12-nube-dev1 · iPad · Windows — Cambiar caballo/jinete en la nube desde las tres apps; confirmar tras descargar; directo por defecto
 **Autor:** Claude (petición del usuario, 20/11 14:00–14:10: «opción de modificar caballo y jinete en la nube desde iOS,
 Windows y apk», «sí» a la confirmación tras la descarga y al directo activado) · **Rama:** `claude/nube-asignacion` · **CI:** ver PR
