@@ -24,6 +24,13 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — iPad 1.0.0 — Informe PDF de «Análisis motor» sin «Cómo se calcula»
+**Autor:** Claude (captura del PDF marcada por el usuario, 20/11 10:06) · **Rama:** `claude/pdf-sin-como-se-calcula` · **CI:** ver PR
+**Qué cambia:** el PDF ya no incluye la sección «Cómo se calcula» ni la línea «Generado el…». La versión del motor
+sigue en el pie de cada página. En la pantalla, el método se sigue pudiendo desplegar, y el texto del estado de la pista
+dice ya que el dato se obtiene automáticamente.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO** en el iPad.
+
 ## 2026-11-20 — iPad 1.0.0 — Estado de la pista automático (PDF de tracking + Equidia)
 **Autor:** Claude (petición del usuario, 20/11 08:33: «que sea automático») · **Rama:** `claude/estado-pista-france-galop` · **CI:** ver PR
 **Qué cambia:**
