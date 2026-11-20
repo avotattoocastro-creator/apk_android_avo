@@ -201,6 +201,7 @@ try
     }
     Avo.Windows.SelfTest.V2Tests.Run(dir, Assert);
     Avo.Windows.SelfTest.KeyDataTests.Run(Assert);   // paridad iPad ↔ PC
+    Avo.Windows.SelfTest.CloudTests.Run(Assert);     // Nube AVO
     Avo.Windows.SelfTest.StableTests.Run(dir, Assert);
     Avo.Windows.SelfTest.WatchTests.Run(dir, Assert);
     UsbTests();

@@ -24,6 +24,24 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Android 2.11-nube-dev1 · iPad · Windows · reglas Storage — Nube AVO: entrenamientos en el servidor
+**Autor:** Claude (petición del usuario, 20/11 12:32–12:44: «servidor para subir los entrenamientos que muestre también
+datos en tiempo real… móntalo todo») · **Rama:** `claude/nube-sesiones` · **CI:** ver PR
+**Qué cambia:**
+- El tiempo real ya existía (LIVE, `docs/LIVE_SERVIDOR.md`). Se añade la **Nube AVO** en Cloud Storage del mismo proyecto
+  de Firebase (el usuario pasó el proyecto a plan Blaze el 20/11).
+- **Android:** cada entrenamiento verificado con el reloj (con caballo y jinete) se sube como `.avo` a
+  `trainings/<CODIGO>/AVO_<id>.avo`, en la misma pasada que Compartir. Tarjeta «Nube AVO» en Compartir (interruptor,
+  contador, pendientes, errores, «Subir ahora»). Dependencia nueva `firebase-storage` (BOM 33.7.0). vc 43 → **44**.
+- **iPad y Windows:** página Servidor › «Nube AVO»: listar, descargar con comprobación de SHA-256 e importar.
+- **Reglas:** `firebase/storage.rules` (solo el dueño, solo `.avo` ≤ 40 MB con `sha256`) con pruebas en el emulador
+  (`firebase/test/storage.test.js`); `firebase.json` y el script de pruebas incluyen el emulador de Storage.
+- Contrato y puesta en marcha: `docs/NUBE_SESIONES.md`.
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`.
+**Validación:** IMPLEMENTADO · CI: ver PR · **NO VERIFICADO** con el bucket real ni en dispositivos.
+**Pendiente:** activar Storage (UE) y publicar `storage.rules` en la consola; comprobar que la clave web acepta iPad y
+Windows; prueba real: descarga verificada en el Android → aparece en iPad y Windows.
+
 ## 2026-11-20 — iPad 1.0.0 — Los caballos y jinetes borrados ya no vuelven; copia de seguridad diaria y recuperación
 **Autor:** Claude (petición del usuario, 20/11 11:17: «cada vez que instalo una build nueva me saltan caballos y jinetes
 que había borrado») · **Rama:** `claude/cuadra-borrados-persistentes` · **CI:** ver PR

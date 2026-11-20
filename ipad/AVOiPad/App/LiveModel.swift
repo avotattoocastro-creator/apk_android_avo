@@ -35,7 +35,23 @@ final class LiveModel {
 
     static let keychainAccount: String = "avo-user-card"
 
-    init(app: AppModel) { self.app = app }
+    /// Nube AVO (página Servidor): misma sesión de Firebase que el LIVE.
+    @ObservationIgnored private(set) var cloud: AvoCloudClient! = nil
+
+    init(app: AppModel) {
+        self.app = app
+        let c: LiveFirebaseClient = client
+        self.cloud = AvoCloudClient(token: { try await c.token() })
+    }
+
+    /// Entra con la tarjeta guardada en el Llavero si aún no hay sesión. Devuelve si hay sesión.
+    @MainActor
+    func ensureSignedIn() async -> Bool {
+        if signedCode != nil { return true }
+        guard let saved = AvoKeychain.read(LiveModel.keychainAccount), let card = try? AvoUserCard.parse(saved) else { return false }
+        await signIn(card, save: false)
+        return signedCode != nil
+    }
 
     func sessionChanged() {}
 

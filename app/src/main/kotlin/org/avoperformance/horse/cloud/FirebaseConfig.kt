@@ -9,5 +9,7 @@ internal object FirebaseConfig {
     const val PROJECT_ID = "avo-performance-horse-7be14"
     const val APP_ID = "1:481038346970:android:aa0854c9bd0c85e5ab93e3"
     const val API_KEY = "AIzaSyAjd0ZKXYWQgpCdq_mMyiQeJ-MUT47HOd0"
+    /** Bucket por defecto de Cloud Storage (plan Blaze). Nube AVO: docs/NUBE_SESIONES.md. */
+    const val STORAGE_BUCKET = "avo-performance-horse-7be14.firebasestorage.app"
     const val DATABASE_URL = "https://avo-performance-horse-7be14-default-rtdb.europe-west1.firebasedatabase.app"
 }

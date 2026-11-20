@@ -58,6 +58,8 @@ import java.util.concurrent.TimeUnit
  */
 class ShareManager(private val c: AppContainer) {
     val firebase = FirebaseShare(c.app)
+    /** Nube AVO: copia de cada entrenamiento verificado (va en la misma pasada que los envíos). */
+    val cloud by lazy { CloudBackup(c, firebase) }
     private val dao get() = c.db.share()
     private val lock = Mutex()
 
@@ -84,7 +86,7 @@ class ShareManager(private val c: AppContainer) {
 
     // ------------------------------------------------------------- package and import (existing system)
 
-    private val packager = object : Packager {
+    internal val packager = object : Packager {
         override suspend fun build(sessionId: String): Packaged {
             val t = c.db.trainings().byId(sessionId) ?: error("Entrenamiento no encontrado")
             val horse = c.db.horses().all().first().firstOrNull { it.code == t.horseCode }?.name.orEmpty()
@@ -134,9 +136,10 @@ class ShareManager(private val c: AppContainer) {
         val horse = t.horseCode?.let { h -> all.filter { it.scope == h }.map { Contact(it.code, it.name) } }.orEmpty()
         val targets = RecipientResolver.resolve(card.code, global, c.settings.shareGlobalEnabled, horse,
             t.horseCode != null && t.horseCode !in c.settings.shareHorsesDisabled, emptyList(), emptyMap())
-        if (targets.isEmpty()) return@launch
+        if (targets.isEmpty()) { if (c.settings.cloudEnabled) runNow(); return@launch }
         val n = engine(card).enqueue(sessionId, targets, t.horseCode)
-        if (n > 0) { c.log.i("SHARE", "$sessionId en cola para $n destinatarios"); runNow() }
+        if (n > 0) c.log.i("SHARE", "$sessionId en cola para $n destinatarios")
+        if (n > 0 || c.settings.cloudEnabled) runNow()
     }
 
     /** Mode C: manual sharing (also old ones and re-sending). */
@@ -185,9 +188,11 @@ class ShareManager(private val c: AppContainer) {
             val sent = e.sendPending()
             e.reconcile()
             val got = e.receive()
+            val up = cloud.sync(card, packager)
             val errs = sent.errors + got.errors
             _status.value = Status(false, System.currentTimeMillis(),
-                "Enviados ${sent.sent} · recibidos ${got.received}" + if (sent.waiting > 0) " · ${sent.waiting} esperando" else "",
+                "Enviados ${sent.sent} · recibidos ${got.received}" + (if (sent.waiting > 0) " · ${sent.waiting} esperando" else "") +
+                    (if (up.uploaded > 0) " · nube ${up.uploaded}" else ""),
                 errs.firstOrNull())
             c.log.i("SHARE", "pasada ($reason): enviados ${sent.sent}, recibidos ${got.received}, esperando ${sent.waiting}, errores ${errs.size}")
             scheduleFollowUp()

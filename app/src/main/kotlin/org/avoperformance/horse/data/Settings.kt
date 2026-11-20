@@ -134,6 +134,14 @@ class Settings(ctx: Context, private val secure: SecureStore) {
     var shareAutoRetry: Boolean
         get() = p.getBoolean("share.autoRetry", true)
         set(v) { p.edit().putBoolean("share.autoRetry", v).apply() }
+    /** Nube AVO: copia automática de cada entrenamiento verificado en Firebase Storage (docs/NUBE_SESIONES.md). */
+    var cloudEnabled: Boolean
+        get() = p.getBoolean("cloud.enabled", true)
+        set(v) { p.edit().putBoolean("cloud.enabled", v).apply() }
+    /** Huellas ya subidas a la nube (`id\tfp` por línea, ver CloudSync). */
+    var cloudUploaded: String
+        get() = p.getString("cloud.uploaded", "") ?: ""
+        set(v) { p.edit().putString("cloud.uploaded", v).apply() }
     var sharePaused: Boolean
         get() = p.getBoolean("share.paused", false)
         set(v) { p.edit().putBoolean("share.paused", v).apply() }

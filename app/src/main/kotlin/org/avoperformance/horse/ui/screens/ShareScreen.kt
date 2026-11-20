@@ -77,6 +77,8 @@ fun ShareScreen(c: AppContainer) {
     var liveOn by remember { mutableStateOf(c.settings.liveShareEnabled) }
     var showIpad by remember { mutableStateOf(false) }
     val live by c.live.status.collectAsStateWithLifecycle()
+    var cloudOn by remember { mutableStateOf(c.settings.cloudEnabled) }
+    val cloud by sm.cloud.status.collectAsStateWithLifecycle()
 
     val card = me
     LaunchedEffect(card, refreshTick, recipients.size) {
@@ -153,6 +155,23 @@ fun ShareScreen(c: AppContainer) {
                     live.sessionId?.let { KV("Sesión en directo", it) }
                     if (live.sent > 0) KV("Muestras enviadas", live.sent.toString())
                     live.error?.let { Note(it, AvoColors.Bad) }
+                }
+            }
+            item {
+                AvoCard("Nube AVO (copia de entrenamientos)", trailing = {
+                    Switch(cloudOn, { cloudOn = it; c.settings.cloudEnabled = it; if (it) sm.runNow() })
+                }) {
+                    Note("Cada entrenamiento verificado con el reloj (con caballo y jinete) se sube a la nube de AVO como .avo. " +
+                        "Solo lo ves tú, con tu tarjeta AVO, desde el Android, el iPad o Windows (página Servidor). " +
+                        "Usa las mismas preferencias de red que los envíos.")
+                    KV("En la nube", cloud.total.toString())
+                    if (cloud.pending > 0) KV("Pendientes", cloud.pending.toString(), AvoColors.Warn)
+                    if (cloud.lastMs > 0) KV("Última comprobación", java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(java.util.Date(cloud.lastMs)))
+                    cloud.error?.let { Note(it, AvoColors.Bad) }
+                    Row {
+                        TextButton(onClick = { sm.runNow() }) { Text("Subir ahora") }
+                        TextButton(onClick = { sm.cloud.forgetUploaded(); sm.runNow() }) { Text("Volver a comprobar todo") }
+                    }
                 }
             }
             item {
