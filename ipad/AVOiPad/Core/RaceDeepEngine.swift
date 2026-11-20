@@ -663,7 +663,7 @@ enum RaceDeepEngine {
         "Fases: salida = primer tramo; final = dos últimos tramos (normalmente los últimos 400 m); desarrollo = el resto. El puesto de cada fase ordena el tiempo de todos los caballos en esa parte.",
         "Carreras anteriores: las importadas en este iPad con fecha anterior. El caballo se reconoce por su ficha de la Cuadra o por su nombre; los rivales, por su nombre.",
         "Misma distancia = ±100 m. Puesto medio = (puesto − 1) / (participantes − 1): 0 es ganar y 1 es llegar el último. Con menos de 3 carreras las tendencias son solo una pista.",
-        "Estado de la pista: escala de France Galop anotada a mano (el PDF no lo trae), agrupada en firme, bueno, blando y pesado.",
+        "Estado de la pista: escala de France Galop, leída del PDF de tracking cuando la trae o de la página de la carrera en Equidia, o elegida a mano; agrupada en firme, bueno, blando y pesado.",
         "Entrenamientos: los de este caballo en el iPad antes de la carrera, analizados con el motor AVO actual (el resultado guardado solo se reutiliza si es de la misma versión del motor). 1 cuerpo ≈ 0,2 s.",
         "Todo es orientativo: ayuda al entrenador a leer la carrera, no sustituye su criterio ni un examen veterinario.",
     ]
