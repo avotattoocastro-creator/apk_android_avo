@@ -386,6 +386,23 @@ fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Uni
     val entry by nav.currentBackStackEntryAsState()
     val route = entry?.destination?.route
     val isTab = tabs.any { it.route == route }
+    // 2.12: tras cada descarga verificada, confirmar (o cambiar) el caballo y el jinete. Uno a uno, el más reciente primero.
+    val allTrainings by c.db.trainings().all().collectAsStateWithLifecycle(emptyList())
+    var confirmTick by remember { androidx.compose.runtime.mutableIntStateOf(0) }
+    val toConfirm = remember(allTrainings, confirmTick) {
+        org.avoperformance.horse.share.TrainingAssign.pendingConfirmation(c, allTrainings).firstOrNull()
+    }
+    if (full && toConfirm != null) {
+        val t = toConfirm
+        val date = java.text.SimpleDateFormat("dd/MM/yyyy HH:mm", java.util.Locale("es", "ES")).format(java.util.Date(t.startRtcMs))
+        org.avoperformance.horse.ui.screens.AssignHorseRiderDialog(c, t,
+            onDismiss = { org.avoperformance.horse.share.TrainingAssign.markConfirmed(c, t.sessionId); confirmTick++ },
+            onDone = { confirmTick++ },
+            title = "Confirma caballo y jinete",
+            intro = "Entrenamiento descargado del $date. Comprueba el caballo y el jinete (los que grabó el pecho) o cámbialos. " +
+                "Se pueden cambiar después en Historial › Asignar.",
+            confirmText = "Confirmar", dismissText = "Más tarde")
+    }
     Scaffold(
         containerColor = AvoColors.Bg,
         topBar = {

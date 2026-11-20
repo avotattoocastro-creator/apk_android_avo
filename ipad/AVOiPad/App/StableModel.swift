@@ -372,6 +372,9 @@ final class StableModel {
             }
         }
         if failed > 0 { app.status = "Asignación guardada en este iPad; \(failed) archivo(s) no se pudieron actualizar (ver registro)" }
+        // Nube AVO: si estos entrenamientos están en la nube, se suben con la asignación nueva (gana la más reciente)
+        let ids: [String] = items.filter { !$0.isSynthetic }.map { $0.id }
+        if !app.captureMode, let live = app.live { Task { @MainActor in await live.pushAssignmentToCloud(ids) } }
     }
 
     /// Applies the Cuadra/Jinetes names to one training (in memory; the file is never changed).

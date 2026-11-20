@@ -28,4 +28,24 @@ final class CloudStorageTests: XCTestCase {
         XCTAssertEqual(CloudItem.listNames(j), ["trainings/A/AVO_1.avo"])
         XCTAssertEqual(CloudItem.listNames([:]), [])
     }
+
+    /// Mismo vector que CloudSyncTest.kt (Android) y CloudTests.cs (Windows).
+    func testFingerprintSharedWithAndroid() {
+        let a: String = CloudConfig.fingerprint(localSha256: "AB", horseCode: "HORSE_001", riderCode: "RIDER_001", horseName: "LEZAMA", riderName: "Ana")
+        XCTAssertEqual(a, CloudConfig.fingerprint(localSha256: "ab", horseCode: "HORSE_001", riderCode: "RIDER_001", horseName: "LEZAMA", riderName: "Ana"))
+        XCTAssertEqual(a, "a242c37ddf781698761028f9ea2c649f")
+        XCTAssertNotEqual(a, CloudConfig.fingerprint(localSha256: "ab", horseCode: "HORSE_002", riderCode: "RIDER_001", horseName: "LEZAMA", riderName: "Ana"))
+    }
+
+    func testManifestIdentityPrefersAssignmentBlock() {
+        let root: [String: Any] = ["format": "AVO-TRAINING-1", "sessionId": "S1", "sha256": "AB", "horseCode": "HORSE_001", "horseName": "VIEJO",
+                                   "riderCode": "RIDER_001", "riderName": "Ana",
+                                   "asignacion": ["version": 1, "horseCode": "H2", "horseName": "LEZAMA", "riderCode": "RIDER_001",
+                                                  "riderName": "Ana", "actualizadoUtc": "2026-11-20T12:00:00Z", "app": "ipad"]]
+        let id = CloudManifestIdentity.from(root)
+        XCTAssertEqual(id.horseName, "LEZAMA")
+        XCTAssertEqual(id.horseCode, "H2")
+        XCTAssertEqual(id.rawSha256, "ab")
+        XCTAssertEqual(id.assignedMs, 1_795_176_000_000)
+    }
 }

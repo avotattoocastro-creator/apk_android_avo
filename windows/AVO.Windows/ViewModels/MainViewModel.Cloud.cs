@@ -36,6 +36,7 @@ public sealed partial class MainViewModel
     public ICommand CloudRefreshCommand { get; private set; } = null!;
     public ICommand CloudImportCommand { get; private set; } = null!;
     public ICommand CloudImportAllCommand { get; private set; } = null!;
+    public ICommand CloudChangeCommand { get; private set; } = null!;
 
     private void InitCloud()
     {
@@ -58,6 +59,7 @@ public sealed partial class MainViewModel
         CloudRefreshCommand = new AsyncCommand(async _ => { if (await CloudEnsureSignedIn()) await CloudList(); }, CloudFail);
         CloudImportCommand = new AsyncCommand(async p => { if (p is CloudRow r) await CloudImport([r.Item]); }, CloudFail);
         CloudImportAllCommand = new AsyncCommand(async _ => await CloudImport(CloudRows.Select(r => r.Item).ToList()), CloudFail);
+        CloudChangeCommand = new AsyncCommand(async p => { if (p is CloudRow r) await CloudChange(r.Item); }, CloudFail);
         if (File.Exists(CloudCardFile)) CloudAccount = "Tarjeta guardada en este PC (pulsa Ver mi nube)";
     }
 
@@ -126,5 +128,55 @@ public sealed partial class MainViewModel
         await ImportFilesAsync(files.ToArray());
         CloudState = $"Importados {files.Count} de la nube";
         RefreshLibrary();
+    }
+
+    private static string CloudSessionId(CloudItem it) => it.SessionId.Length > 0 ? it.SessionId : it.FileName[4..^4];
+
+    /// <summary>Cambiar caballo/jinete de un entrenamiento de la nube: se importa si hace falta y se abre «Asignar».</summary>
+    private async Task CloudChange(CloudItem it)
+    {
+        string sid = CloudSessionId(it);
+        if (!Sessions.Any(s => s.Id == sid)) await CloudImport([it]);
+        var s = Sessions.FirstOrDefault(x => x.Id == sid);
+        if (s is null) { CloudState = $"No se pudo abrir {sid} en este PC (mira el registro de importación)"; return; }
+        OpenAssign(s);
+        CloudState = "Al guardar la asignación se actualiza también en la nube";
+    }
+
+    /// <summary>
+    /// Tras cambiar el caballo/jinete en este PC, vuelve a subir el .avo de los entrenamientos que estén en la nube del
+    /// usuario (gana la asignación más reciente; el Android la aplica en su siguiente comprobación).
+    /// </summary>
+    private async Task CloudPushAssignmentAsync(List<string> sessionIds)
+    {
+        if (sessionIds.Count == 0) return;
+        try
+        {
+            if (!File.Exists(CloudCardFile) && _cloud.SignedInCode is null) return;
+            if (!await CloudEnsureSignedIn()) return;
+            int sent = 0;
+            foreach (var sid in sessionIds)
+            {
+                if (_library.StoredAvoPath(sid) is not { } path) continue;
+                var remote = await _cloud.ItemAsync(sid);
+                if (remote is null) continue;   // no está en la nube
+                var id = CloudManifestIdentity.Read(path);
+                if (id.HorseName.Length == 0 || id.RiderName.Length == 0) continue;
+                var meta = new Dictionary<string, string>
+                {
+                    ["fp"] = id.Fingerprint, ["sessionId"] = sid, ["horseCode"] = id.HorseCode, ["horseName"] = id.HorseName,
+                    ["riderCode"] = id.RiderCode, ["riderName"] = id.RiderName, ["assignedMs"] = id.AssignedMs.ToString(CultureInfo.InvariantCulture),
+                    ["app"] = "windows", ["startRtcMs"] = remote.StartRtcMs.ToString(CultureInfo.InvariantCulture),
+                };
+                if (remote.DistanceM is double dm) meta["distanceM"] = Math.Round(dm).ToString(CultureInfo.InvariantCulture);
+                await _cloud.UploadAsync(path, sid, meta);
+                sent++;
+            }
+            if (sent > 0) { CloudState = $"Asignación actualizada en la nube ({sent})"; Log.Info("nube", "asignación actualizada en la nube", new { sent }); }
+        }
+        catch (Exception ex) when (ex is CloudException or HttpRequestException or IOException or InvalidDataException or System.Text.Json.JsonException or TaskCanceledException or CryptographicException)
+        {
+            CloudFail(ex);
+        }
     }
 }

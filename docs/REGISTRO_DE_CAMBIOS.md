@@ -24,6 +24,24 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Android 2.12-nube-dev1 · iPad · Windows — Cambiar caballo/jinete en la nube desde las tres apps; confirmar tras descargar; directo por defecto
+**Autor:** Claude (petición del usuario, 20/11 14:00–14:10: «opción de modificar caballo y jinete en la nube desde iOS,
+Windows y apk», «sí» a la confirmación tras la descarga y al directo activado) · **Rama:** `claude/nube-asignacion` · **CI:** ver PR
+**Qué cambia:**
+- **Nube AVO:** nuevos metadatos `horseCode`, `riderCode`, `assignedMs`. Gana la asignación más reciente.
+  `CloudSync.decide` (núcleo Kotlin) decide subir, aplicar lo de la nube o nada; huella común en las tres apps con vector
+  compartido.
+- **Android 2.12 (vc 45):** `TrainingAssign` (una sola forma de asignar, guarda la hora); `CloudBackup` aplica cambios de
+  la nube y repasa cada hora; diálogo **«Confirma caballo y jinete»** tras cada descarga verificada (Confirmar / Más
+  tarde); **«Directo (LIVE en el iPad)» activado por defecto**.
+- **iPad:** al guardar una asignación, si el entrenamiento está en la nube, sube el `.avo` reescrito; botón «Cambiar» en
+  Servidor › Nube AVO.
+- **Windows:** lo mismo (subida multipart, botón «Cambiar»).
+- Reglas de Storage sin cambios (ya permiten reemplazar al dueño).
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`.
+**Validación:** IMPLEMENTADO · CI: ver PR · **NO VERIFICADO** en dispositivos.
+**Pendiente:** prueba cruzada: cambiar en el iPad → el Android lo aplica (≤ 1 h o al abrir Compartir › «Volver a comprobar todo»).
+
 ## 2026-11-20 — Android 2.11-nube-dev1 · iPad · Windows · reglas Storage — Nube AVO: entrenamientos en el servidor
 **Autor:** Claude (petición del usuario, 20/11 12:32–12:44: «servidor para subir los entrenamientos que muestre también
 datos en tiempo real… móntalo todo») · **Rama:** `claude/nube-sesiones` · **CI:** ver PR

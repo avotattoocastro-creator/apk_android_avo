@@ -19,6 +19,12 @@ enum CloudConfig {
     }
 
     static func folder(_ code: String) -> String { prefix + "/" + code.uppercased() + "/" }
+
+    /// Huella de lo empaquetado (igual que CloudSync.fingerprint del Android y CloudConfig.Fingerprint de Windows).
+    static func fingerprint(localSha256: String, horseCode: String?, riderCode: String?, horseName: String, riderName: String) -> String {
+        let s: String = [localSha256.lowercased(), horseCode ?? "", riderCode ?? "", horseName, riderName].joined(separator: "\u{1f}")
+        return SHA256.hash(data: Data(s.utf8)).prefix(16).map { String(format: "%02x", $0) }.joined()
+    }
 }
 
 /// Un entrenamiento guardado en la nube.
@@ -32,6 +38,11 @@ struct CloudItem: Identifiable, Equatable {
     var riderName: String
     var startRtcMs: Int64
     var distanceM: Double?
+    var horseCode: String = ""
+    var riderCode: String = ""
+    /// Cuándo se eligió el caballo/jinete (ms UTC; 0 = nunca a mano). Gana el más reciente entre apps.
+    var assignedMs: Int64 = 0
+    var fp: String = ""
     var id: String { name }
     var fileName: String { String(name.split(separator: "/").last ?? Substring(name)) }
 
@@ -44,7 +55,9 @@ struct CloudItem: Identifiable, Equatable {
                          sha256: (m["sha256"] as? String ?? "").lowercased(), sessionId: m["sessionId"] as? String ?? "",
                          horseName: m["horseName"] as? String ?? "", riderName: m["riderName"] as? String ?? "",
                          startRtcMs: Int64(m["startRtcMs"] as? String ?? "") ?? 0,
-                         distanceM: Double(m["distanceM"] as? String ?? ""))
+                         distanceM: Double(m["distanceM"] as? String ?? ""),
+                         horseCode: m["horseCode"] as? String ?? "", riderCode: m["riderCode"] as? String ?? "",
+                         assignedMs: Int64(m["assignedMs"] as? String ?? "") ?? 0, fp: m["fp"] as? String ?? "")
     }
 
     /// Nombres de la respuesta de listado (`{"items":[{"name":…}], "nextPageToken":…}`).
@@ -111,6 +124,42 @@ final class AvoCloudClient {
         return out.sorted { ($0.startRtcMs, $0.updated) > ($1.startRtcMs, $1.updated) }
     }
 
+    /// Metadatos de un entrenamiento de la nube, o nil si no está.
+    func item(code: String, sessionId: String) async throws -> CloudItem? {
+        let path: String = CloudConfig.folder(code) + CloudConfig.fileName(sessionId)
+        guard let u = AvoCloudClient.objectURL(path) else { return nil }
+        let (data, resp) = try await session.data(for: try await request(u))
+        if (resp as? HTTPURLResponse)?.statusCode == 404 { return nil }
+        try AvoCloudClient.check(resp, path)
+        return ((try? JSONSerialization.jsonObject(with: data)) as? [String: Any]).flatMap { CloudItem.parse($0) }
+    }
+
+    /// Sube (o reemplaza) un .avo con sus metadatos (subida «multipart» de Firebase Storage).
+    func upload(fileAt path: String, code: String, sessionId: String, metadata: [String: String]) async throws {
+        let data: Data = try Data(contentsOf: URL(fileURLWithPath: path))
+        if Int64(data.count) > CloudConfig.maxBytes { throw LiveFirebaseError("Nube: archivo de más de 40 MB") }
+        let name: String = CloudConfig.folder(code) + CloudConfig.fileName(sessionId)
+        var meta: [String: String] = metadata
+        meta["sha256"] = SHA256.hash(data: data).map { String(format: "%02x", $0) }.joined()
+        let json: [String: Any] = ["name": name, "contentType": "application/octet-stream", "metadata": meta]
+        let boundary: String = "avo" + UUID().uuidString.replacingOccurrences(of: "-", with: "")
+        var body = Data()
+        body.append(Data("--\(boundary)\r\nContent-Type: application/json; charset=utf-8\r\n\r\n".utf8))
+        body.append(try JSONSerialization.data(withJSONObject: json))
+        body.append(Data("\r\n--\(boundary)\r\nContent-Type: application/octet-stream\r\n\r\n".utf8))
+        body.append(data)
+        body.append(Data("\r\n--\(boundary)--".utf8))
+        var c = URLComponents(string: "https://firebasestorage.googleapis.com/v0/b/\(CloudConfig.bucket)/o")!
+        c.queryItems = [URLQueryItem(name: "name", value: name)]
+        var r: URLRequest = try await request(c.url!)
+        r.httpMethod = "POST"
+        r.setValue("multipart", forHTTPHeaderField: "X-Goog-Upload-Protocol")
+        r.setValue("multipart/related; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        r.timeoutInterval = 600
+        let (_, resp) = try await session.upload(for: r, from: body)
+        try AvoCloudClient.check(resp, "subir " + CloudConfig.fileName(sessionId))
+    }
+
     /// Descarga un .avo a [targetDirectory] y comprueba su SHA-256 con el de la nube. Devuelve la ruta del archivo.
     func download(_ item: CloudItem, targetDirectory: String) async throws -> String {
         if item.size > CloudConfig.maxBytes { throw LiveFirebaseError("Nube: archivo de más de 40 MB") }
@@ -126,5 +175,41 @@ final class AvoCloudClient {
         if FileManager.default.fileExists(atPath: target) { try FileManager.default.removeItem(atPath: target) }
         try data.write(to: URL(fileURLWithPath: target), options: .atomic)
         return target
+    }
+}
+
+/// Identidad escrita en el manifiesto de un .avo (para la huella y los metadatos al volver a subirlo).
+struct CloudManifestIdentity: Equatable {
+    var sessionId: String
+    var rawSha256: String
+    var horseCode: String
+    var horseName: String
+    var riderCode: String
+    var riderName: String
+    var assignedMs: Int64
+
+    static func read(_ avoPath: String) throws -> CloudManifestIdentity {
+        let zip = try ZipReader(path: avoPath)
+        guard let m = zip.entry("manifest.json") else { throw AvoError.invalidData("Falta manifest.json") }
+        var mb = try zip.read(m, max: 16_384)
+        if mb.count >= 3 && mb[0] == 0xEF && mb[1] == 0xBB && mb[2] == 0xBF { mb.removeFirst(3) }
+        guard let root = AvoJSON.object(Data(mb)) else { throw AvoError.invalidData("Manifiesto no válido") }
+        return from(root)
+    }
+
+    /// Prioridad AVO-ASSIGN-1: bloque «asignacion» y, si falta, los campos de primer nivel.
+    static func from(_ root: [String: Any]) -> CloudManifestIdentity {
+        let a: AvoAssignmentData? = AvoAssignment.read(root)
+        func top(_ k: String) -> String { (AvoJSON.string(root, k) ?? "").trimmingCharacters(in: .whitespacesAndNewlines) }
+        let ms: Int64 = a.map { Int64(($0.updated.timeIntervalSince1970 * 1000).rounded()) } ?? 0
+        return CloudManifestIdentity(sessionId: top("sessionId"), rawSha256: top("sha256").lowercased(),
+                                     horseCode: a?.horseCode ?? top("horseCode"), horseName: (a?.horseName).flatMap { $0.isEmpty ? nil : $0 } ?? top("horseName"),
+                                     riderCode: a?.riderCode ?? top("riderCode"), riderName: (a?.riderName).flatMap { $0.isEmpty ? nil : $0 } ?? top("riderName"),
+                                     assignedMs: ms)
+    }
+
+    var fingerprint: String {
+        CloudConfig.fingerprint(localSha256: rawSha256, horseCode: horseCode.isEmpty ? nil : horseCode,
+                                riderCode: riderCode.isEmpty ? nil : riderCode, horseName: horseName, riderName: riderName)
     }
 }
