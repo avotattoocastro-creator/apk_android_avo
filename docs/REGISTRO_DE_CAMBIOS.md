@@ -24,6 +24,20 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Motor 2.0.0-dev13 / KB-1 1.11.0 — Estudio horario 09:09: V200/VHRmax (A9) y umbral de prematuro del ECG (A11)
+**Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-0909` (encadenada desde `claude/kb-estudio-2026-11-20-0809`, PR #94 sin fusionar) · **CI:** ver PR
+**Qué cambia:**
+- Estudio `equine-intelligence/knowledge/estudios/2026-11-20_0909_v200_a9_ecg_a11_umbrales.md`.
+- **A11 / ECG:** Flethøj 2016 (BMC Vet Res, texto completo): el 20/10/4 % son acortamientos del RR escalonados por FC (< 60, 60–100, > 100 lpm) en árabes de raid, y el 4 % en ejercicio sobredetecta (~3,8 % de latidos marcados frente a ≤ 0,4 % de arritmias reales). Se mantiene ≥ 5–6 % con FC > 100 lpm; se anota en el pendiente 10 %/20 % [I] para FC baja y FC pico sin prematuros (Navas de Solis 2026).
+- **A9 / V200:** sin texto completo nuevo; referencias de escala en PSI (Gramkow: VHRmax < 14,5 m/s ↔ ganancias bajas, solo resumen; Kobayashi: +10,9 % de V200 en 5 meses) y ningún dato publicado de V200 en árabes de llano.
+- `base_cientifica.json` 1.11.0: 4 fuentes nuevas (Flethøj 2016, Massie 2021, Gücüyener 2024, Wilk 2017), 5 completadas, notas de A9 y A11, 2 pendientes ampliados, cola actualizada. `KNOWLEDGE_VERSION` 1.11.0, `ENGINE_VERSION` 2.0.0-dev13; fixtures regenerados (solo versiones).
+**Por qué:** estudio horario de la KB pedido por el usuario para el 20/11.
+**No se ha tocado:** lógica, reglas, parámetros ni umbrales del motor; workflows, firmas, firmware ni contratos binarios.
+**Validación:** pruebas locales (ASan/UBSan) y fixtures; CI en el PR · NO VERIFICADO con caballos reales.
+**Pendiente:** textos completos de Vermeulen/Gramkow y Frick desde un navegador; V200 en árabes de llano.
+
+---
+
 ## 2026-11-20 — Motor 2.0.0-dev12 / KB-1 1.10.0 — Estudio horario 08:09: modelo óseo B y velocidad final relativa
 **Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-0809` (desde `develop`, sin PR `kb-*` abiertos) · **CI:** ver PR
 **Qué cambia:**
