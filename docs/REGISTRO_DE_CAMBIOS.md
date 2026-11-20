@@ -24,6 +24,21 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Motor 2.0.0-dev18 / KB-1 1.16.0 — Estudio horario 14:10: regla combinada de Verheyen y TE por defecto de la V200
+**Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-1410` (encadenada desde `claude/kb-estudio-2026-11-20-1312`, PR #102, sin fusionar) · **CI:** ver PR
+**Qué cambia:**
+- Estudio nuevo: `equine-intelligence/knowledge/estudios/2026-11-20_1410_verheyen_combinada_v200_te_japon.md`.
+- `base_cientifica.json` 1.15.0 → 1.16.0: 9 fuentes, 2 parámetros (`v200_te_por_defecto` PROPUESTO [I],
+  `v200_arabes_referencia` CONTEXTO [E]), regla `A1A2_VERHEYEN_COMBINADO` pasa a PROPUESTO con 3 fuentes secundarias,
+  2 pendientes (VC1–VC4, VT1–VT3), 3 entradas de cola, estudio e historial.
+- `KNOWLEDGE_VERSION` 1.16.0 y `ENGINE_VERSION` 2.0.0-dev18 (y la línea de `tests/test_knowledge.cpp`).
+- Ficha 14, tabla de estado y `README.md`.
+**Por qué:** la regla combinada A1+A2 y el TE de la V200 bloquean código. Verheyen 2006 se describe como interacción
+canter × galope en tres secundarios en texto completo; sigue sin OR, así que no se cambian severidades.
+**No se ha tocado:** lógica, reglas y umbrales del motor; firmware; contratos binarios; workflows; firmas; `Info.plist`.
+**Validación:** IMPLEMENTADO (solo versiones) · probado en local con ASan/UBSan y fixtures; CI en el PR · **NO VERIFICADO** con caballos reales.
+**Pendiente:** OR de Verheyen 2006; aprobar o no VC1–VC4; TE numérico de V200 (Vermeulen & Evans 2006, Wiley); disciplina de los árabes de Piccione 2004.
+
 ## 2026-11-20 — Motor 2.0.0-dev17 / KB-1 1.15.0 — Estudio horario 13:12: temperatura y peso cargado como criterios de comparables
 **Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-1312` (encadenada desde `claude/kb-estudio-2026-11-20-1210`, PR #101, sin fusionar) · **CI:** ver PR
 **Qué cambia:**

@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.15.0",
+  "version": "1.16.0",
   "fecha": "2026-11-20",
   "razas": [
     "PSI",
@@ -97,6 +97,11 @@
       "fecha": "2026-11-20",
       "titulo": "Estudio horario 13:12 UTC: temperatura ambiente y peso cargado como criterios de comparables (A7/A8/A9)",
       "archivo": "estudios/2026-11-20_1312_temperatura_peso_comparables.md"
+    },
+    {
+      "fecha": "2026-11-20",
+      "titulo": "Estudio horario 14:10 UTC: regla combinada de Verheyen (A1+A2) y TE/cambio mensual de la V200 (Japón, árabes)",
+      "archivo": "estudios/2026-11-20_1410_verheyen_combinada_v200_te_japon.md"
     }
   ],
   "fuentes": [
@@ -1829,6 +1834,113 @@
       "raza_fuente": "árabe y PSI",
       "nota": "Peso cargado como covariable sin coeficiente publicado; desenlace = puesto",
       "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "MORRICE_WEST_EVJ_13156_AAM",
+      "cita": "Morrice-West AV et al., EVJ (doi 10.1111/evj.13156), manuscrito aceptado",
+      "url": "https://minerva-access.unimelb.edu.au/server/api/core/bitstreams/7acf765a-2765-5fc3-b8f2-7add48f0b805/content",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Australia (Victoria)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "Secundario de Verheyen 2006: interacción canter (≤ 14 m/s) > 44 km/mes × galope (> 14 m/s) > 6 km/mes; medias UK 26,8 y 2,8 km/mes; rangos 0–82,4 y 0–17,7 km; sin OR",
+      "doi": "10.1111/evj.13156"
+    },
+    {
+      "id": "ROSANOWSKI_2018_AAM",
+      "cita": "Rosanowski SM, Chang YM, Stirk AJ, Verheyen KLP 2018, EVJ (doi 10.1111/evj.12968), manuscrito aceptado",
+      "url": "https://rvc-repository.worktribe.com/OutputFile/1386710",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "Con Verheyen como coautora, resume Verheyen 2006 como interacción de ciclos de carga a canter y galope; sin cifras",
+      "doi": "10.1111/evj.12968"
+    },
+    {
+      "id": "VERHEYEN_2006_PVM_PELVIS",
+      "cita": "Verheyen KLP, Newton JR, Price JS, Wood JLN 2006, Prev Vet Med 74:21–35 (fracturas por estrés de pelvis y tibia)",
+      "url": "https://madbarn.com/research/a-case-control-study-of-factors-associated-with-pelvic-and-tibial-stress-fractures-in-thoroughbred-racehorses-in-training-in-the-uk",
+      "acceso": "RESUMEN",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "A 30 d el riesgo sube con el canter hasta un pico hacia ≈ 50 km y luego baja; a 60 d sin asociación; sin OR (agregador de resúmenes)",
+      "doi": "10.1016/j.prevetmed.2006.01.004"
+    },
+    {
+      "id": "KOBAYASHI_2000_V200",
+      "cita": "Kobayashi M, Kuribara K, Amada A 2000, EVJ Suppl 30:159–162 (V200 en potros PSI en campo)",
+      "url": "https://doi.org/10.1111/j.2042-3306.1999.tb05208.x",
+      "acceso": "RESUMEN",
+      "pais": "Japón",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "V200 623 ± 55 → 691 ± 64 m/min en 5 meses (P < 0,05); n ambiguo",
+      "doi": "10.1111/j.2042-3306.1999.tb05208.x"
+    },
+    {
+      "id": "PICCIONE_2004_ARABES_V200",
+      "cita": "Piccione G, Assenza A, Fazio F et al. 2004, Vet Med Czech 49(8):291–297 (umbral anaeróbico en prueba de campo)",
+      "url": "https://vetmed.agriculturejournals.cz/",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Italia",
+      "idioma": "en",
+      "raza_fuente": "Árabe y angloárabe",
+      "verificado_fecha": "2026-11-20",
+      "nota": "Árabes 6–8 años n=10: V200 610 ± 26 m/min; angloárabes 2–4 años n=10: 583 ± 31 (P < 0,01); VLa4 551 ± 40 / 532 ± 39; disciplina [NV]; PDF oficial leído con texto algo dañado"
+    },
+    {
+      "id": "MUKAI_2007_JES_CARRERA",
+      "cita": "Mukai K, Takahashi T, Eto D, Ohmura H, Tsubone H, Hiraga A 2007, J Equine Sci 18:153–160 (FC y lactato en carrera)",
+      "url": "https://doi.org/10.1294/jes.18.153",
+      "acceso": "RESUMEN",
+      "pais": "Japón (JRA)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "n=23, 1200 m: FC pico 213,6 ± 1,7 lpm; 12,4 ± 1,8 s al 95 % del pico; lactato 22,5 ± 0,6 mmol/L a 15,9 m/s",
+      "doi": "10.1294/jes.18.153"
+    },
+    {
+      "id": "HADA_2006_T_RECUPERACION",
+      "cita": "Hada T, Ohmura H, Mukai K, Eto D, Takahashi T, Hiraga A 2006, EVJ Suppl 36:141–145 (constante de tiempo de la recuperación de FC)",
+      "url": "https://doi.org/10.1111/j.2042-3306.2006.tb05530.x",
+      "acceso": "RESUMEN",
+      "pais": "Japón (JRA)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "T sensible a atropina/propranolol; con entrenamiento r=0,43 con VO2max (n=7); sin valores de T",
+      "doi": "10.1111/j.2042-3306.2006.tb05530.x"
+    },
+    {
+      "id": "KUSUNOSE_2002_EQUIPILOT",
+      "cita": "Kusunose R, Takahashi T 2002, J Equine Sci 13:117–121 (fiabilidad de EquiPILOT)",
+      "url": "https://doi.org/10.1294/jes.13.117",
+      "acceso": "RESUMEN",
+      "pais": "Japón (JRA)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "Fiabilidad solo cualitativa en el resumen; PDF de J-STAGE denegado en la sesión",
+      "doi": "10.1294/jes.13.117"
+    },
+    {
+      "id": "IKEDA_2019_JES_TFDS",
+      "cita": "Ikeda Y, Ishihara A, Nakajima M, Yamada K 2019, J Equine Sci 30:93–98 (factores de riesgo de tendinopatía del TFDS, NAR)",
+      "url": "https://doi.org/10.1294/jes.30.93",
+      "acceso": "RESUMEN",
+      "pais": "Japón (NAR, TCK)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "n=292 casos; factores: pista sloppy, puesto ≥ 10.º, carrera corta, más peso, pérdida de peso, cambio corto de distancia; OR [NV] (PDF J-STAGE y PMC6920055 bloqueados)",
+      "doi": "10.1294/jes.30.93"
     }
   ],
   "parametros": [
@@ -2488,6 +2600,36 @@
       ],
       "estado": "PROPUESTO",
       "nota": "KB 1.15.0: sin coeficiente válido de peso a velocidad en PSI ni árabes; en carrera el peso está confundido con la calidad [E]; criterio de comparables de A7/A8 y velocidad final relativa (PC1–PC4), sin corrección"
+    },
+    {
+      "id": "v200_te_por_defecto",
+      "valor": {
+        "te_pct": 3,
+        "aviso_artefacto_pct_mes": 5,
+        "cambio_plausible_potros_pct_mes": 2
+      },
+      "evidencia": "I",
+      "fuentes": [
+        "VERMEULEN_EVANS_2006",
+        "KOBAYASHI_2000_V200"
+      ],
+      "estado": "PROPUESTO",
+      "nota": "KB 1.16.0 (estudio 20/11 14:10): sin TE numérico publicado legible; Vermeulen & Evans 2006 dan diferencias medias ≤ 2 % (sesgo, no TE) [E-r]; Kobayashi 2000 +11 % en 5 meses en potros [E-r]; TE por defecto marcado «no validado» hasta TE propio con ≥ 3 pruebas"
+    },
+    {
+      "id": "v200_arabes_referencia",
+      "valor": {
+        "media_m_min": 610,
+        "de_m_min": 26,
+        "n": 10,
+        "edad": "6–8 años"
+      },
+      "evidencia": "E",
+      "fuentes": [
+        "PICCIONE_2004_ARABES_V200"
+      ],
+      "estado": "CONTEXTO",
+      "nota": "Solo contexto, sin percentiles: disciplina de los árabes de Piccione 2004 [NV]"
     }
   ],
   "reglas": [
@@ -2644,10 +2786,14 @@
       "umbral": "canter > 44 km Y galope > 6 km en 30 d",
       "evidencia": "E (resumen) / NV (forma de la interacción)",
       "fuentes": [
+        "MORRICE_WEST_EVJ_13156_AAM",
+        "ROSANOWSKI_2018_AAM",
+        "VERHEYEN_2006_PVM_PELVIS",
         "VERHEYEN_2006_RESUMEN"
       ],
-      "estado": "PENDIENTE",
-      "falta": "texto completo de Verheyen 2006 (ORs por categoría y cortes) antes de decidir si A1 y A2 aislados bajan a AVISO"
+      "estado": "PROPUESTO",
+      "falta": "texto completo de Verheyen 2006 (ORs por categoría y cortes) antes de decidir si A1 y A2 aislados bajan a AVISO",
+      "nota_1_16_0": "Estudio 20/11 14:10: 3 secundarios en texto completo (Morrice-West AAM, Anwar arXiv, Rosanowski 2018 con Verheyen) describen INTERACCIÓN canter ≤ 14 m/s > 44 km × galope > 14 m/s > 6 km por mes; galope acumulado protector en añojos [E-r]. Propuesta VC1–VC4 [I]: combinada como LIMITAR, A1 aislada como AVISO, A2 aislada a INFO; no implementada (OR [NV], cambia severidades: requiere aprobación)"
     },
     {
       "id": "TENDON_INDICE_HEURISTICO",
@@ -2723,7 +2869,9 @@
     "A1/A2 de Verheyen: el resumen da un umbral CONJUNTO (> 44 km de canter Y > 6 km de galope en 30 d) y galope acumulado protector en añojos; con el texto completo, decidir si A2 por separado se rebaja a INFO o se sustituye por la regla combinada (KB 1.9.0)",
     "A8: añadir la velocidad del último parcial de 200 m (unidad de Wong 2023, HR 1,18 por 0,1 m/s) junto a la de 600 m, y documentar el umbral como diseño (KB 1.9.0); KB 1.14.0: mostrarlo solo junto a su dispersión propia (DE de las comparables), nunca como umbral fijo: el ruido entre carreras es ≈ 0,66 m/s [I]",
     "Planificador P7 (estudio 20/11 11:10): ventana de reincorporación de 21 d (prudente 30 d) tras ≥ 60 d sin trabajo rápido, sin dos trabajos rápidos seguidos ni picos de canter; evidencia Carrier 1998 y Choi 2026 solo por resumen; implementar con el planificador (capa 2)",
-    "Comparables por temperatura y peso (estudio 20/11 13:12, KB 1.15.0): campos de temperatura, humedad/WBGT, jinete y peso cargado en Session; A9 y recuperación solo con |ΔT| ≤ 5 °C y marca «no comparable por calor» (WBGT ≥ 28 °C); A7/A8 con |Δpeso| ≤ 3 kg y mismo jinete preferente; todo [I], sin coeficiente de corrección hasta calibrarlo con datos propios"
+    "Comparables por temperatura y peso (estudio 20/11 13:12, KB 1.15.0): campos de temperatura, humedad/WBGT, jinete y peso cargado en Session; A9 y recuperación solo con |ΔT| ≤ 5 °C y marca «no comparable por calor» (WBGT ≥ 28 °C); A7/A8 con |Δpeso| ≤ 3 kg y mismo jinete preferente; todo [I], sin coeficiente de corrección hasta calibrarlo con datos propios",
+    "VC1–VC4 (estudio 20/11 14:10, KB 1.16.0): regla combinada Verheyen (canter > 44 km Y galope > 6 km en 30 d) como LIMITAR; A1 aislada solo AVISO; A2 aislada a INFO; base: resumen [E-r] + 3 secundarios en texto completo; OR [NV]; cambia severidades de alertas existentes, implementar con aprobación del usuario",
+    "VT1–VT3 (estudio 20/11 14:10): TE por defecto de V200 del 3 % marcado «no validado» hasta TE propio (≥ 3 pruebas); aviso de posible artefacto si |ΔV200| > 5 % en ≤ 31 d; V200 de árabes (Piccione 2004) solo como contexto"
   ],
   "cola_investigacion": [
     "Texto completo de Verheyen 2006 (Bone, DOI 10.1016/j.bone.2006.05.025): ORs, cortes, límite inferior del canter, ventana de 60 d",
@@ -2780,7 +2928,10 @@
     "Wong 2023: método (StrideMASTER, ajuste por distancia y pista) releído en minerva-access o PMC10084173 desde un navegador; DE intra-caballo publicada del último 200 m o 600 m en trabajo; agari 3F de la JRA y lesión (20/11 12:10)",
     "Hargreaves 1999 (EVJ 31:314) completo: raza, temperatura y humedad de las pruebas; Geor 1995/1996 y Marlin 1996 completos (Wiley): FC por escalón en calor (20/11 13:12)",
     "V200 estacional en trotones (Couroucé, Leleu) o PSI y cualquier dato de calor en árabes de carreras (Golfo, Turquía) o Hong Kong: no hallado (20/11 13:12)",
-    "Peso cargado: Oki 1994 (coeficientes), tabla S2 de Morrice-West (peso cargado o corporal), PMC12504628 (capacidad de carga en cinta) y Stefánsdóttir 2017 completo; Powell 2008 y Matsuura no hallados (20/11 13:12)"
+    "Peso cargado: Oki 1994 (coeficientes), tabla S2 de Morrice-West (peso cargado o corporal), PMC12504628 (capacidad de carga en cinta) y Stefánsdóttir 2017 completo; Powell 2008 y Matsuura no hallados (20/11 13:12)",
+    "Verheyen 2006: OpenAlex, CORE y Bristol Pure no probados; Unpaywall y Semantic Scholar sin permiso en la sesión; RVC Worktribe 1434504 sin PDF; OR por categoría y forma exacta de la interacción siguen [NV] (20/11 14:10)",
+    "Piccione 2004 (Vet Med Czech): confirmar la disciplina de los árabes (carreras de llano o no) y releer el PDF con texto limpio; Vermeulen & Evans 2006 (Wiley) para un TE numérico de V200 (20/11 14:10)",
+    "Ikeda 2019 (J Equine Sci 30:93) OR del TFDS: PDF de J-STAGE denegado por robots y PMC6920055 con reCAPTCHA; Hada 2006 valores de T (EVJ Suppl, Wiley); Ohmura 2002 es EVJ 34:634, no J-STAGE (20/11 14:10)"
   ],
   "historial": [
     {
@@ -2862,6 +3013,11 @@
       "version": "1.15.0",
       "fecha": "2026-11-20",
       "cambio": "Estudio horario 13:12: temperatura (sin coeficiente lpm/°C; calor húmedo sube la FC submáxima sin cambiar la pico, la V200 baja sin pérdida de forma) y peso cargado (sin coeficiente válido; confundido con la calidad en carrera); 2 parámetros PROPUESTOS [I] de comparables (TC1–TC5, PC1–PC4), 19 fuentes nuevas, 1 pendiente y 3 entradas de cola; sin cambios de lógica; motor 2.0.0-dev17"
+    },
+    {
+      "version": "1.16.0",
+      "fecha": "2026-11-20",
+      "cambio": "Estudio horario 14:10: Verheyen 2006 es una interacción canter × galope (3 secundarios en texto completo + resumen), propuesta VC1–VC4 sin implementar; V200 sin TE publicado, TE por defecto 3 % [I] y aviso de artefacto > 5 %/mes [I]; primera V200 de árabes (Piccione 2004); 9 fuentes, 2 parámetros, 2 pendientes y 3 entradas de cola; sin cambios de lógica; motor 2.0.0-dev18"
     }
   ]
 }

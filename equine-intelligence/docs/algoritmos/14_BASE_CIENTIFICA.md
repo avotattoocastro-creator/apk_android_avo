@@ -220,6 +220,18 @@ Detalle: `knowledge/estudios/2026-11-20_1210_playa_franjas_parcial_final_200m.md
 - Árabes de carreras en llano: sin datos en ninguno de los dos temas.
 Detalle: `knowledge/estudios/2026-11-20_1312_temperatura_peso_comparables.md`.
 
+**Estudio horario 20/11 14:10 (KB-1 1.16.0, motor 2.0.0-dev18, sin cambios de lógica).**
+- **Verheyen 2006 (A1/A2):** tres fuentes secundarias en texto completo (Morrice-West, manuscrito aceptado; Anwar,
+  arXiv; Rosanowski 2018, con Verheyen como coautora) describen el hallazgo como **interacción**: canter (≤ 14 m/s)
+  > 44 km **y** galope (> 14 m/s) > 6 km en un mes; el galope acumulado es protector en añojos [E-r]. Se propone
+  VC1–VC4 [I]: combinada como LIMITAR, A1 aislada como AVISO, A2 aislada a INFO. No implementado: OR [NV] y cambia
+  severidades (requiere aprobación).
+- **V200:** no hay TE numérico publicado legible; Vermeulen & Evans 2006 dan diferencias medias ≤ 2 % [E-r] y
+  Kobayashi 2000 +11 % en 5 meses en potros [E-r]. Se propone VT1–VT3 [I]: TE por defecto del 3 % «no validado»,
+  aviso de artefacto si |ΔV200| > 5 % en un mes. Primera V200 de árabes adultos: 610 ± 26 m/min (Piccione 2004 [E],
+  disciplina [NV]).
+Detalle: `knowledge/estudios/2026-11-20_1410_verheyen_combinada_v200_te_japon.md`.
+
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se
    guarda en `knowledge/estudios/AAAA-MM-DD_<tema>.md` con fuentes y etiquetas [E]/[I]/[NV].
