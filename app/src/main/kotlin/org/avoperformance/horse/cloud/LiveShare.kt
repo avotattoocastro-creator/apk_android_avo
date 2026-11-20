@@ -2,6 +2,7 @@ package org.avoperformance.horse.cloud
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -13,8 +14,9 @@ import org.avoperformance.horse.core.live.LiveRecorder
 import org.avoperformance.horse.license.LicenseGate
 
 /**
- * LIVE desde el servidor: sube a Firebase (`live/{mi código}/{sesión}`) la `TELEMETRY` que llega del pecho mientras
- * graba, para verla en directo en el iPad (pantalla LIVE). Formato y reglas: docs/LIVE_SERVIDOR.md.
+ * LIVE desde el servidor: sube a Firebase (`live/{mi código}/{sesión}`) la `TELEMETRY` que llega del pecho en cuanto el
+ * pecho está encendido y conectado (en espera, 1 Hz) y mientras graba en la geocerca (2 Hz), para verla en directo en el
+ * iPad (pantalla LIVE). Formato y reglas: docs/LIVE_SERVIDOR.md.
  *
  * - Solo con «Compartir en directo» activado, tarjeta AVO personal y licencia con COMPARTIR.
  * - Lo ven mi propia cuenta (mi iPad con mi tarjeta) y los usuarios que aceptaron mis envíos (grants ACCEPTED).
@@ -37,10 +39,18 @@ class LiveShare(private val c: AppContainer) {
     init {
         c.scope.launch(Dispatchers.IO) { for (batch in queue) runCatching { apply(batch) }.onFailure { e -> report(e) } }
         c.scope.launch { c.share.firebase.connected().collect { online = it } }
+        // presencia: si el pecho deja de mandar TELEMETRY 60 s (apagado o fuera de alcance), el directo se cierra
+        c.scope.launch { while (true) { delay(5_000); tick() } }
     }
 
     private fun enabled(): Boolean = c.settings.liveShareEnabled && c.identity.card.value != null &&
         LicenseGate.allows(LicenseFeature.COMPARTIR)
+
+    @Synchronized
+    private fun tick() {
+        val actions = recorder.onTick(System.currentTimeMillis())
+        if (actions.isNotEmpty()) queue.trySend(actions)
+    }
 
     /** Cada TELEMETRY del pecho (2 Hz), en el hilo de quien la recibe. */
     @Synchronized

@@ -90,3 +90,17 @@ en la consola, no en el repositorio:
 ## Validación
 IMPLEMENTADO · pruebas añadidas (reglas, Kotlin y Swift) · **NO VERIFICADO** en hardware. Prueba física pendiente:
 pecho AVO_1E8C grabando, Android con «Directo» activado y el iPad en LIVE, con la misma tarjeta y con un invitado.
+
+
+## Presencia: el pecho en directo en cuanto se enciende (Android 2.14, 20/11/2026)
+Decisión del usuario (20/11 20:55): el pecho manda su posición al servidor **cada segundo desde que se enciende**, sin
+grabar; el RAW sigue grabándose solo al entrar en la geocerca.
+- El pecho ya manda `TELEMETRY` a 2 Hz siempre que está conectado al móvil (también sin grabar): **sin cambios de
+  firmware ni de protocolo**. El pecho no tiene internet: el directo sale por el Android conectado.
+- `LiveRecorder` abre la sesión con la primera `TELEMETRY`: estado **`IDLE`** («EN ESPERA», 1 muestra/s); `REC` (2 Hz)
+  y `PAUSE` mientras graba en la geocerca; al salir vuelve a `IDLE`. Termina si el directo se desactiva o si pasan 60 s
+  sin `TELEMETRY` (pecho apagado o fuera de alcance).
+- Regla `live/…/meta/state`: ahora `IDLE|REC|PAUSE|END` → **hay que volver a publicar `firebase/database.rules.json`**.
+- iPad: selector de caballo arriba cuando hay más de un directo a la vez, y en la barra lateral «EN DIRECTO» con los
+  sistemas conectados (se actualiza cada 20 s; tocar abre LIVE con ese caballo).
+- Consumo estimado (no medido): unos 0,3 MB por hora y pecho en espera.
