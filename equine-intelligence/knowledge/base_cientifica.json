@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "fecha": "2026-11-20",
   "razas": [
     "PSI",
@@ -72,6 +72,11 @@
       "fecha": "2026-11-20",
       "titulo": "Estudio horario 08:09 UTC: modelo óseo B (dt [NV], tablas 4 y 7, 0,911 frente a 0,852) y velocidad final relativa / A8 (Wong 2023 reconfirmado, FS % de Timeform, árabes)",
       "archivo": "estudios/2026-11-20_0809_modeloB_dt_velocidad_final_relativa.md"
+    },
+    {
+      "fecha": "2026-11-20",
+      "titulo": "Estudio horario 09:09 UTC: V200/VHRmax (A9) y umbrales de prematuro del ECG (A11; Flethøj 2016 en texto completo)",
+      "archivo": "estudios/2026-11-20_0909_v200_a9_ecg_a11_umbrales.md"
     }
   ],
   "fuentes": [
@@ -234,8 +239,8 @@
       "raza_fuente": "PSI",
       "doi": "10.1111/j.2042-3306.2006.tb05525.x",
       "pmid": "17402404",
-      "nota": "«diferencias medias ≤ 2 %» entre días (no CV); el +8 % de VHRmax es de la crónica de prensa AAEP 2005 (n 10); trote + galope, medias de 5 s",
-      "verificado_fecha": "2026-11-19"
+      "nota": "«diferencias medias ≤ 2 %» entre días (no CV); el +8 % de VHRmax es de la crónica de prensa AAEP 2005 (n 10); trote + galope, medias de 5 s; KB 1.11.0: fiabilidad con 12 PSI de 3–5 años y entrenamiento con 12 PSI de 2 años (semanas 2 y 6), GPS + Polar, sin test por escalones; con entrenamiento suben V200 y VHRmax sin cambiar FCmax, pendiente ni ordenada [E-r]; rango, r², mesetas y retraso [NV] (sin texto completo)",
+      "verificado_fecha": "2026-11-20"
     },
     {
       "id": "WONG_2023",
@@ -355,8 +360,8 @@
       "doi": "10.1111/jvim.15358",
       "pmid": "30520119",
       "pmcid": "PMC6335521",
-      "nota": "−6,1/+5,4 % en canter en cinta (HSET), no galope en pista; recuperación: corte 6 % S 88 %, E 97 %, LR 26; texto completo abierto en PMC pero bloqueado en la sesión",
-      "verificado_fecha": "2026-11-19"
+      "nota": "−6,1/+5,4 % en canter en cinta (HSET), no galope en pista; recuperación: corte 6 % S 88 %, E 97 %, LR 26; texto completo abierto en PMC pero bloqueado en la sesión; KB 1.11.0: el 6 % solo está validado en la recuperación; para el galope el resumen no da umbral (sanos hasta −6,1 %)",
+      "verificado_fecha": "2026-11-20"
     },
     {
       "id": "TER_WOORT_2023",
@@ -373,8 +378,8 @@
       "raza_fuente": "PSI",
       "doi": "10.1111/j.2042-3306.2006.tb05526.x",
       "pmid": "17402405",
-      "nota": "r 0,41 con la raíz cuadrada de las ganancias máximas por salida; galopes de prueba 15–16 m/s; un entrenador; n 25",
-      "verificado_fecha": "2026-11-19"
+      "nota": "r 0,41 con la raíz cuadrada de las ganancias máximas por salida; galopes de prueba 15–16 m/s; un entrenador; n 25; KB 1.11.0: VHRmax < 14,5 m/s ↔ < 2500 A$ por carrera de media; FCmax y Vmax sin correlación [E-r]; fórmula exacta de VHRmax [NV]",
+      "verificado_fecha": "2026-11-20"
     },
     {
       "id": "SCHRURS_2024_TEXTO",
@@ -504,7 +509,13 @@
     {
       "id": "KOBAYASHI_2000",
       "cita": "Kobayashi M et al. 2000, Equine Vet J Suppl 30:159 (V200 en PSI de 2 años; resumen)",
-      "url": "https://doi.org/10.1111/j.2042-3306.1999.tb05208.x"
+      "url": "https://doi.org/10.1111/j.2042-3306.1999.tb05208.x",
+      "nota": "KB 1.11.0: V200 623 ± 55 → 691 ± 64 m/min tras 5 meses en PSI de 2 años (+10,9 %) [E-r]; efecto de pista y jinete sin cifras [NV]",
+      "acceso": "AGREGADOR",
+      "pais": "Japón",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20"
     },
     {
       "id": "LANGSETMO_1997",
@@ -742,8 +753,8 @@
       "pais": "Nueva Zelanda",
       "idioma": "en",
       "raza_fuente": "Standardbred [I-raza]",
-      "nota": "8 semanas de sobrecarga: V200 baja",
-      "verificado_fecha": "2026-11-19"
+      "nota": "10 trotones, 34 semanas (24 + 8 de sobrecarga + 2); V200 baja «sustancialmente» sin % en el resumen; últimos 1200 m +4,0 % (1,7–5,8) y velocidad pico −6,9 % (4,7–8,9) [E-r]; repositorio VU bloqueado (Anubis)",
+      "verificado_fecha": "2026-11-20"
     },
     {
       "id": "LELEU_2005",
@@ -1229,6 +1240,54 @@
       "idioma": "fr",
       "raza_fuente": "Árabe",
       "nota": "ganador 2:16,83, último 200 m 12,91 s; tracking no sincronizado con el cronometraje oficial; FS ≈106 % es cálculo propio [I] de un solo caballo",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "FLETHOJ_2016",
+      "cita": "Flethøj M, Kanters JK, Pedersen PJ, et al. 2016, BMC Vet Res 12:266 (ECG de ejercicio en árabes de raid sanos)",
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5126988/",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Dinamarca",
+      "idioma": "en",
+      "raza_fuente": "árabe de raid [I-raza: misma raza, otra disciplina]",
+      "doi": "10.1186/s12917-016-0894-2",
+      "pmcid": "PMC5126988",
+      "nota": "acortamiento del RR frente al anterior: 20 % (< 60 lpm), 10 % (60–100), 4 % (> 100), ajustados por ensayo y error; con el 4 % se marcó hasta un 3,8 % de latidos en ejercicio frente a ≤ 0,4 % de arritmias reales; registro fuera si se pierde > 10 %; FCmax media 188 lpm (156–209); n 11",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "MASSIE_2021",
+      "cita": "Massie SL et al. 2021, Vet J 267:105583 (arritmias y variación RR en PSI sanos de chuckwagon)",
+      "url": "https://madbarn.com/research/prevalence-of-cardiac-arrhythmias-and-r-r-interval-variation-in-healthy-thoroughbred-horses-during-official-chuckwagon-races-and-recovery",
+      "acceso": "AGREGADOR",
+      "pais": "Canadá",
+      "idioma": "en",
+      "raza_fuente": "PSI (chuckwagon, no llano)",
+      "doi": "10.1016/j.tvjl.2020.105583",
+      "nota": "52 de 82 ECG analizados (causa [NV]); arritmias 92 % en carrera, 58 % en recuperación; RR en carrera −27,8 a +45,3 %",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "GUCUYENER_2024",
+      "cita": "Gücüyener Hacan Ö, Danışan S 2024, Vet Sci Pract 19(1):35–45 (árabes de carreras en Turquía; FC máxima)",
+      "url": "https://doi.org/10.17094/vetsci.1471546",
+      "acceso": "RESUMEN",
+      "pais": "Turquía [NV]",
+      "idioma": "en/tr",
+      "raza_fuente": "árabe de carreras",
+      "doi": "10.17094/vetsci.1471546",
+      "nota": "solo FC máxima, sin relación FC–velocidad; no sirve para V200",
+      "verificado_fecha": "2026-11-20"
+    },
+    {
+      "id": "WILK_2017",
+      "cita": "Wilk I et al. 2017, J Anim Sci Biol Bioecon 35(4):75–89 (VFC en árabes de carreras, Polonia)",
+      "url": "https://www.google.com/search?q=Wilk+2017+Arabian+racehorses+heart+rate+variability+Journal+of+Animal+Science+Biology+and+Bioeconomy",
+      "acceso": "RESUMEN",
+      "pais": "Polonia (Janów Podlaski, Służewiec)",
+      "idioma": "en",
+      "raza_fuente": "árabe de carreras (32–37 meses)",
+      "nota": "n 20; solo variabilidad de la FC (Polar RS800CX), sin V200; DOI y URL del editor [NV] (solo resumen visto por el subagente)",
       "verificado_fecha": "2026-11-20"
     }
   ],
@@ -1877,7 +1936,8 @@
       ],
       "estado": "PENDIENTE",
       "falta": "ECG de la cincha 0.5.x en el análisis",
-      "nota": "Vermeulen: medias de 5 s y diferencias test-retest ≤ 2 % (no hay TE ni SWC formal publicado); ICC de V200 0,50 en trotones (Poinsard 2026); sin V200 en el análisis no se puede aplicar (la herramienta kb_drift_down sirve cuando llegue el ECG) · sin TE publicado de V200 en PSI/árabe con texto legal; usar TE propio (≥ 3 sesiones/semana); no mezclar cinta y pista (Couroucé 2000 [I-raza]); V200 baja con sobrecarga (Hamlin 2002 [I-raza]); Fonseca 2011: con rutina el cambio puede no verse (estudio extra 4)"
+      "nota": "Vermeulen: medias de 5 s y diferencias test-retest ≤ 2 % (no hay TE ni SWC formal publicado); ICC de V200 0,50 en trotones (Poinsard 2026); sin V200 en el análisis no se puede aplicar (la herramienta kb_drift_down sirve cuando llegue el ECG) · sin TE publicado de V200 en PSI/árabe con texto legal; usar TE propio (≥ 3 sesiones/semana); no mezclar cinta y pista (Couroucé 2000 [I-raza]); V200 baja con sobrecarga (Hamlin 2002 [I-raza]); Fonseca 2011: con rutina el cambio puede no verse (estudio extra 4)",
+      "nota_1_11_0": "Estudio 09:09: sin texto completo nuevo; VHRmax < 14,5 m/s ↔ ganancias bajas en un entrenador (Gramkow [E-r], no es umbral); +10,9 % de V200 en 5 meses en potros (Kobayashi [E-r]); ningún dato de V200 en árabes de llano: solo línea base propia; superficie y jinete como covariables"
     },
     {
       "id": "A11_ECG",
@@ -1891,11 +1951,15 @@
         "VAN_STEENKISTE_2020_QRS",
         "FRICK_2019",
         "TRACHSEL_2011",
-        "TER_WOORT_2022"
+        "TER_WOORT_2022",
+        "FLETHOJ_2016",
+        "MASSIE_2021",
+        "MARR_2020"
       ],
       "estado": "PENDIENTE",
       "nota": "las definiciones operativas son de Navas de Solis 2026; el texto completo de Van Erck 2026 no se pudo leer; ninguna fuente fija un número aceptable de prematuros (Buhl 2011, Barbesgaard 2011, Massie 2023, Marr 2020)",
-      "nota_1_6_0": "Estudio extra 3: detector anclado en el pico S (Van Steenkiste 2020 [E], reposo: VPP 99,1 %, S 98,0 %; Pan-Tompkins 81,5/91,5 por ondas T); prematuro ≥ 5–6 % de acortamiento del RR con FC > 100 lpm (Navas de Solis 2026 [E], Frick 2019 [E-r]); fases calentamiento/pico/recuperación 0–2 min/tardía (Marr 2020 [E]: 50,6 % de alteraciones en la recuperación); puerta de calidad > 10 % no interpretable por fase (Ter Woort 2022 [E-r]); niveles INFO/VIGILAR/veterinario [I]; siempre candidato a revisar (acuerdo entre observadores en ejercicio 0–13 %, Trachsel 2011 [E-r])"
+      "nota_1_6_0": "Estudio extra 3: detector anclado en el pico S (Van Steenkiste 2020 [E], reposo: VPP 99,1 %, S 98,0 %; Pan-Tompkins 81,5/91,5 por ondas T); prematuro ≥ 5–6 % de acortamiento del RR con FC > 100 lpm (Navas de Solis 2026 [E], Frick 2019 [E-r]); fases calentamiento/pico/recuperación 0–2 min/tardía (Marr 2020 [E]: 50,6 % de alteraciones en la recuperación); puerta de calidad > 10 % no interpretable por fase (Ter Woort 2022 [E-r]); niveles INFO/VIGILAR/veterinario [I]; siempre candidato a revisar (acuerdo entre observadores en ejercicio 0–13 %, Trachsel 2011 [E-r])",
+      "nota_1_11_0": "Estudio 09:09: Flethøj 2016 [E]: 20/10/4 % son acortamientos escalonados por FC y el 4 % en ejercicio sobredetecta (~3,8 % marcados frente a ≤ 0,4 % reales); se mantiene ≥ 5–6 % con FC > 100 lpm; FC < 100 lpm: 10 % (60–100) y 20 % (< 60) solo INFO [I]; FC pico sin prematuros (Navas de Solis [E]); Marr 2020 [E]: 50,6 % de ectópicos en recuperación"
     },
     {
       "id": "KB_FATIGA_OSEA_7D",
@@ -1979,8 +2043,8 @@
   ],
   "pendiente_motor": [
     "Modelo óseo B (Pan/Anwar) con adaptación y reparación: constantes completas con b = −0,02 y f_BM(0) = 0,61 (KB 1.8.0, extra 5); faltan el paso de integración (no publicado) y reproducir la tabla 4 de Anwar (código en Zenodo 19173866); KB 1.10.0: dt y solver no aparecen en los preprints en texto completo (diario [I]); condiciones iniciales f_BM 0,61 y D* 0 [E]; validar con tablas 4 y 7 del preprint (usar 0,911 de la tabla, no 0,852 de la Discusión)",
-    "V200/VHRmax por regresión FC–velocidad (medias de 5 s, trote + galope [E]); mesetas ≥ 30 s descartando 20–30 s [I], R² ≥ 0,90 [I], sin extrapolar; recuperación a 1, 2, 4, 5, 10 y 15 min solo informativa; extra 4: TE propio por caballo (no hay TE publicado legible en PSI/árabe); misma superficie y nunca cinta con pista",
-    "ECG por fase (≥ 250 SPS con interpolación del pico, preferible 500): detector anclado en S con rechazo de T y sin ceguera tras artefacto; prematuro ≥ 6 % frente a la mediana de 8 RR con FC > 100 lpm; pareja, triplete, racha ≥ 4, FA; puerta > 10 % no interpretable por fase; validar con galope real anotado a mano (objetivo VPP ≥ 99 %, S ≥ 98 %) (estudio extra 3)",
+    "V200/VHRmax por regresión FC–velocidad (medias de 5 s, trote + galope [E]); mesetas ≥ 30 s descartando 20–30 s [I], R² ≥ 0,90 [I], sin extrapolar; recuperación a 1, 2, 4, 5, 10 y 15 min solo informativa; extra 4: TE propio por caballo (no hay TE publicado legible en PSI/árabe); misma superficie y nunca cinta con pista; KB 1.11.0: sin referencia publicada para árabes de llano; VHRmax < 14,5 m/s (Gramkow [E-r]) solo como texto informativo, nunca umbral",
+    "ECG por fase (≥ 250 SPS con interpolación del pico, preferible 500): detector anclado en S con rechazo de T y sin ceguera tras artefacto; prematuro ≥ 6 % frente a la mediana de 8 RR con FC > 100 lpm; pareja, triplete, racha ≥ 4, FA; puerta > 10 % no interpretable por fase; validar con galope real anotado a mano (objetivo VPP ≥ 99 %, S ≥ 98 %) (estudio extra 3); KB 1.11.0: con FC < 100 lpm usar 10 % (60–100) y 20 % (< 60) solo INFO (Flethøj 2016 [E] en árabes de raid [I-raza]) y FC pico como media de los 5 RR más cortos sin prematuros (Navas de Solis 2026 [E])",
     "Conectar las líneas base a A9 (V200) cuando el análisis traiga el ECG; A7 y A8 conectadas en 2.0.0-dev7 (KB 1.5.0) con superficie como criterio de comparables; falta el TE propio por métrica y la playa por franja",
     "Velocidad final relativa propia de AVO (France Galop no publica ningún IDF; estudio extra 2 2026-11-19): v(últimos 600/400 m)/v media con par propio por pista y superficie, al estilo de la Finishing Speed % de Timeform; importador de los PDF de tracking por 200 m solo informativo; KB 1.10.0: FS % de Timeform = v final/v media frente al par de pista y distancia, sin umbrales; Wong 2023 usa v200 absoluta y longitudinal; ninguna fuente da umbral de riesgo: solo métrica descriptiva con par propio",
     "Índice tendinoso heurístico por bandas cualitativas (prioritario en árabes de 3–4 años): sin exponente de carga; faltan en la app la lesión previa, la CSA ecográfica y la firmeza del suelo (estudio extra 2026-11-19); extra 4: sin OR de árabes (Golfo, Turquía, Polonia); edad 3–4 años con 3 fuentes; no añadir término de carga (Çalışkan 2020b, Perkins 2005); CSA árabe de referencia 62–94 mm²",
@@ -2012,7 +2076,6 @@
     "Datos de carga o velocidad acumulada asociados al TFDS en árabes (no encontrados en Polonia, Turquía, EAU, Qatar, Francia ni Reino Unido)",
     "PMC12699123 (Norteamérica 2009–2023, bloqueado por reCAPTCHA): días desde la última carrera y el último trabajo rápido",
     "Días entre trabajos rápidos en PSI (Johnston 2020 los calcula sin publicarlos) y cualquier programa semanal de árabes de llano",
-    "Flethøj 2016 en PDF (signo del umbral 20/10/4 %) y Frick 2019 completo (umbral de prematuro en galope)",
     "Textos completos bloqueados en el extra 4: Martig 2013 (n, frecuencia, criterio de fallo; vías: DOI/ScienceDirect antibots, PubMed reCAPTCHA, minerva-access sin tesis), Morrice-West 2025 (unidad de 0,25/0,75 e IC de 2,89/8,51; ScienceDirect, OpenAlex bloqueados), Estberg 1998 (velocidad umbral, P75), Vermeulen & Evans 2006 y Gramkow & Evans 2006 (Wiley de pago; ResearchGate sin texto)",
     "Frick 2019 en PMC6335521 o BORIS desde un navegador: umbral de prematuro en la fase de ejercicio (abierto CC BY-NC, bloqueado por reCAPTCHA/Anubis en la sesión)",
     "DOI de Carrier 1998 (JAVMA 212:1582; probable 10.2460/javma… sin confirmar)",
@@ -2032,7 +2095,10 @@
     "Latinoamérica: resto de la tesis de Zambruno 2017 (mortalidad), tabla 2 de Berkman 2015, OR de Bimson 2022; México, Perú y Colombia sin estudios hallados (20/11)",
     "Versión publicada de Anwar 2026 (RSOS 13:260818, PMC13641913): comparar la tabla 7 con el preprint antes de usar D* en el motor (20/11)",
     "Zenodo 19173866 (Anwar) y 16557014 (Pan) y PMC13641913 desde un navegador con permisos: dt, solver, licencia del código y si la versión publicada corrige 0,852/0,911 (20/11 08:09)",
-    "Nielsen 2006 (EVJ Suppl 36) completo: magnitud de la desaceleración final en árabes; PDF de tracking de France Galop de carreras árabes (2023–2026) para un par propio de FS % por pista y distancia (20/11 08:09)"
+    "Nielsen 2006 (EVJ Suppl 36) completo: magnitud de la desaceleración final en árabes; PDF de tracking de France Galop de carreras árabes (2023–2026) para un par propio de FS % por pista y distancia (20/11 08:09)",
+    "Frick 2019 en el resto del texto (umbral en galope y raza) solo por la vía de PMC/Europe PMC desde un navegador; Flethøj 2016 cerrado en texto completo (20/11 09:09)",
+    "Vermeulen & Evans 2006 y Gramkow & Evans 2006: probar Europe PMC/Unpaywall desde un navegador (OpenAlex 403 en la sesión; Wiley sin respuesta); Massie 2021: causa de los 30 ECG excluidos de 82 (20/11 09:09)",
+    "V200/VHRmax en árabes de carreras en llano: Janów Podlaski/Służewiec (Polonia), Turquía (Gücüyener 2024 solo da FCmax) y Golfo; ninguno hallado (20/11 09:09)"
   ],
   "historial": [
     {
@@ -2089,6 +2155,11 @@
       "version": "1.10.0",
       "fecha": "2026-11-20",
       "cambio": "Estudio horario 08:09: modelo B sin dt publicado (diario [I]), condiciones iniciales f_BM 0,61 y D* 0 confirmadas, incoherencia 0,911/0,852 del preprint de Anwar; A8 con sentido confirmado (Wong 2023: riesgo al bajar la v200 absoluta); FS % de Timeform sin umbrales; 6 fuentes nuevas y 3 completadas; sin cambios de lógica; motor 2.0.0-dev12"
+    },
+    {
+      "version": "1.11.0",
+      "fecha": "2026-11-20",
+      "cambio": "Estudio horario 09:09: A11 — Flethøj 2016 [E]: 20/10/4 % son acortamientos escalonados por FC y el 4 % sobredetecta; se mantiene ≥ 5–6 % con FC > 100 lpm y se propone 10/20 % [I] para FC baja y FC pico sin prematuros; A9 — sin texto completo nuevo, referencias de escala (Gramkow, Kobayashi, Hamlin) y ningún dato de V200 en árabes de llano; 4 fuentes nuevas y 5 completadas; sin cambios de lógica; motor 2.0.0-dev13"
     }
   ]
 }

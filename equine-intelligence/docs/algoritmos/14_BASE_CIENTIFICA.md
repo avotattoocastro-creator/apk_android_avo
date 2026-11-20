@@ -1,4 +1,4 @@
-# 14 · Base científica de la cuadra (KB-1) 1.10.0
+# 14 · Base científica de la cuadra (KB-1) 1.11.0
 
 Código: `include/avo_eq/knowledge.h`, `src/knowledge/knowledge.cpp`. Se calcula en Track Work (`src/racing/racing.cpp`,
 bloque `trabajo_pista.base_cientifica`) y se evalúa en Training Analytics (`src/training/training.cpp`, bloques
@@ -166,6 +166,14 @@ Detalle: `knowledge/estudios/2026-11-19_extra4_auditoria_fuentes_tendon_arabes_v
   0,186 m a la misma velocidad (Pfau 2024 [E]), más que el umbral de A7, así que las comparables deben ser de la misma
   franja; registro de marea, lluvia, humedad y nota del jinete.
 Detalle: `knowledge/estudios/2026-11-19_extra5_modeloB_signo_b_playa_franjas.md`.
+
+**Estudio horario 20/11 09:09 (KB-1 1.11.0, motor 2.0.0-dev13, sin cambios de lógica).**
+- **A11:** Flethøj 2016 [E] (árabes de raid, [I-raza]): los cortes 20/10/4 % son acortamientos del RR escalonados por FC
+  (< 60, 60–100, > 100 lpm) y el 4 % en ejercicio sobredetecta; se mantiene ≥ 5–6 % con FC > 100 lpm y el pendiente
+  añade 10 %/20 % [I] para FC baja (solo INFO) y la FC pico sin prematuros (Navas de Solis 2026 [E]).
+- **A9:** sin texto completo nuevo; VHRmax < 14,5 m/s (Gramkow 2006 [E-r]) solo informativo; no hay V200 publicada en
+  árabes de llano, así que en árabes A9 dependerá solo de la línea base propia.
+Detalle: `knowledge/estudios/2026-11-20_0909_v200_a9_ecg_a11_umbrales.md`.
 
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se
