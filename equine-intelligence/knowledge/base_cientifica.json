@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.23.0",
+  "version": "1.24.0",
   "fecha": "2026-11-20",
   "razas": [
     "PSI",
@@ -137,6 +137,11 @@
       "fecha": "2026-11-20",
       "titulo": "Estudio horario 21:08 UTC: estado del terreno (going) como criterio de comparables y calentamiento / vuelta a la calma",
       "archivo": "estudios/2026-11-20_2108_going_terreno_calentamiento_vuelta_calma.md"
+    },
+    {
+      "fecha": "2026-11-20",
+      "titulo": "Estudio horario 22:09 UTC: lesiones de árabes de llano en Turquía (serie Yıldırım) y repetibilidad de campo de Poinsard 2026",
+      "archivo": "estudios/2026-11-20_2209_lesiones_arabes_turquia_repetibilidad_v200.md"
     }
   ],
   "fuentes": [
@@ -311,7 +316,7 @@
     },
     {
       "id": "YILDIRIM_2025",
-      "cita": "Yildirim et al. 2025, Equine Vet J (553 lesiones PSI y árabes, Turquía)",
+      "cita": "Yıldırım İG, Karaarslan S, Erkan A 2025, Equine Vet J, doi 10.1111/evj.14457 (PMID 39777406; 553 lesiones PSI y árabes, Turquía)",
       "url": "https://madbarn.com/research/distribution-of-race-and-training-related-musculoskeletal-injuries-by-track-and-location-in-thoroughbred-and-arabian-racehorses",
       "doi": "10.1111/evj.14457",
       "acceso": "RESUMEN",
@@ -319,7 +324,7 @@
       "idioma": "en",
       "raza_fuente": "PSI y árabe de carreras",
       "verificado_fecha": "2026-11-20",
-      "nota": "553 lesiones 2018–2023: 45,3 % fracturas, 40,3 % tendinosas; anterior 92,7 % en árabes; picos a 3–4 años; fin de carrera 46,4 % árabes; OR por superficie [NV]; Wiley pdfdirect con error en la sesión (OpenAlex: acceso abierto)"
+      "nota": "553 lesiones 2018–2023: 45,3 % fracturas, 40,3 % tendinosas; anterior 92,7 % en árabes; picos a 3–4 años; fin de carrera 46,4 % árabes; OR por superficie [NV]; Wiley pdfdirect con error en la sesión (OpenAlex: acceso abierto); 22:09: Wiley, doi.org y OpenAlex sin permiso en la sesión desatendida, no hay copia en PMC/Europe PMC; resumen releído vía MadBarn: 2×3 chi² con Z post hoc, superficie p < 0,0001 en ambas razas sin OR; máximo jun–sep; licencia [NV]"
     },
     {
       "id": "VAN_ERCK_2026",
@@ -559,8 +564,11 @@
       "pais": "Francia",
       "idioma": "en",
       "raza_fuente": "trotón francés",
-      "nota": "60 caballos, 483 sesiones; ICC V200 0,50 (0,28–0,66), V150 0,59; recuperación FC 60 s ICC 0,60, MDC95 26 lpm; coste cardíaco ICC 0,67, MDC95 0,04 latidos/m",
-      "verificado_fecha": "2026-11-20"
+      "nota": "60 caballos, 483 sesiones; ICC V200 0,50 (0,28–0,66), V150 0,59; recuperación FC 60 s ICC 0,60, MDC95 26 lpm; coste cardíaco ICC 0,67, MDC95 0,04 latidos/m; 22:09: título centrado en el coste cardíaco; subconjunto de repetibilidad 18 caballos, 36 bloques, 126 sesiones (≥ 3 sesiones con ≤ 7 d entre ellas), ICC ajustado por temperatura; V180, velocidad de recuperación y CC del 2.º bloque «pobres»; MDPI y PMC sin permiso en la sesión, releído solo en resúmenes de terceros (MadBarn, IA; Synapse), que no repiten el ICC de V200 → sigue [E-r]; financiación IFCE",
+      "verificado_fecha": "2026-11-20",
+      "doi": "10.3390/ani16111598",
+      "pmid": "42278033",
+      "pmcid": "PMC13255733"
     },
     {
       "id": "CHOI_PARKIN_2025_TEXTO",
@@ -593,12 +601,13 @@
       "id": "YILDIRIM_KARAARSLAN_2025",
       "cita": "Yıldırım & Karaarslan 2025, Turk J Vet Res 9:33–40 (misma serie que Yildirim 2025 EVJ)",
       "url": "https://dergipark.org.tr/en/download/article-file/4272043",
-      "acceso": "SIN_AUDITAR",
-      "verificado_fecha": "[NV]",
-      "pais": "[NV]",
-      "idioma": "[NV]",
-      "raza_fuente": "[NV]",
-      "nota_auditoria": "campos acceso, verificado_fecha, pais, idioma, raza_fuente completados como SIN_AUDITAR/[NV] el 2026-11-20 sin releer la fuente"
+      "acceso": "TEXTO_COMPLETO",
+      "verificado_fecha": "2026-11-20",
+      "pais": "Turquía",
+      "idioma": "en",
+      "raza_fuente": "PSI y árabe de carreras en llano",
+      "nota_auditoria": "reclasificada 2026-11-20 22:09: es la misma publicación que YILDIRIM_KARAARSLAN_2025_TJVR (usar la canónica, regla AU1)",
+      "duplicado_de": "YILDIRIM_KARAARSLAN_2025_TJVR"
     },
     {
       "id": "BUHL_2011",
@@ -933,13 +942,15 @@
     },
     {
       "id": "YILDIRIM_KARAARSLAN_2025_TJVR",
-      "cita": "Yıldırım İG, Karaarslan S 2025, Turkish J Vet Res 9:33, doi 10.47748/tjvr.1563380",
-      "acceso": "SIN_AUDITAR",
-      "verificado_fecha": "[NV]",
-      "pais": "[NV]",
-      "idioma": "[NV]",
-      "raza_fuente": "[NV]",
-      "nota_auditoria": "campos acceso, verificado_fecha, pais, idioma, raza_fuente completados como SIN_AUDITAR/[NV] el 2026-11-20 sin releer la fuente"
+      "cita": "Yıldırım İG, Karaarslan S 2025, Turkish J Vet Res 9(1):33–40, doi 10.47748/tjvr.1563380",
+      "acceso": "TEXTO_COMPLETO",
+      "verificado_fecha": "2026-11-20",
+      "pais": "Turquía (10 hipódromos TJC; lesiones del hospital de Şirinyer, Esmirna)",
+      "idioma": "en",
+      "raza_fuente": "PSI y árabe de carreras en llano",
+      "doi": "10.47748/tjvr.1563380",
+      "url": "https://dergipark.org.tr/en/download/article-file/4272043",
+      "nota": "misma serie de lesiones que YILDIRIM_2025 (337 PSI + 216 árabes = 553); descriptivo, sin superficie ni carrera/entrenamiento; árabes: tendón 137 (63,7 %), fractura 42 (19,5 %), fisura 29 (13,5 %), desmitis 4, rotura de tendón 2, chip 1; PSI: fractura 206 (61,5 %), tendón 86 (25,7 %); fin de carrera 102/216 árabes (47,2 %); tablas 1 y 2 discrepan (fracturas 208/43 frente a 206/42); el hospital ve ≈ 20 % de los caballos; licencia CC BY-NC 4.0 en cabecera y CC BY 4.0 al final (contradicción)"
     },
     {
       "id": "CALISKAN_2020_JEVS",
@@ -3271,6 +3282,28 @@
       "pais": "Australia",
       "raza_fuente": "PSI",
       "nota": "práctica de calentamiento y vuelta a la calma en Queensland (lectura parcial)"
+    },
+    {
+      "id": "TENDINITIS_TURQUIA_JRVM",
+      "cita": "«Türkiye'de yarış atlarında tendinitis ile etiyolojik faktörler arasındaki ilişki» (Journal of Research in Veterinary Medicine, año [NV])",
+      "url": "https://www.acarindex.com/journal-of-research-in-veterinary-medicine/turkiyede-yaris-atlarinda-tendinitis-ile-etiyolojik-faktorler-arasindaki-iliski-atlarla-iliskili-parametrelerin-etkisi-1081788",
+      "acceso": "RESUMEN",
+      "verificado_fecha": "2026-11-20",
+      "pais": "Turquía",
+      "idioma": "tr/en",
+      "raza_fuente": "PSI y árabe de carreras",
+      "nota": "118 caballos (56 árabes) con 120 casos de tendinitis/peritendinitis de flexores metacarpianos; sin asociación significativa con raza, edad, sexo, altura ni peso; no estudia la pista"
+    },
+    {
+      "id": "PIESZKA_LIMB_INJURIES_TB_ARAB",
+      "cita": "Pieszka M, Łuszczyński J, Baranowska M, «Frequency of limb injuries between Thoroughbred and Arabian horses» (Polonia)",
+      "url": "https://sanad.iau.ir/en/Article/1023289",
+      "acceso": "NO_ACCESIBLE",
+      "verificado_fecha": "2026-11-20",
+      "pais": "Polonia",
+      "idioma": "en",
+      "raza_fuente": "PSI y árabe",
+      "nota": "la ficha no muestra resumen ni cifras [NV]"
     }
   ],
   "parametros": [
@@ -4253,6 +4286,33 @@
       ],
       "estado": "PROPUESTA",
       "nota": "estándar de tests de campo en PSI; base de WU1"
+    },
+    {
+      "id": "proporcion_tendon_lesiones_arabes_turquia",
+      "valor": 0.637,
+      "unidad": "fracción de las lesiones musculoesqueléticas atendidas",
+      "evidencia": "E",
+      "fuentes": [
+        "YILDIRIM_KARAARSLAN_2025_TJVR"
+      ],
+      "estado": "REFERENCIA",
+      "nota": "137/216 árabes frente a 86/337 (25,7 %) en PSI; serie hospitalaria (≈ 20 % de la población), no es incidencia ni riesgo; contexto para el índice tendinoso, no umbral"
+    },
+    {
+      "id": "repetibilidad_campo_bloque_poinsard",
+      "valor": {
+        "caballos": 18,
+        "bloques": 36,
+        "sesiones": 126,
+        "min_sesiones_bloque": 3,
+        "max_dias_entre_sesiones": 7
+      },
+      "evidencia": "E-r / I-raza",
+      "fuentes": [
+        "POINSARD_2026"
+      ],
+      "estado": "REFERENCIA",
+      "nota": "diseño del bloque de repetibilidad en trotones; apoya VT1 (TE propio con ≥ 3 sesiones) y RB1"
     }
   ],
   "reglas": [
@@ -4564,6 +4624,28 @@
       ],
       "estado": "PROPUESTA",
       "nota": "efecto del calentamiento en la V200 de campo no publicado [NV]"
+    },
+    {
+      "id": "TENDON_ARABES_TA1_TA2",
+      "umbral": "TA1 en árabes de llano mostrar el índice tendinoso antes que la fatiga ósea en el resumen de riesgo (prioridad de presentación, no predicción); TA2 en PSI el orden inverso; ninguno modifica umbrales",
+      "evidencia": "E / I",
+      "fuentes": [
+        "YILDIRIM_KARAARSLAN_2025_TJVR",
+        "YILDIRIM_2025"
+      ],
+      "estado": "PROPUESTA",
+      "nota": "en la serie turca el tendón es el 63,7 % de las lesiones de árabes y la fractura el 61,5 % de las de PSI [E]; superficie sin OR [NV]; [I] de diseño, sin implementar"
+    },
+    {
+      "id": "REPETIBILIDAD_BLOQUE_RB1",
+      "umbral": "RB1 el TE propio de V200/V150/recuperación/coste cardíaco se calcula en bloques de ≥ 3 sesiones con ≤ 7 d entre ellas y temperatura registrada; fuera del bloque, marcar «TE no propio»; preferir coste cardíaco y recuperación a 60 s frente a V200 aislada como señal corta",
+      "evidencia": "E-r / I-raza / I",
+      "fuentes": [
+        "POINSARD_2026",
+        "VERMEULEN_EVANS_2006"
+      ],
+      "estado": "PROPUESTA",
+      "nota": "complementa VT1–VT3; sin implementar"
     }
   ],
   "pendiente_motor": [
@@ -4592,7 +4674,8 @@
     "DM1–DM4 (estudio 20/11 19:08, KB 1.21.0): pautas de carga del planificador para potros de 2 años frente a la DMD (rápido corto y frecuente, sin picos agudos de canter, escalones de distancia); [I], sin implementar con la capa 2",
     "SO1–SO3 (estudio 20/11 19:08): A9 con caída de V200/rendimiento y dos señales coincidentes; VLa4 al alza con rendimiento a la baja = sospechoso; A10 relativa a la tendencia de crecimiento en 2 años; [I], sin implementar",
     "RT1–RT3 y PE1–PE3 (estudio 20/11 20:08, KB 1.22.0): separación ≥ 72 h entre trabajos rápidos en el planificador; peso solo matinal con persistencia ≥ 3 d (AVISO ≥ 2 %, ALTO ≥ 4 %) y gracia tras transporte; [I], sin implementar",
-    "GO1–GO4 y WU1–WU4 (estudio 20/11 21:08, KB 1.23.0): going como estrato y covariable de comparables A7/A8 (campo going/penetración en Session); calentamiento mínimo y clase de vuelta a la calma para A9 y CF2; [I], sin implementar"
+    "GO1–GO4 y WU1–WU4 (estudio 20/11 21:08, KB 1.23.0): going como estrato y covariable de comparables A7/A8 (campo going/penetración en Session); calentamiento mínimo y clase de vuelta a la calma para A9 y CF2; [I], sin implementar",
+    "TA1–TA2 y RB1 (estudio 20/11 22:09, KB 1.24.0): orden de presentación tendón/hueso por raza y bloques de repetibilidad (≥ 3 sesiones, ≤ 7 d) para el TE propio; [I], sin implementar"
   ],
   "cola_investigacion": [
     "Texto completo de Verheyen 2006 (Bone, DOI 10.1016/j.bone.2006.05.025): ORs, cortes, límite inferior del canter, ventana de 60 d",
@@ -4671,7 +4754,10 @@
     "Error típico día a día del peso corporal en PSI de carreras con báscula de cuadra (no publicado) y peso antes/después de carrera de llano en PSI o árabes (no hallado) (20/11 20:08)",
     "Glucógeno tras un breeze de 400–800 m en pista en PSI (Minami 2009 da 24 h en cinta frente a 48–72 h de la revisión); textos primarios de Snow & Harris 1991, Davie 1994–96 y Lacombe 1999/2001; PMC7696103 (metaanálisis alta velocidad) (20/11 20:08)",
     "Hobbs 2024 (JEVS 10.1016/j.jevs.2024.105211) completo: m/s por kN de amortiguación; Ely 2009 sobre going; Hong Kong humedad del césped y lesiones; going en árabes de llano (Francia, Polonia, Golfo) (20/11 21:08)",
-    "Efecto del calentamiento sobre la V200 de campo y la recuperación de la FC en PSI (no publicado); textos completos de Mukai 2008/2010, Hubbell 1997 y Jansson 2005 (Cambridge) (20/11 21:08)"
+    "Efecto del calentamiento sobre la V200 de campo y la recuperación de la FC en PSI (no publicado); textos completos de Mukai 2008/2010, Hubbell 1997 y Jansson 2005 (Cambridge) (20/11 21:08)",
+    "Yıldırım, Karaarslan & Erkan 2025 (EVJ 10.1111/evj.14457) en texto completo: recuentos por superficie y carrera/entrenamiento, localización (sesamoideos, MC3, TFDS frente a suspensor) en árabes; Wiley/OpenAlex sin permiso en la sesión de 22:09 (20/11 22:09)",
+    "Poinsard 2026 (MDPI/PMC13255733) en texto completo: ICC y MDC de V200, cálculo exacto (cruce de 200 lpm o regresión), TE en m/s; mdpi.com y PMC sin permiso en la sesión de 22:09 (20/11 22:09)",
+    "Pieszka, Łuszczyński & Baranowska (Polonia): frecuencia de lesiones de miembros PSI frente a árabes; ficha sin resumen (20/11 22:09)"
   ],
   "historial": [
     {
@@ -4793,6 +4879,11 @@
       "version": "1.23.0",
       "fecha": "2026-11-20",
       "cambio": "Estudio horario 21:08: going firme más riesgo (OR 1,29–1,73, Rosanowski 2018/Morrice-West 2025 [E]) y más fatiga ósea por salida; blando más zancadas a igual velocidad; going oficial 51 % de concordancia (Northrop 2024 [E]); árabes 14,45 frente a 13,52 m/s césped/tierra; calentamiento sube la FC a igual esfuerzo (Mukai 2010 [E-r]) y vuelta a la calma activa acelera el lactato; GO1–GO4 y WU1–WU4 [I]; 20 fuentes, 4 parámetros, 2 reglas propuestas, 1 pendiente, 2 de cola; sin cambios de lógica; motor 2.0.0-dev25"
+    },
+    {
+      "version": "1.24.0",
+      "fecha": "2026-11-20",
+      "cambio": "Estudio horario 22:09: Yıldırım & Karaarslan 2025 (TJVR) leído en texto completo y reclasificado (duplicado fusionado): en árabes el tendón es el 63,7 % de 216 lesiones frente al 25,7 % en PSI (fractura 61,5 %); misma serie que el EVJ 2025 (texto completo no accesible); Poinsard 2026: diseño del bloque de repetibilidad (18 caballos, ≥ 3 sesiones en ≤ 7 d) [E-r], ICC de V200 sin reconfirmar; TA1–TA2 y RB1 [I]; 2 fuentes nuevas, 3 actualizadas, 2 parámetros de referencia, 2 reglas propuestas; sin cambios de lógica; motor 2.0.0-dev26"
     }
   ]
 }

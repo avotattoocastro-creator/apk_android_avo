@@ -274,6 +274,16 @@ Detalle: `knowledge/estudios/2026-11-20_1709_exactitud_gnss_mano_de_galope.md`.
   el lactato con FC más alta. Propuesta WU1–WU4 [I] para A9 y CF2.
 Detalle: `knowledge/estudios/2026-11-20_2108_going_terreno_calentamiento_vuelta_calma.md`.
 
+**Estudio horario 20/11 22:09 (KB-1 1.24.0, motor 2.0.0-dev26, sin cambios de lógica).**
+- **Lesiones de árabes de llano (Turquía):** en la serie del hospital de Şirinyer el tendón es el 63,7 % de las 216
+  lesiones de árabes y la fractura el 61,5 % de las 337 de PSI (Yıldırım & Karaarslan 2025, TJVR [E]); es una serie
+  hospitalaria, no un riesgo; la superficie y el punto de la carrera siguen [NV] (EVJ 2025 sin acceso). Duplicado
+  fusionado y fuente reclasificada (AU1). Propuesta TA1–TA2 [I]: orden de presentación tendón/hueso por raza.
+- **Repetibilidad de campo:** Poinsard 2026 estima la repetibilidad en bloques de ≥ 3 sesiones con ≤ 7 d entre ellas;
+  el coste cardíaco y la recuperación de la FC son más repetibles que V180 [E-r, trotones]; sigue sin TE publicado de
+  V200 en PSI/árabes. Propuesta RB1 [I] para el TE propio.
+Detalle: `knowledge/estudios/2026-11-20_2209_lesiones_arabes_turquia_repetibilidad_v200.md`.
+
 **Estudio horario 20/11 20:08 (KB-1 1.22.0, motor 2.0.0-dev24, sin cambios de lógica).**
 - **Recuperación tras el trabajo rápido:** el glucógeno tarda 48–72 h en reponerse (revisión [E], Hyyppä/Lacombe
   [E-r]; Minami 2009 discrepa con 24 h); CK/AST normales en ≤ 24 h, también en árabes de llano; propuesta RT1–RT3 [I]
