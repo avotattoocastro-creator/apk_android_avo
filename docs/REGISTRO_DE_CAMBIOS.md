@@ -343,6 +343,16 @@ reales.
 **Pendiente:** modelo B (signo de b, f_BM inicial, reproducir la tabla 4 de Anwar); cociente de galope de A6; A8; A9;
 A11; regla combinada de Verheyen; pantallas de las apps para A6B.
 
+## 2026-11-18 — Documentación — skills de Claude en `AGENTS.md`
+**Autor:** Claude · **Rama:** `claude/skills-agents`
+**Qué cambia:** `AGENTS.md` gana la sección «Skills de Claude» (qué skill cargar según la tarea: `avo-cambio-protocolo`,
+`avo-release-firmware`, `avo-revision-pcb-cad` y los plugins Engineering, code-review, Data, github y swift-lsp) y el
+paso 6 de «Empieza aquí». El mismo contenido está en `CLAUDE.md` del proyecto de claude.ai.
+**Por qué:** petición del usuario, para que todos los chats de Claude usen las skills activadas el 18/11/2026.
+**Archivos:** `AGENTS.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, workflows ni versiones. La tabla «Vigente» no cambia (no hay versiones nuevas).
+**Validación:** solo documentación; no aplica CI ni prueba física.
+
 ## 2026-11-18 — Cincha CAD REV 6.5 → 7.0 integrada en `develop`
 **Autor:** Claude · **Rama:** `claude/integrar-cad-cincha-rev7`
 **Qué cambia:** se integra en `develop` la cadena de PR del CAD de la cincha (#67 a #73, REV 6.5 → REV 7.0 con 3 IMU),
