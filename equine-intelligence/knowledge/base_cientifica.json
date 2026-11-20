@@ -2,7 +2,7 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.16.0",
+  "version": "1.17.0",
   "fecha": "2026-11-20",
   "razas": [
     "PSI",
@@ -102,6 +102,11 @@
       "fecha": "2026-11-20",
       "titulo": "Estudio horario 14:10 UTC: regla combinada de Verheyen (A1+A2) y TE/cambio mensual de la V200 (Japón, árabes)",
       "archivo": "estudios/2026-11-20_1410_verheyen_combinada_v200_te_japon.md"
+    },
+    {
+      "fecha": "2026-11-20",
+      "titulo": "Estudio horario 15:10 UTC: árabes de llano (lactato, V4, tiempos de 1.400 m) y novedades publicadas en 2026",
+      "archivo": "estudios/2026-11-20_1510_arabes_lactato_novedades_2026.md"
     }
   ],
   "fuentes": [
@@ -1941,6 +1946,111 @@
       "verificado_fecha": "2026-11-20",
       "nota": "n=292 casos; factores: pista sloppy, puesto ≥ 10.º, carrera corta, más peso, pérdida de peso, cambio corto de distancia; OR [NV] (PDF J-STAGE y PMC6920055 bloqueados)",
       "doi": "10.1294/jes.30.93"
+    },
+    {
+      "id": "KEDZIERSKI_2007_ARABES_LACTATO",
+      "cita": "Kędzierski W 2007, Ann UMCS sec. DD 62(2) (lactato y glicerol tras galope en árabes de carreras)",
+      "url": "https://czasopisma.up.lublin.pl/mv/article/view/3544",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Polonia",
+      "idioma": "en/pl",
+      "raza_fuente": "Árabe (carreras de llano)",
+      "verificado_fecha": "2026-11-20",
+      "nota": "36 árabes 3–6 años, 53 galopes de 1.200 m a 8–13 m/s; lactato post 3,92±1,14 / 10,3±1,89 / 16,3±2,84 mmol/L por grupos (≈2,3–22); r glicerol 30 min–lactato 0,80"
+    },
+    {
+      "id": "PAKSOY_2025_ARABES_1400",
+      "cita": "Paksoy et al. 2025, Acta Vet Brno 94:97",
+      "url": "https://doi.org/10.2754/avb202594020097",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Turquía",
+      "idioma": "en",
+      "raza_fuente": "Árabe (carreras de llano) y PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "8 sementales árabes 3,9±1,1 años; 1.400 m en 1:38–1:48 (≈13,0–14,3 m/s calculado [I]); PSI 1:25–1:30; sin FC ni lactato de carrera",
+      "doi": "10.2754/avb202594020097"
+    },
+    {
+      "id": "THOMASSIAN_2005_ARABES_V4",
+      "cita": "Thomassian A et al. 2005, Arch Vet Sci 10(1):63 (prueba incremental en cinta)",
+      "url": "https://core.ac.uk/download/328070186.pdf",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Brasil",
+      "idioma": "pt/en",
+      "raza_fuente": "Árabe (no de carreras)",
+      "verificado_fecha": "2026-11-20",
+      "nota": "11 árabes adultos, cinta 6 %; V4 8,0 m/s; lactato 1,7 reposo, 4,0 a 8 m/s, 9,1 a 10 m/s; [I-raza] disciplina"
+    },
+    {
+      "id": "PRINCE_KER_ARABES_PSI",
+      "cita": "Prince A, Geor R, Pagan J et al. (KER; año y revista [NV])",
+      "url": "https://ker.com/wp-content/uploads/Comparison-Of-The-Metabolic-Responses-Of-Trained-Arabian-And-Thoroughbred-Horses-During-Low-And-High-Intensity-Exerices.pdf",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "Árabe (no de carreras) y PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "5 capones árabes 8–10 años, cinta 3 %: V200 9,51±0,16, VLa4 8,27±0,46 m/s (PSI 9,76/8,44); VO2max 129 mL/kg/min; cita bibliográfica [NV]"
+    },
+    {
+      "id": "DABROWSKA_2026_BMC_LACTATO",
+      "cita": "Dąbrowska, Grzędzicka-Agko, Żmigrodzka, Witkowska-Piłaszewicz 2026, BMC Vet Res",
+      "url": "https://doi.org/10.1186/s12917-026-06055-w",
+      "acceso": "RESUMEN",
+      "pais": "Polonia (SGGW)",
+      "idioma": "en",
+      "raza_fuente": "Árabe (carreras de llano)",
+      "verificado_fecha": "2026-11-20",
+      "nota": "18 árabes; reposo, post y 30–40 min; aclaramiento menor tras carrera; tabla S4 [NV] (BMC/Springer sin permiso en la sesión)",
+      "doi": "10.1186/s12917-026-06055-w"
+    },
+    {
+      "id": "ESPIL_2026_PELVIS",
+      "cita": "Espil JI, Samol MA, Schild CO, Quiroga MA, Stover SM, Uzal FA 2026, J Vet Diagn Invest (en línea 12/08/2026)",
+      "url": "https://doi.org/10.1177/10406387261462107",
+      "acceso": "RESUMEN",
+      "pais": "EE. UU. (California)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "133 fracturas pélvicas catastróficas; más layups, −31 % tiempo de ejercicio y −40 % eventos desde el último layup frente a controles; OR [NV]",
+      "doi": "10.1177/10406387261462107"
+    },
+    {
+      "id": "HALL_2026_STRIDESAFE",
+      "cita": "Hall NP, McSweeney D, … Bayly WM 2026, JAVMA 264(7)",
+      "url": "https://doi.org/10.2460/javma.25.08.0556",
+      "acceso": "AGREGADOR",
+      "pais": "EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "42.623 carreras; 89 % de 53 fracturas en grupo rojo; VPP de una carrera ≈0,08–0,09; media >3 en 3 salidas: VPP 0,74, OR 133 (IC 23,5–753); recuentos incoherentes en la reseña",
+      "doi": "10.2460/javma.25.08.0556"
+    },
+    {
+      "id": "LEGG_2026_CESPED_NZ",
+      "cita": "Legg KA, Gibson MJ, Gee EK, Rogers CW, Equine Vet J 58(4):925–933 (jul 2026; en línea 2025)",
+      "url": "https://doi.org/10.1111/evj.70003",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Nueva Zelanda",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-20",
+      "nota": "437.506 salidas, 2,22 lesiones/1.000; −0,089 m/s por 100 m de distancia; lesión–estado de pista r −0,28, –CV r 0,25",
+      "doi": "10.1111/evj.70003"
+    },
+    {
+      "id": "EAMON_2026_CHUCKWAGON",
+      "cita": "Eamon CM, … Pfau T 2026, Animals 16(9):1361",
+      "url": "https://doi.org/10.3390/ani16091361",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Canadá",
+      "idioma": "en",
+      "raza_fuente": "PSI (chuckwagon, no llano)",
+      "verificado_fecha": "2026-11-20",
+      "nota": "GNSS-IMU 25 Hz; asimetría de impulso al trote 31,7→38,0 % tras carrera; 25 Hz limita la sensibilidad",
+      "doi": "10.3390/ani16091361"
     }
   ],
   "parametros": [
@@ -2630,6 +2740,35 @@
       ],
       "estado": "CONTEXTO",
       "nota": "Solo contexto, sin percentiles: disciplina de los árabes de Piccione 2004 [NV]"
+    },
+    {
+      "id": "lactato_post_galope_arabe_llano",
+      "valor": {
+        "min_mmol_l": 2.3,
+        "max_mmol_l": 22.0,
+        "distancia_m": 1200,
+        "velocidad_m_s": "8–13",
+        "n_pruebas": 53
+      },
+      "evidencia": "E",
+      "fuentes": [
+        "KEDZIERSKI_2007_ARABES_LACTATO"
+      ],
+      "estado": "CONTEXTO",
+      "nota": "Solo contexto: dispersión enorme, sin umbral; lactato solo comparable dentro del caballo a igual distancia y velocidad (KB 1.17.0)"
+    },
+    {
+      "id": "velocidad_carrera_arabe_llano_1400m",
+      "valor": {
+        "min_m_s": 13.0,
+        "max_m_s": 14.3
+      },
+      "evidencia": "I",
+      "fuentes": [
+        "PAKSOY_2025_ARABES_1400"
+      ],
+      "estado": "CONTEXTO",
+      "nota": "Calculada de tiempos [E] de 8 árabes en Turquía; solo plausibilidad de velocidad media, no objetivo (KB 1.17.0)"
     }
   ],
   "reglas": [
@@ -2871,7 +3010,8 @@
     "Planificador P7 (estudio 20/11 11:10): ventana de reincorporación de 21 d (prudente 30 d) tras ≥ 60 d sin trabajo rápido, sin dos trabajos rápidos seguidos ni picos de canter; evidencia Carrier 1998 y Choi 2026 solo por resumen; implementar con el planificador (capa 2)",
     "Comparables por temperatura y peso (estudio 20/11 13:12, KB 1.15.0): campos de temperatura, humedad/WBGT, jinete y peso cargado en Session; A9 y recuperación solo con |ΔT| ≤ 5 °C y marca «no comparable por calor» (WBGT ≥ 28 °C); A7/A8 con |Δpeso| ≤ 3 kg y mismo jinete preferente; todo [I], sin coeficiente de corrección hasta calibrarlo con datos propios",
     "VC1–VC4 (estudio 20/11 14:10, KB 1.16.0): regla combinada Verheyen (canter > 44 km Y galope > 6 km en 30 d) como LIMITAR; A1 aislada solo AVISO; A2 aislada a INFO; base: resumen [E-r] + 3 secundarios en texto completo; OR [NV]; cambia severidades de alertas existentes, implementar con aprobación del usuario",
-    "VT1–VT3 (estudio 20/11 14:10): TE por defecto de V200 del 3 % marcado «no validado» hasta TE propio (≥ 3 pruebas); aviso de posible artefacto si |ΔV200| > 5 % en ≤ 31 d; V200 de árabes (Piccione 2004) solo como contexto"
+    "VT1–VT3 (estudio 20/11 14:10): TE por defecto de V200 del 3 % marcado «no validado» hasta TE propio (≥ 3 pruebas); aviso de posible artefacto si |ΔV200| > 5 % en ≤ 31 d; V200 de árabes (Piccione 2004) solo como contexto",
+    "NV1 (estudio 20/11 15:10, KB 1.17.0): subir severidad de A7/A8 solo con persistencia en ≥ 3 sesiones comparables (Hall 2026 StrideSAFE [E-r]: VPP 0,08–0,09 de una carrera frente a 0,74 con 3 salidas seguidas); [I], sin implementar"
   ],
   "cola_investigacion": [
     "Texto completo de Verheyen 2006 (Bone, DOI 10.1016/j.bone.2006.05.025): ORs, cortes, límite inferior del canter, ventana de 60 d",
@@ -2931,7 +3071,11 @@
     "Peso cargado: Oki 1994 (coeficientes), tabla S2 de Morrice-West (peso cargado o corporal), PMC12504628 (capacidad de carga en cinta) y Stefánsdóttir 2017 completo; Powell 2008 y Matsuura no hallados (20/11 13:12)",
     "Verheyen 2006: OpenAlex, CORE y Bristol Pure no probados; Unpaywall y Semantic Scholar sin permiso en la sesión; RVC Worktribe 1434504 sin PDF; OR por categoría y forma exacta de la interacción siguen [NV] (20/11 14:10)",
     "Piccione 2004 (Vet Med Czech): confirmar la disciplina de los árabes (carreras de llano o no) y releer el PDF con texto limpio; Vermeulen & Evans 2006 (Wiley) para un TE numérico de V200 (20/11 14:10)",
-    "Ikeda 2019 (J Equine Sci 30:93) OR del TFDS: PDF de J-STAGE denegado por robots y PMC6920055 con reCAPTCHA; Hada 2006 valores de T (EVJ Suppl, Wiley); Ohmura 2002 es EVJ 34:634, no J-STAGE (20/11 14:10)"
+    "Ikeda 2019 (J Equine Sci 30:93) OR del TFDS: PDF de J-STAGE denegado por robots y PMC6920055 con reCAPTCHA; Hada 2006 valores de T (EVJ Suppl, Wiley); Ohmura 2002 es EVJ 34:634, no J-STAGE (20/11 14:10)",
+    "Dąbrowska 2026 (BMC Vet Res 10.1186/s12917-026-06055-w) tabla S4 y PMC12866905 (estrés oxidativo, mismo grupo) desde un navegador: lactato absoluto de árabes en galope y carrera (20/11 15:10)",
+    "Anwar 2026 publicado en RSOS 13(10):260818 (royalsocietypublishing.org sin acceso en la sesión): comparar tablas con el preprint arXiv 2603.22680 (20/11 15:10)",
+    "Hall 2026 (JAVMA 10.2460/javma.25.08.0556) y Espil 2026 (JVDI 10.1177/10406387261462107) en texto completo: recuentos y OR; Li 2026 (EVJ 10.1002/evj.70360) contenido (20/11 15:10)",
+    "FC máxima en galope o carrera de árabes de llano y búsqueda en francés (AFAC, pur-sang arabe) y del Golfo/Magreb: no hallado (20/11 15:10)"
   ],
   "historial": [
     {
@@ -3018,6 +3162,11 @@
       "version": "1.16.0",
       "fecha": "2026-11-20",
       "cambio": "Estudio horario 14:10: Verheyen 2006 es una interacción canter × galope (3 secundarios en texto completo + resumen), propuesta VC1–VC4 sin implementar; V200 sin TE publicado, TE por defecto 3 % [I] y aviso de artefacto > 5 %/mes [I]; primera V200 de árabes (Piccione 2004); 9 fuentes, 2 parámetros, 2 pendientes y 3 entradas de cola; sin cambios de lógica; motor 2.0.0-dev18"
+    },
+    {
+      "version": "1.17.0",
+      "fecha": "2026-11-20",
+      "cambio": "Estudio horario 15:10: primeros datos de árabes de llano (lactato post galope 1.200 m ≈2–22 mmol/L, Kędzierski 2007 [E]; 1.400 m en ≈13–14 m/s, Paksoy 2025 [E/I]; V200/V4 en cinta [E]); novedades 2026 (Anwar RSOS, Espil, Hall StrideSAFE, Legg, Eamon); 9 fuentes, 2 parámetros de contexto, pendiente NV1, 4 entradas de cola; sin cambios de lógica; motor 2.0.0-dev19"
     }
   ]
 }

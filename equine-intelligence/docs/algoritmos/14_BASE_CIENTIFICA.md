@@ -232,6 +232,17 @@ Detalle: `knowledge/estudios/2026-11-20_1312_temperatura_peso_comparables.md`.
   disciplina [NV]).
 Detalle: `knowledge/estudios/2026-11-20_1410_verheyen_combinada_v200_te_japon.md`.
 
+**Estudio horario 20/11 15:10 (KB-1 1.17.0, motor 2.0.0-dev19, sin cambios de lógica).**
+- **Árabes de llano:** primer lactato publicado tras galope de entrenamiento de 1.200 m a 8–13 m/s: ≈ 2–22 mmol/L
+  (Kędzierski 2007 [E], Polonia). Velocidad media en 1.400 m ≈ 13–14 m/s (Paksoy 2025 [E], Turquía; cálculo [I]).
+  V200 9,5 m/s y V4 8,0–8,3 m/s en cinta de árabes no de carreras [E]. Todo queda como contexto, sin umbrales. La tabla
+  S4 de Dąbrowska 2026 (BMC) sigue [NV].
+- **Novedades 2026:** Anwar 2026 ya publicado en RSOS (versión final [NV]). Espil 2026 (pelvis, California [E-r])
+  confirma más riesgo con poco trabajo desde el último layup (P7). Hall 2026 (StrideSAFE [E-r]): VPP bajo de una sola
+  carrera y alto con 3 salidas seguidas; se propone NV1 [I], persistencia en 3 sesiones para subir severidad de
+  A7/A8, sin implementar.
+Detalle: `knowledge/estudios/2026-11-20_1510_arabes_lactato_novedades_2026.md`.
+
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se
    guarda en `knowledge/estudios/AAAA-MM-DD_<tema>.md` con fuentes y etiquetas [E]/[I]/[NV].

@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Motor 2.0.0-dev19 / KB-1 1.17.0 — Estudio horario 15:10: árabes de llano (lactato, velocidad) y novedades 2026
+**Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-1510` (encadenada desde `claude/kb-estudio-2026-11-20-1410`, PR #104, sin fusionar) · **CI:** ver PR
+**Qué cambia:**
+- Estudio nuevo: `equine-intelligence/knowledge/estudios/2026-11-20_1510_arabes_lactato_novedades_2026.md`.
+- `base_cientifica.json` 1.17.0: 9 fuentes nuevas (Kędzierski 2007, Paksoy 2025, Thomassian 2005, Prince/KER, Dąbrowska 2026 BMC, Espil 2026, Hall 2026, Legg 2026, Eamon 2026), 2 parámetros de contexto (`lactato_post_galope_arabe_llano`, `velocidad_carrera_arabe_llano_1400m`), pendiente NV1, 4 entradas de cola, estudio e historial.
+- `KNOWLEDGE_VERSION` 1.17.0 y `ENGINE_VERSION` 2.0.0-dev19 (y su prueba); ficha 14, README y tabla de estado.
+**Por qué:** faltaban datos fisiológicos de árabes de carreras en llano y revisar lo publicado en 2026.
+**No se ha tocado:** lógica, reglas, umbrales, firmware, apps, workflows, contratos binarios.
+**Validación:** pruebas locales (ASan/UBSan) y fixtures; CI en el PR · NO VERIFICADO con caballos reales.
+**Pendiente:** tabla S4 de Dąbrowska 2026, versión RSOS de Anwar, textos completos de Hall y Espil 2026; NV1 sin implementar.
+
 ## 2026-11-20 — Motor 2.0.0-dev18 / KB-1 1.16.0 — Estudio horario 14:10: regla combinada de Verheyen y TE por defecto de la V200
 **Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/kb-estudio-2026-11-20-1410` (encadenada desde `claude/kb-estudio-2026-11-20-1312`, PR #102, sin fusionar) · **CI:** ver PR
 **Qué cambia:**
