@@ -184,6 +184,103 @@ Detalle: `knowledge/estudios/2026-11-20_0909_v200_a9_ecg_a11_umbrales.md`.
   relativos por caballo. Sin zancada, FC de carrera ni V200 publicadas.
 Detalle: `knowledge/estudios/2026-11-20_1008_tendon_or_arabes_llano.md`.
 
+**Estudio horario 20/11 11:10 (KB-1 1.13.0, motor 2.0.0-dev15, sin cambios de lógica).**
+- **Regreso tras layup (planificador):** la evidencia está en los primeros 10–21 d de trabajo rápido tras ≥ 60 d sin él
+  y es de fractura de húmero. Carrier 1998, PMID 9604029, da RR 71 y 45 sin IC y su DOI no está confirmado. Choi 2026
+  (Corea) da OR 13,5 (5,5–33,1) en los primeros 20 d tras un layup > 60 d. Las dos fuentes solo se han leído por
+  resumen [E-r]. Se propone **P7**, una ventana de reincorporación de 21 d (prudente 30 d) [I], sin implementar. No es
+  una predicción de lesión.
+- **Sensores 2025–2026:** Poinsard 2026 da una repetibilidad baja de la V200 en campo (ICC 0,50, trotones), lo que
+  apoya que A9 siga siendo informativa. Van den Broek 2025 mide el sesgo de la curva en la zancada (LZ −2,1 %), que es
+  del orden de la señal de A8. Li 2026 (EVJ) sigue sin leerse. No hay datos nuevos de árabes de llano.
+Detalle: `knowledge/estudios/2026-11-20_1110_regreso_layup_sensores_2025_2026.md`.
+
+**Estudio horario 20/11 12:10 (KB-1 1.14.0, motor 2.0.0-dev16, sin cambios de lógica).**
+- **Playa por franjas:** se corrige la atribución del parámetro `playa_franjas`.
+  - La humedad del 19 % frente al 13,5 % es de Crevier-Denoix 2011 (doi 10.1111/j.2042-3306.2010.00202.x).
+  - El −59 % de impacto y el −50 % de frenado de Chateau 2011 son deceleraciones del casco, no fuerzas. El DOI de
+    Chateau 2011 no está confirmado.
+  - No hay cifras absolutas por franja ni coste fisiológico medido. PL1–PL6 siguen como diseño.
+  - Fuentes nuevas: Porzio 2025 (árabes de raid en arena, Dubái, [I-raza]) y Graydon 2023 (cómo medir el suelo).
+- **Parcial final (A8):** Legg 2025 (Nueva Zelanda) y Morrice-West 2020 dan la escala de la velocidad final, de
+  16,4–16,6 m/s.
+  - El ruido residual entre carreras es de ≈ 0,66 m/s (CV ≈ 4 %). Es un cálculo propio [I].
+  - Ese ruido es mucho mayor que el umbral de 0,20 m/s, así que A8 sigue leyendo tendencias y no sesiones aisladas.
+    No cambia el umbral.
+Detalle: `knowledge/estudios/2026-11-20_1210_playa_franjas_parcial_final_200m.md`.
+
+**Estudio horario 20/11 13:12 (KB-1 1.15.0, motor 2.0.0-dev17, sin cambios de lógica).**
+- **Temperatura y humedad:** no hay coeficiente publicado en lpm/°C. El calor húmedo sube la FC submáxima (≈ +12 lpm
+  a 7 m/s, Hargreaves 1999 [E-r]) sin cambiar la FC de pico (Ebisuda 2023 [E]), así que la V200 baja en calor sin
+  pérdida de forma. Se propone TC1–TC5 [I]: comparables de A9 con |ΔT| ≤ 5 °C, «no comparable por calor» con
+  WBGT ≥ 28 °C y transición de aclimatación de 10–14 d.
+- **Peso cargado:** no hay coeficiente válido de peso a velocidad. En carrera, el peso está confundido con la calidad
+  (Bugislaus 2004 [E]) y casi no cambia la zancada (Morrice-West [E]). Se propone PC1–PC4 [I]: comparables de A7/A8
+  con |Δpeso| ≤ 3 kg y mismo jinete preferente, sin corrección.
+- Árabes de carreras en llano: sin datos en ninguno de los dos temas.
+Detalle: `knowledge/estudios/2026-11-20_1312_temperatura_peso_comparables.md`.
+
+**Estudio horario 20/11 14:10 (KB-1 1.16.0, motor 2.0.0-dev18, sin cambios de lógica).**
+- **Verheyen 2006 (A1/A2):** tres fuentes secundarias en texto completo (Morrice-West, manuscrito aceptado; Anwar,
+  arXiv; Rosanowski 2018, con Verheyen como coautora) describen el hallazgo como **interacción**: canter (≤ 14 m/s)
+  > 44 km **y** galope (> 14 m/s) > 6 km en un mes; el galope acumulado es protector en añojos [E-r]. Se propone
+  VC1–VC4 [I]: combinada como LIMITAR, A1 aislada como AVISO, A2 aislada a INFO. No implementado: OR [NV] y cambia
+  severidades (requiere aprobación).
+- **V200:** no hay TE numérico publicado legible; Vermeulen & Evans 2006 dan diferencias medias ≤ 2 % [E-r] y
+  Kobayashi 2000 +11 % en 5 meses en potros [E-r]. Se propone VT1–VT3 [I]: TE por defecto del 3 % «no validado»,
+  aviso de artefacto si |ΔV200| > 5 % en un mes. Primera V200 de árabes adultos: 610 ± 26 m/min (Piccione 2004 [E],
+  disciplina [NV]).
+Detalle: `knowledge/estudios/2026-11-20_1410_verheyen_combinada_v200_te_japon.md`.
+
+**Estudio horario 20/11 15:10 (KB-1 1.17.0, motor 2.0.0-dev19, sin cambios de lógica).**
+- **Árabes de llano:** primer lactato publicado tras galope de entrenamiento de 1.200 m a 8–13 m/s: ≈ 2–22 mmol/L
+  (Kędzierski 2007 [E], Polonia). Velocidad media en 1.400 m ≈ 13–14 m/s (Paksoy 2025 [E], Turquía; cálculo [I]).
+  V200 9,5 m/s y V4 8,0–8,3 m/s en cinta de árabes no de carreras [E]. Todo queda como contexto, sin umbrales. La tabla
+  S4 de Dąbrowska 2026 (BMC) sigue [NV].
+- **Novedades 2026:** Anwar 2026 ya publicado en RSOS (versión final [NV]). Espil 2026 (pelvis, California [E-r])
+  confirma más riesgo con poco trabajo desde el último layup (P7). Hall 2026 (StrideSAFE [E-r]): VPP bajo de una sola
+  carrera y alto con 3 salidas seguidas; se propone NV1 [I], persistencia en 3 sesiones para subir severidad de
+  A7/A8, sin implementar.
+Detalle: `knowledge/estudios/2026-11-20_1510_arabes_lactato_novedades_2026.md`.
+
+**Estudio horario 20/11 16:10 (KB-1 1.18.0, motor 2.0.0-dev20, sin cambios de lógica).**
+- **Aceleración del tronco:** no hay ningún pico publicado en g a 16–18 m/s. Las referencias usan ±10–16 g en la cruz,
+  el sacro o el sudadero (Pfau 2006 y Parsons 2008 [E]). Se estima ≈ 2,5–3,5 g en el cuerpo [I]: ±8 g bastaría, pero
+  los golpes del montaje son [NV]. Contador de saturación: |a| ≥ 7,9 g e invalidar el tramo si > 0,1 % en galope [I].
+  En la cincha BETA, ±16 g.
+- **Cinética de la FC:** el descarte de 20–30 s en las mesetas de V200 es coherente (Mukai 2007 y Langsetmo 1997
+  [E-r]). Se proponen CF1 (meseta ≥ 45–60 s cerca del galope de trabajo) y CF2 (τ de recuperación solo como tendencia
+  propia; la de PSI de Hada 2007 es [NV] y solo hay τ de ponis), ambos [I].
+Detalle: `knowledge/estudios/2026-11-20_1610_aceleracion_tronco_cinetica_fc.md`.
+
+**Estudio horario 20/11 17:09 (KB-1 1.19.0, motor 2.0.0-dev21, sin cambios de lógica).**
+- **Exactitud del GNSS/IMU a galope:** no hay ninguna cifra publicada de RTK a galope. La mejor referencia en carrera
+  es ±0,15 m/s (TurfTrax, Spence 2008 [E-r]) y France Galop exige ≤ 25 cm de posición (Blache 2019 [E-r]). Las curvas y
+  las aceleraciones degradan la velocidad GNSS (Parkes 2019 y Witte 2006 [E]). La longitud de zancada arrastra un error
+  de ≈ 1–1,5 % [I], así que solo se compara por tramos de ≥ 100–200 m. Se propone GN1 [I].
+- **Mano de galope:** en curva, el 18,6 % de las zancadas va en mano incorrecta y el miembro interior pierde su mayor
+  apoyo (Parkes 2020 [E]). En pistas antihorarias se fractura más la mano izquierda (RR 1,14, Peterson 2021 [E]). No hay
+  ninguna exactitud publicada de detección con un solo sensor en el tronco: se propone ML1, experimental [I], y nunca
+  como riesgo.
+Detalle: `knowledge/estudios/2026-11-20_1709_exactitud_gnss_mano_de_galope.md`.
+
+**Estudio horario 20/11 19:08 (KB-1 1.21.0, motor 2.0.0-dev23, sin cambios de lógica).**
+- **DMD (bucked shins) en 2 años:** la distancia rápida corta acumulada se asocia a menos DMD (Crawford 2021 [E]: HR
+  0,89 por km a ~15 m/s; Boston & Nunamaker 2000 [E-r]) y los picos cortos de canter o galope largo a más (Verheyen
+  2005 [E-ag]). Propuesta DM1–DM4 [I] para el planificador; sin datos de árabes; nunca predicción de lesiones.
+- **Sobreentrenamiento (A9/A10):** «14–19 %» corregido a 19 % de tiempo hasta la fatiga (Utrecht, trotones [E]);
+  Tyler-McGowan es 1999; el umbral de peso del 2 % es diseño [I]; VHRmax/FCmax no cambian con sobrecarga (Hamlin
+  [E-ag]). Propuesta SO1–SO3 [I].
+Detalle: `knowledge/estudios/2026-11-20_1908_dmd_potros_auditoria_sobreentrenamiento.md`.
+
+**Estudio horario 20/11 18:09 (KB-1 1.20.0, motor 2.0.0-dev22, sin cambios de lógica).**
+- **Modelo óseo B:** el dt y el solver siguen [NV] (código de Zenodo sin leer). La tabla 4 exacta del preprint de
+  Anwar queda como vector de validación (`modelo_b_tabla4_anwar_preprint`) [E]; se mantiene 0,911 (0,852 solo en la
+  Discusión) y el signo de b queda por confirmar (Pan 0,02 sin signo, Anwar −0,02).
+- **Auditoría de fuentes:** 15 obras duplicadas marcadas con `duplicado_de` y 52 fuentes con campos obligatorios
+  ausentes completadas como `SIN_AUDITAR`/`[NV]`; AU1 [I]: ninguna regla nueva se apoya en fuentes sin auditar.
+Detalle: `knowledge/estudios/2026-11-20_1809_modeloB_tabla4_auditoria_fuentes.md`.
+
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se
    guarda en `knowledge/estudios/AAAA-MM-DD_<tema>.md` con fuentes y etiquetas [E]/[I]/[NV].
