@@ -24,6 +24,124 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-20 — Espalda PROTOTIPO 3.14.7 — NAV-SIG se reactiva o se sondea si la salida periódica se para
+**Autor:** Claude · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` (PR #113) · **CI:** ver PR
+**Qué se vio (22:56):**
+- Cadena RTCM completa a ~1,3 kB/s, con 5,5 msg/s usados.
+- NAV-SIG «activados, pero no llegan (último hace 144 s)», con la petición repetida 3 o más veces y todas aceptadas por el receptor.
+- Llega al arrancar y se para con las correcciones en marcha, mientras NAV-PVT sigue.
+**Lectura:** con 13 tramas UBX/s completas (8 NAV-PVT + RXM-RTCM) y 0 tramas malas, no es pérdida en el cable ni en la espalda. Es el receptor, que deja de generar el mensaje periódico. El pico del 101 % de MON-COMMS puede venir del arranque a 38 400 con la línea saturada de NMEA. Repetir el mismo VALSET no cambia nada en el receptor.
+**Qué cambia:**
+- Primera pérdida (10 s): NAV-SIG se **apaga y se vuelve a encender**, para reiniciar el mensaje periódico.
+- Segunda pérdida seguida: la espalda **sondea NAV-SIG una vez por segundo** (petición de 8 B, respuesta inmediata), sin depender de la salida periódica.
+- Salida RTCM3 del receptor apagada en el puerto de la espalda, en RAM: la espalda nunca la usa.
+- Monitor: `NAV-SIG apagado/encendido N | sondeo NAV-SIG ACTIVO/no (peticiones)`.
+- Pruebas de host: 55 casos y 542 comprobaciones.
+  - Un ZED simulado con la salida periódica atascada se recupera, unas veces con apagar y encender y otras con el sondeo.
+  - Las posiciones no se interrumpen.
+**Validación:** IMPLEMENTADO · CI ver PR · **NO VERIFICADO**.
+
+## 2026-11-20 — Espalda PROTOTIPO 3.14.6 — Solo NAV-SIG (NAV-SAT apagado): el búfer de salida del receptor llegaba al 101 %
+**Autor:** Claude · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` (PR #113) · **CI:** ver PR
+**Qué se vio (monitor de AVO Update, 22:37–22:40, espalda 3.14.5):**
+- **Arranque:** el ZED sale a 38 400 (velocidad de fábrica) y tarda más de 2 s en hablar. La primera vuelta de escucha no lo oye. En la segunda vuelta llena la línea: 3 825 B/s de los 3 840 que caben, con ~70 frases NMEA por segundo de su configuración guardada.
+  - Corrección al informe: no estaba a 460 800. Los bytes sin tramas a 230 400/460 800 eran su señal de 38 400 leída a otra velocidad.
+- **En marcha:**
+  - ZED en **UART2**, 230 400 baudios, firmware **HPG 1.51**.
+  - NAV-SAT y NAV-SIG llegando en ese momento, con 0 UBX malos y 0 desbordes de la FIFO.
+  - Calidad: 25/31 satélites, 50 señales, 0 con fase y C/N₀ media 33 dBHz.
+- **MON-COMMS:** búfer TX del receptor con **pico del 101 %**. El receptor llegó a descartar salida.
+- **Modo carga por USB:** a los 23 s la espalda detecta el USB (GPIO20 = 175 mV) y entra en modo carga, con el GPS apagado. Con el cable puesto solo se observan unos 20 s.
+**Qué cambia:**
+- Mensajes de calidad: solo **NAV-SIG** a 1 Hz.
+  - NAV-SAT se **apaga** en el mismo VALSET, aunque la configuración guardada del receptor lo tuviera activado.
+  - Los satélites seguidos y usados se cuentan con NAV-SIG (satélites distintos entre sus señales).
+  - La ráfaga de 1 Hz baja de ~1,3 KB a ~0,9 KB con 50 señales.
+  - NAV-SAT solo queda como respaldo si el receptor rechaza NAV-SIG (estado 4).
+- La vigilancia mira solo el mensaje que debe llegar.
+- Monitor: «max en marcha» de MON-COMMS (peor uso del búfer TX desde que la espalda configura el receptor), separado del pico desde el arranque, que incluye la fase saturada a 38 400.
+- `BackStatus` sin cambios de formato. Pruebas de host: 52 casos y 527 comprobaciones.
+**Validación:** IMPLEMENTADO · CI ver PR · **NO VERIFICADO**.
+
+## 2026-11-20 — Android 2.15-gnss-dev2 (vc 49) — «No usadas por el receptor» deja de presentarse como pérdida
+**Autor:** Claude · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` (PR #113)
+**Qué se vio (usuario, 22:24, espalda 3.14.5):**
+- Pecho y espalda enlazados.
+- Cadena RTCM completa: 1,3–1,6 kB/s en todas las etapas, 4,5 msg/s usados y solución DGNSS.
+- UBX a 13,1 tramas/s a 230 400.
+- NAV-SAT/SIG «activados, pero no llegan», con 3 o más peticiones repetidas.
+- «El receptor rechaza mensajes RTCM» en rojo.
+**Qué cambia:**
+- El contador `zed_fail` de la espalda junta RXM-RTCM con `msgUsed = 1`, es decir, tipos que el receptor no usa, con los CRC erróneos.
+- Ahora sale como «No usadas por el receptor», en ámbar y con su caudal, en lugar de error rojo.
+- Prueba JVM actualizada. vc 48 → **49**.
+**Validación:** IMPLEMENTADO · CI ver PR · NO VERIFICADO.
+
+## 2026-11-20 — Espalda PROTOTIPO 3.14.5 — UART del ZED otra vez como en la 3.14.3 (la 3.14.4 no enlazaba con el pecho)
+**Autor:** Claude · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` (PR #113) · **CI:** ver PR
+**Qué se vio (usuario, 20/11 21:48–22:08, espalda 3.14.4):**
+- La espalda no enlaza con el reloj ni entra en el modo sin pecho.
+- El monitor de AVO Update mostró el arranque normal (`POWERON`, sin bucle) y el diagnóstico del GPS: 38 400 y 9 600 sin bytes; 115 200 y 230 400 con bytes pero sin tramas válidas, lo propio de un ZED a 460 800 leído a otra velocidad.
+- Tras la línea de 230 400 no salió nada más.
+**Revisión:** el parser nuevo pasó 2 000 flujos aleatorios con ASan/UBSan, sin bloqueos ni errores. En la placa solo cambiaban dos cosas:
+- la tarea de eventos de la UART que crea `onReceiveError`, con prioridad máxima;
+- el umbral de la FIFO RX.
+Causa **no confirmada**.
+**Qué cambia:**
+- La UART del ZED vuelve a configurarse exactamente como en la 3.14.3: solo `setRxTimeout(1)`, sin `onReceiveError` y con el umbral FIFO del núcleo.
+- El ajuste de la 3.14.4 queda en el código tras `AVO_ZED_UART_TUNE` (0), para probarlo en banco.
+- Se conserva el resto de la 3.14.4: parser con resincronización, vigilancia de NAV-SAT/SIG por separado, solo recuentos frescos, presupuesto UART y MON-COMMS.
+- Pruebas de host: 52 casos y 519 comprobaciones.
+**Validación:** IMPLEMENTADO · CI ver PR · **NO VERIFICADO**. Si la 3.14.5 tampoco enlaza, el fallo no está en la UART: volver a la 3.14.3 y comparar.
+
+## 2026-11-20 — Espalda PROTOTIPO 3.14.4 · Android 2.15-gnss-dev1 — Mensajes de calidad GNSS que no llegan, cadena RTCM por etapas
+**Autor:** Claude (encargo del usuario, 20/11 21:07: «Mensajes de calidad activados, pero no llegan», 64,9 cm H, sin RTK
+FIX, velocidad ±0,52 km/h) · **Rama:** `claude/gnss-calidad-rtcm-back-3-14-4` · **Commits:** `3ed96d0` (espalda), `d502568` (Android), docs en el último commit del PR
+**CI:** espalda `build-back-v380.yml` run 44810109245 ✅ (52 casos / 519 comprobaciones; imagen ESP32-S3 927 984 B, 27 % de app0) · espalda tras traer `develop` run 44811443358 ✅ · Android `build-android.yml` run 44811442078 ✅ (lanzado a mano en la rama; core 181 pruebas, 0 fallos = 174 de `develop` + 7 de `GnssChainTest`; pruebas en emulador ✅; APK firmada con la clave estable). El intento 44810606166 falló solo al descargar `com.google.zxing:core:3.5.3` (dependencia ya existente).
+**Informe completo:** `firmware/back/V3_8_0/docs/AUDITORIA_CALIDAD_GNSS_3_14_4.md`.
+**Diagnóstico:**
+- NAV-PVT llegaba, pero NAV-SAT y NAV-SIG no: los satélites «18 / 26» de la app eran de un NAV-SAT antiguo, porque NAV-PVT daba 24.
+- Causa probable, **sin medir**: desbordamiento de la FIFO RX de 128 B del ESP32-S3.
+  - Con el umbral por defecto (~120 B) quedaban 0,35 ms de margen a 230 400 y 0,17 ms a 460 800.
+  - Al desbordarse se pierde un bloque entero: destruye las tramas largas y casi nunca un NAV-PVT de 100 B.
+- Defectos confirmados con pruebas:
+  - el parser UBX perdía también la trama siguiente a una mala;
+  - la vigilancia de la 3.13.12 solo miraba NAV-SIG;
+  - los recuentos caducados se enviaban y se mostraban como actuales;
+  - la activación de los mensajes no calculaba la carga de la UART.
+- **Pines verificados:** el código usa RX=GPIO35 / TX=GPIO33, cableado confirmado el 31/10. El encargo los daba al revés,
+  que es justo el fallo de la 3.9.0. No se tocan.
+**Qué cambia:**
+- **Espalda 3.14.4:**
+  - umbral de la FIFO RX a 32 B;
+  - contadores de errores de la UART;
+  - el parser resincroniza tras una trama mala;
+  - NAV-SAT y NAV-SIG se vigilan por separado;
+  - en `STATUS` solo van recuentos con ≤ 5 s (formato de 108 B sin cambios);
+  - presupuesto UART antes de activar la calidad;
+  - UBX-MON-COMMS cada 5 s (búfer TX del receptor y desbordes de RTCM);
+  - líneas nuevas en el monitor serie: `MENSAJES ZED`, `UART ESP32 (ZED)`, `PRESUPUESTO UART`, `MON-COMMS`.
+- **Android 2.15-gnss-dev1 (vc 48;** commits del Android con el nombre provisional 2.14-gnss-dev1 / vc 47, renumerada al traer `develop`, donde vc 47 ya es 2.14-presencia-dev1**):**
+  - `GnssChain` lee la cadena RTCM (caster → móvil → reloj → espalda → UART → usadas) y la recepción UBX a partir de
+    `DIAG_GET` (ya existente), cada 5 s con INICIO abierta. Dice en qué etapa se paran las correcciones.
+  - «NTRIP recibiendo» no se presenta como RTK.
+  - Calidad GNSS: ya no muestra satélites caducados; la precisión de velocidad se compara con el objetivo de 0,20 km/h.
+  - `KV` y `MetricTile` sin solapes.
+**No se ha tocado:**
+- pecho, ni contratos binarios (`BackStatus` v3, `TELEMETRY` v3, `DIAG_GET`);
+- iPad y Windows, que decodifican igual;
+- pines, alimentación, sueño, carga USB, RTCM, ESP-NOW, modelo dinámico, frecuencia ni máscaras;
+- firmas e `Info.plist`.
+- Workflow `build-back-v380.yml`: solo nombre de versión, marcas de la imagen y la rama de esta tarea en `branches`.
+- Al fusionar, `build-avo-ipad.yml` se lanzará porque cambia `lib/avo_core` (sin cambios para el iPad).
+**Validación:** IMPLEMENTADO · CI ✅ (espalda y Android) · **NO VERIFICADO** en hardware. PR #113.
+**Pendiente:** procedimiento del §8 del informe:
+- `FIFO desbordada` = 0 y edades de NAV-SAT/SIG ≤ 1,5 s durante 10 min;
+- cadena RTCM en verde con NTRIP;
+- ensayos de velocidad parado, en recta y en giros, con porcentaje de épocas con `sAcc` < 55 mm/s.
+
+---
+
 ## 2026-11-20 — Motor 2.0.0-dev25 / KB-1 1.23.0 — Estudio horario 21:08: estado del terreno (going) y calentamiento / vuelta a la calma
 **Autor:** Claude (estudio horario programado) · **Rama:** `claude/kb-estudio-2026-11-20-2108` (encadenada desde `claude/kb-estudio-2026-11-20-2008`, PR #112) · **CI:** ver PR
 **Qué cambia:** KB-1 1.22.0 → 1.23.0 y motor 2.0.0-dev24 → 2.0.0-dev25 (solo versiones, sin cambios de lógica).

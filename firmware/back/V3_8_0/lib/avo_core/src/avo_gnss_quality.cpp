@@ -35,6 +35,9 @@ bool ubx_quality_nav_sig(const uint8_t* p, size_t n, GnssQuality* q) {
   if (n < 8 + (size_t)num * 16) return false;
   uint8_t tr = 0, used = 0, cr = 0, corr = 0, l2 = 0, l2u = 0, weak = 0, cmin = 255, cmax = 0;
   uint32_t csum = 0;
+  // V3.14.6: distinct satellites (gnssId, svId) of the tracked signals, and of those with a pseudorange in use.
+  uint16_t sv_seen[64], sv_used_l[64];
+  uint8_t n_seen = 0, n_used = 0;
   for (uint8_t i = 0; i < num; i++) {
     const uint8_t* s = p + 8 + (size_t)i * 16;
     uint8_t g = s[0], sig = s[2], cno = s[6];
@@ -54,6 +57,15 @@ bool ubx_quality_nav_sig(const uint8_t* p, size_t n, GnssQuality* q) {
     }
     if (cr_used) cr++;
     if (corr_used) corr++;
+    const uint16_t key = (uint16_t)((g << 8) | s[1]);
+    bool f1 = false;
+    for (uint8_t k = 0; k < n_seen; k++) if (sv_seen[k] == key) { f1 = true; break; }
+    if (!f1 && n_seen < 64) sv_seen[n_seen++] = key;
+    if (pr_used) {
+      bool f2 = false;
+      for (uint8_t k = 0; k < n_used; k++) if (sv_used_l[k] == key) { f2 = true; break; }
+      if (!f2 && n_used < 64) sv_used_l[n_used++] = key;
+    }
   }
   q->sig_tracked = tr; q->sig_used = used; q->sig_cr_used = cr; q->sig_corr = corr;
   q->sig_l2 = l2; q->sig_l2_used = l2u; q->sig_weak = weak;
@@ -61,6 +73,7 @@ bool ubx_quality_nav_sig(const uint8_t* p, size_t n, GnssQuality* q) {
   q->cno_min = used ? cmin : 0;
   q->cno_max = cmax;
   q->have_sig = true;
+  q->sig_sv_tracked = n_seen; q->sig_sv_used = n_used;
   return true;
 }
 

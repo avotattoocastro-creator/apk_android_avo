@@ -27,6 +27,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.avoperformance.horse.ui.theme.AvoColors
@@ -63,9 +65,14 @@ fun MetricTile(label: String, value: String?, unit: String = "", modifier: Modif
     Column(
         modifier.clip(shape).background(AvoColors.Surface2).border(1.dp, AvoColors.Line, shape).padding(horizontal = 10.dp, vertical = 9.dp)
     ) {
-        Text((icon?.let { "$it " } ?: "") + label.uppercase(), color = AvoColors.TextDim, fontSize = 10.sp, fontWeight = FontWeight.SemiBold, letterSpacing = 0.8.sp, maxLines = 1)
+        Text((icon?.let { "$it " } ?: "") + label.uppercase(), color = AvoColors.TextDim, fontSize = 10.sp, fontWeight = FontWeight.SemiBold, letterSpacing = 0.8.sp,
+            maxLines = 1, overflow = TextOverflow.Ellipsis)
         Row(verticalAlignment = Alignment.Bottom) {
-            Text(value ?: "—", color = if (value == null) AvoColors.Unknown else accent, fontSize = 22.sp, fontWeight = FontWeight.Black, maxLines = 1)
+            // 2.14-gnss: long values ("64,9 cm", "1,25 m") no longer run into the unit / the next tile on narrow phones.
+            val len = (value ?: "—").length + unit.length
+            val size = when { len <= 6 -> 22.sp; len <= 8 -> 18.sp; else -> 15.sp }
+            Text(value ?: "—", color = if (value == null) AvoColors.Unknown else accent, fontSize = size, fontWeight = FontWeight.Black, maxLines = 1,
+                softWrap = false, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f, fill = false))
             if (unit.isNotEmpty()) {
                 Spacer(Modifier.width(3.dp))
                 Text(unit, color = AvoColors.TextDim, fontSize = 11.sp, modifier = Modifier.padding(bottom = 3.dp))
@@ -116,9 +123,12 @@ fun ScreenHeader(title: String, subtitle: String? = null, actions: @Composable (
 
 @Composable
 fun KV(label: String, value: String?, valueColor: Color = AvoColors.Text) {
-    Row(Modifier.fillMaxWidth().padding(vertical = 3.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+    // 2.14-gnss: label and value each get at most half of the row and wrap inside it (a long value such as
+    // "activados, pero no llegan (último hace 49 s)" squeezed the label into a column of letters before).
+    Row(Modifier.fillMaxWidth().padding(vertical = 3.dp), horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.Top) {
         Text(label, color = AvoColors.TextDim, fontSize = 14.sp, modifier = Modifier.weight(1f))
-        Text(value ?: "—", color = if (value == null) AvoColors.Unknown else valueColor, fontSize = 14.sp, fontWeight = FontWeight.Medium)
+        Text(value ?: "—", color = if (value == null) AvoColors.Unknown else valueColor, fontSize = 14.sp, fontWeight = FontWeight.Medium,
+            textAlign = TextAlign.End, modifier = Modifier.weight(1f, fill = false))
     }
 }
 

@@ -49,6 +49,39 @@ static const uint8_t UBX_CLS_ACK = 0x05, UBX_ID_ACK_ACK = 0x01, UBX_ID_ACK_NAK =
 static const uint8_t UBX_CLS_CFG = 0x06, UBX_ID_CFG_VALSET = 0x8A;
 static const uint8_t UBX_CLS_MON = 0x0A, UBX_ID_MON_VER = 0x04;
 static const uint8_t UBX_CLS_RXM = 0x02, UBX_ID_RXM_RTCM = 0x32;
+static const uint8_t UBX_ID_MON_COMMS = 0x36;   // V3.14.4: receiver port usage (HPG 1.12+)
+
+// V3.14.4: UART budget of the ZED -> back link, computed before enabling NAV-SAT/NAV-SIG.
+// 8N1 = 10 bits per byte. Sizes are UBX frames (8 bytes of header + checksum included):
+// NAV-PVT 100 B, NAV-SAT 16 + 12 x satellites, NAV-SIG 16 + 16 x signals, RXM-RTCM 16 B per RTCM message,
+// MON-COMMS 16 + 40 x ports (one poll every 5 s). The quality pair goes out once per second, in the same epoch as a
+// NAV-PVT, so that burst must fit in one navigation period or it delays the next position.
+struct ZedUartBudget {
+  uint32_t line_bytes_s = 0;     // what the UART can carry
+  uint32_t avg_bytes_s = 0;      // what the receiver sends on average
+  uint16_t load_permille = 0;    // avg / line
+  uint32_t burst_bytes = 0;      // NAV-PVT + NAV-SAT + NAV-SIG + RXM-RTCM of one epoch
+  uint32_t burst_us = 0;         // time on the line for that burst
+  uint32_t epoch_us = 0;         // navigation period
+  bool ok = false;               // load <= 50 % and the burst fits in one epoch
+};
+// Worst case used by the firmware: 60 satellites in NAV-SAT, 120 signals in NAV-SIG, 12 RTCM messages per second.
+ZedUartBudget zed_uart_budget(uint32_t baud, uint8_t nav_hz, bool quality, uint8_t n_sat = 60, uint8_t n_sig = 120,
+                              uint16_t rtcm_msgs_s = 12);
+
+// V3.14.4: UBX-MON-COMMS, the receiver's own view of the port wired to the back.
+struct ZedComms {
+  bool valid = false;
+  uint8_t tx_errors = 0;         // b0 mem, b1 alloc: the receiver could not queue output (messages dropped)
+  uint16_t tx_pending = 0;       // bytes waiting in the receiver to go out on this port
+  uint8_t tx_usage = 0, tx_peak = 0;   // % of the TX buffer, now and peak
+  uint8_t rx_usage = 0, rx_peak = 0;   // % of the RX buffer (RTCM from the back)
+  uint16_t overrun_errs = 0;     // RX overruns on this port (RTCM bytes lost inside the receiver)
+  uint32_t skipped = 0;          // RX bytes the receiver could not parse (no protocol matched)
+  uint32_t rx_bytes = 0, tx_bytes = 0;
+};
+// portId for UART1 0x0100, UART2 0x0201. False if the payload is malformed or the port is not listed.
+bool ubx_decode_mon_comms(const uint8_t* pl, size_t n, uint16_t port_id, ZedComms* c);
 
 // Size in bytes of a key's value (from the key's size bits). 0 = unknown.
 size_t zed_key_value_size(uint32_t key);
@@ -72,14 +105,20 @@ class UbxStream {
   uint32_t frames() const { return frames_; }
   uint32_t bad_checksum() const { return bad_; }
   uint32_t nmea_sentences() const { return nmea_; }   // valid "$..*hh" sentences seen
+  // V3.14.4: frames longer than the buffer, and times the parser searched again for a frame start after a bad
+  // frame (instead of throwing away every byte of the bad frame, which also lost the frame that followed it).
+  uint32_t oversize() const { return oversize_; }
+  uint32_t resyncs() const { return resyncs_; }
  private:
   void byte(uint8_t b);
   void nmea_byte(uint8_t b);
+  void process();
+  void drop(size_t n);
   FrameCb cb_;
   void* ctx_;
   uint8_t buf_[2100];   // V3.9.0: NAV-SIG with ~120 signals is ~1.9 KB
   size_t have_ = 0, need_ = 0;
-  uint32_t frames_ = 0, bad_ = 0, nmea_ = 0;
+  uint32_t frames_ = 0, bad_ = 0, nmea_ = 0, oversize_ = 0, resyncs_ = 0;
   char nm_[96];
   size_t nm_len_ = 0;
   bool nm_on_ = false;
@@ -115,7 +154,7 @@ class ZedManager {
   bool rate_applied() const { return rate_ok_; }
   // Precision profile: 0 not sent, 1 full (model + RTK fixed + constellations + masks), 2 reduced (model + RTK fixed), 3 rejected
   uint8_t tune_state() const { return tune_; }
-  // V3.9.0: NAV-SAT/NAV-SIG output (1 Hz): 0 not requested yet, 1 both enabled, 2 rejected, 3 skipped (UART too slow),
+  // V3.9.0: NAV-SAT/NAV-SIG output (1 Hz): 0 not requested yet, 1 enabled (V3.14.6: NAV-SIG on, NAV-SAT off), 2 rejected, 3 skipped (UART too slow),
   // 4 only NAV-SAT accepted, 5 only NAV-SIG accepted (V3.10.1: each one is retried on its own after a NAK)
   uint8_t monitor_state() const { return mon_; }
   // V3.13.12: times the NAV-SAT/SIG output was asked for again because it stopped arriving for 10 s (field 02/11/2026:
@@ -124,6 +163,24 @@ class ZedManager {
   uint32_t monitor_rearms() const { return mon_rearms_; }
   uint32_t receiver_resets() const { return zed_resets_; }
   static const uint32_t kMonitorLostMs = 10000;
+  // V3.14.4: per-message counters and arrival times (ms, 0 = never) of what the receiver really sends.
+  uint32_t nav_pvt_count() const { return n_pvt_; }
+  uint32_t nav_sat_count() const { return n_sat_; }
+  uint32_t nav_sig_count() const { return n_sig_; }
+  uint32_t last_nav_sat_ms() const { return t_sat_; }
+  uint32_t last_nav_sig_ms() const { return t_sig_; }
+  // V3.14.4: UBX-MON-COMMS of the port wired to the back, polled every 5 s while RUNNING (valid = answered).
+  const ZedComms& comms() const { return comms_; }
+  uint32_t comms_polls() const { return comms_polls_; }
+  uint8_t comms_tx_max_running() const { return comms_tx_max_; }   // V3.14.6: worst TX usage (%) while RUNNING
+  // V3.14.7: NAV-SIG recovery: times the periodic output was switched off and on again, whether the back is polling
+  // NAV-SIG itself (after a second loss in a row), and polls sent.
+  uint32_t sig_toggles() const { return sig_toggles_; }
+  bool sig_polling() const { return sig_poll_; }
+  uint32_t sig_polls() const { return sig_polls_; }
+  static const uint32_t kCommsPollMs = 5000;
+  // V3.14.4: budget used to decide whether NAV-SAT/NAV-SIG fit on the UART (state 3 "UART too slow" otherwise).
+  ZedUartBudget budget() const { return zed_uart_budget(baud_, rate_, true, 0); }   // V3.14.6: NAV-SIG only (NAV-SAT off)
   const char* receiver_fw() const { return fwver_; }   // "HPG 1.32" etc. (empty until MON-VER arrives)
   const ZedGnssSet& gnss_set() const { return set_; }
   void set_dyn_model(ZedDynModel m) { dyn_ = m; }
@@ -144,10 +201,16 @@ class ZedManager {
   void send_config(bool with_rate);
   void send_tune(bool full);
   void send_monitor(uint8_t which);   // 3 both, 1 NAV-SAT, 2 NAV-SIG
-  uint8_t mon_ = 0, mon_try_ = 3, mon_ok_ = 0, mon_rounds_ = 0;
+  uint8_t mon_ = 0, mon_try_ = 2, mon_ok_ = 0, mon_rounds_ = 0;
   uint32_t mon_t0_ = 0;
   uint32_t mon_last_ms_ = 0, mon_set_ms_ = 0, mon_rearms_ = 0, zed_resets_ = 0;
   uint8_t mon_streak_ = 0;
+  uint32_t n_pvt_ = 0, n_sat_ = 0, n_sig_ = 0, t_sat_ = 0, t_sig_ = 0;   // V3.14.4
+  ZedComms comms_;
+  uint32_t comms_t_ = 0, comms_polls_ = 0;
+  uint8_t comms_tx_max_ = 0;
+  bool sig_poll_ = false;
+  uint32_t sig_poll_t_ = 0, sig_polls_ = 0, sig_toggles_ = 0;
   char fwver_[25] = {0};
   ZedIo* io_;
   UbxStream ubx_;
