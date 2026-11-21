@@ -1,4 +1,5 @@
 #include "avo_gnss_codecs.h"
+#include <math.h>
 #include "avo_bytes.h"
 #include "avo_crc.h"
 #include <string.h>
@@ -68,6 +69,46 @@ size_t rtcm_build(const uint8_t* pl, uint16_t plen, uint8_t* out, size_t cap) {
   return (size_t)plen + 6;
 }
 
+uint64_t rtcm_bits(const uint8_t* p, size_t len, size_t pos, unsigned nbits) {
+  uint64_t v = 0;
+  for (unsigned i = 0; i < nbits; i++) {
+    size_t b = pos + i;
+    if (b / 8 >= len) return 0;
+    v = (v << 1) | ((p[b / 8] >> (7 - (b % 8))) & 1u);
+  }
+  return v;
+}
+
+int64_t rtcm_sbits(const uint8_t* p, size_t len, size_t pos, unsigned nbits) {
+  uint64_t v = rtcm_bits(p, len, pos, nbits);
+  if (nbits && nbits < 64 && (v >> (nbits - 1)) & 1u) v |= ~((1ull << nbits) - 1);
+  return (int64_t)v;
+}
+
+// RTCM 10403.3 1005: DF002 type 12 | DF003 station 12 | DF021 6 | DF022-DF024, DF141 4 | DF025 X 38s | DF142 1 | DF001 1 |
+// DF026 Y 38s | DF364 2 | DF027 Z 38s  (152 bits); 1006 adds the antenna height (16 bits).
+bool rtcm_decode_base(const uint8_t* pl, size_t len, uint16_t* station, int64_t* x, int64_t* y, int64_t* z) {
+  if (len < 19) return false;
+  uint16_t t = (uint16_t)rtcm_bits(pl, len, 0, 12);
+  if (t != 1005 && t != 1006) return false;
+  *station = (uint16_t)rtcm_bits(pl, len, 12, 12);
+  *x = rtcm_sbits(pl, len, 34, 38);
+  *y = rtcm_sbits(pl, len, 74, 38);
+  *z = rtcm_sbits(pl, len, 114, 38);
+  return true;
+}
+
+double ecef_distance_m(int64_t x01mm, int64_t y01mm, int64_t z01mm, int32_t lat_e7, int32_t lon_e7, int32_t height_mm) {
+  const double a = 6378137.0, f = 1.0 / 298.257223563, e2 = f * (2 - f);
+  const double kPi = 3.14159265358979323846;
+  const double lat = lat_e7 * 1e-7 * kPi / 180.0, lon = lon_e7 * 1e-7 * kPi / 180.0, h = height_mm / 1000.0;
+  const double sl = sin(lat), cl = cos(lat);
+  const double nrad = a / sqrt(1 - e2 * sl * sl);
+  const double rx = (nrad + h) * cl * cos(lon), ry = (nrad + h) * cl * sin(lon), rz = (nrad * (1 - e2) + h) * sl;
+  const double dx = x01mm * 1e-4 - rx, dy = y01mm * 1e-4 - ry, dz = z01mm * 1e-4 - rz;
+  return sqrt(dx * dx + dy * dy + dz * dz);
+}
+
 void RtcmObserver::feed(const uint8_t* d, size_t n) {
   st_.bytes += (uint32_t)n;
   while (n) {
@@ -99,7 +140,14 @@ void RtcmObserver::scan() {
       if (len >= 2) {
         uint16_t t = (uint16_t)((f[3] << 4) | (f[4] >> 4));
         st_.last_msg_type = t;
-        if (t == 1005 || t == 1006) st_.ref_station_frames++;
+        types_ |= rtcm_type_bits(t);
+        if (t == 1005 || t == 1006) {
+          st_.ref_station_frames++;
+          uint16_t sid; int64_t x, y, z;
+          if (rtcm_decode_base(f + 3, len, &sid, &x, &y, &z)) {
+            st_.base_valid = true; st_.base_id = sid; st_.base_x = x; st_.base_y = y; st_.base_z = z;
+          }
+        }
         uint16_t m = t % 10;
         if (t >= 1070 && t <= 1137 && m >= 4 && m <= 7) st_.msm_frames++;
       }

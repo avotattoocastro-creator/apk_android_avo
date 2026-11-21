@@ -24,6 +24,24 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-21 — Espalda 3.15.0 · Pecho 3.7.11 · Android 2.16-fixdiag-dev1 — Diagnóstico de «no hay RTK FIX» (BackStatus v4)
+**Autor:** Claude (petición del usuario, 21/11 00:47: «añade todas las lecturas necesarias hasta en la apk hasta que
+consigamos averiguar por qué no llega fix; una vez solucionado simplificamos datos en el apk») · **Rama:**
+`claude/gnss-diagnostico-fix` · **CI:** ver PR
+**Qué cambia:**
+- **Espalda 3.15.0:** UBX-MON-RF cada 5 s (antena, alimentación, interferencias, AGC y ruido por banda); familias RTCM en
+  las correcciones y las que usa el receptor (RXM-RTCM); estación base (1005/1006) y su distancia; modelo dinámico y
+  constelaciones. Todo en **`BackStatus v4` (130 B, añadido al final de la v3)** y en el monitor serie.
+- **Pecho 3.7.11:** los campos v4 en el texto `DIAG_GET` (búfer estático de 2048 B). Nada más cambia.
+- **Android 2.16-fixdiag-dev1 (vc 50):** tarjeta «¿Por qué no hay RTK FIX? (diagnóstico)» en Inicio con causas ordenadas
+  (bloquea / aviso / info) y todos los datos. Núcleo `GnssFixDiag` con pruebas JVM.
+- **Workflows (avisado al usuario):** `build-back-v380.yml` y `build-chest-v377-despertar.yml` cambian versión, nombres de
+  archivo y artefactos (`AVO-BACK-V3-15-0-HELTEC`, `AVO-CHEST-V3-7-11-DIAG-FIX-UNVERIFIED`) y añaden el paso 3.7.11.
+- iPad y Windows no leen `DIAG_GET`: sin cambios.
+- Contrato: `docs/DIAGNOSTICO_FIX_RTK.md` (vector compartido de los 22 bytes).
+**Validación:** pruebas de host de la espalda 59/59 y del pecho en local · CI: ver PR · **NO VERIFICADO** en hardware.
+**Pendiente:** prueba de campo; cuando se sepa la causa, simplificar la tarjeta de la app.
+
 ## 2026-11-20 — Integración (23:38): PR #112, #113, #114 y #115 en `develop`
 **Autor:** Claude (chat integrador, petición del usuario 20/11 23:38) · **Orden:** por llegada, de uno en uno, con *merge commit*.
 - **#112** motor 2.0.0-dev24 / KB-1 1.22.0 (sin conflictos).

@@ -117,6 +117,11 @@ class BackCore : public ZedIo, private GirthHub::Io {
   uint32_t last_pvt_ms_ = 0;
   uint16_t fix_lost_ = 0, ttff_fix_s_ = 0xFFFF;
   uint32_t fixed_ms_ = 0, float_ms_ = 0;
+  // V3.15.0: last 3D position (base distance) and RTCM families windows
+  bool pos_ok_ = false;
+  int32_t lat_e7_ = 0, lon_e7_ = 0, height_mm_ = 0;
+  uint16_t types_prev_ = 0, used_types_ = 0, used_prev_ = 0;
+  uint32_t types_t0_ = 0;
   uint16_t seq_ = 0;
   bool have_off_ = false;
   uint32_t exp_off_ = 0;

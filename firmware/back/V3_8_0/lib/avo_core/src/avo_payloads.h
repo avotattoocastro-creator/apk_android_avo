@@ -125,10 +125,46 @@ struct BackStatus {
   uint16_t fix_lost = 0;           // RTK FIX -> no FIX transitions since boot
   uint16_t ttff_fix_s = 0xFFFF;    // seconds from boot to the first RTK FIX (0xFFFF = not yet)
   uint32_t fixed_ms = 0, float_ms = 0;   // time spent in RTK FIX / FLOAT since boot
+  // ---- v4 (BACK V3.15.0, 21/11/2026): diagnosis of "no RTK FIX"; appended (v3 decoders ignore it). 0xFF / 0xFFFF = unknown.
+  bool v4 = false;
+  uint8_t rf_ant_status = 0xFF;    // UBX-MON-RF block L1 antStatus: 0 INIT, 1 DONTKNOW, 2 OK, 3 SHORT, 4 OPEN
+  uint8_t rf_ant_power = 0xFF;     // antPower: 0 OFF, 1 ON, 2 DONTKNOW
+  uint8_t rf_jam_state = 0xFF;     // flags b0-1 (L1): 0 unknown, 1 OK, 2 warning, 3 critical
+  uint8_t rf_jam_l1 = 0xFF, rf_jam_l2 = 0xFF;    // jamInd 0..255 (CW interference; higher = worse)
+  uint8_t rf_agc_l1 = 0xFF, rf_agc_l2 = 0xFF;    // agcCnt as % of 8191
+  uint16_t rf_noise_l1 = 0xFFFF, rf_noise_l2 = 0xFFFF;   // noisePerMS
+  uint8_t rf_age_s = 0xFF;         // seconds since the last MON-RF (255 = never)
+  uint16_t rtcm_types = 0;         // RTCM message families in the corrections stream (last 30-60 s), RtcmTypeBit
+  uint16_t rtcm_used_types = 0;    // families the receiver says it used (UBX-RXM-RTCM msgUsed = 2), same bits
+  uint16_t base_id = 0xFFFF;       // reference station ID (RTCM 1005/1006)
+  uint16_t base_dist_dam = 0xFFFF; // base <-> back distance in decametres (10 m), from 1005/1006 ECEF and NAV-PVT
+  uint8_t dyn_model = 0xFF;        // CFG-NAVSPG-DYNMODEL sent to the receiver
+  uint8_t gnss_set = 0;            // constellations enabled: b0 GPS, b1 GLONASS, b2 Galileo, b3 BeiDou
 };
+// RTCM message families (BackStatus v4 rtcm_types / rtcm_used_types; the same bits in Android, iPad and Windows).
+enum RtcmTypeBit : uint16_t {
+  RTCM_B_BASE_POS = 1u << 0,   // 1005 / 1006 reference station position
+  RTCM_B_GPS_MSM = 1u << 1,    // 1071-1077
+  RTCM_B_GLO_MSM = 1u << 2,    // 1081-1087
+  RTCM_B_GAL_MSM = 1u << 3,    // 1091-1097
+  RTCM_B_BDS_MSM = 1u << 4,    // 1121-1127
+  RTCM_B_QZS_MSM = 1u << 5,    // 1111-1117
+  RTCM_B_SBS_MSM = 1u << 6,    // 1101-1107
+  RTCM_B_GLO_BIAS = 1u << 7,   // 1230 GLONASS code-phase biases
+  RTCM_B_GPS_LEGACY = 1u << 8, // 1001-1004
+  RTCM_B_GLO_LEGACY = 1u << 9, // 1009-1012
+  RTCM_B_ANT_DESC = 1u << 10,  // 1007 / 1008 / 1033 antenna and receiver descriptors
+  RTCM_B_EPHEM = 1u << 11,     // 1019 1020 1042 1044 1045 1046 broadcast ephemerides
+  RTCM_B_MSM7 = 1u << 12,      // any MSM7 (full resolution)
+  RTCM_B_MSM4 = 1u << 13,      // any MSM4
+  RTCM_B_MSM56 = 1u << 14,     // any MSM5 or MSM6
+  RTCM_B_MSM123 = 1u << 15,    // any MSM1..MSM3 (code only: no RTK with them)
+};
+uint16_t rtcm_type_bits(uint16_t msg_type);
 static const size_t BACK_STATUS_V1_LEN = 52;
 static const size_t BACK_STATUS_V2_LEN = 82;
 static const size_t BACK_STATUS_V3_LEN = 82 + 14 + 4 + 8;
+static const size_t BACK_STATUS_V4_LEN = BACK_STATUS_V3_LEN + 22;   // 130 B
 size_t encode_status(const BackStatus& s, uint8_t* out, size_t cap);
 bool decode_status(const uint8_t* p, size_t n, BackStatus* s);
 

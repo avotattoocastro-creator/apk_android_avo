@@ -50,6 +50,18 @@ static const uint8_t UBX_CLS_CFG = 0x06, UBX_ID_CFG_VALSET = 0x8A;
 static const uint8_t UBX_CLS_MON = 0x0A, UBX_ID_MON_VER = 0x04;
 static const uint8_t UBX_CLS_RXM = 0x02, UBX_ID_RXM_RTCM = 0x32;
 static const uint8_t UBX_ID_MON_COMMS = 0x36;   // V3.14.4: receiver port usage (HPG 1.12+)
+static const uint8_t UBX_ID_MON_RF = 0x38;      // V3.15.0: antenna and RF front end (HPG 1.10+)
+
+// V3.15.0: UBX-MON-RF, one block per RF band (block 0 = L1, block 1 = L2/L5). Diagnosis of "no RTK FIX": antenna
+// open/short, jamming (CW interference indicator) and AGC (a front end saturated or starved shows here).
+struct ZedRf {
+  bool valid = false;
+  uint8_t ant_status = 0xFF, ant_power = 0xFF, jam_state = 0xFF;
+  uint8_t jam_l1 = 0xFF, jam_l2 = 0xFF;
+  uint8_t agc_l1 = 0xFF, agc_l2 = 0xFF;        // % of 8191
+  uint16_t noise_l1 = 0xFFFF, noise_l2 = 0xFFFF;
+};
+bool ubx_decode_mon_rf(const uint8_t* pl, size_t n, ZedRf* r);
 
 // V3.14.4: UART budget of the ZED -> back link, computed before enabling NAV-SAT/NAV-SIG.
 // 8N1 = 10 bits per byte. Sizes are UBX frames (8 bytes of header + checksum included):
@@ -179,6 +191,9 @@ class ZedManager {
   bool sig_polling() const { return sig_poll_; }
   uint32_t sig_polls() const { return sig_polls_; }
   static const uint32_t kCommsPollMs = 5000;
+  // V3.15.0: UBX-MON-RF polled every 5 s (2.5 s after MON-COMMS); last_rf_ms 0 = never.
+  const ZedRf& rf() const { return rf_; }
+  uint32_t last_rf_ms() const { return t_rf_; }
   // V3.14.4: budget used to decide whether NAV-SAT/NAV-SIG fit on the UART (state 3 "UART too slow" otherwise).
   ZedUartBudget budget() const { return zed_uart_budget(baud_, rate_, true, 0); }   // V3.14.6: NAV-SIG only (NAV-SAT off)
   const char* receiver_fw() const { return fwver_; }   // "HPG 1.32" etc. (empty until MON-VER arrives)
@@ -208,6 +223,8 @@ class ZedManager {
   uint32_t n_pvt_ = 0, n_sat_ = 0, n_sig_ = 0, t_sat_ = 0, t_sig_ = 0;   // V3.14.4
   ZedComms comms_;
   uint32_t comms_t_ = 0, comms_polls_ = 0;
+  ZedRf rf_;
+  uint32_t rf_t_ = 0, t_rf_ = 0;
   uint8_t comms_tx_max_ = 0;
   bool sig_poll_ = false;
   uint32_t sig_poll_t_ = 0, sig_polls_ = 0, sig_toggles_ = 0;

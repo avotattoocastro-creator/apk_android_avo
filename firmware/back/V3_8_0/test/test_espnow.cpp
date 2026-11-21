@@ -809,12 +809,17 @@ TEST(quality, nav_sat_sig_enabled_at_1hz_and_summarised) {
   CHECK_EQ(q.sig_used, 36); CHECK_EQ(q.sig_cr_used, 36); CHECK_EQ(q.sig_weak, 4);
   CHECK_EQ(q.cno_mean, 44); CHECK_EQ(q.cno_min, 44); CHECK_EQ(q.cno_max, 44);
   BackStatus st = w.back->status();
-  uint8_t b[BACK_STATUS_V3_LEN + 8];
+  uint8_t b[BACK_STATUS_V4_LEN + 8];
   size_t n = encode_status(st, b, sizeof(b));
-  CHECK_EQ(n, BACK_STATUS_V3_LEN);
+  CHECK_EQ(n, BACK_STATUS_V4_LEN);   // V3.15.0: v4 (130 B)
   BackStatus d;
   CHECK(decode_status(b, n, &d));
-  CHECK(d.v2 && d.v3);
+  CHECK(d.v2 && d.v3 && d.v4);
+  // an old chest (v3 decoder) reads the first 108 bytes: same result for the v3 fields
+  BackStatus d3;
+  CHECK(decode_status(b, BACK_STATUS_V3_LEN, &d3));
+  CHECK(d3.v3 && !d3.v4);
+  CHECK_EQ(d3.sig_l2, 20);
   CHECK_EQ(d.sig_l2, 20); CHECK_EQ(d.quality_mon, 1); CHECK(d.quality_age_s <= 2);
   CHECK(d.fixed_ms > 5000); CHECK_EQ(d.fix_lost, 0); CHECK(d.ttff_fix_s < 15);
   // a v2 decoder (old chest) still reads it, a v2 frame still decodes here
@@ -1316,6 +1321,96 @@ TEST(chest_sleep, only_our_chest_wakes_the_back) {
   CHECK(now_is_wake_packet(MAC_CA, pkt, n, peer));                 // our chest asking to pair again
   NowPeerRecord none;
   CHECK(!now_is_wake_packet(MAC_CA, pkt, n, none));                // unpaired back: never sleeps anyway
+}
+
+
+// ------------------------------------------------------------------ V3.15.0: diagnosis of "no RTK FIX" (BackStatus v4)
+TEST(fixdiag, rtcm_type_bits) {
+  CHECK_EQ(rtcm_type_bits(1005), (uint16_t)RTCM_B_BASE_POS);
+  CHECK_EQ(rtcm_type_bits(1006), (uint16_t)RTCM_B_BASE_POS);
+  CHECK_EQ(rtcm_type_bits(1077), (uint16_t)(RTCM_B_GPS_MSM | RTCM_B_MSM7));
+  CHECK_EQ(rtcm_type_bits(1084), (uint16_t)(RTCM_B_GLO_MSM | RTCM_B_MSM4));
+  CHECK_EQ(rtcm_type_bits(1097), (uint16_t)(RTCM_B_GAL_MSM | RTCM_B_MSM7));
+  CHECK_EQ(rtcm_type_bits(1127), (uint16_t)(RTCM_B_BDS_MSM | RTCM_B_MSM7));
+  CHECK_EQ(rtcm_type_bits(1117), (uint16_t)(RTCM_B_QZS_MSM | RTCM_B_MSM7));
+  CHECK_EQ(rtcm_type_bits(1075), (uint16_t)(RTCM_B_GPS_MSM | RTCM_B_MSM56));
+  CHECK_EQ(rtcm_type_bits(1073), (uint16_t)(RTCM_B_GPS_MSM | RTCM_B_MSM123));
+  CHECK_EQ(rtcm_type_bits(1230), (uint16_t)RTCM_B_GLO_BIAS);
+  CHECK_EQ(rtcm_type_bits(1004), (uint16_t)RTCM_B_GPS_LEGACY);
+  CHECK_EQ(rtcm_type_bits(1012), (uint16_t)RTCM_B_GLO_LEGACY);
+  CHECK_EQ(rtcm_type_bits(1033), (uint16_t)RTCM_B_ANT_DESC);
+  CHECK_EQ(rtcm_type_bits(1019), (uint16_t)RTCM_B_EPHEM);
+  CHECK_EQ(rtcm_type_bits(1080), (uint16_t)0);
+  CHECK_EQ(rtcm_type_bits(4094), (uint16_t)0);
+}
+
+// 1005 written bit by bit (station 2003, ECEF of a point near Laredo, Cantabria) and read back
+static size_t put_bits(uint8_t* p, size_t pos, uint64_t v, unsigned n) {
+  for (unsigned i = 0; i < n; i++) { size_t b = pos + i; if ((v >> (n - 1 - i)) & 1u) p[b / 8] |= (uint8_t)(0x80 >> (b % 8)); }
+  return pos + n;
+}
+static size_t make_1005(uint8_t* pl, uint16_t station, int64_t x, int64_t y, int64_t z) {
+  memset(pl, 0, 19);
+  size_t pos = put_bits(pl, 0, 1005, 12);
+  pos = put_bits(pl, pos, station, 12);
+  pos = put_bits(pl, pos, 0, 6); pos = put_bits(pl, pos, 0xF, 4);
+  pos = put_bits(pl, pos, (uint64_t)x & ((1ull << 38) - 1), 38); pos = put_bits(pl, pos, 0, 2);
+  pos = put_bits(pl, pos, (uint64_t)y & ((1ull << 38) - 1), 38); pos = put_bits(pl, pos, 0, 2);
+  pos = put_bits(pl, pos, (uint64_t)z & ((1ull << 38) - 1), 38);
+  return 19;
+}
+
+TEST(fixdiag, base_1005_and_distance) {
+  // base at 43.4100 N, -3.4200 E, 50 m ellipsoid; rover 1 km north (about 0.008983 deg)
+  const double kPi = 3.14159265358979323846, a = 6378137.0, f = 1.0 / 298.257223563, e2 = f * (2 - f);
+  const double lat = 43.41 * kPi / 180, lon = -3.42 * kPi / 180, h = 50.0;
+  const double N = a / sqrt(1 - e2 * sin(lat) * sin(lat));
+  const int64_t x = (int64_t)llround((N + h) * cos(lat) * cos(lon) * 1e4), y = (int64_t)llround((N + h) * cos(lat) * sin(lon) * 1e4),
+                z = (int64_t)llround((N * (1 - e2) + h) * sin(lat) * 1e4);
+  uint8_t pl[19]; make_1005(pl, 2003, x, y, z);
+  uint16_t sid = 0; int64_t rx = 0, ry = 0, rz = 0;
+  CHECK(rtcm_decode_base(pl, sizeof(pl), &sid, &rx, &ry, &rz));
+  CHECK_EQ(sid, 2003); CHECK_EQ(rx, x); CHECK_EQ(ry, y); CHECK_EQ(rz, z);
+  CHECK(y < 0);   // west of Greenwich: the sign survives the 38-bit field
+  CHECK_NEAR(ecef_distance_m(rx, ry, rz, 434100000, -34200000, 50000), 0.0, 0.01);
+  CHECK_NEAR(ecef_distance_m(rx, ry, rz, 434189830, -34200000, 50000), 1000.0, 5.0);
+  // the observer finds it in a stream and remembers the base
+  uint8_t fr[32]; size_t n = rtcm_build(pl, sizeof(pl), fr, sizeof(fr));
+  RtcmObserver o; o.feed(fr, n);
+  CHECK(o.stats().base_valid); CHECK_EQ(o.stats().base_id, 2003); CHECK_EQ(o.stats().base_x, x);
+  CHECK_EQ(o.take_types(), (uint16_t)RTCM_B_BASE_POS); CHECK_EQ(o.take_types(), (uint16_t)0);
+}
+
+TEST(fixdiag, mon_rf_two_blocks) {
+  uint8_t pl[4 + 48] = {0};
+  pl[0] = 0; pl[1] = 2;
+  uint8_t* b0 = pl + 4; b0[0] = 0; b0[1] = 1; b0[2] = 4; b0[3] = 1; b0[12] = 0x5A; b0[13] = 0; b0[14] = 0xFF; b0[15] = 0x0F; b0[16] = 7;
+  uint8_t* b1 = pl + 28; b1[0] = 1; b1[12] = 0x50; b1[14] = 0x00; b1[15] = 0x10; b1[16] = 200;
+  ZedRf r;
+  CHECK(ubx_decode_mon_rf(pl, sizeof(pl), &r));
+  CHECK(r.valid); CHECK_EQ(r.ant_status, 4); CHECK_EQ(r.ant_power, 1); CHECK_EQ(r.jam_state, 1);
+  CHECK_EQ(r.noise_l1, 0x5A); CHECK_EQ(r.agc_l1, 50); CHECK_EQ(r.jam_l1, 7);
+  CHECK_EQ(r.noise_l2, 0x50); CHECK_EQ(r.agc_l2, 50); CHECK_EQ(r.jam_l2, 200);
+  CHECK(!ubx_decode_mon_rf(pl, 20, &r));
+}
+
+TEST(fixdiag, status_v4_roundtrip_and_shared_vector) {
+  BackStatus s;
+  s.v2 = s.v3 = s.v4 = true;
+  s.rf_ant_status = 2; s.rf_ant_power = 1; s.rf_jam_state = 1; s.rf_jam_l1 = 12; s.rf_jam_l2 = 34;
+  s.rf_agc_l1 = 55; s.rf_agc_l2 = 66; s.rf_noise_l1 = 80; s.rf_noise_l2 = 90; s.rf_age_s = 3;
+  s.rtcm_types = 0x101F; s.rtcm_used_types = 0x100F; s.base_id = 2003; s.base_dist_dam = 1234; s.dyn_model = 7; s.gnss_set = 15;
+  uint8_t b[BACK_STATUS_V4_LEN + 8];
+  size_t n = encode_status(s, b, sizeof(b));
+  CHECK_EQ(n, BACK_STATUS_V4_LEN);
+  BackStatus d;
+  CHECK(decode_status(b, n, &d));
+  CHECK(d.v4); CHECK_EQ(d.rf_ant_status, 2); CHECK_EQ(d.rf_jam_l2, 34); CHECK_EQ(d.rf_noise_l2, 90);
+  CHECK_EQ(d.rtcm_types, 0x101F); CHECK_EQ(d.rtcm_used_types, 0x100F); CHECK_EQ(d.base_id, 2003); CHECK_EQ(d.base_dist_dam, 1234);
+  CHECK_EQ(d.dyn_model, 7); CHECK_EQ(d.gnss_set, 15);
+  // the 22 appended bytes, little-endian (vector also in docs/DIAGNOSTICO_FIX_RTK.md)
+  static const uint8_t v4[22] = {2, 1, 1, 12, 34, 55, 66, 80, 0, 90, 0, 3, 0x1F, 0x10, 0x0F, 0x10, 0xD3, 0x07, 0xD2, 0x04, 7, 15};
+  CHECK(memcmp(b + BACK_STATUS_V3_LEN, v4, sizeof(v4)) == 0);
 }
 
 int main(int argc, char** argv) { return tt_run_all(argc > 1 ? argv[1] : nullptr); }

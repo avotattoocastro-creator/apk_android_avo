@@ -46,6 +46,10 @@ import org.avoperformance.horse.core.telemetry.GnssChain
 import org.avoperformance.horse.core.telemetry.GnssChainReport
 import org.avoperformance.horse.core.telemetry.GnssDiagSnapshot
 import org.avoperformance.horse.core.telemetry.StageState
+import org.avoperformance.horse.core.telemetry.GnssFixDiag
+import org.avoperformance.horse.core.telemetry.GnssFixInput
+import org.avoperformance.horse.core.telemetry.GnssFixReport
+import org.avoperformance.horse.core.telemetry.FixSeverity
 import org.avoperformance.horse.service.AvoLinkService
 import org.avoperformance.horse.ui.components.AvoCard
 import org.avoperformance.horse.ui.components.Fmt
@@ -120,6 +124,8 @@ fun HomeScreen(c: AppContainer, go: (String) -> Unit) {
     // 2.14-gnss: RTCM / UBX chain stage by stage, from the watch DIAG counters (every 5 s while this screen is open;
     // no protocol change: DIAG_GET exists since CHEST 3.5.0).
     var chain by remember { mutableStateOf<GnssChainReport?>(null) }
+    // 2.16-fixdiag: «¿Por qué no hay RTK FIX?» (espalda 3.15.0 + pecho 3.7.11, BackStatus v4 en DIAG)
+    var fixInput by remember { mutableStateOf<GnssFixInput?>(null) }
     LaunchedEffect(link) {
         if (link != LinkState.LISTO && link != LinkState.LISTO_SIN_AUTH) { chain = null; return@LaunchedEffect }
         var prev: GnssDiagSnapshot? = null
@@ -129,6 +135,7 @@ fun HomeScreen(c: AppContainer, go: (String) -> Unit) {
             if (m != null && m.isNotEmpty()) {
                 val snap = GnssDiagSnapshot.from(m, System.currentTimeMillis(), c.ntrip.stats.value.bytesReceived, c.ntrip.path.value.sentBytes)
                 chain = GnssChain.report(prev, snap, c.ntrip.state.value is NtripState.Streaming)
+                fixInput = GnssFixInput.from(m)
                 prev = snap
             }
             delay(5_000)
@@ -193,6 +200,12 @@ fun HomeScreen(c: AppContainer, go: (String) -> Unit) {
             }
         }
         item { GnssQualityCard(t?.v3?.takeIf { fresh }, rtk.state, t?.v2?.rtcmUsedByReceiver, chain, ntripState is NtripState.Streaming) }
+        fixInput?.let { fi ->
+            item {
+                val used = chain?.rtcm?.firstOrNull { it.name == "Usadas por el receptor" }?.state
+                GnssFixDiagCard(GnssFixDiag.analyze(fi, t?.carrSoln, used?.let { it == StageState.OK }))
+            }
+        }
         item {
             AvoCard("Correcciones NTRIP", onClick = { go("ntrip") }, trailing = { StatusPill(if (ntripState is NtripState.Streaming) "Recibiendo" else ntripState.texto.take(22), ntripColor) }) {
                 val activeMount by c.ntrip.activeMount.collectAsStateWithLifecycle()
@@ -230,6 +243,21 @@ fun fmtAcc(m: Double): String = if (m < 1) String.format(Locale.forLanguageTag("
  * GNSS quality from the receiver (BACK 3.9.0: UBX-NAV-SAT/NAV-SIG summary, RTK FIX tracking; CHEST 3.7.6 telemetry v3).
  * Diagnosis only: these values tell whether RTK can work and why not, they do not change the position.
  */
+/** 2.16-fixdiag: diagnóstico temporal de «no hay RTK FIX» (se simplificará cuando se encuentre la causa). */
+@Composable
+private fun GnssFixDiagCard(r: GnssFixReport) {
+    fun color(s: FixSeverity) = when (s) { FixSeverity.BLOQUEA -> AvoColors.Bad; FixSeverity.AVISO -> AvoColors.Warn; FixSeverity.INFO -> AvoColors.Text; FixSeverity.BIEN -> AvoColors.Ok }
+    AvoCard("¿Por qué no hay RTK FIX? (diagnóstico)") {
+        r.findings.forEach { f ->
+            val mark = when (f.severity) { FixSeverity.BLOQUEA -> "✖"; FixSeverity.AVISO -> "⚠"; FixSeverity.INFO -> "ℹ"; FixSeverity.BIEN -> "✔" }
+            Text("$mark ${f.text}", color = color(f.severity), fontSize = 13.sp, fontWeight = if (f.severity == FixSeverity.BLOQUEA) FontWeight.Bold else FontWeight.Normal,
+                modifier = Modifier.padding(vertical = 2.dp))
+        }
+        if (r.rows.isNotEmpty()) Spacer(Modifier.height(6.dp))
+        r.rows.forEach { row -> KV(row.label, row.value, if (row.severity == FixSeverity.INFO) AvoColors.Text else color(row.severity)) }
+    }
+}
+
 @Composable
 private fun GnssQualityCard(
     q: org.avoperformance.horse.core.ble.TelemetryV3?, state: org.avoperformance.horse.core.telemetry.RtkState, rtcmUsed: Long?,
