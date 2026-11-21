@@ -1,0 +1,201 @@
+{
+ "placa": {
+  "ancho": 54.0,
+  "alto": 32.0,
+  "radio_esquina": 2.0,
+  "espesor": 1.0,
+  "capas": 4,
+  "acabado": "ENIG"
+ },
+ "taladros": [
+  [
+   -24.0,
+   -13.0
+  ],
+  [
+   24.0,
+   -13.0
+  ]
+ ],
+ "diametro_taladro": 2.2,
+ "bloques": [
+  {
+   "ref": "U1",
+   "descripcion": "ESP32-S3-WROOM-1-N16R8 (antena PCB a la izquierda)",
+   "x0": -27.0,
+   "y0": -2.0,
+   "ancho": 25.5,
+   "alto": 18.0,
+   "altura": 3.1,
+   "cota": "hoja de datos",
+   "notas": "antena a ras del canto izquierdo; sin cobre en ninguna capa bajo los 6 mm de la antena"
+  },
+  {
+   "ref": "U2",
+   "descripcion": "Quectel EG800Q-EU (LTE Cat 1 bis)",
+   "x0": 7.5,
+   "y0": -0.8,
+   "ancho": 17.7,
+   "alto": 15.8,
+   "altura": 2.4,
+   "cota": "hoja de datos",
+   "notas": "LGA, MSL 3, rayos X en JLC; tapa metálica"
+  },
+  {
+   "ref": "U8",
+   "descripcion": "TXS0108E (1,8 V del módem <-> 3,3 V) + pasivos",
+   "x0": -1.1,
+   "y0": 9.5,
+   "ancho": 4.2,
+   "alto": 5.0,
+   "altura": 1.0,
+   "cota": "estimada",
+   "notas": "TX, RX, RTS, CTS, DTR, RI, STATUS, NET_STATUS"
+  },
+  {
+   "ref": "Q2Q3",
+   "descripcion": "2 × NPN PWRKEY/RESET_N + resistencias",
+   "x0": -1.1,
+   "y0": 2.5,
+   "ancho": 4.2,
+   "alto": 6.2,
+   "altura": 1.1,
+   "cota": "estimada",
+   "notas": "colector abierto, como la referencia de Quectel"
+  },
+  {
+   "ref": "J1",
+   "descripcion": "U.FL LTE + red en pi (3 × 0402)",
+   "x0": 20.0,
+   "y0": -5.2,
+   "ancho": 7.0,
+   "alto": 4.0,
+   "altura": 1.25,
+   "cota": "estimada",
+   "notas": "U.FL en el canto derecho; línea de 50 ohm corta hasta ANT_MAIN"
+  },
+  {
+   "ref": "U3",
+   "descripcion": "eSIM MFF2 (DFN-8 6 × 5) + 4 × 33 pF + TVS",
+   "x0": 9.0,
+   "y0": -9.5,
+   "ancho": 7.0,
+   "alto": 6.5,
+   "altura": 0.9,
+   "cota": "hoja de datos",
+   "notas": "a menos de 10 mm de los pines USIM del módem"
+  },
+  {
+   "ref": "BULK",
+   "descripcion": "VBAT del módem: 1 × 220 uF 3528 + 2 × 100 uF 1206 + Q1 PMOS + TVS",
+   "x0": 16.5,
+   "y0": -10.4,
+   "ancho": 9.0,
+   "alto": 4.8,
+   "altura": 2.1,
+   "cota": "estimada",
+   "notas": "pegado a los pines VBAT_BB/VBAT_RF; pista >= 2 mm"
+  },
+  {
+   "ref": "U4",
+   "descripcion": "SPI NAND W25N02KV (2 Gbit, WSON-8 8 × 6)",
+   "x0": -1.8,
+   "y0": -10.0,
+   "ancho": 8.2,
+   "alto": 6.2,
+   "altura": 0.8,
+   "cota": "hoja de datos",
+   "notas": "256 MB para guardar sesiones .avr antes de subirlas"
+  },
+  {
+   "ref": "TP",
+   "descripcion": "Puntos de prueba: USB del módem, UART de depuración, BOOT",
+   "x0": 14.5,
+   "y0": -15.5,
+   "ancho": 6.5,
+   "alto": 4.0,
+   "altura": 0.0,
+   "cota": "estimada",
+   "notas": "pads de 1 mm; para actualizar el módem por USB en el taller"
+  },
+  {
+   "ref": "BAT",
+   "descripcion": "Pads de batería + fusible PTC 1812",
+   "x0": 5.5,
+   "y0": -15.5,
+   "ancho": 8.5,
+   "alto": 4.5,
+   "altura": 1.0,
+   "cota": "estimada",
+   "notas": "batería LiPo soldada bajo la placa"
+  },
+  {
+   "ref": "U5",
+   "descripcion": "Cargador BQ24072 (QFN-16 3 × 3) + pasivos",
+   "x0": -26.5,
+   "y0": -10.0,
+   "ancho": 6.0,
+   "alto": 5.5,
+   "altura": 1.0,
+   "cota": "estimada",
+   "notas": "igual que el casco V5"
+  },
+  {
+   "ref": "U6",
+   "descripcion": "Buck-boost TPS63802 + bobina 2016 (3V3)",
+   "x0": -20.0,
+   "y0": -10.0,
+   "ancho": 6.2,
+   "alto": 5.5,
+   "altura": 1.2,
+   "cota": "estimada",
+   "notas": "aguanta las caídas de la batería con los picos del módem"
+  },
+  {
+   "ref": "U7",
+   "descripcion": "MAX17048 (TDFN 2 × 2) + TTP223 (táctil)",
+   "x0": -13.4,
+   "y0": -10.0,
+   "ancho": 2.8,
+   "alto": 5.5,
+   "altura": 1.0,
+   "cota": "estimada",
+   "notas": "medidor e I2C 0x36"
+  },
+  {
+   "ref": "J2",
+   "descripcion": "Pogo 5 contactos por hilos (VBUS, D-, D+, GND, AUX)",
+   "x0": -20.0,
+   "y0": -15.5,
+   "ancho": 13.0,
+   "alto": 3.0,
+   "altura": 0.0,
+   "cota": "estimada",
+   "notas": "mismo pogo que el casco V5; compatible con el DOCK V1"
+  },
+  {
+   "ref": "ESD",
+   "descripcion": "USBLC6-2SC6 + PTC VBUS + TVS VBUS",
+   "x0": -6.6,
+   "y0": -15.5,
+   "ancho": 6.0,
+   "alto": 4.5,
+   "altura": 1.1,
+   "cota": "estimada",
+   "notas": ""
+  },
+  {
+   "ref": "LED",
+   "descripcion": "LED RGB de estado (SK6812 2020)",
+   "x0": 0.0,
+   "y0": -15.5,
+   "ancho": 5.0,
+   "alto": 4.5,
+   "altura": 0.9,
+   "cota": "estimada",
+   "notas": "luz por la cápsula"
+  }
+ ],
+ "altura_max_componentes": 3.1,
+ "errores": []
+}

@@ -1,0 +1,39 @@
+{
+ "placa": {
+  "ancho": 54.0,
+  "alto": 32.0,
+  "radio_esquina": 2.0,
+  "espesor": 1.0,
+  "capas": 4,
+  "acabado": "ENIG",
+  "vista": "cara F (componentes)"
+ },
+ "taladros": [
+  [
+   -24.0,
+   -13.0
+  ],
+  [
+   24.0,
+   -13.0
+  ]
+ ],
+ "diametro_taladro": 2.2,
+ "altura_max_cara_F": 3.1,
+ "conectores": {
+  "UFL_LTE": [
+   26.0,
+   -3.2
+  ],
+  "POGO_5": [
+   -13.5,
+   -14.0
+  ]
+ },
+ "antena_esp32_sin_cobre": {
+  "x0": -27.0,
+  "x1": -21.0,
+  "y0": -2.0,
+  "y1": 16.0
+ }
+}
