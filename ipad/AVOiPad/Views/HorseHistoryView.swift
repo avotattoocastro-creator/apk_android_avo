@@ -80,6 +80,9 @@ struct HorseHistoryView: View {
     @ViewBuilder
     private func content(_ r: TrainingAnalysisResult) -> some View {
         stateCard(r)
+        if r.baseCientifica.present {
+            KbHistoryCard(status: r.baseCientifica, sessions: r.sesiones, referenceDate: dayText(r.fechaReferencia))
+        }
         if r.sesiones.isEmpty {
             AvoCard { AvoNoData(text: "Sin sesiones con fecha y resumen para este caballo") }
         } else {

@@ -266,6 +266,8 @@ struct TrackWorkEffort: Identifiable, Equatable {
     var last400S: Double? = nil
     var speedLast200: Double? = nil
     var speedLast400: Double? = nil
+    var last600S: Double? = nil          // KB-1 1.1.0: last 600 m (Schrurs 2024); nil when the effort is shorter
+    var speedLast600: Double? = nil
     var splits: [TrackWorkSplit] = []
     var best: [TrackWorkBest] = []
     var strideCount: Int = 0
@@ -407,6 +409,8 @@ struct TrackWorkResult: Equatable {
     var crossings: [TrackWorkCrossing] = []
     var events: [TrackWorkEvent] = []
     var note: String = ""
+    /// «base_cientifica» (KB-1): bands, Verheyen counters and bone fatigue of the session (present = false when missing).
+    var scientificBase: KbSessionBlock = KbSessionBlock()
 
     var phaseBasisText: String {
         switch phaseBasis {
@@ -523,6 +527,7 @@ struct TrackWorkResult: Equatable {
         }
         r.warnings = J.arr(o, "avisos").compactMap { $0 as? String }
         r.note = J.str(o, "nota")
+        r.scientificBase = KbSessionBlock(J.obj(o, "base_cientifica"))
         return r
     }
 
@@ -567,6 +572,8 @@ struct TrackWorkResult: Equatable {
         w.last400S = J.num(e, "ultimos_400m_s")
         w.speedLast200 = J.num(e, "v_ultimos_200m")
         w.speedLast400 = J.num(e, "v_ultimos_400m")
+        w.last600S = J.num(e, "ultimos_600m_s")
+        w.speedLast600 = J.num(e, "v_ultimos_600m")
         w.splits = splits
         w.best = best
         w.strideCount = J.int(J.num(e, "zancadas") ?? 0)

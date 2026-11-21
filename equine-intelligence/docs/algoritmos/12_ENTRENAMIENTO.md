@@ -29,7 +29,7 @@ Usa los segmentos de `rendimiento` del clasificador de referencia:
 - **Aceleraciones** de la trayectoria GNSS (`cinematica`): sostenidas, frenadas y picos laterales, sin contar
   las de calidad `BAJA` o `NO_UTILIZABLE`. Son de la antena del jinete, no de la cincha.
 
-## 1 bis. Ficha de campo (TRAINING 1.1.0, motor 2.0.0-dev27)
+## 1 bis. Ficha de campo (TRAINING 1.1.0, motor 2.0.0-dev28)
 Campos opcionales de `extra` (y de cada entrada de la historia); el resumen los guarda con la misma forma. Los códigos
 se pasan a mayúsculas; un valor no reconocido o fuera de rango se descarta con un aviso en el resumen.
 

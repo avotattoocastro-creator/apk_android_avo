@@ -312,7 +312,7 @@ EQ_TEST(kb, final_speed_last_600m) {
   double keep = -1;
   CHECK(!kb_final_speed(t, d, 600, &keep, nullptr)); CHECK_NEAR(keep, -1, 0);
   CHECK(!kb_final_speed({}, {}, 600, &keep, nullptr));
-  CHECK(std::string(KNOWLEDGE_VERSION) == "1.25.0");
+  CHECK(std::string(KNOWLEDGE_VERSION) == "1.26.0");
 }
 
 // Líneas base (KB 1.3.0, estudio extra 2026-11-19): valores de referencia del estudio ampliado del 18/11 y de la cadena
@@ -489,7 +489,7 @@ EQ_TEST(kb, drift_rules_in_training) {
   CHECK(a7b == nullptr || a7b->text.find("CUSUM") != std::string::npos);   // 0,22 m < 0,3 m: solo puede saltar el CUSUM
 }
 
-// A4 (KB 1.25.0): Morrice-West 2025, carga muy baja antes de correr, HR 2,89 [E]; corte < 2 días rápidos en 28 d [I].
+// A4 (KB 1.26.0): Morrice-West 2025, carga muy baja antes de correr, HR 2,89 [E]; corte < 2 días rápidos en 28 d [I].
 EQ_TEST(kb, rule_low_load_before_race) {
   KbRuleConfig c;
   CHECK(c.prerace_days == 28 && c.prerace_min_fast_days == 2 && c.prerace_warn_days == 14);

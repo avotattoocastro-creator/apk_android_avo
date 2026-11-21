@@ -61,6 +61,7 @@ private struct TrackWorkContent: View {
             TrackWorkEffortDetail(tw: tw, effort: sel, offset: item.engineOffsetS)
         }
         TrackWorkSessionBestCard(tw: tw)
+        KbSessionCard(tw: tw)
         ViewThatFits(in: .horizontal) {
             HStack(alignment: .top, spacing: 14) {
                 TrackWorkGirthCard(tw: tw).frame(maxWidth: .infinity)

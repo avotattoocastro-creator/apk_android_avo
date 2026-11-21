@@ -201,7 +201,7 @@ KbStatus kb_evaluate(const std::vector<KbDay>& sessions, long at_day, long first
                           "Choi & Parkin 2025 (Seúl, 101 casos): (días de galope 60 d / 90 d) + 1 ≤ 1,6, OR 2,19 (IC 95 % 1,23–3,91) de "
                           "tendinopatía del TFDS [E]; día de galope = sesión rápida del motor y vigencia de 30 días [I]"});
     }
-    // A4 carga baja antes de una carrera (KB 1.25.0): Morrice-West 2025 (Tasmania), carga muy baja antes de correr,
+    // A4 carga baja antes de una carrera (KB 1.26.0): Morrice-West 2025 (Tasmania), carga muy baja antes de correr,
     // HR 2,89 frente a carga media [E]; allí «baja» = fatiga ósea acumulada < 0,25 en las 4 salidas previas. Aquí se
     // aproxima con días de sesión rápida en los 28 d previos (< 2) [I]. Se juzga el día de la carrera (sesión CARRERA o
     // TRIAL, o fecha prevista) y, por adelantado, cuando faltan ≤ prerace_warn_days y aún no se llega al mínimo [I].

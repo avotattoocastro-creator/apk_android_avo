@@ -20,7 +20,7 @@
 
 namespace avoeq {
 
-static const char* const KNOWLEDGE_VERSION = "1.25.0";
+static const char* const KNOWLEDGE_VERSION = "1.26.0";
 static const char* const KNOWLEDGE_ID = "AVO_KB_1";
 static const char* const BONE_MODEL_ALGORITHM = "SBFL_MORRICE_WEST_2022";
 
@@ -95,7 +95,7 @@ struct KbRuleConfig {
   int drift_min_baseline = 5;          // sesiones comparables mínimas antes de las 3 últimas [I]
   int drift_warmup = 8;                // CUSUM autoiniciado: sin alarmas antes de la 9.ª sesión comparable [I]
   double drift_h = 5.0;                // h = 5 (muchas cartas a la vez) [I]
-  // A4 carga baja antes de una carrera (KB 1.25.0): Morrice-West 2025 [E], «baja» allí es fatiga ósea acumulada < 0,25
+  // A4 carga baja antes de una carrera (KB 1.26.0): Morrice-West 2025 [E], «baja» allí es fatiga ósea acumulada < 0,25
   // en las 4 salidas previas; el corte en sesiones es [I]. Carreras = fechas previstas (opción «carreras_previstas»)
   // y sesiones de tipo CARRERA o TRIAL.
   std::vector<long> planned_race_days;

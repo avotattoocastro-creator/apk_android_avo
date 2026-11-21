@@ -560,6 +560,8 @@ struct TrainingTrackWorkSummary: Equatable {
     var mejorPasadaS: Double?
     var vMediaMejor: Double?
     var indiceCaidaMejorPct: Double?
+    /// «base_cientifica» of the session summary (KB-1; nil in analyses made before it existed).
+    var baseCientifica: KbSummaryLoad?
 
     init?(_ o: [String: Any]?) {
         guard let o = o else { return nil }
@@ -603,6 +605,7 @@ struct TrainingTrackWorkSummary: Equatable {
         mejorPasadaS = TJ.num(rc, "mejor_pasada_s")
         vMediaMejor = TJ.num(rc, "v_media_mejor")
         indiceCaidaMejorPct = TJ.num(rc, "indice_caida_mejor_pct")
+        baseCientifica = KbSummaryLoad(TJ.obj(o, "base_cientifica"))
     }
 }
 
@@ -745,6 +748,8 @@ struct TrainingSessionResult: Identifiable, Equatable {
     var carga: TrainingLoad
     var desvios: [TrainingDeviation]
     var resumen: TrainingSessionSummary?
+    /// «base_cientifica» (KB-1) evaluated at the day of this session.
+    var baseCientifica: KbHistoryStatus
 
     init(_ o: [String: Any]?) {
         id = TJ.str(o, "id")
@@ -755,6 +760,7 @@ struct TrainingSessionResult: Identifiable, Equatable {
         carga = TrainingLoad(TJ.obj(o, "carga"))
         desvios = TJ.objs(o, "desvios").map { TrainingDeviation($0) }
         resumen = TrainingSessionSummary(TJ.obj(o, "resumen"))
+        baseCientifica = KbHistoryStatus(TJ.obj(o, "base_cientifica"))
     }
 
     var date: Date? { TrainingAnalytics.day(fecha) }
@@ -782,6 +788,8 @@ struct TrainingAnalysisResult: Equatable {
     var motivos: [String]
     var diasDesdeUltima: Int?
     var carga: TrainingLoad
+    /// «estado.base_cientifica» (KB-1): 7 / 30 / 60-day windows and active rules at the reference date.
+    var baseCientifica: KbHistoryStatus
     var nota: String
     var cargaDiaria: [TrainingDailyLoad]
     var lineasBase: [TrainingBaseline]
@@ -815,6 +823,7 @@ struct TrainingAnalysisResult: Equatable {
         motivos = TJ.arr(e, "motivos").compactMap { $0 as? String }
         diasDesdeUltima = TJ.num(e, "dias_desde_ultima").map { TJ.int($0) }
         carga = TrainingLoad(TJ.obj(e, "carga"))
+        baseCientifica = KbHistoryStatus(TJ.obj(e, "base_cientifica"))
         nota = TJ.str(e, "nota")
         cargaDiaria = TJ.objs(o, "carga_diaria").map { TrainingDailyLoad(fecha: TJ.str($0, "fecha"), carga: TJ.num($0, "carga") ?? 0) }
         lineasBase = TJ.objs(o, "lineas_base").map { TrainingBaseline($0) }

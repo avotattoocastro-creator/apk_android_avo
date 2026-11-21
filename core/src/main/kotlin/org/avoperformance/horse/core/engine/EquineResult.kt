@@ -41,6 +41,8 @@ data class EquineResult(
     val warnings: List<String>, val cache: String?, val metrics: List<EqMetric>, val rtk: EqRtk, val quality: List<EqQuality>,
     val gaitV1: EqGait, val gaitV2: EqGait, val performance: EqPerformance, val curves: List<EqCurve>, val accelEvents: List<EqAccelEvent>,
     val events: List<EqEvent>, val fusion: EqFusion, val symmetry: EqSymmetry, val series: EqSeries?, val girth: EqGirthSeries?,
+    /** Base científica KB-1 de la sesión («trabajo_pista.base_cientifica»); null en análisis anteriores. */
+    val scientificBase: KbSession? = null,
 ) {
     fun metric(name: String): EqMetric? = metrics.firstOrNull { it.name == name }
 
@@ -136,6 +138,7 @@ data class EquineResult(
                     sy["grupos"].list.map { EqSymmetryGroup(it["imu"].i(), it["aire"].s(), it["ventanas"].i(), it["trancos"].i(), spread(it["log_cociente_amplitud"]), spread(it["asimetria_temporal"]), spread(it["similitud_mitades"])) },
                     sy["notas"].strings()),
                 series = ser, girth = gir,
+                scientificBase = KbSession.fromTrackWork(r["trabajo_pista"]),
             )
         }
     }
