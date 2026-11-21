@@ -314,6 +314,21 @@ bool training_summary_from_analysis(const json::Value& a, const TrainingConfig& 
       if (t == "IMPACTO_ATIPICO") R.impacts++; else if (t == "MOVIMIENTO_LATERAL_BRUSCO") R.lateral_jolts++; else if (t == "SATURACION") R.saturations++;
     }
   }
+  // ECG de la cincha 0.5.x (motor 2.0.0-dev27)
+  const json::Value& ca = a["cardio"];
+  if (ca.type == json::Value::OBJ && ca["presente"].boolean(false)) {
+    CardioSummary& C = s.cardio;
+    C.present = true; C.quality = ca["calidad"].str();
+    C.v200 = nnum(ca["v200"]["valor_m_s"]); C.v200_method = ca["v200"]["metodo"].str();
+    C.v200_warmup_ok = ca["v200"]["calentamiento_suficiente"].boolean(false);
+    C.v200_regression = nnum(ca["v200_regresion"]["valor_m_s"]);
+    C.vhrmax = nnum(ca["vhrmax"]["valor_m_s"]); C.vhrmax_method = ca["vhrmax"]["metodo"].str();
+    C.hr_peak = nnum(ca["fc_pico_lpm"]);
+    for (size_t k = 0; k < 6 && k < ca["recuperacion"].a.size(); k++) C.recovery_hr[k] = nnum(ca["recuperacion"][k]["fc_lpm"]);
+    C.ectopy_candidates = (int)ca["ectopia"]["candidatos"].num(0);
+    C.ectopy_level = ca["ectopia"]["nivel"].str(); C.ectopy_text = ca["ectopia"]["texto"].str();
+    if (C.quality == "NO_UTILIZABLE") { C.v200 = NAN; C.v200_regression = NAN; C.vhrmax = NAN; s.warnings.push_back("ECG no utilizable: sin V200 ni ectopia"); }
+  }
   if (s.gnss_quality == "NO_UTILIZABLE") s.warnings.push_back("GNSS no utilizable: distancias y velocidades no fiables");
   if (!s.has_imu) s.warnings.push_back("sesión sin cincha: sin cadencia ni regularidad");
   *out = s;
@@ -359,6 +374,15 @@ std::string training_summary_to_json(const SessionSummary& s) {
         << num(R.kb_band_m[2]) << "],\"canter_m\":" << num(R.kb_canter_m) << ",\"galope_rapido_m\":" << num(R.kb_gallop_m)
         << ",\"fatiga_osea_pct\":" << num(R.kb_bone_pct) << ",\"fatiga_osea_lenta_pct\":" << num(R.kb_bone_low_pct) << ",\"zancadas_estimadas\":" << num(R.kb_strides) << "}";
     o << "}";
+  }
+  if (s.cardio.present) {
+    const CardioSummary& C = s.cardio;
+    o << ",\"cardio\":{\"calidad\":" << q(C.quality) << ",\"v200_m_s\":" << num(C.v200) << ",\"v200_metodo\":" << q(C.v200_method)
+      << ",\"v200_calentamiento_suficiente\":" << (C.v200_warmup_ok ? "true" : "false") << ",\"v200_regresion_m_s\":" << num(C.v200_regression)
+      << ",\"vhrmax_m_s\":" << num(C.vhrmax) << ",\"vhrmax_metodo\":" << q(C.vhrmax_method) << ",\"fc_pico_lpm\":" << num(C.hr_peak)
+      << ",\"recuperacion_fc_lpm\":[";
+    for (int k = 0; k < 6; k++) o << (k ? "," : "") << num(C.recovery_hr[k]);
+    o << "],\"ectopia\":{\"candidatos\":" << C.ectopy_candidates << ",\"nivel\":" << q(C.ectopy_level) << ",\"texto\":" << q(C.ectopy_text) << "}}";
   }
   o << ",\"avisos\":[";
   for (size_t i = 0; i < s.warnings.size(); i++) o << (i ? "," : "") << q(s.warnings[i]);
@@ -418,6 +442,17 @@ bool training_summary_from_json(const json::Value& v, SessionSummary* out, std::
       R.kb_bone_pct = nnum(kb["fatiga_osea_pct"]); R.kb_bone_low_pct = nnum(kb["fatiga_osea_lenta_pct"]); R.kb_strides = nnum(kb["zancadas_estimadas"]);
     }
   }
+  const json::Value& ca = v["cardio"];
+  if (ca.type == json::Value::OBJ) {
+    CardioSummary& C = s.cardio;
+    C.present = true; C.quality = ca["calidad"].str();
+    C.v200 = nnum(ca["v200_m_s"]); C.v200_method = ca["v200_metodo"].str(); C.v200_warmup_ok = ca["v200_calentamiento_suficiente"].boolean(false);
+    C.v200_regression = nnum(ca["v200_regresion_m_s"]); C.vhrmax = nnum(ca["vhrmax_m_s"]); C.vhrmax_method = ca["vhrmax_metodo"].str();
+    C.hr_peak = nnum(ca["fc_pico_lpm"]);
+    for (size_t k = 0; k < 6 && k < ca["recuperacion_fc_lpm"].a.size(); k++) C.recovery_hr[k] = nnum(ca["recuperacion_fc_lpm"][k]);
+    C.ectopy_candidates = (int)ca["ectopia"]["candidatos"].num(0);
+    C.ectopy_level = ca["ectopia"]["nivel"].str(); C.ectopy_text = ca["ectopia"]["texto"].str();
+  }
   for (const auto& w : v["avisos"].a) s.warnings.push_back(w.str());
   *out = s;
   return true;
@@ -461,7 +496,9 @@ bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::str
                       {"fatiga_osea_ratio", &c->kb.bone_week_ratio, 1, 10},
                       {"cociente_galope_max", &c->kb.gallop_ratio_max, 1, 2},
                       {"caida_zancada_m", &c->kb.stride_drop_m, 0.01, 1}, {"caida_v_600m", &c->kb.final_speed_drop, 0.01, 3},
-                      {"cusum_h", &c->kb.drift_h, 2, 20}};
+                      {"cusum_h", &c->kb.drift_h, 2, 20},
+                      {"te_v200_pct", &c->kb.v200_te_pct, 0.5, 20}, {"swc_v200_pct", &c->kb.v200_swc_pct, 0, 20},
+                      {"salto_v200_pct", &c->kb.v200_jump_pct, 1, 50}};
       for (const auto& d : kd) {
         if (!k.has(d.k)) continue;
         const json::Value& x = k[d.k];
@@ -472,7 +509,8 @@ bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::str
                       {"dias_descanso_tendon", &c->kb.tendon_rest_days, 7, 730}, {"semanas_min_fatiga_osea", &c->kb.bone_min_weeks, 1, 8},
                       {"dias_galope_60d_max", &c->kb.low_gallop_60d_max_days, 0, 24},
                       {"dias_vigencia_cociente_galope", &c->kb.gallop_ratio_max_age_days, 1, 365},
-                      {"sesiones_min_linea_base", &c->kb.drift_min_baseline, 3, 50}, {"cusum_calentamiento", &c->kb.drift_warmup, 2, 50}};
+                      {"sesiones_min_linea_base", &c->kb.drift_min_baseline, 3, 50}, {"cusum_calentamiento", &c->kb.drift_warmup, 2, 50},
+                      {"dias_salto_v200", &c->kb.v200_jump_days, 1, 365}};
       for (const auto& d : ki) {
         if (!k.has(d.k)) continue;
         const json::Value& x = k[d.k];
@@ -582,8 +620,61 @@ double theil_sen(const std::vector<std::pair<double, double>>& xy, double* lo, d
 
 
 // A7 y A8 (KB 1.5.0): caída frente a la línea base propia en sesiones comparables (misma superficie).
+// A9 (KB 1.25.0): V200 / VHRmax del ECG frente a la línea base propia, misma superficie y mismo método.
+// A11 (KB 1.25.0): ectopia del ECG, siempre «candidatos a revisar», nunca un diagnóstico.
+void kb_cardio_flags(const std::vector<SessionSummary>& ok, size_t i, const KbRuleConfig& kc, std::vector<KbFlag>* out) {
+  const SessionSummary& s = ok[i];
+  if (!s.cardio.present) return;
+  std::string surf = s.surface.empty() ? "sin anotar" : s.surface;
+  char b[520];
+  auto a9 = [&](const char* what, std::function<double(const SessionSummary&)> get, std::function<std::string(const SessionSummary&)> method) {
+    double last = get(s);
+    if (std::isnan(last) || method(s).empty()) return;
+    std::vector<double> x; std::vector<long> days;
+    for (size_t j = 0; j <= i; j++)
+      if (ok[j].cardio.present && ok[j].surface == s.surface && method(ok[j]) == method(s) && !std::isnan(get(ok[j]))) { x.push_back(get(ok[j])); days.push_back(ok[j].day); }
+    // VT2: salto > 5 % frente a la anterior comparable en ≤ 31 días = posible artefacto o condiciones distintas
+    if (x.size() >= 2 && s.day - days[days.size() - 2] <= kc.v200_jump_days) {
+      double prev = x[x.size() - 2], rel = 100.0 * (last - prev) / prev;
+      if (std::fabs(rel) > kc.v200_jump_pct) {
+        snprintf(b, sizeof(b), "%s %.2f m/s, %+.1f %% frente a la sesión comparable anterior (%.2f m/s, %ld días): posible artefacto, otra "
+                 "superficie o calentamiento distinto; revisar antes de interpretarlo", what, last, rel, prev, s.day - days[days.size() - 2]);
+        out->push_back({"A9_V200_SALTO", "INFO", "AVISO", b, "VT2 [I] (estudio 20/11 14:10): cambio plausible ≤ 2 %/mes en potros (Kobayashi 2000 [E-r])"});
+      }
+    }
+    if (!kc.drift_rules) return;
+    int recent = 3, n = (int)x.size();
+    if (n <= recent) return;
+    int end = n - recent, beg = std::max(0, end - 12);
+    std::vector<double> base(x.begin() + beg, x.begin() + end);
+    if ((int)base.size() < kc.drift_min_baseline) return;
+    std::vector<double> sb = base; std::sort(sb.begin(), sb.end());
+    double med = sb.size() % 2 ? sb[sb.size() / 2] : 0.5 * (sb[sb.size() / 2 - 1] + sb[sb.size() / 2]);
+    double delta = kb_change_threshold(kc.v200_te_pct / 100.0 * med, (int)base.size(), kc.v200_swc_pct / 100.0 * med);
+    KbDriftConfig dc; dc.delta = delta; dc.h = kc.drift_h; dc.warmup = kc.drift_warmup; dc.min_baseline = kc.drift_min_baseline;
+    KbDriftResult d = kb_drift_down(x, dc);
+    if (!d.delta_alarm && !d.cusum_alarm) return;
+    snprintf(b, sizeof(b), "%s %.2f m/s, %.2f m/s por debajo de su línea base (%.2f m/s, %d sesiones en «%s», método %s; umbral %.2f m/s con TE "
+             "por defecto del %.0f %% NO VALIDADO)%s%s", what, d.last, d.drop, d.baseline, d.baseline_n, surf.c_str(), method(s).c_str(), delta,
+             kc.v200_te_pct, d.delta_alarm ? (", en " + std::to_string(d.hits) + " de las 3 últimas").c_str() : "",
+             d.cusum_alarm ? "; deriva confirmada por el CUSUM autoiniciado" : "");
+    out->push_back({"A9_PERDIDA_FORMA", d.delta_alarm && d.cusum_alarm ? "VIGILAR" : "INFO", "AVISO", b,
+                    "Vermeulen & Evans 2006, Poinsard 2026 [E]; umbral max(2·TE·√(1+1/n), SWC) (Hopkins 2000) con TE por defecto del 3 % [I], "
+                    "no validado hasta tener el TE propio con ≥ 3 pruebas (VT1); comparar solo misma superficie y método; no es un diagnóstico"});
+  };
+  a9("V200", [](const SessionSummary& z) { return z.cardio.v200; }, [](const SessionSummary& z) { return z.cardio.v200_method; });
+  a9("VHRmax", [](const SessionSummary& z) { return z.cardio.vhrmax; }, [](const SessionSummary& z) { return z.cardio.vhrmax_method; });
+  if (s.cardio.ectopy_candidates > 0 && s.cardio.quality != "NO_UTILIZABLE") {
+    out->push_back({"A11_ECG", s.cardio.ectopy_level == "VIGILAR" ? "VIGILAR" : "INFO", "AVISO", s.cardio.ectopy_text,
+                    "Navas de Solis 2026, van Erck-Westergren 2026 [E]: prematuro ≥ 6 % más corto con FC > 100 lpm, recuento por fase con puerta de "
+                    "calidad > 10 % [E]; tolerancia de 5–10 latidos en el máximo [I]; candidatos a revisar, nunca un diagnóstico"});
+  }
+}
+
 void kb_drift_flags(const std::vector<SessionSummary>& ok, size_t i, const KbRuleConfig& kc, std::vector<KbFlag>* out) {
-  if (!kc.enabled || !kc.drift_rules) return;
+  if (!kc.enabled) return;
+  kb_cardio_flags(ok, i, kc, out);
+  if (!kc.drift_rules) return;
   const SessionSummary& s = ok[i];
   if (!s.race.present) return;
   std::string surf = s.surface.empty() ? "sin anotar" : s.surface;

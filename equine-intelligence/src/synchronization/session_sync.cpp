@@ -42,22 +42,29 @@ void build_session_maps(const Session& s, const ValidationReport& v, const SyncC
       last_batch = m.batch_seq;
       x.push_back(m.girth_us * 1e-6); y.push_back(m.chest_us * 1e-6);
     }
-    ClockMap g2ch = fit_clock(x, y, c);
+    girth_to_gnss[id] = compose_girth_map(x, y, *chest_to_gnss, c);
+  }
+}
+
+ClockMap compose_girth_map(const std::vector<double>& x, const std::vector<double>& y, const ClockMap& chest_to_gnss,
+                           const SyncConfig& c) {
+  ClockMap out;
+  ClockMap g2ch = fit_clock(x, y, c);
     // compose girth -> chest -> gnss (piecewise, using the chest->gnss piece at the start of each girth piece)
     for (auto p : g2ch.pieces) {
       double ch0 = p.offset + p.slope * p.x0, gn0;
       double sd2 = 0;
-      if (!chest_to_gnss->map(ch0, &gn0, &sd2)) continue;
+      if (!chest_to_gnss.map(ch0, &gn0, &sd2)) continue;
       const ClockPiece* cg = nullptr;
-      for (auto& q : chest_to_gnss->pieces) if (ch0 >= q.x0 - 1 && ch0 <= q.x1 + 1) cg = &q;
+      for (auto& q : chest_to_gnss.pieces) if (ch0 >= q.x0 - 1 && ch0 <= q.x1 + 1) cg = &q;
       if (!cg) continue;
       ClockPiece r = p;
       r.slope = cg->slope * p.slope; r.offset = cg->offset + cg->slope * p.offset;
       r.drift_ppm = (r.slope - 1) * 1e6;
       r.envelope_sd_s = std::sqrt(p.envelope_sd_s * p.envelope_sd_s + cg->envelope_sd_s * cg->envelope_sd_s);
-      girth_to_gnss[id].pieces.push_back(r);
+      out.pieces.push_back(r);
     }
-  }
+  return out;
 }
 
 }  // namespace avoeq

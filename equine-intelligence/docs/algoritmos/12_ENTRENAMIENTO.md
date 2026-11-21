@@ -94,3 +94,10 @@ Es **orientativo, no es un diagnóstico veterinario**, y no usa términos clíni
 
 ## Base científica KB-1 (ficha 14)
 - El resumen guarda `trabajo_pista.base_cientifica`. La historia añade `estado.base_cientifica` y `sesiones[].base_cientifica` con las ventanas de 7, 30 y 60 días y las reglas A1–A6 y de fatiga ósea. Las reglas VIGILAR suben el estado.
+
+## ECG de la cincha: V200, VHRmax y ectopia (ficha 15, motor 2.0.0-dev27)
+- El resumen guarda `cardio` (V200 y su método, V200 por regresión, VHRmax y su método, FC pico, recuperación a 1, 2, 4,
+  5, 10 y 15 min y ectopia). Sin ECG utilizable no hay V200.
+- Reglas: `A9_PERDIDA_FORMA` (V200/VHRmax bajo la línea base propia, misma superficie y método, TE por defecto del 3 %
+  NO VALIDADO), `A9_V200_SALTO` (cambio > 5 % en ≤ 31 d: posible artefacto) y `A11_ECG` (candidatos a revisar, nunca un
+  diagnóstico). Opciones en `base_cientifica`: `te_v200_pct`, `swc_v200_pct`, `salto_v200_pct`, `dias_salto_v200`.

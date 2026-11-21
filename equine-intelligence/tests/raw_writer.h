@@ -11,21 +11,27 @@ namespace eqfix {
 using namespace avoeq;
 // Writes a Session to an AVO RAW v1 file with the chest's own writer (avo_core), so the whole chain
 // RAW -> ingestion -> engine -> JSON is exercised exactly as on the phone.
-inline bool write_raw(const char* path, const Session& s, bool close_clean = true) {
+// extra: IMU_SAMPLE payloads already encoded (p. ej. lotes de ECG fmt 2 de la cincha 0.5.x) con su hora de recepción.
+struct ExtraFrame { uint64_t chest_us; std::vector<uint8_t> payload; };
+inline bool write_raw(const char* path, const Session& s, bool close_clean = true, const std::vector<ExtraFrame>* extra = nullptr) {
   static uint8_t blockbuf[avo::RAW_BLOCK_HDR + 8192];
   avo::RawWriter w; w.attach_buffer(blockbuf, 8192);
   avo::RawFileMeta meta; strcpy(meta.session_id, s.session_id.c_str()); strcpy(meta.horse_name, "PRUEBA"); meta.gnss_rate_hz = 8; meta.imu_rate_hz = 200;
   if (!w.open(path, meta, 1)) return false;
   // interleave GNSS epochs and IMU batches by chest reception time
-  struct Rec { uint64_t t; bool gnss; size_t i; };
+  struct Rec { uint64_t t; bool gnss; size_t i; int extra = -1; };
   std::vector<Rec> recs;
   for (size_t i = 0; i < s.gnss.size(); i++) recs.push_back({s.gnss[i].chest_us, true, i});
   for (size_t i = 0; i < s.imu.size(); i++) if (i + 1 == s.imu.size() || s.imu[i + 1].batch_seq != s.imu[i].batch_seq || s.imu[i + 1].imu_id != s.imu[i].imu_id) recs.push_back({s.imu[i].chest_us, false, i});
+  if (extra) for (size_t i = 0; i < extra->size(); i++) recs.push_back({(*extra)[i].chest_us, false, 0, (int)i});
   std::stable_sort(recs.begin(), recs.end(), [](const Rec& a, const Rec& b) { return a.t < b.t; });
   uint16_t seq = 0;
   for (auto& r : recs) {
     uint8_t pl[1600], fr[1800]; size_t n; avo::FrameType ft;
-    if (r.gnss) {
+    if (r.extra >= 0) {
+      const auto& x = (*extra)[(size_t)r.extra];
+      memcpy(pl, x.payload.data(), x.payload.size()); n = x.payload.size(); ft = avo::FrameType::IMU_SAMPLE;
+    } else if (r.gnss) {
       const GnssEpoch& e = s.gnss[r.i];
       avo::GnssSample g; g.itow_ms = e.itow_ms; g.fix_type = e.fix_type; g.flags = e.flags; g.num_sv = e.num_sv;
       g.lat_e7 = (int32_t)std::llround(e.lat_deg * 1e7); g.lon_e7 = (int32_t)std::llround(e.lon_deg * 1e7);

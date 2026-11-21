@@ -2,8 +2,8 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.24.0",
-  "fecha": "2026-11-20",
+  "version": "1.25.0",
+  "fecha": "2026-11-21",
   "razas": [
     "PSI",
     "ARABE"
@@ -3510,7 +3510,7 @@
         "BARBESGAARD_2011",
         "MASSIE_2023"
       ],
-      "estado": "PENDIENTE",
+      "estado": "IMPLEMENTADO",
       "nota": "Frick 2019: −6,1/+5,4 % es canter en cinta; corte de recuperación 6 % con S 88 %, E 97 %, LR 26 [E-r] (estudio extra 4); KB 1.9.0: van Erck-Westergren 2026 (Hong Kong, texto completo) usa variación del RR > 4 % y fases > 185 / < 120 lpm [E]; prevalencia de ≥ 1 ectópico en el máximo 57–70 % de los ECG de PSI sanos: el motor debe tolerar unos pocos latidos (P90 5–10) sin alerta [I]"
     },
     {
@@ -3520,7 +3520,7 @@
       "fuentes": [
         "NAVAS_DE_SOLIS_2026"
       ],
-      "estado": "PENDIENTE"
+      "estado": "IMPLEMENTADO"
     },
     {
       "id": "ecg_no_interpretable",
@@ -3529,7 +3529,7 @@
       "fuentes": [
         "TER_WOORT_2023"
       ],
-      "estado": "PENDIENTE"
+      "estado": "IMPLEMENTADO"
     },
     {
       "id": "vhrmax_psi_corte_m_s",
@@ -3671,8 +3671,9 @@
         "MUKAI_2007_JES_CARRERA",
         "EVANS_ROSE_1988_CINETICA"
       ],
-      "estado": "PENDIENTE",
-      "nota": "no hay constante de tiempo de la FC publicada en PSI de campo; KB 1.18.0: coherente con FC de carrera al 95 % en 12,4 s (Mukai 2007 [E-r]) y deriva sobre el umbral (Evans & Rose 1988 [E-r²]); propuesta CF1"
+      "estado": "IMPLEMENTADO",
+      "nota": "no hay constante de tiempo de la FC publicada en PSI de campo; KB 1.18.0: coherente con FC de carrera al 95 % en 12,4 s (Mukai 2007 [E-r]) y deriva sobre el umbral (Evans & Rose 1988 [E-r²]); propuesta CF1",
+      "nota_1_25_0": "mesetas ≥ 30 s con CV < 5 %, descarte de 20 s y media de los 15 s finales en la regresión FC–velocidad (cardio 1.0.0); CF1 (descartar 30 s y ≥ 45–60 s cerca del galope) sin implementar"
     },
     {
       "id": "recuperacion_fc_ventanas_min",
@@ -3689,7 +3690,7 @@
         "EVANS_1993",
         "SCHRURS_2024_TEXTO"
       ],
-      "estado": "PENDIENTE",
+      "estado": "IMPLEMENTADO",
       "nota": "solo tendencia del propio caballo"
     },
     {
@@ -3978,8 +3979,9 @@
         "VERMEULEN_EVANS_2006",
         "KOBAYASHI_2000_V200"
       ],
-      "estado": "PROPUESTO",
-      "nota": "KB 1.16.0 (estudio 20/11 14:10): sin TE numérico publicado legible; Vermeulen & Evans 2006 dan diferencias medias ≤ 2 % (sesgo, no TE) [E-r]; Kobayashi 2000 +11 % en 5 meses en potros [E-r]; TE por defecto marcado «no validado» hasta TE propio con ≥ 3 pruebas"
+      "estado": "IMPLEMENTADO",
+      "nota": "KB 1.16.0 (estudio 20/11 14:10): sin TE numérico publicado legible; Vermeulen & Evans 2006 dan diferencias medias ≤ 2 % (sesgo, no TE) [E-r]; Kobayashi 2000 +11 % en 5 meses en potros [E-r]; TE por defecto marcado «no validado» hasta TE propio con ≥ 3 pruebas",
+      "nota_1_25_0": "KbRuleConfig.v200_te_pct = 3 (opción te_v200_pct) y v200_jump_pct = 5 / 31 d; marcado «no validado» en el texto de A9"
     },
     {
       "id": "v200_arabes_referencia",
@@ -4429,11 +4431,12 @@
         "DEGRAAF_ROELFSEMA_2009",
         "WIJNBERG_2008"
       ],
-      "estado": "PENDIENTE",
-      "falta": "ECG de la cincha 0.5.x en el análisis",
+      "estado": "IMPLEMENTADO",
+      "falta": "TE propio de V200 por caballo (≥ 3 pruebas comparables, VT1) y validación con ECG real de la cincha PROTOTIPO 0.5.0",
       "nota": "Vermeulen: medias de 5 s y diferencias test-retest ≤ 2 % (no hay TE ni SWC formal publicado); ICC de V200 0,50 en trotones (Poinsard 2026); sin V200 en el análisis no se puede aplicar (la herramienta kb_drift_down sirve cuando llegue el ECG) · sin TE publicado de V200 en PSI/árabe con texto legal; usar TE propio (≥ 3 sesiones/semana); no mezclar cinta y pista (Couroucé 2000 [I-raza]); V200 baja con sobrecarga (Hamlin 2002 [I-raza]); Fonseca 2011: con rutina el cambio puede no verse (estudio extra 4)",
       "nota_1_11_0": "Estudio 09:09: sin texto completo nuevo; VHRmax < 14,5 m/s ↔ ganancias bajas en un entrenador (Gramkow [E-r], no es umbral); +10,9 % de V200 en 5 meses en potros (Kobayashi [E-r]); ningún dato de V200 en árabes de llano: solo línea base propia; superficie y jinete como covariables",
-      "nota_1_21_0": "Estudio 19:08: «14–19 %» corregido a 19 % de tiempo hasta la fatiga (Utrecht, trotones [E]); el 14 % no tiene fuente; VHRmax/FCmax no cambian claramente con sobrecarga (Hamlin [E-ag]); propuesta SO1–SO3 [I]"
+      "nota_1_21_0": "Estudio 19:08: «14–19 %» corregido a 19 % de tiempo hasta la fatiga (Utrecht, trotones [E]); el 14 % no tiene fuente; VHRmax/FCmax no cambian claramente con sobrecarga (Hamlin [E-ag]); propuesta SO1–SO3 [I]",
+      "nota_1_25_0": "Motor 2.0.0-dev27: V200 del ECG de la cincha 0.5.x por el CRUCE de 200 lpm mantenido ≥ 10 s (Poinsard 2026 [E-r], velocidad GNSS media de esos 10 s [I]) y, aparte, por REGRESION FC–velocidad (mesetas ≥ 30 s, CV < 5 %, se descartan 20 s y se promedian 15 s, R² ≥ 0,90, sin extrapolar); el método se guarda como atributo y A9 solo compara sesiones del mismo método y superficie; umbral max(2·TE·√(1+1/n), SWC) (kb_change_threshold) con TE por defecto del 3 % NO VALIDADO (VT1), 2 de las 3 últimas o CUSUM autoiniciado (kb_drift_down, h 5); VHRmax con la misma regla; A9_V200_SALTO (VT2): |ΔV200| > 5 % en ≤ 31 d = posible artefacto [I]. VIGILAR solo con umbral y CUSUM a la vez. NO VERIFICADO con caballos"
     },
     {
       "id": "A11_ECG",
@@ -4452,10 +4455,12 @@
         "MASSIE_2021",
         "MARR_2020"
       ],
-      "estado": "PENDIENTE",
+      "estado": "IMPLEMENTADO",
       "nota": "las definiciones operativas son de Navas de Solis 2026; el texto completo de Van Erck 2026 no se pudo leer; ninguna fuente fija un número aceptable de prematuros (Buhl 2011, Barbesgaard 2011, Massie 2023, Marr 2020)",
       "nota_1_6_0": "Estudio extra 3: detector anclado en el pico S (Van Steenkiste 2020 [E], reposo: VPP 99,1 %, S 98,0 %; Pan-Tompkins 81,5/91,5 por ondas T); prematuro ≥ 5–6 % de acortamiento del RR con FC > 100 lpm (Navas de Solis 2026 [E], Frick 2019 [E-r]); fases calentamiento/pico/recuperación 0–2 min/tardía (Marr 2020 [E]: 50,6 % de alteraciones en la recuperación); puerta de calidad > 10 % no interpretable por fase (Ter Woort 2022 [E-r]); niveles INFO/VIGILAR/veterinario [I]; siempre candidato a revisar (acuerdo entre observadores en ejercicio 0–13 %, Trachsel 2011 [E-r])",
-      "nota_1_11_0": "Estudio 09:09: Flethøj 2016 [E]: 20/10/4 % son acortamientos escalonados por FC y el 4 % en ejercicio sobredetecta (~3,8 % marcados frente a ≤ 0,4 % reales); se mantiene ≥ 5–6 % con FC > 100 lpm; FC < 100 lpm: 10 % (60–100) y 20 % (< 60) solo INFO [I]; FC pico sin prematuros (Navas de Solis [E]); Marr 2020 [E]: 50,6 % de ectópicos en recuperación"
+      "nota_1_11_0": "Estudio 09:09: Flethøj 2016 [E]: 20/10/4 % son acortamientos escalonados por FC y el 4 % en ejercicio sobredetecta (~3,8 % marcados frente a ≤ 0,4 % reales); se mantiene ≥ 5–6 % con FC > 100 lpm; FC < 100 lpm: 10 % (60–100) y 20 % (< 60) solo INFO [I]; FC pico sin prematuros (Navas de Solis [E]); Marr 2020 [E]: 50,6 % de ectópicos en recuperación",
+      "falta": "validación con galope real anotado a mano (objetivo VPP ≥ 99 %, S ≥ 98 %); FA y multiformes sin detectar",
+      "nota_1_25_0": "Motor 2.0.0-dev27: detector anclado en S (paso banda 8–35 Hz, energía de pendiente, umbral adaptativo sin ceguera, rechazo de T, interpolación parabólica); prematuro = RR ≥ 6 % (configurable 5–6 %) más corto que la mediana de 8 RR con FC > 100 lpm (10 % / 20 % con FC menor, solo INFO), acortamiento < 50 % y vuelta del RR en ≤ 4 latidos (si no vuelve es aceleración sinusal); aislado/pareja/triplete/racha; recuento por fase CALENTAMIENTO, MAXIMA (> 185 lpm), RECUPERACION_0_2MIN, RECUPERACION_TARDIA (cortes de van Erck 2026) con puerta > 10 % de artefacto; VIGILAR si en una fase interpretable hay triplete/racha o > 10 candidatos con FC > 100 [I]; siempre CANDIDATO_A_REVISAR, nunca diagnóstico. Pruebas solo con señales sintéticas"
     },
     {
       "id": "KB_FATIGA_OSEA_7D",
@@ -4650,9 +4655,9 @@
   ],
   "pendiente_motor": [
     "Modelo óseo B (Pan/Anwar) con adaptación y reparación: constantes completas con b = −0,02 y f_BM(0) = 0,61 (KB 1.8.0, extra 5); faltan el paso de integración (no publicado) y reproducir la tabla 4 de Anwar (código en Zenodo 19173866); KB 1.10.0: dt y solver no aparecen en los preprints en texto completo (diario [I]); condiciones iniciales f_BM 0,61 y D* 0 [E]; validar con tablas 4 y 7 del preprint (usar 0,911 de la tabla, no 0,852 de la Discusión); KB 1.20.0: tabla 4 exacta guardada como vector de validación (modelo_b_tabla4_anwar_preprint); signo de b por confirmar en el código (bioRxiv 0,02 sin signo)",
-    "V200/VHRmax por regresión FC–velocidad (medias de 5 s, trote + galope [E]); mesetas ≥ 30 s descartando 20–30 s [I], R² ≥ 0,90 [I], sin extrapolar; recuperación a 1, 2, 4, 5, 10 y 15 min solo informativa; extra 4: TE propio por caballo (no hay TE publicado legible en PSI/árabe); misma superficie y nunca cinta con pista; KB 1.11.0: sin referencia publicada para árabes de llano; VHRmax < 14,5 m/s (Gramkow [E-r]) solo como texto informativo, nunca umbral",
-    "ECG por fase (≥ 250 SPS con interpolación del pico, preferible 500): detector anclado en S con rechazo de T y sin ceguera tras artefacto; prematuro ≥ 6 % frente a la mediana de 8 RR con FC > 100 lpm; pareja, triplete, racha ≥ 4, FA; puerta > 10 % no interpretable por fase; validar con galope real anotado a mano (objetivo VPP ≥ 99 %, S ≥ 98 %) (estudio extra 3); KB 1.11.0: con FC < 100 lpm usar 10 % (60–100) y 20 % (< 60) solo INFO (Flethøj 2016 [E] en árabes de raid [I-raza]) y FC pico como media de los 5 RR más cortos sin prematuros (Navas de Solis 2026 [E])",
-    "Conectar las líneas base a A9 (V200) cuando el análisis traiga el ECG; A7 y A8 conectadas en 2.0.0-dev7 (KB 1.5.0) con superficie como criterio de comparables; falta el TE propio por métrica y la playa por franja",
+    "V200/VHRmax por regresión FC–velocidad (medias de 5 s, trote + galope [E]); mesetas ≥ 30 s descartando 20–30 s [I], R² ≥ 0,90 [I], sin extrapolar; recuperación a 1, 2, 4, 5, 10 y 15 min solo informativa; extra 4: TE propio por caballo (no hay TE publicado legible en PSI/árabe); misma superficie y nunca cinta con pista; KB 1.11.0: sin referencia publicada para árabes de llano; VHRmax < 14,5 m/s (Gramkow [E-r]) solo como texto informativo, nunca umbral · HECHO en 2.0.0-dev27 (REGRESION_FC_VELOCIDAD aparte del CRUCE_200_10S principal; recuperación 1, 2, 4, 5, 10 y 15 min)",
+    "ECG por fase (≥ 250 SPS con interpolación del pico, preferible 500): detector anclado en S con rechazo de T y sin ceguera tras artefacto; prematuro ≥ 6 % frente a la mediana de 8 RR con FC > 100 lpm; pareja, triplete, racha ≥ 4, FA; puerta > 10 % no interpretable por fase; validar con galope real anotado a mano (objetivo VPP ≥ 99 %, S ≥ 98 %) (estudio extra 3); KB 1.11.0: con FC < 100 lpm usar 10 % (60–100) y 20 % (< 60) solo INFO (Flethøj 2016 [E] en árabes de raid [I-raza]) y FC pico como media de los 5 RR más cortos sin prematuros (Navas de Solis 2026 [E]) · HECHO en 2.0.0-dev27 salvo FA, multiformes y la validación con galope real anotado (pruebas sintéticas)",
+    "Conectar las líneas base a A9 (V200) cuando el análisis traiga el ECG; A7 y A8 conectadas en 2.0.0-dev7 (KB 1.5.0) con superficie como criterio de comparables; falta el TE propio por métrica y la playa por franja · HECHO en 2.0.0-dev27 (KB 1.25.0): A9 conectada con kb_change_threshold + kb_drift_down sobre la V200 del ECG; falta el TE propio",
     "Velocidad final relativa propia de AVO (France Galop no publica ningún IDF; estudio extra 2 2026-11-19): v(últimos 600/400 m)/v media con par propio por pista y superficie, al estilo de la Finishing Speed % de Timeform; importador de los PDF de tracking por 200 m solo informativo; KB 1.10.0: FS % de Timeform = v final/v media frente al par de pista y distancia, sin umbrales; Wong 2023 usa v200 absoluta y longitudinal; ninguna fuente da umbral de riesgo: solo métrica descriptiva con par propio",
     "Índice tendinoso heurístico por bandas cualitativas (prioritario en árabes de 3–4 años): sin exponente de carga; faltan en la app la lesión previa, la CSA ecográfica y la firmeza del suelo (estudio extra 2026-11-19); extra 4: sin OR de árabes (Golfo, Turquía, Polonia); edad 3–4 años con 3 fuentes; no añadir término de carga (Çalışkan 2020b, Perkins 2005); CSA árabe de referencia 62–94 mm²; KB 1.12.0: OR de Takahashi 2004 y Lam 2007 AJVR siguen [NV] (AVMA 403); entradas cualitativas propuestas [I]: lesión o exploración tendinosa previa (Lam 2007) y peso en carrera alto para la cuadra (Takahashi 2004, Ikeda 2019)",
     "Planificador semanal por restricciones (capa 2) con P1–P6 del estudio extra 3 (práctica [E], forma [I]) y explicación con confianza (capa 3)",
@@ -4664,7 +4669,7 @@
     "Planificador P7 (estudio 20/11 11:10): ventana de reincorporación de 21 d (prudente 30 d) tras ≥ 60 d sin trabajo rápido, sin dos trabajos rápidos seguidos ni picos de canter; evidencia Carrier 1998 y Choi 2026 solo por resumen; implementar con el planificador (capa 2)",
     "Comparables por temperatura y peso (estudio 20/11 13:12, KB 1.15.0): campos de temperatura, humedad/WBGT, jinete y peso cargado en Session; A9 y recuperación solo con |ΔT| ≤ 5 °C y marca «no comparable por calor» (WBGT ≥ 28 °C); A7/A8 con |Δpeso| ≤ 3 kg y mismo jinete preferente; todo [I], sin coeficiente de corrección hasta calibrarlo con datos propios",
     "VC1–VC4 (estudio 20/11 14:10, KB 1.16.0): regla combinada Verheyen (canter > 44 km Y galope > 6 km en 30 d) como LIMITAR; A1 aislada solo AVISO; A2 aislada a INFO; base: resumen [E-r] + 3 secundarios en texto completo; OR [NV]; cambia severidades de alertas existentes, implementar con aprobación del usuario",
-    "VT1–VT3 (estudio 20/11 14:10): TE por defecto de V200 del 3 % marcado «no validado» hasta TE propio (≥ 3 pruebas); aviso de posible artefacto si |ΔV200| > 5 % en ≤ 31 d; V200 de árabes (Piccione 2004) solo como contexto",
+    "VT1–VT3 (estudio 20/11 14:10): TE por defecto de V200 del 3 % marcado «no validado» hasta TE propio (≥ 3 pruebas); aviso de posible artefacto si |ΔV200| > 5 % en ≤ 31 d; V200 de árabes (Piccione 2004) solo como contexto · VT1 y VT2 HECHOS en 2.0.0-dev27 (te_v200_pct 3, salto 5 % en 31 d); VT3 solo contexto",
     "NV1 (estudio 20/11 15:10, KB 1.17.0): subir severidad de A7/A8 solo con persistencia en ≥ 3 sesiones comparables (Hall 2026 StrideSAFE [E-r]: VPP 0,08–0,09 de una carrera frente a 0,74 con 3 salidas seguidas); [I], sin implementar",
     "CF1 (estudio 20/11 16:10, KB 1.18.0): en mesetas cerca del galope de trabajo o tras un salto grande de velocidad, descartar 30 s y exigir meseta ≥ 45–60 s para la V200 (τ del VO₂ 10→21 s sobre el umbral, Langsetmo 1997 [E-r]; deriva 204→221 lpm, Evans & Rose 1988 [E-r²]); [I], sin implementar hasta leer las fuentes completas",
     "CF2 (estudio 20/11 16:10): τ de recuperación de la FC solo como tendencia del propio caballo (exponencial sobre 1–10 min sin el primer minuto); nunca con valores de referencia (τ de PSI [NV]; solo ponis, Rugh 1992); velocidad de recuperación como covariable",
@@ -4884,6 +4889,11 @@
       "version": "1.24.0",
       "fecha": "2026-11-20",
       "cambio": "Estudio horario 22:09: Yıldırım & Karaarslan 2025 (TJVR) leído en texto completo y reclasificado (duplicado fusionado): en árabes el tendón es el 63,7 % de 216 lesiones frente al 25,7 % en PSI (fractura 61,5 %); misma serie que el EVJ 2025 (texto completo no accesible); Poinsard 2026: diseño del bloque de repetibilidad (18 caballos, ≥ 3 sesiones en ≤ 7 d) [E-r], ICC de V200 sin reconfirmar; TA1–TA2 y RB1 [I]; 2 fuentes nuevas, 3 actualizadas, 2 parámetros de referencia, 2 reglas propuestas; sin cambios de lógica; motor 2.0.0-dev26"
+    },
+    {
+      "version": "1.25.0",
+      "fecha": "2026-11-21",
+      "cambio": "Paso 3 (ECG): el motor lee el ECG de la cincha PROTOTIPO 0.5.0 (lote IMU_SAMPLE fmt 2, sin cambio de contrato) y calcula latidos, RR, FC en épocas de 5 s alineadas con el GNSS, fases, V200 (cruce 200 lpm 10 s, Poinsard 2026; regresión aparte), VHRmax, recuperación y candidatos a ectopia; A9 y A11 pasan a IMPLEMENTADO (TE por defecto del 3 % no validado; ectopia = candidato a revisar); motor 2.0.0-dev27"
     }
   ]
 }

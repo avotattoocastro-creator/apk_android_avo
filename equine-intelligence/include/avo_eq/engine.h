@@ -5,6 +5,7 @@
 #include <vector>
 #include <exception>
 #include <memory>
+#include "avo_eq/cardio.h"
 #include "avo_eq/fusion.h"
 #include "avo_eq/gnss.h"
 #include "avo_eq/kinematics.h"
@@ -53,6 +54,7 @@ struct EngineConfig {
   EventConfig events;
   SymmetryConfig symmetry;
   RacingConfig racing;             // AVO Racing: breed profile (GENERICO | PSI | ARABE) and options
+  CardioConfig cardio;             // ECG of the girth 0.5.x: beats, HR, V200, VHRmax, recovery, ectopy candidates
   bool performance_uses_v2 = false;   // V1 stays the reference until V2 is shown better on labelled data
   const GaitModel* gait_model = nullptr;   // optional trained model for V2 (not owned)
   const volatile int* cancel = nullptr;    // non-zero = stop as soon as possible (throws Cancelled)
@@ -82,6 +84,7 @@ struct Analysis {
   SymmetryResult symmetry;
   std::vector<Event> events;
   RacingResult racing;
+  CardioResult cardio;            // empty (present = false) without ECG in the RAW
   AnalysisMode mode = AnalysisMode::OFFLINE_ANALYSIS;
   std::string input_fingerprint, parameters_hash;
   bool has_imu = false, has_gnss = false;

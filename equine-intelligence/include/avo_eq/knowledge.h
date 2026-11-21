@@ -20,7 +20,7 @@
 
 namespace avoeq {
 
-static const char* const KNOWLEDGE_VERSION = "1.24.0";
+static const char* const KNOWLEDGE_VERSION = "1.25.0";
 static const char* const KNOWLEDGE_ID = "AVO_KB_1";
 static const char* const BONE_MODEL_ALGORITHM = "SBFL_MORRICE_WEST_2022";
 
@@ -95,6 +95,14 @@ struct KbRuleConfig {
   int drift_min_baseline = 5;          // sesiones comparables mínimas antes de las 3 últimas [I]
   int drift_warmup = 8;                // CUSUM autoiniciado: sin alarmas antes de la 9.ª sesión comparable [I]
   double drift_h = 5.0;                // h = 5 (muchas cartas a la vez) [I]
+  // A9 (KB 1.25.0, motor 2.0.0-dev27): V200 y VHRmax del ECG de la cincha 0.5.x frente a la línea base propia (misma
+  // superficie y mismo método). Umbral max(2·TE·√(1 + 1/n), SWC) (kb_change_threshold) con TE por defecto del 3 % de la
+  // línea base, NO VALIDADO hasta tener el TE propio con ≥ 3 pruebas (VT1 [I]); aviso de posible artefacto si la V200
+  // cambia > 5 % en ≤ 31 días (VT2 [I]).
+  double v200_te_pct = 3.0;
+  double v200_swc_pct = 0.0;
+  double v200_jump_pct = 5.0;
+  int v200_jump_days = 31;
 };
 
 struct KbDay {

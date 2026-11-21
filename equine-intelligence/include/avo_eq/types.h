@@ -8,7 +8,7 @@
 
 namespace avoeq {
 
-static const char* const ENGINE_VERSION = "2.0.0-dev26";
+static const char* const ENGINE_VERSION = "2.0.0-dev27";
 // Product name from 2.0 (the C API and the JSON keep the avo_eq / avo-equine identifiers for compatibility).
 static const char* const ENGINE_NAME = "AVO Performance Equine";
 
@@ -55,6 +55,21 @@ struct ImuSample {
   int32_t girth_to_back_us = 0; // offset estimated by the back (if any)
 };
 
+// ECG of the girth PROTOTIPO 0.5.x (MAX30003): IMU_SAMPLE batch with fmt 2, imu_id 3, units byte 2 (int24 LE in 0,1 µV).
+// The back and the chest forward and store it unchanged (firmware/girth/V0_5_0/AVO_GIRTH_V0_5_0/girth_ecg.h).
+static const uint8_t ECG_FMT = 2;
+static const uint8_t ECG_IMU_ID = 3;
+static const uint8_t ECG_UNITS_DUV = 2;
+static const int32_t ECG_INVALID_DUV = -8388608;   // 0x800000: electrode off / FIFO overflow (never interpolated)
+struct EcgBatch {
+  uint8_t girth_id = 0;
+  uint32_t batch_seq = 0;       // own ECG batch counter of the girth
+  int64_t t0_us = 0;            // girth clock of the FIRST sample (unwrapped over the 32-bit rollover)
+  double period_us = 1953.125;  // header carries the rounded period (1953); the exact 512 sps period is used then
+  uint64_t chest_us = 0;        // chest reception time of the batch
+  std::vector<int32_t> duv;     // samples in 0,1 µV; ECG_INVALID_DUV = no valid sample
+};
+
 struct MarkerEvent { uint64_t chest_us = 0; std::string text; };
 
 struct Session {
@@ -64,10 +79,12 @@ struct Session {
   std::vector<GnssEpoch> gnss;
   std::vector<ImuSample> imu;
   std::vector<MarkerEvent> markers;
+  std::vector<EcgBatch> ecg;      // girth 0.5.x ECG batches in arrival order (duplicates removed)
   // ingestion bookkeeping
   uint32_t records = 0, bad_records = 0, unknown_frames = 0, segments = 0;
   uint8_t imu_units = 0;          // IMU header byte 15: 1 = BNO085 fixed point (acc Q8 m/s², gyro Q9 rad/s), 0 = raw LSB
   uint32_t imu_fused_batches = 0; // GIRTH 0.4.x fused batches (linear acc + quaternion), counted, not used yet
+  uint32_t ecg_duplicates = 0;    // ECG batches received twice (radio retries), dropped
   bool clean_close = false, tail_garbage = false;
 };
 

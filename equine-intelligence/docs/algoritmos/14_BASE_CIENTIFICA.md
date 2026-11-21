@@ -134,7 +134,9 @@ Evidencia: Wong 2023 (HR 1,11 por 10 cm menos de zancada) y Schrurs 2024 (últim
 [I]. CUSUM: k 0,5, h 5, sin alarmas en las 8 primeras comparables; las sesiones con S > 0,8·h no entran en la base
 (simulación propia: falsa alarma 11,4 % en 100 sesiones; deriva de 3 DE detectada en ≤ 6 sesiones el 91,5 %).
 Opciones (`base_cientifica`): `reglas_linea_base`, `caida_zancada_m`, `caida_v_600m`, `cusum_h`,
-`cusum_calentamiento`, `sesiones_min_linea_base`. A9 (V200) sigue pendiente: el análisis no trae el ECG.
+`cusum_calentamiento`, `sesiones_min_linea_base`. **A9 (V200/VHRmax) y A11 (ectopia) implementadas en el motor
+2.0.0-dev27 / KB-1 1.25.0** con el ECG de la cincha 0.5.x: ficha `15_ECG_V200.md` (TE por defecto del 3 % NO VALIDADO;
+ectopia siempre «candidato a revisar»).
 
 **Estudio extra 3 (KB-1 1.6.0, motor 2.0.0-dev8, sin cambios de lógica).** Dos especificaciones nuevas, **PENDIENTE**:
 - **Planificador semanal (capa 2), restricciones P1–P6** (`reglas.PLANIFICADOR_RESTRICCIONES_P1_P6`): trabajos rápidos

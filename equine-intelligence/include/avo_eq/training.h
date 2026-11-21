@@ -78,6 +78,22 @@ struct RaceSummary {
   double kb_bone_pct = NAN, kb_bone_low_pct = NAN, kb_strides = NAN;
 };
 
+// ECG de la cincha 0.5.x (bloque "cardio" del análisis, motor 2.0.0-dev27). NaN / vacío = no disponible.
+struct CardioSummary {
+  bool present = false;
+  std::string quality;                          // BUENA | UTILIZABLE | POBRE | NO_UTILIZABLE
+  double v200 = NAN;                            // método principal (CRUCE_200_10S, Poinsard 2026), NO VALIDADA
+  std::string v200_method;
+  bool v200_warmup_ok = false;                  // WU1 (atributo)
+  double v200_regression = NAN;                 // REGRESION_FC_VELOCIDAD (aparte)
+  double vhrmax = NAN;
+  std::string vhrmax_method;
+  double hr_peak = NAN;
+  double recovery_hr[6] = {NAN, NAN, NAN, NAN, NAN, NAN};   // 1, 2, 4, 5, 10 y 15 min
+  int ectopy_candidates = 0;
+  std::string ectopy_level, ectopy_text;        // candidatos a revisar; nunca un diagnóstico
+};
+
 struct SessionSummary {
   std::string id, horse, rider, date_utc;       // date_utc ISO-8601 (AAAA-MM-DD[THH:MM:SSZ])
   long day = 0;                                 // días desde 1970-01-01 (calculado)
@@ -93,6 +109,7 @@ struct SessionSummary {
   std::string state, note;                      // BIEN | CANSADO | RARO | COJERA | … texto libre
   std::string surface, track_state;             // pista
   RaceSummary race;
+  CardioSummary cardio;
   std::vector<std::string> warnings;
 };
 
