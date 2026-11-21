@@ -18,6 +18,8 @@ final class ShellState {
     var started: Bool = false
     /// Trainer ratings per session id (valoraciones.json), loaded on first use (AppModel+Training.swift).
     var ratings: [String: TrainingRating]? = nil
+    /// Planned races per horse key (carreras_previstas.json), loaded on first use (AppModel+Training.swift).
+    var plannedRaces: [String: [String]]? = nil
     init() {}
 }
 

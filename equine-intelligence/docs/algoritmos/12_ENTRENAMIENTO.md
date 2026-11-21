@@ -1,7 +1,7 @@
-# 12 · AVO Training Analytics 1.0.0 — análisis de la historia de entrenamientos
+# 12 · AVO Training Analytics 1.1.0 — análisis de la historia de entrenamientos
 
 Código: `include/avo_eq/training.h`, `src/training/training.cpp`, `src/capi/training_capi.cpp`.
-Herramienta: `tools/training/avo_training_cli.cpp`. Pruebas: `tests/test_training.cpp` (10 casos, suite `entreno`).
+Herramienta: `tools/training/avo_training_cli.cpp`. Pruebas: `tests/test_training.cpp` (13 casos, suite `entreno`).
 
 **Objetivo:** comparar cada entrenamiento con la **historia del mismo caballo**, no con otros caballos.
 Es la fase 1: estadística transparente, sin modelo entrenado. Es la base para las fases 2 (valoraciones del
@@ -28,6 +28,24 @@ Usa los segmentos de `rendimiento` del clasificador de referencia:
   segmentos con velocidad media por encima del umbral.
 - **Aceleraciones** de la trayectoria GNSS (`cinematica`): sostenidas, frenadas y picos laterales, sin contar
   las de calidad `BAJA` o `NO_UTILIZABLE`. Son de la antena del jinete, no de la cincha.
+
+## 1 bis. Ficha de campo (TRAINING 1.1.0, motor 2.0.0-dev28)
+Campos opcionales de `extra` (y de cada entrada de la historia); el resumen los guarda con la misma forma. Los códigos
+se pasan a mayúsculas; un valor no reconocido o fuera de rango se descarta con un aviso en el resumen.
+
+| Clave | Valores |
+|---|---|
+| `tipo_sesion` | `TRABAJO`, `TRABAJO_REFERENCIA_1000`, `CARRERA`, `TRIAL`, `DESCANSO_ACTIVO` |
+| `pista.franja` | `ORILLA_FIRME`, `HUMEDA_PROFUNDA`, `SECA_PROFUNDA`, `TRANSICION` (franja de playa, PL1) |
+| `pista.going` | `FIRME`, `BUENO_FIRME`, `BUENO`, `BUENO_BLANDO`, `BLANDO`, `PESADO` (estratos de GO1) |
+| `pista.marea` | `{"hora":"HH:MM", "tipo":"BAJAMAR"\|"PLEAMAR"}` (hora local de la marea de referencia) |
+| `condiciones` | `temperatura_c` (−30–55), `humedad_pct` (0–100) |
+| `pesos` | `jinete_kg` (30–150, con equipo), `caballo_kg` (150–1000, pesaje matinal en ayunas, PE1) |
+| `incidencia` | `tipo` (`NINGUNA`, `TROPIEZO`, `CAIDA`, `ESPANTADA`, `COJERA`, `HERRAJE`, `EQUIPO`, `OTRA`) y `texto` (≤ 500 caracteres) |
+
+Efectos en la historia: CARRERA y TRIAL cuentan como carrera para A4 y P3; con la franja anotada, A7/A8 solo comparan
+la misma superficie y franja (PL1); la incidencia COJERA sube a REVISAR, CAIDA a VIGILAR y las demás solo se anotan
+como motivo. El resto de campos se guarda para calibrar (going GO1, pesos PE1–PE3, temperatura TC, repetibilidad RB1).
 
 ## 2. Carga de entrenamiento
 - **Carga externa (`AVO_TRAINING_LOAD_V1`)** = min_paso·1 + min_trote·3 + min_galope·6 + (m a alta velocidad / 100)·1.
@@ -68,6 +86,14 @@ pendientes por pares dan un intervalo aproximado:
 
 Es **orientativo, no es un diagnóstico veterinario**, y no usa términos clínicos.
 
+## 5 bis. Carreras previstas, A4 y base del planificador (TRAINING 1.1.0)
+- Opción `carreras_previstas`: lista de fechas `AAAA-MM-DD` del caballo (en el iPad, Cuadra › Carreras previstas).
+- **A4_CARGA_BAJA_PRECARRERA** (ficha 14): menos de 2 días con sesión rápida en los 28 d previos a la carrera →
+  AVISO informativo en `base_cientifica.reglas` y comprobación en `base_cientifica.carreras[]`.
+- `estado.planificador`: `dias_rapidos_7d`, `dias_desde_rapido`, `dias_entre_ultimos_rapidos`, `dias_desde_carrera`,
+  `proxima_carrera` (`fecha`, `dias_hasta`, `dias_rapidos_28d`, `faltan_para_minimo`) y `pautas[]` (`regla`, `texto`,
+  `evidencia`) con P1, RT1, A4 y P3. Nunca sube el estado; no es un plan automático.
+
 ## Parámetros (opciones JSON)
 | Opción | Defecto | Opción | Defecto |
 |---|---|---|---|
@@ -82,6 +108,8 @@ Es **orientativo, no es un diagnóstico veterinario**, y no usa términos clíni
 - **IMPLEMENTADO** y probado con datos sintéticos: fechas, resumen, carga estable (ACWR ≈ 1), pico de carga,
   desvío del tranco (z ≈ −6), dirección de la regularidad, valoración del entrenador, tendencia exacta de
   0,1 m/s por semana, duplicados y fechas futuras, API C y determinismo. Todo con ASan y UBSan.
+- TRAINING 1.1.0: ficha de campo (ida y vuelta y valores no válidos), incidencias, A4 con fechas previstas y con
+  sesión TRIAL, planificador (P1, P3, días que faltan) y comparables por franja, con ASan y UBSan.
 - **NO VERIFICADO** con sesiones reales. Los factores de carga y los umbrales son valores de partida y hay que
   ajustarlos con la historia real de cada cuadra.
 - Las tendencias con pocas sesiones son orientativas. El intervalo p10–p90 no es un intervalo de confianza formal.
@@ -95,7 +123,7 @@ Es **orientativo, no es un diagnóstico veterinario**, y no usa términos clíni
 ## Base científica KB-1 (ficha 14)
 - El resumen guarda `trabajo_pista.base_cientifica`. La historia añade `estado.base_cientifica` y `sesiones[].base_cientifica` con las ventanas de 7, 30 y 60 días y las reglas A1–A6 y de fatiga ósea. Las reglas VIGILAR suben el estado.
 
-## ECG de la cincha: V200, VHRmax y ectopia (ficha 15, motor 2.0.0-dev27)
+## ECG de la cincha: V200, VHRmax y ectopia (ficha 15, motor 2.0.0-dev29)
 - El resumen guarda `cardio` (V200 y su método, V200 por regresión, VHRmax y su método, FC pico, recuperación a 1, 2, 4,
   5, 10 y 15 min y ectopia). Sin ECG utilizable no hay V200.
 - Reglas: `A9_PERDIDA_FORMA` (V200/VHRmax bajo la línea base propia, misma superficie y método, TE por defecto del 3 %

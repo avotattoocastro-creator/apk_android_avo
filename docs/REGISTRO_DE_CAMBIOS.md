@@ -24,7 +24,8 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
-## 2026-11-21 — Motor 2.0.0-dev27 · KB-1 1.25.0 — ECG de la cincha PROTOTIPO 0.5.0 en el análisis: V200, VHRmax, A9 y A11
+## 2026-11-21 — Motor 2.0.0-dev29 · KB-1 1.27.0 — ECG de la cincha PROTOTIPO 0.5.0 en el análisis: V200, VHRmax, A9 y A11
+**Integración (21/11):** PR #120 integrado sobre dev28 / KB-1 1.26.0 (PR #117 y #121); renumerado de dev27 / 1.25.0 a **dev29 / 1.27.0**; fixtures regeneradas con el bloque `cardio`.
 **Autor:** Claude (tarea programada, paso 3 del informe «Motor AVO Equine: análisis completo de funciones») · **Rama:**
 `claude/motor-ecg-v200` · **CI:** `build-equine-engine.yml` run 44893307697 ✅ (Linux ASan/UBSan, Windows, Android ×3; `f1700f5`; la 44892612337 falló en Windows por la macro OVERFLOW de MSVC, corregido)
 **Diagnóstico:** la cincha 0.5.0 manda **muestras de ECG** (no RR) como `IMU_SAMPLE fmt 2` (`imu_id 3`, unidades 2 = 0,1 µV,
@@ -43,7 +44,7 @@ líneas en `equine-intelligence/docs/algoritmos/15_ECG_V200.md` §1. **No cambia
   recuento por fase). Bloque `cardio` en el JSON del análisis.
 - Training Analytics: bloque `cardio` en el resumen de sesión; reglas `A9_PERDIDA_FORMA` (kb_change_threshold +
   kb_drift_down, TE por defecto del 3 % **NO VALIDADO**, mismo método y superficie), `A9_V200_SALTO` (VT2) y `A11_ECG`.
-- KB-1 1.25.0: A9 y A11 pasan a IMPLEMENTADO; parámetros y pendientes anotados. Fixtures regeneradas (solo versión,
+- KB-1 1.27.0: A9 y A11 pasan a IMPLEMENTADO; parámetros y pendientes anotados. Fixtures regeneradas (solo versión,
   hash de parámetros y el bloque `cardio` vacío).
 **Archivos:** `equine-intelligence/{include/avo_eq/cardio.h, src/cardio/cardio.cpp, src/ingestion/ingestion.cpp,
 src/synchronization/session_sync.cpp, src/core/engine.cpp, src/training/training.cpp, include/avo_eq/{types,engine,
@@ -55,6 +56,101 @@ cincha y pasa por avo_core → RAW → ingestión → motor; sensibilidad y VPP 
 `check_fixtures.py` OK · CI 44893307697 ✅ · **NO VERIFICADO** con ECG real ni con caballos.
 **Pendiente:** sesión real con el PROTOTIPO (cincha 0.5.0, cápsula REV 5.10) y anotación manual de latidos en galope;
 TE propio de V200 (≥ 3 pruebas); dibujar `cardio` en Android, Windows e iPad; CF1, WU3, FA y multiformes.
+
+---
+
+## 2026-11-21 — Motor 2.0.0-dev28 (Training Analytics 1.1.0, KB-1 1.26.0) · iPad — Ficha de campo, regla A4 y base del planificador
+**Autor:** Claude (tarea programada: pasos 2 y 4 del informe «Motor AVO Equine: análisis completo de funciones») ·
+**Rama:** `claude/ficha-campo-carrera-a4` · **CI:** `build-equine-engine.yml` en la rama: run 44891879590 (n.º 53, `2578464`) ✅
+**Qué cambia:**
+- **Motor (Training Analytics 1.1.0):** ficha de campo opcional en `extra` y en el resumen de sesión: `tipo_sesion`
+  (TRABAJO, TRABAJO_REFERENCIA_1000, CARRERA, TRIAL, DESCANSO_ACTIVO), `pista.franja` (ORILLA_FIRME, HUMEDA_PROFUNDA,
+  SECA_PROFUNDA, TRANSICION), `pista.going`, `pista.marea` (hora y tipo), `condiciones` (temperatura y humedad), `pesos`
+  (jinete y caballo) e `incidencia` (tipo y texto). Valores desconocidos o fuera de rango: se descartan con aviso.
+- **A4_CARGA_BAJA_PRECARRERA → IMPLEMENTADO** (KB-1 1.26.0): opción `carreras_previstas` de la historia; las sesiones
+  CARRERA/TRIAL cuentan como carrera; < 2 días con sesión rápida en los 28 d previos → AVISO informativo (Morrice-West
+  2025, HR 2,89 [E]; corte [I]). Comprobaciones en `base_cientifica.carreras[]`.
+- **Base del planificador semanal:** `estado.planificador` (días rápidos de 7 d, separación entre rápidos, próxima
+  carrera y días rápidos que faltan; pautas P1, RT1, A4 y P3). Informativo: nunca sube el estado.
+- **PL1 parcial:** con la franja anotada, A7/A8 solo comparan la misma superficie y franja. Incidencia COJERA → REVISAR,
+  CAIDA → VIGILAR.
+- **iPad:** «Ficha de campo» en la valoración tras la sesión (`TrainingRatingCard`, se pasa al motor en `extra`) y
+  «Carreras previstas» por caballo en la Cuadra (`carreras_previstas.json`, aparte de `cuadra.json` para no romper el
+  intercambio con Windows), que se pasan en las opciones de la historia.
+- **Protocolo:** `docs/PROTOCOLO_PRUEBAS_CAMPO_PROTOTIPO.md` (registro por sesión, trabajo de referencia de 1.000 m,
+  playa de Laredo, calibración de A7/A8/A9).
+- Fichas 12 y 14, `base_cientifica.json` (A4 IMPLEMENTADO; PL1–PL6 y P1–P6 PARCIAL), `ENGINE_VERSION` 2.0.0-dev28,
+  `KNOWLEDGE_VERSION` 1.26.0, `TRAINING_VERSION` 1.1.0 y fixtures del núcleo (solo cambian las cadenas de versión).
+**Decisiones (sin supervisión):** A4 como INFO/AVISO, como A6B, porque el corte en sesiones es [I]; aviso anticipado
+cuando faltan ≤ 14 d (configurable); sin la historia de los 28 d no se juzga; las carreras previstas del iPad van en un
+archivo propio y no en `cuadra.json`; la base cita «HR 2,89» (Morrice-West 2025) y se mantiene así.
+**Archivos:** `equine-intelligence/include/avo_eq/{training,knowledge,types}.h`, `src/training/training.cpp`,
+`src/knowledge/knowledge.cpp`, `src/capi/training_capi.cpp`, `tests/test_{training,knowledge}.cpp`, fichas 12 y 14,
+`knowledge/base_cientifica.json`, `core/src/test/resources/equine/*_analysis.json`, `ipad/AVOiPad/{Core/TrainingAnalytics,
+App/AppModel+Training,App/AppModel+Shell,Views/TrainingRatingCard,Views/StableView}.swift`,
+`ipad/AVOiPadTests/TrainingAnalyticsTests.swift`, `docs/PROTOCOLO_PRUEBAS_CAMPO_PROTOTIPO.md`.
+**No se ha tocado:** contratos binarios, firmware, workflows, firmas, `Info.plist` ni número de build.
+**Validación:** pruebas locales del motor ✅ con ASan/UBSan (107 casos, 1.790 comprobaciones, 0 fallos); fixtures en
+Release ✅ (`check_fixtures.py`, regeneradas: solo versión) · CI del motor ✅ run 44891879590 (Linux ASan/UBSan, Release, fixtures, JNI; Windows; Android ×3) · iPad: **sin compilar** (no hay
+Xcode en la nube; el CI de TestFlight solo corre al fusionar en `develop`) · **NO VERIFICADO** con caballos reales.
+**Pendiente:** Android y Windows no usan todavía Training Analytics (no llaman a `avo_eq_training_*`): la ficha y las
+carreras previstas llegarán cuando se porte la historia de entrenamientos; mostrar `estado.planificador` en la pantalla
+de historia del iPad; A9 (TE propio) con los datos del protocolo; PL2–PL6, GO1, PE1–PE3 y la capa 2 del planificador.
+
+---
+
+## 2026-11-21 — iPad · Android · Windows — Pantalla «Base científica» (KB-1 del motor, paso 1 del informe de funciones)
+**Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/apps-base-cientifica` (PR #118) · **CI:** se ejecuta al
+integrar en `develop` (los workflows no corren en los PR)
+**Qué cambia:** las apps enseñan lo que la base científica KB-1 del motor ya calculaba (hasta hoy solo salía como texto
+en los motivos del estado del iPad). Solo lectura del JSON del motor; nada se calcula en las apps.
+- **iPad (`ipad/`):** tarjeta **«Base científica»** en *Trabajo en pista* de la sesión (`KbSessionCard`): metros por banda
+  B1/B2/B3 con sus límites en m/s y barra de reparto, canter y galope rápido (Verheyen 2006), fatiga ósea validada y
+  extrapolada lenta con «Índice relativo, no es una probabilidad de lesión» y «SIN CALIBRAR» fuera del PSI, y velocidad de
+  los últimos 600 m de cada trabajo y pasada. En la **historia del caballo** (`KbHistoryCard`, bajo el estado): ventanas de
+  7, 30, 30 anteriores y 60 días (B1/B2/B3, canter, galope rápido, fatiga ósea, sesiones), días sin trabajo rápido, vuelta
+  tras descanso, cociente de galope (60/90 d), días de galope en 60 d, ratio de fatiga ósea 7 d frente a la semana
+  habitual, **reglas activas** (A1–A8, A6B, A6C, FO 7 d) con nivel, acción AVISO/LIMITAR, texto y línea de evidencia, las
+  reglas sin aviso y las 12 últimas sesiones. Modelos en `Core/ScientificBase.swift`; vista `Views/ScientificBaseView.swift`.
+- **Android (`core/`, `app/`):** modelo `core/.../engine/ScientificBase.kt` (`KbSession`, `KbHistory`) y
+  `EquineResult.scientificBase`; tarjeta compacta «Base científica» al final de la pestaña **Motor** de la sesión.
+- **Windows (`windows/`):** filas `EquineAnalysis.ScientificBase` y tarjeta «Base científica (KB-1)» en **Motor AVO**.
+- Un campo `null` se muestra como «sin datos»; nunca valores inventados.
+- **Fixtures SINTÉTICAS nuevas** (motor 2.0.0-dev26, KB-1 1.24.0): `core/src/test/resources/equine/kb_psi_analysis.json`
+  y `kb_training_history_psi.json` (copias en `ipad/AVOiPadTests/Fixtures/`), generador `scripts/fixtures/gen_kb_fixtures.cpp`.
+  No entran en `check_fixtures.py` (no salen de un RAW): si cambia el formato de KB-1 hay que regenerarlas.
+- **Pruebas:** iPad `ScientificBaseTests` (4), Kotlin `ScientificBaseTest` (4; también sobre `synthetic_analysis.json` y
+  `sample_analysis.json`), Windows SelfTest (9 comprobaciones; el `.csproj` de SelfTest enlaza las dos fixtures).
+**No se ha tocado:** motor C++, contratos binarios, firmware, workflows, firmas, `Info.plist`, número de build ni
+números de versión de las apps.
+**Validación:** IMPLEMENTADO. Sin compilar en local (la nube no tiene Swift, ni acceso a Maven/Google para Gradle, ni
+.NET): **compila y prueba el CI al integrar**. Fixtures generadas y comprobadas con el motor en local (regeneración
+idéntica). **NO VERIFICADO** en iPad, teléfono ni PC.
+**Pendiente:** historia del caballo en Android y Windows (ninguna de las dos tiene todavía la vista de Training Analytics);
+ver la tarjeta en el iPad real con un entrenamiento PSI o árabe.
+
+---
+
+## 2026-11-21 — Motor 2.0.0-dev27 / KB-1 1.25.0 — Investigación nocturna: auditoría de 20 fuentes, método de V200, FCmax de árabes de llano y cobertura mundial
+**Autor:** Claude (investigación nocturna programada) · **Rama:** `claude/kb-noche-2026-11-21` (desde `develop`, 09b0be0) · **CI:** ver PR
+**Qué cambia:** KB-1 1.24.0 → 1.25.0 y motor 2.0.0-dev26 → 2.0.0-dev27 (solo versiones, sin cambios de lógica).
+- **Auditoría (20 fuentes, 14 mejoradas):** Poinsard 2026, Kalisiak 2012, Pfau 2024, Morrice-West 2021, Lee 2019 (tesis),
+  Ter Woort 2023, Navas de Solis 2026, Parsons 2008, Verkade 2020 y Van Steenkiste 2020 pasan a texto completo; ICRAV 2026,
+  Frick 2019, Beaumont 2025 y Trachsel reclasificadas. **Correcciones:** V200 de Poinsard por primer cruce ≥ 10 s (no
+  regresión); Pfau 2024 en PSI outriders (no de carreras); HR 1,80 de Morrice-West 2025 = carrera completa y categoría
+  media = referencia; Morrice-West 2021 sin km/semana; Verkade 2020 mecánico (sin OR por raza); Parsons 2008 con Ferrari M.
+  SEM de recuperación 9,4 lpm confirmado (antes [I]). Ningún umbral implementado cambia.
+- **Investigación nueva:** FCmax de árabes de llano ≥ 211–212 lpm (Janczarek 2016, Polonia [E]); velocidades de carrera
+  de árabes en Turquía; lactato de PSI en Brasil; incidencias y estructura de preparaciones en Sudáfrica, Nueva Zelanda y
+  Hong Kong; Golfo sin datos de árabes de llano. 23 fuentes nuevas, 5 parámetros de referencia.
+- Propuestas MV1, FM1 y EC1 [I], sin implementar; 10 entradas nuevas en la cola.
+**Por qué:** auditoría de fuentes que sostienen reglas del motor y cobertura mundial y multirraza (investigación nocturna).
+**Archivos:** `equine-intelligence/knowledge/base_cientifica.json`, `equine-intelligence/knowledge/estudios/2026-11-21_noche_auditoria_v200_metodo_fcmax_arabes_latam.md`, `equine-intelligence/include/avo_eq/{types,knowledge}.h`, `equine-intelligence/tests/test_knowledge.cpp`, `equine-intelligence/docs/algoritmos/14_BASE_CIENTIFICA.md`, fixtures de `core` (versión), `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`, `README.md`.
+**No se ha tocado:** workflows, firmas, `Info.plist`, build de TestFlight, firmware ni contratos binarios.
+**Validación:** pruebas del motor en local (Debug con `-DAVO_EQ_SANITIZE=ON`: 100 % en verde; Release + `check_fixtures.py`: OK tras `--update` con solo el cambio de versión de la KB); CI en el PR. NO VERIFICADO con caballos reales.
+**Pendiente:** Verheyen 2006 (OR), tabla S2 de Poinsard, Kobayashi 2000 original, Hamlin 2002 (% de V200) y Morrice-West 2025 en texto completo.
+
+---
 
 ## 2026-11-21 — Espalda 3.15.0 · Pecho 3.7.11 · Android 2.16-fixdiag-dev1 — Diagnóstico de «no hay RTK FIX» (BackStatus v4)
 **Autor:** Claude (petición del usuario, 21/11 00:47: «añade todas las lecturas necesarias hasta en la apk hasta que

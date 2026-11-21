@@ -1,4 +1,4 @@
-// AVO Cardio (motor 2.0.0-dev27, KB-1 1.25.0): ECG de la cincha PROTOTIPO 0.5.x (MAX30003, 512 muestras/s) en el
+// AVO Cardio (motor 2.0.0-dev29, KB-1 1.27.0): ECG de la cincha PROTOTIPO 0.5.x (MAX30003, 512 muestras/s) en el
 // análisis. Ficha: docs/algoritmos/15_ECG_V200.md. Nada de esto es un diagnóstico: la ectopia sale siempre como
 // «candidato a revisar» y la V200 no está validada hasta tener el error típico (TE) propio de cada caballo.
 //

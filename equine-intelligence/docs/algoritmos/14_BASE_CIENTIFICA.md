@@ -1,4 +1,4 @@
-# 14 · Base científica de la cuadra (KB-1) 1.12.0
+# 14 · Base científica de la cuadra (KB-1) 1.26.0
 
 Código: `include/avo_eq/knowledge.h`, `src/knowledge/knowledge.cpp`. Se calcula en Track Work (`src/racing/racing.cpp`,
 bloque `trabajo_pista.base_cientifica`) y se evalúa en Training Analytics (`src/training/training.cpp`, bloques
@@ -61,6 +61,7 @@ El corte de 14 m/s es de Verheyen 2006 en PSI [E]; su escalado al árabe es [I].
 | A5_VUELTA_DESCANSO | primera sesión rápida tras ≥ 60 d sin ella: 21 d vigilados | LIMITAR | Carrier 1998, RR 71 a 10 d [E] |
 | A6_VUELTA_TENDON | igual tras ≥ 90 d: sugiere ecografía del TFDS | LIMITAR | Choi & Parkin 2025, OR 3,10 [E] |
 | A6B_POCO_GALOPE_60D | ≤ 2 días con sesión rápida en los 60 d previos, con sesiones en los últimos 7 d (60 d de historia) | AVISO (INFO) | Choi & Parkin 2025, OR 1,84 (1,07–3,16) de TFDS [E]; día de galope = sesión rápida [I] |
+| A4_CARGA_BAJA_PRECARRERA (KB 1.26.0) | < 2 días con sesión rápida en los 28 d previos a una carrera (fecha de `carreras_previstas` o sesión de tipo CARRERA/TRIAL); se juzga el día de la carrera y, por adelantado, cuando faltan ≤ 14 d | AVISO (INFO) | Morrice-West 2025 (Tasmania), carga muy baja antes de correr, HR 2,89 frente a carga media [E]; allí «baja» = fatiga ósea < 0,25 en las 4 salidas previas, así que el corte en sesiones y el aviso a 14 d son [I] |
 | KB_FATIGA_OSEA_7D | fatiga ósea 7 d > 1,5 × mediana semanal propia (≥ 4 semanas) | AVISO | Morrice-West 2025, Hong Kong [E]; umbral [I] |
 | KB_SIN_RAPIDO_30D | canter sin trabajo rápido en 30 d | AVISO (INFO) | Morrice-West 2025 [E]; aplicación [I] |
 
@@ -70,6 +71,12 @@ Sesión rápida = al menos 100 m de galope rápido. Las reglas VIGILAR suben el 
 Opciones de Training Analytics (`base_cientifica`: `true`/`false` u objeto): `activa`, `canter_30d_aviso_km`,
 `canter_30d_limite_km`, `galope_30d_limite_km`, `rampa_ratio`, `rampa_min_m`, `galope_sesion_min_m`,
 `fatiga_osea_ratio`, `dias_descanso_vuelta`, `dias_ventana_vuelta`, `dias_descanso_tendon`, `semanas_min_fatiga_osea`, `dias_galope_60d_max` (0–24, por defecto 2).
+A4 (KB 1.26.0): `carreras_previstas` (lista de `AAAA-MM-DD`, en la raíz de las opciones) y, dentro de
+`base_cientifica`, `dias_precarrera` (7–90, 28), `min_dias_rapidos_precarrera` (1–20, 2) y `dias_aviso_precarrera`
+(0–90, 14). Cada comprobación sale en `base_cientifica.carreras[]` (`fecha`, `origen` PREVISTA|SESION, `dias_hasta`,
+`dias_rapidos_28d`, `sesiones_sin_datos`, `ventana_cubierta`, `aviso`). Sin la historia de los 28 días previos no se
+juzga. El día de la carrera no cuenta para su propia ventana. Fecha prevista y sesión CARRERA el mismo día: una sola
+comprobación (origen SESION).
 Opciones del análisis de sesión: `v_carrera_m_s` (8–20), `sigma_max_mpa` (30–120), `sigma0_mpa` (100–180).
 
 Los análisis anteriores sin el bloque cuentan como «sesiones sin datos» y no se juzgan.
@@ -135,7 +142,7 @@ Evidencia: Wong 2023 (HR 1,11 por 10 cm menos de zancada) y Schrurs 2024 (últim
 (simulación propia: falsa alarma 11,4 % en 100 sesiones; deriva de 3 DE detectada en ≤ 6 sesiones el 91,5 %).
 Opciones (`base_cientifica`): `reglas_linea_base`, `caida_zancada_m`, `caida_v_600m`, `cusum_h`,
 `cusum_calentamiento`, `sesiones_min_linea_base`. **A9 (V200/VHRmax) y A11 (ectopia) implementadas en el motor
-2.0.0-dev27 / KB-1 1.25.0** con el ECG de la cincha 0.5.x: ficha `15_ECG_V200.md` (TE por defecto del 3 % NO VALIDADO;
+2.0.0-dev29 / KB-1 1.27.0** con el ECG de la cincha 0.5.x: ficha `15_ECG_V200.md` (TE por defecto del 3 % NO VALIDADO;
 ectopia siempre «candidato a revisar»).
 
 **Estudio extra 3 (KB-1 1.6.0, motor 2.0.0-dev8, sin cambios de lógica).** Dos especificaciones nuevas, **PENDIENTE**:
@@ -285,6 +292,34 @@ Detalle: `knowledge/estudios/2026-11-20_2108_going_terreno_calentamiento_vuelta_
   el coste cardíaco y la recuperación de la FC son más repetibles que V180 [E-r, trotones]; sigue sin TE publicado de
   V200 en PSI/árabes. Propuesta RB1 [I] para el TE propio.
 Detalle: `knowledge/estudios/2026-11-20_2209_lesiones_arabes_turquia_repetibilidad_v200.md`.
+
+**Investigación nocturna 21/11 (KB-1 1.25.0, motor 2.0.0-dev27, sin cambios de lógica).**
+- **Auditoría de 20 fuentes (14 mejoradas):** Poinsard 2026 en texto completo: su V200 es la velocidad en el **primer
+  cruce** de 200 lpm mantenido ≥ 10 s, no una regresión FC–velocidad, y MDC95 = 1,96·√2·SEM (el SEM de recuperación
+  9,4 lpm pasa de [I] a [E, trotones]). Pfau 2024 se midió en PSI castrados de outriders, no de carreras. En
+  Morrice-West 2025 el HR 1,80 es de la carrera completa y la categoría media es la referencia (curva en U). Verkade
+  2020 es mecánico (sin OR por raza) y Ter Woort 2023 publica κ (no sensibilidad/especificidad). Ningún umbral
+  implementado cambia.
+- **Árabes de llano:** FC ≥ 211–212 lpm en el galope de prueba a ~15,7 m/s (Polonia, Janczarek 2016 [E]); velocidades de
+  carrera de 13,7–14,8 m/s (Turquía [E]); sigue sin V200 ni TE publicados de árabes de llano.
+- **Cobertura mundial:** Japón, Corea, Golfo (sin datos de llano), Turquía, Polonia, Latinoamérica (lactato de PSI en
+  Brasil), Sudáfrica (0,53–0,6 lesiones catastróficas por 1.000 salidas; < 1 semana entre carreras como riesgo), Nueva
+  Zelanda (17 d entre salidas) y Hong Kong.
+- Propuestas MV1 (método de V200 como atributo), FM1 (FCmax por defecto 210–215 lpm «no propia») y EC1 (arritmias del
+  galope solo como «revisar»; prioridad a la recuperación) [I], sin implementar.
+Detalle: `knowledge/estudios/2026-11-21_noche_auditoria_v200_metodo_fcmax_arabes_latam.md`.
+
+**Ficha de campo, A4 y base del planificador (KB-1 1.26.0, motor 2.0.0-dev28, TRAINING 1.1.0; cambio de lógica).**
+- **A4_CARGA_BAJA_PRECARRERA → IMPLEMENTADO** como AVISO informativo (tabla de la sección 3); no sube el estado.
+- **PL1 parcial:** con la franja de playa anotada (`pista.franja`), A7 y A8 solo comparan sesiones de la misma
+  superficie **y** franja. Sin franja se comporta como antes. PL2–PL6 siguen pendientes (lluvia, TDR, penetrómetro).
+- **Base del planificador (P1, P3, RT1, RT3, A4):** `estado.planificador` de la historia da los días rápidos de 7 d,
+  los días desde el último y entre los dos últimos, la próxima carrera prevista con los días rápidos que faltan y las
+  pautas: P1 (0 o > 3 días rápidos en una semana activa), RT1 (< 72 h entre rápidos), P3/RT3 (< 14 d entre carreras).
+  Son pautas informativas [I]; P2, P4–P6 y DM1–DM4 siguen pendientes (capa 2).
+- La ficha (tipo de sesión, going, marea, temperatura, humedad y pesos) se guarda en el resumen para calibrar GO1, PE1–PE3,
+  TC/PC y RB1 con los datos de campo del PROTOTIPO (`docs/PROTOCOLO_PRUEBAS_CAMPO_PROTOTIPO.md`); todavía no cambia
+  ninguna regla.
 
 **Estudio horario 20/11 20:08 (KB-1 1.22.0, motor 2.0.0-dev24, sin cambios de lógica).**
 - **Recuperación tras el trabajo rápido:** el glucógeno tarda 48–72 h en reponerse (revisión [E], Hyyppä/Lacombe

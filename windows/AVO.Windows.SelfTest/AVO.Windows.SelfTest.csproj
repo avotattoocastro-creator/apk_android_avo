@@ -3,4 +3,5 @@
   <ItemGroup><ProjectReference Include="..\AVO.Windows.Core\AVO.Windows.Core.csproj" /></ItemGroup>
   <ItemGroup><None Include="usb_transcript.json" CopyToOutputDirectory="PreserveNewest" /><None Include="watch_vectors.json" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
   <ItemGroup><None Include="..\..\core\src\test\resources\equine\synthetic_session.avo" Link="synthetic_session.avo" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
+  <ItemGroup><None Include="..\..\core\src\test\resources\equine\kb_psi_analysis.json" Link="kb_psi_analysis.json" CopyToOutputDirectory="PreserveNewest" /><None Include="..\..\core\src\test\resources\equine\sample_analysis.json" Link="sample_analysis.json" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
 </Project>

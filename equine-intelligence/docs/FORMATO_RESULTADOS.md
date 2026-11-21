@@ -27,7 +27,7 @@ Métricas nuevas: `distancia_puenteada` (regla del analizador Kotlin anterior, s
 `estabilidad_espectral`, `incertidumbre_media_ventana`, `ventanas_cadencia_validas`.
 **Cambio de semántica:** `frecuencia_hz` de una ventana es 0 salvo estado VALIDA; GAIT_CLASSIFIER_V1 (1.0.1) solo recibe cadencias válidas.
 
-## Bloque `cardio` (AVO Cardio 1.0.0, motor 2.0.0-dev27) — ficha 15
+## Bloque `cardio` (AVO Cardio 1.0.0, motor 2.0.0-dev29) — ficha 15
 Siempre presente. Sin ECG en el RAW: `{"presente":false,"version","algoritmo"}`. Con el ECG de la cincha 0.5.x:
 `fuente` (`CINCHA_MAX30003_FMT2`), `lotes`, `lotes_duplicados`, `muestras`, `muestras_no_validas`, `fs_hz`, `alineada_gnss`,
 `duracion_s`, `polaridad_s`, `latidos`, `rr_validos`, `artefacto_pct`, `calidad` (BUENA | UTILIZABLE | POBRE | NO_UTILIZABLE),

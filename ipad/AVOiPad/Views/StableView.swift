@@ -323,6 +323,7 @@ private struct StableDetailPane: View {
                             .buttonStyle(.avoPrimary)
                             .disabled(sel.count == 0)
                             .accessibilityIdentifier("stable.horseHistory")
+                            StablePlannedRacesCard(row: sel)
                             StableRacesCard(row: sel)
                             FranceGalopHorseCard(row: sel)
                         }
@@ -659,6 +660,70 @@ private struct StableStretchRow: View {
                 .accessibilityLabel("Borrar tramo")
         }
         .frame(width: 150, alignment: .trailing)
+    }
+}
+
+/// «Carreras previstas» of the horse (carreras_previstas.json): passed to the engine history as «carreras_previstas»
+/// for the A4 rule (carga baja antes de correr) and the weekly planner (Training Analytics 1.1.0).
+private struct StablePlannedRacesCard: View {
+    let row: StableIdentityRow
+    @Environment(AppModel.self) private var app
+    @State private var days: [String] = []
+    @State private var newDay: Date = Date()
+    @State private var message: String = ""
+
+    var body: some View {
+        AvoCard {
+            VStack(alignment: .leading, spacing: 10) {
+                Text("CARRERAS PREVISTAS DE \(row.name.uppercased())")
+                    .font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
+                HStack(spacing: 10) {
+                    DatePicker("Fecha", selection: $newDay, displayedComponents: [.date])
+                        .labelsHidden()
+                    Button {
+                        let d: String = TrainingAnalytics.dayText(newDay, utc: false)
+                        if !days.contains(d) { store(days + [d]) }
+                    } label: {
+                        Label("Añadir fecha", systemImage: "calendar.badge.plus")
+                    }
+                    .buttonStyle(.avoPrimary)
+                    .accessibilityIdentifier("stable.addPlannedRace")
+                    Spacer(minLength: 0)
+                }
+                if days.isEmpty {
+                    Text("Sin carreras previstas. Con una fecha, la historia avisa si en los 28 días previos hay menos de 2 días de trabajo rápido (regla A4, Morrice-West 2025) y el planificador muestra cuántos faltan.")
+                        .font(.footnote).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+                } else {
+                    ForEach(days, id: \.self) { (d: String) in
+                        HStack {
+                            Image(systemName: "flag.checkered").foregroundStyle(Avo.red)
+                            Text(d).font(.body.monospacedDigit()).foregroundStyle(Avo.text)
+                            Spacer()
+                            Button(role: .destructive) {
+                                store(days.filter { $0 != d })
+                            } label: {
+                                Image(systemName: "trash")
+                            }
+                            .buttonStyle(.borderless)
+                        }
+                    }
+                }
+                if !message.isEmpty {
+                    Text(message).font(.caption).foregroundStyle(Avo.cyan)
+                }
+            }
+        }
+        .onAppear { days = app.plannedRaces(for: row.code) }
+        .onChange(of: row.code) { (_: String, c: String) in days = app.plannedRaces(for: c) }
+    }
+
+    private func store(_ list: [String]) {
+        if let e = app.savePlannedRaces(row.code, list) {
+            message = "No se pudo guardar: " + e
+        } else {
+            days = app.plannedRaces(for: row.code)
+            message = "Carreras previstas guardadas."
+        }
     }
 }
 

@@ -25,6 +25,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.avoperformance.horse.core.engine.EquineResult
+import org.avoperformance.horse.core.engine.KbFormat
+import org.avoperformance.horse.core.engine.KbSession
 import org.avoperformance.horse.engine.EngineState
 import org.avoperformance.horse.ui.components.*
 import org.avoperformance.horse.ui.theme.AvoColors
@@ -210,6 +212,32 @@ fun LazyListScope.engineItems(state: EngineState, onAnalyse: () -> Unit, onRepro
             }
             r.symmetry.notes.forEach { Note(it) }
         }
+    }
+    // ---- scientific base KB-1 (engine block «trabajo_pista.base_cientifica»)
+    item { ScientificBaseCard(r.scientificBase) }
+}
+
+/** «Base científica» (KB-1) compacta: bandas B1/B2/B3, Verheyen, fatiga ósea y últimos 600 m. Solo valores del motor. */
+@Composable
+fun ScientificBaseCard(kb: KbSession?) {
+    AvoCard("Base científica" + (kb?.version?.takeIf { it.isNotEmpty() }?.let { " · KB-1 $it" } ?: "")) {
+        if (kb == null) { Note("Sin datos: este análisis no trae la base científica (vuelve a analizar la sesión)."); return@AvoCard }
+        KV("Ritmo de carrera", KbFormat.ms(kb.racePace) + when (kb.racePaceOrigin) { "RAZA" -> " · raza ${kb.breed}"; "CABALLO" -> " · del caballo"; else -> "" })
+        Text("METROS POR BANDA", color = AvoColors.Silver, fontSize = 11.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 8.dp, bottom = 2.dp))
+        kb.bands.forEach { b -> KV("${b.name} (${b.limitsText})", KbFormat.metres(b.distanceM)) }
+        if (kb.racePace == null) Note("Sin ritmo de carrera de referencia: todo cuenta en B1 y no hay canter ni galope rápido.", AvoColors.Warn)
+        Text("VERHEYEN 2006", color = AvoColors.Silver, fontSize = 11.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 8.dp, bottom = 2.dp))
+        KV("Canter (${KbFormat.range(kb.canterMinSpeed, kb.gallopCut)})", KbFormat.metres(kb.canterM))
+        KV("Galope rápido (> ${KbFormat.ms(kb.gallopCut)})", KbFormat.metres(kb.gallopM), if ((kb.gallopM ?: 0.0) > 0) AvoColors.Red else AvoColors.Text)
+        Text("FATIGA ÓSEA", color = AvoColors.Silver, fontSize = 11.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 8.dp, bottom = 2.dp))
+        KV("Validada (≥ ${KbFormat.ms(kb.boneValidMinSpeed, 2)})", KbFormat.percent(kb.bonePct))
+        KV("Extrapolado lento", KbFormat.percent(kb.boneLowPct), AvoColors.TextDim)
+        Note(KbFormat.BONE_NOTE)
+        if (kb.calibrated == false) Note(KbFormat.UNCALIBRATED, AvoColors.Warn)
+        Text("ÚLTIMOS 600 M", color = AvoColors.Silver, fontSize = 11.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 8.dp, bottom = 2.dp))
+        if (kb.final600.isEmpty()) Note("${KbFormat.NO_DATA}: sin trabajos de galope.")
+        kb.final600.forEach { e -> KV("${e.title} · ${KbFormat.metres(e.distanceM)}", KbFormat.ms(e.speed, 2)) }
+        Note("Orientativo: reglas de la literatura con umbrales de partida, sin validar con la cuadra.")
     }
 }
 
