@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-21 — iPad · Android · Windows — Pantalla «Base científica» (KB-1 del motor, paso 1 del informe de funciones)
-**Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/apps-base-cientifica` · **CI:** se ejecuta al
+**Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/apps-base-cientifica` (PR #118) · **CI:** se ejecuta al
 integrar en `develop` (los workflows no corren en los PR)
 **Qué cambia:** las apps enseñan lo que la base científica KB-1 del motor ya calculaba (hasta hoy solo salía como texto
 en los motivos del estado del iPad). Solo lectura del JSON del motor; nada se calcula en las apps.
