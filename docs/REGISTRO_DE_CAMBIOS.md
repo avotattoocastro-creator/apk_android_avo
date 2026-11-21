@@ -24,6 +24,13 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-21 — iPad — Arreglo de la prueba `ScientificBaseTests.testHistoryStatusAndRules`
+**Autor:** Claude · **Rama:** `claude/fix-test-base-cientifica` · **CI:** se ejecuta al integrar
+**Qué cambia:** la prueba del PR #118 esperaba 900 m en B3 en la última sesión de `kb_training_history_psi.json`, pero
+esa sesión (día 99) trae 0 m en B3 y 900 m de galope rápido. Fallo del CI del iPad en `fc6d436` (la build de TestFlight sí
+salió). Ahora comprueba B1 = 3200 m, B3 = 0 m y galope rápido = 900 m. Solo cambia la prueba; la app no cambia.
+**Validación:** sin ejecutar en local (no hay Swift en la nube): CI al integrar · NO VERIFICADO en el iPad.
+
 ## 2026-11-21 — Motor 2.0.0-dev28 (Training Analytics 1.1.0, KB-1 1.26.0) · iPad — Ficha de campo, regla A4 y base del planificador
 **Autor:** Claude (tarea programada: pasos 2 y 4 del informe «Motor AVO Equine: análisis completo de funciones») ·
 **Rama:** `claude/ficha-campo-carrera-a4` · **CI:** `build-equine-engine.yml` en la rama: run 44891879590 (n.º 53, `2578464`) ✅
