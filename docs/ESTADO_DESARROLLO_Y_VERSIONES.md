@@ -24,6 +24,7 @@ registrada: **NO VERIFICADO**.
 | BETA | Casco BACK V5 (PCB + CAD) | — | `hardware/back/V5_CASCO` (PR #64) | `build-back-v5-*.yml` (solo a mano) | [`CAD_CASCO_BETA_V5.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/CAD_CASCO_BETA_V5.zip) | diseño · sin firmware |
 | BETA | DOCK V1 (PCB REV A + caja) | — | `hardware/dock/V1` (PR #45) | `build-dock-v1-*.yml` (solo a mano) | [`CAD_DOCK_BETA_V1.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/CAD_DOCK_BETA_V1.zip) | CI ✅ · sin fabricar · sin firmware |
 | BETA | Espalda V4 (placa ESP32-S3) | 4.0.0-dev2 | `firmware/back/V4_0_0`, `hardware/back/V4` | `build-back-v4-*.yml` | [`CAD_ESPALDA_BETA_V4.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/CAD_ESPALDA_BETA_V4.zip) | sin fabricar · **nunca en la Heltec** |
+| BETA | Pasarela LTE V1 (sustituto del móvil: ESP32-S3 + EG800Q-EU + eSIM) | anteproyecto PCB REV 0 (54 × 32 mm) | `hardware/pasarela/BETA_V1` | — | — | diseño · sin esquema · sin firmware |
 
 ### Apps y motor
 

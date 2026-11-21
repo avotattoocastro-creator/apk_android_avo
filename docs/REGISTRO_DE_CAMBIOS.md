@@ -24,6 +24,23 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-21 — Pasarela LTE BETA V1 — anteproyecto de la PCB REV 0 (sustituto del móvil)
+**Autor:** Claude (petición del usuario, 21/11 10:41–10:48: «pcb compacta tipo a la de la cincha que realice todas las
+funciones del móvil»; la lleva el jinete lejos del casco; eSIM soldada si no encarece mucho; primero la PCB, después la
+cápsula) · **Rama:** `claude/pasarela-lte-pcb-rev0` · **CI:** no aplica (sin workflow)
+**Qué cambia:**
+- Carpeta nueva `hardware/pasarela/BETA_V1`: anteproyecto con componentes, alimentación, conexiones del ESP32-S3,
+  estimaciones de datos y consumo, riesgos y decisiones pendientes.
+- Placa propuesta de **54 × 32 × 1,0 mm**, 4 capas: ESP32-S3-WROOM-1-N16R8 + Quectel EG800Q-EU (LTE Cat 1 bis) + eSIM
+  MFF2 + SPI NAND de 256 MB + BQ24072 + TPS63802 + MAX17048 + pogo de 5 contactos como el casco V5.
+- `PCB/fuente/place_rev0.py` genera la colocación y comprueba solapes, márgenes y taladros (0 errores; 69 % de
+  ocupación de envolventes), `PCB/pcb_mecanica.json` y `DOCS/colocacion_pcb_rev0.svg`.
+**No se ha tocado:** firmware, apps, contratos binarios ni workflows. La fase 1 (NTRIP + LIVE) no cambia contratos.
+**Validación:** IMPLEMENTADO (anteproyecto) · sin KiCad · **NO VERIFICADO**. Existencias de JLC sin consultar (el proxy
+de la sesión bloquea su API).
+**Pendiente:** elegir módem (EG800Q-EU o A7670E) y eSIM/operador; validar NTRIP + LIVE con una LilyGO (PROTOTIPO),
+incluido el alcance BLE desde el bolsillo; después, esquema y placa en KiCad 9 y la cápsula.
+
 ## 2026-11-21 — Espalda 3.15.0 · Pecho 3.7.11 · Android 2.16-fixdiag-dev1 — Diagnóstico de «no hay RTK FIX» (BackStatus v4)
 **Autor:** Claude (petición del usuario, 21/11 00:47: «añade todas las lecturas necesarias hasta en la apk hasta que
 consigamos averiguar por qué no llega fix; una vez solucionado simplificamos datos en el apk») · **Rama:**
