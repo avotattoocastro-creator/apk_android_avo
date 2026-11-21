@@ -24,6 +24,46 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-21 — Motor 2.0.0-dev28 (Training Analytics 1.1.0, KB-1 1.26.0) · iPad — Ficha de campo, regla A4 y base del planificador
+**Autor:** Claude (tarea programada: pasos 2 y 4 del informe «Motor AVO Equine: análisis completo de funciones») ·
+**Rama:** `claude/ficha-campo-carrera-a4` · **CI:** `build-equine-engine.yml` en la rama: run 44891879590 (n.º 53, `2578464`) ✅
+**Qué cambia:**
+- **Motor (Training Analytics 1.1.0):** ficha de campo opcional en `extra` y en el resumen de sesión: `tipo_sesion`
+  (TRABAJO, TRABAJO_REFERENCIA_1000, CARRERA, TRIAL, DESCANSO_ACTIVO), `pista.franja` (ORILLA_FIRME, HUMEDA_PROFUNDA,
+  SECA_PROFUNDA, TRANSICION), `pista.going`, `pista.marea` (hora y tipo), `condiciones` (temperatura y humedad), `pesos`
+  (jinete y caballo) e `incidencia` (tipo y texto). Valores desconocidos o fuera de rango: se descartan con aviso.
+- **A4_CARGA_BAJA_PRECARRERA → IMPLEMENTADO** (KB-1 1.26.0): opción `carreras_previstas` de la historia; las sesiones
+  CARRERA/TRIAL cuentan como carrera; < 2 días con sesión rápida en los 28 d previos → AVISO informativo (Morrice-West
+  2025, HR 2,89 [E]; corte [I]). Comprobaciones en `base_cientifica.carreras[]`.
+- **Base del planificador semanal:** `estado.planificador` (días rápidos de 7 d, separación entre rápidos, próxima
+  carrera y días rápidos que faltan; pautas P1, RT1, A4 y P3). Informativo: nunca sube el estado.
+- **PL1 parcial:** con la franja anotada, A7/A8 solo comparan la misma superficie y franja. Incidencia COJERA → REVISAR,
+  CAIDA → VIGILAR.
+- **iPad:** «Ficha de campo» en la valoración tras la sesión (`TrainingRatingCard`, se pasa al motor en `extra`) y
+  «Carreras previstas» por caballo en la Cuadra (`carreras_previstas.json`, aparte de `cuadra.json` para no romper el
+  intercambio con Windows), que se pasan en las opciones de la historia.
+- **Protocolo:** `docs/PROTOCOLO_PRUEBAS_CAMPO_PROTOTIPO.md` (registro por sesión, trabajo de referencia de 1.000 m,
+  playa de Laredo, calibración de A7/A8/A9).
+- Fichas 12 y 14, `base_cientifica.json` (A4 IMPLEMENTADO; PL1–PL6 y P1–P6 PARCIAL), `ENGINE_VERSION` 2.0.0-dev28,
+  `KNOWLEDGE_VERSION` 1.26.0, `TRAINING_VERSION` 1.1.0 y fixtures del núcleo (solo cambian las cadenas de versión).
+**Decisiones (sin supervisión):** A4 como INFO/AVISO, como A6B, porque el corte en sesiones es [I]; aviso anticipado
+cuando faltan ≤ 14 d (configurable); sin la historia de los 28 d no se juzga; las carreras previstas del iPad van en un
+archivo propio y no en `cuadra.json`; la base cita «HR 2,89» (Morrice-West 2025) y se mantiene así.
+**Archivos:** `equine-intelligence/include/avo_eq/{training,knowledge,types}.h`, `src/training/training.cpp`,
+`src/knowledge/knowledge.cpp`, `src/capi/training_capi.cpp`, `tests/test_{training,knowledge}.cpp`, fichas 12 y 14,
+`knowledge/base_cientifica.json`, `core/src/test/resources/equine/*_analysis.json`, `ipad/AVOiPad/{Core/TrainingAnalytics,
+App/AppModel+Training,App/AppModel+Shell,Views/TrainingRatingCard,Views/StableView}.swift`,
+`ipad/AVOiPadTests/TrainingAnalyticsTests.swift`, `docs/PROTOCOLO_PRUEBAS_CAMPO_PROTOTIPO.md`.
+**No se ha tocado:** contratos binarios, firmware, workflows, firmas, `Info.plist` ni número de build.
+**Validación:** pruebas locales del motor ✅ con ASan/UBSan (107 casos, 1.790 comprobaciones, 0 fallos); fixtures en
+Release ✅ (`check_fixtures.py`, regeneradas: solo versión) · CI del motor ✅ run 44891879590 (Linux ASan/UBSan, Release, fixtures, JNI; Windows; Android ×3) · iPad: **sin compilar** (no hay
+Xcode en la nube; el CI de TestFlight solo corre al fusionar en `develop`) · **NO VERIFICADO** con caballos reales.
+**Pendiente:** Android y Windows no usan todavía Training Analytics (no llaman a `avo_eq_training_*`): la ficha y las
+carreras previstas llegarán cuando se porte la historia de entrenamientos; mostrar `estado.planificador` en la pantalla
+de historia del iPad; A9 (TE propio) con los datos del protocolo; PL2–PL6, GO1, PE1–PE3 y la capa 2 del planificador.
+
+---
+
 ## 2026-11-21 — iPad · Android · Windows — Pantalla «Base científica» (KB-1 del motor, paso 1 del informe de funciones)
 **Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/apps-base-cientifica` (PR #118) · **CI:** se ejecuta al
 integrar en `develop` (los workflows no corren en los PR)

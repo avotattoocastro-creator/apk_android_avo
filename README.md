@@ -18,7 +18,7 @@ estado actual.
 
 Resumen (17/11/2026): pecho PROTOTIPO 3.7.10 · espalda PROTOTIPO 3.14.7 · cincha PROTOTIPO 0.4.3 / 0.5.0 (ECG) ·
 cincha BETA 0.6.0 · Android 2.15-gnss-dev2 (vc 49) · Tarjetas 1.4 · AVO Update 2.3.1 · Windows V2 PRO · iPad 1.0 + LIVE (TestFlight) ·
-motor 2.0.0-dev27 (base científica KB-1 1.25.0, rama `claude/kb-noche-2026-11-21`). Todo **compilado en CI**; nada de lo integrado desde el 12/11 está **verificado en hardware**.
+motor 2.0.0-dev28 (ficha de campo, regla A4 y base del planificador sobre la investigación nocturna 21/11; KB-1 1.26.0). Todo **compilado en CI**; nada de lo integrado desde el 12/11 está **verificado en hardware**.
 
 <details><summary>Tabla antigua (22/10–09/11/2026, superada)</summary>
 
