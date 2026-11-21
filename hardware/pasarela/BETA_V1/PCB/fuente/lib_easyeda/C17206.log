@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C17206
+       Symbol name : TXS0108EPWR
+       Library path : lib_easyeda/C17206.kicad_sym
+[INFO] Created Kicad footprint for ID: C17206
+       Footprint name: TSSOP-20_L6.5-W4.4-P0.65-LS6.4-BL
+       Footprint path: lib_easyeda/C17206.pretty/TSSOP-20_L6.5-W4.4-P0.65-LS6.4-BL.kicad_mod
+[INFO] Created 3D model for ID: C17206
+       3D model name: TSSOP-20_L6.5-W4.4-H1.0-LS6.4-P0.65
+       3D model path (wrl): lib_easyeda/C17206.3dshapes/TSSOP-20_L6.5-W4.4-H1.0-LS6.4-P0.65.wrl
+       3D model path (step): lib_easyeda/C17206.3dshapes/TSSOP-20_L6.5-W4.4-H1.0-LS6.4-P0.65.step
+-- easyeda2kicad.py v1.0.1 --
