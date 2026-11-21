@@ -94,7 +94,10 @@ final class ScientificBaseTests: XCTestCase {
         let last: TrainingSessionResult = try XCTUnwrap(r.sesiones.last)
         XCTAssertTrue(last.baseCientifica.present)
         let load: KbSummaryLoad = try XCTUnwrap(last.resumen?.trabajoPista?.baseCientifica)
-        XCTAssertEqual(load.bandsM[2] ?? 0, 900, accuracy: 1e-9)
+        // fixture: bandas_m [3200, 500, 0]; los 900 m son de galope rápido (> 14 m/s), por debajo de B3 (≥ 0,93 · 16,7 m/s)
+        XCTAssertEqual(load.bandsM[0] ?? -1, 3200, accuracy: 1e-9)
+        XCTAssertEqual(load.bandsM[1] ?? -1, 500, accuracy: 1e-9)
+        XCTAssertEqual(load.bandsM[2] ?? -1, 0, accuracy: 1e-9)
         XCTAssertEqual(load.bonePct ?? 0, 2.4, accuracy: 1e-9)
     }
 
