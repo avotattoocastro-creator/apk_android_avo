@@ -15,7 +15,16 @@
 #include "raw_writer.h"
 #include "synth.h"
 // El codificador del lote fmt 2 es el del firmware de la cincha (fuente única del formato).
+// MSVC define OVERFLOW (math.h) como macro y choca con girth::max30003::OVERFLOW: se aparta solo aquí.
+#ifdef OVERFLOW
+#pragma push_macro("OVERFLOW")
+#undef OVERFLOW
+#define AVO_TEST_RESTORE_OVERFLOW
+#endif
 #include "../../firmware/girth/V0_5_0/AVO_GIRTH_V0_5_0/girth_ecg.cpp"
+#ifdef AVO_TEST_RESTORE_OVERFLOW
+#pragma pop_macro("OVERFLOW")
+#endif
 
 using namespace avoeq;
 
