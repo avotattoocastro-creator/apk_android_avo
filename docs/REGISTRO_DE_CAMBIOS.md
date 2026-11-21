@@ -24,6 +24,27 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-21 — Motor 2.0.0-dev27 / KB-1 1.25.0 — Investigación nocturna: auditoría de 20 fuentes, método de V200, FCmax de árabes de llano y cobertura mundial
+**Autor:** Claude (investigación nocturna programada) · **Rama:** `claude/kb-noche-2026-11-21` (desde `develop`, 09b0be0) · **CI:** ver PR
+**Qué cambia:** KB-1 1.24.0 → 1.25.0 y motor 2.0.0-dev26 → 2.0.0-dev27 (solo versiones, sin cambios de lógica).
+- **Auditoría (20 fuentes, 14 mejoradas):** Poinsard 2026, Kalisiak 2012, Pfau 2024, Morrice-West 2021, Lee 2019 (tesis),
+  Ter Woort 2023, Navas de Solis 2026, Parsons 2008, Verkade 2020 y Van Steenkiste 2020 pasan a texto completo; ICRAV 2026,
+  Frick 2019, Beaumont 2025 y Trachsel reclasificadas. **Correcciones:** V200 de Poinsard por primer cruce ≥ 10 s (no
+  regresión); Pfau 2024 en PSI outriders (no de carreras); HR 1,80 de Morrice-West 2025 = carrera completa y categoría
+  media = referencia; Morrice-West 2021 sin km/semana; Verkade 2020 mecánico (sin OR por raza); Parsons 2008 con Ferrari M.
+  SEM de recuperación 9,4 lpm confirmado (antes [I]). Ningún umbral implementado cambia.
+- **Investigación nueva:** FCmax de árabes de llano ≥ 211–212 lpm (Janczarek 2016, Polonia [E]); velocidades de carrera
+  de árabes en Turquía; lactato de PSI en Brasil; incidencias y estructura de preparaciones en Sudáfrica, Nueva Zelanda y
+  Hong Kong; Golfo sin datos de árabes de llano. 23 fuentes nuevas, 5 parámetros de referencia.
+- Propuestas MV1, FM1 y EC1 [I], sin implementar; 10 entradas nuevas en la cola.
+**Por qué:** auditoría de fuentes que sostienen reglas del motor y cobertura mundial y multirraza (investigación nocturna).
+**Archivos:** `equine-intelligence/knowledge/base_cientifica.json`, `equine-intelligence/knowledge/estudios/2026-11-21_noche_auditoria_v200_metodo_fcmax_arabes_latam.md`, `equine-intelligence/include/avo_eq/{types,knowledge}.h`, `equine-intelligence/tests/test_knowledge.cpp`, `equine-intelligence/docs/algoritmos/14_BASE_CIENTIFICA.md`, fixtures de `core` (versión), `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`, `README.md`.
+**No se ha tocado:** workflows, firmas, `Info.plist`, build de TestFlight, firmware ni contratos binarios.
+**Validación:** pruebas del motor en local (Debug con `-DAVO_EQ_SANITIZE=ON`: 100 % en verde; Release + `check_fixtures.py`: OK tras `--update` con solo el cambio de versión de la KB); CI en el PR. NO VERIFICADO con caballos reales.
+**Pendiente:** Verheyen 2006 (OR), tabla S2 de Poinsard, Kobayashi 2000 original, Hamlin 2002 (% de V200) y Morrice-West 2025 en texto completo.
+
+---
+
 ## 2026-11-21 — Espalda 3.15.0 · Pecho 3.7.11 · Android 2.16-fixdiag-dev1 — Diagnóstico de «no hay RTK FIX» (BackStatus v4)
 **Autor:** Claude (petición del usuario, 21/11 00:47: «añade todas las lecturas necesarias hasta en la apk hasta que
 consigamos averiguar por qué no llega fix; una vez solucionado simplificamos datos en el apk») · **Rama:**

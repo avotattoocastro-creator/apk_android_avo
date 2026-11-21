@@ -284,6 +284,22 @@ Detalle: `knowledge/estudios/2026-11-20_2108_going_terreno_calentamiento_vuelta_
   V200 en PSI/árabes. Propuesta RB1 [I] para el TE propio.
 Detalle: `knowledge/estudios/2026-11-20_2209_lesiones_arabes_turquia_repetibilidad_v200.md`.
 
+**Investigación nocturna 21/11 (KB-1 1.25.0, motor 2.0.0-dev27, sin cambios de lógica).**
+- **Auditoría de 20 fuentes (14 mejoradas):** Poinsard 2026 en texto completo: su V200 es la velocidad en el **primer
+  cruce** de 200 lpm mantenido ≥ 10 s, no una regresión FC–velocidad, y MDC95 = 1,96·√2·SEM (el SEM de recuperación
+  9,4 lpm pasa de [I] a [E, trotones]). Pfau 2024 se midió en PSI castrados de outriders, no de carreras. En
+  Morrice-West 2025 el HR 1,80 es de la carrera completa y la categoría media es la referencia (curva en U). Verkade
+  2020 es mecánico (sin OR por raza) y Ter Woort 2023 publica κ (no sensibilidad/especificidad). Ningún umbral
+  implementado cambia.
+- **Árabes de llano:** FC ≥ 211–212 lpm en el galope de prueba a ~15,7 m/s (Polonia, Janczarek 2016 [E]); velocidades de
+  carrera de 13,7–14,8 m/s (Turquía [E]); sigue sin V200 ni TE publicados de árabes de llano.
+- **Cobertura mundial:** Japón, Corea, Golfo (sin datos de llano), Turquía, Polonia, Latinoamérica (lactato de PSI en
+  Brasil), Sudáfrica (0,53–0,6 lesiones catastróficas por 1.000 salidas; < 1 semana entre carreras como riesgo), Nueva
+  Zelanda (17 d entre salidas) y Hong Kong.
+- Propuestas MV1 (método de V200 como atributo), FM1 (FCmax por defecto 210–215 lpm «no propia») y EC1 (arritmias del
+  galope solo como «revisar»; prioridad a la recuperación) [I], sin implementar.
+Detalle: `knowledge/estudios/2026-11-21_noche_auditoria_v200_metodo_fcmax_arabes_latam.md`.
+
 **Estudio horario 20/11 20:08 (KB-1 1.22.0, motor 2.0.0-dev24, sin cambios de lógica).**
 - **Recuperación tras el trabajo rápido:** el glucógeno tarda 48–72 h en reponerse (revisión [E], Hyyppä/Lacombe
   [E-r]; Minami 2009 discrepa con 24 h); CK/AST normales en ≤ 24 h, también en árabes de llano; propuesta RT1–RT3 [I]
