@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-21 — iPad — Corrección de la prueba `ScientificBaseTests.testHistoryStatusAndRules` (PR #118)
+**Autor:** Claude (chat integrador) · **Rama:** `claude/fix-ipad-kb-test` · **CI:** iPad al integrar
+**Qué cambia:** la prueba esperaba 900 m en la banda B3 de la última sesión, pero la fixture trae `bandas_m [3200, 500, 0]`
+y los 900 m son de galope rápido (> 14 m/s, por debajo de B3). Se comprueban las tres bandas con los valores reales. Solo
+cambia la prueba; ni la app ni el motor.
+**No se ha tocado:** código de la app, motor, workflows, firmas, `Info.plist` ni número de build.
+**Validación:** el CI del iPad falló por esta prueba tras fusionar #118 (runs 44893807350 y 44894671372); TestFlight salió bien.
+NO VERIFICADO en el iPad.
+
+---
+
 ## 2026-11-21 — Motor 2.0.0-dev29 · KB-1 1.27.0 — ECG de la cincha PROTOTIPO 0.5.0 en el análisis: V200, VHRmax, A9 y A11
 **Integración (21/11):** PR #120 integrado sobre dev28 / KB-1 1.26.0 (PR #117 y #121); renumerado de dev27 / 1.25.0 a **dev29 / 1.27.0**; fixtures regeneradas con el bloque `cardio`.
 **Autor:** Claude (tarea programada, paso 3 del informe «Motor AVO Equine: análisis completo de funciones») · **Rama:**
