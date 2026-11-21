@@ -26,7 +26,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ## 2026-11-21 — Motor 2.0.0-dev27 · KB-1 1.25.0 — ECG de la cincha PROTOTIPO 0.5.0 en el análisis: V200, VHRmax, A9 y A11
 **Autor:** Claude (tarea programada, paso 3 del informe «Motor AVO Equine: análisis completo de funciones») · **Rama:**
-`claude/motor-ecg-v200` · **CI:** `build-equine-engine.yml` lanzado a mano en la rama (ver PR)
+`claude/motor-ecg-v200` · **CI:** `build-equine-engine.yml` run 44893307697 ✅ (Linux ASan/UBSan, Windows, Android ×3; `f1700f5`; la 44892612337 falló en Windows por la macro OVERFLOW de MSVC, corregido)
 **Diagnóstico:** la cincha 0.5.0 manda **muestras de ECG** (no RR) como `IMU_SAMPLE fmt 2` (`imu_id 3`, unidades 2 = 0,1 µV,
 51 muestras int24 por lote, 177 B; máximo 204 B + 16 B de cabecera = lote de 220 B). La espalda (`GirthHub`,
 `decode_imu_header` «formato desconocido: cabecera válida») y el pecho (RAW literal antes de decodificar) lo reenvían y
@@ -52,7 +52,7 @@ docs/algoritmos/{12,14,15}_*.md, docs/FORMATO_RESULTADOS.md}`, `core/src/test/re
 **No se ha tocado:** firmware (cincha, espalda, pecho), contratos binarios, apps, workflows, firmas, `Info.plist`, número de build.
 **Validación:** pruebas locales 111/111 con ASan/UBSan (8 casos nuevos: el lote se codifica con el codificador real de la
 cincha y pasa por avo_core → RAW → ingestión → motor; sensibilidad y VPP ≥ 99,5 % en señal sintética) ·
-`check_fixtures.py` OK · CI: ver PR · **NO VERIFICADO** con ECG real ni con caballos.
+`check_fixtures.py` OK · CI 44893307697 ✅ · **NO VERIFICADO** con ECG real ni con caballos.
 **Pendiente:** sesión real con el PROTOTIPO (cincha 0.5.0, cápsula REV 5.10) y anotación manual de latidos en galope;
 TE propio de V200 (≥ 3 pruebas); dibujar `cardio` en Android, Windows e iPad; CF1, WU3, FA y multiformes.
 
