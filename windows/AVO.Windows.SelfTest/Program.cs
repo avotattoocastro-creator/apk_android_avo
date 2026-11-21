@@ -138,6 +138,22 @@ try
     var torn = raw[..^9]; File.WriteAllBytes(avr, torn);
     var partial = TrainingImporter.Import(avr);
     Assert(partial.Segments[0].Truncated && partial.Integrity.Contains("parcial"), "Bloque incompleto señalado, no interpretado");
+    // ---- Base científica KB-1: JSON del motor (fixtures SINTÉTICAS de core/src/test/resources/equine) -> filas de «Motor AVO».
+    {
+        var kbPsi = EquineAnalysis.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "kb_psi_analysis.json")));
+        Assert(kbPsi.HasScientificBase, "Base científica: bloque presente en el entrenamiento PSI");
+        string KbRow(EquineAnalysis x, string prefix) => x.ScientificBase.FirstOrDefault(r => r.Metrica.StartsWith(prefix, StringComparison.Ordinal))?.Valor ?? "";
+        Assert(KbRow(kbPsi, "Ritmo de carrera") == "16,7 m/s · raza PSI", "Base científica: ritmo de carrera de la raza");
+        Assert(kbPsi.ScientificBase.Any(r => r.Metrica == "B3 · alta (≥ 15,5 m/s)" && r.Valor == "682 m"), "Base científica: B3 con su límite en m/s");
+        Assert(KbRow(kbPsi, "Galope rápido") == "811 m" && KbRow(kbPsi, "Canter") == "341 m", "Base científica: canter y galope rápido (Verheyen)");
+        Assert(KbRow(kbPsi, "Fatiga ósea (") == "5,76 %" && KbRow(kbPsi, "Fatiga ósea extrapolada") == "0,16 %", "Base científica: fatiga ósea validada y extrapolada");
+        Assert(KbRow(kbPsi, "Últimos 600 m · Trabajo 1") == "16,02 m/s", "Base científica: velocidad de los últimos 600 m");
+        Assert(kbPsi.ScientificBaseNote.Contains("no es una probabilidad de lesión") && !kbPsi.ScientificBaseNote.Contains("Sin calibrar"), "Base científica: nota del índice, PSI calibrado");
+        var kbGen = EquineAnalysis.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "sample_analysis.json")));
+        Assert(KbRow(kbGen, "Galope rápido") == EquineAnalysis.KbNoData && KbRow(kbGen, "B2 · intermedia (sin datos)") == "0 m",
+            "Base científica: sin ritmo de carrera, «sin datos»");
+        Assert(kbGen.ScientificBaseNote.Contains("Sin calibrar"), "Base científica: sin calibrar fuera del PSI");
+    }
     // ---- AVO Equine Intelligence Engine (avo_equine.dll) on the SYNTHETIC reference session.
     // RAW -> importer -> P/Invoke -> C++ engine -> JSON -> C# model used by the window. Not a validation on real horses.
     string fixture = Path.Combine(AppContext.BaseDirectory, "synthetic_session.avo");

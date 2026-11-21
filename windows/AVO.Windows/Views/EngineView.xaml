@@ -22,7 +22,7 @@
         </Border>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-            <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+            <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="*"/><RowDefinition Height="*"/></Grid.RowDefinitions>
             <c:AvoCard Header="Segmentos de rendimiento (clasificador de aires)" Margin="0,0,6,6">
                 <DataGrid Style="{StaticResource AvoDataTable}" ItemsSource="{Binding Selected.Engine.Segments, FallbackValue={x:Null}}">
                     <DataGrid.Columns>
@@ -70,6 +70,19 @@
                         <DataGridTextColumn Header="Motivo" Binding="{Binding Motivo}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
+            </c:AvoCard>
+            <!-- Base científica KB-1 (motor: trabajo_pista.base_cientifica): bandas, Verheyen, fatiga ósea y últimos 600 m -->
+            <c:AvoCard Grid.Row="2" Grid.ColumnSpan="2" Header="Base científica (KB-1) · carga de la sesión según la literatura" Margin="0,12,0,0">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Bottom" Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,6,0,0"
+                               Text="{Binding Selected.Engine.ScientificBaseNote, FallbackValue='Sin datos: el análisis no trae la base científica; vuelve a analizar la sesión.', TargetNullValue='Sin datos'}"/>
+                    <DataGrid Style="{StaticResource AvoDataTable}" ItemsSource="{Binding Selected.Engine.ScientificBase, FallbackValue={x:Null}}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Métrica" Binding="{Binding Metrica}" Width="320"/>
+                            <DataGridTextColumn Header="Valor" Binding="{Binding Valor}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
             </c:AvoCard>
         </Grid>
     </Grid>

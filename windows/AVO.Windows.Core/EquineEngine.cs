@@ -161,6 +161,10 @@ public sealed class EquineAnalysis
     public int SymmetryWindows { get; private set; }
     public double? Metric(string name) => Metrics.TryGetValue(name, out var v) && double.IsFinite(v) ? v : null;
     public string RawJson { get; private set; } = "";
+    /// <summary>Base científica KB-1 de la sesión («trabajo_pista.base_cientifica»): filas Métrica/Valor; vacía si falta el bloque.</summary>
+    public List<EngineKvRow> ScientificBase { get; } = [];
+    public bool HasScientificBase => ScientificBase.Count > 0;
+    public string ScientificBaseNote { get; private set; } = "";
 
     private static readonly CultureInfo Es = CultureInfo.GetCultureInfo("es-ES");
     private static string F(double? v, string fmt, string unit = "") => v is double d && double.IsFinite(d) ? d.ToString(fmt, Es) + unit : "—";
@@ -177,6 +181,47 @@ public sealed class EquineAnalysis
         "STOPPED" => "Parado", "WALK" => "Paso", "TROT" => "Trote", "CANTER_GALLOP" => "Galope", "TRANSITION" => "Transición",
         "UNKNOWN" => "Desconocido", "INSUFFICIENT_DATA" => "Datos insuficientes", _ => code
     };
+
+    // ---------------------------------------------------------------- base científica KB-1
+    public const string KbNoData = "sin datos";
+    private static string Kb(double? v, string fmt, string unit) => v is double d && double.IsFinite(d) ? d.ToString(fmt, Es) + unit : KbNoData;
+    private static string KbRange(double? lo, double? hi)
+    {
+        double l = lo ?? double.NaN, h = hi ?? double.NaN;
+        if (double.IsFinite(l) && double.IsFinite(h)) return $"{l.ToString("0.0", Es)}–{h.ToString("0.0", Es)} m/s";
+        if (double.IsFinite(l)) return $"≥ {l.ToString("0.0", Es)} m/s";
+        if (double.IsFinite(h)) return $"< {h.ToString("0.0", Es)} m/s";
+        return KbNoData;
+    }
+    private static string KbBandName(string code) => code switch { "B1_TRABAJO" => "B1 · trabajo", "B2_INTERMEDIA" => "B2 · intermedia", "B3_ALTA" => "B3 · alta", _ => code };
+
+    /// <summary>Filas compactas de «trabajo_pista.base_cientifica» y de la velocidad de los últimos 600 m de cada trabajo.
+    /// Solo valores del motor: null → «sin datos».</summary>
+    internal static void AddScientificBase(EquineAnalysis a, JsonElement tp)
+    {
+        var kb = Obj(tp, "base_cientifica");
+        if (kb.ValueKind != JsonValueKind.Object) return;
+        var rows = a.ScientificBase;
+        string origin = Str(kb, "v_carrera_origen") switch { "RAZA" => " · raza " + Str(Obj(tp, "perfil"), "raza"), "CABALLO" => " · del caballo", _ => "" };
+        rows.Add(new("Ritmo de carrera", Kb(Num(kb, "v_carrera_m_s"), "0.0", " m/s") + origin));
+        foreach (var b in Arr(kb, "bandas"))
+            rows.Add(new($"{KbBandName(Str(b, "banda"))} ({KbRange(Num(b, "v_min"), Num(b, "v_max"))})", Kb(Num(b, "distancia_m"), "0", " m")));
+        var vh = Obj(kb, "verheyen");
+        rows.Add(new($"Canter ({KbRange(Num(vh, "canter_v_min"), Num(vh, "corte_galope_m_s"))})", Kb(Num(vh, "canter_m"), "0", " m")));
+        rows.Add(new($"Galope rápido (> {Kb(Num(vh, "corte_galope_m_s"), "0.0", " m/s")})", Kb(Num(vh, "galope_rapido_m"), "0", " m")));
+        var fo = Obj(kb, "fatiga_osea");
+        rows.Add(new($"Fatiga ósea (≥ {Kb(Num(fo, "v_min_validada"), "0.00", " m/s")})", Kb(Num(fo, "pct"), "0.00", " %")));
+        rows.Add(new("Fatiga ósea extrapolada lenta", Kb(Num(fo, "pct_extrapolado_lento"), "0.00", " %")));
+        var efforts = Arr(Obj(tp, "trabajos"), "lista").Concat(Arr(Obj(tp, "recorrido"), "pasadas")).ToList();
+        if (efforts.Count == 0) rows.Add(new("Últimos 600 m", KbNoData + " (sin trabajos de galope)"));
+        foreach (var e in efforts)
+            rows.Add(new($"Últimos 600 m · {(Str(e, "tipo") == "PASADA" ? "Pasada" : "Trabajo")} {(int)(Num(e, "id") ?? 0)} ({Kb(Num(e, "distancia_m"), "0", " m")})",
+                Kb(Num(e, "v_ultimos_600m"), "0.00", " m/s")));
+        bool calibrated = fo.ValueKind == JsonValueKind.Object && fo.TryGetProperty("calibrado", out var cv) && cv.ValueKind == JsonValueKind.True;
+        a.ScientificBaseNote = "Fatiga ósea: índice relativo, no es una probabilidad de lesión."
+            + (calibrated ? "" : " Sin calibrar: fuera del PSI (árabes incluidos) se usan los parámetros de PSI.")
+            + " Orientativo: reglas de la literatura con umbrales de partida, sin validar con la cuadra.";
+    }
 
     public static EquineAnalysis Parse(string json)
     {
@@ -235,6 +280,7 @@ public sealed class EquineAnalysis
             a.SymmetryGroups.Add(new EngineSymmetryGroup((int)(Num(g, "imu") ?? 0), Str(g, "aire"), (int)(Num(g, "ventanas") ?? 0), (int)(Num(g, "trancos") ?? 0),
                 Num(la, "mediana"), Bool(la, "reproducible"), Num(ta, "mediana"), Bool(ta, "reproducible"), Num(hm, "mediana")));
         }
+        AddScientificBase(a, Obj(r, "trabajo_pista"));
         var se = Obj(r, "series");
         if (se.ValueKind == JsonValueKind.Object)
         {

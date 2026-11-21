@@ -24,6 +24,36 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-21 — iPad · Android · Windows — Pantalla «Base científica» (KB-1 del motor, paso 1 del informe de funciones)
+**Autor:** Claude (tarea programada, sin supervisión) · **Rama:** `claude/apps-base-cientifica` · **CI:** se ejecuta al
+integrar en `develop` (los workflows no corren en los PR)
+**Qué cambia:** las apps enseñan lo que la base científica KB-1 del motor ya calculaba (hasta hoy solo salía como texto
+en los motivos del estado del iPad). Solo lectura del JSON del motor; nada se calcula en las apps.
+- **iPad (`ipad/`):** tarjeta **«Base científica»** en *Trabajo en pista* de la sesión (`KbSessionCard`): metros por banda
+  B1/B2/B3 con sus límites en m/s y barra de reparto, canter y galope rápido (Verheyen 2006), fatiga ósea validada y
+  extrapolada lenta con «Índice relativo, no es una probabilidad de lesión» y «SIN CALIBRAR» fuera del PSI, y velocidad de
+  los últimos 600 m de cada trabajo y pasada. En la **historia del caballo** (`KbHistoryCard`, bajo el estado): ventanas de
+  7, 30, 30 anteriores y 60 días (B1/B2/B3, canter, galope rápido, fatiga ósea, sesiones), días sin trabajo rápido, vuelta
+  tras descanso, cociente de galope (60/90 d), días de galope en 60 d, ratio de fatiga ósea 7 d frente a la semana
+  habitual, **reglas activas** (A1–A8, A6B, A6C, FO 7 d) con nivel, acción AVISO/LIMITAR, texto y línea de evidencia, las
+  reglas sin aviso y las 12 últimas sesiones. Modelos en `Core/ScientificBase.swift`; vista `Views/ScientificBaseView.swift`.
+- **Android (`core/`, `app/`):** modelo `core/.../engine/ScientificBase.kt` (`KbSession`, `KbHistory`) y
+  `EquineResult.scientificBase`; tarjeta compacta «Base científica» al final de la pestaña **Motor** de la sesión.
+- **Windows (`windows/`):** filas `EquineAnalysis.ScientificBase` y tarjeta «Base científica (KB-1)» en **Motor AVO**.
+- Un campo `null` se muestra como «sin datos»; nunca valores inventados.
+- **Fixtures SINTÉTICAS nuevas** (motor 2.0.0-dev26, KB-1 1.24.0): `core/src/test/resources/equine/kb_psi_analysis.json`
+  y `kb_training_history_psi.json` (copias en `ipad/AVOiPadTests/Fixtures/`), generador `scripts/fixtures/gen_kb_fixtures.cpp`.
+  No entran en `check_fixtures.py` (no salen de un RAW): si cambia el formato de KB-1 hay que regenerarlas.
+- **Pruebas:** iPad `ScientificBaseTests` (4), Kotlin `ScientificBaseTest` (4; también sobre `synthetic_analysis.json` y
+  `sample_analysis.json`), Windows SelfTest (9 comprobaciones; el `.csproj` de SelfTest enlaza las dos fixtures).
+**No se ha tocado:** motor C++, contratos binarios, firmware, workflows, firmas, `Info.plist`, número de build ni
+números de versión de las apps.
+**Validación:** IMPLEMENTADO. Sin compilar en local (la nube no tiene Swift, ni acceso a Maven/Google para Gradle, ni
+.NET): **compila y prueba el CI al integrar**. Fixtures generadas y comprobadas con el motor en local (regeneración
+idéntica). **NO VERIFICADO** en iPad, teléfono ni PC.
+**Pendiente:** historia del caballo en Android y Windows (ninguna de las dos tiene todavía la vista de Training Analytics);
+ver la tarjeta en el iPad real con un entrenamiento PSI o árabe.
+
 ## 2026-11-21 — Espalda 3.15.0 · Pecho 3.7.11 · Android 2.16-fixdiag-dev1 — Diagnóstico de «no hay RTK FIX» (BackStatus v4)
 **Autor:** Claude (petición del usuario, 21/11 00:47: «añade todas las lecturas necesarias hasta en la apk hasta que
 consigamos averiguar por qué no llega fix; una vez solucionado simplificamos datos en el apk») · **Rama:**
