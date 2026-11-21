@@ -181,4 +181,32 @@ final class TrainingAnalyticsTests: XCTestCase {
         XCTAssertTrue(a.sesiones.isEmpty)
         XCTAssertNil(TrainingAnalysisResult(["formato": "otra"]))
     }
+
+    /// Ficha de campo (Training Analytics 1.1.0) and «carreras_previstas» in the history options.
+    func testFieldSheetAndPlannedRaces() throws {
+        let f = TrainingFieldSheet(tipo_sesion: "TRABAJO_REFERENCIA_1000", franja: "ORILLA_FIRME", going: "BUENO", marea_hora: "07:42",
+                                   marea_tipo: "BAJAMAR", temperatura_c: 14.5, humedad_pct: 82, peso_jinete_kg: 56, peso_caballo_kg: 478,
+                                   incidencia_tipo: "TROPIEZO", incidencia_texto: "en la transición")
+        let rating = TrainingRating(rpe: 6, pista: TrainingTrack(superficie: "playa", estado: nil), ficha: f)
+        let o: [String: Any] = TrainingAnalytics.extraObject(id: "F1", horse: "H0001", rider: "ANA", dateUtc: "2026-11-21T08:00:00Z", rating: rating)
+        XCTAssertEqual(o["tipo_sesion"] as? String, "TRABAJO_REFERENCIA_1000")
+        let pista = try XCTUnwrap(o["pista"] as? [String: Any])
+        XCTAssertEqual(pista["superficie"] as? String, "playa")
+        XCTAssertEqual(pista["franja"] as? String, "ORILLA_FIRME")
+        XCTAssertEqual((pista["marea"] as? [String: Any])?["hora"] as? String, "07:42")
+        XCTAssertEqual((o["pesos"] as? [String: Any])?["caballo_kg"] as? Double, 478)
+        XCTAssertTrue(TrainingFieldSheet().isEmpty)
+        XCTAssertFalse(TrainingRating(ficha: f).isEmpty)
+        // the options carry only valid, sorted and unique days
+        let opt: String = try XCTUnwrap(TrainingAnalytics.historyOptions(plannedRaces: ["2026-12-20", "mañana", "2026-12-06", "2026-12-20"]))
+        XCTAssertEqual(opt, #"{"carreras_previstas":["2026-12-06","2026-12-20"]}"#)
+        XCTAssertNil(TrainingAnalytics.historyOptions(plannedRaces: []))
+        guard EquineEngine.available else { return }
+        let analysis: String = #"{"formato":"avo-equine-analysis","sesion":{"id":"F1","caballo":"LUNA","inicio_utc":null},"rendimiento":{"segmentos":[]}}"#
+        let extra: String = TrainingAnalytics.extraJson(id: "F1", horse: "H0001", rider: "ANA", dateUtc: "2026-11-21T08:00:00Z", rating: rating)
+        let text: String = try EquineEngine.trainingSummary(analysisJson: analysis, extraJson: extra)
+        let v = try XCTUnwrap(AvoJSON.object(Data(text.utf8)))
+        XCTAssertEqual(v["tipo_sesion"] as? String, "TRABAJO_REFERENCIA_1000")
+        XCTAssertEqual((v["pista"] as? [String: Any])?["franja"] as? String, "ORILLA_FIRME")
+    }
 }

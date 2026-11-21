@@ -295,3 +295,107 @@ EQ_TEST(entreno, racing_metrics_history) {
   CHECK(back.race.present && back.race.impacts == 2 && std::fabs(back.race.sl_ref[0] - 5.9) < 1e-9 && back.race.breed == "PSI");
   CHECK(training_summary_to_json(back) == training_summary_to_json(bad));
 }
+
+// Ficha de campo (TRAINING 1.1.0): tipo de sesión, franja, marea, going, condiciones, pesos e incidencia.
+EQ_TEST(entreno, field_sheet_extra) {
+  const char* an = R"({"formato":"avo-equine-analysis","sesion":{"id":"F1","caballo":"LUNA","inicio_utc":"2026-11-21T08:00:00Z"},"rendimiento":{"segmentos":[]}})";
+  const char* extra = R"({"tipo_sesion":"trabajo_referencia_1000","pista":{"superficie":"PLAYA","franja":"ORILLA_FIRME","going":"BUENO",
+    "marea":{"hora":"07:42","tipo":"BAJAMAR"}},"condiciones":{"temperatura_c":14.5,"humedad_pct":82},
+    "pesos":{"jinete_kg":56,"caballo_kg":478},"incidencia":{"tipo":"TROPIEZO","texto":"tropieza en la transición"}})";
+  char* out = nullptr;
+  CHECK(avo_eq_training_summary(an, extra, &out) == 0 && out);
+  json::Value v; std::string err;
+  CHECK(out && json::parse(out, &v, &err));
+  CHECK(v["tipo_sesion"].str() == "TRABAJO_REFERENCIA_1000");
+  CHECK(v["pista"]["superficie"].str() == "PLAYA" && v["pista"]["franja"].str() == "ORILLA_FIRME" && v["pista"]["going"].str() == "BUENO");
+  CHECK(v["pista"]["marea"]["hora"].str() == "07:42" && v["pista"]["marea"]["tipo"].str() == "BAJAMAR");
+  CHECK_NEAR(v["condiciones"]["temperatura_c"].num(), 14.5, 1e-9);
+  CHECK_NEAR(v["condiciones"]["humedad_pct"].num(), 82, 1e-9);
+  CHECK_NEAR(v["pesos"]["jinete_kg"].num(), 56, 1e-9);
+  CHECK_NEAR(v["pesos"]["caballo_kg"].num(), 478, 1e-9);
+  CHECK(v["incidencia"]["tipo"].str() == "TROPIEZO" && v["incidencia"]["texto"].str() == "tropieza en la transición");
+  // ida y vuelta: el resumen leído y escrito de nuevo es idéntico
+  SessionSummary back;
+  CHECK(training_summary_from_json(v, &back, &err) && back.session_type == "TRABAJO_REFERENCIA_1000" && back.beach_band == "ORILLA_FIRME");
+  CHECK(training_summary_to_json(back) == std::string(out));
+  avo_eq_free(out);
+  // valores no válidos: se descartan con aviso, el resto se conserva
+  const char* bad = R"({"tipo_sesion":"PASEO","pista":{"franja":"ARENA","marea":{"hora":"25:10"}},"condiciones":{"temperatura_c":80,"humedad_pct":50},
+    "pesos":{"caballo_kg":40}})";
+  CHECK(avo_eq_training_summary(an, bad, &out) == 0 && out && json::parse(out, &v, &err));
+  CHECK(v["tipo_sesion"].str().empty() && v["pista"]["franja"].str().empty() && v["pista"]["marea"]["hora"].str().empty());
+  CHECK(v["condiciones"]["temperatura_c"].is_null() && v["condiciones"]["humedad_pct"].num() == 50 && v["pesos"]["caballo_kg"].is_null());
+  avo_eq_free(out);
+  // incidencias: COJERA sube a REVISAR, CAIDA a VIGILAR, el resto solo se anota
+  std::vector<SessionSummary> h;
+  for (int i = 0; i < 3; i++) h.push_back(make("I" + std::to_string(i), D0 + i, 15, 20, 5));
+  h[0].incident_type = "TROPIEZO"; h[1].incident_type = "CAIDA"; h[2].incident_type = "COJERA"; h[2].incident_text = "mano izquierda";
+  TrainingResult r = analyse_training(h, "", TrainingConfig());
+  CHECK(find(r, "I0")->level == "NORMAL" && contains(find(r, "I0")->reasons, "incidencia anotada: TROPIEZO"));
+  CHECK(find(r, "I1")->level == "VIGILAR");
+  CHECK(find(r, "I2")->level == "REVISAR" && contains(find(r, "I2")->reasons, "COJERA (mano izquierda)"));
+}
+
+// A4 y base del planificador en la historia: opción «carreras_previstas» y sesiones CARRERA/TRIAL.
+EQ_TEST(entreno, planned_races_a4_and_planner) {
+  // PSI con bloque de base científica: canter cada 2 días durante 60 días, galope rápido de 400 m solo el día 50
+  std::vector<SessionSummary> h;
+  for (int d = 0; d <= 58; d += 2) {
+    SessionSummary s = make("P" + std::to_string(d), D0 + d, 15, 10, 8);
+    s.race.present = true; s.race.breed = "PSI";
+    s.race.kb_band_m[0] = 1500; s.race.kb_band_m[1] = 0; s.race.kb_band_m[2] = d == 50 ? 400 : 0;
+    s.race.kb_canter_m = 1500; s.race.kb_gallop_m = d == 50 ? 400 : 0; s.race.kb_bone_pct = 0.3;
+    h.push_back(s);
+  }
+  TrainingConfig c;
+  json::Value opt; std::string err;
+  CHECK(json::parse("{\"carreras_previstas\":[\"" + training_day_text(D0 + 66) + "\",\"" + training_day_text(D0 + 75) + "\"]}", &opt, &err));
+  CHECK(training_config_from_json(opt, &c, &err) && c.kb.planned_race_days.size() == 2);
+  TrainingResult r = analyse_training(h, training_day_text(D0 + 58), c);
+  // carrera del día 66 vista el 58: faltan 8 días, 1 día rápido en [38, 58] → AVISO (INFO, no sube el estado)
+  bool a4 = false;
+  for (const auto& f : r.kb.flags) if (f.rule == "A4_CARGA_BAJA_PRECARRERA") a4 = f.level == "INFO";
+  CHECK(a4);
+  CHECK(r.planner.available && r.planner.next_race_day == D0 + 66 && r.planner.days_to_next_race == 8);
+  CHECK(r.planner.fast_days_before_race == 1 && r.planner.fast_needed == 1 && r.planner.days_since_fast == 8);
+  bool p1 = false, p3 = false;
+  for (const auto& n : r.planner.notes) { if (n.rule == "PLANIFICADOR_P1") p1 = true; if (n.rule == "PLANIFICADOR_P3") p3 = true; }
+  CHECK(p1);   // ningún rápido en los últimos 7 días con el caballo trabajando
+  CHECK(p3);   // 9 días entre las dos carreras previstas (< 14)
+  std::string js = training_to_json(r, c);
+  CHECK(js.find("\"planificador\":{\"disponible\":true,\"dias_rapidos_7d\":0") != std::string::npos);
+  CHECK(js.find("\"proxima_carrera\":{\"fecha\":\"" + training_day_text(D0 + 66) + "\",\"dias_hasta\":8,\"dias_rapidos_28d\":1,\"faltan_para_minimo\":1}") != std::string::npos);
+  // una sesión de tipo TRIAL el día 58 cuenta como carrera: A4 retrospectivo en esa sesión
+  std::vector<SessionSummary> h2 = h; h2.back().session_type = "TRIAL"; h2.back().race.kb_gallop_m = 1200; h2.back().race.kb_band_m[2] = 1200;
+  TrainingResult r2 = analyse_training(h2, "", TrainingConfig());
+  bool a4s = false;
+  for (const auto& f : r2.sessions.back().kb.flags) if (f.rule == "A4_CARGA_BAJA_PRECARRERA") a4s = true;
+  CHECK(a4s && r2.planner.days_since_last_race == 0);
+  // fecha prevista no válida: error de opciones
+  TrainingConfig c3;
+  CHECK(json::parse("{\"carreras_previstas\":[\"mañana\"]}", &opt, &err) && !training_config_from_json(opt, &c3, &err));
+  char* out = nullptr;
+  CHECK(avo_eq_training_analyse("{\"sesiones\":[]}", "{\"carreras_previstas\":\"2026-12-01\"}", nullptr, &out) == 5); avo_eq_free(out);
+}
+
+// PL1: con la franja anotada, A7/A8 solo comparan sesiones de la misma superficie y franja.
+EQ_TEST(entreno, beach_band_comparables) {
+  std::vector<SessionSummary> h;
+  for (int i = 0; i < 12; i++) {
+    SessionSummary s = make("B" + std::to_string(i), D0 + 2 * i, 15, 10, 8);
+    s.surface = "PLAYA"; s.race.present = true; s.race.breed = "PSI"; s.race.vedba_load_gmin = 20;
+    s.race.sl_ref[0] = 6.40; s.beach_band = i < 9 ? "ORILLA_FIRME" : "SECA_PROFUNDA";
+    if (i >= 9) s.race.sl_ref[0] = 6.20;   // arena seca profunda: zancada más corta, no es fatiga
+    h.push_back(s);
+  }
+  TrainingResult r = analyse_training(h, "", TrainingConfig());
+  bool a7 = false;
+  for (const auto& f : r.sessions.back().kb.flags) if (f.rule == "A7_CAIDA_ZANCADA") a7 = true;
+  CHECK(!a7);   // solo 3 sesiones en SECA_PROFUNDA: sin línea base comparable
+  // la misma caída sin franja anotada sí salta (se comparan con las de orilla)
+  for (auto& s : h) s.beach_band.clear();
+  TrainingResult r2 = analyse_training(h, "", TrainingConfig());
+  bool a7b = false;
+  for (const auto& f : r2.sessions.back().kb.flags) if (f.rule == "A7_CAIDA_ZANCADA") a7b = true;
+  CHECK(a7b);
+}

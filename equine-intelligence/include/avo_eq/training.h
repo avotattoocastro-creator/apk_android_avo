@@ -16,7 +16,7 @@
 
 namespace avoeq {
 
-static const char* const TRAINING_VERSION = "1.0.0";
+static const char* const TRAINING_VERSION = "1.1.0";   // 1.1.0: ficha de campo, A4 y base del planificador
 static const char* const TRAINING_LOAD_ALGORITHM = "AVO_TRAINING_LOAD_V1";
 
 // Aires que cuentan para la historia (los demás —transición, desconocido— solo suman tiempo).
@@ -92,6 +92,16 @@ struct SessionSummary {
   double rpe = NAN;                             // 1..10
   std::string state, note;                      // BIEN | CANSADO | RARO | COJERA | … texto libre
   std::string surface, track_state;             // pista
+  // Ficha de campo (TRAINING 1.1.0, todo opcional; la app la pasa en «extra»). Vacío / NaN = sin anotar.
+  std::string session_type;   // TRABAJO | TRABAJO_REFERENCIA_1000 | CARRERA | TRIAL | DESCANSO_ACTIVO
+  std::string beach_band;     // franja de playa: ORILLA_FIRME | HUMEDA_PROFUNDA | SECA_PROFUNDA | TRANSICION
+  std::string going;          // FIRME | BUENO_FIRME | BUENO | BUENO_BLANDO | BLANDO | PESADO
+  std::string tide_time;      // HH:MM (hora local) de la bajamar o pleamar de referencia
+  std::string tide_type;      // BAJAMAR | PLEAMAR
+  double temperature_c = NAN, humidity_pct = NAN;
+  double rider_kg = NAN, horse_kg = NAN;        // peso del jinete (con equipo) y peso corporal del caballo
+  std::string incident_type, incident_text;     // NINGUNA | TROPIEZO | CAIDA | ESPANTADA | COJERA | HERRAJE | EQUIPO | OTRA
+  bool counts_as_race() const { return session_type == "CARRERA" || session_type == "TRIAL"; }
   RaceSummary race;
   std::vector<std::string> warnings;
 };
@@ -99,6 +109,10 @@ struct SessionSummary {
 // Extrae el resumen de un JSON "avo-equine-analysis" (v1 o v2). false + *err si no es un análisis válido.
 bool training_summary_from_analysis(const json::Value& analysis, const TrainingConfig& c, SessionSummary* out, std::string* err);
 std::string training_summary_to_json(const SessionSummary& s);
+// Lee la ficha de campo de un objeto con la forma del resumen o de «extra» (tipo_sesion, pista.franja, pista.going,
+// pista.marea, condiciones, pesos, incidencia). Solo sobrescribe los campos presentes y válidos; los no válidos se
+// descartan con un aviso en s->warnings.
+void training_read_field_sheet(const json::Value& x, SessionSummary* s);
 bool training_summary_from_json(const json::Value& v, SessionSummary* out, std::string* err);
 
 struct Deviation {
@@ -135,6 +149,22 @@ struct Trend {
   std::string direction;       // SUBE | BAJA | ESTABLE | SIN_DATOS
 };
 
+// Base del planificador semanal (TRAINING 1.1.0): pautas informativas P1, P3, RT1 y RT3 de la base científica y el
+// margen hasta la próxima carrera prevista (A4). Nunca sube el estado; no es un plan automático.
+struct PlannerNote { std::string rule, text, evidence; };
+struct PlannerStatus {
+  bool available = false;              // hay sesiones con el bloque de carga de la base científica
+  int fast_days_7d = 0;                // días con sesión rápida en los últimos 7 días
+  int days_since_fast = -1;            // -1: ninguna
+  int days_between_last_fast = -1;     // separación entre los dos últimos días rápidos (-1: menos de dos)
+  long next_race_day = -1;             // próxima carrera prevista (≥ referencia), -1 si no hay
+  int days_to_next_race = -1;
+  int fast_days_before_race = 0;       // días rápidos ya hechos en los 28 d previos a esa carrera
+  int fast_needed = 0;                 // los que faltan para el mínimo de A4
+  int days_since_last_race = -1;       // última sesión CARRERA o TRIAL
+  std::vector<PlannerNote> notes;
+};
+
 struct TrainingResult {
   std::string horse, reference_date;
   long reference_day = 0;
@@ -145,6 +175,7 @@ struct TrainingResult {
   std::vector<Deviation> baselines;                 // línea base actual por métrica (value = NaN)
   std::vector<Trend> trends;
   KbStatus kb;                                      // base científica a la fecha de referencia
+  PlannerStatus planner;                            // base del planificador semanal a la fecha de referencia
   std::string level = "NORMAL";
   std::vector<std::string> reasons, warnings;
 };

@@ -312,7 +312,7 @@ EQ_TEST(kb, final_speed_last_600m) {
   double keep = -1;
   CHECK(!kb_final_speed(t, d, 600, &keep, nullptr)); CHECK_NEAR(keep, -1, 0);
   CHECK(!kb_final_speed({}, {}, 600, &keep, nullptr));
-  CHECK(std::string(KNOWLEDGE_VERSION) == "1.24.0");
+  CHECK(std::string(KNOWLEDGE_VERSION) == "1.25.0");
 }
 
 // Líneas base (KB 1.3.0, estudio extra 2026-11-19): valores de referencia del estudio ampliado del 18/11 y de la cadena
@@ -487,4 +487,49 @@ EQ_TEST(kb, drift_rules_in_training) {
   CHECK_NEAR(c3.kb.stride_drop_m, 0.3, 1e-12); CHECK_NEAR(c3.kb.drift_h, 8, 1e-12);
   const KbFlag* a7b = flag(analyse_training(ss, "", c3).sessions.back().kb, "A7_CAIDA_ZANCADA");
   CHECK(a7b == nullptr || a7b->text.find("CUSUM") != std::string::npos);   // 0,22 m < 0,3 m: solo puede saltar el CUSUM
+}
+
+// A4 (KB 1.25.0): Morrice-West 2025, carga muy baja antes de correr, HR 2,89 [E]; corte < 2 días rápidos en 28 d [I].
+EQ_TEST(kb, rule_low_load_before_race) {
+  KbRuleConfig c;
+  CHECK(c.prerace_days == 28 && c.prerace_min_fast_days == 2 && c.prerace_warn_days == 14);
+  std::vector<KbDay> h;
+  // canter cada 2 días desde el día 0 hasta el 98; galope rápido (400 m) solo el día 80
+  for (long d = 0; d <= 98; d += 2) h.push_back(day_with(d, 1500, d == 80 ? 400 : 0, 0.3));
+  // 1) carrera prevista el día 100, evaluada el 90 (faltan 10 ≤ 14): 1 día rápido en [72, 90] → AVISO
+  c.planned_race_days = {100};
+  KbStatus s = kb_evaluate(h, 90, 0, c);
+  const KbFlag* f = flag(s, "A4_CARGA_BAJA_PRECARRERA");
+  CHECK(f && f->level == "INFO" && f->action == "AVISO");
+  CHECK(f && f->evidence.find("2,89") != std::string::npos && f->evidence.find("[I]") != std::string::npos);
+  CHECK(s.races.size() == 1 && s.races[0].planned && s.races[0].days_to == 10 && s.races[0].fast_days == 1 && s.races[0].covered);
+  std::string js = kb_status_json(s);
+  CHECK(js.find("\"carreras\":[{\"fecha\":\"1970-04-11\",\"origen\":\"PREVISTA\",\"dias_hasta\":10,\"dias_rapidos_28d\":1") != std::string::npos);
+  // 2) misma carrera vista el día 80 (faltan 20 > 14): se informa en «carreras», sin aviso todavía
+  KbStatus early = kb_evaluate(h, 80, 0, c);
+  CHECK(flag(early, "A4_CARGA_BAJA_PRECARRERA") == nullptr && early.races.size() == 1 && !early.races[0].flagged);
+  // 3) con un segundo día rápido (día 90) ya se llega al mínimo
+  std::vector<KbDay> h2 = h; h2[45].gallop_m = 400;   // día 90
+  CHECK(flag(kb_evaluate(h2, 90, 0, c), "A4_CARGA_BAJA_PRECARRERA") == nullptr);
+  // 4) carrera fuera del horizonte (día 130) o ya pasada (día 85): no se evalúa
+  c.planned_race_days = {130};
+  CHECK(kb_evaluate(h, 90, 0, c).races.empty());
+  c.planned_race_days = {85};
+  CHECK(kb_evaluate(h, 90, 0, c).races.empty());
+  // 5) historia que no cubre la ventana (empieza el día 80): no se juzga
+  c.planned_race_days = {100};
+  KbStatus nc = kb_evaluate(h, 90, 80, c);
+  CHECK(nc.races.size() == 1 && !nc.races[0].covered && flag(nc, "A4_CARGA_BAJA_PRECARRERA") == nullptr);
+  // 6) sesión de tipo CARRERA el día 98 sin fecha prevista: se juzga ese día con [70, 97] → 1 día rápido → AVISO
+  KbRuleConfig c2;
+  std::vector<KbDay> h3 = h; h3.back().race = true; h3.back().gallop_m = 1600;   // la carrera no cuenta para su propia ventana
+  KbStatus sr = kb_evaluate(h3, 98, 0, c2);
+  CHECK(sr.races.size() == 1 && !sr.races[0].planned && sr.races[0].days_to == 0 && sr.races[0].fast_days == 1);
+  const KbFlag* fr = flag(sr, "A4_CARGA_BAJA_PRECARRERA");
+  CHECK(fr && fr->text.find("carrera de hoy") != std::string::npos);
+  // prevista y corrida el mismo día: una sola comprobación, origen SESION
+  c2.planned_race_days = {98};
+  KbStatus both = kb_evaluate(h3, 98, 0, c2);
+  CHECK(both.races.size() == 1 && !both.races[0].planned);
+  CHECK(kb_day_text(0) == "1970-01-01" && kb_day_text(20500) == "2026-02-16" && kb_day_text(19782) == "2024-02-29");
 }

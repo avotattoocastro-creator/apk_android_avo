@@ -20,7 +20,7 @@
 
 namespace avoeq {
 
-static const char* const KNOWLEDGE_VERSION = "1.24.0";
+static const char* const KNOWLEDGE_VERSION = "1.25.0";
 static const char* const KNOWLEDGE_ID = "AVO_KB_1";
 static const char* const BONE_MODEL_ALGORITHM = "SBFL_MORRICE_WEST_2022";
 
@@ -95,10 +95,18 @@ struct KbRuleConfig {
   int drift_min_baseline = 5;          // sesiones comparables mínimas antes de las 3 últimas [I]
   int drift_warmup = 8;                // CUSUM autoiniciado: sin alarmas antes de la 9.ª sesión comparable [I]
   double drift_h = 5.0;                // h = 5 (muchas cartas a la vez) [I]
+  // A4 carga baja antes de una carrera (KB 1.25.0): Morrice-West 2025 [E], «baja» allí es fatiga ósea acumulada < 0,25
+  // en las 4 salidas previas; el corte en sesiones es [I]. Carreras = fechas previstas (opción «carreras_previstas»)
+  // y sesiones de tipo CARRERA o TRIAL.
+  std::vector<long> planned_race_days;
+  int prerace_days = 28;               // ventana previa a la carrera [I]
+  int prerace_min_fast_days = 2;       // < 2 días con sesión rápida: AVISO [I]
+  int prerace_warn_days = 14;          // aviso anticipado cuando faltan ≤ 14 días y aún no se llega al mínimo [I]
 };
 
 struct KbDay {
   long day = 0;
+  bool race = false;                   // sesión de tipo CARRERA o TRIAL (A4)
   double band_m[KB_BANDS] = {NAN, NAN, NAN};
   double canter_m = NAN, gallop_m = NAN, bone_pct = NAN;
 };
@@ -109,8 +117,19 @@ struct KbWindow {
   double canter_m = 0, gallop_m = 0, bone_pct = 0;
   int sessions = 0, missing = 0;
 };
+// A4: una carrera (prevista o sesión CARRERA/TRIAL) dentro del horizonte de la fecha evaluada.
+struct KbRaceCheck {
+  long day = 0;
+  bool planned = false;                // true: fecha prevista; false: sesión de tipo CARRERA o TRIAL
+  int days_to = 0;                     // días desde la fecha evaluada hasta la carrera (0 = ese día)
+  int fast_days = 0;                   // días con sesión rápida en [carrera − 28, carrera − 1] hasta la fecha evaluada
+  int missing = 0;                     // sesiones de esa ventana sin bloque de carga
+  bool covered = false;                // la historia cubre la ventana (si no, no se juzga)
+  bool flagged = false;
+};
 struct KbStatus {
   bool available = false;
+  std::vector<KbRaceCheck> races;      // A4
   KbWindow w7, w30, prev30, w60;
   double bone_weekly_median = NAN, bone_ratio = NAN;
   int days_since_gallop = -1;          // días desde la última sesión rápida (-1: ninguna)
@@ -127,6 +146,7 @@ struct KbStatus {
 // first_day: primer día de la historia del caballo (para saber si las ventanas están cubiertas).
 KbStatus kb_evaluate(const std::vector<KbDay>& sessions, long at_day, long first_day, const KbRuleConfig& c);
 std::string kb_status_json(const KbStatus& s);
+std::string kb_day_text(long day);   // días desde 1970-01-01 -> AAAA-MM-DD
 
 // ------------------------------------------------------------------ líneas base (KB 1.3.0, estudio extra 2026-11-19)
 // Herramientas estadísticas para comparar a cada caballo consigo mismo. Matemática cerrada [E]; su uso en caballos y

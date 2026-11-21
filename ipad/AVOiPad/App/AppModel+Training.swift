@@ -45,6 +45,35 @@ extension AppModel {
         return nil
     }
 
+    // ------------------------------------------------------------------ planned races (A4, weekly planner)
+    var plannedRacesFile: String { AvoFiles.join(paths.root, "carreras_previstas.json") }
+
+    private var allPlannedRaces: [String: [String]] {
+        if let r = shellState.plannedRaces { return r }
+        let r: [String: [String]] = PlannedRacesStore.load(plannedRacesFile)
+        shellState.plannedRaces = r
+        return r
+    }
+
+    /// Planned race days ("AAAA-MM-DD", sorted) of a horse of the Cuadra (key = record code).
+    func plannedRaces(for key: String) -> [String] { allPlannedRaces[key] ?? [] }
+
+    /// Replaces the planned races of a horse. Returns an error text, nil when saved.
+    func savePlannedRaces(_ key: String, _ days: [String]) -> String? {
+        var all: [String: [String]] = allPlannedRaces
+        let clean: [String] = Array(Set(days.filter { (d: String) -> Bool in TrainingAnalytics.day(d) != nil })).sorted()
+        if clean.isEmpty { all.removeValue(forKey: key) } else { all[key] = clean }
+        shellState.plannedRaces = all
+        do {
+            try PlannedRacesStore.save(all, to: plannedRacesFile)
+        } catch {
+            log.warn("carreras previstas", error.localizedDescription, error)
+            return error.localizedDescription
+        }
+        log.info("carreras previstas", "Carreras previstas guardadas", ["caballo": key, "n": String(clean.count)])
+        return nil
+    }
+
     // ------------------------------------------------------------------ per-session summary
     /// Stable identity of the horse of a session: the Cuadra record code if known, otherwise the name.
     func horseKey(_ s: SessionItem) -> String {
@@ -153,7 +182,8 @@ extension AppModel {
             () -> (json: String, used: Int, missing: [String]) in
             TrainingAnalytics.historyInput(horse: horse, reference: reference, entries: entries)
         }.value
-        let json: String = try await EquineEngine.trainingAnalyse(inputJson: input.json, optionsJson: nil)
+        let options: String? = TrainingAnalytics.historyOptions(plannedRaces: plannedRaces(for: key))
+        let json: String = try await EquineEngine.trainingAnalyse(inputJson: input.json, optionsJson: options)
         let result: TrainingAnalysisResult = try await Task.detached(priority: .userInitiated) { () -> TrainingAnalysisResult in
             try TrainingAnalysisResult.parse(json)
         }.value

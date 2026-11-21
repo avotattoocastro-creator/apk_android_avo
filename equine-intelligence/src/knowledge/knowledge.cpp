@@ -90,6 +90,17 @@ void KbSessionLoad::add(double dt_s, double dd_m, double v, const SpeedBandConfi
 }
 
 // ------------------------------------------------------------------ historia
+// Días desde 1970-01-01 -> AAAA-MM-DD (algoritmo civil de H. Hinnant).
+std::string kb_day_text(long z) {
+  z += 719468;
+  long era = (z >= 0 ? z : z - 146096) / 146097;
+  long doe = z - era * 146097, yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;
+  long y = yoe + era * 400, doy = doe - (365 * yoe + yoe / 4 - yoe / 100), mp = (5 * doy + 2) / 153;
+  long d = doy - (153 * mp + 2) / 5 + 1, m = mp < 10 ? mp + 3 : mp - 9;
+  char b[48]; snprintf(b, sizeof(b), "%04ld-%02ld-%02ld", y + (m <= 2), m, d);
+  return b;
+}
+
 KbStatus kb_evaluate(const std::vector<KbDay>& sessions, long at_day, long first_day, const KbRuleConfig& c) {
   KbStatus st;
   auto in = [](long d, long from, long to) { return d >= from && d <= to; };
@@ -190,6 +201,48 @@ KbStatus kb_evaluate(const std::vector<KbDay>& sessions, long at_day, long first
                           "Choi & Parkin 2025 (Seúl, 101 casos): (días de galope 60 d / 90 d) + 1 ≤ 1,6, OR 2,19 (IC 95 % 1,23–3,91) de "
                           "tendinopatía del TFDS [E]; día de galope = sesión rápida del motor y vigencia de 30 días [I]"});
     }
+    // A4 carga baja antes de una carrera (KB 1.25.0): Morrice-West 2025 (Tasmania), carga muy baja antes de correr,
+    // HR 2,89 frente a carga media [E]; allí «baja» = fatiga ósea acumulada < 0,25 en las 4 salidas previas. Aquí se
+    // aproxima con días de sesión rápida en los 28 d previos (< 2) [I]. Se juzga el día de la carrera (sesión CARRERA o
+    // TRIAL, o fecha prevista) y, por adelantado, cuando faltan ≤ prerace_warn_days y aún no se llega al mínimo [I].
+    {
+      std::vector<std::pair<long, bool>> races;   // día, prevista
+      for (long d : c.planned_race_days) races.push_back({d, true});
+      for (const auto& s : sessions) {
+        if (s.day > at_day) break;
+        if (s.race) races.push_back({s.day, false});
+      }
+      std::sort(races.begin(), races.end());
+      long prev = -1;
+      for (const auto& rc : races) {
+        long R = rc.first;
+        if (R == prev) continue;   // misma fecha prevista y corrida: una sola comprobación (gana la sesión, que va después)
+        prev = R;
+        if (R < at_day || R > at_day + c.prerace_days) continue;
+        KbRaceCheck k; k.day = R; k.days_to = (int)(R - at_day);
+        k.planned = true;
+        for (const auto& o : races) if (o.first == R && !o.second) k.planned = false;
+        long from = R - c.prerace_days, to = std::min(R - 1, at_day);
+        k.covered = first_day <= from;
+        for (long d : gallop_days) if (in(d, from, to)) k.fast_days++;
+        for (const auto& s : sessions) { if (s.day > to) break; if (in(s.day, from, to) && !has_kb(s)) k.missing++; }
+        bool due = k.days_to == 0 || k.days_to <= c.prerace_warn_days;
+        if (k.covered && due && k.fast_days < c.prerace_min_fast_days) {
+          k.flagged = true;
+          if (k.days_to == 0)
+            snprintf(b, sizeof(b), "carrera %s con %d días de trabajo rápido en los %d días previos (mínimo %d): carga baja antes de correr",
+                     k.planned ? "prevista hoy" : "de hoy", k.fast_days, c.prerace_days, c.prerace_min_fast_days);
+          else
+            snprintf(b, sizeof(b), "carrera prevista en %d días con %d días de trabajo rápido en su ventana de %d días (mínimo %d): "
+                     "planificar el trabajo rápido que falta sin juntarlo (≥ 72 h entre rápidos)",
+                     k.days_to, k.fast_days, c.prerace_days, c.prerace_min_fast_days);
+          st.flags.push_back({"A4_CARGA_BAJA_PRECARRERA", "INFO", "AVISO", b,
+                              "Morrice-West 2025 (Tasmania): carga muy baja antes de correr, HR 2,89 frente a carga media [E]; allí "
+                              "«baja» es fatiga ósea < 0,25 en las 4 salidas previas; el corte de 2 días rápidos en 28 d es [I]"});
+        }
+        st.races.push_back(k);
+      }
+    }
     // Informativo: ningún trabajo rápido en 30 días con canter
     if (first_day <= at_day - 29 && st.w30.gallop_m < c.gallop_session_min_m && st.w30.canter_m > 0)
       st.flags.push_back({"KB_SIN_RAPIDO_30D", "INFO", "AVISO", "sin trabajo rápido en 30 días: el hueso pierde estímulo; al volver, subirlo poco a poco",
@@ -234,6 +287,16 @@ std::string kb_status_json(const KbStatus& s) {
       << ",\"dias_galope_60d\":" << s.gallop_days_60d << ",\"cociente_galope\":";
     if (std::isnan(s.gallop_ratio)) o << "null";
     else o << "{\"valor\":" << num(s.gallop_ratio) << ",\"dias_galope_60d\":" << s.gallop_days_60_last << ",\"dias_galope_90d\":" << s.gallop_days_90_last << "}";
+    if (!s.races.empty()) {
+      o << ",\"carreras\":[";
+      for (size_t i = 0; i < s.races.size(); i++) {
+        const KbRaceCheck& k = s.races[i];
+        o << (i ? "," : "") << "{\"fecha\":\"" << kb_day_text(k.day) << "\",\"origen\":\"" << (k.planned ? "PREVISTA" : "SESION")
+          << "\",\"dias_hasta\":" << k.days_to << ",\"dias_rapidos_28d\":" << k.fast_days << ",\"sesiones_sin_datos\":" << k.missing
+          << ",\"ventana_cubierta\":" << (k.covered ? "true" : "false") << ",\"aviso\":" << (k.flagged ? "true" : "false") << "}";
+      }
+      o << "]";
+    }
     o << ",\"vuelta_descanso\":";
     if (s.return_day < 0) o << "null";
     else o << "{\"dia\":" << s.return_day << ",\"dias_sin_rapido_antes\":" << s.return_rest << "}";

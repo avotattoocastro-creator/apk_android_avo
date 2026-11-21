@@ -1,4 +1,4 @@
-# 14 · Base científica de la cuadra (KB-1) 1.12.0
+# 14 · Base científica de la cuadra (KB-1) 1.25.0
 
 Código: `include/avo_eq/knowledge.h`, `src/knowledge/knowledge.cpp`. Se calcula en Track Work (`src/racing/racing.cpp`,
 bloque `trabajo_pista.base_cientifica`) y se evalúa en Training Analytics (`src/training/training.cpp`, bloques
@@ -61,6 +61,7 @@ El corte de 14 m/s es de Verheyen 2006 en PSI [E]; su escalado al árabe es [I].
 | A5_VUELTA_DESCANSO | primera sesión rápida tras ≥ 60 d sin ella: 21 d vigilados | LIMITAR | Carrier 1998, RR 71 a 10 d [E] |
 | A6_VUELTA_TENDON | igual tras ≥ 90 d: sugiere ecografía del TFDS | LIMITAR | Choi & Parkin 2025, OR 3,10 [E] |
 | A6B_POCO_GALOPE_60D | ≤ 2 días con sesión rápida en los 60 d previos, con sesiones en los últimos 7 d (60 d de historia) | AVISO (INFO) | Choi & Parkin 2025, OR 1,84 (1,07–3,16) de TFDS [E]; día de galope = sesión rápida [I] |
+| A4_CARGA_BAJA_PRECARRERA (KB 1.25.0) | < 2 días con sesión rápida en los 28 d previos a una carrera (fecha de `carreras_previstas` o sesión de tipo CARRERA/TRIAL); se juzga el día de la carrera y, por adelantado, cuando faltan ≤ 14 d | AVISO (INFO) | Morrice-West 2025 (Tasmania), carga muy baja antes de correr, HR 2,89 frente a carga media [E]; allí «baja» = fatiga ósea < 0,25 en las 4 salidas previas, así que el corte en sesiones y el aviso a 14 d son [I] |
 | KB_FATIGA_OSEA_7D | fatiga ósea 7 d > 1,5 × mediana semanal propia (≥ 4 semanas) | AVISO | Morrice-West 2025, Hong Kong [E]; umbral [I] |
 | KB_SIN_RAPIDO_30D | canter sin trabajo rápido en 30 d | AVISO (INFO) | Morrice-West 2025 [E]; aplicación [I] |
 
@@ -70,6 +71,12 @@ Sesión rápida = al menos 100 m de galope rápido. Las reglas VIGILAR suben el 
 Opciones de Training Analytics (`base_cientifica`: `true`/`false` u objeto): `activa`, `canter_30d_aviso_km`,
 `canter_30d_limite_km`, `galope_30d_limite_km`, `rampa_ratio`, `rampa_min_m`, `galope_sesion_min_m`,
 `fatiga_osea_ratio`, `dias_descanso_vuelta`, `dias_ventana_vuelta`, `dias_descanso_tendon`, `semanas_min_fatiga_osea`, `dias_galope_60d_max` (0–24, por defecto 2).
+A4 (KB 1.25.0): `carreras_previstas` (lista de `AAAA-MM-DD`, en la raíz de las opciones) y, dentro de
+`base_cientifica`, `dias_precarrera` (7–90, 28), `min_dias_rapidos_precarrera` (1–20, 2) y `dias_aviso_precarrera`
+(0–90, 14). Cada comprobación sale en `base_cientifica.carreras[]` (`fecha`, `origen` PREVISTA|SESION, `dias_hasta`,
+`dias_rapidos_28d`, `sesiones_sin_datos`, `ventana_cubierta`, `aviso`). Sin la historia de los 28 días previos no se
+juzga. El día de la carrera no cuenta para su propia ventana. Fecha prevista y sesión CARRERA el mismo día: una sola
+comprobación (origen SESION).
 Opciones del análisis de sesión: `v_carrera_m_s` (8–20), `sigma_max_mpa` (30–120), `sigma0_mpa` (100–180).
 
 Los análisis anteriores sin el bloque cuentan como «sesiones sin datos» y no se juzgan.
@@ -273,6 +280,18 @@ Detalle: `knowledge/estudios/2026-11-20_1709_exactitud_gnss_mano_de_galope.md`.
   (Mukai 2010 en PSI [E-r]); su efecto en la V200 de campo no está publicado [NV]; la vuelta a la calma activa aclara antes
   el lactato con FC más alta. Propuesta WU1–WU4 [I] para A9 y CF2.
 Detalle: `knowledge/estudios/2026-11-20_2108_going_terreno_calentamiento_vuelta_calma.md`.
+
+**Ficha de campo, A4 y base del planificador (KB-1 1.25.0, motor 2.0.0-dev27, TRAINING 1.1.0; cambio de lógica).**
+- **A4_CARGA_BAJA_PRECARRERA → IMPLEMENTADO** como AVISO informativo (tabla de la sección 3); no sube el estado.
+- **PL1 parcial:** con la franja de playa anotada (`pista.franja`), A7 y A8 solo comparan sesiones de la misma
+  superficie **y** franja. Sin franja se comporta como antes. PL2–PL6 siguen pendientes (lluvia, TDR, penetrómetro).
+- **Base del planificador (P1, P3, RT1, RT3, A4):** `estado.planificador` de la historia da los días rápidos de 7 d,
+  los días desde el último y entre los dos últimos, la próxima carrera prevista con los días rápidos que faltan y las
+  pautas: P1 (0 o > 3 días rápidos en una semana activa), RT1 (< 72 h entre rápidos), P3/RT3 (< 14 d entre carreras).
+  Son pautas informativas [I]; P2, P4–P6 y DM1–DM4 siguen pendientes (capa 2).
+- La ficha (tipo de sesión, going, marea, temperatura, humedad y pesos) se guarda en el resumen para calibrar GO1, PE1–PE3,
+  TC/PC y RB1 con los datos de campo del PROTOTIPO (`docs/PROTOCOLO_PRUEBAS_CAMPO_PROTOTIPO.md`); todavía no cambia
+  ninguna regla.
 
 **Estudio horario 20/11 22:09 (KB-1 1.24.0, motor 2.0.0-dev26, sin cambios de lógica).**
 - **Lesiones de árabes de llano (Turquía):** en la serie del hospital de Şirinyer el tendón es el 63,7 % de las 216

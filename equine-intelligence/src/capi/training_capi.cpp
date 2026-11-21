@@ -43,6 +43,7 @@ void apply_extra(const avoeq::json::Value& x, avoeq::SessionSummary* s) {
   if (!v["nota"].str().empty()) s->note = v["nota"].str();
   if (!x["pista"]["superficie"].str().empty()) s->surface = x["pista"]["superficie"].str();
   if (!x["pista"]["estado"].str().empty()) s->track_state = x["pista"]["estado"].str();
+  avoeq::training_read_field_sheet(x, s);   // ficha de campo (TRAINING 1.1.0)
 }
 
 }  // namespace

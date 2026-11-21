@@ -15,27 +15,106 @@ struct TrainingTrack: Codable, Equatable {
     var isEmpty: Bool { (superficie ?? "").trimmed.isEmpty && (estado ?? "").trimmed.isEmpty }
 }
 
-/// Trainer's rating of one session (same keys as the engine: rpe 1–10, estado BIEN|CANSADO|RARO|COJERA, nota, pista).
+/// Ficha de campo of one session (Training Analytics 1.1.0, docs/PROTOCOLO_PRUEBAS_CAMPO_PROTOTIPO.md). Every field is
+/// optional; the engine validates the codes and ignores (with a warning) any value it does not know.
+struct TrainingFieldSheet: Codable, Equatable {
+    var tipo_sesion: String?
+    var franja: String?
+    var going: String?
+    var marea_hora: String?
+    var marea_tipo: String?
+    var temperatura_c: Double?
+    var humedad_pct: Double?
+    var peso_jinete_kg: Double?
+    var peso_caballo_kg: Double?
+    var incidencia_tipo: String?
+    var incidencia_texto: String?
+
+    static let sessionTypes: [String] = ["TRABAJO", "TRABAJO_REFERENCIA_1000", "CARRERA", "TRIAL", "DESCANSO_ACTIVO"]
+    static let beachBands: [String] = ["ORILLA_FIRME", "HUMEDA_PROFUNDA", "SECA_PROFUNDA", "TRANSICION"]
+    static let goings: [String] = ["FIRME", "BUENO_FIRME", "BUENO", "BUENO_BLANDO", "BLANDO", "PESADO"]
+    static let tideTypes: [String] = ["BAJAMAR", "PLEAMAR"]
+    static let incidentTypes: [String] = ["NINGUNA", "TROPIEZO", "CAIDA", "ESPANTADA", "COJERA", "HERRAJE", "EQUIPO", "OTRA"]
+
+    /// Text shown in the pickers for an engine code.
+    static func label(_ code: String) -> String {
+        switch code {
+        case "TRABAJO_REFERENCIA_1000": return "Referencia 1.000 m"
+        case "DESCANSO_ACTIVO": return "Descanso activo"
+        case "ORILLA_FIRME": return "Orilla firme"
+        case "HUMEDA_PROFUNDA": return "Húmeda profunda"
+        case "SECA_PROFUNDA": return "Seca profunda"
+        case "TRANSICION": return "Transición"
+        case "BUENO_FIRME": return "Bueno-firme"
+        case "BUENO_BLANDO": return "Bueno-blando"
+        case "CAIDA": return "Caída"
+        default: return String(code.prefix(1)) + code.dropFirst().lowercased()
+        }
+    }
+
+    private static func text(_ s: String?) -> String? {
+        guard let t = s?.trimmed, !t.isEmpty else { return nil }
+        return t
+    }
+
+    var isEmpty: Bool {
+        TrainingFieldSheet.text(tipo_sesion) == nil && TrainingFieldSheet.text(franja) == nil && TrainingFieldSheet.text(going) == nil
+            && TrainingFieldSheet.text(marea_hora) == nil && TrainingFieldSheet.text(marea_tipo) == nil && temperatura_c == nil
+            && humedad_pct == nil && peso_jinete_kg == nil && peso_caballo_kg == nil && TrainingFieldSheet.text(incidencia_tipo) == nil
+            && TrainingFieldSheet.text(incidencia_texto) == nil
+    }
+
+    /// Adds the sheet to an engine «extra» object: tipo_sesion, pista.{franja, going, marea}, condiciones, pesos, incidencia.
+    func merge(into o: inout [String: Any]) {
+        if let t = TrainingFieldSheet.text(tipo_sesion) { o["tipo_sesion"] = t }
+        var pista: [String: Any] = (o["pista"] as? [String: Any]) ?? [:]
+        if let f = TrainingFieldSheet.text(franja) { pista["franja"] = f }
+        if let g = TrainingFieldSheet.text(going) { pista["going"] = g }
+        var marea: [String: Any] = [:]
+        if let h = TrainingFieldSheet.text(marea_hora) { marea["hora"] = h }
+        if let t = TrainingFieldSheet.text(marea_tipo) { marea["tipo"] = t }
+        if !marea.isEmpty { pista["marea"] = marea }
+        if !pista.isEmpty { o["pista"] = pista }
+        var cond: [String: Any] = [:]
+        if let t = temperatura_c, t.isFinite { cond["temperatura_c"] = t }
+        if let h = humedad_pct, h.isFinite { cond["humedad_pct"] = h }
+        if !cond.isEmpty { o["condiciones"] = cond }
+        var pesos: [String: Any] = [:]
+        if let j = peso_jinete_kg, j.isFinite { pesos["jinete_kg"] = j }
+        if let c = peso_caballo_kg, c.isFinite { pesos["caballo_kg"] = c }
+        if !pesos.isEmpty { o["pesos"] = pesos }
+        var inc: [String: Any] = [:]
+        if let t = TrainingFieldSheet.text(incidencia_tipo) { inc["tipo"] = t }
+        if let t = TrainingFieldSheet.text(incidencia_texto) { inc["texto"] = t }
+        if !inc.isEmpty { o["incidencia"] = inc }
+    }
+}
+
+/// Trainer's rating of one session (same keys as the engine: rpe 1–10, estado BIEN|CANSADO|RARO|COJERA, nota, pista)
+/// plus the ficha de campo (Training Analytics 1.1.0).
 struct TrainingRating: Codable, Equatable {
     var rpe: Int?
     var estado: String?
     var nota: String?
     var pista: TrainingTrack?
+    var ficha: TrainingFieldSheet?
     var actualizado_utc: String?
 
     enum CodingKeys: String, CodingKey {
-        case rpe, estado, nota, pista, actualizado_utc
+        case rpe, estado, nota, pista, ficha, actualizado_utc
     }
 
     static let states: [String] = ["BIEN", "CANSADO", "RARO", "COJERA"]
     static let surfaces: [String] = ["arena", "hierba", "playa", "pista fibra", "tierra", "arena mojada"]
     static let trackStates: [String] = ["blanda", "buena", "dura"]
 
-    init(rpe: Int? = nil, estado: String? = nil, nota: String? = nil, pista: TrainingTrack? = nil, actualizado_utc: String? = nil) {
+    init(rpe: Int? = nil, estado: String? = nil, nota: String? = nil, pista: TrainingTrack? = nil, ficha: TrainingFieldSheet? = nil,
+         actualizado_utc: String? = nil) {
         self.rpe = rpe
         self.estado = estado
         self.nota = nota
         self.pista = pista
+        self.ficha = ficha
         self.actualizado_utc = actualizado_utc
     }
 
@@ -48,11 +127,13 @@ struct TrainingRating: Codable, Equatable {
         estado = (try? c.decodeIfPresent(String.self, forKey: .estado)) ?? nil
         nota = (try? c.decodeIfPresent(String.self, forKey: .nota)) ?? nil
         pista = (try? c.decodeIfPresent(TrainingTrack.self, forKey: .pista)) ?? nil
+        ficha = (try? c.decodeIfPresent(TrainingFieldSheet.self, forKey: .ficha)) ?? nil
         actualizado_utc = (try? c.decodeIfPresent(String.self, forKey: .actualizado_utc)) ?? nil
     }
 
     var isEmpty: Bool {
         rpe == nil && (estado ?? "").trimmed.isEmpty && (nota ?? "").trimmed.isEmpty && (pista?.isEmpty ?? true)
+            && (ficha?.isEmpty ?? true)
     }
 
     /// {"rpe","estado","nota"} for the engine (only the keys that are set; RPE outside 1–10 is not sent).
@@ -98,6 +179,28 @@ enum TrainingRatingStore {
     }
 }
 
+/// paths.root/carreras_previstas.json: {"<horse key>": ["AAAA-MM-DD", …]} (A4 and weekly planner). A separate file so
+/// cuadra.json stays interchangeable with AVO Windows.
+enum PlannedRacesStore {
+    static func load(_ path: String) -> [String: [String]] {
+        guard let data = AvoFiles.read(path), let o = AvoJSON.object(data) else { return [:] }
+        var out: [String: [String]] = [:]
+        for (k, v) in o {
+            guard let l = v as? [Any] else { continue }
+            let days: [String] = l.compactMap { (x: Any) -> String? in
+                guard let s = x as? String, TrainingAnalytics.day(s) != nil else { return nil }
+                return String(s.prefix(10))
+            }
+            if !days.isEmpty { out[k] = Array(Set(days)).sorted() }
+        }
+        return out
+    }
+
+    static func save(_ all: [String: [String]], to path: String) throws {
+        try AvoFiles.writeAtomic(AvoJSON.data(all, pretty: true), to: path)
+    }
+}
+
 // ------------------------------------------------------------------ JSON for the engine
 
 enum TrainingAnalytics {
@@ -110,8 +213,16 @@ enum TrainingAnalytics {
         if let r = rating {
             if let v = r.valoracionObject { o["valoracion"] = v }
             if let p = r.pistaObject { o["pista"] = p }
+            if let f = r.ficha { f.merge(into: &o) }
         }
         return o
+    }
+
+    /// options_json of avo_eq_training_analyse: «carreras_previstas» (A4 and planner). Nil when there is nothing to pass.
+    static func historyOptions(plannedRaces: [String]) -> String? {
+        let days: [String] = plannedRaces.filter { (d: String) -> Bool in day(d) != nil }.map { String($0.prefix(10)) }
+        if days.isEmpty { return nil }
+        return String(decoding: AvoJSON.data(["carreras_previstas": Array(Set(days)).sorted()]), as: UTF8.self)
     }
 
     static func extraJson(id: String, horse: String, rider: String, dateUtc: String?, rating: TrainingRating?) -> String {

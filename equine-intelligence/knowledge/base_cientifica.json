@@ -2,8 +2,8 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.24.0",
-  "fecha": "2026-11-20",
+  "version": "1.25.0",
+  "fecha": "2026-11-21",
   "razas": [
     "PSI",
     "ARABE"
@@ -4353,9 +4353,9 @@
       "fuentes": [
         "MORRICE_WEST_2025"
       ],
-      "estado": "PENDIENTE",
-      "falta": "fecha de la carrera prevista en la ficha del caballo; hoy solo hay el aviso informativo KB_SIN_RAPIDO_30D",
-      "nota": "Morrice-West 2025 (Tasmania, HR): «baja» = fatiga ósea acumulada < 0,25 en las 4 salidas previas, no un recuento de sesiones; el corte de 2 sesiones en 28 d es [I] (estudio extra 4)"
+      "estado": "IMPLEMENTADO",
+      "nota": "Morrice-West 2025 (Tasmania, HR): «baja» = fatiga ósea acumulada < 0,25 en las 4 salidas previas, no un recuento de sesiones; el corte de 2 sesiones en 28 d es [I] (estudio extra 4)",
+      "implementacion": "motor 2.0.0-dev27 (KB 1.25.0, TRAINING 1.1.0): carreras = opción «carreras_previstas» de la historia y sesiones de tipo CARRERA o TRIAL; se cuentan días con sesión rápida (≥ 100 m de galope rápido) en [carrera − 28, carrera − 1]; AVISO informativo (nivel INFO, no sube el estado) el día de la carrera y por adelantado cuando faltan ≤ 14 d [I]; sin la historia de los 28 d no se juzga; opciones dias_precarrera, min_dias_rapidos_precarrera y dias_aviso_precarrera"
     },
     {
       "id": "A5_VUELTA_DESCANSO",
@@ -4514,8 +4514,9 @@
         "HITCHENS_2018_CALIFORNIA",
         "GEORGOPOULOS_PARKIN_2017"
       ],
-      "estado": "PENDIENTE",
-      "falta": "capa 2 del planificador; sin evidencia publicada de días entre trabajos rápidos ni datos de árabes de llano"
+      "estado": "PARCIAL",
+      "falta": "capa 2 del planificador (P2, P4–P6, propuesta de semana); sin evidencia publicada de días entre trabajos rápidos ni datos de árabes de llano",
+      "implementacion": "motor 2.0.0-dev27: base informativa en estado.planificador (P1 0 o > 3 días rápidos en semana activa, P3 < 14 d entre carreras, días que faltan para A4); nunca sube el estado"
     },
     {
       "id": "PLAYA_LINEA_BASE_PL1_PL6",
@@ -4527,8 +4528,9 @@
         "CREVIER_DENOIX_2011",
         "WHITE_PAPER_SUPERFICIES_2012"
       ],
-      "estado": "PENDIENTE",
-      "falta": "campo de franja y marea en la app; sin datos publicados de galope de carreras ni de lesiones en playa"
+      "estado": "PARCIAL",
+      "falta": "PL2 lluvia 24–48 h, humedad TDR y penetrómetro; PL3–PL6; A9 por franja",
+      "implementacion": "motor 2.0.0-dev27: campo pista.franja y hora/tipo de marea en el resumen; PL1 aplicado a A7/A8 (comparables de la misma superficie y franja cuando la franja está anotada)"
     },
     {
       "id": "A6C_COCIENTE_GALOPE",
@@ -4581,7 +4583,8 @@
         "MORRICE_WEST_2021_INTERVALO"
       ],
       "estado": "PROPUESTA",
-      "nota": "estudio 20/11 20:08; cifras exactas de diseño [I]"
+      "nota": "estudio 20/11 20:08; cifras exactas de diseño [I]",
+      "implementacion": "motor 2.0.0-dev27: RT1 (< 72 h entre los dos últimos días rápidos) y RT3 (vía P3, < 14 d entre carreras) como pautas informativas del planificador; RT2 sin implementar"
     },
     {
       "id": "PESO_PE1_PE3",
@@ -4884,6 +4887,11 @@
       "version": "1.24.0",
       "fecha": "2026-11-20",
       "cambio": "Estudio horario 22:09: Yıldırım & Karaarslan 2025 (TJVR) leído en texto completo y reclasificado (duplicado fusionado): en árabes el tendón es el 63,7 % de 216 lesiones frente al 25,7 % en PSI (fractura 61,5 %); misma serie que el EVJ 2025 (texto completo no accesible); Poinsard 2026: diseño del bloque de repetibilidad (18 caballos, ≥ 3 sesiones en ≤ 7 d) [E-r], ICC de V200 sin reconfirmar; TA1–TA2 y RB1 [I]; 2 fuentes nuevas, 3 actualizadas, 2 parámetros de referencia, 2 reglas propuestas; sin cambios de lógica; motor 2.0.0-dev26"
+    },
+    {
+      "version": "1.25.0",
+      "fecha": "2026-11-21",
+      "cambio": "Ficha de campo y A4: A4_CARGA_BAJA_PRECARRERA implementada como AVISO informativo (Morrice-West 2025 [E], corte de 2 días rápidos en 28 d y aviso a 14 d [I]) con «carreras_previstas» y sesiones CARRERA/TRIAL; PL1 parcial (franja en las comparables de A7/A8); base del planificador (P1, P3, RT1, días que faltan para A4) informativa; ficha de campo en el resumen (tipo de sesión, franja, marea, going, temperatura, humedad, pesos, incidencia) para calibrar con el PROTOTIPO; motor 2.0.0-dev27, TRAINING 1.1.0"
     }
   ]
 }

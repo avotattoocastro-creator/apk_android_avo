@@ -1,9 +1,11 @@
 // AVO Training Analytics (fase 1). Ver include/avo_eq/training.h y docs/algoritmos/12_ENTRENAMIENTO.md.
 #include "avo_eq/training.h"
 #include <algorithm>
+#include <cctype>
 #include <cmath>
 #include <cstdio>
 #include <functional>
+#include <initializer_list>
 #include <map>
 #include <set>
 #include <sstream>
@@ -336,7 +338,12 @@ std::string training_summary_to_json(const SessionSummary& s) {
     << ",\"pico_aceleracion_m_s2\":" << num(s.accel_peak) << ",\"pico_frenada_m_s2\":" << num(s.decel_peak) << ",\"fuente\":\"TRAYECTORIA_GNSS\"}"
     << ",\"calidad\":{\"gnss\":" << q(s.gnss_quality) << ",\"imu\":" << q(s.imu_quality) << "}"
     << ",\"valoracion\":{\"rpe\":" << num(s.rpe) << ",\"estado\":" << q(s.state) << ",\"nota\":" << q(s.note) << "}"
-    << ",\"pista\":{\"superficie\":" << q(s.surface) << ",\"estado\":" << q(s.track_state) << "}";
+    << ",\"pista\":{\"superficie\":" << q(s.surface) << ",\"estado\":" << q(s.track_state) << ",\"franja\":" << q(s.beach_band)
+    << ",\"going\":" << q(s.going) << ",\"marea\":{\"hora\":" << q(s.tide_time) << ",\"tipo\":" << q(s.tide_type) << "}}"
+    << ",\"tipo_sesion\":" << q(s.session_type)
+    << ",\"condiciones\":{\"temperatura_c\":" << num(s.temperature_c) << ",\"humedad_pct\":" << num(s.humidity_pct) << "}"
+    << ",\"pesos\":{\"jinete_kg\":" << num(s.rider_kg) << ",\"caballo_kg\":" << num(s.horse_kg) << "}"
+    << ",\"incidencia\":{\"tipo\":" << q(s.incident_type) << ",\"texto\":" << q(s.incident_text) << "}";
   if (s.race.present) {
     const RaceSummary& R = s.race;
     o << ",\"trabajo_pista\":{\"raza\":" << q(R.breed) << ",\"carga_vedba_g_min\":" << num(R.vedba_load_gmin) << ",\"vedba_galope_g\":" << num(R.vedba_gallop_g)
@@ -385,6 +392,7 @@ bool training_summary_from_json(const json::Value& v, SessionSummary* out, std::
   s.gnss_quality = v["calidad"]["gnss"].str(); s.imu_quality = v["calidad"]["imu"].str();
   s.rpe = nnum(v["valoracion"]["rpe"]); s.state = v["valoracion"]["estado"].str(); s.note = v["valoracion"]["nota"].str();
   s.surface = v["pista"]["superficie"].str(); s.track_state = v["pista"]["estado"].str();
+  training_read_field_sheet(v, &s);
   const json::Value& rc = v["trabajo_pista"];
   if (rc.type == json::Value::OBJ) {
     RaceSummary& R = s.race;
@@ -424,6 +432,46 @@ bool training_summary_from_json(const json::Value& v, SessionSummary* out, std::
 }
 
 // ------------------------------------------------------------------ configuration
+// ------------------------------------------------------------------ ficha de campo (TRAINING 1.1.0)
+namespace {
+bool in_list(const std::string& x, std::initializer_list<const char*> l) {
+  for (const char* e : l) if (x == e) return true;
+  return false;
+}
+}  // namespace
+
+void training_read_field_sheet(const json::Value& x, SessionSummary* s) {
+  if (x.type != json::Value::OBJ) return;
+  auto code = [&](const json::Value& v, std::initializer_list<const char*> l, const char* what, std::string* dst) {
+    if (v.type != json::Value::STR || v.s.empty()) return;
+    std::string u = upper_ascii(v.s);
+    if (in_list(u, l)) *dst = u; else s->warnings.push_back(std::string(what) + " «" + v.s + "» no reconocido: no se usa");
+  };
+  auto number = [&](const json::Value& v, double lo, double hi, const char* what, double* dst) {
+    if (v.type != json::Value::NUM) return;
+    if (v.n >= lo && v.n <= hi) *dst = v.n; else s->warnings.push_back(std::string(what) + " fuera de rango: no se usa");
+  };
+  code(x["tipo_sesion"], {"TRABAJO", "TRABAJO_REFERENCIA_1000", "CARRERA", "TRIAL", "DESCANSO_ACTIVO"}, "tipo de sesión", &s->session_type);
+  const json::Value& p = x["pista"];
+  code(p["franja"], {"ORILLA_FIRME", "HUMEDA_PROFUNDA", "SECA_PROFUNDA", "TRANSICION"}, "franja de playa", &s->beach_band);
+  code(p["going"], {"FIRME", "BUENO_FIRME", "BUENO", "BUENO_BLANDO", "BLANDO", "PESADO"}, "going", &s->going);
+  const json::Value& m = p["marea"];
+  if (m["hora"].type == json::Value::STR && !m["hora"].s.empty()) {
+    const std::string& h = m["hora"].s;
+    bool ok = h.size() == 5 && h[2] == ':' && isdigit((unsigned char)h[0]) && isdigit((unsigned char)h[1]) && isdigit((unsigned char)h[3]) &&
+              isdigit((unsigned char)h[4]) && std::stoi(h.substr(0, 2)) < 24 && std::stoi(h.substr(3, 2)) < 60;
+    if (ok) s->tide_time = h; else s->warnings.push_back("hora de marea «" + h + "» no válida (HH:MM): no se usa");
+  }
+  code(m["tipo"], {"BAJAMAR", "PLEAMAR"}, "tipo de marea", &s->tide_type);
+  number(x["condiciones"]["temperatura_c"], -30, 55, "temperatura", &s->temperature_c);
+  number(x["condiciones"]["humedad_pct"], 0, 100, "humedad", &s->humidity_pct);
+  number(x["pesos"]["jinete_kg"], 30, 150, "peso del jinete", &s->rider_kg);
+  number(x["pesos"]["caballo_kg"], 150, 1000, "peso del caballo", &s->horse_kg);
+  const json::Value& inc = x["incidencia"];
+  code(inc["tipo"], {"NINGUNA", "TROPIEZO", "CAIDA", "ESPANTADA", "COJERA", "HERRAJE", "EQUIPO", "OTRA"}, "tipo de incidencia", &s->incident_type);
+  if (inc["texto"].type == json::Value::STR && !inc["texto"].s.empty()) s->incident_text = inc["texto"].s.substr(0, 500);
+}
+
 bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::string* err) {
   if (v.is_null()) return true;
   if (v.type != json::Value::OBJ) { if (err) *err = "las opciones deben ser un objeto JSON"; return false; }
@@ -472,7 +520,9 @@ bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::str
                       {"dias_descanso_tendon", &c->kb.tendon_rest_days, 7, 730}, {"semanas_min_fatiga_osea", &c->kb.bone_min_weeks, 1, 8},
                       {"dias_galope_60d_max", &c->kb.low_gallop_60d_max_days, 0, 24},
                       {"dias_vigencia_cociente_galope", &c->kb.gallop_ratio_max_age_days, 1, 365},
-                      {"sesiones_min_linea_base", &c->kb.drift_min_baseline, 3, 50}, {"cusum_calentamiento", &c->kb.drift_warmup, 2, 50}};
+                      {"sesiones_min_linea_base", &c->kb.drift_min_baseline, 3, 50}, {"cusum_calentamiento", &c->kb.drift_warmup, 2, 50},
+                      {"dias_precarrera", &c->kb.prerace_days, 7, 90}, {"min_dias_rapidos_precarrera", &c->kb.prerace_min_fast_days, 1, 20},
+                      {"dias_aviso_precarrera", &c->kb.prerace_warn_days, 0, 90}};
       for (const auto& d : ki) {
         if (!k.has(d.k)) continue;
         const json::Value& x = k[d.k];
@@ -481,6 +531,18 @@ bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::str
       }
       if (c->kb.canter_30d_watch_km > c->kb.canter_30d_limit_km) { if (err) *err = "base_cientifica: el aviso de canter debe ser ≤ el límite"; return false; }
     } else { if (err) *err = "«base_cientifica» debe ser true/false o un objeto"; return false; }
+  }
+  // A4: fechas de carrera previstas del caballo (lista de AAAA-MM-DD), en la raíz de las opciones.
+  if (v.has("carreras_previstas")) {
+    const json::Value& l = v["carreras_previstas"];
+    if (l.type != json::Value::ARR) { if (err) *err = "«carreras_previstas» debe ser una lista de fechas"; return false; }
+    for (const auto& e : l.a) {
+      long d = 0;
+      if (e.type != json::Value::STR || !training_parse_day(e.s, &d)) { if (err) *err = "fecha de «carreras_previstas» no válida"; return false; }
+      c->kb.planned_race_days.push_back(d);
+    }
+    std::sort(c->kb.planned_race_days.begin(), c->kb.planned_race_days.end());
+    c->kb.planned_race_days.erase(std::unique(c->kb.planned_race_days.begin(), c->kb.planned_race_days.end()), c->kb.planned_race_days.end());
   }
   if (c->acute_days >= c->chronic_days) { if (err) *err = "dias_aguda debe ser menor que dias_cronica"; return false; }
   if (c->z_watch >= c->z_review) { if (err) *err = "z_vigilar debe ser menor que z_revisar"; return false; }
@@ -586,10 +648,11 @@ void kb_drift_flags(const std::vector<SessionSummary>& ok, size_t i, const KbRul
   if (!kc.enabled || !kc.drift_rules) return;
   const SessionSummary& s = ok[i];
   if (!s.race.present) return;
-  std::string surf = s.surface.empty() ? "sin anotar" : s.surface;
+  std::string surf = (s.surface.empty() ? "sin anotar" : s.surface) + (s.beach_band.empty() ? "" : " · " + s.beach_band);
   auto run = [&](std::function<double(const SessionSummary&)> get, double delta) {
     std::vector<double> x;
-    for (size_t j = 0; j <= i; j++) if (ok[j].surface == s.surface && ok[j].race.present) x.push_back(get(ok[j]));
+    for (size_t j = 0; j <= i; j++)
+      if (ok[j].surface == s.surface && ok[j].beach_band == s.beach_band && ok[j].race.present) x.push_back(get(ok[j]));
     KbDriftConfig dc; dc.delta = delta; dc.h = kc.drift_h; dc.warmup = kc.drift_warmup; dc.min_baseline = kc.drift_min_baseline;
     return kb_drift_down(x, dc);
   };
@@ -619,6 +682,67 @@ void kb_drift_flags(const std::vector<SessionSummary>& ok, size_t i, const KbRul
                       "autoiniciado [I]; depende de lo que pida el jinete: comprobar que el trabajo fue comparable"});
     }
   }
+}
+
+// Base del planificador semanal (TRAINING 1.1.0): pautas informativas, nunca suben el estado.
+PlannerStatus planner_at(const std::vector<SessionSummary>& ok, const std::vector<KbDay>& kbdays, long at, long first_day, const KbRuleConfig& kc) {
+  PlannerStatus p;
+  std::vector<long> fast, races;
+  for (const auto& d : kbdays) {
+    if (d.day > at) break;
+    if (!std::isnan(d.bone_pct)) p.available = true;
+    if (!std::isnan(d.gallop_m) && d.gallop_m >= kc.gallop_session_min_m && (fast.empty() || fast.back() != d.day)) fast.push_back(d.day);
+  }
+  for (const auto& s : ok) if (s.day <= at && s.counts_as_race()) races.push_back(s.day);
+  if (!races.empty()) p.days_since_last_race = (int)(at - races.back());
+  if (!p.available) return p;
+  for (long d : fast) if (d >= at - 6) p.fast_days_7d++;
+  if (!fast.empty()) p.days_since_fast = (int)(at - fast.back());
+  if (fast.size() >= 2) p.days_between_last_fast = (int)(fast[fast.size() - 1] - fast[fast.size() - 2]);
+  for (long d : kc.planned_race_days) if (d >= at) { p.next_race_day = d; break; }
+  char b[360];
+  // P1: 1–2 (2 años) o 2–3 (maduros) trabajos rápidos por semana activa, nunca 0
+  bool active_week = false;
+  for (const auto& s : ok) if (s.day <= at && s.day >= at - 6) active_week = true;
+  if (first_day <= at - 6 && active_week) {
+    if (p.fast_days_7d == 0)
+      p.notes.push_back({"PLANIFICADOR_P1", "ningún día de trabajo rápido en los últimos 7 días con el caballo trabajando: la pauta es 2–3 por semana (1–2 en potros de 2 años), nunca 0",
+                         "práctica de entrenadores y asociaciones (Morrice-West 2020/2021) [E]; forma de la pauta [I]"});
+    else if (p.fast_days_7d > 3) {
+      snprintf(b, sizeof(b), "%d días de trabajo rápido en los últimos 7 días: más de los 2–3 de la pauta", p.fast_days_7d);
+      p.notes.push_back({"PLANIFICADOR_P1", b, "práctica de entrenadores (Morrice-West 2020) [E]; corte [I]"});
+    }
+  }
+  // RT1: ≥ 72 h entre trabajos rápidos
+  if (p.days_between_last_fast >= 0 && p.days_between_last_fast < 3) {
+    snprintf(b, sizeof(b), "solo %d día(s) entre los dos últimos trabajos rápidos: la pauta es ≥ 72 h (48 h solo como excepción en caballos acondicionados)",
+             p.days_between_last_fast);
+    p.notes.push_back({"RECUPERACION_RT1", b, "glucógeno muscular 48–72 h tras el trabajo rápido [E-r]; pauta de 72 h [I]"});
+  }
+  // A4 / P3 / RT3: próxima carrera prevista
+  if (p.next_race_day >= 0) {
+    p.days_to_next_race = (int)(p.next_race_day - at);
+    long from = p.next_race_day - kc.prerace_days, to = std::min(p.next_race_day - 1, at);
+    for (long d : fast) if (d >= from && d <= to) p.fast_days_before_race++;
+    p.fast_needed = std::max(0, kc.prerace_min_fast_days - p.fast_days_before_race);
+    if (p.days_to_next_race <= kc.prerace_days && p.fast_needed > 0) {
+      snprintf(b, sizeof(b), "carrera prevista en %d días (%s): faltan %d día(s) de trabajo rápido para el mínimo de %d en los %d días previos",
+               p.days_to_next_race, kb_day_text(p.next_race_day).c_str(), p.fast_needed, kc.prerace_min_fast_days, kc.prerace_days);
+      p.notes.push_back({"A4_CARGA_BAJA_PRECARRERA", b, "Morrice-West 2025 [E]; corte en sesiones [I]"});
+    }
+  }
+  std::vector<long> all = races;
+  for (long d : kc.planned_race_days) if (d >= at) all.push_back(d);
+  std::sort(all.begin(), all.end());
+  all.erase(std::unique(all.begin(), all.end()), all.end());
+  for (size_t i = 1; i < all.size(); i++) {
+    long gap = all[i] - all[i - 1];
+    if (all[i] < at - 28 || gap >= 14) continue;
+    snprintf(b, sizeof(b), "solo %ld días entre las carreras del %s y del %s: la pauta es 17–21 días, aviso con menos de 14",
+             gap, kb_day_text(all[i - 1]).c_str(), kb_day_text(all[i]).c_str());
+    p.notes.push_back({"PLANIFICADOR_P3", b, "Parkin 2004/2005 y práctica de entrenadores [E-r]; cortes [I]"});
+  }
+  return p;
 }
 
 }  // namespace
@@ -659,7 +783,7 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
   long first_day = ok.front().day;
   std::vector<KbDay> kbdays;   // base científica KB-1: una entrada por sesión (NaN si no trae el bloque)
   for (const auto& s : ok) {
-    KbDay d; d.day = s.day;
+    KbDay d; d.day = s.day; d.race = s.counts_as_race();
     if (s.race.present && !std::isnan(s.race.kb_bone_pct)) {
       for (int k = 0; k < KB_BANDS; k++) d.band_m[k] = s.race.kb_band_m[k];
       d.canter_m = s.race.kb_canter_m; d.gallop_m = s.race.kb_gallop_m; d.bone_pct = s.race.kb_bone_pct;
@@ -722,6 +846,13 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
     std::string st = upper_ascii(s.state);
     if (st == "COJERA" || st == "COJO" || st == "DOLOR") { raise(&R.level, "REVISAR"); R.reasons.push_back("el entrenador anotó: " + s.state); }
     else if (st == "CANSADO" || st == "RARO" || st == "MAL") { raise(&R.level, "VIGILAR"); R.reasons.push_back("el entrenador anotó: " + s.state); }
+    // Incidencia anotada en la ficha de campo (TRAINING 1.1.0): misma escala que la valoración del entrenador.
+    if (!s.incident_type.empty() && s.incident_type != "NINGUNA") {
+      std::string t = "incidencia anotada: " + s.incident_type + (s.incident_text.empty() ? "" : " (" + s.incident_text + ")");
+      if (s.incident_type == "COJERA") raise(&R.level, "REVISAR");
+      else if (s.incident_type == "CAIDA") raise(&R.level, "VIGILAR");
+      R.reasons.push_back(t);
+    }
     if (!std::isnan(s.rpe) && s.rpe >= 9) R.reasons.push_back("esfuerzo percibido muy alto (RPE " + num(s.rpe) + ")");
     R.kb = kb_evaluate(kbdays, s.day, first_day, c.kb);
     kb_drift_flags(ok, i, c.kb, &R.kb.flags);
@@ -751,6 +882,7 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
   r.kb = kb_evaluate(kbdays, r.reference_day, first_day, c.kb);
   if (r.days_since_last <= c.acute_days) kb_drift_flags(ok, ok.size() - 1, c.kb, &r.kb.flags);
   kb_apply(r.kb, &r.level, &r.reasons);
+  r.planner = planner_at(ok, kbdays, r.reference_day, first_day, c.kb);
   if (!std::isnan(r.current.acwr) && r.current.acwr < c.acwr_low)
     r.reasons.push_back("carga reciente baja respecto a la habitual (ACWR " + num(r.current.acwr) + "): descarga o parada");
   if (r.days_since_last > c.rest_watch_days)
@@ -833,6 +965,20 @@ std::string training_to_json(const TrainingResult& r, const TrainingConfig& c) {
   o << ",\"estado\":{\"nivel\":" << q(r.level) << ",\"motivos\":"; strs(o, r.reasons);
   o << ",\"dias_desde_ultima\":" << (r.days_since_last < 0 ? std::string("null") : std::to_string(r.days_since_last)) << ",\"carga\":"; load_json(o, r.current);
   o << ",\"base_cientifica\":" << kb_status_json(r.kb);
+  {
+    const PlannerStatus& p = r.planner;
+    auto opt = [](int v) { return v < 0 ? std::string("null") : std::to_string(v); };
+    o << ",\"planificador\":{\"disponible\":" << (p.available ? "true" : "false") << ",\"dias_rapidos_7d\":" << p.fast_days_7d
+      << ",\"dias_desde_rapido\":" << opt(p.days_since_fast) << ",\"dias_entre_ultimos_rapidos\":" << opt(p.days_between_last_fast)
+      << ",\"dias_desde_carrera\":" << opt(p.days_since_last_race) << ",\"proxima_carrera\":";
+    if (p.next_race_day < 0) o << "null";
+    else o << "{\"fecha\":" << q(kb_day_text(p.next_race_day)) << ",\"dias_hasta\":" << p.days_to_next_race
+           << ",\"dias_rapidos_28d\":" << p.fast_days_before_race << ",\"faltan_para_minimo\":" << p.fast_needed << "}";
+    o << ",\"pautas\":[";
+    for (size_t i = 0; i < p.notes.size(); i++)
+      o << (i ? "," : "") << "{\"regla\":" << q(p.notes[i].rule) << ",\"texto\":" << q(p.notes[i].text) << ",\"evidencia\":" << q(p.notes[i].evidence) << "}";
+    o << "],\"nota\":\"pautas informativas de la base científica; no suben el estado ni sustituyen el criterio del entrenador\"}";
+  }
   o << ",\"nota\":\"orientativo; no es un diagnóstico veterinario\"}";
   o << ",\"carga_diaria\":[";
   for (size_t i = 0; i < r.daily_load.size(); i++) o << (i ? "," : "") << "{\"fecha\":" << q(training_day_text(r.daily_load[i].first)) << ",\"carga\":" << num(r.daily_load[i].second) << "}";
