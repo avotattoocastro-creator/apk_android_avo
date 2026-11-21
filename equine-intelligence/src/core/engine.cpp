@@ -103,7 +103,7 @@ std::vector<std::pair<std::string, std::string>> algorithm_versions() {
   return {{"motor", ENGINE_VERSION}, {"gnss", "1.1.0"}, {"aceleracion", KINEMATICS_VERSION}, {"curvas", CURVES_VERSION},
           {"cadencia", CADENCE_VERSION}, {GAIT_V1_ID, "1.0.1"}, {GAIT_V2_ID, "2.0.0"}, {"fusion", FUSION_VERSION},
           {"rendimiento", PERFORMANCE_VERSION}, {"eventos", EVENTS_VERSION}, {"simetria", SYMMETRY_VERSION}, {"trabajo_pista", RACING_VERSION},
-          {"base_cientifica", KNOWLEDGE_VERSION}};
+          {"base_cientifica", KNOWLEDGE_VERSION}, {"cardio", CARDIO_VERSION}};
 }
 
 std::string params_hash(const EngineConfig& c) {
@@ -127,6 +127,8 @@ std::string params_hash(const EngineConfig& c) {
   if (c.identity.any()) all += "|id:" + c.identity.horse_code + "\x1f" + c.identity.horse_name + "\x1f" + c.identity.rider_code + "\x1f" + c.identity.rider_name;
   { char x[96]; snprintf(x, sizeof(x), "|M%d|%.0f|%.0f", c.racing.manual_efforts_set ? 1 : 0, c.racing.manual_work_start_itow, c.racing.manual_work_end_itow); all += x; }
   for (const auto& e : c.racing.manual_efforts_itow) { char x[64]; snprintf(x, sizeof(x), "|%.0f-%.0f", e.first, e.second); all += x; }
+  { char x[160]; snprintf(x, sizeof(x), "|ECG%d|%g|%g|%g|%g|%g|%g|%g", c.cardio.enabled ? 1 : 0, c.cardio.band_lo_hz, c.cardio.band_hi_hz,
+                          c.cardio.threshold_fraction, c.cardio.premature_pct, c.cardio.max_phase_bpm, c.cardio.recovery_bpm, c.cardio.v200_bpm); all += x; }
   uint64_t h = 1469598103934665603ull;
   for (const char* p = all.c_str(); *p; p++) { h ^= (uint8_t)*p; h *= 1099511628211ull; }
   char out[20]; snprintf(out, sizeof(out), "%016llx", (unsigned long long)h);
@@ -183,6 +185,7 @@ Analysis analyse(const Session& s, const EngineConfig& c, const std::string& whe
   a.events = detect_events(in, c.events);
   a.racing = analyse_racing(a.gnss, a.imu, a.girth_to_gnss, chosen, s.imu_units, c.racing,
                             s.gnss.empty() ? NAN : (double)s.gnss[0].itow_ms); step();
+  a.cardio = analyse_cardio(s, a.chest_to_gnss, a.gnss.t, a.gnss.speed, c.sync, c.cardio); step();
   find_anomalies(a);
   assess_quality(s, a);
   return a;
@@ -420,6 +423,7 @@ std::string to_json(const Analysis& a, const Session& s, const EngineConfig& c, 
   o << "]";
   write_v2_blocks(o, a, s);
   o << ",\"trabajo_pista\":" << racing_json(a.racing, c.racing);
+  o << ",\"cardio\":" << cardio_json(a.cardio, c.cardio, series);
   if (series) write_series(o, a, c);
   o << "}";
   return o.str();

@@ -4,6 +4,7 @@
 #include "avo_core.h"
 #include <cstring>
 #include <memory>
+#include <unordered_set>
 
 namespace avoeq {
 
@@ -13,7 +14,38 @@ struct Ctx {
   avo::UartDecoder* dec = nullptr;
   uint64_t cur_chest_us = 0;
   uint32_t cur_block = 0;
+  // ECG (girth 0.5.x): 32-bit girth clock unwrapped, duplicates (radio retries) dropped
+  bool ecg_have = false;
+  uint32_t ecg_last_raw = 0;
+  int64_t ecg_wraps = 0;
+  std::unordered_set<uint64_t> ecg_seen;
 };
+
+// ECG batch: IMU_SAMPLE fmt 2, imu_id 3, units byte (offset 15) 2, count × int24 LE in 0,1 µV.
+void on_ecg(Ctx* c, const avo::ImuBatchHeader& h, const uint8_t* payload, size_t len) {
+  Session& s = *c->s;
+  size_t need = avo::IMU_HDR_LEN + (size_t)h.count * 3;
+  if (h.imu_id != ECG_IMU_ID || h.reserved != ECG_UNITS_DUV || h.count == 0 || need > len) { s.bad_records++; return; }
+  uint64_t key = ((uint64_t)h.girth_seq << 32) | h.girth_t0_us;
+  if (!c->ecg_seen.insert(key).second) { s.ecg_duplicates++; return; }
+  // 32-bit µs rollover (71,6 min): only a drop from the top quarter to the bottom quarter is a wrap; any other
+  // backwards jump is a girth restart and is left to the clock map (new piece).
+  if (c->ecg_have && h.girth_t0_us < c->ecg_last_raw && c->ecg_last_raw >= 0xC0000000u && h.girth_t0_us < 0x40000000u)
+    c->ecg_wraps += (int64_t)1 << 32;
+  c->ecg_have = true; c->ecg_last_raw = h.girth_t0_us;
+  EcgBatch b;
+  b.girth_id = h.girth_id; b.batch_seq = h.girth_seq;
+  b.t0_us = (int64_t)h.girth_t0_us + c->ecg_wraps;
+  b.period_us = h.period_us == 1953 ? 1953.125 : (double)h.period_us;   // README 0.5.0: 512 sps, header rounded
+  b.chest_us = c->cur_chest_us;
+  b.duv.resize(h.count);
+  const uint8_t* p = payload + avo::IMU_HDR_LEN;
+  for (uint16_t i = 0; i < h.count; i++, p += 3) {
+    uint32_t v = (uint32_t)p[0] | ((uint32_t)p[1] << 8) | ((uint32_t)p[2] << 16);
+    b.duv[i] = (v & 0x800000u) ? (int32_t)(v | 0xFF000000u) : (int32_t)v;   // int24 sign extension
+  }
+  s.ecg.push_back(std::move(b));
+}
 
 void on_frame(const avo::FrameView& f, void* vctx) {
   Ctx* c = (Ctx*)vctx;
@@ -36,8 +68,9 @@ void on_frame(const avo::FrameView& f, void* vctx) {
   } else if (f.type == avo::FrameType::IMU_SAMPLE) {
     avo::ImuBatchHeader h;
     if (!avo::decode_imu_header(f.payload, f.len, &h)) { s.bad_records++; return; }
-    if (h.reserved == 1) s.imu_units = 1;   // GIRTH 0.4.3+: units of the BNO085 declared in byte 15
+    if (h.fmt != ECG_FMT && h.reserved == 1) s.imu_units = 1;   // GIRTH 0.4.3+: units of the BNO085 declared in byte 15
     if (h.fmt == 1) { s.imu_fused_batches++; return; }   // GIRTH 0.4.x fused batch (linear acc + quaternion): not used yet
+    if (h.fmt == ECG_FMT) { on_ecg(c, h, f.payload, f.len); return; }   // GIRTH 0.5.x ECG (MAX30003)
     if (h.fmt != avo::IMU_FMT_9AXIS_I16) { s.bad_records++; return; }
     size_t need = avo::IMU_HDR_LEN + (size_t)h.count * avo::IMU_SAMPLE_LEN_9AXIS;
     if (need > f.len) { s.bad_records++; return; }

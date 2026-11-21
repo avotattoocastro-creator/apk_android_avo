@@ -27,6 +27,19 @@ Métricas nuevas: `distancia_puenteada` (regla del analizador Kotlin anterior, s
 `estabilidad_espectral`, `incertidumbre_media_ventana`, `ventanas_cadencia_validas`.
 **Cambio de semántica:** `frecuencia_hz` de una ventana es 0 salvo estado VALIDA; GAIT_CLASSIFIER_V1 (1.0.1) solo recibe cadencias válidas.
 
+## Bloque `cardio` (AVO Cardio 1.0.0, motor 2.0.0-dev29) — ficha 15
+Siempre presente. Sin ECG en el RAW: `{"presente":false,"version","algoritmo"}`. Con el ECG de la cincha 0.5.x:
+`fuente` (`CINCHA_MAX30003_FMT2`), `lotes`, `lotes_duplicados`, `muestras`, `muestras_no_validas`, `fs_hz`, `alineada_gnss`,
+`duracion_s`, `polaridad_s`, `latidos`, `rr_validos`, `artefacto_pct`, `calidad` (BUENA | UTILIZABLE | POBRE | NO_UTILIZABLE),
+`fc_pico_lpm`, `fc_max_epoca_lpm`, `fc_media_lpm`, `fin_esfuerzo_s`, `fc_bajo_120_tras_s`, `vuelta_calma`;
+`fases.{CALENTAMIENTO,MAXIMA,RECUPERACION_0_2MIN,RECUPERACION_TARDIA}` (`t0`, `t1`, `duracion_s`, `artefacto_pct`,
+`interpretable`, `latidos`, `ectopicos_candidatos`, `ectopicos_candidatos_fc_mayor_100`); `v200` (método `CRUCE_200_10S`,
+`t_cruce_s`, `validada: false`, `calentamiento_suficiente`, `motivo`), `v200_regresion` (método `REGRESION_FC_VELOCIDAD`,
+pendiente, intercepto, `r2`, `mesetas`), `vhrmax` (`metodo`), `recuperacion[]` (`min` 1, 2, 4, 5, 10, 15; `fc_lpm`,
+`caida_lpm`), `ectopia` (`tipo: CANDIDATO_A_REVISAR`, `umbral_pct`, `candidatos`, `aislados`, `parejas`, `tripletes`,
+`rachas`, `nivel` INFO | VIGILAR, `texto`, `diagnostico: false`), `avisos`. Con series: `epocas` ([t0, FC, v, artefacto]
+cada 5 s) y `latidos_rr` ([t, RR, candidato]). Tiempos en s GNSS desde la primera época.
+
 ## Análisis de entrenamientos (AVO Training Analytics 1.0.0) — ficha 12
 API: `avo_eq_training_summary(analisis_json, extra_json, &json)` y `avo_eq_training_analyse(entrada_json, opciones_json, cancel, &json)`.
 Mismos códigos de retorno; el texto se libera con `avo_eq_free`.

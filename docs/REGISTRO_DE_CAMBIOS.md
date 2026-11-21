@@ -24,6 +24,41 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-21 — Motor 2.0.0-dev29 · KB-1 1.27.0 — ECG de la cincha PROTOTIPO 0.5.0 en el análisis: V200, VHRmax, A9 y A11
+**Integración (21/11):** PR #120 integrado sobre dev28 / KB-1 1.26.0 (PR #117 y #121); renumerado de dev27 / 1.25.0 a **dev29 / 1.27.0**; fixtures regeneradas con el bloque `cardio`.
+**Autor:** Claude (tarea programada, paso 3 del informe «Motor AVO Equine: análisis completo de funciones») · **Rama:**
+`claude/motor-ecg-v200` · **CI:** `build-equine-engine.yml` run 44893307697 ✅ (Linux ASan/UBSan, Windows, Android ×3; `f1700f5`; la 44892612337 falló en Windows por la macro OVERFLOW de MSVC, corregido)
+**Diagnóstico:** la cincha 0.5.0 manda **muestras de ECG** (no RR) como `IMU_SAMPLE fmt 2` (`imu_id 3`, unidades 2 = 0,1 µV,
+51 muestras int24 por lote, 177 B; máximo 204 B + 16 B de cabecera = lote de 220 B). La espalda (`GirthHub`,
+`decode_imu_header` «formato desconocido: cabecera válida») y el pecho (RAW literal antes de decodificar) lo reenvían y
+lo guardan tal cual: **el `.avr` ya trae el ECG**. El motor dev26 lo descartaba como registro malo. Ruta con archivos y
+líneas en `equine-intelligence/docs/algoritmos/15_ECG_V200.md` §1. **No cambia ningún contrato binario** ni firmware.
+**Qué cambia (solo motor):**
+- Ingestión del `fmt 2` (`Session::ecg`), desenrollado del reloj de 32 bits, periodo exacto 1953,125 µs y descarte de
+  lotes repetidos por reintento de radio.
+- `src/cardio/cardio.cpp` (AVO Cardio 1.0.0): detector anclado en S con rechazo de T y sin ceguera tras artefacto; RR con
+  calidad; FC en épocas de 5 s en tiempo GNSS (mapa cincha → pecho → GNSS, `compose_girth_map` compartido con la IMU);
+  fases CALENTAMIENTO / MAXIMA (> 185 lpm) / RECUPERACION_0_2MIN / TARDIA con puerta > 10 % de artefacto; V200 por
+  `CRUCE_200_10S` (Poinsard 2026, método principal) y por `REGRESION_FC_VELOCIDAD` aparte, con el método como atributo;
+  VHRmax; recuperación a 1, 2, 4, 5, 10 y 15 min; ectopia como `CANDIDATO_A_REVISAR` (RR ≥ 6 % más corto, rachas,
+  recuento por fase). Bloque `cardio` en el JSON del análisis.
+- Training Analytics: bloque `cardio` en el resumen de sesión; reglas `A9_PERDIDA_FORMA` (kb_change_threshold +
+  kb_drift_down, TE por defecto del 3 % **NO VALIDADO**, mismo método y superficie), `A9_V200_SALTO` (VT2) y `A11_ECG`.
+- KB-1 1.27.0: A9 y A11 pasan a IMPLEMENTADO; parámetros y pendientes anotados. Fixtures regeneradas (solo versión,
+  hash de parámetros y el bloque `cardio` vacío).
+**Archivos:** `equine-intelligence/{include/avo_eq/cardio.h, src/cardio/cardio.cpp, src/ingestion/ingestion.cpp,
+src/synchronization/session_sync.cpp, src/core/engine.cpp, src/training/training.cpp, include/avo_eq/{types,engine,
+knowledge,training,session_sync}.h, knowledge/base_cientifica.json, tests/test_cardio.cpp, tests/raw_writer.h,
+docs/algoritmos/{12,14,15}_*.md, docs/FORMATO_RESULTADOS.md}`, `core/src/test/resources/equine/*_analysis.json`.
+**No se ha tocado:** firmware (cincha, espalda, pecho), contratos binarios, apps, workflows, firmas, `Info.plist`, número de build.
+**Validación:** pruebas locales 111/111 con ASan/UBSan (8 casos nuevos: el lote se codifica con el codificador real de la
+cincha y pasa por avo_core → RAW → ingestión → motor; sensibilidad y VPP ≥ 99,5 % en señal sintética) ·
+`check_fixtures.py` OK · CI 44893307697 ✅ · **NO VERIFICADO** con ECG real ni con caballos.
+**Pendiente:** sesión real con el PROTOTIPO (cincha 0.5.0, cápsula REV 5.10) y anotación manual de latidos en galope;
+TE propio de V200 (≥ 3 pruebas); dibujar `cardio` en Android, Windows e iPad; CF1, WU3, FA y multiformes.
+
+---
+
 ## 2026-11-21 — Motor 2.0.0-dev28 (Training Analytics 1.1.0, KB-1 1.26.0) · iPad — Ficha de campo, regla A4 y base del planificador
 **Autor:** Claude (tarea programada: pasos 2 y 4 del informe «Motor AVO Equine: análisis completo de funciones») ·
 **Rama:** `claude/ficha-campo-carrera-a4` · **CI:** `build-equine-engine.yml` en la rama: run 44891879590 (n.º 53, `2578464`) ✅

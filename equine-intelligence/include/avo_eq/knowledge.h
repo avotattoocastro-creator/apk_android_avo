@@ -20,7 +20,7 @@
 
 namespace avoeq {
 
-static const char* const KNOWLEDGE_VERSION = "1.26.0";
+static const char* const KNOWLEDGE_VERSION = "1.27.0";
 static const char* const KNOWLEDGE_ID = "AVO_KB_1";
 static const char* const BONE_MODEL_ALGORITHM = "SBFL_MORRICE_WEST_2022";
 
@@ -102,6 +102,14 @@ struct KbRuleConfig {
   int prerace_days = 28;               // ventana previa a la carrera [I]
   int prerace_min_fast_days = 2;       // < 2 días con sesión rápida: AVISO [I]
   int prerace_warn_days = 14;          // aviso anticipado cuando faltan ≤ 14 días y aún no se llega al mínimo [I]
+  // A9 (KB 1.27.0, motor 2.0.0-dev29): V200 y VHRmax del ECG de la cincha 0.5.x frente a la línea base propia (misma
+  // superficie y mismo método). Umbral max(2·TE·√(1 + 1/n), SWC) (kb_change_threshold) con TE por defecto del 3 % de la
+  // línea base, NO VALIDADO hasta tener el TE propio con ≥ 3 pruebas (VT1 [I]); aviso de posible artefacto si la V200
+  // cambia > 5 % en ≤ 31 días (VT2 [I]).
+  double v200_te_pct = 3.0;
+  double v200_swc_pct = 0.0;
+  double v200_jump_pct = 5.0;
+  int v200_jump_days = 31;
 };
 
 struct KbDay {
