@@ -26,7 +26,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ## 2026-11-21 — Motor 2.0.0-dev27 (Training Analytics 1.1.0, KB-1 1.25.0) · iPad — Ficha de campo, regla A4 y base del planificador
 **Autor:** Claude (tarea programada: pasos 2 y 4 del informe «Motor AVO Equine: análisis completo de funciones») ·
-**Rama:** `claude/ficha-campo-carrera-a4` · **CI:** `build-equine-engine.yml` en la rama: CI_PENDIENTE
+**Rama:** `claude/ficha-campo-carrera-a4` · **CI:** `build-equine-engine.yml` en la rama: run 44891879590 (n.º 53, `2578464`) ✅
 **Qué cambia:**
 - **Motor (Training Analytics 1.1.0):** ficha de campo opcional en `extra` y en el resumen de sesión: `tipo_sesion`
   (TRABAJO, TRABAJO_REFERENCIA_1000, CARRERA, TRIAL, DESCANSO_ACTIVO), `pista.franja` (ORILLA_FIRME, HUMEDA_PROFUNDA,
@@ -56,7 +56,7 @@ App/AppModel+Training,App/AppModel+Shell,Views/TrainingRatingCard,Views/StableVi
 `ipad/AVOiPadTests/TrainingAnalyticsTests.swift`, `docs/PROTOCOLO_PRUEBAS_CAMPO_PROTOTIPO.md`.
 **No se ha tocado:** contratos binarios, firmware, workflows, firmas, `Info.plist` ni número de build.
 **Validación:** pruebas locales del motor ✅ con ASan/UBSan (107 casos, 1.790 comprobaciones, 0 fallos); fixtures en
-Release ✅ (`check_fixtures.py`, regeneradas: solo versión) · CI del motor: CI_PENDIENTE · iPad: **sin compilar** (no hay
+Release ✅ (`check_fixtures.py`, regeneradas: solo versión) · CI del motor ✅ run 44891879590 (Linux ASan/UBSan, Release, fixtures, JNI; Windows; Android ×3) · iPad: **sin compilar** (no hay
 Xcode en la nube; el CI de TestFlight solo corre al fusionar en `develop`) · **NO VERIFICADO** con caballos reales.
 **Pendiente:** Android y Windows no usan todavía Training Analytics (no llaman a `avo_eq_training_*`): la ficha y las
 carreras previstas llegarán cuando se porte la historia de entrenamientos; mostrar `estado.planificador` en la pantalla
