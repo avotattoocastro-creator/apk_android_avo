@@ -102,6 +102,20 @@ Libres de PSRAM octal (35–37) y de la flash (26–32). Se revisa pin a pin al 
 - Proveedor y tipo de eSIM (con o sin eUICC).
 - ¿Vibrador para avisos al jinete? (≈ 4 mm de diámetro; cabe en la franja inferior)
 
+## REV 1 (21/11/2026, 11:11–11:21): Cat 4 + pantalla AMOLED (decisiones del usuario)
+- **Módem Cat 4** para subir a velocidad parecida a la del móvil: **SIMCom SIM7600E-H** (LCC 30 × 30, LCSC C5338795,
+  Cat 4 150/50 Mbit/s). El Quectel EG25-G no está en LCSC/JLC. Mismos comandos AT que las LilyGO T-SIM7600.
+- Conexión **USB** entre ESP32-S3 y módem (conmutador TS3USB221A: en el DOCK el USB va al pogo, fuera va al módem).
+  Techo real ≈ 8 Mbit/s (USB *full speed* del S3): ≈ 40–60 s para 40 MB (estimado).
+- **ESP32-S3-WROOM-1U-N16R8** (como el casco) con antena FPC de 2,4 GHz por U.FL.
+- **Pantalla AMOLED 2,06" 410 × 502 (CO5300 + táctil)** en la cara B, la misma del pecho PROTOTIPO.
+- Todo sellado: solo el pogo de 5 contactos por fuera.
+- Placa **60 × 40 × 1,0 mm**, 4 capas. Colocación: `out/PRESUPUESTO/*_COLOCACION.svg`.
+- **Paquete solo para presupuesto** (`PCB/fuente/presupuesto_rev1.py` → `out/PRESUPUESTO/`): Gerber de contorno de 4
+  capas sin pistas, BOM con códigos LCSC (127 piezas, 37 referencias) y CPL con posiciones aproximadas. **NO FABRICAR.**
+- Fuera de JLC: eSIM (la da el operador), panel AMOLED y su conector FPC, antenas y batería.
+- Siguiente: huellas EasyEDA en el CI (`easyeda-fp-pasarela.yml`, solo en esta rama) → esquema → ruteado y DRC/ERC.
+
 ## Siguiente paso
 Con el visto bueno: esquema y placa en KiCad 9 con el mismo flujo que el casco y la cincha (Python → Freerouting en el
 CI → DRC, ERC y paridad → puerta de fabricación). Después, la cápsula en FreeCAD.

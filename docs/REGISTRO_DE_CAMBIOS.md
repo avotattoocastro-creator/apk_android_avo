@@ -38,7 +38,10 @@ cápsula) · **Rama:** `claude/pasarela-lte-pcb-rev0` · **CI:** no aplica (sin 
 **No se ha tocado:** firmware, apps, contratos binarios ni workflows. La fase 1 (NTRIP + LIVE) no cambia contratos.
 **Validación:** IMPLEMENTADO (anteproyecto) · sin KiCad · **NO VERIFICADO**. Existencias de JLC sin consultar (el proxy
 de la sesión bloquea su API).
-**Pendiente:** elegir módem (EG800Q-EU o A7670E) y eSIM/operador; validar NTRIP + LIVE con una LilyGO (PROTOTIPO),
+**REV 1 (11:21):** Cat 4 SIM7600E-H por USB + AMOLED 2,06" + WROOM-1U; placa 60 × 40; paquete **solo para
+presupuesto** en `out/PRESUPUESTO/` (sin pistas). **Workflow nuevo** `easyeda-fp-pasarela.yml` (copia del de casco V5,
+solo en esta rama; avisado al usuario). 
+**Pendiente:** eSIM/operador; panel AMOLED concreto; validar NTRIP + LIVE con una LilyGO (PROTOTIPO),
 incluido el alcance BLE desde el bolsillo; después, esquema y placa en KiCad 9 y la cápsula.
 
 ## 2026-11-21 — Espalda 3.15.0 · Pecho 3.7.11 · Android 2.16-fixdiag-dev1 — Diagnóstico de «no hay RTK FIX» (BackStatus v4)
