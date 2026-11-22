@@ -24,6 +24,30 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-22 — Motor 2.0.0-dev30 · KB-1 1.28.0 — Investigación nocturna: auditoría de 12 fuentes, TE de V200 en varias razas, carga y FC en Asia (cuesta de la JRA), América, Oceanía y África
+**Autor:** Claude (tarea programada nocturna, sin supervisión) · **Rama:** `claude/kb-noche-2026-11-22` (desde `develop` `daa2bb7`) · **CI:** ver PR
+**Qué cambia:**
+- Estudio `equine-intelligence/knowledge/estudios/2026-11-22_noche_auditoria_ecg_carga_cuesta_jra_te_v200.md`.
+- **Auditoría de 12 fuentes, 9 mejoradas.** Pasan a texto completo Önder 2022, Reef 2014, Marr 2020, Ikeda 2019, Nomura 2019, Morrice-West 2020 y Georgopoulos & Parkin 2017. Se corrigen:
+  - Marr 2020: son alteraciones del ritmo, no causas de bajo rendimiento.
+  - Georgopoulos 2017: la población es de EE. UU. y Canadá.
+  - Nomura 2019: el WBGT de 28–33 °C es una norma externa.
+  - Evans 1993: la etiqueta pasa de [E] a [E-r], y la prueba es en cinta.
+  - Ikeda 2019: solo tiene OR univariables.
+  - Yıldırım 2025: el pico de los PSI es a los 2–3 años.
+
+  **Ningún valor del motor cambia.**
+- Se añaden 31 fuentes: JRA (artículos e informes institucionales), Corea, Hong Kong, Golfo, Nueva Zelanda, Chile, Colombia, Brasil, EE. UU., Sudáfrica y trotones. Los datos de otras razas llevan `raza_fuente` y la etiqueta [I-raza].
+- Reglas **PD1** (pendiente), **TE2** (TE de V200 según las condiciones), **RC1** (THR100) y **FW1** (FC de un calentamiento fijo) como PROPUESTA [I]. No se implementan.
+- `base_cientifica.json` 1.28.0, `KNOWLEDGE_VERSION` 1.28.0, `ENGINE_VERSION` 2.0.0-dev30 y prueba de versión en `test_knowledge.cpp`. Las fixtures se regeneran solo por la cadena de versión (4 diferencias por archivo). Bloque 22/11 en `14_BASE_CIENTIFICA.md`.
+
+**Por qué:** es la auditoría nocturna de fuentes de la KB-1. Faltaba el texto completo de fuentes que sostienen A11, P1/P6, el criterio de calor y el TFDS. También estaba pendiente el TE de V200 para VT1.
+**No se ha tocado:** lógica del motor, firmware, apps, contratos binarios, workflows, firmas, `Info.plist` ni número de build.
+**Validación:** pruebas locales ✅ con ASan/UBSan (`avo_eq_tests`) y fixtures OK en Release. CI en el PR. **NO VERIFICADO** con caballos reales.
+**Pendiente:** TE de V200 de PSI o árabe en texto completo. Informes de pendiente de la JRA revisados por pares. Trujillo 2012 y Bravo 2009 (Chile) desde un navegador. Yıldırım 2025 completo.
+
+---
+
 ## 2026-11-21 — iPad — Corrección de la prueba `ScientificBaseTests.testHistoryStatusAndRules` (PR #118)
 **Autor:** Claude (chat integrador) · **Rama:** `claude/fix-ipad-kb-test` · **CI:** iPad al integrar
 **Qué cambia:** la prueba esperaba 900 m en la banda B3 de la última sesión, pero la fixture trae `bandas_m [3200, 500, 0]`
