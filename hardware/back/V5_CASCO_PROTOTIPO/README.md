@@ -46,8 +46,9 @@ URTK1.2 lo da el RT9080 (se apaga con ZED_EN), como el prototipo de la espalda d
 
 ## Programar y desmontar sin soldar (19/11)
 - **USB-C J16** (canto superior, cara F): programar y cargar con la placa **fuera de la cápsula**. El S3 entra solo en
-  descarga por USB nativo; si un firmware lo desactiva, puentear TP2 (BOOT) a GND al arrancar. **No conectar el USB-C y
-  el pogo a la vez.**
+  descarga por USB nativo; si un firmware lo desactiva, puentear TP2 (BOOT) a GND al arrancar. Mejor no conectar el USB-C y
+  el pogo a la vez: desde el 23/11 el Schottky D18 impide que el 5 V del pogo entre en el ordenador, pero D± siguen
+  en paralelo y el USB puede no enumerar.
 - **Batería por coleta:** soldar una vez a BAT+ (J2) / BAT− (J6) un cable corto con conector JST PH 2.0 (el de la celda).
   El empalme va tumbado en la franja del fondo entre la batería y la pared, junto al costado por donde salen los hilos
   de la celda; sujetarlo con una gota de silicona o kapton (el PH no tiene pestillo). **Medir la polaridad** de la
@@ -75,3 +76,9 @@ URTK1.2 lo da el RT9080 (se apaga con ZED_EN), como el prototipo de la espalda d
 - `PCB/fuente/placa_masa.py` → `PCB/PLACA_MASA/`: Gerber y taladros de la placa de masa (2 capas, 0,8 mm) y su
   geometría para el CAD.
 - `CAD/avo_casco_v5p.py` — cápsula; CI `build-back-v5p-cad.yml`. PCB: CI `build-back-v5p-pcb.yml`.
+
+## Auditoría externa (22–23/11/2026)
+- NTC RT2 sobre el centro de la batería, a 25,9 mm del BQ24072 (antes 3,0 mm: medía el calor del cargador).
+- Anillo LED a 4,28 V (R25 620k / R26 100k), como la REV B: margen del DIN de 3,3 V ≈ 0,3 V.
+- Schottky D18 (B5819W SL) en el VBUS del USB-C J16. Revisar su giro en la vista previa de JLC (cátodo = pad 1).
+- Detalle: `docs/REGISTRO_DE_CAMBIOS.md` (23/11) y el documento de auditoría del proyecto.

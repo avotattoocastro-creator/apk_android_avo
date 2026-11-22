@@ -23,7 +23,7 @@ from router import GRID, poly_mask, seg_mask                 # noqa: E402
 from sexpr import find, find_all, parse                      # noqa: E402
 
 SIGNAL_W = {"Potencia": 0.3, "Qi_AC": 0.3, "Default": 0.2}
-POWER = {D.VBAT, D.VBUS, D.VSYS, "BAT_IN", "POGO_VBUS", D.VZED, D.V3}
+POWER = {D.VBAT, D.VBUS, D.VSYS, "BAT_IN", "POGO_VBUS", "USBC_VBUS", D.VZED, D.V3}
 QIAC = set()
 
 
@@ -132,7 +132,8 @@ def clusters(net, pads, segs, vias):
         if not (layers(items[i]) & layers(items[j])):
             return False
         if ki == "pad" and kj == "pad":
-            return False          # pads of the same net never touch by design
+            # pads of the same net never touch by design, except stacked pads of one footprint (USB-C: A4/B9, A9/B4)
+            return math.hypot(di["c"][0] - dj["c"][0], di["c"][1] - dj["c"][1]) < 0.01
         if ki == "pad" or kj == "pad":
             pad, other = (di, (kj, dj)) if ki == "pad" else (dj, (ki, di))
             k2, d2 = other
@@ -252,6 +253,11 @@ def main():
                        else "AVO_BACK_V5P_PCB.kicad_pcb")
     segs, vias, fps = read_board(src)
     bad = check_positions(fps)
+    # --moved REF1,REF2: piezas movidas o nuevas a propósito; sus pistas viejas quedan sueltas y se podan, y las redes
+    # se rutean otra vez (usar junto con --clear sobre la zona nueva para quitar pistas de otras redes que la crucen)
+    if "--moved" in sys.argv:
+        moved = set(sys.argv[sys.argv.index("--moved") + 1].split(","))
+        bad = [b_ for b_ in bad if b_ not in moved]
     if bad:
         print("La placa ruteada no corresponde a la colocación actual: %s" % ", ".join(bad[:12]))
         sys.exit(2)
@@ -288,7 +294,10 @@ def main():
         i = sys.argv.index("--clear")
         x0, y0, x1, y1 = map(float, sys.argv[i + 1:i + 5])
         inb = lambda p: x0 <= p[0] <= x1 and y0 <= p[1] <= y1
-        hit = set(s_["net"] for s_ in segs if s_["net"] and s_["net"] not in build.PLANES and (inb(s_["a"]) or inb(s_["b"])))
+        box = [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
+        # auditoría 22/11: también las pistas que CRUZAN la caja sin terminar en ella (antes solo por sus extremos)
+        hit = set(s_["net"] for s_ in segs if s_["net"] and s_["net"] not in build.PLANES and
+                  (inb(s_["a"]) or inb(s_["b"]) or seg_poly(s_["a"], s_["b"], box) <= s_["w"] / 2))
         hit |= set(v["net"] for v in vias if v["net"] and v["net"] not in build.PLANES and inb(v["p"]))
         segs[:] = [s_ for s_ in segs if s_["net"] not in hit]
         vias[:] = [v for v in vias if v["net"] not in hit]

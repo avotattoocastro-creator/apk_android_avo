@@ -43,7 +43,7 @@ DECAP = {"C21": ("U3", "1"), "C22": ("U3", "5"), "C60": ("U7", "1"), "C61": ("J1
          "C41": ("J3", "4"),
          "C80": ("U8", "1"), "TP9": ("U7", "5"), "TP6": ("U3", "5"), "TP8": ("U3", "1"), "TP7": ("F1", "2"),
          "R60": ("U7", "3"), "R40": ("Q4", "1"), "D2": ("P1", "1"), "D3": ("P5", "1"), "R18": ("U6", "1"),
-         "R19": ("U6", "3"), "R6": ("U2", "16"), "R7": ("U2", "12"), "RT2": ("U2", "1"),
+         "R19": ("U6", "3"), "R6": ("U2", "16"), "R7": ("U2", "12"),
          "R8": ("U2", "5"), "R9": ("U4", "31"), "R10": ("U4", "32"),   # REV B: pull-ups de estado junto al micro (despejan OUT del BQ24072) "R22": ("U6", "5"), "R23": ("U6", "5"),
          "R20": ("P5", "1"), "R21": ("P5", "1"), "R30": ("J16", "A5"), "R31": ("J16", "B5"),
          "C90": ("D10", "2"), "C91": ("D11", "2"), "C92": ("D12", "2"), "C93": ("D13", "2"),
@@ -59,6 +59,9 @@ DECAP = {"C21": ("U3", "1"), "C22": ("U3", "5"), "C60": ("U7", "1"), "C61": ("J1
          # REV B: pull-ups y serie de la microSD junto a sus pines (canal entre el WROOM y J3)
          "R41": ("J3", "3"), "R42": ("J3", "7"), "R43": ("J3", "8"), "R44": ("J3", "1"), "R45": ("J3", "2"),
          "R46": ("J3", "5")}
+# auditoría 22/11/2026: piezas con objetivo fijo (no junto a un pin): la NTC sobre el centro de la batería, lejos del
+# BQ24072, y el Schottky del USB-C junto a J16
+OBJETIVO = {"RT2": (8.0, -3.0), "D18": (8.0, 21.0)}
 GAP = 0.12            # separación mínima entre patios
 STEP = 0.2
 
@@ -158,6 +161,8 @@ def main():
     BIG = {D.GND, D.V3, D.VSYS, D.VBAT, D.VBUS, D.VZED, D.VSD}
 
     def target_of(p):
+        if p["ref"] in OBJETIVO:
+            return OBJETIVO[p["ref"]]
         if p["ref"] in DECAP:
             ic, num = DECAP[p["ref"]]
             q = byref[ic]

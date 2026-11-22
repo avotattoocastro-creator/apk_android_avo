@@ -24,6 +24,29 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-23 — Casco V5 PROTOTIPO A — correcciones de la auditoría externa (NTC, anillo a 4,28 V, Schottky del USB-C)
+**Autor:** Claude · **Rama:** `claude/casco-v5p-auditoria-22-11` (PR a `feature/back-v5-casco`) · **CI:** pendiente (PCB `build-back-v5p-pcb.yml`)
+**Qué cambia (decisión del usuario, 22/11 23:29):**
+- **NTC RT2** sobre el centro de la batería (11, −3), a 25,9 mm del BQ24072 (antes 3,0 mm: medía el calor del cargador,
+  ≈ 1,15 W al cargar, y podía cortar la carga por TS caliente con la celda fría). A > 19 mm de U3, U7, U11 y L71.
+- **Anillo LED a 4,28 V:** R25 1M → 620k (C137952), R26 150k → 100k (C25741), como la REV B. Con 4,56 V el VIH del
+  SK6812 (0,7 × VDD = 3,19 V) dejaba ≈ 0,1 V de margen al DIN de 3,3 V.
+- **Schottky D18** (B5819W SL, C8598, Basic, SOD-123) entre el VBUS del USB-C J16 (red nueva `USBC_VBUS`) y POGO_VBUS:
+  con el USB-C y el pogo conectados a la vez, el 5 V del pogo ya no entra en el ordenador. El pogo sigue sin caída;
+  el USB-C del banco pierde ≈ 0,5 V (VBUS_DET ≈ 2,7 V > VIH 2,475 V). D± siguen en paralelo: con los dos conectados
+  el USB puede no enumerar, pero no hay daño.
+- `repair.py`: opción `--moved` (piezas movidas o nuevas), `--clear` también quita las pistas que **cruzan** la caja
+  (antes solo las que terminaban en ella: una pista VSYS habría quedado sobre el pad de D18) y los pads apilados de
+  la misma red (USB-C A4/B9, A9/B4) cuentan como unidos. `place_v5.py`: objetivos fijos (`OBJETIVO`) para RT2 y D18.
+- Rehecho el ruteado solo de las redes afectadas (CHG_TS, POGO_VBUS, USBC_VBUS, VSYS, VLED, VBAT, BAT_ADC, +3V3_SD,
+  ZED_TX2_C, LED_D3); el resto de la placa no cambia. Comprobación local de separaciones: 0 casos nuevos por debajo de
+  0,10 mm (los 3 restantes ya estaban en la placa anterior, que pasó el DRC).
+**No se ha tocado:** REV B (`V5_CASCO`): su NTC RT2 también está a 3,8 mm del BQ24072 (**pendiente**). Avisos de
+serigrafía del DRC (J16 recortado por el canto, círculos de U12/L71): solo estéticos, sin cambiar.
+**Validación:** IMPLEMENTADO. CI pendiente. **NO VERIFICADO** en hardware. Hay que revisar el giro de D18 (cátodo = pad 1)
+en la vista previa de JLC y volver a subir Gerber, BOM y CPL.
+**Pendiente:** medir la URTK1.2 con calibre (BLOQUEANTE para pedir); mismo cambio de la NTC en la REV B.
+
 ## 2026-11-19 — Casco V5 PROTOTIPO A — USB-C de programación y empalme de la batería en línea
 **Autor:** Claude · **CI:** puerta superada en `816c26e` (0 errores DRC/ERC, 0 sin conectar; avisos solo de serigrafía) · CAD 0 interferencias, cápsula 61,4 × 61,4 × 35,1 · revisado con la skill `avo-revision-pcb-cad` (tramo colgante de USB_DP_C quitado, rótulos del pogo y logotipo fuera del cobre)
 **Qué cambia:** USB-C J16 (HRO TYPE-C-31-M-12, C165948) en el canto superior de la cara F, en paralelo con los pads
