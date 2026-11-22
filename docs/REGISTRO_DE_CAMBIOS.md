@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-23 — Casco V5 PROTOTIPO A — correcciones de la auditoría externa (NTC, anillo a 4,28 V, Schottky del USB-C)
-**Autor:** Claude · **Rama:** `claude/casco-v5p-auditoria-22-11` (PR a `feature/back-v5-casco`) · **CI:** pendiente (PCB `build-back-v5p-pcb.yml`)
+**Autor:** Claude · **Commits:** `2c2f068`, `38b9be9` · **PR:** #125 (a `feature/back-v5-casco`) · **CI:** PCB run 45082937520, **puerta superada** (0 errores DRC/ERC, 0 sin conectar, 0 cortocircuitos, paridad esquema ↔ placa; 5 avisos de serigrafía, los mismos de antes). El primer intento (run 45082104434) falló por 2 conexiones incompletas: faltaba la vía de masa de RT2 (su pad GND solo tocaba una isla de cobre) y un tramo de 0,4 mm de VLED junto a C99; corregido en `38b9be9`
 **Qué cambia (decisión del usuario, 22/11 23:29):**
 - **NTC RT2** sobre el centro de la batería (11, −3), a 25,9 mm del BQ24072 (antes 3,0 mm: medía el calor del cargador,
   ≈ 1,15 W al cargar, y podía cortar la carga por TS caliente con la celda fría). A > 19 mm de U3, U7, U11 y L71.
@@ -43,7 +43,8 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
   0,10 mm (los 3 restantes ya estaban en la placa anterior, que pasó el DRC).
 **No se ha tocado:** REV B (`V5_CASCO`): su NTC RT2 también está a 3,8 mm del BQ24072 (**pendiente**). Avisos de
 serigrafía del DRC (J16 recortado por el canto, círculos de U12/L71): solo estéticos, sin cambiar.
-**Validación:** IMPLEMENTADO. CI pendiente. **NO VERIFICADO** en hardware. Hay que revisar el giro de D18 (cátodo = pad 1)
+**Validación:** COMPILADO / CI. **NO VERIFICADO** en hardware. Las existencias del informe son de la consulta del 18/11:
+C8598 sale «sin respuesta», pero su ficha de JLC (consultada el 23/11) dice Basic y en stock. Hay que revisar el giro de D18 (cátodo = pad 1)
 en la vista previa de JLC y volver a subir Gerber, BOM y CPL.
 **Pendiente:** medir la URTK1.2 con calibre (BLOQUEANTE para pedir); mismo cambio de la NTC en la REV B.
 
