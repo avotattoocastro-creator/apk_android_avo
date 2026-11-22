@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-22 — Motor 2.0.0-dev30 · KB-1 1.28.0 — Investigación nocturna: auditoría de 12 fuentes, TE de V200 en varias razas, carga y FC en Asia (cuesta de la JRA), América, Oceanía y África
-**Autor:** Claude (tarea programada nocturna, sin supervisión) · **Rama:** `claude/kb-noche-2026-11-22` (desde `develop` `daa2bb7`) · **CI:** ver PR
+**Autor:** Claude (tarea programada nocturna, sin supervisión) · **Rama:** `claude/kb-noche-2026-11-22` (desde `develop` `daa2bb7`) · **CI:** `build-equine-engine.yml` run 44981278300 ✅ (`8fae5bb`)
 **Qué cambia:**
 - Estudio `equine-intelligence/knowledge/estudios/2026-11-22_noche_auditoria_ecg_carga_cuesta_jra_te_v200.md`.
 - **Auditoría de 12 fuentes, 9 mejoradas.** Pasan a texto completo Önder 2022, Reef 2014, Marr 2020, Ikeda 2019, Nomura 2019, Morrice-West 2020 y Georgopoulos & Parkin 2017. Se corrigen:
@@ -43,7 +43,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 **Por qué:** es la auditoría nocturna de fuentes de la KB-1. Faltaba el texto completo de fuentes que sostienen A11, P1/P6, el criterio de calor y el TFDS. También estaba pendiente el TE de V200 para VT1.
 **No se ha tocado:** lógica del motor, firmware, apps, contratos binarios, workflows, firmas, `Info.plist` ni número de build.
-**Validación:** pruebas locales ✅ con ASan/UBSan (`avo_eq_tests`) y fixtures OK en Release. CI en el PR. **NO VERIFICADO** con caballos reales.
+**Validación:** pruebas locales ✅ con ASan/UBSan (`avo_eq_tests`) y fixtures OK en Release. CI run 44981278300 ✅. **NO VERIFICADO** con caballos reales.
 **Pendiente:** TE de V200 de PSI o árabe en texto completo. Informes de pendiente de la JRA revisados por pares. Trujillo 2012 y Bravo 2009 (Chile) desde un navegador. Yıldırım 2025 completo.
 
 ---
