@@ -1,0 +1,28 @@
+** Drc report for AVO_BACK_V5P_PCB.kicad_pcb **
+** Created on 2026-11-22T23:23:44+0000 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 5 DRC violations **
+[silk_edge_clearance]: Silkscreen clipped by board edge
+    Rule: board setup constraints silk; warning
+    @(125.0000 mm, 72.0000 mm): Segment on Edge.Cuts
+    @(99.5000 mm, 73.6500 mm): Segment of J16 on F.Silkscreen
+[silk_edge_clearance]: Silkscreen clipped by board edge
+    Rule: board setup constraints silk; warning
+    @(125.0000 mm, 72.0000 mm): Segment on Edge.Cuts
+    @(108.9000 mm, 73.6500 mm): Segment of J16 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(78.4560 mm, 78.2830 mm): Segment on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(113.0000 mm, 95.0000 mm): Circle of U12 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(82.4600 mm, 85.8000 mm): Circle of L71 on F.Silkscreen
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** End of Report **

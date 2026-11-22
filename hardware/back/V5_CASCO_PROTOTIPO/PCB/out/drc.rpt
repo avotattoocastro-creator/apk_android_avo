@@ -1,15 +1,8 @@
 ** Drc report for AVO_BACK_V5P_PCB.kicad_pcb **
-** Created on 2026-11-22T23:14:46+0000 **
+** Created on 2026-11-22T23:23:44+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 7 DRC violations **
-[track_dangling]: Track has unconnected end
-    Local override; warning
-    @(83.8750 mm, 86.7750 mm): Track [VLED] on F.Cu, length 0.4500 mm
-[connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0428 mm) (F.Cu)
-    Rule: board setup constraints; warning
-    @(83.8750 mm, 86.7750 mm): Track [VLED] on F.Cu, length 0.4500 mm
-    @(83.3800 mm, 87.5000 mm): Pad 1 [VLED] of C99 on F.Cu
+** Found 5 DRC violations **
 [silk_edge_clearance]: Silkscreen clipped by board edge
     Rule: board setup constraints silk; warning
     @(125.0000 mm, 72.0000 mm): Segment on Edge.Cuts
@@ -28,15 +21,7 @@
     Local override; warning
     @(82.4600 mm, 85.8000 mm): Circle of L71 on F.Silkscreen
 
-** Found 2 unconnected pads **
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
-    @(128.0000 mm, 125.0000 mm): Zone [GND] on B.Cu, priority 0
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(83.4750 mm, 86.4250 mm): Track [VLED] on F.Cu, length 0.3500 mm
-    @(83.8750 mm, 86.7750 mm): Track [VLED] on F.Cu, length 0.4500 mm
+** Found 0 unconnected pads **
 
 ** Found 0 Footprint errors **
 
