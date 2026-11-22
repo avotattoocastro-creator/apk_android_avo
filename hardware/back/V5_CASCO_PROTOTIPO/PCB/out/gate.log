@@ -1,26 +1,32 @@
-# AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de fabricación
+# AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de diagnóstico
 
-- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `9ddca050f2e9ab941257092a480921d9a2892270` · ejecución de CI: 44424430681
+- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
+- Commit: `2c2f068437a6226400813c96d246db66ac698ac8` · ejecución de CI: 45082104434
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 56 × 56 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo bajo la URTK1.2, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
-- Componentes: 136 en total, 109 para montar, 1 sin montar (DNP: C69), 26 a mano (pads de hilo y de prueba)
-- Pistas: 1133 · vías: 192 · ruteado completo (0 conexiones incompletas)
+- Componentes: 137 en total, 110 para montar, 1 sin montar (DNP: C69), 26 a mano (pads de hilo y de prueba)
+- Pistas: 1100 · vías: 218 · ruteado INCOMPLETO (2 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | correcto | 0 |
+| DRC: conexiones incompletas | **FALLA** | 2 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
 
+### Conexiones incompletas
+- Zone [GND] on F.Cu, priority 0 ↔ Zone [GND] on In1.Cu, priority 0
+- Track [VLED] on F.Cu, length 0.3500 mm ↔ Track [VLED] on F.Cu, length 0.4500 mm
+
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 3
 - silk_edge_clearance: 2
+- track_dangling: 1
+- connection_width: 1
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: ninguna
@@ -28,7 +34,7 @@
 - Revisar el giro de cada pieza en la vista previa de JLCPCB: el CPL lleva las correcciones de fuente/jlc_correcciones.json; J3 (microSD) y U8 no tienen huella EasyEDA con la que comprobarlas.
 
 ## Modelo 3D (STEP y renders, no afecta a la fabricación)
-- Modelos de la librería de KiCad 9.0.0 descargados: 10; sin descargar: Connector_USB.3dshapes/USB_C_Receptacle_HRO_TYPE-C-31-M-12.step, Package_DFN_QFN.3dshapes/VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm.step
+- Modelos de la librería de KiCad 9.0.0 descargados: 11; sin descargar: Connector_USB.3dshapes/USB_C_Receptacle_HRO_TYPE-C-31-M-12.step, Package_DFN_QFN.3dshapes/VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm.step
 - ESP32-S3-WROOM-1U: modelo de Espressif (`fuente/3d`). Piezas de EasyEDA y pads de hilo/prueba: sin modelo 3D.
 
 ## Existencias en JLCPCB (consulta del CI: 2026-11-18 11:44 UTC)
@@ -61,21 +67,23 @@
 | C25744 | 0402WGF1002TCE | 9 | 36586442 | Basic | 0.0015 US$ |
 | C11702 | 0402WGF1001TCE | 4 | 30290405 | Basic | 0.0013 US$ |
 | C36871 | 0402WGF6802TCE | 1 | 1080092 | Extended | 0.0012 US$ |
-| C25755 | 0402WGF1503TCE | 2 | 1002574 | Extended | 0.0011 US$ |
-| C26083 | 0402WGF1004TCE | 4 | 2854070 | Basic | 0.0011 US$ |
+| C25755 | 0402WGF1503TCE | 1 | 1002574 | Extended | 0.0011 US$ |
+| C26083 | 0402WGF1004TCE | 3 | 2854070 | Basic | 0.0011 US$ |
 | C25104 | 0402WGF3300TCE | 4 | 2218307 | Basic | 0.0011 US$ |
 | C25879 | 0402WGF2201TCE | 2 | 2895113 | Basic | 0.0011 US$ |
 | C25092 | 0402WGF220JTCE | 3 | 4483746 | Basic | 0.0010 US$ |
-| C25741 | 0402WGF1003TCE | 10 | 8706634 | Basic | 0.0009 US$ |
+| C25741 | 0402WGF1003TCE | 11 | 8706634 | Basic | 0.0009 US$ |
 | C165948 | ? | 1 | sin respuesta | Extended | ? |
+| C8598 | ? | 1 | sin respuesta | Extended | ? |
 | C25905 | ? | 2 | sin respuesta | Extended | ? |
 | C5378721 | ? | 8 | sin respuesta | Extended | ? |
+| C137952 | ? | 1 | sin respuesta | Extended | ? |
 
-- Piezas sin existencias para 5 placas: C165948, C25905, C5378721
+- Piezas sin existencias para 5 placas: C165948, C8598, C25905, C5378721, C137952
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **sí**
-- Apto para solicitar prototipos: **sí, pendiente de validación física**
+- Diseño verificado por software (KiCad 9 en el CI): **no**
+- Apto para solicitar prototipos: **no**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)
@@ -88,4 +96,4 @@
 - REV B: firmware nuevo (BACK 5.x): POWER_HOLD (GPIO46) al arrancar, pulsación larga, LED_PWR (GPIO48), I²C (MAX17048 + LSM6DSV16X).
 - Con el anillo apagado, GPIO47 a 0 (no alimentar los LED por DIN). PROTO A: 8 LED (D14 a la derecha de la salida de la microSD).
 - Nada de esto se ha fabricado ni medido: no es un prototipo validado.
-::notice title=Puerta de fabricación::SUPERADA
+::notice title=Puerta de fabricación::NO SUPERADA
