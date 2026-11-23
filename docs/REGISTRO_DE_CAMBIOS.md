@@ -43,7 +43,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 **Por qué:** auditoría nocturna de la KB-1. Cinco funciones implementadas (z robusto, CUSUM, CUSUM autoiniciado, umbral de cambio y contracción) se apoyaban en fuentes sin auditar; el planificador (capa 2) y las líneas base necesitan saber qué carga y qué prior tienen respaldo.
 **No se ha tocado:** lógica del motor, firmware, apps, contratos binarios, workflows, firmas, `Info.plist` ni número de build.
-**Validación:** pruebas locales ✅ con ASan/UBSan (`avo_eq_tests`) y en Release; fixtures OK. **NO VERIFICADO** con caballos reales.
+**Validación:** pruebas locales ✅ con ASan/UBSan (`avo_eq_tests`) y en Release; fixtures OK. CI run 45108066980 ✅. **NO VERIFICADO** con caballos reales.
 **Pendiente:** PDF de Mukai 2007 (J-STAGE) a mano; ARL del NIST con 0,5σ y h 5 a mano; originales de Banister, Williams y Foster; V200/FCmax por sexo (no publicado).
 
 ---
