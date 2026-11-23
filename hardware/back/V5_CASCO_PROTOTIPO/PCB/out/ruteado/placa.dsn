@@ -219,7 +219,7 @@
       (place R30 104760.000000 -81570.000000 front 0.000000 (PN 5k1))
       (place R31 101760.000000 -81570.000000 front 0.000000 (PN 5k1))
       (place R18 94510.000000 -80440.000000 front 90.000000 (PN 22R))
-      (place R19 97180.000000 -81660.000000 front 0.000000 (PN 22R))
+      (place R19 97180.000000 -81660.000000 front 180.000000 (PN 22R))
       (place R22 87960.000000 -94970.000000 front 0.000000 (PN 1k))
       (place R23 88550.000000 -93190.000000 front 90.000000 (PN 1k5))
       (place R6 87800.000000 -112250.000000 front 0.000000 (PN 1k5))
@@ -1753,7 +1753,7 @@
     (wire (path F.Cu 300  114500 -89912.5  114575 -90125  114875 -90425  114925 -90425)(net GND)(type route))
     (wire (path F.Cu 300  116560 -89270  116575 -89025  116575 -88575)(net GND)(type route))
     (wire (path F.Cu 300  113340 -91160  113325 -91425  113325 -91875)(net GND)(type route))
-    (wire (path F.Cu 300  87130 -93300  87125 -93775  87125 -94225)(net GND)(type route))
+    (wire (path F.Cu 300  87130 -93300  87125 -93275)(net GND)(type route))
     (wire (path F.Cu 200  87250 -116462  87125 -116825  86475 -117475  86290 -117790)(net CHG_EN2)(type route))
     (wire (path F.Cu 200  89462.5 -115250  89475 -115125  89475 -114825  89462.5 -114750)(net VSYS)(type route))
     (wire (path F.Cu 200  89462.5 -115250  89825 -115325  91525 -115325  91825 -115625
@@ -1768,9 +1768,8 @@
     (wire (path In2.Cu 200  93700 -74500  94475 -74825  95625 -75975  96625 -75975)(net USB_DM_C)(type route))
     (wire (path F.Cu 200  96625 -75975  97775 -77125  97960 -77762.5  97975 -78375
             97975 -79425  97960 -80037.5  98225 -80425  98675 -80425)(net USB_DM_C)(type route))
-    (wire (path In2.Cu 200  98675 -80425  98675 -81475)(net USB_DM_C)(type route))
-    (wire (path F.Cu 200  98675 -81475  98225 -81925  98225 -82175  98125 -82275  97225 -82275
-            96925 -81975  96670 -81660)(net USB_DM_C)(type route))
+    (wire (path In2.Cu 200  98675 -80425  98675 -81175  98375 -81475)(net USB_DM_C)(type route))
+    (wire (path F.Cu 200  98375 -81475  97925 -81475  97690 -81660)(net USB_DM_C)(type route))
     (wire (path F.Cu 200  97960 -77762.5  98225 -77475  102575 -77475  103925 -78825
             103925 -78975  103950 -79695)(net USB_DM_C)(type route))
     (wire (path F.Cu 200  103925 -78825  104075 -78675  104775 -78675  104875 -78775
@@ -1876,9 +1875,9 @@
     (via "Via[0-3]_500:300_um"  114925 -90425 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  116575 -88575 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  113325 -91875 (net GND)(type route))
-    (via "Via[0-3]_500:300_um"  87125 -94225 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  87125 -93275 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  96625 -75975 (net USB_DM_C)(type route))
     (via "Via[0-3]_500:300_um"  98675 -80425 (net USB_DM_C)(type route))
-    (via "Via[0-3]_500:300_um"  98675 -81475 (net USB_DM_C)(type route))
+    (via "Via[0-3]_500:300_um"  98375 -81475 (net USB_DM_C)(type route))
   )
 )

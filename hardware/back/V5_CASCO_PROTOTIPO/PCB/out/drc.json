@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-11-23T18:19:09+0000",
+    "date": "2026-11-23T19:45:45+0000",
     "included_severities": [
         "error",
         "warning",
@@ -15,43 +15,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 2 [+3V3_SD] of R42 on F.Cu",
+                    "description": "Track [+3V3_SD] on F.Cu, length 0.8517 mm",
                     "pos": {
-                        "x": 98.09,
-                        "y": 104.32
+                        "x": 100.475,
+                        "y": 106.075
                     },
-                    "uuid": "b69755b9-3c69-51a7-b2bc-5d4f9834361c"
+                    "uuid": "147a09d8-be75-41db-8e71-7f3bc56f5adb"
                 },
                 {
-                    "description": "Track [+3V3_SD] on F.Cu, length 0.0386 mm",
+                    "description": "Track [+3V3_SD] on F.Cu, length 0.9139 mm",
                     "pos": {
-                        "x": 95.89,
-                        "y": 104.2
+                        "x": 106.1062,
+                        "y": 103.6938
                     },
-                    "uuid": "61bd37ba-0afe-4e33-8287-24d574ba63f3"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Zone [GND] on In1.Cu, priority 0",
-                    "pos": {
-                        "x": 128.0,
-                        "y": 125.0
-                    },
-                    "uuid": "c8cc020a-5053-5288-bd97-101dc7688f0f"
-                },
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 128.0,
-                        "y": 125.0
-                    },
-                    "uuid": "d6b6a837-c9f2-4b7d-af99-1789772f085a"
+                    "uuid": "b876e9ea-20af-4800-a6a1-f65163fac32c"
                 }
             ],
             "severity": "error",
@@ -69,12 +46,12 @@
                     "uuid": "3b174f64-0c3d-5cfe-b3fb-ab5edee5e268"
                 },
                 {
-                    "description": "Pad 2 [VBUS] of F2 on F.Cu",
+                    "description": "Track [VBUS] on F.Cu, length 0.9122 mm",
                     "pos": {
-                        "x": 88.0,
-                        "y": 77.6
+                        "x": 91.3385,
+                        "y": 81.3507
                     },
-                    "uuid": "a2956f3e-6b13-5535-b44f-255626960542"
+                    "uuid": "9d559dad-4a67-428d-bc43-a5120f98d9aa"
                 }
             ],
             "severity": "error",
@@ -84,20 +61,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 7 [I2C_SCL] of U12 on F.Cu",
+                    "description": "Pad 1 [EN_3V3] of R14 on F.Cu",
                     "pos": {
-                        "x": 113.75,
-                        "y": 93.06
+                        "x": 86.3,
+                        "y": 110.35
                     },
-                    "uuid": "fc295734-d168-564a-9828-a4921ca31ac5"
+                    "uuid": "d3a6b6a6-c79f-5164-94b2-1aec6d3c6366"
                 },
                 {
-                    "description": "Track [I2C_SCL] on F.Cu, length 0.7275 mm",
+                    "description": "Track [EN_3V3] on F.Cu, length 1.5825 mm",
                     "pos": {
-                        "x": 114.0,
-                        "y": 88.0875
+                        "x": 86.8625,
+                        "y": 108.95
                     },
-                    "uuid": "5aa2da87-afc6-4152-9545-3e4a521937e7"
+                    "uuid": "fb531501-625a-4e77-897b-cec928aacb40"
                 }
             ],
             "severity": "error",
@@ -130,29 +107,6 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 20 [SD_CLK0] of U4 on F.Cu",
-                    "pos": {
-                        "x": 98.365,
-                        "y": 102.2
-                    },
-                    "uuid": "85918f19-896a-5220-9fb9-3b6ea9a0b43a"
-                },
-                {
-                    "description": "Pad 1 [SD_CLK0] of R46 on F.Cu",
-                    "pos": {
-                        "x": 99.27,
-                        "y": 104.32
-                    },
-                    "uuid": "4aefbf05-4b72-59ec-a838-5e523890bc21"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
                     "description": "Pad A9 [USBC_VBUS] of J16 on F.Cu",
                     "pos": {
                         "x": 101.75,
@@ -161,12 +115,12 @@
                     "uuid": "3d07ba61-03ec-51e5-a2ec-6a7eac53a58e"
                 },
                 {
-                    "description": "Pad B9 [USBC_VBUS] of J16 on F.Cu",
+                    "description": "Track [USBC_VBUS] on F.Cu, length 0.4883 mm",
                     "pos": {
                         "x": 106.65,
-                        "y": 79.695
+                        "y": 80.1833
                     },
-                    "uuid": "37e85d56-73f6-51b9-8c97-b8678b10a7e2"
+                    "uuid": "18bc8a56-b209-44b7-9508-3e7c0712a947"
                 }
             ],
             "severity": "error",
@@ -176,35 +130,12 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 13 [USB_DM] of U4 on F.Cu",
+                    "description": "Track [VLED] on F.Cu, length 0.6049 mm",
                     "pos": {
-                        "x": 90.25,
-                        "y": 99.68
+                        "x": 88.0223,
+                        "y": 74.8377
                     },
-                    "uuid": "7fb6d26e-acd3-55cb-9f2c-65e4ab782b34"
-                },
-                {
-                    "description": "Pad 2 [USB_DM] of R19 on F.Cu",
-                    "pos": {
-                        "x": 97.69,
-                        "y": 81.66
-                    },
-                    "uuid": "504d6f21-7401-5930-96d5-d3da30a77d05"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Track [VLED] on F.Cu, length 1.0324 mm",
-                    "pos": {
-                        "x": 88.45,
-                        "y": 74.41
-                    },
-                    "uuid": "40b5a289-1509-47e4-bf60-7ee2cc8813c4"
+                    "uuid": "f85d13b6-ba5d-489d-82c0-c0046fd0112f"
                 },
                 {
                     "description": "Track [VLED] on F.Cu, length 5.1100 mm",
@@ -212,7 +143,7 @@
                         "x": 115.3333,
                         "y": 78.7533
                     },
-                    "uuid": "bb16b64b-1bc1-4d7d-b923-a7c0e1d0dc94"
+                    "uuid": "7b73b3c5-a8ea-403a-9242-7f0929f515bd"
                 }
             ],
             "severity": "error",
@@ -220,6 +151,144 @@
         }
     ],
     "violations": [
+        {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1841 mm)",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 125.0,
+                        "y": 72.0
+                    },
+                    "uuid": "d3ebe89f-8dd2-5fd1-accc-5f07109addbe"
+                },
+                {
+                    "description": "Track [VBAT] on In2.Cu, length 3.4450 mm",
+                    "pos": {
+                        "x": 95.5173,
+                        "y": 72.3341
+                    },
+                    "uuid": "0bbc25ea-df29-48d5-944c-1f0d22aa9f07"
+                }
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+        },
+        {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1841 mm)",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 125.0,
+                        "y": 72.0
+                    },
+                    "uuid": "d3ebe89f-8dd2-5fd1-accc-5f07109addbe"
+                },
+                {
+                    "description": "Track [VBAT] on In2.Cu, length 5.4197 mm",
+                    "pos": {
+                        "x": 87.4971,
+                        "y": 76.1664
+                    },
+                    "uuid": "23c8685b-2cdb-438d-bb67-51f89472cc50"
+                }
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+        },
+        {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1841 mm)",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 125.0,
+                        "y": 72.0
+                    },
+                    "uuid": "d3ebe89f-8dd2-5fd1-accc-5f07109addbe"
+                },
+                {
+                    "description": "Track [VBAT] on In2.Cu, length 4.1879 mm",
+                    "pos": {
+                        "x": 91.3294,
+                        "y": 72.3341
+                    },
+                    "uuid": "f6cfa947-cfb8-4da9-8513-bfe207036768"
+                }
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+        },
+        {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2932 mm)",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 125.0,
+                        "y": 72.0
+                    },
+                    "uuid": "d3ebe89f-8dd2-5fd1-accc-5f07109addbe"
+                },
+                {
+                    "description": "Track [LED_D2] on F.Cu, length 0.7285 mm",
+                    "pos": {
+                        "x": 113.575,
+                        "y": 72.9083
+                    },
+                    "uuid": "7e42a9f2-8b98-4531-8535-b85a1ffaa6d5"
+                }
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+        },
+        {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2932 mm)",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 125.0,
+                        "y": 72.0
+                    },
+                    "uuid": "d3ebe89f-8dd2-5fd1-accc-5f07109addbe"
+                },
+                {
+                    "description": "Track [LED_D2] on F.Cu, length 0.7285 mm",
+                    "pos": {
+                        "x": 87.9451,
+                        "y": 72.3932
+                    },
+                    "uuid": "b2055289-4328-4678-9f41-fc3fb682a92e"
+                }
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+        },
+        {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2932 mm)",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 125.0,
+                        "y": 72.0
+                    },
+                    "uuid": "d3ebe89f-8dd2-5fd1-accc-5f07109addbe"
+                },
+                {
+                    "description": "Track [LED_D2] on F.Cu, length 25.1148 mm",
+                    "pos": {
+                        "x": 113.0599,
+                        "y": 72.3932
+                    },
+                    "uuid": "eceb5b61-b246-450e-990a-269576cfa090"
+                }
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+        },
         {
             "description": "Silkscreen clipped by board edge",
             "items": [

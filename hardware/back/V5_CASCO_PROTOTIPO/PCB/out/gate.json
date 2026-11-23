@@ -3,13 +3,13 @@
  "checks": [
   {
    "name": "DRC: errores",
-   "ok": true,
-   "n": 0
+   "ok": false,
+   "n": 6
   },
   {
    "name": "DRC: conexiones incompletas",
    "ok": false,
-   "n": 9
+   "n": 6
   },
   {
    "name": "DRC: cortocircuitos",
@@ -34,10 +34,12 @@
   {
    "name": "Fabricaci\u00f3n: v\u00edas dentro de pads SMD (o a < 0,10 mm)",
    "ok": false,
-   "n": 5
+   "n": 1
   }
  ],
- "drc_errors": {},
+ "drc_errors": {
+  "copper_edge_clearance": 6
+ },
  "drc_warnings": {
   "silk_edge_clearance": 2,
   "silk_over_copper": 3
