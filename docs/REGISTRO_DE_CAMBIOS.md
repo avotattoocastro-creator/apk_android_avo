@@ -24,6 +24,49 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-23 — Casco V5 PROTOTIPO A — PEDIDO A JLCPCB
+**Autor:** Claude (registro) · **Pedido del usuario:** W2026112308485306 (23/11/2026 01:48), en producción
+**Qué se ha pedido:** PCB 4 capas 56 × 56, 5 uds. (7,27 $) + PCBA Standard, cara Top, 2 placas (128,24 $), con los
+ficheros del CI 45089929588 (commit `5b2aa59`, puerta superada). Envío 11,73 $ + derechos e impuestos 42,23 $:
+**total 189,47 $**. El pedido anterior sin las correcciones (W2026111908220847, 19/11) quedó **cancelado**.
+**No pedido todavía:** placa de masa de la antena (`PCB/PLACA_MASA`, 2 capas, 52 × 52 × 0,8, sin montaje).
+**Validación:** pedido FABRICÁNDOSE. **NO VERIFICADO** en hardware hasta la recepción (pruebas M1–M10 y de recepción).
+**Pendiente:** medir la URTK1.2 con calibre antes de soldar las tiras; firmware BACK 5.x del casco (aún no existe).
+
+## 2026-11-23 — Casco V5 PROTOTIPO A — coste: divisores con resistencias básicas de JLC
+**Autor:** Claude · **Commit:** `5b2aa59` · **PR:** #125 · **CI:** PCB run 45089929588, **puerta superada**
+**Qué cambia:** el presupuesto de JLC subió de 149,09 $ (pedido del 19/11) a ≈ 152,6 $ por la 620 kΩ (C137952,
+Extended: ≈ 3 $ de carga) y pasaba del límite de 150 $ del envío con IVA prepagado. Solo valores, mismas huellas y mismo
+cobre: anillo R25 2k (C4109) / R26 330R (C25104) → 0,595 × (1 + 2000/330) ≈ 4,20 V (VIH del SK6812 2,94 V: margen
+≈ 0,36 V); VBUS_DET R22 1k (C11702) / R23 1k5 (C25867), misma proporción 0,6 (≈ 3,0 V con 5 V), sin la 150 kΩ
+(C25755, Extended). Quedan fuera 2 piezas Extended (≈ −6 $). Consumo: ≈ 1,8 mA en el divisor del anillo solo con el
+anillo encendido; ≈ 2 mA en VBUS_DET solo con el cable conectado.
+**Validación:** IMPLEMENTADO. **NO VERIFICADO** en hardware.
+
+## 2026-11-23 — Casco V5 PROTOTIPO A — correcciones de la auditoría externa (NTC, anillo a 4,28 V, Schottky del USB-C)
+**Autor:** Claude · **Commits:** `2c2f068`, `38b9be9` · **PR:** #125 (a `feature/back-v5-casco`) · **CI:** PCB run 45082937520, **puerta superada** (0 errores DRC/ERC, 0 sin conectar, 0 cortocircuitos, paridad esquema ↔ placa; 5 avisos de serigrafía, los mismos de antes). El primer intento (run 45082104434) falló por 2 conexiones incompletas: faltaba la vía de masa de RT2 (su pad GND solo tocaba una isla de cobre) y un tramo de 0,4 mm de VLED junto a C99; corregido en `38b9be9`
+**Qué cambia (decisión del usuario, 22/11 23:29):**
+- **NTC RT2** sobre el centro de la batería (11, −3), a 25,9 mm del BQ24072 (antes 3,0 mm: medía el calor del cargador,
+  ≈ 1,15 W al cargar, y podía cortar la carga por TS caliente con la celda fría). A > 19 mm de U3, U7, U11 y L71.
+- **Anillo LED a 4,28 V:** R25 1M → 620k (C137952), R26 150k → 100k (C25741), como la REV B. Con 4,56 V el VIH del
+  SK6812 (0,7 × VDD = 3,19 V) dejaba ≈ 0,1 V de margen al DIN de 3,3 V.
+- **Schottky D18** (B5819W SL, C8598, Basic, SOD-123) entre el VBUS del USB-C J16 (red nueva `USBC_VBUS`) y POGO_VBUS:
+  con el USB-C y el pogo conectados a la vez, el 5 V del pogo ya no entra en el ordenador. El pogo sigue sin caída;
+  el USB-C del banco pierde ≈ 0,5 V (VBUS_DET ≈ 2,7 V > VIH 2,475 V). D± siguen en paralelo: con los dos conectados
+  el USB puede no enumerar, pero no hay daño.
+- `repair.py`: opción `--moved` (piezas movidas o nuevas), `--clear` también quita las pistas que **cruzan** la caja
+  (antes solo las que terminaban en ella: una pista VSYS habría quedado sobre el pad de D18) y los pads apilados de
+  la misma red (USB-C A4/B9, A9/B4) cuentan como unidos. `place_v5.py`: objetivos fijos (`OBJETIVO`) para RT2 y D18.
+- Rehecho el ruteado solo de las redes afectadas (CHG_TS, POGO_VBUS, USBC_VBUS, VSYS, VLED, VBAT, BAT_ADC, +3V3_SD,
+  ZED_TX2_C, LED_D3); el resto de la placa no cambia. Comprobación local de separaciones: 0 casos nuevos por debajo de
+  0,10 mm (los 3 restantes ya estaban en la placa anterior, que pasó el DRC).
+**No se ha tocado:** REV B (`V5_CASCO`): su NTC RT2 también está a 3,8 mm del BQ24072 (**pendiente**). Avisos de
+serigrafía del DRC (J16 recortado por el canto, círculos de U12/L71): solo estéticos, sin cambiar.
+**Validación:** COMPILADO / CI. **NO VERIFICADO** en hardware. Las existencias del informe son de la consulta del 18/11:
+C8598 sale «sin respuesta», pero su ficha de JLC (consultada el 23/11) dice Basic y en stock. Hay que revisar el giro de D18 (cátodo = pad 1)
+en la vista previa de JLC y volver a subir Gerber, BOM y CPL.
+**Pendiente:** medir la URTK1.2 con calibre (BLOQUEANTE para pedir); mismo cambio de la NTC en la REV B.
+
 ## 2026-11-19 — Casco V5 PROTOTIPO A — USB-C de programación y empalme de la batería en línea
 **Autor:** Claude · **CI:** puerta superada en `816c26e` (0 errores DRC/ERC, 0 sin conectar; avisos solo de serigrafía) · CAD 0 interferencias, cápsula 61,4 × 61,4 × 35,1 · revisado con la skill `avo-revision-pcb-cad` (tramo colgante de USB_DP_C quitado, rótulos del pogo y logotipo fuera del cobre)
 **Qué cambia:** USB-C J16 (HRO TYPE-C-31-M-12, C165948) en el canto superior de la cara F, en paralelo con los pads

@@ -237,6 +237,7 @@ FP = {
     "MICROSD": load("microSD_HC_Hirose_DM3AT-SF-PEJM5.kicad_mod",
                     M3 + "Connector_Card.3dshapes/microSD_HC_Hirose_DM3AT-SF-PEJM5.step", 1.6),
     "SOD323": load("D_SOD-323.kicad_mod", M3 + "Diode_SMD.3dshapes/D_SOD-323.step", 1.1),
+    "SOD123": load("D_SOD-123.kicad_mod", M3 + "Diode_SMD.3dshapes/D_SOD-123.step", 1.35),
     "GNDPIN": wire_pad("(pin de masa de la placa de la antena)", drill=1.2, d=2.0),   # revisión 18/11: admite hilo de 1 mm
     "FILA9": FILA9_FP,
     "FILA10": FILA10_FP,
@@ -285,6 +286,9 @@ LC = {
     "620k": "C137952", "150k": "C25755",
     # PROTO A (19/11/2026): USB-C de programación (el mismo HRO del DOCK V1) y sus Rd de 5,1 kΩ
     "TYPEC": "C165948", "5k1": "C25905",
+    # auditoría 22/11/2026: Schottky 1 A / 40 V en el VBUS del USB-C: B5819W SL (JSCJ), SOD-123, Basic; ficha de JLC
+    # consultada el 23/11 (40 V, 600 mV a 1 A). Revisar su giro en la vista previa de JLC (cátodo = pad 1)
+    "B5819W": "C8598",
 }
 
 
@@ -327,20 +331,29 @@ part("U6", "SOT23-6", "USBLC6-2SC6", (0, 0), 0,
 # PROTO A (19/11/2026, petición del usuario): USB-C solo para programar en el banco, en paralelo con los pads del pogo
 # (mismo VBUS antes del PTC F2 y mismo D+/D− antes del USBLC6). Va en el canto superior, en la cara F (hacia la
 # batería, fuera de su huella): se usa con la placa sacada de la cápsula. No conectar a la vez que el pogo.
+# Auditoría 22/11/2026: el VBUS del USB-C ya no va directo a POGO_VBUS sino por el Schottky D18 (USBC_VBUS → POGO_VBUS).
+# Si se conectan los dos a la vez, el 5 V del pogo (cargador o DOCK) no puede entrar en el puerto del ordenador. El
+# pogo, que es la carga de campo, sigue sin caída de tensión; el USB-C del banco pierde ≈ 0,5 V con 0,8 A (B5819W SL:
+# 0,6 V a 1 A; VBUS ≈ 4,5 V): el BQ24072 carga algo más despacio y VBUS_DET da ≈ 2,7 V, por encima de VIH = 2,475 V.
 part("J16", "USBC", "USB-C programación", (0, 0), 0,
-     {"A1": GND, "B12": GND, "B1": GND, "A12": GND, "A4": "POGO_VBUS", "B9": "POGO_VBUS", "B4": "POGO_VBUS",
-      "A9": "POGO_VBUS", "A5": "USBC_CC1", "B5": "USBC_CC2", "A6": "USB_DP_C", "B6": "USB_DP_C", "A7": "USB_DM_C",
+     {"A1": GND, "B12": GND, "B1": GND, "A12": GND, "A4": "USBC_VBUS", "B9": "USBC_VBUS", "B4": "USBC_VBUS",
+      "A9": "USBC_VBUS", "A5": "USBC_CC1", "B5": "USBC_CC2", "A6": "USB_DP_C", "B6": "USB_DP_C", "A7": "USB_DM_C",
       "B7": "USB_DM_C", "A8": None, "B8": None, "S1": GND}, LC["TYPEC"], "TYPE-C-31-M-12 (HRO)", "Pogo",
      sym=dict(L=[("A4", "VBUS"), ("A9", "VBUS"), ("B4", "VBUS"), ("B9", "VBUS"), ("A5", "CC1"), ("B5", "CC2"),
                  ("A6", "D+"), ("B6", "D+"), ("A7", "D-"), ("B7", "D-"), ("A8", "SBU1"), ("B8", "SBU2")],
               R=[("A1", "GND"), ("A12", "GND"), ("B1", "GND"), ("B12", "GND"), ("S1", "SHIELD")]),
-     note="USB-C de programación y carga en el banco (placa fuera de la cápsula); en paralelo con el pogo")
+     note="USB-C de programación y carga en el banco (placa fuera de la cápsula); D± en paralelo con el pogo, VBUS por D18")
+part("D18", "SOD123", "B5819W", (0, 0), 0, {1: "POGO_VBUS", 2: "USBC_VBUS"}, LC["B5819W"], "B5819W SL", "Pogo",
+     sym=dict(L=[(2, "A")], R=[(1, "K")]),
+     note="auditoría 22/11: Schottky 1 A en el VBUS del USB-C; impide que el 5 V del pogo entre en el ordenador")
 R("R30", "5k1", "USBC_CC1", GND, block="Pogo", note="Rd: la placa es consumidora (sink): cualquier cargador da 5 V")
 R("R31", "5k1", "USBC_CC2", GND, block="Pogo")
 R("R18", "22R", "USB_DP_C", "USB_DP", block="Pogo")
 R("R19", "22R", "USB_DM_C", "USB_DM", block="Pogo")
-R("R22", "100k", VBUS, "VBUS_DET", block="Pogo", note="divisor 100k/150k → GPIO18 (despierta al conectar el cable)")
-R("R23", "150k", "VBUS_DET", GND, block="Pogo",
+R("R22", "1k", VBUS, "VBUS_DET", block="Pogo",
+  note="divisor 1k/1k5 → GPIO18 (despierta al conectar el cable). Auditoría 23/11 (coste): antes 100k/150k; misma "
+       "proporción con piezas básicas (150k era Extended). Gasta ≈ 2 mA solo con el cable conectado")
+R("R23", "1k5", "VBUS_DET", GND, block="Pogo",
   note="REV B (revisión 18/11): 100k/150k → 2,85–3,15 V con VBUS 4,75–5,25 V. Con 100k/100k daba 2,4–2,6 V, por debajo "
        "de VIH = 0,75 × VDD = 2,475 V del ESP32-S3 (hoja del WROOM, DC characteristics): lectura no fiable")
 
@@ -360,7 +373,8 @@ C("C35", "22u 10V", VSYS, GND, block="Cargador", fp="C0805",
 R("R6", "1k5", "CHG_ISET", GND, block="Cargador", note="I_carga = 890/1k5 ≈ 590 mA (0,3 C de 2000 mAh; ≈ 4 h)")
 R("R7", "2k", "CHG_ILIM", GND, block="Cargador", note="I_entrada = K_ILIM/R_ILIM ≈ 1600/2k ≈ 800 mA (BQ24072T, SLUS937)")
 part("RT2", "R0402", "NTC 10k B3380", (0, 0), 0, {1: "CHG_TS", 2: GND}, LC["NTC10k"], "NCP15XH103F03RC", "Cargador", sym="R",
-     note="NTC junto a la batería (cara F, encima de la celda)")
+     note="NTC sobre el centro de la batería (cara F). Auditoría 22/11/2026: estaba a 3,0 mm del BQ24072 (≈ 1,15 W al "
+          "cargar) y medía su calor, no el de la celda; ahora a > 20 mm del cargador y de los reguladores")
 R("R12", "68k", "CHG_TMR", GND, block="Cargador",
   note="REV B: temporizador de seguridad t_MAXCH = 10 × K_TMR × R_TMR ≈ 10 × 45 × 68k ≈ 8,5 h (35–55 s/kΩ: 6,6–10,4 h; "
        "SLUS937). Al aire eran 4–6 h y podía cortar la carga con el casco encendido en el DOCK")
@@ -512,8 +526,11 @@ part("L71", "L0806", "1 µH", (0, 0), 0, {1: VSYS, 2: "VLED_SW"}, LC["1uH 0806"]
      sym="R", note="1 µH, I_sat 3 A, 50 mΩ (≈ 0,4 A de pico con los 7 LED a tope desde 3 V)")
 C("C98", "10u 25V", VSYS, GND, block="Anillo", fp="C0603", note="entrada del elevador")
 C("C99", "22u 10V", "VLED", GND, block="Anillo", fp="C0805", note="salida del elevador (≥ 10 µF efectivos)")
-R("R25", "1M", "VLED", "VLED_FB", block="Anillo", note="PROTO A (18/11, ahorro en JLC: piezas básicas): V_OUT = 0,595 × (1 + 1M/150k) ≈ 4,56 V; DIN 3,3 V ≥ 0,65 × 4,56 = 2,96 V")
-R("R26", "150k", "VLED_FB", GND, block="Anillo")
+R("R25", "2k", "VLED", "VLED_FB", block="Anillo",
+  note="auditoría 23/11/2026 (coste): V_OUT = 0,595 × (1 + 2k/330R) ≈ 4,20 V con piezas básicas (620k era Extended: "
+       "+3 $ por pedido). VIH del SK6812 = 0,7 × 4,20 = 2,94 V: margen ≈ 0,36 V al DIN de 3,3 V. El divisor gasta "
+       "≈ 1,8 mA solo con el anillo encendido (con EN = 0 el TPS61023 desconecta la salida)")
+R("R26", "330R", "VLED_FB", GND, block="Anillo")
 R("R27", "100k", "LED_PWR", GND, block="Anillo", note="elevador apagado por defecto (arranque y casco apagado)")
 
 # ---------------------------------------------------------------------------------------- Hall (encendido en la base)

@@ -1,11 +1,11 @@
 # AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de fabricación
 
 - Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `9ddca050f2e9ab941257092a480921d9a2892270` · ejecución de CI: 44424430681
+- Commit: `5b2aa59052bca4ff1ce1ec58aec19f594cc3fbc0` · ejecución de CI: 45089929588
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 56 × 56 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo bajo la URTK1.2, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
-- Componentes: 136 en total, 109 para montar, 1 sin montar (DNP: C69), 26 a mano (pads de hilo y de prueba)
-- Pistas: 1133 · vías: 192 · ruteado completo (0 conexiones incompletas)
+- Componentes: 137 en total, 110 para montar, 1 sin montar (DNP: C69), 26 a mano (pads de hilo y de prueba)
+- Pistas: 1103 · vías: 219 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
@@ -28,7 +28,7 @@
 - Revisar el giro de cada pieza en la vista previa de JLCPCB: el CPL lleva las correcciones de fuente/jlc_correcciones.json; J3 (microSD) y U8 no tienen huella EasyEDA con la que comprobarlas.
 
 ## Modelo 3D (STEP y renders, no afecta a la fabricación)
-- Modelos de la librería de KiCad 9.0.0 descargados: 10; sin descargar: Connector_USB.3dshapes/USB_C_Receptacle_HRO_TYPE-C-31-M-12.step, Package_DFN_QFN.3dshapes/VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm.step
+- Modelos de la librería de KiCad 9.0.0 descargados: 11; sin descargar: Connector_USB.3dshapes/USB_C_Receptacle_HRO_TYPE-C-31-M-12.step, Package_DFN_QFN.3dshapes/VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm.step
 - ESP32-S3-WROOM-1U: modelo de Espressif (`fuente/3d`). Piezas de EasyEDA y pads de hilo/prueba: sin modelo 3D.
 
 ## Existencias en JLCPCB (consulta del CI: 2026-11-18 11:44 UTC)
@@ -55,23 +55,23 @@
 | C2135 | BAT54C | 2 | 150474 | Extended | 0.0246 US$ |
 | C77131 | NCP15XH103F03RC | 1 | 293593 | Extended | 0.0164 US$ |
 | C52923 | CL05A105KA5NQNC | 7 | 9100317 | Basic | 0.0055 US$ |
-| C25867 | 0402WGF1501TCE | 1 | 1179471 | Basic | 0.0029 US$ |
+| C25867 | 0402WGF1501TCE | 2 | 1179471 | Basic | 0.0029 US$ |
 | C1525 | CL05B104KO5NNNC | 17 | 35317245 | Basic | 0.0024 US$ |
-| C4109 | 0402WGF2001TCE | 1 | 9762766 | Basic | 0.0019 US$ |
+| C4109 | 0402WGF2001TCE | 2 | 9762766 | Basic | 0.0019 US$ |
 | C25744 | 0402WGF1002TCE | 9 | 36586442 | Basic | 0.0015 US$ |
-| C11702 | 0402WGF1001TCE | 4 | 30290405 | Basic | 0.0013 US$ |
+| C11702 | 0402WGF1001TCE | 5 | 30290405 | Basic | 0.0013 US$ |
 | C36871 | 0402WGF6802TCE | 1 | 1080092 | Extended | 0.0012 US$ |
-| C25755 | 0402WGF1503TCE | 2 | 1002574 | Extended | 0.0011 US$ |
-| C26083 | 0402WGF1004TCE | 4 | 2854070 | Basic | 0.0011 US$ |
-| C25104 | 0402WGF3300TCE | 4 | 2218307 | Basic | 0.0011 US$ |
+| C26083 | 0402WGF1004TCE | 3 | 2854070 | Basic | 0.0011 US$ |
+| C25104 | 0402WGF3300TCE | 5 | 2218307 | Basic | 0.0011 US$ |
 | C25879 | 0402WGF2201TCE | 2 | 2895113 | Basic | 0.0011 US$ |
 | C25092 | 0402WGF220JTCE | 3 | 4483746 | Basic | 0.0010 US$ |
-| C25741 | 0402WGF1003TCE | 10 | 8706634 | Basic | 0.0009 US$ |
+| C25741 | 0402WGF1003TCE | 9 | 8706634 | Basic | 0.0009 US$ |
 | C165948 | ? | 1 | sin respuesta | Extended | ? |
+| C8598 | ? | 1 | sin respuesta | Extended | ? |
 | C25905 | ? | 2 | sin respuesta | Extended | ? |
 | C5378721 | ? | 8 | sin respuesta | Extended | ? |
 
-- Piezas sin existencias para 5 placas: C165948, C25905, C5378721
+- Piezas sin existencias para 5 placas: C165948, C8598, C25905, C5378721
 
 ## Estado de fabricación
 - Diseño verificado por software (KiCad 9 en el CI): **sí**
