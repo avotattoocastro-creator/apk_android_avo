@@ -24,6 +24,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-23 — Casco V5 PROTOTIPO A — coste: divisores con resistencias básicas de JLC
+**Autor:** Claude · **PR:** #125 · **CI:** pendiente
+**Qué cambia:** el presupuesto de JLC subió de 149,09 $ (pedido del 19/11) a ≈ 152,6 $ por la 620 kΩ (C137952,
+Extended: ≈ 3 $ de carga) y pasaba del límite de 150 $ del envío con IVA prepagado. Solo valores, mismas huellas y mismo
+cobre: anillo R25 2k (C4109) / R26 330R (C25104) → 0,595 × (1 + 2000/330) ≈ 4,20 V (VIH del SK6812 2,94 V: margen
+≈ 0,36 V); VBUS_DET R22 1k (C11702) / R23 1k5 (C25867), misma proporción 0,6 (≈ 3,0 V con 5 V), sin la 150 kΩ
+(C25755, Extended). Quedan fuera 2 piezas Extended (≈ −6 $). Consumo: ≈ 1,8 mA en el divisor del anillo solo con el
+anillo encendido; ≈ 2 mA en VBUS_DET solo con el cable conectado.
+**Validación:** IMPLEMENTADO. **NO VERIFICADO** en hardware.
+
 ## 2026-11-23 — Casco V5 PROTOTIPO A — correcciones de la auditoría externa (NTC, anillo a 4,28 V, Schottky del USB-C)
 **Autor:** Claude · **Commits:** `2c2f068`, `38b9be9` · **PR:** #125 (a `feature/back-v5-casco`) · **CI:** PCB run 45082937520, **puerta superada** (0 errores DRC/ERC, 0 sin conectar, 0 cortocircuitos, paridad esquema ↔ placa; 5 avisos de serigrafía, los mismos de antes). El primer intento (run 45082104434) falló por 2 conexiones incompletas: faltaba la vía de masa de RT2 (su pad GND solo tocaba una isla de cobre) y un tramo de 0,4 mm de VLED junto a C99; corregido en `38b9be9`
 **Qué cambia (decisión del usuario, 22/11 23:29):**

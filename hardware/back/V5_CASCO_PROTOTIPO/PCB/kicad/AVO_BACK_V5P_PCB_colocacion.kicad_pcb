@@ -3199,7 +3199,7 @@
 		)
 		(property
 			"Value"
-			"100k"
+			"1k"
 			(at 0 1.07 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -3235,7 +3235,7 @@
 		)
 		(property
 			"LCSC"
-			"C25741"
+			"C11702"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -3244,7 +3244,7 @@
 		)
 		(property
 			"MPN"
-			"100k"
+			"1k"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -3372,7 +3372,7 @@
 		)
 		(property
 			"Value"
-			"150k"
+			"1k5"
 			(at 0 1.07 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -3408,7 +3408,7 @@
 		)
 		(property
 			"LCSC"
-			"C25755"
+			"C25867"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -3417,7 +3417,7 @@
 		)
 		(property
 			"MPN"
-			"150k"
+			"1k5"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -17900,7 +17900,7 @@
 		)
 		(property
 			"Value"
-			"620k"
+			"2k"
 			(at 0 1.07 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -17936,7 +17936,7 @@
 		)
 		(property
 			"LCSC"
-			"C137952"
+			"C4109"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -17945,7 +17945,7 @@
 		)
 		(property
 			"MPN"
-			"620k"
+			"2k"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -18073,7 +18073,7 @@
 		)
 		(property
 			"Value"
-			"100k"
+			"330R"
 			(at 0 1.07 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -18109,7 +18109,7 @@
 		)
 		(property
 			"LCSC"
-			"C25741"
+			"C25104"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -18118,7 +18118,7 @@
 		)
 		(property
 			"MPN"
-			"100k"
+			"330R"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)

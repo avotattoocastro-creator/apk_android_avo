@@ -350,8 +350,10 @@ R("R30", "5k1", "USBC_CC1", GND, block="Pogo", note="Rd: la placa es consumidora
 R("R31", "5k1", "USBC_CC2", GND, block="Pogo")
 R("R18", "22R", "USB_DP_C", "USB_DP", block="Pogo")
 R("R19", "22R", "USB_DM_C", "USB_DM", block="Pogo")
-R("R22", "100k", VBUS, "VBUS_DET", block="Pogo", note="divisor 100k/150k → GPIO18 (despierta al conectar el cable)")
-R("R23", "150k", "VBUS_DET", GND, block="Pogo",
+R("R22", "1k", VBUS, "VBUS_DET", block="Pogo",
+  note="divisor 1k/1k5 → GPIO18 (despierta al conectar el cable). Auditoría 23/11 (coste): antes 100k/150k; misma "
+       "proporción con piezas básicas (150k era Extended). Gasta ≈ 2 mA solo con el cable conectado")
+R("R23", "1k5", "VBUS_DET", GND, block="Pogo",
   note="REV B (revisión 18/11): 100k/150k → 2,85–3,15 V con VBUS 4,75–5,25 V. Con 100k/100k daba 2,4–2,6 V, por debajo "
        "de VIH = 0,75 × VDD = 2,475 V del ESP32-S3 (hoja del WROOM, DC characteristics): lectura no fiable")
 
@@ -524,10 +526,11 @@ part("L71", "L0806", "1 µH", (0, 0), 0, {1: VSYS, 2: "VLED_SW"}, LC["1uH 0806"]
      sym="R", note="1 µH, I_sat 3 A, 50 mΩ (≈ 0,4 A de pico con los 7 LED a tope desde 3 V)")
 C("C98", "10u 25V", VSYS, GND, block="Anillo", fp="C0603", note="entrada del elevador")
 C("C99", "22u 10V", "VLED", GND, block="Anillo", fp="C0805", note="salida del elevador (≥ 10 µF efectivos)")
-R("R25", "620k", "VLED", "VLED_FB", block="Anillo",
-  note="auditoría 22/11/2026: V_OUT = 0,595 × (1 + 620k/100k) ≈ 4,28 V, como la REV B. Con 1M/150k eran 4,56 V y el VIH "
-       "del SK6812 (0,7 × VDD = 3,19 V) dejaba solo ≈ 0,1 V de margen al DIN de 3,3 V; ahora 3,0 V (margen ≈ 0,3 V)")
-R("R26", "100k", "VLED_FB", GND, block="Anillo")
+R("R25", "2k", "VLED", "VLED_FB", block="Anillo",
+  note="auditoría 23/11/2026 (coste): V_OUT = 0,595 × (1 + 2k/330R) ≈ 4,20 V con piezas básicas (620k era Extended: "
+       "+3 $ por pedido). VIH del SK6812 = 0,7 × 4,20 = 2,94 V: margen ≈ 0,36 V al DIN de 3,3 V. El divisor gasta "
+       "≈ 1,8 mA solo con el anillo encendido (con EN = 0 el TPS61023 desconecta la salida)")
+R("R26", "330R", "VLED_FB", GND, block="Anillo")
 R("R27", "100k", "LED_PWR", GND, block="Anillo", note="elevador apagado por defecto (arranque y casco apagado)")
 
 # ---------------------------------------------------------------------------------------- Hall (encendido en la base)
