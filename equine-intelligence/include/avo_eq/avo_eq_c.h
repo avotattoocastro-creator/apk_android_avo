@@ -78,6 +78,21 @@ AVO_EQ_API int avo_eq_cache_invalidate(const char* cache_dir);
 AVO_EQ_API int avo_eq_training_summary(const char* analysis_json, const char* extra_json, char** json_out);
 AVO_EQ_API int avo_eq_training_analyse(const char* input_json, const char* options_json, const volatile int* cancel, char** json_out);
 
+/* ---------------- PPK (AVO PPK 1.0.0, motor 2.0.0-dev32) ----------------
+ * Posición poscalculada (PPK) de la espalda con RTKLIB demo5 (BSD-2): RXM-RAWX/SFRBX de la sesión (espalda PROTOTIPO
+ * >= 3.16.0, tramas GNSS_UBX_FRAG; casco BETA V5, tramas GNSS_UBX enteras) frente a una estación base (RINEX 3).
+ * avo_eq_ppk_need: qué base hace falta. paths = segmentos .avr. Devuelve {"formato":"avo-ppk-necesita",
+ *   "tiene_rawx", "rawx", "inicio_utc", "fin_utc", "lat", "lon", "rover": {...}}. Sin RAWX: "tiene_rawx": false (código 0).
+ * avo_eq_ppk: base_paths = ficheros RINEX 3 de la base, de observación (texto o Hatanaka .crx, ya sin gzip) y,
+ *   opcionalmente, de navegación. options_json (puede ser NULL): "elev_min" (15), "frecuencias" (2), "glonass_ar" (false),
+ *   "fix_and_hold" (true), "ratio" (3), "edad_max_s" (30), "combinar" (true), "base_xyz": [x,y,z] ECEF m (coordenadas
+ *   oficiales; por defecto APPROX POSITION XYZ), "dir_trabajo" (copias RINEX expandidas), "epocas" (true).
+ *   Devuelve "avo-ppk" (rover, base, resultado, avisos, epocas[]: semana, tow_s, utc_ms, lat, lon, h, q 1 FIX/2 FLOAT/5 SINGLE,
+ *   ns, sdn/sde/sdu, ratio, edad_s, vn/ve/vu). Mismos códigos de retorno que la API 2. */
+AVO_EQ_API int avo_eq_ppk_need(const char* const* paths, int n, char** json_out);
+AVO_EQ_API int avo_eq_ppk(const char* const* paths, int n, const char* const* base_paths, int nb, const char* options_json,
+                          const volatile int* cancel, char** json_out);
+
 #ifdef __cplusplus
 }
 #endif
