@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-11-23T17:37:47+0000",
+    "date": "2026-11-23T18:19:09+0000",
     "included_severities": [
         "error",
         "warning",
@@ -10,7 +10,215 @@
     "kicad_version": "9.0.9",
     "schematic_parity": [],
     "source": "AVO_BACK_V5P_PCB.kicad_pcb",
-    "unconnected_items": [],
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [+3V3_SD] of R42 on F.Cu",
+                    "pos": {
+                        "x": 98.09,
+                        "y": 104.32
+                    },
+                    "uuid": "b69755b9-3c69-51a7-b2bc-5d4f9834361c"
+                },
+                {
+                    "description": "Track [+3V3_SD] on F.Cu, length 0.0386 mm",
+                    "pos": {
+                        "x": 95.89,
+                        "y": 104.2
+                    },
+                    "uuid": "61bd37ba-0afe-4e33-8287-24d574ba63f3"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Zone [GND] on In1.Cu, priority 0",
+                    "pos": {
+                        "x": 128.0,
+                        "y": 125.0
+                    },
+                    "uuid": "c8cc020a-5053-5288-bd97-101dc7688f0f"
+                },
+                {
+                    "description": "Zone [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": 128.0,
+                        "y": 125.0
+                    },
+                    "uuid": "d6b6a837-c9f2-4b7d-af99-1789772f085a"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 5 [VBUS] of U6 on F.Cu",
+                    "pos": {
+                        "x": 97.01,
+                        "y": 77.7625
+                    },
+                    "uuid": "3b174f64-0c3d-5cfe-b3fb-ab5edee5e268"
+                },
+                {
+                    "description": "Pad 2 [VBUS] of F2 on F.Cu",
+                    "pos": {
+                        "x": 88.0,
+                        "y": 77.6
+                    },
+                    "uuid": "a2956f3e-6b13-5535-b44f-255626960542"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 7 [I2C_SCL] of U12 on F.Cu",
+                    "pos": {
+                        "x": 113.75,
+                        "y": 93.06
+                    },
+                    "uuid": "fc295734-d168-564a-9828-a4921ca31ac5"
+                },
+                {
+                    "description": "Track [I2C_SCL] on F.Cu, length 0.7275 mm",
+                    "pos": {
+                        "x": 114.0,
+                        "y": 88.0875
+                    },
+                    "uuid": "5aa2da87-afc6-4152-9545-3e4a521937e7"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 3 [LED_D4] of D12 on F.Cu",
+                    "pos": {
+                        "x": 126.24,
+                        "y": 87.43
+                    },
+                    "uuid": "ff439ca8-89bc-58a2-8ead-7557a68976af"
+                },
+                {
+                    "description": "Pad 1 [LED_D4] of D13 on F.Cu",
+                    "pos": {
+                        "x": 126.24,
+                        "y": 113.575
+                    },
+                    "uuid": "60113d28-571e-5da2-abd3-3977ed5ac6c0"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 20 [SD_CLK0] of U4 on F.Cu",
+                    "pos": {
+                        "x": 98.365,
+                        "y": 102.2
+                    },
+                    "uuid": "85918f19-896a-5220-9fb9-3b6ea9a0b43a"
+                },
+                {
+                    "description": "Pad 1 [SD_CLK0] of R46 on F.Cu",
+                    "pos": {
+                        "x": 99.27,
+                        "y": 104.32
+                    },
+                    "uuid": "4aefbf05-4b72-59ec-a838-5e523890bc21"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad A9 [USBC_VBUS] of J16 on F.Cu",
+                    "pos": {
+                        "x": 101.75,
+                        "y": 79.695
+                    },
+                    "uuid": "3d07ba61-03ec-51e5-a2ec-6a7eac53a58e"
+                },
+                {
+                    "description": "Pad B9 [USBC_VBUS] of J16 on F.Cu",
+                    "pos": {
+                        "x": 106.65,
+                        "y": 79.695
+                    },
+                    "uuid": "37e85d56-73f6-51b9-8c97-b8678b10a7e2"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 13 [USB_DM] of U4 on F.Cu",
+                    "pos": {
+                        "x": 90.25,
+                        "y": 99.68
+                    },
+                    "uuid": "7fb6d26e-acd3-55cb-9f2c-65e4ab782b34"
+                },
+                {
+                    "description": "Pad 2 [USB_DM] of R19 on F.Cu",
+                    "pos": {
+                        "x": 97.69,
+                        "y": 81.66
+                    },
+                    "uuid": "504d6f21-7401-5930-96d5-d3da30a77d05"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [VLED] on F.Cu, length 1.0324 mm",
+                    "pos": {
+                        "x": 88.45,
+                        "y": 74.41
+                    },
+                    "uuid": "40b5a289-1509-47e4-bf60-7ee2cc8813c4"
+                },
+                {
+                    "description": "Track [VLED] on F.Cu, length 5.1100 mm",
+                    "pos": {
+                        "x": 115.3333,
+                        "y": 78.7533
+                    },
+                    "uuid": "bb16b64b-1bc1-4d7d-b923-a7c0e1d0dc94"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
     "violations": [
         {
             "description": "Silkscreen clipped by board edge",

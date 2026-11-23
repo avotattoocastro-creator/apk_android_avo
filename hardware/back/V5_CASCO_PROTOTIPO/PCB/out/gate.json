@@ -1,5 +1,5 @@
 {
- "ok": true,
+ "ok": false,
  "checks": [
   {
    "name": "DRC: errores",
@@ -8,8 +8,8 @@
   },
   {
    "name": "DRC: conexiones incompletas",
-   "ok": true,
-   "n": 0
+   "ok": false,
+   "n": 9
   },
   {
    "name": "DRC: cortocircuitos",
@@ -30,6 +30,11 @@
    "name": "ERC: advertencias",
    "ok": true,
    "n": 0
+  },
+  {
+   "name": "Fabricaci\u00f3n: v\u00edas dentro de pads SMD (o a < 0,10 mm)",
+   "ok": false,
+   "n": 5
   }
  ],
  "drc_errors": {},
