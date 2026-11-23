@@ -35,6 +35,7 @@ enum class FrameType : uint8_t {
   TIME_SYNC = 0x03,     // back: mapping back-clock <-> GNSS time via PPS
   GNSS_SAMPLE = 0x10,   // back: compact decoded NAV-PVT + timestamps
   GNSS_UBX = 0x11,      // back: verbatim UBX frame from the ZED-F9P (RAW first)
+  GNSS_UBX_FRAG = 0x12, // back V3.16.0: piece of a long UBX frame (RXM-RAWX/SFRBX for PPK), see avo_ubx_frag.h
   IMU_SAMPLE = 0x20,    // back: batch of girth (cincha) IMU samples, original ids/seq/time
   RTCM_DATA = 0x30,     // chest->back: RTCM3 bytes, unmodified
   EVENT = 0x40,

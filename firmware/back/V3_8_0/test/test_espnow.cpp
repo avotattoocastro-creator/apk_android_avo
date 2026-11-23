@@ -212,6 +212,8 @@ struct SimZed {
   bool sig_stuck = false; uint32_t sig_polls = 0; bool sig_kick = false;   // V3.14.7: periodic NAV-SIG stuck (firmware), polls still answered; OFF->ON restarts it if sig_kick
   bool comms_answer = true; uint8_t comms_tx_peak = 41, comms_tx_err = 0; uint16_t comms_overruns = 0; uint32_t comms_polls = 0;   // V3.14.4
   uint8_t carr = 2;                                           // carrSoln reported in NAV-PVT
+  bool no_raw_keys = false; uint32_t rawx_every[3] = {0, 0, 0}, sfrbx_on[3] = {0, 0, 0}; uint16_t n_meas = 64;   // V3.16.0
+  std::vector<std::vector<uint8_t>> raw_sent;                 // complete UBX frames of RXM-RAWX/SFRBX put on the UART
   bool alive = true;
   std::deque<std::pair<uint32_t, uint8_t>> out;   // (baud it was sent at, byte)
   std::vector<uint8_t> rtcm_bytes;                // RTCM frames accepted (valid CRC)
@@ -222,9 +224,17 @@ struct SimZed {
 
   void send_ubx(uint8_t cls, uint8_t id, const uint8_t* pl, uint16_t n) {
     if (!out_ubx[port]) return;
-    uint8_t b[2100];
+    static uint8_t b[4200];
     size_t len = ubx_build(cls, id, pl, n, b, sizeof(b));
     for (size_t i = 0; i < len; i++) out.push_back({baud[port], b[i]});
+  }
+  void send_raw(uint8_t id, const std::vector<uint8_t>& pl) {
+    if (!out_ubx[port]) return;
+    std::vector<uint8_t> f(pl.size() + 8);
+    size_t n = ubx_build(UBX_CLS_RXM, id, pl.data(), (uint16_t)pl.size(), f.data(), f.size());
+    f.resize(n);
+    raw_sent.push_back(f);
+    for (uint8_t c : f) out.push_back({baud[port], c});
   }
   void send_text(const char* s) { for (; *s; s++) out.push_back({baud[port], (uint8_t)*s}); }
 
@@ -236,6 +246,10 @@ struct SimZed {
       zedkey::UART2OUTPROT_NMEA, zedkey::UART2OUTPROT_RTCM3X, zedkey::MSGOUT_NAV_PVT_UART1, zedkey::MSGOUT_NAV_PVT_UART2,
       zedkey::MSGOUT_RXM_RTCM_UART1, zedkey::MSGOUT_RXM_RTCM_UART2,
       zedkey::MSGOUT_NAV_SAT_UART1, zedkey::MSGOUT_NAV_SAT_UART2, zedkey::MSGOUT_NAV_SIG_UART1, zedkey::MSGOUT_NAV_SIG_UART2};
+    if (!no_raw_keys) {   // V3.16.0
+      static const uint32_t rk[] = {zedkey::MSGOUT_RXM_RAWX_UART1, zedkey::MSGOUT_RXM_RAWX_UART2, zedkey::MSGOUT_RXM_SFRBX_UART1, zedkey::MSGOUT_RXM_SFRBX_UART2};
+      for (uint32_t x : rk) if (x == k) return true;
+    }
     for (uint32_t x : ks) if (x == k) return true;
     static const uint32_t tune[] = {zedkey::NAVSPG_DYNMODEL, zedkey::NAVHPG_DGNSSMODE, zedkey::NAVSPG_INFIL_MINELEV,
       zedkey::NAVSPG_INFIL_MINCNO, zedkey::SIGNAL_GPS_ENA, zedkey::SIGNAL_GLO_ENA, zedkey::SIGNAL_GAL_ENA, zedkey::SIGNAL_BDS_ENA};
@@ -278,6 +292,8 @@ struct SimZed {
       else if (k == zedkey::MSGOUT_RXM_RTCM_UART1) rxm[1] = v; else if (k == zedkey::MSGOUT_RXM_RTCM_UART2) rxm[2] = v;
       else if (k == zedkey::MSGOUT_NAV_SAT_UART1) sat_every[1] = v; else if (k == zedkey::MSGOUT_NAV_SAT_UART2) sat_every[2] = v;
       else if (k == zedkey::MSGOUT_NAV_SIG_UART1) sig_every[1] = v; else if (k == zedkey::MSGOUT_NAV_SIG_UART2) sig_every[2] = v;
+      else if (k == zedkey::MSGOUT_RXM_RAWX_UART1) rawx_every[1] = v; else if (k == zedkey::MSGOUT_RXM_RAWX_UART2) rawx_every[2] = v;
+      else if (k == zedkey::MSGOUT_RXM_SFRBX_UART1) sfrbx_on[1] = v; else if (k == zedkey::MSGOUT_RXM_SFRBX_UART2) sfrbx_on[2] = v;
       if ((k == zedkey::MSGOUT_NAV_SIG_UART1 || k == zedkey::MSGOUT_NAV_SIG_UART2) && v == 0 && sig_kick) sig_stuck = false;
     }
     if (sig) signal_restarts++;
@@ -349,6 +365,17 @@ struct SimZed {
       send_ubx(UBX_CLS_NAV, UBX_ID_NAV_SAT, b.data(), (uint16_t)b.size());
     }
     if (sig_every[port] && epochs % sig_every[port] == 0 && !sig_stuck) send_sig();
+    if (rawx_every[port] && epochs % rawx_every[port] == 0) {   // V3.16.0: RXM-RAWX, 16 + 32 x n_meas
+      std::vector<uint8_t> b(16 + 32u * n_meas);
+      put_u32(&b[0], epochs); b[11] = (uint8_t)n_meas; b[13] = 1;
+      for (size_t i = 16; i < b.size(); i++) b[i] = (uint8_t)(i * 7 + epochs);
+      send_raw(UBX_ID_RXM_RAWX, b);
+    }
+    if (sfrbx_on[port] && epochs % 3 == 0) {                   // V3.16.0: one 10-word subframe every 3 epochs
+      std::vector<uint8_t> b(8 + 40); b[0] = 0; b[1] = (uint8_t)(epochs % 32 + 1); b[4] = 10;
+      for (size_t i = 8; i < b.size(); i++) b[i] = (uint8_t)(i + epochs);
+      send_raw(UBX_ID_RXM_SFRBX, b);
+    }
     if (out_nmea[port]) send_text("$GNGSA,A,3,,,,,,,,,,,,,1.0,0.5,0.8,1*00\r\n$GPTXT,01,01,02,u-blox*00\r\n");   // bad checksums: noise only
   }
   void send_sig() {
@@ -400,6 +427,7 @@ struct ChestModel {
   std::vector<GnssSample> gnss;
   BackStatus last_status; bool have_status = false;
   Caps caps; bool have_caps = false;
+  UbxDefrag defrag; std::vector<std::vector<uint8_t>> raw_frames;   // V3.16.0
   uint32_t last_rx_ms = 0, tx_fail = 0, rtcm_lost_bytes = 0;
   ChestModel() { dec = new UartDecoder(on_frame, this); pair.open(0, 0, 0xA0A0, 0xB0B0); }
   ~ChestModel() { delete dec; }
@@ -408,6 +436,10 @@ struct ChestModel {
     if (f.type == FrameType::GNSS_SAMPLE) { GnssSample g; if (decode_gnss(f.payload, f.len, &g)) c->gnss.push_back(g); }
     if (f.type == FrameType::STATUS) c->have_status = decode_status(f.payload, f.len, &c->last_status);
     if (f.type == FrameType::CAPS) c->have_caps = decode_caps(f.payload, f.len, &c->caps);
+    if (f.type == FrameType::GNSS_UBX_FRAG) {
+      const uint8_t* fr; size_t fl;
+      if (c->defrag.feed(f.payload, f.len, &fr, &fl)) c->raw_frames.emplace_back(fr, fr + fl);
+    }
   }
   void reboot() { boot_id++; seq = 0; rtcm_off = 0; delete dec; dec = new UartDecoder(on_frame, this); guard = NowBootGuard(); }
 };
@@ -441,10 +473,10 @@ struct World {
   std::deque<Pkt> to_back, to_chest;
   std::vector<uint8_t> phone_rtcm;      // what the phone sent (= what must reach the ZED)
   std::mt19937 rng{7};
-  World(int zport = 2) {
+  World(int zport = 2, uint8_t nav_hz = 10) {
     zed.port = zport;
     plat.w = this;
-    back = new BackCore(&plat, "BACKTEST", 10);
+    back = new BackCore(&plat, "BACKTEST", nav_hz);
     back->begin(NowPeerRecord());
   }
   ~World() { delete back; }
@@ -1411,6 +1443,122 @@ TEST(fixdiag, status_v4_roundtrip_and_shared_vector) {
   // the 22 appended bytes, little-endian (vector also in docs/DIAGNOSTICO_FIX_RTK.md)
   static const uint8_t v4[22] = {2, 1, 1, 12, 34, 55, 66, 80, 0, 90, 0, 3, 0x1F, 0x10, 0x0F, 0x10, 0xD3, 0x07, 0xD2, 0x04, 7, 15};
   CHECK(memcmp(b + BACK_STATUS_V3_LEN, v4, sizeof(v4)) == 0);
+}
+
+// ---------------------------------------------------------------- V3.16.0 PPK: raw measurements to the chest
+TEST(ppk, fragments_roundtrip_every_length) {
+  std::vector<uint8_t> pl(4088 - 8);
+  for (size_t i = 0; i < pl.size(); i++) pl[i] = (uint8_t)(i * 31 + 5);
+  for (size_t plen : {0u, 1u, 184u, 185u, 1000u, 4080u}) {
+    std::vector<uint8_t> f(plen + 8);
+    size_t n = ubx_build(UBX_CLS_RXM, UBX_ID_RXM_RAWX, pl.data(), (uint16_t)plen, f.data(), f.size());
+    CHECK_EQ(n, plen + 8);
+    size_t cnt = ubx_frag_count(n);
+    CHECK(cnt >= 1 && cnt <= UBX_FRAG_MAX_PIECES);
+    UbxDefrag d; const uint8_t* out = nullptr; size_t on = 0; int done = 0;
+    for (size_t i = 0; i < cnt; i++) {
+      uint8_t piece[UBX_FRAG_HDR + UBX_FRAG_CHUNK];
+      size_t pn = ubx_frag_encode(f.data(), n, 77, (uint8_t)i, piece, sizeof(piece));
+      CHECK(pn > UBX_FRAG_HDR && pn <= sizeof(piece));
+      CHECK(AVO_UART_HDR + pn + AVO_UART_TRAILER <= NOW_MAX_BODY);   // one ESP-NOW packet per piece
+      if (d.feed(piece, pn, &out, &on)) done++;
+    }
+    CHECK_EQ(done, 1);
+    CHECK(on == n && memcmp(out, f.data(), n) == 0);
+  }
+  CHECK_EQ(ubx_frag_count(4097), 0u);
+  CHECK_EQ(ubx_frag_count(0), 0u);
+}
+
+TEST(ppk, lost_piece_drops_only_that_frame_and_duplicates_are_harmless) {
+  std::vector<uint8_t> pl(1000, 0x5A), f(1008);
+  size_t n = ubx_build(UBX_CLS_RXM, UBX_ID_RXM_RAWX, pl.data(), 1000, f.data(), f.size());
+  size_t cnt = ubx_frag_count(n);
+  UbxDefrag d; const uint8_t* out; size_t on;
+  uint8_t piece[UBX_FRAG_HDR + UBX_FRAG_CHUNK];
+  for (size_t i = 0; i < cnt; i++) if (i != 2) { size_t pn = ubx_frag_encode(f.data(), n, 1, (uint8_t)i, piece, sizeof(piece)); CHECK(!d.feed(piece, pn, &out, &on)); }
+  int done = 0;
+  for (size_t i = 0; i < cnt; i++) {   // next message, piece 0 sent twice, then a late duplicate of the last piece
+    size_t pn = ubx_frag_encode(f.data(), n, 2, (uint8_t)i, piece, sizeof(piece));
+    if (d.feed(piece, pn, &out, &on)) done++;
+    if (i == 0 && d.feed(piece, pn, &out, &on)) done++;
+  }
+  size_t pn = ubx_frag_encode(f.data(), n, 2, (uint8_t)(cnt - 1), piece, sizeof(piece));
+  if (d.feed(piece, pn, &out, &on)) done++;
+  CHECK_EQ(done, 1);
+  CHECK_EQ(d.incomplete(), 1u);
+  CHECK_EQ(d.complete(), 1u);
+  piece[UBX_FRAG_HDR + 3] ^= 1;   // corrupted content of a single-piece frame is caught by the UBX checksum
+  std::vector<uint8_t> small(16, 1), sf(24);
+  size_t sn = ubx_build(UBX_CLS_RXM, UBX_ID_RXM_SFRBX, small.data(), 16, sf.data(), sf.size());
+  pn = ubx_frag_encode(sf.data(), sn, 9, 0, piece, sizeof(piece));
+  piece[UBX_FRAG_HDR + 10] ^= 1;
+  CHECK(!d.feed(piece, pn, &out, &on));
+  CHECK_EQ(d.bad(), 1u);
+}
+
+TEST(ppk, raw_rate_follows_the_uart_budget) {
+  CHECK_EQ(zed_raw_rate_for(460800, 8), 2);
+  CHECK_EQ(zed_raw_rate_for(230400, 8), 1);
+  CHECK_EQ(zed_raw_rate_for(115200, 8), 0);   // the burst would delay the next NAV-PVT by more than one epoch
+  CHECK_EQ(zed_raw_rate_for(38400, 1), 0);
+  ZedUartBudget b = zed_uart_budget_raw(230400, 8, 1);
+  CHECK(b.ok && b.load_permille < 400);
+}
+
+TEST(ppk, rawx_and_sfrbx_reach_the_chest_byte_exact) {
+  World w(2, 8);
+  w.run_ms(20000);
+  CHECK_EQ((int)w.back->zed().state(), (int)ZedManager::RUNNING);
+  CHECK_EQ(w.back->zed().raw_state(), 1);
+  CHECK_EQ(w.back->zed().raw_rate_hz(), 1);
+  CHECK_EQ(w.zed.rawx_every[2], 8u);          // 8 Hz navigation: every 8th epoch = 1 Hz
+  CHECK_EQ(w.zed.sfrbx_on[2], 1u);
+  CHECK(w.chest.have_caps && (w.chest.caps.caps & CAP_GNSS_RAW));
+  size_t before = w.zed.raw_sent.size(), got0 = w.chest.raw_frames.size();
+  w.run_ms(10000, 5);
+  size_t sent = w.zed.raw_sent.size() - before, got = w.chest.raw_frames.size() - got0;
+  CHECK(sent >= 30);                          // 10 RXM-RAWX + ~26 RXM-SFRBX in 10 s
+  CHECK(got + 1 >= sent);                     // clean radio: every frame (the last one may still be in flight)
+  // byte-exact: the chest got the very frames the receiver put on the UART, in order
+  size_t match = 0;
+  for (size_t i = 0, j = 0; i < w.chest.raw_frames.size() && j < w.zed.raw_sent.size(); j++)
+    if (w.chest.raw_frames[i] == w.zed.raw_sent[j]) { match++; i++; }
+  CHECK_EQ(match, w.chest.raw_frames.size());
+  CHECK(w.chest.gnss.size() > 200);           // NAV-PVT keeps flowing at the navigation rate
+  CHECK(w.zed.rtcm_bytes == std::vector<uint8_t>(w.phone_rtcm.begin(), w.phone_rtcm.begin() + w.zed.rtcm_bytes.size()));
+}
+
+TEST(ppk, lossy_radio_loses_whole_frames_only) {
+  World w(2, 8);
+  w.radio.loss = 0.05;
+  w.run_ms(40000);
+  CHECK_EQ(w.back->zed().raw_state(), 1);
+  CHECK(w.chest.raw_frames.size() > 10);
+  for (auto& f : w.chest.raw_frames) {         // every frame the chest assembled is a valid UBX frame of the receiver
+    bool found = false;
+    for (auto& s : w.zed.raw_sent) if (s == f) { found = true; break; }
+    CHECK(found);
+  }
+  CHECK(w.back->stats().raw_failed > 0);
+}
+
+TEST(ppk, receiver_without_raw_keys_keeps_everything_else) {
+  World w(2, 8);
+  w.zed.no_raw_keys = true;
+  w.run_ms(20000);
+  CHECK_EQ(w.back->zed().raw_state(), 2);
+  CHECK(w.zed.pvt[2] && w.zed.sig_every[2]);
+  CHECK(w.chest.gnss.size() > 100);
+  CHECK(!(w.chest.caps.caps & CAP_GNSS_RAW));
+}
+
+TEST(ppk, slow_uart_skips_raw_output) {
+  World w(1, 8);                                  // UART1 with NMEA: may end on a slower line
+  w.run_ms(20000);
+  uint8_t r = w.back->zed().raw_state();
+  CHECK(r == 1 || r == 3);
+  if (w.back->zed().baud() < 230400) CHECK_EQ(r, 3);
 }
 
 int main(int argc, char** argv) { return tt_run_all(argc > 1 ? argv[1] : nullptr); }

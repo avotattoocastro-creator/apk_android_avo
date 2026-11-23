@@ -172,6 +172,7 @@ bool decode_status(const uint8_t* p, size_t n, BackStatus* s);
 enum CapBits : uint32_t {
   CAP_GNSS_SAMPLE = 1u << 0, CAP_GNSS_UBX = 1u << 1, CAP_IMU = 1u << 2, CAP_RTCM_IN = 1u << 3,
   CAP_PPS = 1u << 4, CAP_TIME_SYNC = 1u << 5, CAP_RXM_RTCM = 1u << 6, CAP_ACK = 1u << 7,
+  CAP_GNSS_RAW = 1u << 8,   // V3.16.0: RXM-RAWX/SFRBX in GNSS_UBX_FRAG frames (set while the receiver outputs them)
 };
 struct Caps {
   uint8_t proto_min = 1, proto_max = 1;

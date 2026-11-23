@@ -27,6 +27,9 @@ static const uint32_t MSGOUT_RXM_RTCM_UART1 = 0x20910269, MSGOUT_RXM_RTCM_UART2 
 // V3.9.0 quality monitoring (output rate = once every N navigation epochs)
 static const uint32_t MSGOUT_NAV_SAT_UART1 = 0x20910016, MSGOUT_NAV_SAT_UART2 = 0x20910017;
 static const uint32_t MSGOUT_NAV_SIG_UART1 = 0x20910346, MSGOUT_NAV_SIG_UART2 = 0x20910347;
+// V3.16.0 PPK: raw carrier-phase/pseudorange/Doppler measurements and broadcast navigation subframes
+static const uint32_t MSGOUT_RXM_RAWX_UART1 = 0x209102A5, MSGOUT_RXM_RAWX_UART2 = 0x209102A6;
+static const uint32_t MSGOUT_RXM_SFRBX_UART1 = 0x20910232, MSGOUT_RXM_SFRBX_UART2 = 0x20910233;
 // ---- V3.8.0 precision profile (u-blox F9 HPG Interface Description)
 static const uint32_t NAVSPG_DYNMODEL = 0x20110021;      // E1
 static const uint32_t NAVSPG_INFIL_MINELEV = 0x201100A4; // I1 degrees
@@ -49,6 +52,7 @@ static const uint8_t UBX_CLS_ACK = 0x05, UBX_ID_ACK_ACK = 0x01, UBX_ID_ACK_NAK =
 static const uint8_t UBX_CLS_CFG = 0x06, UBX_ID_CFG_VALSET = 0x8A;
 static const uint8_t UBX_CLS_MON = 0x0A, UBX_ID_MON_VER = 0x04;
 static const uint8_t UBX_CLS_RXM = 0x02, UBX_ID_RXM_RTCM = 0x32;
+static const uint8_t UBX_ID_RXM_RAWX = 0x15, UBX_ID_RXM_SFRBX = 0x13;   // V3.16.0 PPK
 static const uint8_t UBX_ID_MON_COMMS = 0x36;   // V3.14.4: receiver port usage (HPG 1.12+)
 static const uint8_t UBX_ID_MON_RF = 0x38;      // V3.15.0: antenna and RF front end (HPG 1.10+)
 
@@ -80,6 +84,13 @@ struct ZedUartBudget {
 // Worst case used by the firmware: 60 satellites in NAV-SAT, 120 signals in NAV-SIG, 12 RTCM messages per second.
 ZedUartBudget zed_uart_budget(uint32_t baud, uint8_t nav_hz, bool quality, uint8_t n_sat = 60, uint8_t n_sig = 120,
                               uint16_t rtcm_msgs_s = 12);
+// V3.16.0 PPK: the same budget (NAV-SIG on, NAV-SAT off) plus RXM-RAWX at raw_hz (16 + 32 x measurements + 8 bytes,
+// worst case 80 measurements) and RXM-SFRBX (~1 KB/s worst case with four constellations on two bands). The raw
+// epoch is assumed to fall in the same navigation epoch as NAV-PVT + NAV-SIG (worst burst).
+ZedUartBudget zed_uart_budget_raw(uint32_t baud, uint8_t nav_hz, uint8_t raw_hz, uint8_t n_meas = 80);
+// Raw output rate chosen by the back: 2 Hz when the line runs at >= 460800 baud and the budget allows it, otherwise
+// 1 Hz when the budget allows it, otherwise 0 (raw output not requested).
+uint8_t zed_raw_rate_for(uint32_t baud, uint8_t nav_hz);
 
 // V3.14.4: UBX-MON-COMMS, the receiver's own view of the port wired to the back.
 struct ZedComms {
@@ -128,7 +139,7 @@ class UbxStream {
   void drop(size_t n);
   FrameCb cb_;
   void* ctx_;
-  uint8_t buf_[2100];   // V3.9.0: NAV-SIG with ~120 signals is ~1.9 KB
+  uint8_t buf_[4200];   // V3.9.0: NAV-SIG with ~120 signals is ~1.9 KB · V3.16.0: RXM-RAWX up to 4088 B (127 measurements)
   size_t have_ = 0, need_ = 0;
   uint32_t frames_ = 0, bad_ = 0, nmea_ = 0, oversize_ = 0, resyncs_ = 0;
   char nm_[96];
@@ -169,6 +180,12 @@ class ZedManager {
   // V3.9.0: NAV-SAT/NAV-SIG output (1 Hz): 0 not requested yet, 1 enabled (V3.14.6: NAV-SIG on, NAV-SAT off), 2 rejected, 3 skipped (UART too slow),
   // 4 only NAV-SAT accepted, 5 only NAV-SIG accepted (V3.10.1: each one is retried on its own after a NAK)
   uint8_t monitor_state() const { return mon_; }
+  // V3.16.0 PPK: RXM-RAWX + RXM-SFRBX output: 0 not requested yet, 1 enabled, 2 rejected by the receiver,
+  // 3 skipped (UART too slow), 7 waiting for the answer. raw_rate_hz = rate requested (1 or 2 Hz, 0 = none).
+  uint8_t raw_state() const { return raw_; }
+  uint8_t raw_rate_hz() const { return raw_hz_; }
+  uint32_t rawx_count() const { return n_rawx_; }
+  uint32_t sfrbx_count() const { return n_sfrbx_; }
   // V3.13.12: times the NAV-SAT/SIG output was asked for again because it stopped arriving for 10 s (field 02/11/2026:
   // the card stayed in "waiting for the signal summary" while NAV-PVT kept flowing), and times the receiver went
   // silent for 5 s and had to be detected again (reset, brown-out or cable).
@@ -216,6 +233,9 @@ class ZedManager {
   void send_config(bool with_rate);
   void send_tune(bool full);
   void send_monitor(uint8_t which);   // 3 both, 1 NAV-SAT, 2 NAV-SIG
+  void send_raw(uint8_t raw_hz);      // V3.16.0
+  uint8_t raw_ = 0, raw_hz_ = 0, raw_rounds_ = 0;
+  uint32_t raw_t0_ = 0, n_rawx_ = 0, n_sfrbx_ = 0;
   uint8_t mon_ = 0, mon_try_ = 2, mon_ok_ = 0, mon_rounds_ = 0;
   uint32_t mon_t0_ = 0;
   uint32_t mon_last_ms_ = 0, mon_set_ms_ = 0, mon_rearms_ = 0, zed_resets_ = 0;
