@@ -309,6 +309,18 @@ Detalle: `knowledge/estudios/2026-11-20_2209_lesiones_arabes_turquia_repetibilid
   galope solo como «revisar»; prioridad a la recuperación) [I], sin implementar.
 Detalle: `knowledge/estudios/2026-11-21_noche_auditoria_v200_metodo_fcmax_arabes_latam.md`.
 
+**Investigación nocturna 23/11 (KB-1 1.29.0, motor 2.0.0-dev31, sin cambios de lógica).**
+- **Auditoría de 9 fuentes (8 mejoradas):** las fuentes estadísticas de `kb_robust_z`, `kb_cusum_upper`,
+  `kb_self_starting_z`, `kb_change_threshold` y `kb_shrink_mean` ya están leídas (NIST, Lombard & Hawkins, Hopkins 2000,
+  Efron & Morris 1975). La tabla del NIST es del CUSUM unilateral (336 / 930; nuestra cadena de Markov da 335 / 931);
+  los ARL bilaterales son cálculo nuestro. Davie 2026: ICC de la recuperación a 30 s 0,451 (no 0,42) y CV de la FC de
+  galope ≈ 2,7 %. Spargo 2019: el 73,6 % es de las extremidades disecadas. Mukai 2007: los ± son EE.
+- **Carga:** sin TRIMP ni ACWR validados en carreras; CG1–CG3 [I] solo descriptivos (TRIMP con FC propias, bandas
+  GNSS de PSI, EWMA 7/28 d como «cambio relativo», nunca riesgo).
+- **Edad y sexo:** ES1–ES3 [I]: μ_pop por edad y raza (PSI 2 / 3 / 4+; árabe 3 / 4 / 5+), sexo solo en la velocidad
+  de carrera (≈ −0,4 % hembras), FCmax común con DE ≈ 8 lpm.
+Detalle: `knowledge/estudios/2026-11-23_noche_auditoria_estadistica_trimp_acwr_edad_sexo.md`.
+
 **Investigación nocturna 22/11 (KB-1 1.28.0, motor 2.0.0-dev30, sin cambios de lógica).**
 - **Auditoría de 12 fuentes (9 mejoradas, 7 a texto completo):** Reef 2014 y Marr 2020 confirman que no hay umbral
   numérico de prematuros (A11 sin cambios; Marr da alteraciones del ritmo, no causas). Ikeda 2019 solo tiene OR
