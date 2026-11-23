@@ -201,9 +201,22 @@ def ep_stubs(r, pads):
 VIA_PAD_WEB = 0.20
 
 
-def smd_pad_block(r, pads):
-    if getattr(r, "smd_block", None) is not None:
-        return r.smd_block
+def smd_pad_block(r, pads, web=None):
+    """Celdas donde no cabe una vía sin invadir un pad SMD con pasta (+ franja de máscara `web`)."""
+    web = VIA_PAD_WEB if web is None else web
+    cache = getattr(r, "smd_block", None)
+    if cache is None:
+        cache = r.smd_block = {}
+    if web in cache:
+        return cache[web]
+    m = np.zeros((r.H, r.W), bool)
+    for rec in pads:
+        if rec["pad"].kind == "smd" and any(str(c).endswith("Paste") for c in rec["pad"].layers):
+            m |= poly_mask((r.H, r.W), r.x0, r.y0, rec["poly"])
+    from scipy import ndimage
+    d = ndimage.distance_transform_edt(~m) * GRID
+    cache[web] = d < VIA[0] / 2 + web
+    return cache[web]
     m = np.zeros((r.H, r.W), bool)
     for rec in pads:
         if rec["pad"].kind == "smd":
