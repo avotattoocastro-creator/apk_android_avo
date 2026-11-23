@@ -24,6 +24,19 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-23 — Espalda PROTOTIPO 3.16.0 · Motor 2.0.0-dev32 (AVO PPK 1.0.0) — PPK: RXM-RAWX/SFRBX al pecho y cálculo con RTKLIB
+**Autor:** Claude · **Commits:** `93eada5` (espalda), `5664e0b` (motor), y el de esta documentación · **CI:** no se lanza en las ramas (se compila al fusionar en `develop`)
+**Qué cambia:**
+- **Espalda 3.16.0:** pide RXM-RAWX (1 Hz; 2 Hz a ≥ 460 800 baudios) y RXM-SFRBX en un VALSET propio, solo si caben en el presupuesto de la UART, y los envía al pecho en tramas nuevas `GNSS_UBX_FRAG` (0x12) de 192 B, un paquete ESP-NOW y un intento por trozo. Bit `CAP_GNSS_RAW` en CAPS. Búfer UBX de 4200 B. Línea «PPK:» en el monitor serie. NAV-PVT sigue a 8 Hz.
+- **Pecho:** sin cambios (ya graba cada trama tal cual en el `.avr`).
+- **Motor 2.0.0-dev32:** RTKLIB demo5 (`75a2e56`, BSD-2) en `src/ppk/rtklib` (sin `execcmd`, sin avisos ni sanitizadores); descompresor Hatanaka propio (CRINEX 3.0, IGN); extracción de RAWX/SFRBX del `.avr` (trozos de la Heltec y tramas enteras del casco BETA V5); cinemático adelante + atrás; API C `avo_eq_ppk_need` y `avo_eq_ppk` (JSON `avo-ppk`). CMake del motor con C (Android, Windows e iPad compilan los `.c` con el mismo `src/`).
+- **Documentación:** `docs/PPK.md` (contrato `GNSS_UBX_FRAG`, compatibilidad, pruebas). Tabla «Vigente»: la siguiente prueba física ya no propone la espalda 3.14.4 (no enlazaba con el pecho).
+**Por qué:** petición del usuario (23/11, 18:30): PPK para tener precisión sin depender del FIX en directo ni llevar el móvil en el trabajo.
+**Archivos:** `firmware/back/V3_8_0/lib/avo_core/src/avo_ubx_frag.*`, `avo_ubx_zed.*`, `avo_back_core.*`, `avo_uart_proto.h`, `avo_payloads.h`, `avo_version.h`, `AVO_BACK_V3_8_0.ino`, `test/test_espnow.cpp`; `equine-intelligence/CMakeLists.txt`, `include/avo_eq/ppk.h`, `include/avo_eq/avo_eq_c.h`, `src/ppk/**`, `src/capi/ppk_capi.cpp`, `tests/test_ppk.cpp`, `tests/data/ppk/**`; `docs/PPK.md`.
+**No se ha tocado:** firmware del pecho, workflows, firmas, `Info.plist`, apps.
+**Validación:** pruebas de anfitrión — espalda 66 casos / 836 comprobaciones (ASan/UBSan limpio); motor 120 casos / 2635 comprobaciones (GCC con ASan/UBSan y Clang Release), fixtures correctas. PPK con datos reales GEONET 2005: 98 % FIX, dispersión horizontal ≤ 4,2 cm; desde `.avr` con trozos, diferencia ≤ 0,07 cm con la solución RINEX. **Sin compilar todavía:** firmware con arduino-cli, motor con MSVC, NDK y Xcode (se compilan al fusionar). **NO VERIFICADO** en hardware.
+**Pendiente:** apps (descarga de la base del IGN, botón PPK y `AVO_<sesión>.ppk.json` en la nube con reglas de Storage nuevas); prueba en el banco y en pista.
+
 ## 2026-11-23 — Motor 2.0.0-dev31 · KB-1 1.29.0 — Investigación nocturna: auditoría de 9 fuentes (estadística del motor, ECG, fiabilidad de la FC), carga con FC y GPS (TRIMP, ACWR) y edad y sexo como covariables
 **Autor:** Claude (tarea programada nocturna, sin supervisión) · **Rama:** `claude/kb-noche-2026-11-23` (desde `claude/kb-noche-2026-11-22` `91ab2c2`, PR #124 sin fusionar) · **PR:** #126 · **CI:** `build-equine-engine.yml` run 45108066980 ✅ (`d2b4488`)
 **Qué cambia:**
