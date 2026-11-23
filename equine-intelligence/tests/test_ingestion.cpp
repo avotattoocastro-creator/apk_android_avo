@@ -59,6 +59,37 @@ EQ_TEST(ingestion, raw_written_by_avo_core_is_read_back_unchanged) {
   remove(path);
 }
 
+// CASCO 5.0.0 (motor 2.0.0-dev32): el lote de la IMU de la cabeza (fmt 3, imu_id 4, byte 15 = 3) se cuenta aparte, no se
+// mezcla con la cincha, no cambia imu_units y no es un registro malo.
+EQ_TEST(ingestion, head_imu_batch_from_the_helmet_is_counted_not_bad) {
+  const char* path = "eq_test_head_imu.avo";
+  remove(path);
+  static uint8_t blockbuf[avo::RAW_BLOCK_HDR + 8192];
+  avo::RawWriter w; w.attach_buffer(blockbuf, 8192);
+  avo::RawFileMeta meta;
+  strcpy(meta.session_id, "S_TEST_HEAD"); strcpy(meta.horse_name, "PRUEBA"); meta.gnss_rate_hz = 8; meta.imu_rate_hz = 120;
+  CHECK(w.open(path, meta, 1));
+  uint16_t seq = 0;
+  for (int b = 0; b < 3; b++) {
+    avo::ImuBatchHeader ih; ih.girth_id = 0xCA; ih.imu_id = 4; ih.count = 15; ih.fmt = 3; ih.girth_seq = (uint32_t)b;
+    ih.girth_t0_us = 1000000 + b * 125000; ih.period_us = 8333; ih.sync_state = 2; ih.reserved = 3;
+    uint8_t pl[avo::IMU_HDR_LEN + 15 * 12], fr[512];
+    memset(pl, 0x11, sizeof(pl));
+    avo::encode_imu_header(ih, pl, sizeof(pl));
+    size_t fn = avo::uart_encode(avo::FrameType::IMU_SAMPLE, 0, 1, seq++, 0, pl, sizeof(pl), fr, sizeof(fr));
+    avo::RecHdr h; h.type = (uint8_t)avo::RecType::UART_FRAME; h.len = (uint16_t)fn; h.chest_us = 6000000ull + b * 125000ull;
+    CHECK(w.append(h, fr, 0, 0));
+  }
+  CHECK(w.close(true, 0, 0));
+  Session s; std::string err;
+  CHECK(ingest_raw({path}, &s, &err));
+  CHECK(s.head_imu_batches == 3);
+  CHECK(s.imu.empty());
+  CHECK(s.bad_records == 0);
+  CHECK(s.imu_units == 0);
+  remove(path);
+}
+
 EQ_TEST(ingestion, non_avo_file_is_rejected) {
   const char* path = "eq_not_avo.bin";
   FILE* f = fopen(path, "wb"); fputs("esto no es un fichero AVO", f); fclose(f);
