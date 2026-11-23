@@ -23,7 +23,7 @@ from router import GRID, poly_mask, seg_mask                 # noqa: E402
 from sexpr import find, find_all, parse                      # noqa: E402
 
 # Reparación: franja de máscara mínima entre vía y pad SMD (0,10 mm + margen de rejilla)
-REPAIR_WEB = float(os.environ.get("AVO_REPAIR_WEB", "0.10"))
+REPAIR_WEB = float(os.environ.get("AVO_REPAIR_WEB", "0.15"))
 
 SIGNAL_W = {"Potencia": 0.3, "Qi_AC": 0.3, "Default": 0.2}
 POWER = {D.VBAT, D.VBUS, D.VSYS, "BAT_IN", "POGO_VBUS", "USBC_VBUS", D.VZED, D.V3}
