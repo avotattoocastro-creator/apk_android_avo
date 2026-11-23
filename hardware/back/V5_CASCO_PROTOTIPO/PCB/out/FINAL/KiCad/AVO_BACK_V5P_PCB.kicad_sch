@@ -2948,7 +2948,7 @@
 		(dnp no)
 		(uuid "fd35d35d-a625-5b45-b79d-6f746fe2a19d")
 		(property "Reference" "R22" (at 121.92 123.19 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "100k" (at 121.92 125.73 0) (effects (font (size 1 1)) (justify left)))
+		(property "Value" "1k" (at 121.92 125.73 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
@@ -2958,7 +2958,7 @@
 		)
 		(property "Datasheet" "" (at 119.38 124.46 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 119.38 124.46 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C25741" (at 119.38 124.46 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C11702" (at 119.38 124.46 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 119.38 124.46 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "e62d777b-0e10-59a8-ab34-1285b224b5b9"))
 		(pin "2" (uuid "27482771-8360-5105-9bcd-e315591a0f86"))
@@ -2994,7 +2994,7 @@
 		(dnp no)
 		(uuid "f0b38f43-2bb7-54a2-9906-18a60da28c55")
 		(property "Reference" "R23" (at 146.05 127 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "150k" (at 146.05 129.54 0) (effects (font (size 1 1)) (justify left)))
+		(property "Value" "1k5" (at 146.05 129.54 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
@@ -3004,7 +3004,7 @@
 		)
 		(property "Datasheet" "" (at 143.51 128.27 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 143.51 128.27 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C25755" (at 143.51 128.27 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25867" (at 143.51 128.27 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 143.51 128.27 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "ac2e11d9-ce3a-5f28-a546-1ff6ddff0be5"))
 		(pin "2" (uuid "367113c4-96c2-53f4-b8b1-852bed978f4c"))
@@ -4548,7 +4548,7 @@
 		(dnp no)
 		(uuid "169a7c1c-5b14-5ba8-be86-4b3bb219f610")
 		(property "Reference" "R25" (at 26.67 344.17 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "620k" (at 26.67 346.71 0) (effects (font (size 1 1)) (justify left)))
+		(property "Value" "2k" (at 26.67 346.71 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
@@ -4558,7 +4558,7 @@
 		)
 		(property "Datasheet" "" (at 24.13 345.44 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 24.13 345.44 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C137952" (at 24.13 345.44 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C4109" (at 24.13 345.44 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 24.13 345.44 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "1e69694f-4896-5815-867e-1cb52f455d96"))
 		(pin "2" (uuid "af9299bd-4072-5a89-bebc-4e2394998e01"))
@@ -4594,7 +4594,7 @@
 		(dnp no)
 		(uuid "7147d462-2cdd-5907-99e2-b987c6c2b6c8")
 		(property "Reference" "R26" (at 50.8 346.71 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "100k" (at 50.8 349.25 0) (effects (font (size 1 1)) (justify left)))
+		(property "Value" "330R" (at 50.8 349.25 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
@@ -4604,7 +4604,7 @@
 		)
 		(property "Datasheet" "" (at 48.26 347.98 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 48.26 347.98 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C25741" (at 48.26 347.98 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25104" (at 48.26 347.98 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 48.26 347.98 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "0fa71090-df51-536c-8a54-383aa343ad3b"))
 		(pin "2" (uuid "0f89d073-7824-5ef0-bf87-0971a8fd3174"))
