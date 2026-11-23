@@ -43,7 +43,7 @@ ven un pecho con su espalda conectada. La radio ESP-NOW queda solo para las cinc
 ## IMU de la cabeza y PPS (incluidos desde 5.0.0)
 - **IMU** LSM6DSV16X (0x6A): los mismos registros que la cincha REV D. 120 Hz, ±16 g, ±2000 dps, FIFO continua.
   Se envía en lotes `IMU_SAMPLE` **fmt 3**, `imu_id 4`, `girth_id 0xCA`, byte 15 = 3: 15 muestras de 12 B (ax ay az
-  gx gy gz, int16 LE en LSB; 0,488 mg/LSB y 70 mdps/LSB). Va al `.avr` y al motor (≥ 2.0.0-dev30: `head_imu_batches`)
+  gx gy gz, int16 LE en LSB; 0,488 mg/LSB y 70 mdps/LSB). Va al `.avr` y al motor (≥ 2.0.0-dev32: `head_imu_batches`)
   por la misma cola que las cinchas, sin mezclarse con ellas.
 - **PPS** (GPIO7): estado en BackStatus y en cada muestra GNSS. Además envía **TIME_SYNC** (µs del casco en el flanco
   e iTOW del segundo entero), que enlaza el reloj del casco con la hora GPS.

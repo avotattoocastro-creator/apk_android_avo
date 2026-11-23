@@ -68,7 +68,7 @@ void on_frame(const avo::FrameView& f, void* vctx) {
   } else if (f.type == avo::FrameType::IMU_SAMPLE) {
     avo::ImuBatchHeader h;
     if (!avo::decode_imu_header(f.payload, f.len, &h)) { s.bad_records++; return; }
-    // CASCO 5.0.0 (motor dev30): IMU de la cabeza, fmt 3 / imu_id 4 / unidades 3 en el byte 15 (LSM6DSV16X ±16 g, ±2000 dps).
+    // CASCO 5.0.0 (motor dev32): IMU de la cabeza, fmt 3 / imu_id 4 / unidades 3 en el byte 15 (LSM6DSV16X ±16 g, ±2000 dps).
     // Se cuenta y no entra en la cincha: antes de imu_units, para que su byte 15 no cambie las unidades de la cincha.
     if (h.fmt == 3) { s.head_imu_batches++; return; }
     if (h.fmt != ECG_FMT && h.reserved == 1) s.imu_units = 1;   // GIRTH 0.4.3+: units of the BNO085 declared in byte 15

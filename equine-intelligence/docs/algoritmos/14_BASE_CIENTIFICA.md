@@ -309,6 +309,33 @@ Detalle: `knowledge/estudios/2026-11-20_2209_lesiones_arabes_turquia_repetibilid
   galope solo como «revisar»; prioridad a la recuperación) [I], sin implementar.
 Detalle: `knowledge/estudios/2026-11-21_noche_auditoria_v200_metodo_fcmax_arabes_latam.md`.
 
+**Investigación nocturna 23/11 (KB-1 1.29.0, motor 2.0.0-dev31, sin cambios de lógica).**
+- **Auditoría de 9 fuentes (8 mejoradas):** las fuentes estadísticas de `kb_robust_z`, `kb_cusum_upper`,
+  `kb_self_starting_z`, `kb_change_threshold` y `kb_shrink_mean` ya están leídas (NIST, Lombard & Hawkins, Hopkins 2000,
+  Efron & Morris 1975). La tabla del NIST es del CUSUM unilateral (336 / 930; nuestra cadena de Markov da 335 / 931);
+  los ARL bilaterales son cálculo nuestro. Davie 2026: ICC de la recuperación a 30 s 0,451 (no 0,42) y CV de la FC de
+  galope ≈ 2,7 %. Spargo 2019: el 73,6 % es de las extremidades disecadas. Mukai 2007: los ± son EE.
+- **Carga:** sin TRIMP ni ACWR validados en carreras; CG1–CG3 [I] solo descriptivos (TRIMP con FC propias, bandas
+  GNSS de PSI, EWMA 7/28 d como «cambio relativo», nunca riesgo).
+- **Edad y sexo:** ES1–ES3 [I]: μ_pop por edad y raza (PSI 2 / 3 / 4+; árabe 3 / 4 / 5+), sexo solo en la velocidad
+  de carrera (≈ −0,4 % hembras), FCmax común con DE ≈ 8 lpm.
+Detalle: `knowledge/estudios/2026-11-23_noche_auditoria_estadistica_trimp_acwr_edad_sexo.md`.
+
+**Investigación nocturna 22/11 (KB-1 1.28.0, motor 2.0.0-dev30, sin cambios de lógica).**
+- **Auditoría de 12 fuentes (9 mejoradas, 7 a texto completo):** Reef 2014 y Marr 2020 confirman que no hay umbral
+  numérico de prematuros (A11 sin cambios; Marr da alteraciones del ritmo, no causas). Ikeda 2019 solo tiene OR
+  univariables. En Nomura 2019 el WBGT 28–33 °C es una norma externa citada. Morrice-West 2020 da 1,7 / 2,0 trabajos
+  rápidos por semana y 2 descansos al año de unas 6 semanas (P1, P3 y P6 pasan a [E]). Georgopoulos & Parkin 2017 es
+  de Norteamérica. La r −0,565 de Evans 1993 es de una prueba en cinta y solo por resumen. Ningún valor del motor cambia.
+- **TE de V200:** sigue sin cifra de PSI o árabe en texto completo. Propuesta TE2 [I]: 3 % en condiciones iguales y
+  4–5 % si no están estandarizadas.
+- **Asia:** la JRA (informes institucionales) da una V200 de campo de 11,9 m/s en PSI en activo, unos +4–6 lpm por
+  cada 1 % de pendiente y la métrica THR100 (200 s). Corea añade la ventana de 120–180 días para las fracturas de
+  sesamoideos. El Golfo sigue sin datos de árabes de llano.
+- Propuestas PD1 (pendiente como criterio de comparables), RC1 (THR100 informativo) y FW1 (FC de un calentamiento
+  fijo como tendencia diaria) [I], sin implementar.
+Detalle: `knowledge/estudios/2026-11-22_noche_auditoria_ecg_carga_cuesta_jra_te_v200.md`.
+
 **Ficha de campo, A4 y base del planificador (KB-1 1.26.0, motor 2.0.0-dev28, TRAINING 1.1.0; cambio de lógica).**
 - **A4_CARGA_BAJA_PRECARRERA → IMPLEMENTADO** como AVISO informativo (tabla de la sección 3); no sube el estado.
 - **PL1 parcial:** con la franja de playa anotada (`pista.franja`), A7 y A8 solo comparan sesiones de la misma

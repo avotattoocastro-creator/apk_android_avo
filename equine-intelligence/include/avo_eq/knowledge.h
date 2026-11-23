@@ -20,7 +20,7 @@
 
 namespace avoeq {
 
-static const char* const KNOWLEDGE_VERSION = "1.27.0";
+static const char* const KNOWLEDGE_VERSION = "1.29.0";
 static const char* const KNOWLEDGE_ID = "AVO_KB_1";
 static const char* const BONE_MODEL_ALGORITHM = "SBFL_MORRICE_WEST_2022";
 
@@ -182,8 +182,9 @@ double kb_change_threshold(double te, int n, double swc);
 
 // CUSUM unilateral superior sobre z ya tipificados con la DE dentro del caballo: S_t = max(0, S_{t−1} + z_t − k), alarma
 // cuando S_t > h. Para derivas a la baja se pasa −z. Con k = 0,5: h = 4 → ARL0 ≈ 335 sesiones y ARL1(δ = 1) ≈ 8,4;
-// h = 5 → ARL0 ≈ 931 y ARL1 ≈ 10,4 (cadena de Markov de Brook-Evans, coincide con la tabla del NIST/SEMATECH
-// e-Handbook §6.3.2.3.1). Los 168/465 que se citan a veces son del CUSUM bilateral. Con muchas cartas a la vez (caballos
+// h = 5 → ARL0 ≈ 931 y ARL1 ≈ 10,4 (cadena de Markov de Brook-Evans; la tabla del NIST/SEMATECH e-Handbook
+// §6.3.2.3.1, leída el 23/11/2026, da 336 / 8,38 y 930 / 10,4 para el CUSUM UNILATERAL). Los 168/465 del CUSUM
+// bilateral (≈ ARL0/2 de dos cartas unilaterales) son un cálculo nuestro: el NIST no publica ARL bilaterales. Con muchas cartas a la vez (caballos
 // × métricas × sentidos) conviene h = 5 [I]. fir: arranque con S0 = h/2 (Lucas & Crosier 1982), ARL1(δ = 1) 5,3 con
 // h = 4. min_samples: no se dan alarmas antes de esa muestra válida [I]. NaN: la muestra se salta (S no cambia).
 struct KbCusumConfig { double k = 0.5, h = 4.0; bool fir = false; int min_samples = 1; };

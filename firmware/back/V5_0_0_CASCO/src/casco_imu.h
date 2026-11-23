@@ -8,7 +8,7 @@
 //   girth_seq = número de lote · girth_t0_us = reloj del casco (esp_timer, µs, 32 bits) de la primera muestra
 //   sync_state = 2 con el PPS enganchado (TIME_SYNC del mismo reloj), 1 sin él · girth_to_back_us = 0 (mismo reloj)
 // Las apps y el motor que no conocen fmt 3 lo ignoran (Windows/iPad: lote «opaco»; Android: solo fmt 0;
-// motor ≥ 2.0.0-dev30: head_imu_batches). No se mezcla con las cinchas (imu_id 0–3).
+// motor ≥ 2.0.0-dev32: head_imu_batches). No se mezcla con las cinchas (imu_id 0–3).
 #pragma once
 #include <stdint.h>
 #include <stddef.h>

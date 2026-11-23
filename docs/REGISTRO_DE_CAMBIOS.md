@@ -24,7 +24,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
-## 2026-11-23 — Casco BACK V5 firmware 5.0.0 (IMU de la cabeza + PPS/TIME_SYNC) · Motor 2.0.0-dev30
+## 2026-11-23 — Casco BACK V5 firmware 5.0.0 (IMU de la cabeza + PPS/TIME_SYNC) · Motor 2.0.0-dev32
 **Autor:** Claude · **Rama:** `claude/casco-fw-5-0-0` (PR #127, sin fusionar) · **CI:** workflow `build-casco-v500-fw.yml` todavía **pendiente del permiso del usuario** · compilado en local (arduino-esp32 3.3.12, 1 396 203 B)
 **Qué cambia:** petición del usuario (23/11): «añadir el IMU y PPS del casco desde ya, no quiero andar haciendo 20 firm
 distintos». En el mismo firmware **5.0.0**:
@@ -42,7 +42,7 @@ distintos». En el mismo firmware **5.0.0**:
   CAPS añade `CAP_PPS | CAP_TIME_SYNC | CAP_IMU`.
 - **Ganchos en `BackCore`** solo en la copia del casco (`apply_v500.py`, paso 1b: `set_pps`, `set_pvt_observer`,
   `send_extra`). La biblioteca de la espalda de la Heltec (`firmware/back/V3_8_0`) **no se toca**.
-- **Motor 2.0.0-dev30**: el lote fmt 3 se cuenta en `Session::head_imu_batches`, antes de leer `imu_units`. No se
+- **Motor 2.0.0-dev32** (renumerado al integrar: dev30 y dev31 ya estaban en develop por las investigaciones nocturnas): el lote fmt 3 se cuenta en `Session::head_imu_batches`, antes de leer `imu_units`. No se
   mezcla con la cincha, no cambia sus unidades y no cuenta como registro malo (antes habría bajado la calidad
   INTEGRIDAD). Prueba `ingestion.head_imu_batch_from_the_helmet_is_counted_not_bad`.
 **Apps:** sin cambios necesarios para no romper nada: Windows e iPad cuentan los fmt desconocidos como lote «opaco» y
@@ -72,6 +72,56 @@ y las 59 pruebas de la espalda con la biblioteca del casco: 63 casos, 618 compro
 **No se ha tocado:** el pecho ni la espalda (sus carpetas y workflows); ningún workflow.
 **Validación:** IMPLEMENTADO · compilado · **NO VERIFICADO** en la placa (PROTOTIPO A en fabricación).
 **Pendiente:** pruebas M1–M10 en la placa; IMU y PPS sin usar; AVO Update y las apps no reconocen todavía «AVO-CASCO».
+
+---
+
+## 2026-11-23 — Motor 2.0.0-dev31 · KB-1 1.29.0 — Investigación nocturna: auditoría de 9 fuentes (estadística del motor, ECG, fiabilidad de la FC), carga con FC y GPS (TRIMP, ACWR) y edad y sexo como covariables
+**Autor:** Claude (tarea programada nocturna, sin supervisión) · **Rama:** `claude/kb-noche-2026-11-23` (desde `claude/kb-noche-2026-11-22` `91ab2c2`, PR #124 sin fusionar) · **PR:** #126 · **CI:** `build-equine-engine.yml` run 45108066980 ✅ (`d2b4488`)
+**Qué cambia:**
+- Estudio `equine-intelligence/knowledge/estudios/2026-11-23_noche_auditoria_estadistica_trimp_acwr_edad_sexo.md`.
+- **Auditoría de 9 fuentes, 8 mejoradas.** Se reclasifican las 5 fuentes `SIN_AUDITAR` que sostienen funciones ya implementadas: NIST/SEMATECH (OFICIAL), Lombard & Hawkins (PREPRINT, título corregido), Bosch 2018, Hopkins 2000 y Efron & Morris 1975 (TEXTO_COMPLETO). Pasan a texto completo Frick 2019, Spargo 2019 y Davie 2026. Correcciones:
+  - NIST: la tabla es del CUSUM unilateral (ARL0 336 / 930); los 168 / 465 «bilaterales» son cálculo nuestro.
+  - Davie 2026: ICC de la recuperación a 30 s 0,42 → **0,451** (tabla 3); CV intraindividual de la FC de galope ≈ 2,7 %.
+  - Spargo 2019: el 73,6 % es de 53 extremidades disecadas, no de los caballos; 0,56 / 1.000.
+  - Mukai 2007: los ± son error estándar (DE entre caballos ≈ 8,2 lpm).
+  - Frick 2019: razas mixtas (83 % warmblood; 4 PSI, 3 árabes).
+
+  **Ningún valor que use el código cambia.**
+- **Carga:** no existe TRIMP ni ACWR validado en PSI, árabes ni trotones; el único equino (Munsters 2020) es de completo, y allí solo el ACWR de distancia a alta velocidad se asoció a lesión. Fórmulas humanas de plantilla confirmadas en fuentes secundarias legales.
+- **Edad y sexo:** la edad cambia mucho la V200 y la velocidad entre 2 y 4 años (árabes ≈ 1 año más tarde); el sexo solo ≈ 0,3–1 % de velocidad de carrera; ningún dato de V200/FCmax por sexo dentro de PSI o árabe.
+- 30 fuentes nuevas (completo, trotón sueco, JRA, QREC, BHA, Turquía, Polonia, Brasil, fórmulas humanas). Reglas **CG1–CG3** (carga descriptiva) y **ES1–ES3** (prior por edad y raza) como PROPUESTA [I]. No se implementan.
+- `base_cientifica.json` 1.29.0, `KNOWLEDGE_VERSION` 1.29.0, `ENGINE_VERSION` 2.0.0-dev31, prueba de versión en `test_knowledge.cpp` y comentario del CUSUM en `knowledge.h` (valores del NIST). Fixtures regeneradas solo por la cadena de versión (4 diferencias por archivo). Bloque 23/11 en `14_BASE_CIENTIFICA.md`.
+
+**Por qué:** auditoría nocturna de la KB-1. Cinco funciones implementadas (z robusto, CUSUM, CUSUM autoiniciado, umbral de cambio y contracción) se apoyaban en fuentes sin auditar; el planificador (capa 2) y las líneas base necesitan saber qué carga y qué prior tienen respaldo.
+**No se ha tocado:** lógica del motor, firmware, apps, contratos binarios, workflows, firmas, `Info.plist` ni número de build.
+**Validación:** pruebas locales ✅ con ASan/UBSan (`avo_eq_tests`) y en Release; fixtures OK. CI run 45108066980 ✅. **NO VERIFICADO** con caballos reales.
+**Pendiente:** PDF de Mukai 2007 (J-STAGE) a mano; ARL del NIST con 0,5σ y h 5 a mano; originales de Banister, Williams y Foster; V200/FCmax por sexo (no publicado).
+
+---
+
+## 2026-11-22 — Motor 2.0.0-dev30 · KB-1 1.28.0 — Investigación nocturna: auditoría de 12 fuentes, TE de V200 en varias razas, carga y FC en Asia (cuesta de la JRA), América, Oceanía y África
+**Autor:** Claude (tarea programada nocturna, sin supervisión) · **Rama:** `claude/kb-noche-2026-11-22` (desde `develop` `daa2bb7`) · **CI:** `build-equine-engine.yml` run 44981278300 ✅ (`8fae5bb`)
+**Qué cambia:**
+- Estudio `equine-intelligence/knowledge/estudios/2026-11-22_noche_auditoria_ecg_carga_cuesta_jra_te_v200.md`.
+- **Auditoría de 12 fuentes, 9 mejoradas.** Pasan a texto completo Önder 2022, Reef 2014, Marr 2020, Ikeda 2019, Nomura 2019, Morrice-West 2020 y Georgopoulos & Parkin 2017. Se corrigen:
+  - Marr 2020: son alteraciones del ritmo, no causas de bajo rendimiento.
+  - Georgopoulos 2017: la población es de EE. UU. y Canadá.
+  - Nomura 2019: el WBGT de 28–33 °C es una norma externa.
+  - Evans 1993: la etiqueta pasa de [E] a [E-r], y la prueba es en cinta.
+  - Ikeda 2019: solo tiene OR univariables.
+  - Yıldırım 2025: el pico de los PSI es a los 2–3 años.
+
+  **Ningún valor del motor cambia.**
+- Se añaden 31 fuentes: JRA (artículos e informes institucionales), Corea, Hong Kong, Golfo, Nueva Zelanda, Chile, Colombia, Brasil, EE. UU., Sudáfrica y trotones. Los datos de otras razas llevan `raza_fuente` y la etiqueta [I-raza].
+- Reglas **PD1** (pendiente), **TE2** (TE de V200 según las condiciones), **RC1** (THR100) y **FW1** (FC de un calentamiento fijo) como PROPUESTA [I]. No se implementan.
+- `base_cientifica.json` 1.28.0, `KNOWLEDGE_VERSION` 1.28.0, `ENGINE_VERSION` 2.0.0-dev30 y prueba de versión en `test_knowledge.cpp`. Las fixtures se regeneran solo por la cadena de versión (4 diferencias por archivo). Bloque 22/11 en `14_BASE_CIENTIFICA.md`.
+
+**Por qué:** es la auditoría nocturna de fuentes de la KB-1. Faltaba el texto completo de fuentes que sostienen A11, P1/P6, el criterio de calor y el TFDS. También estaba pendiente el TE de V200 para VT1.
+**No se ha tocado:** lógica del motor, firmware, apps, contratos binarios, workflows, firmas, `Info.plist` ni número de build.
+**Validación:** pruebas locales ✅ con ASan/UBSan (`avo_eq_tests`) y fixtures OK en Release. CI run 44981278300 ✅. **NO VERIFICADO** con caballos reales.
+**Pendiente:** TE de V200 de PSI o árabe en texto completo. Informes de pendiente de la JRA revisados por pares. Trujillo 2012 y Bravo 2009 (Chile) desde un navegador. Yıldırım 2025 completo.
+
+---
 
 ## 2026-11-21 — iPad — Corrección de la prueba `ScientificBaseTests.testHistoryStatusAndRules` (PR #118)
 **Autor:** Claude (chat integrador) · **Rama:** `claude/fix-ipad-kb-test` · **CI:** iPad al integrar

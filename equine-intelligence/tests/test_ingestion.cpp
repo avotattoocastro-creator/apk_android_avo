@@ -59,7 +59,7 @@ EQ_TEST(ingestion, raw_written_by_avo_core_is_read_back_unchanged) {
   remove(path);
 }
 
-// CASCO 5.0.0 (motor 2.0.0-dev30): el lote de la IMU de la cabeza (fmt 3, imu_id 4, byte 15 = 3) se cuenta aparte, no se
+// CASCO 5.0.0 (motor 2.0.0-dev32): el lote de la IMU de la cabeza (fmt 3, imu_id 4, byte 15 = 3) se cuenta aparte, no se
 // mezcla con la cincha, no cambia imu_units y no es un registro malo.
 EQ_TEST(ingestion, head_imu_batch_from_the_helmet_is_counted_not_bad) {
   const char* path = "eq_test_head_imu.avo";
