@@ -24,6 +24,24 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-23 — Casco BACK V5 — firmware 5.0.0: pecho 3.7.11 + espalda 3.15.0 en un solo ESP32-S3
+**Autor:** Claude · **Rama:** `claude/casco-fw-5-0-0` · **CI:** workflow `build-casco-v500-fw.yml` escrito, **pendiente del permiso del usuario** para subirlo · compilado en local (arduino-esp32 3.3.12, 1 391 296 B)
+**Qué cambia:** primer firmware del casco (petición del usuario, 23/11 08:39: «lo mismo que la espalda y el reloj, en
+uno solo»). `firmware/back/V5_0_0_CASCO`: monta el pecho 3.7.11 con su cadena oficial (`tools/prepare_chest_tree.py`
+lee `build-chest-v377-despertar.yml`) y aplica `tools/apply_v500.py`. Dentro va el `BackCore` de la espalda 3.15.0 sin
+cambios (ZED-F9P 8 Hz, RTK fijo, BackStatus v4, GirthHub). El enlace pecho ↔ espalda pasa a ser **interno** (los mismos
+paquetes ESP-NOW por memoria, pareja fija); la radio queda para las cinchas. **Ningún contrato binario cambia.**
+Hardware del casco: PWR_HOLD (GPIO46) en `initVariant()`, táctil (1/2/3 toques, 3 s apaga), MAX17048 + BQ24072,
+microSD de 4 bits con su interruptor, ZED por UART1 (GPIO5/6) con ZED_EN, anillo SK6812 ≤ 30 % en lugar de la
+pantalla, reglas 1–7 de la revisión previa a fabricación. Identidad `AVO-CASCO 5.0.0` (OTA con `target`
+`AVO_CASCO_V5_ESP32S3`; USB AVO1 conserva `"name":"AVO-CHEST"` y añade `"model":"CASCO-V5"`).
+**Pruebas:** `tests_test_casco_v500.py` (pines contra la placa, reglas y contratos) · `test/test_casco_link.cpp` (enlace
+interno con el ZED simulado de la espalda: pareja fija sin emparejamiento, 8 Hz RTK fijo, RTCM byte a byte, BACK_SLEEP)
+y las 59 pruebas de la espalda con la biblioteca del casco: 63 casos, 618 comprobaciones, 0 fallos.
+**No se ha tocado:** el pecho ni la espalda (sus carpetas y workflows); ningún workflow.
+**Validación:** IMPLEMENTADO · compilado · **NO VERIFICADO** en la placa (PROTOTIPO A en fabricación).
+**Pendiente:** pruebas M1–M10 en la placa; IMU y PPS sin usar; AVO Update y las apps no reconocen todavía «AVO-CASCO».
+
 ## 2026-11-21 — iPad — Corrección de la prueba `ScientificBaseTests.testHistoryStatusAndRules` (PR #118)
 **Autor:** Claude (chat integrador) · **Rama:** `claude/fix-ipad-kb-test` · **CI:** iPad al integrar
 **Qué cambia:** la prueba esperaba 900 m en la banda B3 de la última sesión, pero la fixture trae `bandas_m [3200, 500, 0]`
