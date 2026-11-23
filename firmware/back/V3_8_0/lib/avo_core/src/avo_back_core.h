@@ -16,6 +16,7 @@
 #include "avo_ubx_zed.h"
 #include "avo_gnss_quality.h"
 #include "avo_girth_link.h"
+#include "avo_ubx_frag.h"
 
 namespace avo {
 
@@ -45,6 +46,7 @@ struct BackStats {
   uint32_t rxm_used = 0, rxm_failed = 0;
   uint32_t nav_pvt = 0, gnss_sent = 0, gnss_send_fail = 0;
   uint32_t pairings = 0;
+  uint32_t raw_sent = 0, raw_failed = 0, raw_too_long = 0;   // V3.16.0 PPK: UBX frames sent whole / abandoned / too long
   int8_t rssi = 0;
   uint32_t last_chest_rx_ms = 0;
 };
@@ -87,7 +89,10 @@ class BackCore : public ZedIo, private GirthHub::Io {
   static void on_ubx(uint8_t cls, uint8_t id, const uint8_t* pl, uint16_t plen, void* ctx);
   void ubx(uint8_t cls, uint8_t id, const uint8_t* pl, uint16_t plen);
   void queue_frame(FrameType t, uint8_t flags, const uint8_t* pl, size_t len, bool flush_now);
-  void flush();
+  bool flush(int attempts_override = 0);   // V3.16.0: returns whether the packet was delivered
+  void forward_raw(uint8_t cls, uint8_t id, const uint8_t* pl, uint16_t plen);   // V3.16.0 PPK
+  uint8_t raw_buf_[UBX_FRAG_MAX_FRAME];
+  uint16_t raw_seq_ = 0;
   void send_status();
   void send_caps();
   void send_ack(FrameType t, const FrameView& f, uint16_t cmd_id, uint8_t status, bool nack);
@@ -131,6 +136,7 @@ class BackCore : public ZedIo, private GirthHub::Io {
   uint32_t rate_t0_ = 0, rate_n_ = 0;
   uint16_t rate_x10_ = 0;
   bool caps_sent_ = false;
+  bool caps_raw_ = false;   // V3.16.0
 };
 
 }  // namespace avo

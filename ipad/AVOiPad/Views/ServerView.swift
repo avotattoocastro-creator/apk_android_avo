@@ -210,6 +210,9 @@ struct ServerView: View {
         cloudState = "Validando e importando \(files.count)…"
         await app.importFiles(files)
         cloudState = "Importados \(files.count) de la nube"
+        // PPK 1.0.0: el de la nube si ya lo calculó otra app; si no, se calcula aquí (estación elegida) y se sube
+        let sids: [String] = items.map { $0.sessionId.isEmpty ? String($0.fileName.dropFirst(4).dropLast(4)) : $0.sessionId }
+        Task { @MainActor in await app.autoPpk(sids) }
         refreshTick += 1
     }
 

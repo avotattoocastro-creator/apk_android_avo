@@ -66,6 +66,25 @@ ZedUartBudget zed_uart_budget(uint32_t baud, uint8_t nav_hz, bool quality, uint8
   return b;
 }
 
+ZedUartBudget zed_uart_budget_raw(uint32_t baud, uint8_t nav_hz, uint8_t raw_hz, uint8_t n_meas) {
+  ZedUartBudget b = zed_uart_budget(baud, nav_hz, true, 0);
+  if (raw_hz == 0) return b;
+  const uint32_t rawx = 16 + 32u * n_meas + 8, sfrbx_s = 1000;
+  b.avg_bytes_s += rawx * raw_hz + sfrbx_s;
+  b.load_permille = b.line_bytes_s ? (uint16_t)(b.avg_bytes_s * 1000ull / b.line_bytes_s > 65535 ? 65535 : b.avg_bytes_s * 1000ull / b.line_bytes_s) : 65535;
+  b.burst_bytes += rawx;
+  b.burst_us = b.line_bytes_s ? (uint32_t)(b.burst_bytes * 1000000ull / b.line_bytes_s) : 0xFFFFFFFFu;
+  b.ok = b.line_bytes_s && b.load_permille <= 500 && b.burst_us <= 2 * b.epoch_us;
+  return b;
+}
+
+uint8_t zed_raw_rate_for(uint32_t baud, uint8_t nav_hz) {
+  if (nav_hz == 0) nav_hz = 1;
+  if (baud >= 460800 && nav_hz >= 2 && zed_uart_budget_raw(baud, nav_hz, 2).ok) return 2;
+  if (zed_uart_budget_raw(baud, nav_hz, 1).ok) return 1;
+  return 0;
+}
+
 // UBX-MON-RF: version U1, nBlocks U1, reserved 2, then 24 bytes per block: blockId U1, flags X1 (b0-1 jammingState),
 // antStatus U1, antPower U1, postStatus U4, reserved 4, noisePerMS U2, agcCnt U2, jamInd U1, ofsI I1, magI U1, ofsQ I1,
 // magQ U1, reserved 3.
@@ -252,6 +271,8 @@ void ZedManager::handle(const uint8_t* f, size_t n) {
   if (cls == UBX_CLS_NAV && id == UBX_ID_NAV_PVT) n_pvt_++;
   if (cls == UBX_CLS_NAV && id == UBX_ID_NAV_SAT) { n_sat_++; t_sat_ = now_ | 1; }
   if (cls == UBX_CLS_NAV && id == UBX_ID_NAV_SIG) { n_sig_++; t_sig_ = now_ | 1; }
+  if (cls == UBX_CLS_RXM && id == UBX_ID_RXM_RAWX) n_rawx_++;     // V3.16.0
+  if (cls == UBX_CLS_RXM && id == UBX_ID_RXM_SFRBX) n_sfrbx_++;
   if (cls == UBX_CLS_MON && id == UBX_ID_MON_COMMS) {
     ZedComms c;
     if (ubx_decode_mon_comms(pl, plen, port_ == 2 ? 0x0201 : 0x0100, &c)) {
@@ -379,6 +400,18 @@ void ZedManager::send_monitor(uint8_t which) {
   io_->zed_write(b, len);
 }
 
+// V3.16.0 PPK: RXM-RAWX every (nav rate / raw rate) epochs and every RXM-SFRBX, in their own VALSET (a receiver that
+// rejects them keeps NAV-PVT, RTCM and NAV-SIG exactly as before). RAM layer only, like the rest.
+void ZedManager::send_raw(uint8_t raw_hz) {
+  uint32_t every = raw_hz ? (rate_ > raw_hz ? rate_ / raw_hz : 1) : 0;
+  ZedKV kv[2] = {{port_ == 2 ? zedkey::MSGOUT_RXM_RAWX_UART2 : zedkey::MSGOUT_RXM_RAWX_UART1, every},
+                 {port_ == 2 ? zedkey::MSGOUT_RXM_SFRBX_UART2 : zedkey::MSGOUT_RXM_SFRBX_UART1, raw_hz ? 1u : 0u}};
+  uint8_t b[48];
+  size_t len = ubx_valset_ram(kv, 2, b, sizeof(b));
+  ack_ = 0;
+  io_->zed_write(b, len);
+}
+
 void ZedManager::go(State s, uint32_t now_ms) {
   st_ = s;
   step_ = 0;
@@ -400,6 +433,7 @@ void ZedManager::set_nav_rate(uint8_t hz, uint32_t now_ms) {
   zed_gnss_for_rate(hz, &eff);
   rate_ = eff;
   mon_ = 0; mon_t0_ = 0; mon_try_ = 2; mon_ok_ = 0; mon_rounds_ = 0;   // V3.9.0: quality output follows the new rate
+  raw_ = 0; raw_t0_ = 0; raw_rounds_ = 0;                               // V3.16.0: raw output too
   if (st_ == RUNNING) { cfg_with_rate_ = true; go(CONFIGURE, now_ms); }
 }
 
@@ -527,6 +561,17 @@ void ZedManager::tick(uint32_t now_ms) {
         }
       }
       if (mon_ == 6 && now_ms - mon_t0_ >= 30000) { mon_ = 0; mon_t0_ = 0; mon_ok_ = 0; }
+      // V3.16.0 PPK: raw measurements, once the quality output is settled (both share the ACK slot).
+      if (port_ != 0 && mon_ != 0 && mon_ != 6) {
+        if (raw_ == 0) {
+          raw_hz_ = zed_raw_rate_for(baud_, rate_);
+          if (!raw_hz_) raw_ = 3;
+          else { send_raw(raw_hz_); raw_ = 7; raw_t0_ = now_ms | 1; }
+        } else if (raw_ == 7 && (ack_ == 1 || ack_ == 2 || now_ms - raw_t0_ >= 1000)) {
+          raw_ = ack_ == 1 ? 1 : 2;
+          raw_t0_ = now_ms | 1;
+        } else if (raw_ == 2 && raw_rounds_ < 2 && now_ms - raw_t0_ >= 30000) { raw_rounds_++; raw_ = 0; }
+      }
       // V3.13.12: the output was accepted but nothing arrives any more (receiver lost its RAM setting without going
       // silent for 5 s): ask again, same sequence as at start. NAV-PVT and RTCM are not touched.
       // After 3 requests in a row with nothing back, only once a minute (never floods the UART).
@@ -583,7 +628,7 @@ void ZedManager::tick(uint32_t now_ms) {
         io_->zed_write(b, n);
         rf_t_ = now_ms | 1;
       }
-      if (quiet >= 5000) { sig_poll_ = false; comms_tx_max_ = 0; rf_ = ZedRf(); t_rf_ = 0; rf_t_ = 0; zed_resets_++; cand_ = 0; set_applied_ = false; tune_ = 0; mon_ = 0; mon_t0_ = 0; mon_try_ = 2; mon_ok_ = 0; mon_rounds_ = 0; go(DETECT, now_ms); }   // receiver reset or unplugged
+      if (quiet >= 5000) { sig_poll_ = false; comms_tx_max_ = 0; rf_ = ZedRf(); t_rf_ = 0; rf_t_ = 0; zed_resets_++; cand_ = 0; set_applied_ = false; tune_ = 0; mon_ = 0; mon_t0_ = 0; mon_try_ = 2; mon_ok_ = 0; mon_rounds_ = 0; raw_ = 0; raw_t0_ = 0; raw_rounds_ = 0; go(DETECT, now_ms); }   // receiver reset or unplugged
       break;
     }
   }

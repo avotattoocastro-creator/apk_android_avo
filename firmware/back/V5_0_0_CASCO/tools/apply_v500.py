@@ -40,7 +40,8 @@ def patch(rel, old, new, count=1):
 # ------------------------------------------------------------------ 1. biblioteca común
 for name in ("avo_back_core.h", "avo_back_core.cpp", "avo_ubx_zed.h", "avo_ubx_zed.cpp", "avo_gnss_codecs.h",
              "avo_gnss_codecs.cpp", "avo_girth_link.h", "avo_girth_link.cpp", "avo_gnss_quality.h", "avo_gnss_quality.cpp",
-             "avo_tx_power.h", "avo_tx_power.cpp", "avo_reed_gate.h", "avo_chest_sleep.h", "avo_core.h"):
+             "avo_tx_power.h", "avo_tx_power.cpp", "avo_reed_gate.h", "avo_chest_sleep.h", "avo_core.h",
+             "avo_ubx_frag.h", "avo_ubx_frag.cpp"):   # espalda 3.16.0: RXM-RAWX/SFRBX troceados (PPK, docs/PPK.md)
     shutil.copy2(BACK_LIB / name, LIB / name)
 for name in ("avo_payloads.h", "avo_payloads.cpp", "avo_espnow_link.h", "avo_espnow_link.cpp", "avo_uart_proto.h",
              "avo_uart_proto.cpp"):   # contratos: tienen que ser los mismos bytes en los dos lados

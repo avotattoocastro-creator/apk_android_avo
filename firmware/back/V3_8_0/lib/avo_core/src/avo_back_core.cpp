@@ -173,6 +173,8 @@ void BackCore::ubx(uint8_t cls, uint8_t id, const uint8_t* pl, uint16_t plen) {
     ubx_quality_nav_sat(pl, plen, &q_);
   } else if (cls == UBX_CLS_NAV && id == UBX_ID_NAV_SIG) {
     if (ubx_quality_nav_sig(pl, plen, &q_)) q_ms_ = now | 1;
+  } else if (cls == UBX_CLS_RXM && (id == UBX_ID_RXM_RAWX || id == UBX_ID_RXM_SFRBX)) {
+    forward_raw(cls, id, pl, plen);   // V3.16.0 PPK
   } else if (cls == UBX_CLS_RXM && id == UBX_ID_RXM_RTCM) {
     RxmRtcm r;
     if (ubx_decode_rxm_rtcm(pl, plen, &r)) {
@@ -192,9 +194,28 @@ void BackCore::queue_frame(FrameType t, uint8_t flags, const uint8_t* pl, size_t
   if (flush_now) flush();
 }
 
-void BackCore::flush() {
-  if (pk_.empty()) return;
-  if (!pair_.paired()) { pk_.clear(); return; }
+// V3.16.0 PPK: a long UBX frame goes out in GNSS_UBX_FRAG pieces, one ESP-NOW packet each, ONE attempt per packet
+// (no retries: a burst of failed sends must never hold the loop long enough to overflow the ZED UART buffer).
+// The first failed piece abandons the rest of that frame (the engine drops an incomplete frame anyway).
+void BackCore::forward_raw(uint8_t cls, uint8_t id, const uint8_t* pl, uint16_t plen) {
+  if (!pair_.paired() || !chest_online()) return;
+  size_t len = ubx_build(cls, id, pl, plen, raw_buf_, sizeof(raw_buf_));
+  size_t count = ubx_frag_count(len);
+  if (!count) { st_.raw_too_long++; return; }
+  flush();
+  uint16_t ms = raw_seq_++;
+  for (size_t i = 0; i < count; i++) {
+    uint8_t piece[UBX_FRAG_HDR + UBX_FRAG_CHUNK];
+    size_t n = ubx_frag_encode(raw_buf_, len, ms, (uint8_t)i, piece, sizeof(piece));
+    queue_frame(GNSS_UBX_FRAG, 0, piece, n, false);
+    if (!flush(1)) { st_.raw_failed++; return; }
+  }
+  st_.raw_sent++;
+}
+
+bool BackCore::flush(int attempts_override) {
+  if (pk_.empty()) return true;
+  if (!pair_.paired()) { pk_.clear(); return false; }
   NowHeader h;
   h.kind = NowKind::DATA;
   h.pair_id = pair_.peer().pair_id;
@@ -202,9 +223,9 @@ void BackCore::flush() {
   uint8_t pkt[NOW_MAX_PACKET];
   size_t n = now_build(h, pk_.data(), pk_.size(), pkt, sizeof(pkt));
   pk_.clear();
-  if (!n) return;
+  if (!n) return false;
   // While the chest is not heard, one attempt only (keeps the loop responsive).
-  int attempts = chest_online() ? 3 : 1;
+  int attempts = attempts_override > 0 ? attempts_override : chest_online() ? 3 : 1;
   bool ok = false;
   for (int i = 0; i < attempts && !ok; i++) {
     if (i) st_.tx_retries++;
@@ -212,6 +233,7 @@ void BackCore::flush() {
   }
   if (ok) st_.tx_packets++;
   else st_.tx_fail++;
+  return ok;
 }
 
 void BackCore::send_ack(FrameType t, const FrameView& f, uint16_t cmd_id, uint8_t status, bool nack) {
@@ -321,6 +343,7 @@ void BackCore::send_caps() {
   c.node_type = (uint8_t)NodeId::BACK;
   strncpy(c.fw_version, AVO_FW_VERSION, sizeof(c.fw_version) - 1);
   c.caps = CAP_GNSS_SAMPLE | CAP_RTCM_IN | CAP_RXM_RTCM | CAP_ACK;
+  if (zed_.raw_state() == 1) c.caps |= CAP_GNSS_RAW;   // V3.16.0 PPK
   c.max_payload = (uint16_t)(NOW_MAX_BODY - AVO_UART_HDR - AVO_UART_TRAILER);
   c.uart_baud = zed_.baud();
   c.gnss_rate_hz = zed_.nav_rate();
@@ -352,7 +375,8 @@ void BackCore::tick() {
   if (types_t0_ == 0) types_t0_ = now | 1;
   if (now - types_t0_ >= 30000) { types_t0_ = now | 1; types_prev_ = obs_.take_types(); used_prev_ = used_types_; used_types_ = 0; }
   if (now - last_status_ >= 1000) { last_status_ = now; send_status(); }
-  if (!caps_sent_ || now - last_caps_ >= 30000) { last_caps_ = now; send_caps(); }
+  bool raw_on = zed_.raw_state() == 1;   // V3.16.0: CAPS again as soon as the raw output changes
+  if (!caps_sent_ || now - last_caps_ >= 30000 || raw_on != caps_raw_) { last_caps_ = now; caps_raw_ = raw_on; send_caps(); }
   flush();
 }
 
