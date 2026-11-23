@@ -24,6 +24,24 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-24 — Casco V5 PROTOTIPO A — vías fuera de pads: estado del ruteado (sin cerrar)
+**Autor:** Claude · **Rama:** `claude/v5p-vias-fuera-de-pad` · **PR:** #128 · **CI:** 45234497647, 45249293042,
+45263403036 (las tres con la puerta en **fallo**; no hay Gerber nuevos)
+**Qué se ha probado:**
+1. Re-ruteado completo con Freerouting desde la colocación corregida: 9 y 6 conexiones pendientes, errores de borde
+   (VBAT/LED_D2) y vías de Freerouting junto a pads. Descartado.
+2. `fuente/quitar_vias_en_pad.py` (nuevo): parte de la placa **pedida** (`711b097`, DRC limpio) y solo quita las 117
+   vías que invaden la abertura de máscara de un pad con pasta. Vías GND nuevas fuera de los pads: 91 de 94
+   (U11.4, C90.2 y C97.2 sin sitio: los encierran LED_D1, LED_D8, POGO_AUX_C, VLED_SW y LED_PWR). En el CI
+   45263403036 (variante anterior) quedaron: 8 pads GND aislados, 2 tramos VSYS/VLED de capa interior sueltos y
+   1 error de separación.
+**Hallazgos útiles:** las vías van tapadas por la máscara (los Gerber F/B_Mask de `711b097` no tienen aberturas de
+vía), así que basta con que el cobre de la vía quede fuera de la abertura del pad (cobre + 0,05 mm):
+`via_en_pad.MARGEN` = 0,075 mm. Los TP sin pasta no cuentan.
+**Pendiente:** cerrar el ruteado de USB_DP_C/USB_DM_C (J16), el anillo VLED y los 3 pads GND. El router de la rejilla
+(`repair.py`) tarda > 30 min por cada búsqueda fallida en esta zona; alternativas: hacerlo a mano en KiCad 9
+(solo esas zonas) o mover C90/C97/U11 unas décimas en `colocacion_v5.json` y volver a generar. **NO VERIFICADO.**
+
 ## 2026-11-23 — Casco V5 PROTOTIPO A — vías fuera de los pads SMD (aviso de JLCPCB, PCBA 13966268A)
 **Autor:** Claude · **Rama:** `claude/v5p-vias-fuera-de-pad` · **CI:** pendiente (workflow_dispatch del PCB V5P)
 **Qué pasa:** JLCPCB paró el montaje del pedido W2026112308485306 (PCBA 13966268A / SMT026112360152_Y17): vías
