@@ -58,8 +58,8 @@ os.makedirs(OUT, exist_ok=True)
 NAME = "AVO_BACK_V5P_PCB"
 REV, DATE = "PROTO A", "2026-11-18"
 THICK = 1.6
-SIZE, CORNER_R = 56.0, 3.0
-HOLE_XY, HOLE_D, HOLE_KEEP = 24.5, 2.8, 3.0          # 4 taladros de los tornillos de la caja (M2,5)
+SIZE, CORNER_R = 60.0, 3.0            # 24/11/2026: 56 → 60 (vías fuera de pads con sitio)
+HOLE_XY, HOLE_D, HOLE_KEEP = 26.5, 2.8, 3.0          # 4 taladros de los tornillos de la caja (M2,5)
 # URTK1.2 (cotas del plano del anuncio y de hardware/back/V4/DOCS/INTEGRACION_GNSS.md; VERIFICAR CON CALIBRE):
 # 43,434 × 43,688 × 1,6; taladros Ø3,2 a (2,667; 2,794) de la esquina; pines a paso 2,54 desde x = 12,827, filas a
 # 1,524 de los cantos (40,64 entre filas). Marco U = vista desde arriba de la URTK1.2, origen en su centro.

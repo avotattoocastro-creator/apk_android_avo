@@ -11,7 +11,7 @@
   "note": "5 V del cable USB magnético",
   "jlc_rot": 0,
   "x": -8.65,
-  "y": 25.5,
+  "y": 27.5,
   "rot": 0
  },
  {
@@ -26,7 +26,7 @@
   "note": "USB D−",
   "jlc_rot": 0,
   "x": -6.3,
-  "y": 25.5,
+  "y": 27.5,
   "rot": 0
  },
  {
@@ -41,7 +41,7 @@
   "note": "USB D+",
   "jlc_rot": 0,
   "x": -3.95,
-  "y": 25.5,
+  "y": 27.5,
   "rot": 0
  },
  {
@@ -56,7 +56,7 @@
   "note": "masa",
   "jlc_rot": 0,
   "x": -8.65,
-  "y": 23.05,
+  "y": 25.05,
   "rot": 0
  },
  {
@@ -71,7 +71,7 @@
   "note": "contacto libre (reservado: base o accesorio)",
   "jlc_rot": 0,
   "x": -6.3,
-  "y": 23.05,
+  "y": 25.05,
   "rot": 0
  },
  {
@@ -87,7 +87,7 @@
   "jlc_rot": 0,
   "x": -12.0,
   "y": 21.0,
-  "rot": 90
+  "rot": 0
  },
  {
   "ref": "D2",
@@ -100,8 +100,8 @@
   "no_assembly": false,
   "note": "ESD en VBUS del pogo",
   "jlc_rot": 0,
-  "x": -9.2,
-  "y": 20.13,
+  "x": -11.0,
+  "y": 25.64,
   "rot": 90
  },
  {
@@ -115,8 +115,8 @@
   "no_assembly": false,
   "note": "ESD en el contacto AUX",
   "jlc_rot": 0,
-  "x": -14.86,
-  "y": 23.85,
+  "x": -6.95,
+  "y": 22.74,
   "rot": 0
  },
  {
@@ -130,9 +130,9 @@
   "no_assembly": false,
   "note": "serie del contacto AUX → GPIO40. Revisión 18/11: 10 kΩ (0,4 mA como máximo hacia el 3,3 V si la base pusiera 5 V con el casco apagado)",
   "jlc_rot": 0,
-  "x": -6.5,
-  "y": 21.26,
-  "rot": 0
+  "x": -4.5,
+  "y": 25.05,
+  "rot": 90
  },
  {
   "ref": "R21",
@@ -145,9 +145,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -7.1,
-  "y": 19.95,
-  "rot": 0
+  "x": -3.3,
+  "y": 25.05,
+  "rot": 90
  },
  {
   "ref": "U6",
@@ -176,7 +176,7 @@
   "note": "USB-C de programación y carga en el banco (placa fuera de la cápsula); D± en paralelo con el pogo, VBUS por D18",
   "jlc_rot": 0,
   "x": 4.2,
-  "y": 24.35,
+  "y": 26.35,
   "rot": 180
  },
  {
@@ -190,8 +190,8 @@
   "no_assembly": false,
   "note": "auditoría 22/11: Schottky 1 A en el VBUS del USB-C; impide que el 5 V del pogo entre en el ordenador",
   "jlc_rot": 0,
-  "x": 12.2,
-  "y": 21.0,
+  "x": 8.35,
+  "y": 19.65,
   "rot": 0
  },
  {
@@ -206,7 +206,7 @@
   "note": "Rd: la placa es consumidora (sink): cualquier cargador da 5 V",
   "jlc_rot": 0,
   "x": 4.76,
-  "y": 18.43,
+  "y": 20.43,
   "rot": 0
  },
  {
@@ -221,7 +221,7 @@
   "note": "",
   "jlc_rot": 0,
   "x": 1.76,
-  "y": 18.43,
+  "y": 20.43,
   "rot": 0
  },
  {
@@ -235,8 +235,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -5.49,
-  "y": 19.56,
+  "x": -5.34,
+  "y": 20.06,
   "rot": 90
  },
  {
@@ -250,9 +250,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -2.82,
-  "y": 18.34,
-  "rot": 180
+  "x": -0.64,
+  "y": 19.96,
+  "rot": 90
  },
  {
   "ref": "R22",
@@ -280,9 +280,9 @@
   "no_assembly": false,
   "note": "REV B (revisión 18/11): 100k/150k → 2,85–3,15 V con VBUS 4,75–5,25 V. Con 100k/100k daba 2,4–2,6 V, por debajo de VIH = 0,75 × VDD = 2,475 V del ESP32-S3 (hoja del WROOM, DC characteristics): lectura no fiable",
   "jlc_rot": 0,
-  "x": -11.45,
-  "y": 6.81,
-  "rot": 90
+  "x": -5.15,
+  "y": -3.84,
+  "rot": 0
  },
  {
   "ref": "U2",
@@ -340,8 +340,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -16.12,
-  "y": -13.86,
+  "x": -15.01,
+  "y": -14.35,
   "rot": 90
  },
  {
@@ -400,9 +400,9 @@
   "no_assembly": false,
   "note": "NTC sobre el centro de la batería (cara F). Auditoría 22/11/2026: estaba a 3,0 mm del BQ24072 (≈ 1,15 W al cargar) y medía su calor, no el de la celda; ahora a > 20 mm del cargador y de los reguladores",
   "jlc_rot": 0,
-  "x": 11.0,
-  "y": -3.0,
-  "rot": 90
+  "x": 7.95,
+  "y": -4.0,
+  "rot": 0
  },
  {
   "ref": "R12",
@@ -476,7 +476,7 @@
   "note": "hilo + de la celda (≥ 2000 mAh): soldado, sin conector (más plano y sin holgura al galope)",
   "jlc_rot": 0,
   "x": -17.9,
-  "y": -25.5,
+  "y": -27.5,
   "rot": 0
  },
  {
@@ -491,7 +491,7 @@
   "note": "hilo − de la celda",
   "jlc_rot": 0,
   "x": -15.4,
-  "y": -25.5,
+  "y": -27.5,
   "rot": 0
  },
  {
@@ -550,9 +550,9 @@
   "no_assembly": false,
   "note": "divisor 1:2 → GPIO2 (ADC1_CH1)",
   "jlc_rot": 0,
-  "x": 10.75,
-  "y": 5.23,
-  "rot": 90
+  "x": 0.41,
+  "y": -3.83,
+  "rot": 0
  },
  {
   "ref": "R33",
@@ -565,9 +565,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -11.47,
-  "y": 1.29,
-  "rot": 90
+  "x": -2.62,
+  "y": -3.83,
+  "rot": 0
  },
  {
   "ref": "C34",
@@ -580,8 +580,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -8.85,
-  "y": -3.9,
+  "x": -2.85,
+  "y": -4.94,
   "rot": 0
  },
  {
@@ -685,9 +685,9 @@
   "no_assembly": false,
   "note": "LDO de ≈ 1 µA: mantiene V_BCKP del ZED (efemérides) con el casco apagado y alimenta el táctil",
   "jlc_rot": 0,
-  "x": -14.99,
-  "y": 20.1,
-  "rot": 0
+  "x": -14.3,
+  "y": 18.02,
+  "rot": 90
  },
  {
   "ref": "C66",
@@ -700,9 +700,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -12.18,
-  "y": 17.97,
-  "rot": 0
+  "x": -14.99,
+  "y": 20.9,
+  "rot": 90
  },
  {
   "ref": "C67",
@@ -715,9 +715,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -15.89,
-  "y": 17.55,
-  "rot": 0
+  "x": -11.75,
+  "y": 17.02,
+  "rot": 90
  },
  {
   "ref": "U10",
@@ -745,9 +745,9 @@
   "no_assembly": false,
   "note": "obligatorio y pegado a VDD/VSS (hoja del TTP223)",
   "jlc_rot": 0,
-  "x": -18.26,
-  "y": 17.42,
-  "rot": 0
+  "x": -16.26,
+  "y": 20.78,
+  "rot": 90
  },
  {
   "ref": "C69",
@@ -790,7 +790,7 @@
   "no_assembly": true,
   "note": "hilo o muelle a la lámina de cobre del electrodo (pared interior adelgazada, sin agujero)",
   "jlc_rot": 0,
-  "x": -25.7,
+  "x": -27.7,
   "y": 17.0,
   "rot": 0
  },
@@ -1015,9 +1015,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 9.52,
-  "y": -1.74,
-  "rot": 90
+  "x": 5.77,
+  "y": -3.87,
+  "rot": 0
  },
  {
   "ref": "R55",
@@ -1060,9 +1060,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -12.7,
-  "y": 10.25,
-  "rot": 0
+  "x": -8.08,
+  "y": 18.79,
+  "rot": 90
  },
  {
   "ref": "C25",
@@ -1075,8 +1075,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -8.85,
-  "y": 17.57,
+  "x": -12.08,
+  "y": 10.79,
   "rot": 0
  },
  {
@@ -1090,8 +1090,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -6.5,
-  "y": 17.54,
+  "x": -10.35,
+  "y": 18.85,
   "rot": 0
  },
  {
@@ -1151,7 +1151,7 @@
   "note": "RGB direccionable, emisión lateral",
   "jlc_rot": 0,
   "x": -12.0,
-  "y": 26.25,
+  "y": 28.25,
   "rot": 180
  },
  {
@@ -1165,8 +1165,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -11.8,
-  "y": 24.86,
+  "x": -13.26,
+  "y": 26.85,
   "rot": 0
  },
  {
@@ -1181,7 +1181,7 @@
   "note": "RGB direccionable, emisión lateral",
   "jlc_rot": 0,
   "x": 12.0,
-  "y": 26.25,
+  "y": 28.25,
   "rot": 180
  },
  {
@@ -1196,7 +1196,7 @@
   "note": "",
   "jlc_rot": 0,
   "x": 12.2,
-  "y": 24.86,
+  "y": 26.86,
   "rot": 0
  },
  {
@@ -1210,7 +1210,7 @@
   "no_assembly": false,
   "note": "RGB direccionable, emisión lateral",
   "jlc_rot": 0,
-  "x": 26.25,
+  "x": 28.25,
   "y": 12.0,
   "rot": 90
  },
@@ -1225,7 +1225,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 24.87,
+  "x": 26.87,
   "y": 11.85,
   "rot": 90
  },
@@ -1240,7 +1240,7 @@
   "no_assembly": false,
   "note": "RGB direccionable, emisión lateral",
   "jlc_rot": 0,
-  "x": 26.25,
+  "x": 28.25,
   "y": -12.0,
   "rot": 90
  },
@@ -1255,7 +1255,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 24.87,
+  "x": 26.87,
   "y": -12.15,
   "rot": 90
  },
@@ -1271,7 +1271,7 @@
   "note": "RGB direccionable, emisión lateral",
   "jlc_rot": 0,
   "x": 12.0,
-  "y": -26.25,
+  "y": -28.25,
   "rot": 0
  },
  {
@@ -1286,7 +1286,7 @@
   "note": "",
   "jlc_rot": 0,
   "x": 11.7,
-  "y": -24.85,
+  "y": -26.85,
   "rot": 0
  },
  {
@@ -1301,7 +1301,7 @@
   "note": "RGB direccionable, emisión lateral",
   "jlc_rot": 0,
   "x": -12.0,
-  "y": -26.25,
+  "y": -28.25,
   "rot": 0
  },
  {
@@ -1316,7 +1316,7 @@
   "note": "",
   "jlc_rot": 0,
   "x": -12.3,
-  "y": -24.85,
+  "y": -26.85,
   "rot": 0
  },
  {
@@ -1330,7 +1330,7 @@
   "no_assembly": false,
   "note": "RGB direccionable, emisión lateral",
   "jlc_rot": 0,
-  "x": -26.25,
+  "x": -28.25,
   "y": -12.0,
   "rot": 270
  },
@@ -1345,7 +1345,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -24.84,
+  "x": -26.84,
   "y": -11.55,
   "rot": 90
  },
@@ -1360,7 +1360,7 @@
   "no_assembly": false,
   "note": "RGB direccionable, emisión lateral",
   "jlc_rot": 0,
-  "x": -26.25,
+  "x": -28.25,
   "y": 12.0,
   "rot": 270
  },
@@ -1375,7 +1375,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -24.84,
+  "x": -26.84,
   "y": 12.45,
   "rot": 90
  },
@@ -1405,8 +1405,8 @@
   "no_assembly": false,
   "note": "1 µH, I_sat 3 A, 50 mΩ (≈ 0,4 A de pico con los 7 LED a tope desde 3 V)",
   "jlc_rot": 0,
-  "x": -16.74,
-  "y": 15.2,
+  "x": -16.71,
+  "y": 14.6,
   "rot": 90
  },
  {
@@ -1420,9 +1420,9 @@
   "no_assembly": false,
   "note": "entrada del elevador",
   "jlc_rot": 0,
-  "x": -16.21,
-  "y": 10.51,
-  "rot": 0
+  "x": -16.41,
+  "y": 10.16,
+  "rot": 90
  },
  {
   "ref": "C99",
@@ -1435,9 +1435,9 @@
   "no_assembly": false,
   "note": "salida del elevador (≥ 10 µF efectivos)",
   "jlc_rot": 0,
-  "x": -15.67,
-  "y": 12.5,
-  "rot": 0
+  "x": -14.4,
+  "y": 12.13,
+  "rot": 90
  },
  {
   "ref": "R25",
@@ -1465,8 +1465,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -12.42,
-  "y": 16.54,
+  "x": -16.6,
+  "y": 12.31,
   "rot": 0
  },
  {
@@ -1480,9 +1480,9 @@
   "no_assembly": false,
   "note": "elevador apagado por defecto (arranque y casco apagado)",
   "jlc_rot": 0,
-  "x": -14.17,
-  "y": 17.0,
-  "rot": 90
+  "x": -10.2,
+  "y": 17.59,
+  "rot": 0
  },
  {
   "ref": "U8",
@@ -1526,7 +1526,7 @@
   "note": "sin detección de tarjeta (caja estanca: la tarjeta va siempre puesta)",
   "jlc_rot": 0,
   "x": 1.0,
-  "y": -13.8,
+  "y": -15.8,
   "rot": 0
  },
  {
@@ -1615,8 +1615,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -6.71,
-  "y": -4.29,
+  "x": 1.17,
+  "y": -5.16,
   "rot": 0
  },
  {
@@ -1630,8 +1630,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 4.95,
-  "y": -4.34,
+  "x": 1.98,
+  "y": -6.32,
   "rot": 0
  },
  {
@@ -1646,7 +1646,7 @@
   "note": "",
   "jlc_rot": 0,
   "x": -2.42,
-  "y": -4.32,
+  "y": -6.32,
   "rot": 0
  },
  {
@@ -1661,7 +1661,7 @@
   "note": "",
   "jlc_rot": 0,
   "x": -4.62,
-  "y": -4.2,
+  "y": -6.2,
   "rot": 0
  },
  {
@@ -1675,8 +1675,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 7.15,
-  "y": -4.34,
+  "x": 4.18,
+  "y": -6.32,
   "rot": 0
  },
  {
@@ -1690,8 +1690,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 9.24,
-  "y": -4.29,
+  "x": 3.37,
+  "y": -5.16,
   "rot": 0
  },
  {
@@ -1706,7 +1706,7 @@
   "note": "serie del reloj (amortigua el flanco)",
   "jlc_rot": 0,
   "x": -0.22,
-  "y": -4.32,
+  "y": -6.32,
   "rot": 0
  },
  {
@@ -1825,8 +1825,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -12.92,
-  "y": 8.42,
+  "x": -12.19,
+  "y": 9.43,
   "rot": 0
  },
  {
@@ -1840,7 +1840,7 @@
   "no_assembly": true,
   "note": "GPIO0 a GND al arrancar = descarga (también por USB nativo)",
   "jlc_rot": 0,
-  "x": 10.95,
+  "x": 9.75,
   "y": -0.95,
   "rot": 0
  },
@@ -1855,8 +1855,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -12.87,
-  "y": 6.7,
+  "x": -7.12,
+  "y": -4.07,
   "rot": 0
  },
  {
@@ -1900,8 +1900,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -8.88,
-  "y": -9.81,
+  "x": -9.92,
+  "y": -4.41,
   "rot": 0
  },
  {
@@ -1960,8 +1960,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -17.59,
-  "y": 22.6,
+  "x": -17.15,
+  "y": 17.12,
   "rot": 0
  },
  {
@@ -1975,8 +1975,8 @@
   "no_assembly": true,
   "note": "4,3 V del anillo (solo con LED_PWR = 1)",
   "jlc_rot": 0,
-  "x": -15.4,
-  "y": 8.94,
+  "x": -14.7,
+  "y": 9.5,
   "rot": 0
  },
  {
