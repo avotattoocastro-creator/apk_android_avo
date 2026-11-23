@@ -24,8 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-23 — Casco V5 PROTOTIPO A — PEDIDO A JLCPCB
+**Autor:** Claude (registro) · **Pedido del usuario:** W2026112308485306 (23/11/2026 01:48), en producción
+**Qué se ha pedido:** PCB 4 capas 56 × 56, 5 uds. (7,27 $) + PCBA Standard, cara Top, 2 placas (128,24 $), con los
+ficheros del CI 45089929588 (commit `5b2aa59`, puerta superada). Envío 11,73 $ + derechos e impuestos 42,23 $:
+**total 189,47 $**. El pedido anterior sin las correcciones (W2026111908220847, 19/11) quedó **cancelado**.
+**No pedido todavía:** placa de masa de la antena (`PCB/PLACA_MASA`, 2 capas, 52 × 52 × 0,8, sin montaje).
+**Validación:** pedido FABRICÁNDOSE. **NO VERIFICADO** en hardware hasta la recepción (pruebas M1–M10 y de recepción).
+**Pendiente:** medir la URTK1.2 con calibre antes de soldar las tiras; firmware BACK 5.x del casco (aún no existe).
+
 ## 2026-11-23 — Casco V5 PROTOTIPO A — coste: divisores con resistencias básicas de JLC
-**Autor:** Claude · **PR:** #125 · **CI:** pendiente
+**Autor:** Claude · **Commit:** `5b2aa59` · **PR:** #125 · **CI:** PCB run 45089929588, **puerta superada**
 **Qué cambia:** el presupuesto de JLC subió de 149,09 $ (pedido del 19/11) a ≈ 152,6 $ por la 620 kΩ (C137952,
 Extended: ≈ 3 $ de carga) y pasaba del límite de 150 $ del envío con IVA prepagado. Solo valores, mismas huellas y mismo
 cobre: anillo R25 2k (C4109) / R26 330R (C25104) → 0,595 × (1 + 2000/330) ≈ 4,20 V (VIH del SK6812 2,94 V: margen
