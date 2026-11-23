@@ -24,6 +24,30 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-23 — Casco V5 PROTOTIPO A — vías fuera de los pads SMD (aviso de JLCPCB, PCBA 13966268A)
+**Autor:** Claude · **Rama:** `claude/v5p-vias-fuera-de-pad` · **CI:** pendiente (workflow_dispatch del PCB V5P)
+**Qué pasa:** JLCPCB paró el montaje del pedido W2026112308485306 (PCBA 13966268A / SMT026112360152_Y17): vías
+abiertas dentro de los pads (la soldadura se escurre: piezas torcidas, tombstoning, juntas abiertas). Ofreció A) montar
+sin garantía o B) cancelar con reembolso. Comprobado en la placa pedida (`711b097`, CI de `5b2aa59`): **114 vías dentro
+de pads en 77 componentes** (51 pasivos, 8 LED del anillo, U13 LSM6DSV16X LGA, U12 MAX17048 TDFN, U2 BQ24072 QFN,
+U11, U6, U3, U7, U8, U9, U10, J16 USB-C, J3 microSD…). Decisión recomendada al usuario: **B** (cancelar y volver a pedir).
+**Causa:** en `fuente/build.py` → `via_drops()`, la máscara de destino de la vía de cada pad de plano solo excluía las
+otras redes; el A* terminaba en el propio pad y dejaba la vía en su centro. El DRC de KiCad no lo marca.
+**Qué cambia:**
+- `build.py`: `smd_pad_block()` prohíbe vías a menos de 0,25 + 0,20 mm (`VIA_PAD_WEB`) de cualquier pad SMD, en los
+  fan-outs a planos y en los pre-ruteos (`route_tree`). Colocación regenerada en local: 91 vías a planos, 0 fallos,
+  **0 vías en pad** (antes 96 en la colocación).
+- `via_en_pad.py` (nuevo, sin KiCad) y `gate.py`: la puerta de fabricación **falla** si hay alguna vía a < 0,10 mm de
+  un pad SMD.
+- Se borra `kicad/AVO_BACK_V5P_PCB_ruteado.kicad_pcb`: el CI vuelve a rutear con Freerouting desde la colocación nueva.
+**Afecta también (sin corregir aún, mismo tipo de generador):** casco REV B, DOCK V1, cincha REV D. Revisar antes de
+pedirlas (los recuentos brutos incluyen vías térmicas legítimas de EPAD).
+**Corrección de documentación:** el pedido W2026112308485306 es del **PROTOTIPO A** (no de la REV B, como decía una nota
+del proyecto en claude.ai).
+**Validación:** IMPLEMENTADO y comprobado por software en local (colocación). Ruteado/DRC/puerta: pendiente de CI.
+**NO VERIFICADO** en hardware.
+**Pendiente:** CI en verde → Gerber/BOM/CPL nuevos → revisar visor de JLC → nuevo pedido (confirmar con el usuario).
+
 ## 2026-11-23 — Casco V5 PROTOTIPO A — PEDIDO A JLCPCB
 **Autor:** Claude (registro) · **Pedido del usuario:** W2026112308485306 (23/11/2026 01:48), en producción
 **Qué se ha pedido:** PCB 4 capas 56 × 56, 5 uds. (7,27 $) + PCBA Standard, cara Top, 2 placas (128,24 $), con los
