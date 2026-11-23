@@ -24,6 +24,30 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-23 — Motor 2.0.0-dev31 · KB-1 1.29.0 — Investigación nocturna: auditoría de 9 fuentes (estadística del motor, ECG, fiabilidad de la FC), carga con FC y GPS (TRIMP, ACWR) y edad y sexo como covariables
+**Autor:** Claude (tarea programada nocturna, sin supervisión) · **Rama:** `claude/kb-noche-2026-11-23` (desde `claude/kb-noche-2026-11-22` `91ab2c2`, PR #124 sin fusionar) · **CI:** ver PR
+**Qué cambia:**
+- Estudio `equine-intelligence/knowledge/estudios/2026-11-23_noche_auditoria_estadistica_trimp_acwr_edad_sexo.md`.
+- **Auditoría de 9 fuentes, 8 mejoradas.** Se reclasifican las 5 fuentes `SIN_AUDITAR` que sostienen funciones ya implementadas: NIST/SEMATECH (OFICIAL), Lombard & Hawkins (PREPRINT, título corregido), Bosch 2018, Hopkins 2000 y Efron & Morris 1975 (TEXTO_COMPLETO). Pasan a texto completo Frick 2019, Spargo 2019 y Davie 2026. Correcciones:
+  - NIST: la tabla es del CUSUM unilateral (ARL0 336 / 930); los 168 / 465 «bilaterales» son cálculo nuestro.
+  - Davie 2026: ICC de la recuperación a 30 s 0,42 → **0,451** (tabla 3); CV intraindividual de la FC de galope ≈ 2,7 %.
+  - Spargo 2019: el 73,6 % es de 53 extremidades disecadas, no de los caballos; 0,56 / 1.000.
+  - Mukai 2007: los ± son error estándar (DE entre caballos ≈ 8,2 lpm).
+  - Frick 2019: razas mixtas (83 % warmblood; 4 PSI, 3 árabes).
+
+  **Ningún valor que use el código cambia.**
+- **Carga:** no existe TRIMP ni ACWR validado en PSI, árabes ni trotones; el único equino (Munsters 2020) es de completo, y allí solo el ACWR de distancia a alta velocidad se asoció a lesión. Fórmulas humanas de plantilla confirmadas en fuentes secundarias legales.
+- **Edad y sexo:** la edad cambia mucho la V200 y la velocidad entre 2 y 4 años (árabes ≈ 1 año más tarde); el sexo solo ≈ 0,3–1 % de velocidad de carrera; ningún dato de V200/FCmax por sexo dentro de PSI o árabe.
+- 30 fuentes nuevas (completo, trotón sueco, JRA, QREC, BHA, Turquía, Polonia, Brasil, fórmulas humanas). Reglas **CG1–CG3** (carga descriptiva) y **ES1–ES3** (prior por edad y raza) como PROPUESTA [I]. No se implementan.
+- `base_cientifica.json` 1.29.0, `KNOWLEDGE_VERSION` 1.29.0, `ENGINE_VERSION` 2.0.0-dev31, prueba de versión en `test_knowledge.cpp` y comentario del CUSUM en `knowledge.h` (valores del NIST). Fixtures regeneradas solo por la cadena de versión (4 diferencias por archivo). Bloque 23/11 en `14_BASE_CIENTIFICA.md`.
+
+**Por qué:** auditoría nocturna de la KB-1. Cinco funciones implementadas (z robusto, CUSUM, CUSUM autoiniciado, umbral de cambio y contracción) se apoyaban en fuentes sin auditar; el planificador (capa 2) y las líneas base necesitan saber qué carga y qué prior tienen respaldo.
+**No se ha tocado:** lógica del motor, firmware, apps, contratos binarios, workflows, firmas, `Info.plist` ni número de build.
+**Validación:** pruebas locales ✅ con ASan/UBSan (`avo_eq_tests`) y en Release; fixtures OK. **NO VERIFICADO** con caballos reales.
+**Pendiente:** PDF de Mukai 2007 (J-STAGE) a mano; ARL del NIST con 0,5σ y h 5 a mano; originales de Banister, Williams y Foster; V200/FCmax por sexo (no publicado).
+
+---
+
 ## 2026-11-22 — Motor 2.0.0-dev30 · KB-1 1.28.0 — Investigación nocturna: auditoría de 12 fuentes, TE de V200 en varias razas, carga y FC en Asia (cuesta de la JRA), América, Oceanía y África
 **Autor:** Claude (tarea programada nocturna, sin supervisión) · **Rama:** `claude/kb-noche-2026-11-22` (desde `develop` `daa2bb7`) · **CI:** `build-equine-engine.yml` run 44981278300 ✅ (`8fae5bb`)
 **Qué cambia:**

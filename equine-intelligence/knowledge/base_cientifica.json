@@ -2,8 +2,8 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.28.0",
-  "fecha": "2026-11-22",
+  "version": "1.29.0",
+  "fecha": "2026-11-23",
   "razas": [
     "PSI",
     "ARABE"
@@ -152,6 +152,11 @@
       "fecha": "2026-11-22",
       "titulo": "Investigación nocturna 22/11: auditoría de 12 fuentes (Reef 2014, Marr 2020, Ikeda 2019, Nomura 2019, Morrice-West 2020, Georgopoulos 2017 en texto completo; 9 mejoradas), TE de V200 multirraza, carga y FC en Asia (cuesta de la JRA, Corea, Hong Kong, Golfo) y en América, Oceanía y África",
       "archivo": "estudios/2026-11-22_noche_auditoria_ecg_carga_cuesta_jra_te_v200.md"
+    },
+    {
+      "fecha": "2026-11-23",
+      "titulo": "Investigación nocturna 23/11: auditoría de 9 fuentes (NIST, Lombard & Hawkins, Bosch 2018, Hopkins 2000, Efron & Morris 1975 reclasificadas; Frick 2019, Spargo 2019 y Davie 2026 a texto completo; 8 mejoradas), carga de entrenamiento con FC y GPS (TRIMP, ACWR) multirraza, y edad y sexo como covariables del prior",
+      "archivo": "estudios/2026-11-23_noche_auditoria_estadistica_trimp_acwr_edad_sexo.md"
     }
   ],
   "fuentes": [
@@ -476,12 +481,13 @@
       "id": "BOSCH_2018",
       "cita": "Bosch et al. 2018, Sensors 18:850 (EquiMoves, ±16 g)",
       "url": "https://www.mdpi.com/1424-8220/18/3/850",
-      "acceso": "SIN_AUDITAR",
-      "verificado_fecha": "[NV]",
-      "pais": "[NV]",
-      "idioma": "[NV]",
-      "raza_fuente": "[NV]",
-      "nota_auditoria": "campos acceso, verificado_fecha, pais, idioma, raza_fuente completados como SIN_AUDITAR/[NV] el 2026-11-20 sin releer la fuente"
+      "acceso": "TEXTO_COMPLETO",
+      "verificado_fecha": "2026-11-23",
+      "pais": "Países Bajos (Utrecht)",
+      "idioma": "en",
+      "raza_fuente": "warmblood (7 yeguas de 10–21 años)",
+      "doi": "10.3390/s18030850",
+      "nota": "KB 1.29.0 (auditoría 23/11): ProMove-mini: acelerómetros fusionados ±16 g y ±400 g, giroscopio ±2000 °/s, 200 Hz (hasta 1 kHz con pocos nodos; 8 nodos a 1 kHz en galope); validación a paso y trote frente a Qualisys: ±2,3° sagital, −8,8/+8,1° coronal, simetría del tronco ±5 mm [E]; sin validación en galope; [I-raza] para PSI"
     },
     {
       "id": "PFAU_2022",
@@ -520,16 +526,16 @@
     {
       "id": "FRICK_2019",
       "cita": "Frick L, Schwarzwald CC, Mitchell KJ 2019, J Vet Intern Med 33(1):212–224",
-      "url": "https://boris.unibe.ch/124563",
-      "acceso": "RESUMEN",
+      "url": "https://academic.oup.com/jvim/article/33/1/212/8447902",
+      "acceso": "TEXTO_COMPLETO",
       "pais": "Suiza",
       "idioma": "en",
-      "raza_fuente": "caballos de clínica (raza no verificada)",
+      "raza_fuente": "mixto: 45 warmblood, 4 PSI, 3 árabes, 1 Cuarto de Milla, 1 poni [I-raza]",
       "doi": "10.1111/jvim.15358",
       "pmid": "30520119",
       "pmcid": "PMC6335521",
-      "nota": "−6,1/+5,4 % en canter en cinta (HSET), no galope en pista; recuperación: corte 6 % S 88 %, E 97 %, LR 26; texto completo abierto en PMC pero bloqueado en la sesión; KB 1.11.0: el 6 % solo está validado en la recuperación; para el galope el resumen no da umbral (sanos hasta −6,1 %) · KB 1.25.0 (auditoría 21/11): resumen del repositorio BORIS (Berna): 54 caballos (13 sanos, 30 con arritmias, 11 bajo rendimiento sin arritmias); cifras −4,4/+3,8 % (trote) y −6,1/+5,4 % (canter) y corte 6 % (S 88 %, E 97 %, LR 26) confirmadas [E-r]; razas y velocidades [NV]; PMC con reCAPTCHA, PDF de BORIS (CC BY-NC) sin URL en búsquedas",
-      "verificado_fecha": "2026-11-21"
+      "nota": "−6,1/+5,4 % en canter en cinta (HSET), no galope en pista; recuperación: corte 6 % S 88 %, E 97 %, LR 26; texto completo abierto en PMC pero bloqueado en la sesión; KB 1.11.0: el 6 % solo está validado en la recuperación; para el galope el resumen no da umbral (sanos hasta −6,1 %) · KB 1.25.0 (auditoría 21/11): resumen del repositorio BORIS (Berna): 54 caballos (13 sanos, 30 con arritmias, 11 bajo rendimiento sin arritmias); cifras −4,4/+3,8 % (trote) y −6,1/+5,4 % (canter) y corte 6 % (S 88 %, E 97 %, LR 26) confirmadas [E-r]; razas y velocidades [NV]; PMC con reCAPTCHA, PDF de BORIS (CC BY-NC) sin URL en búsquedas · KB 1.29.0 (auditoría 23/11): texto completo (OUP, CC BY-NC): cifras −4,4/+3,8 % (trote), −6,1/+5,4 % (canter) y corte 6 % en recuperación (S 88 % IC 68–97, E 97 % IC 83–100, LR 26) confirmadas [E]; cinta 6 %, 2 escalones de trote y 3–4 de canter, pico mediano 8 m/s (5–11), ECG 500 Hz; cortes extra: recuperación 4,1 % (S 100, E 80) y 6,3 % (S 88, E 100); canter 11 % (S 88, E 98, LR 40) y 6,5 % (S 100, E 59); trote 5,7 % (S 83, E 85) [E]; diseño prospectivo o retrospectivo [NV]",
+      "verificado_fecha": "2026-11-23"
     },
     {
       "id": "TER_WOORT_2023",
@@ -811,34 +817,35 @@
       "id": "NIST_CUSUM",
       "cita": "NIST/SEMATECH e-Handbook of Statistical Methods §6.3.2.3.1 (ARL del CUSUM) y §1.3.5.17 (z modificado)",
       "url": "https://itl.nist.gov/div898/handbook/pmc/section3/pmc3231.htm",
-      "acceso": "SIN_AUDITAR",
-      "verificado_fecha": "[NV]",
-      "pais": "[NV]",
-      "idioma": "[NV]",
-      "raza_fuente": "[NV]",
-      "nota_auditoria": "campos acceso, verificado_fecha, pais, idioma, raza_fuente completados como SIN_AUDITAR/[NV] el 2026-11-20 sin releer la fuente"
+      "acceso": "OFICIAL",
+      "verificado_fecha": "2026-11-23",
+      "pais": "EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "no aplica (estadística)",
+      "nota": "KB 1.29.0 (auditoría 23/11): texto completo oficial leído: la tabla de ARL con k = 0,5 es del CUSUM UNILATERAL; ARL0 336 (h 4) y 930 (h 5), ARL1(1σ) 8,38 y 10,4 [E]; nuestros 335/931 son de la cadena de Markov propia (diferencia de 1 unidad); el NIST no da ARL bilaterales: los 168/465 son cálculo nuestro (≈ ARL0/2); valor 0,5σ con h 5 extraído como 30,0 [NV, revisar]; §1.3.5.17: M = 0,6745·(x − mediana)/MAD, atípico si |M| > 3,5 (Iglewicz y Hoaglin) [E]"
     },
     {
       "id": "EFRON_MORRIS_1975",
       "cita": "Efron B, Morris C 1975, J Am Stat Assoc 70:311–319 (estimador de Stein)",
-      "url": "https://doi.org/10.1080/01621459.1975.10479864",
-      "acceso": "SIN_AUDITAR",
-      "verificado_fecha": "[NV]",
-      "pais": "[NV]",
-      "idioma": "[NV]",
-      "raza_fuente": "[NV]",
-      "nota_auditoria": "campos acceso, verificado_fecha, pais, idioma, raza_fuente completados como SIN_AUDITAR/[NV] el 2026-11-20 sin releer la fuente"
+      "url": "https://www.medicine.mcgill.ca/epidemiology/hanley/bios602/MultilevelData/EfronMorrisJASA1975.pdf",
+      "acceso": "TEXTO_COMPLETO",
+      "verificado_fecha": "2026-11-23",
+      "pais": "EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "no aplica (estadística)",
+      "nota": "KB 1.29.0 (auditoría 23/11): copia docente (McGill): estimador de Stein hacia la media y, con varianzas desiguales, B_i = D_i/(A + D_i) [E], misma forma que kb_shrink_mean; peso propio del ejemplo de béisbol extraído como 0,209 (se cita 0,212) [NV]"
     },
     {
       "id": "HOPKINS_2000",
       "cita": "Hopkins WG 2000, Sports Med 30:1–15 (error típico y fiabilidad)",
-      "url": "https://doi.org/10.2165/00007256-200030010-00001",
-      "acceso": "SIN_AUDITAR",
-      "verificado_fecha": "[NV]",
-      "pais": "[NV]",
-      "idioma": "[NV]",
-      "raza_fuente": "[NV]",
-      "nota_auditoria": "campos acceso, verificado_fecha, pais, idioma, raza_fuente completados como SIN_AUDITAR/[NV] el 2026-11-20 sin releer la fuente"
+      "url": "https://statistics.sportsci.org/resource/stats/Hopkins_SportsMed_rely_00.pdf",
+      "acceso": "TEXTO_COMPLETO",
+      "verificado_fecha": "2026-11-23",
+      "pais": "Nueva Zelanda",
+      "idioma": "en",
+      "raza_fuente": "humanos (método)",
+      "doi": "10.2165/00007256-200030010-00001",
+      "nota": "KB 1.29.0 (auditoría 23/11): PDF del autor: TE = DE de las diferencias / √2; cambio real individual 1,5–2,0·TE (≈ 6:1 a 12:1); TE de un estudio corto sin cambio verdadero; ≈ 50 sujetos y ≥ 3 pruebas; el ICC depende de la heterogeneidad [E]; √(1 + 1/n) sigue siendo cálculo nuestro [I]"
     },
     {
       "id": "CHATEAU_2011",
@@ -920,13 +927,14 @@
     },
     {
       "id": "LOMBARD_HAWKINS_ARXIV_1904_00340",
-      "cita": "Lombard F, Hawkins DM, arXiv 1904.00340 (CUSUM autoiniciado; ARL incondicional nominal)",
-      "acceso": "SIN_AUDITAR",
-      "verificado_fecha": "[NV]",
-      "pais": "[NV]",
-      "idioma": "[NV]",
-      "raza_fuente": "[NV]",
-      "nota_auditoria": "campos acceso, verificado_fecha, pais, idioma, raza_fuente completados como SIN_AUDITAR/[NV] el 2026-11-20 sin releer la fuente"
+      "cita": "Lombard F, Hawkins DM 2019, «CUSUM Average Run Length: Conditional or Unconditional?», arXiv 1904.00340",
+      "acceso": "PREPRINT",
+      "verificado_fecha": "2026-11-23",
+      "pais": "Sudáfrica (Johannesburgo) y EE. UU. (Minnesota)",
+      "idioma": "en",
+      "raza_fuente": "no aplica (estadística)",
+      "url": "https://arxiv.org/pdf/1904.00340",
+      "nota": "KB 1.29.0 (auditoría 23/11): título corregido; transformación U_n = Φ⁻¹(F_{n−2}(W_n·√((n−1)/n))) confirmada [E]; defienden el ARL incondicional; con datos no normales recomiendan CUSUM de rangos secuenciales (Hawkins y Deng 2010); DOI de revista [NV]"
     },
     {
       "id": "SALEH_2016_CUSUM",
@@ -1281,11 +1289,11 @@
       "url": "https://www.jstage.jst.go.jp/article/jes/18/4/18_4_153/_article",
       "doi": "10.1294/jes.18.153",
       "acceso": "RESUMEN",
-      "pais": "Japón",
+      "pais": "Japón (JRA, Nakayama)",
       "idioma": "en",
       "raza_fuente": "PSI",
-      "nota": "95 % de la FC pico en 12,4 ± 1,8 s · KB 1.28.0 (auditoría 22/11): resumen J-STAGE releído: cifras confirmadas; lactato 10 min tras la carrera; 194,0 ± 2,0 lpm en el medio galope a los cajones y 171,4 ± 5,3 en los cajones [E-r]; PDF bloqueado por robots",
-      "verificado_fecha": "2026-11-22"
+      "nota": "95 % de la FC pico en 12,4 ± 1,8 s · KB 1.28.0 (auditoría 22/11): resumen J-STAGE releído: cifras confirmadas; lactato 10 min tras la carrera; 194,0 ± 2,0 lpm en el medio galope a los cajones y 171,4 ± 5,3 en los cajones [E-r]; PDF bloqueado por robots · KB 1.29.0 (auditoría 23/11): resumen J-STAGE releído: los ± son ERROR ESTÁNDAR (n 23), no DE; FC pico 213,6 ± 1,7 (EE) ⇒ DE entre caballos ≈ 8,2 lpm [I, cálculo]; la FC sube en el pasillo y al montar sin esfuerzo [E-r]; PDF J-STAGE bloqueado por robots (_pdf, -char/en) y por permiso (-char/ja); ResearchGate con error; sigue en cola",
+      "verificado_fecha": "2026-11-23"
     },
     {
       "id": "HITCHENS_2018_BMMB",
@@ -1385,8 +1393,8 @@
       "pais": "Australia (Victoria)",
       "idioma": "en",
       "raza_fuente": "PSI",
-      "nota": "versión publicada (PMC13641913) sin leer; preprint CC BY: daño máximo D* 0,753 / 0,893 / 1,077 / 1,196 con 1.733 / 2.667 / 3.787 / 4.720 m de galope por semana; descansos de 4/6/8 semanas (2 al año) 0,992 / 0,833 / 0,713; back-off de 2 semanas acaba en fallo; σ0 139, σ1 14,1, σmax 90 MPa; la discusión y la tabla 7 del preprint no siempre cuadran",
-      "verificado_fecha": "2026-11-20",
+      "nota": "versión publicada (PMC13641913) sin leer; preprint CC BY: daño máximo D* 0,753 / 0,893 / 1,077 / 1,196 con 1.733 / 2.667 / 3.787 / 4.720 m de galope por semana; descansos de 4/6/8 semanas (2 al año) 0,992 / 0,833 / 0,713; back-off de 2 semanas acaba en fallo; σ0 139, σ1 14,1, σmax 90 MPa; la discusión y la tabla 7 del preprint no siempre cuadran · KB 1.29.0 (23/11): publicado el 07/10/2026 en R Soc Open Sci 13(10):260818; la web de la revista dio error en la sesión; cifras del preprint (1,543 / 0,911 / 0,799 con 1/2/3 descansos; 0,992 → 0,713 con descansos de 4 a 8 semanas) sin comparar con la versión publicada [NV]",
+      "verificado_fecha": "2026-11-23",
       "duplicado_de": "ANWAR_2026_ARXIV_V1",
       "nota_auditoria": "misma obra que ANWAR_2026_ARXIV_V1 (auditoría 2026-11-20 18:09); el acceso que manda es el de ANWAR_2026_ARXIV_V1 (PREPRINT)"
     },
@@ -1509,13 +1517,13 @@
     {
       "id": "DAVIE_2026",
       "cita": "Davie AJ, Beavers R, Denham J 2026, Animals 16(14):2187, doi 10.3390/ani16142187",
-      "url": "https://doi.org/10.3390/ani16142187",
-      "acceso": "RESUMEN",
-      "pais": "Australia",
+      "url": "https://www.mdpi.com/2076-2615/16/14/2187",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Australia (Melbourne y Ballina)",
       "idioma": "en",
       "raza_fuente": "PSI",
-      "nota": "64 caballos, 823 galopes en cinta; ICC de la FC media 0,756; ICC de la recuperación 0,42 (30 s), 0,50 (60 s), 0,60 (90 s), 0,57 (120 s)",
-      "verificado_fecha": "2026-11-20"
+      "nota": "64 caballos, 823 galopes en cinta; ICC de la FC media 0,756; ICC de la recuperación 0,42 (30 s), 0,50 (60 s), 0,60 (90 s), 0,57 (120 s) · KB 1.29.0 (auditoría 23/11): texto completo (MDPI): 64 PSI de 3–8 años, 823 galopes en cinta a 6°; ICC FC de galope 0,756 (0,621–0,809); CORRECCIÓN: recuperación 30 s 0,451 en la tabla 3 (0,421 en el resumen), 60 s 0,502, 90 s 0,595, 120 s 0,571; CV intraindividual FC de galope ≈ 2,7 % y recuperación 5,5–6,2 % (combinado 5,8 % y 8,4–9,3 %); lactato ICC 0,415, CV ≈ 25 % [E]; TE/MDC/SWC [NV]",
+      "verificado_fecha": "2026-11-23"
     },
     {
       "id": "JOSE_CUNILLERAS_2006",
@@ -2303,8 +2311,8 @@
       "pais": "Japón (JRA)",
       "idioma": "en",
       "raza_fuente": "PSI",
-      "verificado_fecha": "2026-11-20",
-      "nota": "n=23, 1200 m: FC pico 213,6 ± 1,7 lpm; 12,4 ± 1,8 s al 95 % del pico; lactato 22,5 ± 0,6 mmol/L a 15,9 m/s",
+      "verificado_fecha": "2026-11-23",
+      "nota": "n=23, 1200 m: FC pico 213,6 ± 1,7 lpm; 12,4 ± 1,8 s al 95 % del pico; lactato 22,5 ± 0,6 mmol/L a 15,9 m/s · KB 1.29.0 (auditoría 23/11): los ± son EE (n 23), no DE; ver MUKAI_2007_JES",
       "doi": "10.1294/jes.18.153",
       "duplicado_de": "MUKAI_2007_JES",
       "nota_auditoria": "misma obra que MUKAI_2007_JES (auditoría 2026-11-20 18:09); el acceso que manda es el de MUKAI_2007_JES (RESUMEN)"
@@ -3503,13 +3511,13 @@
     {
       "id": "SPARGO_2019_JSAVA",
       "cita": "Spargo KE, Rubio-Martínez LM, Wheeler DP, Fletcher L, Carstens A 2019, JSAVA 90:a1640 (lesiones catastróficas en Gauteng)",
-      "url": "https://repository.up.ac.za/items/14ddc71b-35ae-46ef-96bb-cfe4df51e74e/full",
-      "acceso": "RESUMEN",
+      "url": "https://core.ac.uk/download/201190064.pdf",
+      "acceso": "TEXTO_COMPLETO",
       "pais": "Sudáfrica (Gauteng)",
       "idioma": "en",
       "raza_fuente": "PSI",
-      "nota": "1998–2012: 114 eutanasias por lesión catastrófica en carrera, 0,6 por 1.000 salidas; sesamoideos proximales y suspensor distal 55,3 %; 73,6 % anterior izquierdo; 74,5 % fracturas biaxiales de PSB",
-      "verificado_fecha": "2026-11-21"
+      "nota": "1998–2012: 114 eutanasias por lesión catastrófica en carrera, 0,6 por 1.000 salidas; sesamoideos proximales y suspensor distal 55,3 %; 73,6 % anterior izquierdo; 74,5 % fracturas biaxiales de PSB · KB 1.29.0 (auditoría 23/11): texto completo (CORE, CC BY 4.0): 114 eutanasias en 203.965 salidas = 0,56/1.000 [E]; 55,26 % PSB y suspensor distal; 74,47 % biaxiales (35/47); CORRECCIÓN: el 73,6 % es de las 53 extremidades disecadas o radiografiadas; sobre 114 caballos, AI 54,39 % y AD 28,95 %; por hipódromo Turffontein 0,66, Newmarket 0,53, Vaal 0,51, Gosforth Park 0,34; sentido horario; anual 0,29–0,99 [E]",
+      "verificado_fecha": "2026-11-23"
     },
     {
       "id": "CILLIERS_2009_UP",
@@ -3959,6 +3967,354 @@
       "doi": "",
       "nota": "revisión; no consta que incluya PSI o árabes de llano [NV]",
       "verificado_fecha": "2026-11-22"
+    },
+    {
+      "id": "MUNSTERS_2020_ACWR",
+      "cita": "Munsters CCBM, Kingma BRM, van den Broek J, Sloet van Oldruitenborgh-Oosterbaan MM 2020, Prev Vet Med 179:105010 (iTRIMP y ACWR en caballos de completo)",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0167587719306932",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Países Bajos",
+      "idioma": "en",
+      "raza_fuente": "caballo de completo (warmblood) [I-raza]",
+      "verificado_fecha": "2026-11-23",
+      "nota": "58 caballos, 94 temporadas, ≈ 2.300 sesiones, 64 lesiones; HS 6,6–9,5 m/s y SS > 9,5 m/s; iTRIMP de Banister con b, c por caballo (b 1,53 ± 0,42; c 0,01 ± 0,04, dudoso) y FC de reposo/máxima SUPUESTAS 30/220; ACWR EWMA 1/4 semanas acoplado; ACWR HS de la semana previa OR ≈ 3,95 (1,39–12,50); ACWR interno no significativo [E]; único TRIMP/ACWR equino hallado; solo método (KB 1.29.0)",
+      "doi": "10.1016/j.prevetmed.2020.105010"
+    },
+    {
+      "id": "DAVIE_2025_JEVS_REVISION",
+      "cita": "Davie AJ, Beavers R, Denham J 2025, J Equine Vet Sci 149:105567 (revisión: distribución de la intensidad)",
+      "url": "https://research.usq.edu.au",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Australia",
+      "idioma": "en",
+      "raza_fuente": "PSI (revisión)",
+      "verificado_fecha": "2026-11-23",
+      "nota": "propone modelo piramidal 70–80 % del volumen bajo el umbral de lactato; sin zonas de FC equinas ni TRIMP [E] (KB 1.29.0)",
+      "doi": "10.1016/j.jevs.2025.105567"
+    },
+    {
+      "id": "VALLE_2013_CEP",
+      "cita": "Valle E et al. 2013, Comp Exerc Physiol 9:93 (FC y gasto energético en completo)",
+      "url": "https://iris.unito.it",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Italia",
+      "idioma": "en",
+      "raza_fuente": "warmblood de completo [I-raza]",
+      "verificado_fecha": "2026-11-23",
+      "nota": "FC pico 190–228 lpm; recuperación (%FC pico) final→180 s: doma 57→37, salto 59→41, cross 92→53 [E] (KB 1.29.0)",
+      "doi": "10.3920/CEP12028"
+    },
+    {
+      "id": "FLYRIN_HAGGLUND_2021_SLU",
+      "cita": "Flyrin M, Hägglund A 2021, tesina de grado, SLU (FC de trotones en entrenamiento con Polar)",
+      "url": "https://stud.epsilon.slu.se/17336/",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Suecia",
+      "idioma": "sv",
+      "raza_fuente": "trotón (sueco) [I-raza]",
+      "verificado_fecha": "2026-11-23",
+      "nota": "32 trotones; tiempo > 180 y > 200 lpm en cuesta ≈ 500 y ≈ 379 s; FCmax en entrenamiento sementales 231, castrados 224, yeguas 220 lpm [E]; tesina sin revisión por pares (KB 1.29.0)"
+    },
+    {
+      "id": "KIRSCH_2022_SALTO",
+      "cita": "Kirsch K et al. 2022, Front Physiol (V140, V170, VLa2, VLa4 en caballos de salto)",
+      "url": "https://www.frontiersin.org",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Alemania",
+      "idioma": "en",
+      "raza_fuente": "caballo de salto [I-raza]",
+      "verificado_fecha": "2026-11-23",
+      "nota": "índices de forma por FC y lactato; sin TRIMP [E] (KB 1.29.0)",
+      "doi": "10.3389/fphys.2021.818381"
+    },
+    {
+      "id": "NYERGES_BOHAK_2021",
+      "cita": "Nyerges-Bohák Z et al. 2021, PLoS One 16:e0259933 (VFC en reposo y SWC)",
+      "url": "https://madbarn.com",
+      "acceso": "RESUMEN",
+      "pais": "Hungría",
+      "idioma": "en",
+      "raza_fuente": "PSI y trotón",
+      "verificado_fecha": "2026-11-23",
+      "nota": "rMSSD en reposo baja tras 14 semanas; SWC como señal de posible mala adaptación [E-r] (KB 1.29.0)",
+      "doi": "10.1371/journal.pone.0259933"
+    },
+    {
+      "id": "MASSIE_2024_POTROS_JAPON",
+      "cita": "Massie S et al. 2024, BMC Vet Res 20:159 (FC y velocidad en potros PSI de 2 años, Miyazaki)",
+      "url": "https://doi.org/10.1186/s12917-024-03997-x",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Japón y Canadá",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-23",
+      "nota": "10 potros (4 M, 6 H) de 20–23 meses: FCmax 221 ± 8 → 226 ± 7 lpm; vmax 13,3 → 16,0 m/s; últimos 400 m 30,9 → 26,1 s; sin efecto del sexo (P 0,92) [E] (KB 1.29.0)",
+      "doi": "10.1186/s12917-024-03997-x"
+    },
+    {
+      "id": "GRAMM_MARKSTEINER_2010",
+      "cita": "Gramm M, Marksteiner R 2010, J Equine Sci 21:73–78 (edad de rendimiento máximo, índices Beyer)",
+      "url": "https://doi.org/10.1294/jes.21.73",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-23",
+      "nota": "274 machos: edad pico 4,45 años; +22,2 Beyer de 2 años al pico (≈ 10 cuerpos en velocidad) [E] (KB 1.29.0)",
+      "doi": "10.1294/jes.21.73"
+    },
+    {
+      "id": "SOBOTKOVA_2023",
+      "cita": "Sobotková E et al. 2023, Arch Anim Breed 66:299–313 (ratings IFHA de PSI de élite)",
+      "url": "https://doi.org/10.5194/aab-66-299-2023",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "internacional (República Checa)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-23",
+      "nota": "6.216 PSI con rating ≥ 115: enteros 117,85, castrados 117,17, yeguas 117,13; 3 años 117,80, 4 años 117,74, 6+ 117,08 [E]; muestra truncada (KB 1.29.0)",
+      "doi": "10.5194/aab-66-299-2023"
+    },
+    {
+      "id": "OKI_1994_SEXO",
+      "cita": "Oki H, Sasaki Y, Willham RL 1994, J Anim Breed Genet 111:128–137",
+      "url": "https://doi.org/10.1111/j.1439-0388.1994.tb00446.x",
+      "acceso": "RESUMEN",
+      "pais": "Japón",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-23",
+      "nota": "hembras más rápidas en césped, machos en arena salvo 1.200 m; 5 años más rápidos que 3 y 4 [E-r]; confusión con la descarga de peso (KB 1.29.0)",
+      "doi": "10.1111/j.1439-0388.1994.tb00446.x"
+    },
+    {
+      "id": "KATZ_2023_ANOJOS",
+      "cita": "Katz LM et al. 2023, Vet J 300–302:106041 (VO₂pico en añojos PSI)",
+      "url": "https://doi.org/10.1016/j.tvjl.2023.106041",
+      "acceso": "RESUMEN",
+      "pais": "Irlanda y EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "PSI (añojos)",
+      "verificado_fecha": "2026-11-23",
+      "nota": "41 añojos: VO₂pico/kg hembras 121,5 ± 21,6 y machos 111,9 ± 27,4 mL/kg/min (P 0,03); absoluto sin diferencia [E-r] (KB 1.29.0)",
+      "doi": "10.1016/j.tvjl.2023.106041"
+    },
+    {
+      "id": "ENTIN_2002_APS",
+      "cita": "Entin P 2002, APS Comparative Physiology (nota de prensa)",
+      "url": "https://www.eurekalert.org/news-releases/529662",
+      "acceso": "PRENSA",
+      "pais": "EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-23",
+      "nota": "machos ≈ 1 % más rápidos (330 carreras) [prensa] (KB 1.29.0)"
+    },
+    {
+      "id": "JRA_PESOS_NORMAS",
+      "cita": "JRA, 負担重量 (normas de peso por edad y sexo)",
+      "url": "https://www.jra.go.jp/keiba/rules/weight.html",
+      "acceso": "OFICIAL",
+      "pais": "Japón",
+      "idioma": "ja",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-23",
+      "nota": "hembras 2 kg a 3 años (1 kg a 2 años oct–dic); castrados = machos; 3 años 7–10 kg en enero y 1–2 kg en diciembre frente a mayores (KB 1.29.0)"
+    },
+    {
+      "id": "JRA_HIDAKA_BLOG_V200_POTROS",
+      "cita": "JRA Hidaka, blog 2019/04 y 2021/01 (Haneda T.): V200 de potros",
+      "url": "https://blog.jra.jp/shiryoushitsu/2021/01/v200-091c.html",
+      "acceso": "OFICIAL",
+      "pais": "Japón",
+      "idioma": "ja",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-23",
+      "nota": "V200 de potros sube de febrero a abril; n 236: V200 al final de la doma separa a los que ganan ≥ 2 carreras, más clara en hembras; sin cifras por sexo (divulgativo) (KB 1.29.0)"
+    },
+    {
+      "id": "BHA_PERFORMANCE_FIGURES",
+      "cita": "BHA, Performance figures y guía del handicapper",
+      "url": "https://www.britishhorseracing.com/regulation/performance-figures/",
+      "acceso": "OFICIAL",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-23",
+      "nota": "5 lb de descarga de hembras; 5–6 cuerpos por segundo en llano; 8 lb de 3 frente a 4 años en la milla (ejemplo) (KB 1.29.0)"
+    },
+    {
+      "id": "BHA_ARABES_2024",
+      "cita": "BHA, Regulations for Arabian Horseracing 2024, reg. 134",
+      "url": "https://www.britishhorseracing.com/wp-content/uploads/2024/01/2024-BHA-Regulations-for-Arabian-Horseracing.pdf",
+      "acceso": "OFICIAL",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "árabe de carreras",
+      "verificado_fecha": "2026-11-23",
+      "nota": "hembras 4 lb en grupo, listed, condiciones, novatos y maiden; castrados sin descarga (KB 1.29.0)"
+    },
+    {
+      "id": "QREC_PROGRAMA_2025_26",
+      "cita": "QREC, Racing Season Program 2025-26",
+      "url": "https://www.qrec.gov.qa/pdf/2025-2026-Racing-Season-Program/en.pdf",
+      "acceso": "OFICIAL",
+      "pais": "Qatar",
+      "idioma": "en",
+      "raza_fuente": "árabe de carreras y PSI",
+      "verificado_fecha": "2026-11-23",
+      "nota": "hembras 2 kg; árabes de 4 años 5–6 kg menos que los de 5+ (p. ej. 56 frente a 62 kg en maiden); en PSI 0,5–1,5 kg (KB 1.29.0)"
+    },
+    {
+      "id": "RV_HANDICAPPING",
+      "cita": "Racing Victoria, Handicapping",
+      "url": "https://www.racingvictoria.com.au/racing/handicapping",
+      "acceso": "OFICIAL",
+      "pais": "Australia",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-23",
+      "nota": "hembras 2 kg en hándicaps mixtos; escala de peso por edad (KB 1.29.0)"
+    },
+    {
+      "id": "TACYILDIZ_2026_ARABES",
+      "cita": "Taçyıldız SŞI, Yılmaz İ, Kaygısız A 2026, KSÜ Tarım ve Doğa Derg 29(4):1067–1077 (árabes de carreras en Turquía)",
+      "url": "https://doi.org/10.18016/ksutarimdoga.vi.1634951",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Turquía",
+      "idioma": "tr",
+      "raza_fuente": "árabe de carreras",
+      "verificado_fecha": "2026-11-23",
+      "nota": "493 árabes, 11.366 carreras: machos y hembras 13,86 ± 0,01 m/s; por edad 2 a 13,68, 3 a 14,01, 4 a 13,80, 5 a 13,87, 6 a 13,93, 7 a 13,81, 8 a 13,69, 10 a 13,21 m/s [E]; confundido con la distancia [I] (KB 1.29.0)",
+      "doi": "10.18016/ksutarimdoga.vi.1634951"
+    },
+    {
+      "id": "SOBCZYNSKA_2010",
+      "cita": "Sobczyńska M 2010, Arch Tierz 53:639–649 (edad al primer arranque PSI y árabes, Polonia)",
+      "url": "https://doi.org/10.5194/aab-53-639-2010",
+      "acceso": "RESUMEN",
+      "pais": "Polonia",
+      "idioma": "en",
+      "raza_fuente": "PSI y árabe de carreras",
+      "verificado_fecha": "2026-11-23",
+      "nota": "primer arranque PSI 933 días (≈ 2,6 años), árabes ≈ 1.199 días (≈ 3,3 años) [E-r] (KB 1.29.0)",
+      "doi": "10.5194/aab-53-639-2010"
+    },
+    {
+      "id": "SANTOS_2023_ARABES_BR",
+      "cita": "Santos MM et al. 2023, Animals 13:1800 (V2 y V4 en árabes jóvenes en cinta)",
+      "url": "https://doi.org/10.3390/ani13111800",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Brasil",
+      "idioma": "en",
+      "raza_fuente": "árabe (no de carreras) [I-raza]",
+      "verificado_fecha": "2026-11-23",
+      "nota": "12 árabes de 28 ± 4 meses: 6 semanas, V2 5,2 → 6,7 m/s y V4 5,8 → 7,6 m/s (≈ +31 %) [E] (KB 1.29.0)",
+      "doi": "10.3390/ani13111800"
+    },
+    {
+      "id": "LELEU_2004_ECEP_EDAD",
+      "cita": "Leleu C, Cotrel C, Barrey E 2004, Equine Comp Exerc Physiol 1:107–117 (V200 y zancada por edad en trotones)",
+      "url": "https://doi.org/10.1079/ECEP200312",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Francia",
+      "idioma": "en",
+      "raza_fuente": "trotón francés [I-raza]",
+      "verificado_fecha": "2026-11-23",
+      "nota": "143 trotones de 2 a 5+ años: V200 distinta entre todos los grupos y crece con la edad (r 0,47; valores en figura [NV]); zancada a 11,6 m/s 5,51–5,72 m y 2,03–2,11 Hz (2–4 %, no monótono) [E] (KB 1.29.0)",
+      "doi": "10.1079/ECEP200312"
+    },
+    {
+      "id": "WALKER_2009_EDAD_VO2",
+      "cita": "Walker A, Arent SM, McKeever KH 2009, Comp Exerc Physiol 6:177–181",
+      "url": "https://doi.org/10.1017/S1755254010000073",
+      "acceso": "RESUMEN",
+      "pais": "EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "Standardbred (yeguas) [I-raza]",
+      "verificado_fecha": "2026-11-23",
+      "nota": "VO₂max cae con la edad (R² 0,55), quiebre a 18–20 años [E-r] (KB 1.29.0)",
+      "doi": "10.1017/S1755254010000073"
+    },
+    {
+      "id": "OHMURA_JONES_2017_FC_REPOSO",
+      "cita": "Ohmura H, Jones JH 2017, J Equine Sci 28:99–103 (FC en reposo por edad)",
+      "url": "https://doi.org/10.1294/jes.28.99",
+      "acceso": "RESUMEN",
+      "pais": "Japón y EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-23",
+      "nota": "FC en reposo mínima en caballos de carreras de 3–7 años: 32,9 ± 3,5 lpm [E-r] (KB 1.29.0)",
+      "doi": "10.1294/jes.28.99"
+    },
+    {
+      "id": "MORTON_BANISTER_1990_TRIMP",
+      "cita": "Morton RH, Fitz-Clarke JR, Banister EW 1990, J Appl Physiol 69(3):1171–1177 (TRIMP de Banister), leído vía Sanders 2016 y Matomäki 2024",
+      "url": "https://hull-repository.worktribe.com/OutputFile/443111",
+      "acceso": "RESUMEN",
+      "pais": "Nueva Zelanda y Canadá",
+      "idioma": "en",
+      "raza_fuente": "humanos (método) [I-raza]",
+      "verificado_fecha": "2026-11-23",
+      "nota": "fórmula confirmada en fuente secundaria en texto completo: TRIMP = D(min)·ΔFC·0,64·e^(1,92·ΔFC) (hombres), ΔFC = (FCejercicio − FCreposo)/(FCmax − FCreposo); exponente 1,67 en mujeres (multiplicador 0,86 sin fuente fiable [NV]); original sin leer (PubMed reCAPTCHA) (KB 1.29.0)"
+    },
+    {
+      "id": "EDWARDS_1993_ZONAS",
+      "cita": "Edwards S 1993, The Heart Rate Monitor Book (zonas de FC), leído vía Sanders 2016",
+      "url": "https://hull-repository.worktribe.com/OutputFile/443111",
+      "acceso": "RESUMEN",
+      "pais": "EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "humanos (método) [I-raza]",
+      "verificado_fecha": "2026-11-23",
+      "nota": "zonas 50–59 / 60–69 / 70–79 / 80–89 / 90–100 % de FCmax con pesos 1–5; carga = Σ minutos × peso [fuente secundaria]; libro sin versión abierta (KB 1.29.0)"
+    },
+    {
+      "id": "FOSTER_1998_MONOTONIA",
+      "cita": "Foster C 1998, Med Sci Sports Exerc 30(7):1164–1168 (monotonía y strain)",
+      "url": "https://www.sponet.de/sponet/Record/4001707",
+      "acceso": "RESUMEN",
+      "pais": "EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "humanos (método) [I-raza]",
+      "verificado_fecha": "2026-11-23",
+      "nota": "monotonía = media diaria / DE en la semana; strain = carga semanal × monotonía; 25 deportistas [E-r]; corroborado por Anderson 2003 (core.ac.uk) [texto completo secundario]; DE muestral o poblacional y días de descanso [NV] (KB 1.29.0)"
+    },
+    {
+      "id": "WILLIAMS_2017_EWMA",
+      "cita": "Williams S, West S, Cross MJ, Stokes KA 2017, Br J Sports Med 51(3):209–210 (ACWR con EWMA), leído vía Hamlin 2019 (Front Physiol 10:34, OA)",
+      "url": "https://doi.org/10.3389/fphys.2019.00034",
+      "acceso": "RESUMEN",
+      "pais": "Reino Unido",
+      "idioma": "en",
+      "raza_fuente": "humanos (método) [I-raza]",
+      "verificado_fecha": "2026-11-23",
+      "nota": "EWMA_hoy = carga·λ + (1 − λ)·EWMA_ayer, λ = 2/(N + 1), N 7 y 28 (λ 0,25 y ≈ 0,069) [fuente secundaria en texto completo]; original sin leer (KB 1.29.0)"
+    },
+    {
+      "id": "IMPELLIZZERI_2020_ACWR",
+      "cita": "Impellizzeri FM, Tenan MS, Kempton T, Novak A, Coutts AJ 2020, Int J Sports Physiol Perform 15(6):907–913 (crítica del ACWR)",
+      "url": "https://opus.lib.uts.edu.au/handle/10453/141898",
+      "acceso": "RESUMEN",
+      "pais": "Australia",
+      "idioma": "en",
+      "raza_fuente": "humanos (método)",
+      "verificado_fecha": "2026-11-23",
+      "nota": "sin pruebas que apoyen usar el ACWR para gestionar cargas o reducir lesiones; problemas de ratios, definiciones ambiguas y relación inconsistente con la lesión [E-r] (KB 1.29.0)",
+      "doi": "10.1123/ijspp.2019-0864"
+    },
+    {
+      "id": "PINETZKI_2026_PREENTRENO",
+      "cita": "Pinetzki L et al. 2026, Front Vet Sci 13 (conducta de PSI de 18–24 meses tras el pre-entrenamiento, con monitores de actividad)",
+      "url": "https://doi.org/10.3389/fvets.2026.1927282",
+      "acceso": "TEXTO_COMPLETO",
+      "pais": "Alemania",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "verificado_fecha": "2026-11-23",
+      "nota": "n 30; conducta, no carga; galope en la prueba del objeto nuevo 1,9 → 11,4 s (p < 0,001) [E parcial] (KB 1.29.0)",
+      "doi": "10.3389/fvets.2026.1927282"
     }
   ],
   "parametros": [
@@ -4153,7 +4509,8 @@
         "WITTE_2006"
       ],
       "estado": "PROPUESTA",
-      "nota": "no hay picos de aceleración del tronco publicados a ≥ 12 m/s; afecta al firmware, no al motor"
+      "nota": "no hay picos de aceleración del tronco publicados a ≥ 12 m/s; afecta al firmware, no al motor",
+      "nota_1_29_0": "auditoría 23/11: Bosch 2018 en texto completo: EquiMoves fusiona ±16 g y ±400 g; validación solo a paso y trote en warmblood [E] [I-raza]"
     },
     {
       "id": "ecg_prematuro",
@@ -4167,7 +4524,8 @@
         "MASSIE_2023"
       ],
       "estado": "IMPLEMENTADO",
-      "nota": "Frick 2019: −6,1/+5,4 % es canter en cinta; corte de recuperación 6 % con S 88 %, E 97 %, LR 26 [E-r] (estudio extra 4); KB 1.9.0: van Erck-Westergren 2026 (Hong Kong, texto completo) usa variación del RR > 4 % y fases > 185 / < 120 lpm [E]; prevalencia de ≥ 1 ectópico en el máximo 57–70 % de los ECG de PSI sanos: el motor debe tolerar unos pocos latidos (P90 5–10) sin alerta [I]"
+      "nota": "Frick 2019: −6,1/+5,4 % es canter en cinta; corte de recuperación 6 % con S 88 %, E 97 %, LR 26 [E-r] (estudio extra 4); KB 1.9.0: van Erck-Westergren 2026 (Hong Kong, texto completo) usa variación del RR > 4 % y fases > 185 / < 120 lpm [E]; prevalencia de ≥ 1 ectópico en el máximo 57–70 % de los ECG de PSI sanos: el motor debe tolerar unos pocos latidos (P90 5–10) sin alerta [I]",
+      "nota_1_29_0": "auditoría 23/11: Frick 2019 en texto completo: razas mixtas (45 WB, 4 PSI, 3 árabes), cinta a ≤ 11 m/s; canter 11 % (S 88, E 98) como corte de alta especificidad, no umbral del motor [I-raza]; el 5 % se mantiene"
     },
     {
       "id": "ecg_fases",
@@ -4231,7 +4589,8 @@
         "NIST_CUSUM"
       ],
       "estado": "IMPLEMENTADO",
-      "nota": "kb_robust_baseline y kb_robust_z (motor 2.0.0-dev5); sin conectar a reglas. El estudio ampliado usaba |z| > 3"
+      "nota": "kb_robust_baseline y kb_robust_z (motor 2.0.0-dev5); sin conectar a reglas. El estudio ampliado usaba |z| > 3",
+      "nota_1_29_0": "auditoría 23/11: NIST §1.3.5.17 leído: M = 0,6745·(x − mediana)/MAD con corte 3,5 [E]; equivalente a |x − mediana|/(1,4826·MAD) > 3,5"
     },
     {
       "id": "shrinkage_normal",
@@ -4241,7 +4600,8 @@
         "EFRON_MORRIS_1975"
       ],
       "estado": "IMPLEMENTADO",
-      "nota": "kb_shrink_mean; pesa sobre todo en las primeras 3–5 sesiones"
+      "nota": "kb_shrink_mean; pesa sobre todo en las primeras 3–5 sesiones",
+      "nota_1_29_0": "auditoría 23/11: Efron & Morris 1975 en texto completo: B_i = D_i/(A + D_i) [E]; ES1 propone estratificar μ_pop por edad y raza (PROPUESTA [I])"
     },
     {
       "id": "umbral_cambio_real",
@@ -4251,7 +4611,8 @@
         "HOPKINS_2000"
       ],
       "estado": "IMPLEMENTADO",
-      "nota": "kb_change_threshold; sustituye a max(√2·TE, SWC) del estudio ampliado. TE por métrica: medir con 2–3 trabajos repetidos"
+      "nota": "kb_change_threshold; sustituye a max(√2·TE, SWC) del estudio ampliado. TE por métrica: medir con 2–3 trabajos repetidos",
+      "nota_1_29_0": "auditoría 23/11: Hopkins 2000 en texto completo (PDF del autor): 1,5–2,0·TE confirmado [E]"
     },
     {
       "id": "cusum_unilateral",
@@ -4264,12 +4625,13 @@
         "ARL1_d1_h5": 10.4,
         "FIR": "S0 = h/2 (ARL1 5,3 con h 4)"
       },
-      "evidencia": "E (tabla del NIST, cadena de Markov recalculada) / I (uso en caballos, h = 5 con muchas cartas)",
+      "evidencia": "E (tabla oficial del NIST, unilateral; nuestra cadena de Markov difiere en 1 unidad) / I (uso en caballos, h = 5 con muchas cartas; ARL bilaterales calculados)",
       "fuentes": [
         "NIST_CUSUM"
       ],
       "estado": "IMPLEMENTADO",
-      "nota": "kb_cusum_upper; 168/465 son ARL0 del CUSUM bilateral. Ectopia: no usar CUSUM normal (recuentos)"
+      "nota": "kb_cusum_upper; 168/465 son ARL0 del CUSUM bilateral. Ectopia: no usar CUSUM normal (recuentos)",
+      "nota_1_29_0": "auditoría 23/11: tabla del NIST (unilateral) leída: ARL0 336 (h 4) / 930 (h 5), ARL1(1σ) 8,38 / 10,4 [E]; nuestros 335/931 son de la cadena de Markov (diferencia de 1 unidad, sin cambio); 168/465 bilaterales son cálculo nuestro, no del NIST"
     },
     {
       "id": "te_recuperacion_fc_lpm",
@@ -4415,7 +4777,8 @@
         "LOMBARD_HAWKINS_ARXIV_1904_00340"
       ],
       "estado": "IMPLEMENTADO (herramienta, sin regla)",
-      "nota": "kb_self_starting_z; calentamiento 8–10 sesiones sin alarma [I]"
+      "nota": "kb_self_starting_z; calentamiento 8–10 sesiones sin alarma [I]",
+      "nota_1_29_0": "auditoría 23/11: Lombard & Hawkins (arXiv, título «CUSUM Average Run Length: Conditional or Unconditional?») confirma la transformación y el ARL incondicional con datos normales; con colas recomiendan CUSUM de rangos [E]"
     },
     {
       "id": "tfds_or_ikeda_2019",
@@ -4490,18 +4853,19 @@
     {
       "id": "fc_recuperacion_fiabilidad_icc",
       "valor": {
-        "30s": 0.42,
-        "60s": 0.5,
-        "90s": 0.6,
-        "120s": 0.57,
+        "30s": 0.451,
+        "60s": 0.502,
+        "90s": 0.595,
+        "120s": 0.571,
         "fc_media_galope": 0.756
       },
-      "evidencia": "E-r",
+      "evidencia": "E",
       "fuentes": [
         "DAVIE_2026"
       ],
       "estado": "PENDIENTE",
-      "nota": "cinta, PSI Australia: la recuperación antes de 90 s es poco fiable; solo informativa en A9"
+      "nota": "cinta, PSI Australia: la recuperación antes de 90 s es poco fiable; solo informativa en A9",
+      "nota_1_29_0": "auditoría 23/11: texto completo; CORRECCIÓN 30 s 0,42 → 0,451 (tabla 3; el resumen dice 0,421), 60 s 0,50 → 0,502, 90 s 0,60 → 0,595, 120 s 0,57 → 0,571; CV intraindividual FC de galope ≈ 2,7 %, recuperación 5,5–6,2 % [E]; el parámetro sigue PENDIENTE (no lo usa el código)"
     },
     {
       "id": "arabe_trabajo_rapido_velocidad_3a_polonia",
@@ -4995,7 +5359,8 @@
         "LEE_2019_KOREA"
       ],
       "estado": "REFERENCIA",
-      "nota": "KB 1.25.0: 211–212 lpm es cota inferior (probablemente media del tramo) en árabes de llano de 3 años; FCmax por defecto 210–215 lpm hasta medir la propia; nunca 220 − edad"
+      "nota": "KB 1.25.0: 211–212 lpm es cota inferior (probablemente media del tramo) en árabes de llano de 3 años; FCmax por defecto 210–215 lpm hasta medir la propia; nunca 220 − edad",
+      "nota_1_29_0": "auditoría 23/11: los ± de Mukai 2007 son EE (n 23): DE entre caballos ≈ 8,2 lpm [I, cálculo]; Massie 2024 (potros PSI de 2 años, Japón) FCmax 221 ± 8 → 226 ± 7 lpm [E]"
     },
     {
       "id": "velocidad_carrera_arabe_llano_m_s",
@@ -5057,7 +5422,8 @@
         "HISA_Q2_2026"
       ],
       "estado": "REFERENCIA",
-      "nota": "KB 1.25.0: solo contexto poblacional; definiciones distintas entre países; nunca una predicción individual"
+      "nota": "KB 1.25.0: solo contexto poblacional; definiciones distintas entre países; nunca una predicción individual",
+      "nota_1_29_0": "auditoría 23/11: Spargo 2019 en texto completo: 0,56/1.000 (114/203.965); Turffontein 0,66, Newmarket 0,53, Vaal 0,51, Gosforth Park 0,34 [E]"
     },
     {
       "id": "estructura_preparacion_nz",
@@ -5499,6 +5865,84 @@
       ],
       "estado": "PROPUESTA",
       "nota": "KB 1.28.0, sin implementar"
+    },
+    {
+      "id": "CARGA_CG1",
+      "umbral": "CG1 carga interna por sesión (TRIMP equino individualizado) solo descriptiva: ΔFC con FC de reposo y máxima propias (no 30/220); Σ Δt·ΔFC·b·e^(c·ΔFC)/60 con b 0,64 y c 1,92 de plantilla «no validados en equinos» [NV]; además tiempo > 180 y > 200 lpm",
+      "evidencia": "E (método, completo) / I",
+      "fuentes": [
+        "MUNSTERS_2020_ACWR",
+        "FLYRIN_HAGGLUND_2021_SLU",
+        "MORTON_BANISTER_1990_TRIMP",
+        "EDWARDS_1993_ZONAS"
+      ],
+      "estado": "PROPUESTA",
+      "nota": "KB 1.29.0, sin implementar; nunca como predicción de lesiones"
+    },
+    {
+      "id": "CARGA_CG2",
+      "umbral": "CG2 carga externa por bandas de velocidad GNSS: < 10 / 10–13,3 / 13,3–14,3 / 14,4–15,4 / 15,5–16,7 / ≥ 16,8 m/s en PSI, con totales ≤ 14 / > 14 m/s y ≥ 13,3 m/s por sesión, 7 d y 30 d; en árabes relativas a v_carrera [I-raza]",
+      "evidencia": "E (bandas de PSI) / I",
+      "fuentes": [
+        "MORRICE_WEST_EVJ_13156_AAM",
+        "WONG_2023",
+        "VERHEYEN_2006"
+      ],
+      "estado": "PROPUESTA",
+      "nota": "KB 1.29.0, sin implementar; nunca como predicción de lesiones"
+    },
+    {
+      "id": "CARGA_CG3",
+      "umbral": "CG3 agudo/crónico (EWMA 7/28 d) de distancia ≥ 13,3 m/s y de TRIMP por separado, solo como «cambio relativo de carga»; nunca riesgo ni semáforo de lesión; λ = 2/(N + 1) (0,25 y ≈ 0,069); mostrar aguda y crónica por separado además del cociente; monotonía y strain de Foster solo informativos",
+      "evidencia": "E (completo: solo ACWR HS de la semana previa asociado) / I",
+      "fuentes": [
+        "MUNSTERS_2020_ACWR",
+        "WILLIAMS_2017_EWMA",
+        "IMPELLIZZERI_2020_ACWR",
+        "FOSTER_1998_MONOTONIA"
+      ],
+      "estado": "PROPUESTA",
+      "nota": "KB 1.29.0, sin implementar; nunca como predicción de lesiones"
+    },
+    {
+      "id": "PRIOR_ES1",
+      "umbral": "ES1 μ_pop estratificado por edad y raza, no por sexo: PSI 2 / 3 / 4+ años; árabes 3 / 4 / 5+ años; en 2 años τ² × 1,5–2 y menos contracción",
+      "evidencia": "E-r (V200 +11 % en 5 meses) / E (edad pico 4,45 años; árabes maduran ≈ 1 año después) / I",
+      "fuentes": [
+        "KOBAYASHI_2000_V200",
+        "GRAMM_MARKSTEINER_2010",
+        "TAKAHASHI_2015_EDAD_PESO",
+        "QREC_PROGRAMA_2025_26",
+        "SOBCZYNSKA_2010"
+      ],
+      "estado": "PROPUESTA",
+      "nota": "KB 1.29.0, sin implementar; nunca como predicción de lesiones"
+    },
+    {
+      "id": "PRIOR_ES2",
+      "umbral": "ES2 sexo solo como covariable pequeña de velocidad de carrera y parciales (hembras −0,4 %, rango 0–1 %); ningún efecto de sexo en V200, VHRmax, FCmax ni VLa4",
+      "evidencia": "E (árabes sin diferencia; élite castrados ≈ yeguas) / OFICIAL (descargas) / I (conversión)",
+      "fuentes": [
+        "TACYILDIZ_2026_ARABES",
+        "SOBOTKOVA_2023",
+        "MASSIE_2024_POTROS_JAPON",
+        "JRA_PESOS_NORMAS",
+        "BHA_PERFORMANCE_FIGURES"
+      ],
+      "estado": "PROPUESTA",
+      "nota": "KB 1.29.0, sin implementar; nunca como predicción de lesiones"
+    },
+    {
+      "id": "PRIOR_ES3",
+      "umbral": "ES3 prior de FCmax común sin sexo: media ≈ 215–226 lpm y DE entre caballos ≈ 8 lpm, marcada «no propia»",
+      "evidencia": "E-r (Mukai 2007, EE → DE) / E (Massie 2024) / I",
+      "fuentes": [
+        "MUKAI_2007_JES",
+        "MASSIE_2024_POTROS_JAPON",
+        "BTC_SHIOSE_80_FC"
+      ],
+      "estado": "PROPUESTA",
+      "nota": "KB 1.29.0, sin implementar; nunca como predicción de lesiones"
     }
   ],
   "pendiente_motor": [
@@ -5530,7 +5974,8 @@
     "GO1–GO4 y WU1–WU4 (estudio 20/11 21:08, KB 1.23.0): going como estrato y covariable de comparables A7/A8 (campo going/penetración en Session); calentamiento mínimo y clase de vuelta a la calma para A9 y CF2; [I], sin implementar",
     "TA1–TA2 y RB1 (estudio 20/11 22:09, KB 1.24.0): orden de presentación tendón/hueso por raza y bloques de repetibilidad (≥ 3 sesiones, ≤ 7 d) para el TE propio; [I], sin implementar",
     "MV1, FM1 y EC1 (estudio noche 21/11, KB 1.25.0): método de V200 como atributo obligatorio de la línea base y FCmax por defecto 210–215 lpm marcada «no propia»; arritmias en galope solo como «revisar»; [I], sin implementar",
-    "PD1, TE2, RC1 y FW1 (estudio noche 22/11, KB 1.28.0): pendiente como criterio de comparables, TE de V200 según condiciones, THR100 informativo y FC de calentamiento fijo como tendencia diaria; [I], sin implementar"
+    "PD1, TE2, RC1 y FW1 (estudio noche 22/11, KB 1.28.0): pendiente como criterio de comparables, TE de V200 según condiciones, THR100 informativo y FC de calentamiento fijo como tendencia diaria; [I], sin implementar",
+    "CG1–CG3 y ES1–ES3 (estudio noche 23/11, KB 1.29.0): carga interna (TRIMP individual) y externa (bandas GNSS) solo descriptivas, agudo/crónico como cambio relativo; prior μ_pop por edad y raza, sexo solo en velocidad, FCmax común con DE ≈ 8 lpm; [I], sin implementar"
   ],
   "cola_investigacion": [
     "Texto completo de Verheyen 2006 (Bone, DOI 10.1016/j.bone.2006.05.025): ORs, cortes, límite inferior del canter, ventana de 60 d",
@@ -5629,7 +6074,13 @@
     "Davie 2026 (Animals 16:2187) y Poinsard 2026 tabla S2 desde MDPI con permiso: CV/TE/MDC de V200 y de la FC a velocidad fija (22/11)",
     "Choi & Parkin 2026 (JAVMA 10.2460/javma.26.04.0244, sesamoideos) en texto completo: definición de ventanas y OR ajustados (22/11)",
     "AAEP 2026 sensores biométricos en breezes: artículo revisado cuando se publique (22/11)",
-    "Golfo: siguen sin datos de FC/lactato/carga de árabes de llano (búsqueda árabe e inglés 22/11)"
+    "Golfo: siguen sin datos de FC/lactato/carga de árabes de llano (búsqueda árabe e inglés 22/11)",
+    "Mukai 2007 (J Equine Sci 18:153) PDF de J-STAGE por descarga manual (FREE ACCESS, CC BY-NC-ND): curva temporal de la FC y velocidad por tramo; robots y permiso de la herramienta bloquean (23/11)",
+    "NIST §6.3.2.3.1: comprobar a mano el ARL con 0,5σ y h 5 (extraído 30,0; esperable ≈ 38) (23/11)",
+    "Originales de Morton/Banister 1990 (J Appl Physiol), Williams 2017 (BJSM; repositorio de Bath sin probar), Foster 1998 (MSSE) e Impellizzeri 2020 en texto completo: fórmulas ya confirmadas en fuentes secundarias legales; multiplicador 0,86 femenino del TRIMP sin fuente fiable (23/11)",
+    "Ringmark 2015 (Acta Vet Scand 10.1186/s13028-015-0107-1, trotones con menos distancia de alta intensidad) y tesis de Melbourne (Morrice-West) y Massey (Legg) sobre cargas: texto completo (23/11)",
+    "V200/VHRmax/FCmax por sexo o castración dentro de PSI o árabe de carreras: no publicado (búsqueda EN, JA, KO, ZH, AR, TR, PL, ES/PT 23/11); figuras por sexo de Takahashi 2015 y suplemento S1 de Sharman & Wilson 2022",
+    "Golfo y China: siguen sin datos de carga, edad o sexo con FC en árabes de llano (búsqueda en árabe y chino 23/11)"
   ],
   "historial": [
     {
@@ -5776,6 +6227,11 @@
       "version": "1.28.0",
       "fecha": "2026-11-22",
       "cambio": "Investigación nocturna 22/11: auditoría de 12 fuentes (7 a texto completo; correcciones de Marr 2020, Georgopoulos 2017, Nomura 2019, Evans 1993, Ikeda 2019 y Yıldırım 2025, sin cambio de valores del motor); 31 fuentes nuevas (JRA, Corea, Hong Kong, Golfo, Nueva Zelanda, Chile, Colombia, Brasil, Sudáfrica, trotones); reglas PD1, TE2, RC1 y FW1 PROPUESTA [I]; motor 2.0.0-dev30 solo versión"
+    },
+    {
+      "version": "1.29.0",
+      "fecha": "2026-11-23",
+      "cambio": "Investigación nocturna 23/11: auditoría de 9 fuentes (8 mejoradas; 5 SIN_AUDITAR del código estadístico reclasificadas; correcciones de Davie 2026 ICC 30 s 0,42 → 0,451, Spargo 2019 73,6 % de extremidades, Mukai 2007 ± = EE, ARL bilaterales propios); 30 fuentes nuevas (completo, trotón sueco, JRA, QREC, BHA, Turquía, Polonia, Brasil y fórmulas humanas de carga como plantilla); reglas CG1–CG3 y ES1–ES3 PROPUESTA [I]; motor 2.0.0-dev31 solo versión"
     }
   ]
 }
