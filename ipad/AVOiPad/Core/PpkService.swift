@@ -2,7 +2,7 @@ import Foundation
 import Compression
 import CryptoKit
 
-/// AVO PPK 1.0.0 en el iPad (motor 2.0.0-dev32, docs/PPK.md).
+/// AVO PPK 1.0.0 en el iPad (motor 2.0.0-dev33, docs/PPK.md).
 ///  - Base: red ERGNSS del IGN, ficheros horarios a 1 s:
 ///    http://datos-geodesia.ign.es/ERGNSS/horario_1s/AAAAMMDD/HH/<EST>00ESP_R_AAAADDDHH00_01H_01S_MO.crx.gz (+ _01H_MN.rnx.gz)
 ///    (estructura comprobada por el usuario el 23/11/2026 con capturas; el servidor redirige https → http: excepción ATS

@@ -39,7 +39,7 @@ void count_ubx(const uint8_t* f, size_t n, PpkRoverStats* st) {
 
 void x_frame(const avo::FrameView& f, void* vctx) {
   XCtx* c = (XCtx*)vctx;
-  if (f.type == avo::FrameType::GNSS_UBX_FRAG) {
+  if (f.type == avo::GNSS_UBX_FRAG) {
     const uint8_t* fr;
     size_t fl;
     if (c->defrag.feed(f.payload, f.len, &fr, &fl)) {

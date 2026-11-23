@@ -34,18 +34,68 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **Validación:** IMPLEMENTADO. **Sin compilar** (sin Xcode ni emulador de Firebase en la sesión): lo compilan el CI de iPad y el de reglas al fusionar. **NO VERIFICADO** en el iPad. **Pendiente del usuario:** publicar `firebase/storage.rules` en la consola (Storage › Reglas).
 **Pendiente:** Android y Windows.
 
-## 2026-11-23 — Espalda PROTOTIPO 3.16.0 · Motor 2.0.0-dev32 (AVO PPK 1.0.0) — PPK: RXM-RAWX/SFRBX al pecho y cálculo con RTKLIB
+## 2026-11-23 — Espalda PROTOTIPO 3.16.0 · Motor 2.0.0-dev33 (AVO PPK 1.0.0) — PPK: RXM-RAWX/SFRBX al pecho y cálculo con RTKLIB
 **Autor:** Claude · **Commits:** `93eada5` (espalda), `5664e0b` (motor), y el de esta documentación · **CI:** no se lanza en las ramas (se compila al fusionar en `develop`)
 **Qué cambia:**
 - **Espalda 3.16.0:** pide RXM-RAWX (1 Hz; 2 Hz a ≥ 460 800 baudios) y RXM-SFRBX en un VALSET propio, solo si caben en el presupuesto de la UART, y los envía al pecho en tramas nuevas `GNSS_UBX_FRAG` (0x12) de 192 B, un paquete ESP-NOW y un intento por trozo. Bit `CAP_GNSS_RAW` en CAPS. Búfer UBX de 4200 B. Línea «PPK:» en el monitor serie. NAV-PVT sigue a 8 Hz.
 - **Pecho:** sin cambios (ya graba cada trama tal cual en el `.avr`).
-- **Motor 2.0.0-dev32:** RTKLIB demo5 (`75a2e56`, BSD-2) en `src/ppk/rtklib` (sin `execcmd`, sin avisos ni sanitizadores); descompresor Hatanaka propio (CRINEX 3.0, IGN); extracción de RAWX/SFRBX del `.avr` (trozos de la Heltec y tramas enteras del casco BETA V5); cinemático adelante + atrás; API C `avo_eq_ppk_need` y `avo_eq_ppk` (JSON `avo-ppk`). CMake del motor con C (Android, Windows e iPad compilan los `.c` con el mismo `src/`).
+- **Motor 2.0.0-dev33** (renumerado de dev32 al integrar: la dev32 es la del casco, PR #127): RTKLIB demo5 (`75a2e56`, BSD-2) en `src/ppk/rtklib` (sin `execcmd`, sin avisos ni sanitizadores); descompresor Hatanaka propio (CRINEX 3.0, IGN); extracción de RAWX/SFRBX del `.avr` (trozos de la Heltec y tramas enteras del casco BETA V5); cinemático adelante + atrás; API C `avo_eq_ppk_need` y `avo_eq_ppk` (JSON `avo-ppk`). CMake del motor con C (Android, Windows e iPad compilan los `.c` con el mismo `src/`).
 - **Documentación:** `docs/PPK.md` (contrato `GNSS_UBX_FRAG`, compatibilidad, pruebas). Tabla «Vigente»: la siguiente prueba física ya no propone la espalda 3.14.4 (no enlazaba con el pecho).
 **Por qué:** petición del usuario (23/11, 18:30): PPK para tener precisión sin depender del FIX en directo ni llevar el móvil en el trabajo.
-**Archivos:** `firmware/back/V3_8_0/lib/avo_core/src/avo_ubx_frag.*`, `avo_ubx_zed.*`, `avo_back_core.*`, `avo_uart_proto.h`, `avo_payloads.h`, `avo_version.h`, `AVO_BACK_V3_8_0.ino`, `test/test_espnow.cpp`; `equine-intelligence/CMakeLists.txt`, `include/avo_eq/ppk.h`, `include/avo_eq/avo_eq_c.h`, `src/ppk/**`, `src/capi/ppk_capi.cpp`, `tests/test_ppk.cpp`, `tests/data/ppk/**`; `docs/PPK.md`.
+**Archivos:** `firmware/back/V3_8_0/lib/avo_core/src/avo_ubx_frag.*`, `avo_ubx_zed.*`, `avo_back_core.*`, `avo_payloads.h`, `avo_version.h`, `AVO_BACK_V3_8_0.ino`, `test/test_espnow.cpp`; `equine-intelligence/CMakeLists.txt`, `include/avo_eq/ppk.h`, `include/avo_eq/avo_eq_c.h`, `src/ppk/**`, `src/capi/ppk_capi.cpp`, `tests/test_ppk.cpp`, `tests/data/ppk/**`; `docs/PPK.md`.
 **No se ha tocado:** firmware del pecho, workflows, firmas, `Info.plist`, apps.
 **Validación:** pruebas de anfitrión — espalda 66 casos / 836 comprobaciones (ASan/UBSan limpio); motor 120 casos / 2635 comprobaciones (GCC con ASan/UBSan y Clang Release), fixtures correctas. PPK con datos reales GEONET 2005: 98 % FIX, dispersión horizontal ≤ 4,2 cm; desde `.avr` con trozos, diferencia ≤ 0,07 cm con la solución RINEX. **Sin compilar todavía:** firmware con arduino-cli, motor con MSVC, NDK y Xcode (se compilan al fusionar). **NO VERIFICADO** en hardware.
 **Pendiente:** apps (descarga de la base del IGN, botón PPK y `AVO_<sesión>.ppk.json` en la nube con reglas de Storage nuevas); prueba en el banco y en pista.
+## 2026-11-23 — Casco BACK V5 firmware 5.0.0 (IMU de la cabeza + PPS/TIME_SYNC) · Motor 2.0.0-dev32
+**Autor:** Claude · **Rama:** `claude/casco-fw-5-0-0` (PR #127, sin fusionar) · **CI:** workflow `build-casco-v500-fw.yml` todavía **pendiente del permiso del usuario** · compilado en local (arduino-esp32 3.3.12, 1 396 203 B)
+**Qué cambia:** petición del usuario (23/11): «añadir el IMU y PPS del casco desde ya, no quiero andar haciendo 20 firm
+distintos». En el mismo firmware **5.0.0**:
+- **IMU de la cabeza** (`src/casco_imu.*`): LSM6DSV16X (I²C 0x6A) con los registros de la cincha REV D
+  (`firmware/girth/V0_6_0/girth_imu6.h`): WHO_AM_I 0x70, 120 Hz, ±16 g, ±2000 dps, FIFO continua leída cada 10 ms con
+  el cerrojo del bus I²C que comparte el MAX17048. Sin la IMU, el casco sigue funcionando y reintenta con pausa creciente.
+- **Lote IMU_SAMPLE fmt 3** (extensión compatible: la cabecera de 24 B no cambia): `girth_id 0xCA`, `imu_id 4`,
+  byte 15 = 3 (unidades LSM6DSV16X), 15 muestras de 12 B (ax ay az gx gy gz, int16 LE en LSB del sensor), 8 lotes/s,
+  `girth_t0_us` en el reloj del casco, `sync_state` 2 con el PPS enganchado. Son 15 muestras y no 16 porque la prueba de
+  ordenador vio que 24 + 16 × 12 = 216 B supera la carga máxima de una trama del enlace (234 − 19 = 215 B) y se perdía
+  sin aviso.
+- **PPS** (GPIO7, flanco de subida, `esp_timer`): estado 0/1/2 en BackStatus (`pps_state`, `pps_count`), `pps_locked`
+  en cada muestra GNSS y **TIME_SYNC** (trama 0x03, 24 B, ya definida y que la Heltec nunca enviaba): pulso emparejado
+  con el NAV-PVT del segundo entero que le sigue (≤ 900 ms), con jitter medido entre flancos (en tolerancia ≤ 50 µs).
+  CAPS añade `CAP_PPS | CAP_TIME_SYNC | CAP_IMU`.
+- **Ganchos en `BackCore`** solo en la copia del casco (`apply_v500.py`, paso 1b: `set_pps`, `set_pvt_observer`,
+  `send_extra`). La biblioteca de la espalda de la Heltec (`firmware/back/V3_8_0`) **no se toca**.
+- **Motor 2.0.0-dev32** (renumerado al integrar: dev30 y dev31 ya estaban en develop por las investigaciones nocturnas): el lote fmt 3 se cuenta en `Session::head_imu_batches`, antes de leer `imu_units`. No se
+  mezcla con la cincha, no cambia sus unidades y no cuenta como registro malo (antes habría bajado la calidad
+  INTEGRIDAD). Prueba `ingestion.head_imu_batch_from_the_helmet_is_counted_not_bad`.
+**Apps:** sin cambios necesarios para no romper nada: Windows e iPad cuentan los fmt desconocidos como lote «opaco» y
+Android solo procesa fmt 0. Representar la IMU de la cabeza en las apps queda para cuando haya datos reales.
+**Pruebas:** estáticas PASS (pines PPS/INT1, WHO_AM_I, contrato fmt 3, tamaño del lote, ganchos) · ordenador: 67 casos,
+658 comprobaciones, 0 fallos (nuevas: PPS en STATUS/CAPS/GNSS, TIME_SYNC e IMU de la cabeza íntegras y en orden hasta
+el pecho, límite de tamaño, `send_extra` espera al pecho) · motor: 116 casos, 1 884 comprobaciones, 0 fallos.
+**Validación:** IMPLEMENTADO · compilado en local (no en CI) · **NO VERIFICADO** en hardware: la PCB PROTOTIPO A está
+en fabricación. Falta comprobar en la placa el WHO_AM_I real, la orientación de los ejes, la polaridad y el ancho del
+PPS del ZED (TP1 por defecto, 1 Hz) y el emparejamiento pulso ↔ NAV-PVT.
+**Pendiente:** permiso para subir el workflow; la placa (pruebas M1–M10 más IMU y PPS); la IMU de la cabeza en el análisis.
+
+## 2026-11-23 — Casco BACK V5 — firmware 5.0.0: pecho 3.7.11 + espalda 3.15.0 en un solo ESP32-S3
+**Autor:** Claude · **Rama:** `claude/casco-fw-5-0-0` · **CI:** workflow `build-casco-v500-fw.yml` escrito, **pendiente del permiso del usuario** para subirlo · compilado en local (arduino-esp32 3.3.12, 1 391 296 B)
+**Qué cambia:** primer firmware del casco (petición del usuario, 23/11 08:39: «lo mismo que la espalda y el reloj, en
+uno solo»). `firmware/back/V5_0_0_CASCO`: monta el pecho 3.7.11 con su cadena oficial (`tools/prepare_chest_tree.py`
+lee `build-chest-v377-despertar.yml`) y aplica `tools/apply_v500.py`. Dentro va el `BackCore` de la espalda 3.15.0 sin
+cambios (ZED-F9P 8 Hz, RTK fijo, BackStatus v4, GirthHub). El enlace pecho ↔ espalda pasa a ser **interno** (los mismos
+paquetes ESP-NOW por memoria, pareja fija); la radio queda para las cinchas. **Ningún contrato binario cambia.**
+Hardware del casco: PWR_HOLD (GPIO46) en `initVariant()`, táctil (1/2/3 toques, 3 s apaga), MAX17048 + BQ24072,
+microSD de 4 bits con su interruptor, ZED por UART1 (GPIO5/6) con ZED_EN, anillo SK6812 ≤ 30 % en lugar de la
+pantalla, reglas 1–7 de la revisión previa a fabricación. Identidad `AVO-CASCO 5.0.0` (OTA con `target`
+`AVO_CASCO_V5_ESP32S3`; USB AVO1 conserva `"name":"AVO-CHEST"` y añade `"model":"CASCO-V5"`).
+**Pruebas:** `tests_test_casco_v500.py` (pines contra la placa, reglas y contratos) · `test/test_casco_link.cpp` (enlace
+interno con el ZED simulado de la espalda: pareja fija sin emparejamiento, 8 Hz RTK fijo, RTCM byte a byte, BACK_SLEEP)
+y las 59 pruebas de la espalda con la biblioteca del casco: 63 casos, 618 comprobaciones, 0 fallos.
+**No se ha tocado:** el pecho ni la espalda (sus carpetas y workflows); ningún workflow.
+**Validación:** IMPLEMENTADO · compilado · **NO VERIFICADO** en la placa (PROTOTIPO A en fabricación).
+**Pendiente:** pruebas M1–M10 en la placa; IMU y PPS sin usar; AVO Update y las apps no reconocen todavía «AVO-CASCO».
+
+---
 
 ## 2026-11-23 — Motor 2.0.0-dev31 · KB-1 1.29.0 — Investigación nocturna: auditoría de 9 fuentes (estadística del motor, ECG, fiabilidad de la FC), carga con FC y GPS (TRIMP, ACWR) y edad y sexo como covariables
 **Autor:** Claude (tarea programada nocturna, sin supervisión) · **Rama:** `claude/kb-noche-2026-11-23` (desde `claude/kb-noche-2026-11-22` `91ab2c2`, PR #124 sin fusionar) · **PR:** #126 · **CI:** `build-equine-engine.yml` run 45108066980 ✅ (`d2b4488`)

@@ -207,7 +207,7 @@ void BackCore::forward_raw(uint8_t cls, uint8_t id, const uint8_t* pl, uint16_t 
   for (size_t i = 0; i < count; i++) {
     uint8_t piece[UBX_FRAG_HDR + UBX_FRAG_CHUNK];
     size_t n = ubx_frag_encode(raw_buf_, len, ms, (uint8_t)i, piece, sizeof(piece));
-    queue_frame(FrameType::GNSS_UBX_FRAG, 0, piece, n, false);
+    queue_frame(GNSS_UBX_FRAG, 0, piece, n, false);
     if (!flush(1)) { st_.raw_failed++; return; }
   }
   st_.raw_sent++;

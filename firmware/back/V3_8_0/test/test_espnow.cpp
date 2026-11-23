@@ -436,7 +436,7 @@ struct ChestModel {
     if (f.type == FrameType::GNSS_SAMPLE) { GnssSample g; if (decode_gnss(f.payload, f.len, &g)) c->gnss.push_back(g); }
     if (f.type == FrameType::STATUS) c->have_status = decode_status(f.payload, f.len, &c->last_status);
     if (f.type == FrameType::CAPS) c->have_caps = decode_caps(f.payload, f.len, &c->caps);
-    if (f.type == FrameType::GNSS_UBX_FRAG) {
+    if (f.type == GNSS_UBX_FRAG) {
       const uint8_t* fr; size_t fl;
       if (c->defrag.feed(f.payload, f.len, &fr, &fl)) c->raw_frames.emplace_back(fr, fr + fl);
     }

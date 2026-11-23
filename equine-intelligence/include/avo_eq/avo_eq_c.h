@@ -78,7 +78,7 @@ AVO_EQ_API int avo_eq_cache_invalidate(const char* cache_dir);
 AVO_EQ_API int avo_eq_training_summary(const char* analysis_json, const char* extra_json, char** json_out);
 AVO_EQ_API int avo_eq_training_analyse(const char* input_json, const char* options_json, const volatile int* cancel, char** json_out);
 
-/* ---------------- PPK (AVO PPK 1.0.0, motor 2.0.0-dev32) ----------------
+/* ---------------- PPK (AVO PPK 1.0.0, motor 2.0.0-dev33) ----------------
  * Posición poscalculada (PPK) de la espalda con RTKLIB demo5 (BSD-2): RXM-RAWX/SFRBX de la sesión (espalda PROTOTIPO
  * >= 3.16.0, tramas GNSS_UBX_FRAG; casco BETA V5, tramas GNSS_UBX enteras) frente a una estación base (RINEX 3).
  * avo_eq_ppk_need: qué base hace falta. paths = segmentos .avr. Devuelve {"formato":"avo-ppk-necesita",

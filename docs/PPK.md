@@ -1,4 +1,4 @@
-# PPK — posición poscalculada de la espalda (espalda 3.16.0 · motor 2.0.0-dev32)
+# PPK — posición poscalculada de la espalda (espalda 3.16.0 · motor 2.0.0-dev33)
 
 **Estado:** IMPLEMENTADO · pruebas de anfitrión correctas · **NO VERIFICADO** en hardware ni con datos de la cuadra.
 
@@ -44,9 +44,9 @@ Carga útil (little-endian), definida en `firmware/back/V3_8_0/lib/avo_core/src/
 ## Compatibilidad
 | Espalda | Pecho | Motor / apps | Resultado |
 |---|---|---|---|
-| ≥ 3.16.0 | cualquiera ≥ 3.7.x | ≥ 2.0.0-dev32 | PPK disponible |
-| ≥ 3.16.0 | cualquiera | < dev32 | las tramas 0x12 se cuentan como desconocidas y se ignoran (sin error) |
-| < 3.16.0 | cualquiera | ≥ dev32 | `avo_eq_ppk_need` → `"tiene_rawx": false` |
+| ≥ 3.16.0 | cualquiera ≥ 3.7.x | ≥ 2.0.0-dev33 | PPK disponible |
+| ≥ 3.16.0 | cualquiera | < dev33 | las tramas 0x12 se cuentan como desconocidas y se ignoran (sin error) |
+| < 3.16.0 | cualquiera | ≥ dev33 | `avo_eq_ppk_need` → `"tiene_rawx": false` |
 | ZED sin las claves RAWX/SFRBX | — | — | `raw_state = 2` (rechazado); NAV-PVT, RTCM y NAV-SIG como antes |
 | UART < 230 400 baudios | — | — | `raw_state = 3` (omitido) |
 

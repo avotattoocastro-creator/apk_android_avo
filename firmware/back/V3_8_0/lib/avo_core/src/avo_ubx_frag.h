@@ -17,9 +17,13 @@
 #pragma once
 #include <stdint.h>
 #include <stddef.h>
+#include "avo_uart_proto.h"
 
 namespace avo {
 
+// Frame type 0x12. Declared here and not in avo_uart_proto.h on purpose: avo_uart_proto.h must stay byte-identical in
+// the chest tree and in the back library (the CASCO 5.0.0 build checks it), and the chest only stores it verbatim.
+static const FrameType GNSS_UBX_FRAG = (FrameType)0x12;
 static const uint8_t UBX_FRAG_VERSION = 1;
 static const size_t UBX_FRAG_HDR = 8;
 static const size_t UBX_FRAG_CHUNK = 192;

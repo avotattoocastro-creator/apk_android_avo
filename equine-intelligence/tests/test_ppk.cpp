@@ -121,7 +121,7 @@ bool write_avr(const std::string& path, const std::vector<std::vector<uint8_t>>&
   int piece_no = 0;
   for (const auto& f : frames) {
     std::vector<std::vector<uint8_t>> payloads;
-    avo::FrameType ft = fragments ? avo::FrameType::GNSS_UBX_FRAG : avo::FrameType::GNSS_UBX;
+    avo::FrameType ft = fragments ? avo::GNSS_UBX_FRAG : avo::FrameType::GNSS_UBX;
     if (fragments) {
       size_t cnt = avo::ubx_frag_count(f.size());
       for (size_t i = 0; i < cnt; i++) {
