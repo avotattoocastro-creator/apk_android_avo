@@ -1,36 +1,46 @@
 # AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `e4370a6f7ac3ab2229c6b586688a92c30e5af68b` · ejecución de CI: 45249293042
-- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
+- Commit: `a4df379c4ed0ea81dbb0bee6c0c809217f3428ec` · ejecución de CI: 45263403036
+- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 56 × 56 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo bajo la URTK1.2, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 137 en total, 110 para montar, 1 sin montar (DNP: C69), 26 a mano (pads de hilo y de prueba)
-- Pistas: 1214 · vías: 190 · ruteado INCOMPLETO (6 conexiones)
+- Pistas: 1221 · vías: 198 · ruteado INCOMPLETO (13 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | **FALLA** | 6 |
-| DRC: conexiones incompletas | **FALLA** | 6 |
+| DRC: errores | **FALLA** | 1 |
+| DRC: conexiones incompletas | **FALLA** | 13 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
-| Fabricación: vías dentro de pads SMD (o a < 0,10 mm) | **FALLA** | 1 |
+| Fabricación: vías dentro de pads SMD (o a < 0,10 mm) | correcto | 0 |
 
-Errores de DRC por tipo: copper_edge_clearance 6
+Errores de DRC por tipo: clearance 1
 
 ### Conexiones incompletas
-- Track [+3V3_SD] on F.Cu, length 0.8517 mm ↔ Track [+3V3_SD] on F.Cu, length 0.9139 mm
-- Pad 5 [VBUS] of U6 on F.Cu ↔ Track [VBUS] on F.Cu, length 0.9122 mm
-- Pad 1 [EN_3V3] of R14 on F.Cu ↔ Track [EN_3V3] on F.Cu, length 1.5825 mm
-- Pad 3 [LED_D4] of D12 on F.Cu ↔ Pad 1 [LED_D4] of D13 on F.Cu
-- Pad A9 [USBC_VBUS] of J16 on F.Cu ↔ Track [USBC_VBUS] on F.Cu, length 0.4883 mm
-- Track [VLED] on F.Cu, length 0.6049 mm ↔ Track [VLED] on F.Cu, length 5.1100 mm
+- Pad 2 [GND] of C97 on F.Cu ↔ Zone [GND] on F.Cu, priority 0
+- Zone [GND] on F.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
+- Pad 2 [GND] of C99 on F.Cu ↔ Pad 2 [GND] of C27 on F.Cu
+- Zone [GND] on F.Cu, priority 0 ↔ Pad 2 [GND] of C99 on F.Cu
+- Zone [GND] on F.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
+- Zone [GND] on F.Cu, priority 0 ↔ Pad 2 [GND] of C90 on F.Cu
+- Pad 2 [GND] of C18 on F.Cu ↔ Pad 2 [GND] of R12 on F.Cu
+- Zone [GND] on F.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
+- Zone [GND] on F.Cu, priority 0 ↔ Pad 2 [GND] of R12 on F.Cu
+- Pad 2 [GND] of R12 on F.Cu ↔ Zone [GND] on F.Cu, priority 0
+- Pad 11 [GND] of J3 on F.Cu ↔ Zone [GND] on F.Cu, priority 0
+- Track [VSYS] on F.Cu, length 0.3000 mm ↔ Track [VSYS] on In2.Cu, length 0.3000 mm
+- Track [VLED] on F.Cu, length 0.4500 mm ↔ Pad 1 [VLED] of C99 on F.Cu
 
 ## Advertencias de DRC (no bloqueantes)
+- track_dangling: 6
 - silk_over_copper: 3
 - silk_edge_clearance: 2
+- via_dangling: 1
+- connection_width: 1
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: ninguna
