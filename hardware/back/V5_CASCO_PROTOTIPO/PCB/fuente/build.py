@@ -44,6 +44,9 @@ def kpoly(pts):
     return [D.K(x, y) for x, y in pts]
 
 
+PADS = []   # lista de pads de la placa (la rellena collect_pads; la usa smd_pad_block)
+
+
 def collect_pads():
     """Absolute pad records: (part, pad, net, layers, poly, center)."""
     out = []
@@ -64,6 +67,7 @@ def collect_pads():
                 continue            # paste-only apertures
             out.append(dict(part=p, pad=pd, net=net, layers=ls, poly=pad_poly(pd, cx, cy, p["rot"]),
                             c=pad_center(pd, cx, cy, p["rot"]), npth=False))
+    PADS[:] = out
     return out
 
 
@@ -139,7 +143,7 @@ def via_drops(r, pads, log):
             continue
         w = 0.3
         free = r.free_mask(nid, w)
-        vm = r.via_mask(nid) & ~drill_block(r, pads)
+        vm = r.via_mask(nid) & ~drill_block(r, pads) & ~smd_pad_block(r, pads)
         # goal: any cell where a via fits, within 2.5 mm of the pad centre
         ci, cj = r.ij(*rec["c"])
         R = int(2.5 / GRID)
@@ -190,6 +194,26 @@ def ep_stubs(r, pads):
         r.add_track(D.CODE[D.GND], "F.Cu", (px, py), end, 0.2)
 
 
+# Vía fuera de pad (pedido PCBA del 23/11/2026: JLC avisó de vías abiertas dentro de pads de pasivos y CI).
+# Una vía sin rellenar dentro de un pad SMD se traga la pasta: piezas torcidas, tombstoning y juntas abiertas.
+# Ninguna vía (de ninguna red) puede quedar a menos de VIA_PAD_WEB del borde de un pad SMD, para dejar una
+# franja de máscara entre la vía y el pad. Las vías térmicas del EPAD del módulo van aparte (add_epad_vias).
+VIA_PAD_WEB = 0.20
+
+
+def smd_pad_block(r, pads):
+    if getattr(r, "smd_block", None) is not None:
+        return r.smd_block
+    m = np.zeros((r.H, r.W), bool)
+    for rec in pads:
+        if rec["pad"].kind == "smd":
+            m |= poly_mask((r.H, r.W), r.x0, r.y0, rec["poly"])
+    from scipy import ndimage
+    d = ndimage.distance_transform_edt(~m) * GRID
+    r.smd_block = d < VIA[0] / 2 + VIA_PAD_WEB
+    return r.smd_block
+
+
 def drill_block(r, pads):
     """Cells too close to a drilled hole for another via (hole-to-hole ≥ 0.25 mm with 0.3 mm drills)."""
     m = np.zeros((r.H, r.W), bool)
@@ -234,7 +258,7 @@ def route_nets(r, pads, log, prio=()):
 
 def route_tree(r, net, nid, recs, w):
     free = r.free_mask(nid, w)
-    vm = r.via_mask(nid)
+    vm = r.via_mask(nid) & ~smd_pad_block(r, PADS)
     # order pads: start from the first, then nearest unconnected
     tree_cells = set()
     first = recs[0]
@@ -267,7 +291,7 @@ def route_tree(r, net, nid, recs, w):
                 break
         r.commit(nid, path, w, start_xy=sxy, end_xy=tgt["c"])
         free = r.free_mask(nid, w)
-        vm = r.via_mask(nid)
+        vm = r.via_mask(nid) & ~smd_pad_block(r, PADS)
         tree_cells |= set(path)
         connected.append(tgt)
         for l in tgt["layers"]:
