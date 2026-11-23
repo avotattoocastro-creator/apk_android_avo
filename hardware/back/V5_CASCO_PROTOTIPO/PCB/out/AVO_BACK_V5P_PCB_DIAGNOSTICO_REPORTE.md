@@ -1,26 +1,46 @@
-# AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de fabricación
+# AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de diagnóstico
 
-- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `fcbdcc7a82e359497fdec09ec1057172a83e9195` · ejecución de CI: 45229559538
+- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
+- Commit: `a4df379c4ed0ea81dbb0bee6c0c809217f3428ec` · ejecución de CI: 45263403036
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 56 × 56 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo bajo la URTK1.2, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 137 en total, 110 para montar, 1 sin montar (DNP: C69), 26 a mano (pads de hilo y de prueba)
-- Pistas: 1103 · vías: 219 · ruteado completo (0 conexiones incompletas)
+- Pistas: 1221 · vías: 198 · ruteado INCOMPLETO (13 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | correcto | 0 |
+| DRC: errores | **FALLA** | 1 |
+| DRC: conexiones incompletas | **FALLA** | 13 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
+| Fabricación: vías dentro de pads SMD (o a < 0,10 mm) | correcto | 0 |
 
+Errores de DRC por tipo: clearance 1
+
+### Conexiones incompletas
+- Pad 2 [GND] of C97 on F.Cu ↔ Zone [GND] on F.Cu, priority 0
+- Zone [GND] on F.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
+- Pad 2 [GND] of C99 on F.Cu ↔ Pad 2 [GND] of C27 on F.Cu
+- Zone [GND] on F.Cu, priority 0 ↔ Pad 2 [GND] of C99 on F.Cu
+- Zone [GND] on F.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
+- Zone [GND] on F.Cu, priority 0 ↔ Pad 2 [GND] of C90 on F.Cu
+- Pad 2 [GND] of C18 on F.Cu ↔ Pad 2 [GND] of R12 on F.Cu
+- Zone [GND] on F.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
+- Zone [GND] on F.Cu, priority 0 ↔ Pad 2 [GND] of R12 on F.Cu
+- Pad 2 [GND] of R12 on F.Cu ↔ Zone [GND] on F.Cu, priority 0
+- Pad 11 [GND] of J3 on F.Cu ↔ Zone [GND] on F.Cu, priority 0
+- Track [VSYS] on F.Cu, length 0.3000 mm ↔ Track [VSYS] on In2.Cu, length 0.3000 mm
+- Track [VLED] on F.Cu, length 0.4500 mm ↔ Pad 1 [VLED] of C99 on F.Cu
 
 ## Advertencias de DRC (no bloqueantes)
+- track_dangling: 6
 - silk_over_copper: 3
 - silk_edge_clearance: 2
+- via_dangling: 1
+- connection_width: 1
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: ninguna
@@ -74,8 +94,8 @@
 - Piezas sin existencias para 5 placas: C165948, C8598, C25905, C5378721
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **sí**
-- Apto para solicitar prototipos: **sí, pendiente de validación física**
+- Diseño verificado por software (KiCad 9 en el CI): **no**
+- Apto para solicitar prototipos: **no**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)

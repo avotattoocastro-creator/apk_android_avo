@@ -39,6 +39,13 @@ checks = [
     ("ERC: errores", len(erc_e) == 0, len(erc_e)),
     ("ERC: advertencias", len(erc_w) == 0, len(erc_w)),
 ]
+# Vías dentro de pads SMD (aviso de JLCPCB del 23/11/2026, pedido PCBA 13966268A): bloquea la fabricación.
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__))))
+from via_en_pad import vias_en_pad  # noqa: E402
+via_pad = vias_en_pad(os.path.join("kicad", "AVO_BACK_V5P_PCB.kicad_pcb"))
+checks.append(("Fabricación: vías dentro de pads SMD (o a < 0,10 mm)", len(via_pad) == 0, len(via_pad)))
+if via_pad:
+    print("Vías en pad:", ", ".join("%s.%s" % (h[0], h[1]) for h in via_pad))
 ok = all(c[1] for c in checks)
 sha = os.environ.get("GITHUB_SHA") or subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True,
                                                       text=True).stdout.strip()

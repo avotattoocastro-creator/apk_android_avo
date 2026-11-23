@@ -24,6 +24,48 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-24 — Casco V5 PROTOTIPO A — vías fuera de pads: estado del ruteado (sin cerrar)
+**Autor:** Claude · **Rama:** `claude/v5p-vias-fuera-de-pad` · **PR:** #128 · **CI:** 45234497647, 45249293042,
+45263403036 (las tres con la puerta en **fallo**; no hay Gerber nuevos)
+**Qué se ha probado:**
+1. Re-ruteado completo con Freerouting desde la colocación corregida: 9 y 6 conexiones pendientes, errores de borde
+   (VBAT/LED_D2) y vías de Freerouting junto a pads. Descartado.
+2. `fuente/quitar_vias_en_pad.py` (nuevo): parte de la placa **pedida** (`711b097`, DRC limpio) y solo quita las 117
+   vías que invaden la abertura de máscara de un pad con pasta. Vías GND nuevas fuera de los pads: 91 de 94
+   (U11.4, C90.2 y C97.2 sin sitio: los encierran LED_D1, LED_D8, POGO_AUX_C, VLED_SW y LED_PWR). En el CI
+   45263403036 (variante anterior) quedaron: 8 pads GND aislados, 2 tramos VSYS/VLED de capa interior sueltos y
+   1 error de separación.
+**Hallazgos útiles:** las vías van tapadas por la máscara (los Gerber F/B_Mask de `711b097` no tienen aberturas de
+vía), así que basta con que el cobre de la vía quede fuera de la abertura del pad (cobre + 0,05 mm):
+`via_en_pad.MARGEN` = 0,075 mm. Los TP sin pasta no cuentan.
+**Pendiente:** cerrar el ruteado de USB_DP_C/USB_DM_C (J16), el anillo VLED y los 3 pads GND. El router de la rejilla
+(`repair.py`) tarda > 30 min por cada búsqueda fallida en esta zona; alternativas: hacerlo a mano en KiCad 9
+(solo esas zonas) o mover C90/C97/U11 unas décimas en `colocacion_v5.json` y volver a generar. **NO VERIFICADO.**
+
+## 2026-11-23 — Casco V5 PROTOTIPO A — vías fuera de los pads SMD (aviso de JLCPCB, PCBA 13966268A)
+**Autor:** Claude · **Rama:** `claude/v5p-vias-fuera-de-pad` · **CI:** pendiente (workflow_dispatch del PCB V5P)
+**Qué pasa:** JLCPCB paró el montaje del pedido W2026112308485306 (PCBA 13966268A / SMT026112360152_Y17): vías
+abiertas dentro de los pads (la soldadura se escurre: piezas torcidas, tombstoning, juntas abiertas). Ofreció A) montar
+sin garantía o B) cancelar con reembolso. Comprobado en la placa pedida (`711b097`, CI de `5b2aa59`): **114 vías dentro
+de pads en 77 componentes** (51 pasivos, 8 LED del anillo, U13 LSM6DSV16X LGA, U12 MAX17048 TDFN, U2 BQ24072 QFN,
+U11, U6, U3, U7, U8, U9, U10, J16 USB-C, J3 microSD…). Decisión recomendada al usuario: **B** (cancelar y volver a pedir).
+**Causa:** en `fuente/build.py` → `via_drops()`, la máscara de destino de la vía de cada pad de plano solo excluía las
+otras redes; el A* terminaba en el propio pad y dejaba la vía en su centro. El DRC de KiCad no lo marca.
+**Qué cambia:**
+- `build.py`: `smd_pad_block()` prohíbe vías a menos de 0,25 + 0,20 mm (`VIA_PAD_WEB`) de cualquier pad SMD, en los
+  fan-outs a planos y en los pre-ruteos (`route_tree`). Colocación regenerada en local: 91 vías a planos, 0 fallos,
+  **0 vías en pad** (antes 96 en la colocación).
+- `via_en_pad.py` (nuevo, sin KiCad) y `gate.py`: la puerta de fabricación **falla** si hay alguna vía a < 0,10 mm de
+  un pad SMD.
+- Se borra `kicad/AVO_BACK_V5P_PCB_ruteado.kicad_pcb`: el CI vuelve a rutear con Freerouting desde la colocación nueva.
+**Afecta también (sin corregir aún, mismo tipo de generador):** casco REV B, DOCK V1, cincha REV D. Revisar antes de
+pedirlas (los recuentos brutos incluyen vías térmicas legítimas de EPAD).
+**Corrección de documentación:** el pedido W2026112308485306 es del **PROTOTIPO A** (no de la REV B, como decía una nota
+del proyecto en claude.ai).
+**Validación:** IMPLEMENTADO y comprobado por software en local (colocación). Ruteado/DRC/puerta: pendiente de CI.
+**NO VERIFICADO** en hardware.
+**Pendiente:** CI en verde → Gerber/BOM/CPL nuevos → revisar visor de JLC → nuevo pedido (confirmar con el usuario).
+
 ## 2026-11-23 — Casco V5 PROTOTIPO A — PEDIDO A JLCPCB
 **Autor:** Claude (registro) · **Pedido del usuario:** W2026112308485306 (23/11/2026 01:48), en producción
 **Qué se ha pedido:** PCB 4 capas 56 × 56, 5 uds. (7,27 $) + PCBA Standard, cara Top, 2 placas (128,24 $), con los

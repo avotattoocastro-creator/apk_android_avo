@@ -1,15 +1,15 @@
 {
- "ok": true,
+ "ok": false,
  "checks": [
   {
    "name": "DRC: errores",
-   "ok": true,
-   "n": 0
+   "ok": false,
+   "n": 1
   },
   {
    "name": "DRC: conexiones incompletas",
-   "ok": true,
-   "n": 0
+   "ok": false,
+   "n": 13
   },
   {
    "name": "DRC: cortocircuitos",
@@ -30,10 +30,20 @@
    "name": "ERC: advertencias",
    "ok": true,
    "n": 0
+  },
+  {
+   "name": "Fabricaci\u00f3n: v\u00edas dentro de pads SMD (o a < 0,10 mm)",
+   "ok": true,
+   "n": 0
   }
  ],
- "drc_errors": {},
+ "drc_errors": {
+  "clearance": 1
+ },
  "drc_warnings": {
+  "track_dangling": 6,
+  "via_dangling": 1,
+  "connection_width": 1,
   "silk_edge_clearance": 2,
   "silk_over_copper": 3
  }
