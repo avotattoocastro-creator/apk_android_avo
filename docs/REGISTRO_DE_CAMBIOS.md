@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-23 — Motor 2.0.0-dev31 · KB-1 1.29.0 — Investigación nocturna: auditoría de 9 fuentes (estadística del motor, ECG, fiabilidad de la FC), carga con FC y GPS (TRIMP, ACWR) y edad y sexo como covariables
-**Autor:** Claude (tarea programada nocturna, sin supervisión) · **Rama:** `claude/kb-noche-2026-11-23` (desde `claude/kb-noche-2026-11-22` `91ab2c2`, PR #124 sin fusionar) · **CI:** ver PR
+**Autor:** Claude (tarea programada nocturna, sin supervisión) · **Rama:** `claude/kb-noche-2026-11-23` (desde `claude/kb-noche-2026-11-22` `91ab2c2`, PR #124 sin fusionar) · **PR:** #126 · **CI:** `build-equine-engine.yml` run 45108066980 ✅ (`d2b4488`)
 **Qué cambia:**
 - Estudio `equine-intelligence/knowledge/estudios/2026-11-23_noche_auditoria_estadistica_trimp_acwr_edad_sexo.md`.
 - **Auditoría de 9 fuentes, 8 mejoradas.** Se reclasifican las 5 fuentes `SIN_AUDITAR` que sostienen funciones ya implementadas: NIST/SEMATECH (OFICIAL), Lombard & Hawkins (PREPRINT, título corregido), Bosch 2018, Hopkins 2000 y Efron & Morris 1975 (TEXTO_COMPLETO). Pasan a texto completo Frick 2019, Spargo 2019 y Davie 2026. Correcciones:
