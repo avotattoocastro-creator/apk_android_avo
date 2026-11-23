@@ -40,6 +40,16 @@ ven un pecho con su espalda conectada. La radio ESP-NOW queda solo para las cinc
 | Anillo: DIN · EN del elevador | 47 · 48 |
 | Batería (divisor 1:2, reserva) · Hall · IMU INT1 | 2 · 1 · 4 |
 
+## IMU de la cabeza y PPS (incluidos desde 5.0.0)
+- **IMU** LSM6DSV16X (0x6A): los mismos registros que la cincha REV D. 120 Hz, ±16 g, ±2000 dps, FIFO continua.
+  Se envía en lotes `IMU_SAMPLE` **fmt 3**, `imu_id 4`, `girth_id 0xCA`, byte 15 = 3: 15 muestras de 12 B (ax ay az
+  gx gy gz, int16 LE en LSB; 0,488 mg/LSB y 70 mdps/LSB). Va al `.avr` y al motor (≥ 2.0.0-dev30: `head_imu_batches`)
+  por la misma cola que las cinchas, sin mezclarse con ellas.
+- **PPS** (GPIO7): estado en BackStatus y en cada muestra GNSS. Además envía **TIME_SYNC** (µs del casco en el flanco
+  e iTOW del segundo entero), que enlaza el reloj del casco con la hora GPS.
+- Sin IMU o sin PPS, el casco funciona igual. El registro serie muestra «PPS ENGANCHADO / con pulsos / sin pulsos» e
+  «IMU cabeza OK / sin IMU» cada 5 s.
+
 ## Uso
 | Táctil | Acción |
 |---|---|
@@ -78,8 +88,9 @@ al revés (marca de imagen `AVOCASCO-IMG-V1:BACK-V5`). AVO Update todavía no co
 ## Lo que falta o queda pendiente
 - **Probarlo en la placa** (pruebas M1–M10 de la revisión y la de recepción): encendido y enclavamiento en reinicios y
   OTA, táctil, anillo, microSD a 4 bits, MAX17048, carga, ZED por la URTK1.2, RTK FIX, cinchas.
-- IMU LSM6DSV16X: no se usa todavía (despertar por movimiento y caídas, cuando se decida qué registrar).
-- PPS (GPIO7): no se usa (tampoco en la espalda de la Heltec).
+- IMU de la cabeza: se registra (120 Hz, fmt 3) pero ninguna app la muestra todavía; despertar por movimiento y detección
+  de caídas, sin hacer.
+- PPS: falta comprobar en la placa la polaridad y el ancho del pulso del ZED (TP1 por defecto) y el emparejamiento con el NAV-PVT.
 - AVO Update y las apps: reconocer «AVO-CASCO» (el USB AVO1 sigue diciendo `"name":"AVO-CHEST"` y añade
   `"model":"CASCO-V5"`, para no romper las apps).
 - Potencia de radio adaptativa de la espalda (`avo_tx_power`): no se aplica; la radio solo habla con las cinchas.

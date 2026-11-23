@@ -68,4 +68,83 @@ TEST(casco, back_sleep_parks_only_the_zed) {
   CHECK(w.back->paired());
 }
 
+// ---------------------------------------------------------------- PPS, TIME_SYNC e IMU de la cabeza (ganchos del casco)
+// Recoge las tramas que el ChestModel de la espalda no guarda (TIME_SYNC, IMU_SAMPLE) y deja pasar el resto.
+struct Extra { std::vector<TimeSync> ts; std::vector<ImuBatchHeader> imu; std::vector<size_t> imu_len; ChestModel* c; };
+static void extra_frame(const FrameView& f, void* ctx) {
+  Extra* e = (Extra*)ctx;
+  ChestModel::on_frame(f, e->c);
+  if (f.type == FrameType::TIME_SYNC) { TimeSync t; if (decode_timesync(f.payload, f.len, &t)) e->ts.push_back(t); }
+  if (f.type == FrameType::IMU_SAMPLE) {
+    ImuBatchHeader h;
+    if (decode_imu_header(f.payload, f.len, &h)) { e->imu.push_back(h); e->imu_len.push_back(f.len); }
+  }
+}
+static void hook_chest(CascoWorld& w, Extra& e) { e.c = &w.chest; delete w.chest.dec; w.chest.dec = new UartDecoder(extra_frame, &e); }
+
+struct PvtLog { uint32_t n = 0; };
+static void pvt_log(const GnssSample& g, void* ctx) {
+  PvtLog* l = (PvtLog*)ctx;
+  (void)g;
+  l->n++;
+}
+
+TEST(casco, pps_state_reaches_status_caps_and_gnss_samples) {
+  CascoWorld w(1);
+  PvtLog log;
+  w.back->set_pvt_observer(pvt_log, &log);
+  w.run_ms(8000);
+  CHECK(w.chest.have_caps);
+  CHECK(w.chest.caps.caps & CAP_PPS);
+  CHECK(w.chest.caps.caps & CAP_TIME_SYNC);
+  CHECK(w.chest.caps.caps & CAP_IMU);
+  CHECK(w.chest.have_status && w.chest.last_status.pps_state == 0);   // sin pulsos todavía
+  w.back->set_pps(2, 41);
+  w.chest.gnss.clear();
+  w.run_ms(3000);
+  CHECK_EQ(w.chest.last_status.pps_state, 2);
+  CHECK_EQ(w.chest.last_status.pps_count, 41u);
+  CHECK(!w.chest.gnss.empty() && w.chest.gnss.back().pps_locked == 1);
+  CHECK(log.n > 50);        // el observador ve todos los NAV-PVT (8 Hz)
+}
+
+TEST(casco, time_sync_and_head_imu_travel_unchanged_to_the_chest) {
+  CascoWorld w(1);
+  Extra e;
+  w.run_ms(5000);
+  hook_chest(w, e);   // después del primer paquete (NowBootGuard rehace el decodificador)
+  TimeSync t; t.back_us_at_pps = 123456789012ull; t.tow_ms_at_pps = 345000; t.flags = 1 | 4; t.pps_jitter_ns = 800; t.pps_count = 7;
+  uint8_t tb[TIME_SYNC_V1_LEN];
+  CHECK_EQ(encode_timesync(t, tb, sizeof(tb)), TIME_SYNC_V1_LEN);
+  CHECK(w.back->send_extra(FrameType::TIME_SYNC, tb, TIME_SYNC_V1_LEN));
+  // lote de la cabeza como casco_imu.cpp: 24 B + 15 × 12 B, fmt 3, imu_id 4, unidades 3 en el byte 15
+  ImuBatchHeader h; h.girth_id = 0xCA; h.imu_id = 4; h.count = 15; h.fmt = 3; h.girth_seq = 9; h.girth_t0_us = 5000000;
+  h.period_us = 8333; h.sync_state = 2; h.reserved = 3;
+  std::vector<uint8_t> ib(IMU_HDR_LEN + 15 * 12, 0x5A);
+  CHECK_EQ(encode_imu_header(h, ib.data(), IMU_HDR_LEN), IMU_HDR_LEN);
+  CHECK_EQ(ib[15], 3);
+  for (int k = 0; k < 20; k++) { h.girth_seq = 9 + k; encode_imu_header(h, ib.data(), IMU_HDR_LEN); CHECK(w.back->send_extra(FrameType::IMU_SAMPLE, ib.data(), ib.size())); }
+  w.run_ms(1000);
+  CHECK_EQ(e.ts.size(), 1u);
+  CHECK(!e.ts.empty() && e.ts[0].back_us_at_pps == 123456789012ull && e.ts[0].tow_ms_at_pps == 345000u && e.ts[0].pps_count == 7u);
+  CHECK_EQ(e.imu.size(), 20u);
+  bool all = e.imu.size() == 20;
+  for (size_t i = 0; i < e.imu.size(); i++)
+    all = all && e.imu[i].fmt == 3 && e.imu[i].imu_id == 4 && e.imu[i].reserved == 3 && e.imu[i].girth_seq == 9 + i &&
+          e.imu_len[i] == IMU_HDR_LEN + 15 * 12;
+  CHECK(all);               // en orden, sin pérdidas ni duplicados (el enlace interno es memoria)
+}
+
+TEST(casco, a_16_sample_head_batch_would_not_fit_one_frame) {
+  // límite real del enlace: carga ≤ NOW_MAX_BODY − cabecera y cola UART (15 + 4) = 215 B
+  CHECK(IMU_HDR_LEN + 15 * 12 <= NOW_MAX_BODY - AVO_UART_HDR - AVO_UART_TRAILER);
+  CHECK(IMU_HDR_LEN + 16 * 12 > NOW_MAX_BODY - AVO_UART_HDR - AVO_UART_TRAILER);
+}
+
+TEST(casco, send_extra_waits_for_the_chest) {
+  CascoWorld w(1);
+  uint8_t tb[TIME_SYNC_V1_LEN] = {0};
+  CHECK(!w.back->send_extra(FrameType::TIME_SYNC, tb, sizeof(tb)));   // el pecho aún no ha hablado
+}
+
 int main(int argc, char** argv) { return tt_run_all(argc > 1 ? argv[1] : "casco"); }

@@ -11,6 +11,7 @@
 #include <esp_rom_gpio.h>
 #include <soc/gpio_sig_map.h>
 #include <atomic>
+#include <esp_timer.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/message_buffer.h"
 #include "freertos/semphr.h"
@@ -19,6 +20,7 @@
 #include "avo_core.h"
 #include "board_pins.h"
 #include "services.h"
+#include "casco_imu.h"
 
 using namespace avo;
 
@@ -43,6 +45,59 @@ static volatile bool s_zed_on = false, s_parked = false, s_park_req = false, s_u
 static uint32_t s_pair_id = 0;
 static char s_dev_id[16] = {0};
 static BackCore* s_core = nullptr;
+static MessageBufferHandle_t s_head_imu = nullptr;
+
+// ---------------------------------------------------------------- PPS (GPIO7) y TIME_SYNC
+static volatile int64_t s_pps_us = 0;          // esp_timer del último flanco
+static volatile uint32_t s_pps_count = 0;
+static volatile uint32_t s_pps_jitter_ns = 0;  // |intervalo − 1 s| del último par de flancos
+static volatile bool s_pps_paired = false;     // el último flanco ya tiene su NAV-PVT
+static uint32_t s_sync_ms = 0;                 // última TIME_SYNC válida (millis)
+static bool s_ts_pending = false;
+static TimeSync s_ts;
+
+static void IRAM_ATTR pps_isr() {
+  const int64_t t = esp_timer_get_time();
+  if (s_pps_us) {
+    int64_t d = t - s_pps_us - 1000000;
+    if (d < 0) d = -d;
+    s_pps_jitter_ns = d > 4000000 ? 0xFFFFFFFFu : (uint32_t)(d * 1000);
+  }
+  s_pps_us = t;
+  s_pps_count = s_pps_count + 1;
+  s_pps_paired = false;
+}
+
+uint8_t pps_state() {
+  const int64_t last = s_pps_us;
+  if (!last || esp_timer_get_time() - last > 2500000) return 0;   // sin pulso en 2,5 s
+  return millis() - s_sync_ms < 3000 ? 2 : 1;
+}
+bool pps_locked() { return pps_state() == 2; }
+
+// NAV-PVT recibido por BackCore (gancho del casco): el del segundo entero (iTOW múltiplo de 1000) se empareja con el
+// flanco que lo precede. Por defecto el ZED-F9P alinea el pulso al segundo (TP1 a 1 Hz). Se descarta si el flanco
+// tiene más de 900 ms o si el intervalo entre flancos se aleja más de 50 µs de 1 s.
+static void on_pvt(const GnssSample& g, void*) {
+  const int64_t now = esp_timer_get_time(), edge = s_pps_us;
+  if (g.itow_ms % 1000 != 0 || !g.gnss_fix_ok() || g.fix_type < 2 || !edge || s_pps_paired) return;
+  const int64_t age = now - edge;
+  if (age < 0 || age > 900000) return;
+  s_pps_paired = true;
+  s_ts = TimeSync();
+  s_ts.back_us_at_pps = (uint64_t)edge;
+  s_ts.tow_ms_at_pps = g.itow_ms;
+  s_ts.pps_jitter_ns = s_pps_jitter_ns;
+  s_ts.pps_count = s_pps_count;
+  const bool tol = s_pps_jitter_ns <= 50000;
+  s_ts.flags = (uint8_t)(1 | (tol ? 4 : 0));   // b0 válida, b2 pulso en tolerancia (semana GPS y UTC: no se envían)
+  if (tol) s_sync_ms = millis();
+  s_ts_pending = true;
+}
+
+bool push_head_imu(const uint8_t* payload, size_t n) {
+  return s_head_imu && xMessageBufferSend(s_head_imu, payload, n, 0) != 0;
+}
 
 // La pareja interna pecho ↔ espalda es fija: pair_id derivado de la MAC del chip (≠ 0), igual en los dos lados.
 uint32_t pair_id() {
@@ -181,6 +236,9 @@ static void print_status() {
   const ZedManager& z = s_core->zed();
   const BackStats& st = s_core->stats();
   const BackStatus bs = s_core->status();
+  Serial.printf("[AVO CASCO] PPS %s (%lu pulsos, jitter %lu ns) | IMU cabeza %s\n",
+                pps_state() == 2 ? "ENGANCHADO" : pps_state() == 1 ? "con pulsos" : "sin pulsos", (unsigned long)s_pps_count,
+                (unsigned long)s_pps_jitter_ns, casco_imu::present() ? "OK" : "sin IMU");
   Serial.printf("[AVO CASCO] ZED %s %lu bd puerto UART%u | NAV-PVT %lu | RTCM al ZED %lu B (aplicadas %lu) | "
                 "cincha %s%s | bat %u mV | perdidos pecho %lu aire %lu%s\n",
                 s_zed_on ? zed_state_str(z.state()) : "APAGADO", (unsigned long)z.baud(), (unsigned)z.port(),
@@ -220,6 +278,16 @@ static void task(void*) {
       worked = true;
     }
     s_core->set_battery_mv(s_batt_mv);
+    s_core->set_pps(pps_state(), s_pps_count);
+    if (s_ts_pending) {   // TIME_SYNC (24 B), fuera del callback del NAV-PVT
+      s_ts_pending = false;
+      uint8_t b[TIME_SYNC_V1_LEN];
+      if (encode_timesync(s_ts, b, sizeof(b))) s_core->send_extra(FrameType::TIME_SYNC, b, TIME_SYNC_V1_LEN);
+    }
+    for (int k = 0; k < 4 && (got = xMessageBufferReceive(s_head_imu, buf, sizeof(buf), 0)) > 0; k++) {
+      s_core->send_extra(FrameType::IMU_SAMPLE, buf, got);   // IMU de la cabeza: misma cola que las cinchas
+      worked = true;
+    }
     s_core->tick();
     if (now - last_print >= 5000) { last_print = now; print_status(); }
     esp_task_wdt_reset();
@@ -231,7 +299,8 @@ bool init() {
   s_from_chest = psram_message_buffer(16384);
   s_from_air = psram_message_buffer(8192);
   s_air_sent = xSemaphoreCreateBinary();
-  if (!s_from_chest || !s_from_air || !s_air_sent) return false;
+  s_head_imu = psram_message_buffer(4096);
+  if (!s_from_chest || !s_from_air || !s_air_sent || !s_head_imu) return false;
   uint8_t mac[6];
   esp_wifi_get_mac(WIFI_IF_STA, mac);
   snprintf(s_dev_id, sizeof(s_dev_id), "%02X%02X%02X%02X%02X%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
@@ -245,6 +314,9 @@ bool init() {
   memcpy(chest.mac, kVirtualChest, 6);
   chest.pair_id = pair_id();
   s_core->begin(chest, have_girth ? girth : nullptr);
+  s_core->set_pvt_observer(on_pvt, nullptr);
+  pinMode(PIN_ZED_PPS, INPUT);
+  attachInterrupt(PIN_ZED_PPS, pps_isr, RISING);
   ensure_air_peer(kBroadcast);
   BaseType_t ok = xTaskCreatePinnedToCore(task, "casco_back", 8192, nullptr, 16, nullptr, 1);
   Serial.printf("[AVO CASCO] espalda interna %s (BackCore de la espalda, %u Hz) cincha %s\n", ok == pdPASS ? "OK" : "FALLO",

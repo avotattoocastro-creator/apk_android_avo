@@ -7,7 +7,9 @@ Uso (dentro del árbol del pecho ya montado):  python3 apply_v500.py <raíz del 
 Qué hace, en orden (cada cambio comprueba que el texto original existe: si el pecho cambia, falla en vez de adivinar):
   1. lib/avo_core: los ficheros de la espalda 3.15.0 (BackCore, ZED, GirthHub, calidad GNSS, códecs RTCM) sobre los del
      pecho, salvo avo_input y avo_ble_proto (los del pecho son los más nuevos). Identidad AVO-CASCO 5.0.0.
-  2. src: placa del casco (board_pins.h, hal_board.cpp), espalda interna (casco_back.*) y anillo LED (ui.cpp) en lugar de
+  1b. Ganchos del casco en la copia de BackCore: PPS, observador de NAV-PVT (TIME_SYNC) y tramas propias (IMU cabeza).
+  2. src: placa del casco (board_pins.h, hal_board.cpp), espalda interna (casco_back.*), IMU de la cabeza (casco_imu.*)
+     y anillo LED (ui.cpp) en lugar de
      la pantalla AMOLED, el AXP2101, el RTC y el táctil de la pantalla.
   3. Enlace pecho ↔ espalda por memoria (uart_link.cpp), táctil (controller.cpp), arranque (app_main.cpp), microSD de
      4 bits con su interruptor (storage.cpp), OTA y nombres propios del casco (ota.cpp, ble_service.cpp, usb_sync.cpp).
@@ -51,11 +53,44 @@ for name in ("avo_payloads.h", "avo_payloads.cpp", "avo_espnow_link.h", "avo_esp
     "#define AVO_FW_VERSION_NUM 0x050000\n"
     '#define AVO_HW_TARGET "AVO CASCO BACK V5 (ESP32-S3-WROOM-1U-N16R8, PROTOTIPO A / REV B)"\n')
 
+# ------------------------------------------------------------------ 1b. ganchos del casco en BackCore (solo en este árbol)
+# La espalda de la Heltec no tiene PPS ni IMU propia: su biblioteca (firmware/back/V3_8_0) NO se toca. En la copia del
+# casco se añaden: estado del PPS en BackStatus y en GnssSample.pps_locked, un observador de NAV-PVT (para la
+# TIME_SYNC) y el envío de tramas propias (TIME_SYNC, IMU de la cabeza) por la misma cola hacia el pecho.
+BH = "lib/avo_core/src/avo_back_core.h"
+BC = "lib/avo_core/src/avo_back_core.cpp"
+patch(BH, "  void set_battery_mv(uint16_t mv) { batt_mv_ = mv; }\n",
+      "  void set_battery_mv(uint16_t mv) { batt_mv_ = mv; }\n"
+      "  // AVO CASCO 5.0.0: PPS medido por la placa (0 sin pulsos, 1 pulsos, 2 enganchado), observador de NAV-PVT y\n"
+      "  // tramas propias del casco (TIME_SYNC, IMU_SAMPLE de la cabeza) por la cola hacia el pecho.\n"
+      "  void set_pps(uint8_t state, uint32_t count) { pps_state_ = state; pps_count_ = count; }\n"
+      "  typedef void (*PvtCb)(const GnssSample& g, void* ctx);\n"
+      "  void set_pvt_observer(PvtCb cb, void* ctx) { pvt_cb_ = cb; pvt_ctx_ = ctx; }\n"
+      "  bool send_extra(FrameType t, const uint8_t* pl, size_t n) {\n"
+      "    if (!pair_.paired() || !chest_online()) return false;\n"
+      "    queue_frame(t, 0, pl, n, true);\n"
+      "    return true;\n"
+      "  }\n")
+patch(BH, "  uint16_t batt_mv_ = 0;\n",
+      "  uint16_t batt_mv_ = 0;\n"
+      "  uint8_t pps_state_ = 0;   // AVO CASCO\n"
+      "  uint32_t pps_count_ = 0;\n"
+      "  PvtCb pvt_cb_ = nullptr;\n"
+      "  void* pvt_ctx_ = nullptr;\n")
+patch(BC, "    g.pps_locked = 0;\n",
+      "    g.pps_locked = pps_state_ == 2 ? 1 : 0;   // AVO CASCO: PPS de la placa\n"
+      "    if (pvt_cb_) pvt_cb_(g, pvt_ctx_);        // AVO CASCO: TIME_SYNC\n")
+patch(BC, "  s.pps_state = 0;          // PPS not wired on this back\n",
+      "  s.pps_state = pps_state_;   // AVO CASCO: PPS de la placa\n"
+      "  s.pps_count = pps_count_;\n")
+patch(BC, "  c.caps = CAP_GNSS_SAMPLE | CAP_RTCM_IN | CAP_RXM_RTCM | CAP_ACK;",
+      "  c.caps = CAP_GNSS_SAMPLE | CAP_RTCM_IN | CAP_RXM_RTCM | CAP_ACK | CAP_PPS | CAP_TIME_SYNC | CAP_IMU;   // AVO CASCO")
+
 # ------------------------------------------------------------------ 2. placa y pantalla
 for name in ("ui_dash.cpp", "ui_dash.h", "ui_fb.cpp", "ui_fb.h", "ui_model.cpp", "ui_model.h", "ui_pc.h", "ui_pc_draw.h",
              "ui_assets.h", "ui.cpp", "hal_board.cpp", "board_pins.h"):
     (SRC / name).unlink()
-for name in ("board_pins.h", "hal_board.cpp", "casco_back.h", "casco_back.cpp", "ui.cpp"):
+for name in ("board_pins.h", "hal_board.cpp", "casco_back.h", "casco_back.cpp", "casco_imu.h", "casco_imu.cpp", "ui.cpp"):
     shutil.copy2(CASCO / name, SRC / name)
 
 # ------------------------------------------------------------------ 3a. enlace con la espalda: por memoria
@@ -148,13 +183,14 @@ patch(C, "  esp_sleep_enable_ext0_wakeup((gpio_num_t)PIN_BOOT_BTN, 0);\n",
 
 # ------------------------------------------------------------------ 3c. arranque
 A = "AVO_CHEST_V3_5_0/src/app_main.cpp"
-patch(A, '#include "build_info.h"\n', '#include "build_info.h"\n#include "casco_back.h"   // AVO CASCO 5.0.0\n')
+patch(A, '#include "build_info.h"\n', '#include "build_info.h"\n#include "casco_back.h"   // AVO CASCO 5.0.0\n#include "casco_imu.h"\n')
 patch(A, """  bool link_ok = uartlink::init(uart_baud);
   boot_log("uart", rtcm_ok && link_ok);
 """, """  bool link_ok = uartlink::init(uart_baud);
   boot_log("uart", rtcm_ok && link_ok);
   bool back_ok = link_ok && casco_back::init();   // AVO CASCO: espalda interna (ZED-F9P + cinchas)
   boot_log("back", back_ok);
+  boot_log("imu", casco_imu::init());   // AVO CASCO: LSM6DSV16X de la cabeza (sin ella el casco sigue)
 """)
 patch(A, "    const bool healthy = i2c_ok && pmu_ok && sd_ok && ctl_ok && ui_ok && ble_ok;\n",
       "    const bool healthy = i2c_ok && pmu_ok && sd_ok && ctl_ok && ui_ok && ble_ok && back_ok;\n")

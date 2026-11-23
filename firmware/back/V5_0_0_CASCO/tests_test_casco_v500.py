@@ -68,4 +68,19 @@ assert "TELEMETRY_V3_LEN = 83 + 1 + 14 + 4 + 8 + 4 + 2" in bp   # 116 B, como el
 assert '\\"name\\":\\"AVO-CHEST\\"' in src["usb_sync.cpp"]          # USB AVO1: el nombre que buscan las apps no cambia
 for gone in ("ui_fb.cpp", "ui_model.cpp", "ui_dash.cpp"):
     assert gone not in src
+# IMU de la cabeza y PPS (5.0.0: desde la primera versión, para no tener otro firmware después)
+im = src["casco_imu.cpp"] + src["casco_imu.h"]
+assert pin("PIN_ZED_PPS") == 7 and pin("PIN_IMU_INT1") == 4
+assert "WHO_AM_I = 0x0F, LSM_ID = 0x70" in im                      # el mismo valor que la cincha REV D
+assert "HEAD_IMU_ID = 4" in im and "HEAD_FMT = 3" in im and "HEAD_UNITS = 3" in im and "HEAD_GIRTH_ID = 0xCA" in im
+hb = int(re.search(r"HEAD_BATCH = (\d+)", im).group(1))
+assert 24 + hb * 12 <= 250 - 16 - 15 - 4, "el lote de la cabeza no cabe en una trama del enlace"
+assert "board::i2c_lock" in im                                    # comparte el bus con el MAX17048
+cb = src["casco_back.cpp"]
+assert "attachInterrupt(PIN_ZED_PPS, pps_isr, RISING)" in cb and "IRAM_ATTR pps_isr" in cb
+assert "FrameType::TIME_SYNC" in cb and "FrameType::IMU_SAMPLE" in cb and "set_pvt_observer" in cb
+bc = (L / "avo_back_core.cpp").read_text() + (L / "avo_back_core.h").read_text()
+assert "s.pps_state = pps_state_;" in bc and "g.pps_locked = pps_state_ == 2" in bc and "bool send_extra(" in bc
+assert "CAP_PPS | CAP_TIME_SYNC | CAP_IMU" in bc
+assert 'boot_log("imu", casco_imu::init())' in src["app_main.cpp"]
 print("PASS: casco 5.0.0 — reglas de la placa y contratos (estático; no sustituye a la prueba en la placa)")

@@ -24,6 +24,37 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-23 — Casco BACK V5 firmware 5.0.0 (IMU de la cabeza + PPS/TIME_SYNC) · Motor 2.0.0-dev30
+**Autor:** Claude · **Rama:** `claude/casco-fw-5-0-0` (PR #127, sin fusionar) · **CI:** workflow `build-casco-v500-fw.yml` todavía **pendiente del permiso del usuario** · compilado en local (arduino-esp32 3.3.12, 1 396 203 B)
+**Qué cambia:** petición del usuario (23/11): «añadir el IMU y PPS del casco desde ya, no quiero andar haciendo 20 firm
+distintos». En el mismo firmware **5.0.0**:
+- **IMU de la cabeza** (`src/casco_imu.*`): LSM6DSV16X (I²C 0x6A) con los registros de la cincha REV D
+  (`firmware/girth/V0_6_0/girth_imu6.h`): WHO_AM_I 0x70, 120 Hz, ±16 g, ±2000 dps, FIFO continua leída cada 10 ms con
+  el cerrojo del bus I²C que comparte el MAX17048. Sin la IMU, el casco sigue funcionando y reintenta con pausa creciente.
+- **Lote IMU_SAMPLE fmt 3** (extensión compatible: la cabecera de 24 B no cambia): `girth_id 0xCA`, `imu_id 4`,
+  byte 15 = 3 (unidades LSM6DSV16X), 15 muestras de 12 B (ax ay az gx gy gz, int16 LE en LSB del sensor), 8 lotes/s,
+  `girth_t0_us` en el reloj del casco, `sync_state` 2 con el PPS enganchado. Son 15 muestras y no 16 porque la prueba de
+  ordenador vio que 24 + 16 × 12 = 216 B supera la carga máxima de una trama del enlace (234 − 19 = 215 B) y se perdía
+  sin aviso.
+- **PPS** (GPIO7, flanco de subida, `esp_timer`): estado 0/1/2 en BackStatus (`pps_state`, `pps_count`), `pps_locked`
+  en cada muestra GNSS y **TIME_SYNC** (trama 0x03, 24 B, ya definida y que la Heltec nunca enviaba): pulso emparejado
+  con el NAV-PVT del segundo entero que le sigue (≤ 900 ms), con jitter medido entre flancos (en tolerancia ≤ 50 µs).
+  CAPS añade `CAP_PPS | CAP_TIME_SYNC | CAP_IMU`.
+- **Ganchos en `BackCore`** solo en la copia del casco (`apply_v500.py`, paso 1b: `set_pps`, `set_pvt_observer`,
+  `send_extra`). La biblioteca de la espalda de la Heltec (`firmware/back/V3_8_0`) **no se toca**.
+- **Motor 2.0.0-dev30**: el lote fmt 3 se cuenta en `Session::head_imu_batches`, antes de leer `imu_units`. No se
+  mezcla con la cincha, no cambia sus unidades y no cuenta como registro malo (antes habría bajado la calidad
+  INTEGRIDAD). Prueba `ingestion.head_imu_batch_from_the_helmet_is_counted_not_bad`.
+**Apps:** sin cambios necesarios para no romper nada: Windows e iPad cuentan los fmt desconocidos como lote «opaco» y
+Android solo procesa fmt 0. Representar la IMU de la cabeza en las apps queda para cuando haya datos reales.
+**Pruebas:** estáticas PASS (pines PPS/INT1, WHO_AM_I, contrato fmt 3, tamaño del lote, ganchos) · ordenador: 67 casos,
+658 comprobaciones, 0 fallos (nuevas: PPS en STATUS/CAPS/GNSS, TIME_SYNC e IMU de la cabeza íntegras y en orden hasta
+el pecho, límite de tamaño, `send_extra` espera al pecho) · motor: 116 casos, 1 884 comprobaciones, 0 fallos.
+**Validación:** IMPLEMENTADO · compilado en local (no en CI) · **NO VERIFICADO** en hardware: la PCB PROTOTIPO A está
+en fabricación. Falta comprobar en la placa el WHO_AM_I real, la orientación de los ejes, la polaridad y el ancho del
+PPS del ZED (TP1 por defecto, 1 Hz) y el emparejamiento pulso ↔ NAV-PVT.
+**Pendiente:** permiso para subir el workflow; la placa (pruebas M1–M10 más IMU y PPS); la IMU de la cabeza en el análisis.
+
 ## 2026-11-23 — Casco BACK V5 — firmware 5.0.0: pecho 3.7.11 + espalda 3.15.0 en un solo ESP32-S3
 **Autor:** Claude · **Rama:** `claude/casco-fw-5-0-0` · **CI:** workflow `build-casco-v500-fw.yml` escrito, **pendiente del permiso del usuario** para subirlo · compilado en local (arduino-esp32 3.3.12, 1 391 296 B)
 **Qué cambia:** primer firmware del casco (petición del usuario, 23/11 08:39: «lo mismo que la espalda y el reloj, en
