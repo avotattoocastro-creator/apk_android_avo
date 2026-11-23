@@ -2,7 +2,7 @@ rules_version = '2';
 
 // Nube AVO (Cloud Storage for Firebase, plan Blaze). Contrato: docs/NUBE_SESIONES.md
 // Cada usuario (tarjeta AVO, correo <codigo>@avo-cards.app) solo ve y escribe su carpeta trainings/<CODIGO>/.
-// Solo paquetes .avo (AVO-TRAINING-1) de hasta 40 MB. Compartir con otros sigue por la Realtime Database (blobs).
+// Solo paquetes .avo (AVO-TRAINING-1) de hasta 40 MB y su resultado PPK (AVO_<id>.ppk.json, hasta 10 MB). Compartir con otros sigue por la Realtime Database (blobs).
 // Pruebas: firebase/test/storage.test.js (emulador). Se publican a mano en la consola: Storage › Reglas.
 service firebase.storage {
   match /b/{bucket}/o {
@@ -16,12 +16,21 @@ service firebase.storage {
     match /trainings/{owner}/{file} {
       allow read: if isOwner(owner);
       allow delete: if isOwner(owner);
-      allow create, update: if isOwner(owner)
-        && file.matches('^[A-Za-z0-9._-]{1,140}[.]avo$')
-        && request.resource.size > 0
-        && request.resource.size <= 40 * 1024 * 1024
-        && request.resource.metadata.sha256 is string
-        && request.resource.metadata.sha256.matches('^[0-9a-f]{64}$');
+      allow create, update: if isOwner(owner) && (
+        (file.matches('^[A-Za-z0-9._-]{1,140}[.]avo$')
+          && request.resource.size > 0
+          && request.resource.size <= 40 * 1024 * 1024
+          && request.resource.metadata.sha256 is string
+          && request.resource.metadata.sha256.matches('^[0-9a-f]{64}$'))
+        // PPK 1.0.0 (docs/PPK.md): resultado junto al .avo, AVO_<id>.ppk.json, con el SHA-256 del .avo de origen
+        || (file.matches('^[A-Za-z0-9._-]{1,140}[.]ppk[.]json$')
+          && request.resource.size > 0
+          && request.resource.size <= 10 * 1024 * 1024
+          && request.resource.contentType == 'application/json'
+          && request.resource.metadata.sha256 is string
+          && request.resource.metadata.sha256.matches('^[0-9a-f]{64}$')
+          && request.resource.metadata.avo_sha256 is string
+          && request.resource.metadata.avo_sha256.matches('^[0-9a-f]{64}$')));
     }
 
     match /{any=**} {

@@ -171,6 +171,74 @@ enum EquineEngine {
         return text
     }
 
+    // MARK: AVO PPK 1.0.0 (avo_eq_ppk_need / avo_eq_ppk, motor 2.0.0-dev32)
+
+    /// What base data the PPK of this session needs («avo-ppk-necesita»: tiene_rawx, inicio_utc, fin_utc, lat, lon). Blocking.
+    static func ppkNeed(_ segments: [String]) throws -> String {
+        if !available { throw AvoError.invalidOperation(unavailableReason ?? "motor no disponible") }
+        let ms: [UnsafeMutablePointer<CChar>?] = segments.map { strdup($0) }
+        defer { for p in ms { free(p) } }
+        let cs: [UnsafePointer<CChar>?] = ms.map { (p: UnsafeMutablePointer<CChar>?) -> UnsafePointer<CChar>? in p.map { UnsafePointer<CChar>($0) } }
+        var json: UnsafeMutablePointer<CChar>? = nil
+        let rc: Int32 = cs.withUnsafeBufferPointer { (b: UnsafeBufferPointer<UnsafePointer<CChar>?>) -> Int32 in
+            avo_eq_ppk_need(b.baseAddress, Int32(cs.count), &json)
+        }
+        defer { if let j = json { avo_eq_free(j) } }
+        let text: String = json.map { String(cString: $0) } ?? ""
+        if rc != 0 { throw AvoError.invalidData(errorOf(text)) }
+        return text
+    }
+
+    /// PPK of the session against the base RINEX files (observation, plain or Hatanaka, already without gzip; navigation
+    /// optional). Returns «avo-ppk». Runs off the caller's thread; Task cancellation sets the native flag.
+    static func ppk(_ segments: [String], base: [String], optionsJson: String?) async throws -> String {
+        let flag = EngineCancelFlag()
+        if Task.isCancelled { flag.cancel() }
+        return try await withTaskCancellationHandler {
+            try await withCheckedThrowingContinuation { (cont: CheckedContinuation<String, Error>) in
+                DispatchQueue.global(qos: .userInitiated).async {
+                    do {
+                        let text: String = try EquineEngine.ppkSync(segments, base: base, optionsJson: optionsJson, cancel: flag)
+                        cont.resume(returning: text)
+                    } catch {
+                        cont.resume(throwing: error)
+                    }
+                }
+            }
+        } onCancel: {
+            flag.cancel()
+        }
+    }
+
+    static func ppkSync(_ segments: [String], base: [String], optionsJson: String?, cancel: EngineCancelFlag? = nil) throws -> String {
+        if !available { throw AvoError.invalidOperation(unavailableReason ?? "motor no disponible") }
+        let flag: EngineCancelFlag = cancel ?? EngineCancelFlag()
+        let ms: [UnsafeMutablePointer<CChar>?] = segments.map { strdup($0) }
+        let mb: [UnsafeMutablePointer<CChar>?] = base.map { strdup($0) }
+        defer {
+            for p in ms { free(p) }
+            for p in mb { free(p) }
+        }
+        let cs: [UnsafePointer<CChar>?] = ms.map { (p: UnsafeMutablePointer<CChar>?) -> UnsafePointer<CChar>? in p.map { UnsafePointer<CChar>($0) } }
+        let cb: [UnsafePointer<CChar>?] = mb.map { (p: UnsafeMutablePointer<CChar>?) -> UnsafePointer<CChar>? in p.map { UnsafePointer<CChar>($0) } }
+        let cancelPtr: UnsafePointer<Int32> = UnsafePointer<Int32>(flag.pointer)
+        let opt: String = optionsJson ?? ""
+        var json: UnsafeMutablePointer<CChar>? = nil
+        let rc: Int32 = opt.withCString { (o: UnsafePointer<CChar>) -> Int32 in
+            cs.withUnsafeBufferPointer { (sb: UnsafeBufferPointer<UnsafePointer<CChar>?>) -> Int32 in
+                cb.withUnsafeBufferPointer { (bb: UnsafeBufferPointer<UnsafePointer<CChar>?>) -> Int32 in
+                    avo_eq_ppk(sb.baseAddress, Int32(cs.count), bb.baseAddress, Int32(cb.count), opt.isEmpty ? nil : o, cancelPtr, &json)
+                }
+            }
+        }
+        defer { if let j = json { avo_eq_free(j) } }
+        let text: String = json.map { String(cString: $0) } ?? ""
+        withExtendedLifetime(flag) {}
+        if rc == 4 { throw CancellationError() }
+        if rc != 0 { throw AvoError.invalidData(errorOf(text)) }
+        return text
+    }
+
     private static func errorOf(_ json: String) -> String {
         guard let o = AvoJSON.object(Data(json.utf8)) else { return json }
         if let e = o["error"] { return (e as? String) ?? json }

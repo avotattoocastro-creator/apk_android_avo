@@ -68,7 +68,8 @@ struct CloudItem: Identifiable, Equatable {
 
 final class AvoCloudClient {
     private let session: URLSession
-    private let token: () async throws -> String
+    /// Interno (no privado): lo usa también la extensión del PPK (Core/PpkService.swift).
+    let token: () async throws -> String
 
     init(token: @escaping () async throws -> String, session: URLSession = .shared) {
         self.token = token

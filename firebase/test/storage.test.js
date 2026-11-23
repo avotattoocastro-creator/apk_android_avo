@@ -66,3 +66,18 @@ test('nube: nada fuera de trainings/ y códigos de tarjeta válidos', async () =
   const bad = env.authenticatedContext('uid_x', { email: 'avo-aaaa@avo-cards.app' }).storage();
   await assertFails(uploadBytes(ref(bad, path('AVO-AAAA')), BYTES, META));
 });
+
+test('nube PPK: el dueño sube y lee AVO_<id>.ppk.json; otros no; sin avo_sha256 o como no JSON se rechaza', async () => {
+  const s = st(A);
+  const J = new TextEncoder().encode('{"formato":"avo-ppk"}');
+  const PM = { contentType: 'application/json', customMetadata: { sha256: SHA, avo_sha256: 'd'.repeat(64), sessionId: 'S0001' } };
+  const p = path(A, 'AVO_S0001.ppk.json');
+  await assertSucceeds(uploadBytes(ref(s, p), J, PM));
+  await assertSucceeds(getBytes(ref(s, p)));
+  await assertSucceeds(uploadBytes(ref(s, p), J, PM)); // recalculado
+  await assertFails(getBytes(ref(st(B), p)));
+  await assertFails(uploadBytes(ref(st(B), p), J, PM));
+  await assertFails(uploadBytes(ref(s, p), J, { contentType: 'application/json', customMetadata: { sha256: SHA } }));
+  await assertFails(uploadBytes(ref(s, p), J, { contentType: 'application/octet-stream', customMetadata: PM.customMetadata }));
+  await assertFails(uploadBytes(ref(s, path(A, 'AVO_S0001.json')), J, PM));
+});

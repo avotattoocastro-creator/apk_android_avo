@@ -15,6 +15,7 @@ WhatsApp y Compartir.
 | Bucket | `avo-performance-horse-7be14.firebasestorage.app` (el bucket por defecto al activar Storage) |
 | Ruta | `trainings/<CODIGO_TARJETA>/AVO_<sessionId>.avo` (un solo nivel; caracteres fuera de `A-Za-z0-9_-` → `_`, máx. 130) |
 | Contenido | paquete `.avo` AVO-TRAINING-1, máx. **40 MB** |
+| PPK (23/11/2026) | `trainings/<CODIGO_TARJETA>/AVO_<sessionId>.ppk.json` junto al `.avo`: resultado `avo-ppk` del motor, máx. 10 MB, metadatos `sha256`, `avo_sha256` (del `.avo` de origen), `ppk_version`, `base`, `pct_fix`. La primera app que lo calcula lo sube; las demás lo reutilizan si `avo_sha256` coincide. Ver `docs/PPK.md` |
 | Metadatos propios | `sha256` (del `.avo`, **obligatorio**, minúsculas), `fp` (huella de lo empaquetado: SHA-256 del RAW + códigos + nombres de caballo y jinete, separados por U+001F, 16 primeros bytes del SHA-256 en hex), `sessionId`, `horseCode`, `horseName`, `riderCode`, `riderName`, `assignedMs` (ms UTC de la última asignación a mano; 0 = nunca), `startRtcMs`, `distanceM`, `app` |
 | Cuenta | la tarjeta AVO: correo `<codigo>@avo-cards.app` + clave de la tarjeta (Firebase Authentication, igual que Compartir y LIVE) |
 | Permisos | solo el dueño lista, lee, sube y borra su carpeta (`firebase/storage.rules`). Para enviar a otros se sigue usando Compartir |

@@ -24,6 +24,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-23 — iPad · reglas de Storage — PPK en el iPad (base del IGN y resultado compartido en la nube)
+**Autor:** Claude · **Commits:** el de esta entrada · **CI:** al fusionar (TestFlight y `firebase-rules.yml`)
+**Qué cambia:**
+- **iPad:** Motor › «PPK (base IGN)» con hoja propia (`Views/PpkSheet.swift`); `Core/PpkService.swift` (índice y descarga de `ERGNSS/horario_1s/AAAAMMDD/HH/`, gzip, estación recordada, `AVO_<id>.ppk.json` en la nube); `App/AppModel+Ppk.swift` (guardado local → nube → cálculo y subida); `EquineEngine.ppkNeed` / `ppk`; PPK automático tras descargar de la nube; `AvoCloudClient.token` pasa de privado a interno.
+- **`Info.plist` del iPad (aprobado por el usuario, 23/11 19:44):** excepción ATS solo para `datos-geodesia.ign.es` (el IGN redirige https → http). Nada más del `Info.plist` cambia.
+- **`firebase/storage.rules`:** se admite `AVO_<id>.ppk.json` (≤ 10 MB, JSON, `sha256` y `avo_sha256`), con pruebas en `test/storage.test.js`.
+**Por qué:** petición del usuario (23/11, 18:57 y 19:42): que la primera app que descarga un entrenamiento sin PPK lo calcule y lo suba, empezando por iOS.
+**Validación:** IMPLEMENTADO. **Sin compilar** (sin Xcode ni emulador de Firebase en la sesión): lo compilan el CI de iPad y el de reglas al fusionar. **NO VERIFICADO** en el iPad. **Pendiente del usuario:** publicar `firebase/storage.rules` en la consola (Storage › Reglas).
+**Pendiente:** Android y Windows.
+
 ## 2026-11-23 — Espalda PROTOTIPO 3.16.0 · Motor 2.0.0-dev32 (AVO PPK 1.0.0) — PPK: RXM-RAWX/SFRBX al pecho y cálculo con RTKLIB
 **Autor:** Claude · **Commits:** `93eada5` (espalda), `5664e0b` (motor), y el de esta documentación · **CI:** no se lanza en las ramas (se compila al fusionar en `develop`)
 **Qué cambia:**

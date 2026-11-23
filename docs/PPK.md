@@ -73,12 +73,27 @@ Carga útil (little-endian), definida en `firmware/back/V3_8_0/lib/avo_core/src/
   - La misma sesión convertida a RXM-RAWX y grabada en `.avr` con trozos (y entera, y con 1 trozo de cada 37 perdido):
     mismas épocas FIX y diferencia máxima de **0,07 cm** con la solución del RINEX.
 
+## Apps
+### iPad (23/11/2026) — IMPLEMENTADO, sin compilar (sin Xcode en la sesión; lo compila el CI al fusionar)
+- Motor › botón **«PPK (base IGN)»** → hoja PPK: estación ERGNSS (código de 4 letras, se recuerda; botón «Ver estaciones
+  disponibles a esa hora» lee el índice del IGN), «Calcular PPK», «Importar la base a mano» (RINEX de Archivos, también
+  `.gz`) y resultado (FIX %, épocas, base, distancia a la base, avisos).
+- Base del IGN, estructura comprobada por el usuario (capturas del 23/11): `http://datos-geodesia.ign.es/ERGNSS/horario_1s/AAAAMMDD/HH/`
+  con `<EST>00ESP_R_AAAADDDHH00_01H_01S_MO.crx.gz` (observación) y `…_01H_MN.rnx.gz` (navegación). El servidor
+  redirige https → http: **excepción ATS solo para `datos-geodesia.ign.es`** en `Info.plist` (aprobada por el usuario).
+  gzip con el framework Compression (`Core/PpkService.swift`); Hatanaka en el motor.
+- Orden: resultado guardado en el iPad → `AVO_<id>.ppk.json` de la nube (si su `avo_sha256` coincide con el `.avo`)
+  → cálculo en el iPad y **subida a la nube** junto al `.avo`. Al descargar entrenamientos de la nube (Servidor ›
+  Nube AVO) se intenta el PPK en segundo plano; si el IGN aún no ha publicado la hora, queda para otra vez.
+- Pruebas: `AVOiPadTests/PpkTests.swift` (gzip, nombres del IGN, lectura de las respuestas del motor).
+
+### Nube
+- `firebase/storage.rules`: se admite `trainings/<CÓDIGO>/AVO_<id>.ppk.json` (≤ 10 MB, `application/json`, metadatos
+  `sha256` y `avo_sha256`). Pruebas en `firebase/test/storage.test.js`. **Hay que publicarlas en la consola** (Storage ›
+  Reglas). Las apps antiguas solo listan `.avo`: no ven el fichero nuevo.
+
 ## Pendiente
-1. Apps (Android, iPad, Windows): descargar la base del IGN (`ERGNSS/horario_1s/`, ficheros `…_01H_01S_MO.crx.gz`),
-   quitar el gzip y llamar al motor. **La estructura de carpetas de `horario_1s` no está comprobada** (la web
-   redirige a http).
-2. Nube: guardar el resultado como `trainings/<CÓDIGO>/AVO_<sesión>.ppk.json` junto al `.avo` (con el SHA-256 del
-   `.avo` de origen y la versión del PPK), para que la primera app que lo calcule lo suba y el resto lo descargue.
-   Hace falta ampliar `firebase/storage.rules` y publicarlas en la consola.
+1. Android y Windows: mismo flujo que el iPad (descarga del IGN, gzip, `avo_eq_ppk`, `.ppk.json` en la nube).
+2. Usar las posiciones PPK en el análisis del motor (parciales, distancia y velocidad media por tramo) cuando existan.
 3. Prueba física: espalda 3.16.0 en el banco (monitor serie «PPK: RAWX/SFRBX ACTIVO»), sesión en pista sin móvil,
    PPK con la estación ERGNSS más cercana y comparación con distancias medidas.

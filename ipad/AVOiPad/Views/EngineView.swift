@@ -13,6 +13,7 @@ struct EngineView: View {
     @State private var askHorse: Bool = false
     @State private var askCache: Bool = false
     @State private var shareURL: URL? = nil
+    @State private var ppkItem: SessionItem? = nil   // PPK 1.0.0 (docs/PPK.md)
 
     var body: some View {
         GeometryReader { geo in
@@ -74,6 +75,9 @@ struct EngineView: View {
         .sheet(isPresented: Binding(get: { shareURL != nil }, set: { if !$0 { shareURL = nil } })) {
             if let u = shareURL { ReportsActivitySheet(url: u) }
         }
+        .sheet(isPresented: Binding(get: { ppkItem != nil }, set: { if !$0 { ppkItem = nil } })) {
+            if let it = ppkItem { PpkSheet(item: it) }
+        }
     }
 
     // ------------------------------------------------------------------ buttons column
@@ -112,6 +116,10 @@ struct EngineView: View {
                         withAnimation { proxy.scrollTo("motor.technical", anchor: .top) }
                     }
                 }
+            }
+            actionButton("PPK (base IGN)", "scope", enabled: hasSel && !busy, id: "motor.ppk") { ppkItem = app.selected }
+            if let s = app.selected.flatMap({ app.ppkSummary($0) }) {
+                Text("PPK: FIX \(Int(s.pctFix)) % · \(s.base)").font(.caption2).foregroundStyle(Avo.textDim).lineLimit(2)
             }
             actionButton("Borrar caché", "trash", destructive: true, enabled: !busy, id: "motor.deleteCache") { askCache = true }
             if busy {
