@@ -1,7 +1,8 @@
 """Re-ruteo local y ordenado (24/11, tras sacar las vías de los pads): quita las pistas y vías de unas redes dentro de una
 caja y las vuelve a unir en el orden dado, sin rip-up (rápido). Si alguna no se puede unir, no escribe nada.
 
-Uso: python ruta_local.py x0 y0 x1 y1 RED1,RED2,...      (coordenadas KiCad; lee y escribe kicad/..._ruteado.kicad_pcb)
+Uso: python ruta_local.py x0 y0 x1 y1 RED1,RED2,... [--via-gap 0.35]   (coordenadas KiCad; lee y escribe
+     kicad/..._ruteado.kicad_pcb)
 """
 import os
 import sys
@@ -16,6 +17,8 @@ import repair                 # noqa: E402
 
 def main():
     x0, y0, x1, y1 = map(float, sys.argv[1:5])
+    if "--via-gap" in sys.argv:                 # p. ej. 0.35 = mínimo de la puerta (0,10 mm de cobre), solo en esta caja
+        build.VIA_PAD_GAP = float(sys.argv[sys.argv.index("--via-gap") + 1])
     order = sys.argv[5].split(",")
     path = os.path.join(D.OUT, "AVO_BACK_V5P_PCB_ruteado.kicad_pcb")
     segs, vias, _ = repair.read_board(path)

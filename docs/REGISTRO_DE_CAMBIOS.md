@@ -25,25 +25,31 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-24 — Casco V5 PROTOTIPO A — vías fuera de los pads (JLCPCB: «hole in pad», pedido W2026112308485306)
-**Autor:** Claude · **Rama:** `claude/casco-v5p-auditoria-22-11` (PR #125) · **CI:** pendiente (hay que lanzar `build-back-v5p-pcb.yml` a mano en esta rama)
+**Autor:** Claude · **Rama:** `claude/casco-v5p-auditoria-22-11` (PR #125) · **CI:** 45296519857 (puerta en rojo: primera pasada, ver abajo) y la de este commit
 **Qué pasó:** el 23/11 JLCPCB (Doris) paró el pedido SMT026112360152_Y17 porque había vías en pads, con riesgo de
 piezas torcidas, «tombstoning» y soldaduras abiertas. Ofreció soldar sin garantía (A) o cancelar y devolver el
 dinero (B). Revisando la placa salen **108 vías dentro de pads y 119 con el anillo a < 0,35 mm del cobre de un pad**:
-97 de masa, más VSYS, USB-C, USB D+/D−, la IMU U13 (LGA), el MAX17048 U12 y el ESD U6. Es un fallo del generador: la
-máscara de vías aceptaba el cobre de la propia red, así que la vía de descenso al plano caía en el centro del pad.
-La revisión del DFM del 23/11 no lo detectó. Recomendación al usuario: opción B y volver a pedir.
+la mayoría de masa, más VSYS, USB-C, USB D+/D−, la IMU U13 (LGA), el MAX17048 U12 y el ESD U6. Es un fallo del
+generador: la máscara de vías aceptaba el cobre de la propia red, así que la vía de descenso al plano caía en el
+centro del pad. La revisión del DFM del 23/11 no lo detectó. Recomendación al usuario: opción B y volver a pedir.
 **Qué cambia:**
-- `router.py` / `build.py`: `via_keep`. Ninguna vía nueva a menos de 0,45 mm del borde de un pad SMD de cualquier red
-  (radio 0,25 + máscara 0,05 + franja ≥ 0,10 + margen).
+- `router.py` / `build.py`: `via_keep`. Ninguna vía nueva a menos de **0,40 mm** del borde de un pad SMD de cualquier
+  red (radio 0,25 + 0,15 de cobre). Las vías van tapadas con máscara: comprobado en el Gerber del pedido, donde
+  ninguna tiene apertura. Con 0,45 mm la zona vedada cubría más del 90 % del área junto a U11/C27.
+  `via_drops`: pista de 0,3 mm y, si no cabe, de 0,2 mm; radio y subconjunto de pads configurables.
 - `vias_en_pad.py` (nuevo): lee la placa KiCad tal cual se fabrica y lista las vías con el anillo a < 0,35 mm de un
   pad SMD (pads redondos incluidos). Añadido a `gate.py` como **comprobación bloqueante**.
-- `repair.py --vias-fuera --src …`: quita esas vías; las de masa vuelven a bajar al plano desde fuera del pad
-  (`via_drops(only=…)`) y las de señal se rehacen. `ruta_local.py` (nuevo): re-ruteo ordenado en una caja, sin rip-up.
-  Así se unieron VLED_FB (U11) y ZED_RX1 (R50), que quedaron en bucle.
-- `kicad/AVO_BACK_V5P_PCB_ruteado.kicad_pcb`: 0 vías en pads (antes 108), 0 conexiones pendientes, 228 vías (antes
-  219). La colocación de las piezas, la BOM y el CPL no cambian.
-**Validación:** comprobado localmente (vías en pad y conectividad del reparador) · DRC de KiCad 9 y puerta: **pendiente del CI** · NO VERIFICADO
-**Pendiente:** CI → ficheros FINAL nuevos → nuevo pedido a JLCPCB.
+- `repair.py --vias-fuera --src … [--sin-ripup]`, `gnd_vias.py` (pads de masa sin vía: vía nueva, unión a masa ya
+  conectada o rip-up mínimo) y `ruta_local.py` (re-ruteo ordenado en una caja).
+- `kicad/AVO_BACK_V5P_PCB_ruteado.kicad_pcb`: 0 vías en pads (antes 108), 0 conexiones pendientes, 0 pads de masa
+  nuevos sin vía al plano, 238 vías (antes 219), sin taladros a < 0,62 mm. La colocación de las piezas, la BOM y el
+  CPL no cambian. Se quitó un tramo de masa en F.Cu entre R27.2 y R26.2 para dejar paso a VSYS hacia U11.3 (R26.2
+  baja ahora al plano con su propia vía).
+- Primera pasada (CI 45296519857): DRC 0 errores, pero 12 conexiones de masa incompletas y 3 fallos de paridad,
+  porque en local faltaba la librería EasyEDA (`V5_CASCO/PCB/fuente/lib_easyeda`) y se usaron las huellas provisionales
+  de U11/U12/L71. Rehecha entera con las huellas reales.
+**Validación:** comprobado en local (vías en pad, conectividad, masa) · DRC de KiCad 9 y puerta: el CI de este commit · NO VERIFICADO
+**Pendiente:** ficheros FINAL nuevos → nuevo pedido a JLCPCB.
 
 ## 2026-11-23 — Casco V5 PROTOTIPO A — PEDIDO A JLCPCB
 **Autor:** Claude (registro) · **Pedido del usuario:** W2026112308485306 (23/11/2026 01:48), en producción

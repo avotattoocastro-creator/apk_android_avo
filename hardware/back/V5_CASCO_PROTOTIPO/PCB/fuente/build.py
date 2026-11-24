@@ -23,10 +23,11 @@ PLANES = {D.GND: "In1.Cu"}                 # In1 = plano GND macizo
 ROUTE_LAYERS = ["F.Cu", "In2.Cu"]   # V5: B.Cu = plano de masa de la antena GNSS, sin pistas
 CLEAR = 0.15
 VIA = (0.5, 0.3)
-# 24/11 (JLCPCB rechaza el pedido W2026112308485306 por «hole in pad»): centro de vía a ≥ 0,45 mm del borde de
-# cualquier pad SMD = radio de vía 0,25 + apertura de máscara 0,05 + franja de máscara ≥ 0,10 + margen 0,05.
-# La soldadura ya no se va por el taladro (piezas torcidas, «tombstoning», LGA sin soldar).
-VIA_PAD_GAP = 0.45
+# 24/11 (JLCPCB rechaza el pedido W2026112308485306 por «hole in pad»): centro de vía a ≥ 0,40 mm del borde de
+# cualquier pad SMD (también de su propia red) = radio 0,25 + 0,15 de cobre libre (la holgura entre redes). Las vías van
+# tapadas con máscara (comprobado en el Gerber del pedido: ninguna tiene apertura), así que la soldadura no llega al
+# taladro. Con 0,45 mm la zona vedada cubría > 90 % del área junto a U11/C27 y no cabía ninguna vía de masa.
+VIA_PAD_GAP = 0.40
 EPS_KEEP = 0.035                        # error máximo del centro de celda (rejilla 0,05 mm)
 
 # widths per net (mm)
@@ -134,7 +135,7 @@ def pad_cells(r, rec, layer, free=None):
     return [(l, i, j)]
 
 
-def via_drops(r, pads, log, only=None):
+def via_drops(r, pads, log, only=None, radius=2.5):
     """Connects every pad of a plane net (GND → In1, +3V3 → In2) with a short track and a via.
     only: set of (ref, pin) — solo esos pads (repair.py --vias-fuera)."""
     done = 0
@@ -158,27 +159,27 @@ def via_drops(r, pads, log, only=None):
         layer = rec["layers"][0]
         if layer not in r.layers:
             continue
-        w = 0.3
-        free = r.free_mask(nid, w)
         vm = r.via_mask(nid) & ~drill_block(r, pads)
-        # goal: any cell where a via fits, within 2.5 mm of the pad centre
         ci, cj = r.ij(*rec["c"])
-        R = int(2.5 / GRID)
+        R = int(radius / GRID)
         i0, i1 = max(0, ci - R), min(r.H, ci + R); j0, j1 = max(0, cj - R), min(r.W, cj + R)
         l = r.layers.index(layer)
-        sub = vm[i0:i1, j0:j1] & free[l, i0:i1, j0:j1]
-        cand = np.argwhere(sub)
-        if len(cand) == 0:
-            fails.append(rec["part"]["ref"] + "." + rec["pad"].num)
-            continue
-        # skip if a via of the same net is already within 0.9 mm (shared via)
-        near = [v for v in r.vias if v[0] == nid and math.hypot(v[1][0] - rec["c"][0], v[1][1] - rec["c"][1]) < 0.9]
-        starts = pad_cells(r, rec, layer, free)
-        goals = set((l, i0 + a, j0 + b) for a, b in cand)
-        path = r.astar(nid, set(starts), goals, w, free, np.zeros_like(vm), rec["c"], max_exp=200000)
+        path = None
+        # 24/11: pista de 0,3 mm y, si no cabe, de 0,2 mm (la anchura mínima del relleno de masa)
+        for w in (0.3, 0.2):
+            free = r.free_mask(nid, w)
+            cand = np.argwhere(vm[i0:i1, j0:j1] & free[l, i0:i1, j0:j1])
+            if len(cand) == 0:
+                continue
+            starts = pad_cells(r, rec, layer, free)
+            goals = set((l, i0 + a, j0 + b) for a, b in cand)
+            path = r.astar(nid, set(starts), goals, w, free, np.zeros_like(vm), rec["c"], max_exp=200000)
+            if path:
+                break
         if not path:
             fails.append(rec["part"]["ref"] + "." + rec["pad"].num)
             continue
+        near = None
         end = path[-1]
         exy = r.xy(end[1], end[2])
         if near and not path_inside_pad(path, r, rec):

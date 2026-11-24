@@ -10,7 +10,7 @@ import math
 import re
 import sys
 
-VIA_PAD_GAP = 0.45   # = build.VIA_PAD_GAP: radio 0,25 + máscara 0,05 + franja ≥ 0,10 + margen 0,05 (objetivo)
+VIA_PAD_GAP = 0.40   # = build.VIA_PAD_GAP: radio 0,25 + 0,15 de cobre (objetivo del router)
 GATE_GAP = 0.35      # puerta: el anillo de la vía (Ø 0,5) a ≥ 0,10 mm del cobre del pad (vía tapada con máscara)
 
 

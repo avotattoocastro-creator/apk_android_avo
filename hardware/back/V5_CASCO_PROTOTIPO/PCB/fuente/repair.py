@@ -386,7 +386,8 @@ def main():
             queue.insert(0, net)                  # more groups may remain
             continue
         # 2) rip-up: route ignoring other nets' tracks, then remove the tracks in the way and re-queue their nets
-        if ripped.get(net, 0) >= 6:
+        #    (--sin-ripup: se deja sin unir y se resuelve después con ruta_local.py, mucho más rápido)
+        if ripped.get(net, 0) >= 6 or "--sin-ripup" in sys.argv:
             failed.append(net)
             continue
         ripped[net] = ripped.get(net, 0) + 1
