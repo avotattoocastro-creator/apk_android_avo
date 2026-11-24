@@ -549,6 +549,7 @@ RacingResult analyse_racing(const GnssResult& g, const std::vector<ImuSeries>& i
   kb_bands.work_speed = c.breed.work_speed;
   kb_bands.race_pace = std::isnan(c.race_pace_override) ? c.breed.race_pace : c.race_pace_override;
   r.race_pace_used = kb_bands.race_pace;
+  kb_bands.cg_relative = c.breed.name == "ARABE";   // CG2: árabes relativas a v_carrera [I-raza]
   if (n > 2) {
     for (size_t i = 1; i < n; i++) {
       double v0 = g.speed[i - 1], v1 = g.speed[i];
@@ -901,7 +902,17 @@ std::string racing_json(const RacingResult& r, const RacingConfig& c) {
       << ",\"v_min_validada\":" << num(M.valid_min_speed) << ",\"pct\":" << num(100.0 * K.bone_fl) << ",\"zancadas_estimadas\":" << num(K.strides)
       << ",\"pct_extrapolado_lento\":" << num(100.0 * K.bone_fl_low) << ",\"zancadas_lentas_estimadas\":" << num(K.strides_low)
       << ",\"frecuencia_zancada\":\"MODELO_PAN_2025\",\"calibrado\":" << (b.name == "PSI" ? "true" : "false")
-      << ",\"nota\":\"indice relativo de carga osea (Morrice-West 2022); no es una probabilidad de lesion" << (b.name == "PSI" ? "" : "; parametros de PSI sin calibrar en esta raza") << "\"}}";
+      << ",\"nota\":\"indice relativo de carga osea (Morrice-West 2022); no es una probabilidad de lesion" << (b.name == "PSI" ? "" : "; parametros de PSI sin calibrar en esta raza") << "\"}";
+    // CG2 (KB 1.30.0): bandas de velocidad de Morrice-West 2020 [E] (árabes escaladas por v_carrera [I-raza])
+    bool rel = b.name == "ARABE" && rp;
+    double e[KB_CG_BANDS - 1]; kb_cg_edges(rel, r.race_pace_used, e);
+    o << ",\"carga_externa\":{\"regla\":\"CG2\",\"escala\":" << q(rel ? "RELATIVAS_V_CARRERA" : "ABSOLUTAS_PSI")
+      << ",\"etiqueta\":" << q(rel ? "I-raza" : (b.name == "PSI" ? "E" : "I-raza")) << ",\"bandas\":[";
+    for (int k = 0; k < KB_CG_BANDS; k++)
+      o << (k ? "," : "") << "{\"banda\":" << q(kb_cg_band_name(k)) << ",\"v_min\":" << num(k ? e[k - 1] : 0.0) << ",\"v_max\":" << num(k < KB_CG_BANDS - 1 ? e[k] : kNaN)
+        << ",\"distancia_m\":" << num(K.cg_band_m[k]) << ",\"tiempo_s\":" << num(K.cg_band_s[k]) << "}";
+    o << "],\"v_rapido_m_s\":" << num(e[KB_CG_HS_BAND - 1]) << ",\"rapido_m\":" << num(K.hs_m)
+      << ",\"nota\":\"carga externa descriptiva; no es un riesgo de lesion\"}}";
   }
   o << ",\"nota\":\"entrenamiento de caballos de carreras; exploratorio, sin validar con caballos reales; perfiles de raza = valores de partida\"}";
   return o.str();

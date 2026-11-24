@@ -790,6 +790,8 @@ struct TrainingAnalysisResult: Equatable {
     var carga: TrainingLoad
     /// «estado.base_cientifica» (KB-1): 7 / 30 / 60-day windows and active rules at the reference date.
     var baseCientifica: KbHistoryStatus
+    /// «estado.carga_cg» (CG1–CG3, motor 2.0.0-dev34): carga descriptiva, siempre INFO.
+    var cargaCg: TrainingLoadCg
     var nota: String
     var cargaDiaria: [TrainingDailyLoad]
     var lineasBase: [TrainingBaseline]
@@ -824,6 +826,7 @@ struct TrainingAnalysisResult: Equatable {
         diasDesdeUltima = TJ.num(e, "dias_desde_ultima").map { TJ.int($0) }
         carga = TrainingLoad(TJ.obj(e, "carga"))
         baseCientifica = KbHistoryStatus(TJ.obj(e, "base_cientifica"))
+        cargaCg = TrainingLoadCg(TJ.obj(e, "carga_cg"))
         nota = TJ.str(e, "nota")
         cargaDiaria = TJ.objs(o, "carga_diaria").map { TrainingDailyLoad(fecha: TJ.str($0, "fecha"), carga: TJ.num($0, "carga") ?? 0) }
         lineasBase = TJ.objs(o, "lineas_base").map { TrainingBaseline($0) }

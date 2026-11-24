@@ -399,3 +399,97 @@ EQ_TEST(entreno, beach_band_comparables) {
   for (const auto& f : r2.sessions.back().kb.flags) if (f.rule == "A7_CAIDA_ZANCADA") a7b = true;
   CHECK(a7b);
 }
+
+// CG1–CG3 (KB 1.30.0): carga interna (TRIMP) y externa (trabajo rápido) descriptivas, nunca suben el estado.
+EQ_TEST(entreno, load_cg_trimp_bands_ewma) {
+  std::vector<SessionSummary> h;
+  const double peaks[3] = {220, 225, 218};
+  int fast = 0;
+  for (int d = 0; d <= 38; d += 2) {
+    SessionSummary s = make("G" + std::to_string(d), D0 + d, 15, 10, 8);
+    s.race.present = true; s.race.breed = "PSI";
+    s.race.kb_hs_m = 400; s.race.kb_cg_scale = "ABSOLUTAS_PSI";
+    double bands[KB_CG_BANDS] = {3000, 1500, 300, 100, 0, 0};
+    for (int k = 0; k < KB_CG_BANDS; k++) s.race.kb_cg_band_m[k] = bands[k];
+    s.race.kb_gallop_m = d % 10 == 0 ? 400 : 0;   // días 0, 10, 20, 30: trabajo rápido
+    s.cardio.present = true; s.cardio.quality = "BUENA"; s.cardio.trimp_coverage_pct = 95;
+    s.cardio.hr_hist = {{120, 600}, {200, 60}};    // 10 min a 120–125 y 1 min a 200–205 lpm
+    s.cardio.hr_peak = s.race.kb_gallop_m > 0 && fast < 3 ? peaks[fast++] : 190;
+    h.push_back(s);
+  }
+  TrainingConfig c;
+  TrainingResult r = analyse_training(h, training_day_text(D0 + 39), c);
+  const CgStatus& g = r.cg;
+  CHECK(g.available);
+  // FM1: FC máxima propia = 225 (máximo de los trabajos rápidos con FC, ≥ 3); reposo por defecto 33
+  CHECK(g.hr_max_origin == "PROPIA_HISTORIA" && g.hr_max_sessions == 4);   // días 0, 10, 20 y 30
+  CHECK_NEAR(g.hr_max, 225, 1e-9);
+  CHECK(g.hr_rest_origin == "POR_DEFECTO");
+  // TRIMP por sesión con 33/225 (a mano): 10·w(0,466146) + 1·w(0,882813) = 10,378573
+  CHECK_NEAR(r.sessions.back().cg_trimp, 10.378573, 1e-5);
+  CHECK_NEAR(g.internal.sum_short, 3 * 10.378573, 1e-4);   // días 34, 36 y 38
+  // CG2: 400 m de trabajo rápido cada 2 días → 7 d: 1.200 m; 30 d: 6.000 m
+  CHECK_NEAR(g.external.sum_short, 1200, 1e-9);
+  CHECK_NEAR(g.external.sum_long, 6000, 1e-9);
+  CHECK_NEAR(g.band_long_m[0], 15 * 3000, 1e-9);
+  CHECK(g.scale == "ABSOLUTAS_PSI");
+  // CG3: EWMA 7/28 d desde el día 0 (a mano): aguda 171,4268, crónica 181,7943, cociente 0,942971
+  CHECK_NEAR(g.external.ewma_acute, 171.4268, 1e-3);
+  CHECK_NEAR(g.external.ewma_chronic, 181.7943, 1e-3);
+  CHECK_NEAR(g.external.ratio, 0.942971, 1e-5);
+  CHECK(g.external.reason.empty() && g.external.sessions_long == 14 && g.external.missing_long == 0);
+  CHECK(std::isfinite(g.internal.ratio));
+  CHECK(std::isfinite(g.external.monotony) && std::isfinite(g.external.strain));
+  CHECK(g.daily.size() == 28);
+  // nunca sube el estado: el mismo resultado con CG apagada
+  TrainingConfig off; off.cg.enabled = false;
+  TrainingResult r0 = analyse_training(h, training_day_text(D0 + 39), off);
+  CHECK(r0.level == r.level && r0.reasons.size() == r.reasons.size());
+  // JSON
+  json::Value v; std::string err;
+  CHECK(json::parse(training_to_json(r, c), &v, &err));
+  const json::Value& cg = v["estado"]["carga_cg"];
+  CHECK(cg["nivel"].str() == "INFO" && !cg["validado"].boolean(true));
+  CHECK(cg["fc_referencia"]["fc_max_origen"].str() == "PROPIA_HISTORIA");
+  CHECK_NEAR(cg["externa"]["cociente"].num(0), 0.942971, 1e-5);
+  CHECK(cg["diaria"].a.size() == 28 && cg["bandas"]["bandas"].a.size() == (size_t)KB_CG_BANDS);
+  CHECK_NEAR(v["sesiones"][0]["carga_cg"]["rapido_m"].num(0), 400, 1e-9);
+  // resumen ida y vuelta: histograma y bandas
+  json::Value sj; CHECK(json::parse(training_summary_to_json(h.back()), &sj, &err));
+  SessionSummary back; CHECK(training_summary_from_json(sj, &back, &err));
+  CHECK(back.cardio.hr_hist.size() == 2 && back.cardio.hr_hist[1].first == 200 && back.cardio.hr_hist[1].second == 60);
+  CHECK_NEAR(back.race.kb_hs_m, 400, 1e-9); CHECK_NEAR(back.race.kb_cg_band_m[1], 1500, 1e-9); CHECK(back.race.kb_cg_scale == "ABSOLUTAS_PSI");
+  CHECK_NEAR(back.cardio.trimp_coverage_pct, 95, 1e-9);
+  // sin ECG en 4 de las 14 sesiones de la ventana crónica (29 % > 20 %): sin cociente interno, con motivo; el externo sigue
+  std::vector<SessionSummary> h2 = h;
+  for (size_t i = h2.size() - 4; i < h2.size(); i++) h2[i].cardio = CardioSummary();
+  TrainingResult r2 = analyse_training(h2, training_day_text(D0 + 39), c);
+  CHECK(std::isnan(r2.cg.internal.ratio) && r2.cg.internal.missing_long == 4);
+  CHECK(r2.cg.internal.reason.find("faltan datos en 4 de 14") != std::string::npos);
+  CHECK(std::isfinite(r2.cg.external.ratio));
+  // cobertura de FC baja (< 80 %): la sesión no aporta TRIMP
+  std::vector<SessionSummary> h3 = h; h3.back().cardio.trimp_coverage_pct = 50;
+  TrainingResult r3 = analyse_training(h3, training_day_text(D0 + 39), c);
+  CHECK(std::isnan(r3.sessions.back().cg_trimp));
+  // historia corta (< 28 d): totales sí, cociente no
+  std::vector<SessionSummary> h4(h.begin(), h.begin() + 5);
+  TrainingResult r4 = analyse_training(h4, training_day_text(D0 + 9), c);
+  CHECK(std::isnan(r4.cg.external.ratio) && r4.cg.external.reason.find("historia menor de 28") != std::string::npos);
+  CHECK_NEAR(r4.cg.external.sum_long, 2000, 1e-9);
+  CHECK(r4.cg.hr_max_origin == "POR_DEFECTO" && r4.cg.hr_max == 213);   // 1 trabajo rápido: FC máxima por defecto
+  // historia sin bloques nuevos (análisis anteriores): sin datos, todo null
+  std::vector<SessionSummary> h5;
+  for (int d = 0; d <= 30; d += 3) h5.push_back(make("O" + std::to_string(d), D0 + d, 15, 10, 8));
+  TrainingResult r5 = analyse_training(h5, "", c);
+  CHECK(!r5.cg.available && std::isnan(r5.cg.external.sum_short) && r5.cg.external.reason == "sin datos");
+  // opciones: FC máxima del caballo y valores fuera de rango
+  TrainingConfig c6; json::Value opt;
+  CHECK(json::parse("{\"carga_cg\":{\"fc_max_lpm\":230,\"fc_reposo_lpm\":30}}", &opt, &err) && training_config_from_json(opt, &c6, &err));
+  CHECK(c6.cg.trimp.hr_max_own && c6.cg.trimp.hr_rest_own);
+  TrainingResult r6 = analyse_training(h, training_day_text(D0 + 39), c6);
+  CHECK(r6.cg.hr_max_origin == "CABALLO" && r6.cg.hr_rest_origin == "CABALLO" && r6.cg.hr_max == 230);
+  TrainingConfig c7;
+  CHECK(json::parse("{\"carga_cg\":{\"fc_max_lpm\":300}}", &opt, &err) && !training_config_from_json(opt, &c7, &err));
+  CHECK(json::parse("{\"carga_cg\":{\"dias_ewma_aguda\":28,\"dias_ewma_cronica\":7}}", &opt, &err) && !training_config_from_json(opt, &c7, &err));
+  CHECK(json::parse("{\"carga_cg\":false}", &opt, &err) && training_config_from_json(opt, &c7, &err) && !c7.cg.enabled);
+}

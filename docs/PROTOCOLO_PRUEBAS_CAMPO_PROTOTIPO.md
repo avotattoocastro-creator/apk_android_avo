@@ -132,6 +132,18 @@ En la Cuadra, cada caballo con carrera o trial a la vista lleva sus **carreras p
 faltan. Las sesiones con tipo CARRERA o TRIAL cuentan como carrera. Es una pauta de la literatura con corte [I], no una
 orden: el entrenador decide.
 
+## 6 bis. Carga de entrenamiento CG1–CG3 (motor 2.0.0-dev34)
+Para calibrar la carga descriptiva (hoy con valores por defecto «no propios»):
+- **FC de reposo:** 5 min con el caballo parado en el box o atado, con la cincha 0.5.0 puesta y el ECG en marcha antes de
+  montar; anotar la mediana de la FC en la valoración (se pasará como `fc_reposo_lpm`). Repetir 3 días.
+- **FC máxima propia:** basta con ≥ 3 trabajos rápidos con ECG `BUENA` o `UTILIZABLE` (el motor la toma sola, FM1);
+  revisar en las épocas que el pico no sea un artefacto.
+- **Cobertura:** que ≥ 80 % de cada sesión tenga FC válida (electrodos húmedos, cincha bien apretada); si no, la sesión
+  no aporta TRIMP a la historia.
+- **Continuidad:** ≥ 8 semanas seguidas con GNSS y ECG en todas las sesiones para ver cómo se mueve el cociente propio
+  (con > 20 % de sesiones sin dato en 28 días el motor no lo calcula).
+- Los coeficientes b y c del TRIMP no se pueden calibrar con el PROTOTIPO (harían falta prueba estándar y lactato).
+
 ## 7. Registro
 
 Cada jornada se anota en `docs/REGISTRO_DE_CAMBIOS.md` (o en un informe de sesiones reales) con: fecha, caballos,

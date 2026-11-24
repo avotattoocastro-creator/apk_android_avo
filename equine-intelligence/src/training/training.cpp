@@ -310,6 +310,11 @@ bool training_summary_from_analysis(const json::Value& a, const TrainingConfig& 
       R.kb_canter_m = nnum(kb["verheyen"]["canter_m"]); R.kb_gallop_m = nnum(kb["verheyen"]["galope_rapido_m"]);
       R.kb_bone_pct = nnum(kb["fatiga_osea"]["pct"]); R.kb_bone_low_pct = nnum(kb["fatiga_osea"]["pct_extrapolado_lento"]);
       R.kb_strides = nnum(kb["fatiga_osea"]["zancadas_estimadas"]);
+      const json::Value& ce = kb["carga_externa"];   // CG2 (KB 1.30.0)
+      if (ce.type == json::Value::OBJ) {
+        for (int k = 0; k < KB_CG_BANDS; k++) R.kb_cg_band_m[k] = nnum(ce["bandas"][k]["distancia_m"]);
+        R.kb_hs_m = nnum(ce["rapido_m"]); R.kb_cg_scale = ce["escala"].str();
+      }
     }
     for (const auto& e : rc["eventos"].a) {
       std::string t = e["tipo"].str();
@@ -329,6 +334,14 @@ bool training_summary_from_analysis(const json::Value& a, const TrainingConfig& 
     for (size_t k = 0; k < 6 && k < ca["recuperacion"].a.size(); k++) C.recovery_hr[k] = nnum(ca["recuperacion"][k]["fc_lpm"]);
     C.ectopy_candidates = (int)ca["ectopia"]["candidatos"].num(0);
     C.ectopy_level = ca["ectopia"]["nivel"].str(); C.ectopy_text = ca["ectopia"]["texto"].str();
+    const json::Value& ci = ca["carga_interna"];   // CG1 (cardio 1.1.0)
+    if (ci.type == json::Value::OBJ) {
+      C.trimp = nnum(ci["trimp"]); C.trimp_coverage_pct = nnum(ci["cobertura_pct"]);
+      for (const auto& b : ci["histograma_fc"]["s"].a) {
+        double lo = nnum(b[0]), sec = nnum(b[1]);
+        if (std::isfinite(lo) && std::isfinite(sec) && sec > 0) C.hr_hist.push_back({lo, sec});
+      }
+    }
     if (C.quality == "NO_UTILIZABLE") { C.v200 = NAN; C.v200_regression = NAN; C.vhrmax = NAN; s.warnings.push_back("ECG no utilizable: sin V200 ni ectopia"); }
   }
   if (s.gnss_quality == "NO_UTILIZABLE") s.warnings.push_back("GNSS no utilizable: distancias y velocidades no fiables");
@@ -376,10 +389,13 @@ std::string training_summary_to_json(const SessionSummary& s) {
       << ",\"recuperacion_media_s\":" << num(R.recovery_mean_s) << ",\"calentamiento_corto\":" << (R.warmup_short ? "true" : "false") << "}"
       << ",\"recorrido\":{\"nombre\":" << q(R.course_name) << ",\"pasadas\":" << R.passes << ",\"mejor_pasada_s\":" << num(R.best_pass_s)
       << ",\"v_media_mejor\":" << num(R.best_pass_speed) << ",\"indice_caida_mejor_pct\":" << num(R.best_pass_fatigue_pct) << "}";
-    if (!std::isnan(R.kb_bone_pct))
+    if (!std::isnan(R.kb_bone_pct) || !std::isnan(R.kb_hs_m))
       o << ",\"base_cientifica\":{\"v_carrera_m_s\":" << num(R.kb_race_pace) << ",\"bandas_m\":[" << num(R.kb_band_m[0]) << "," << num(R.kb_band_m[1]) << ","
         << num(R.kb_band_m[2]) << "],\"canter_m\":" << num(R.kb_canter_m) << ",\"galope_rapido_m\":" << num(R.kb_gallop_m)
-        << ",\"fatiga_osea_pct\":" << num(R.kb_bone_pct) << ",\"fatiga_osea_lenta_pct\":" << num(R.kb_bone_low_pct) << ",\"zancadas_estimadas\":" << num(R.kb_strides) << "}";
+        << ",\"fatiga_osea_pct\":" << num(R.kb_bone_pct) << ",\"fatiga_osea_lenta_pct\":" << num(R.kb_bone_low_pct) << ",\"zancadas_estimadas\":" << num(R.kb_strides)
+        << ",\"bandas_cg_m\":[" << num(R.kb_cg_band_m[0]) << "," << num(R.kb_cg_band_m[1]) << "," << num(R.kb_cg_band_m[2]) << "," << num(R.kb_cg_band_m[3])
+        << "," << num(R.kb_cg_band_m[4]) << "," << num(R.kb_cg_band_m[5]) << "],\"rapido_m\":" << num(R.kb_hs_m)
+        << ",\"escala_cg\":" << (R.kb_cg_scale.empty() ? std::string("null") : q(R.kb_cg_scale)) << "}";
     o << "}";
   }
   if (s.cardio.present) {
@@ -389,7 +405,10 @@ std::string training_summary_to_json(const SessionSummary& s) {
       << ",\"vhrmax_m_s\":" << num(C.vhrmax) << ",\"vhrmax_metodo\":" << q(C.vhrmax_method) << ",\"fc_pico_lpm\":" << num(C.hr_peak)
       << ",\"recuperacion_fc_lpm\":[";
     for (int k = 0; k < 6; k++) o << (k ? "," : "") << num(C.recovery_hr[k]);
-    o << "],\"ectopia\":{\"candidatos\":" << C.ectopy_candidates << ",\"nivel\":" << q(C.ectopy_level) << ",\"texto\":" << q(C.ectopy_text) << "}}";
+    o << "],\"ectopia\":{\"candidatos\":" << C.ectopy_candidates << ",\"nivel\":" << q(C.ectopy_level) << ",\"texto\":" << q(C.ectopy_text) << "}"
+      << ",\"trimp\":" << num(C.trimp) << ",\"trimp_cobertura_pct\":" << num(C.trimp_coverage_pct) << ",\"histograma_fc\":[";
+    for (size_t k = 0; k < C.hr_hist.size(); k++) o << (k ? "," : "") << "[" << num(C.hr_hist[k].first) << "," << num(C.hr_hist[k].second) << "]";
+    o << "]}";
   }
   o << ",\"avisos\":[";
   for (size_t i = 0; i < s.warnings.size(); i++) o << (i ? "," : "") << q(s.warnings[i]);
@@ -448,6 +467,8 @@ bool training_summary_from_json(const json::Value& v, SessionSummary* out, std::
       for (int k = 0; k < KB_BANDS; k++) R.kb_band_m[k] = nnum(kb["bandas_m"][k]);
       R.kb_canter_m = nnum(kb["canter_m"]); R.kb_gallop_m = nnum(kb["galope_rapido_m"]);
       R.kb_bone_pct = nnum(kb["fatiga_osea_pct"]); R.kb_bone_low_pct = nnum(kb["fatiga_osea_lenta_pct"]); R.kb_strides = nnum(kb["zancadas_estimadas"]);
+      for (int k = 0; k < KB_CG_BANDS; k++) R.kb_cg_band_m[k] = nnum(kb["bandas_cg_m"][k]);
+      R.kb_hs_m = nnum(kb["rapido_m"]); R.kb_cg_scale = kb["escala_cg"].str();
     }
   }
   const json::Value& ca = v["cardio"];
@@ -460,6 +481,11 @@ bool training_summary_from_json(const json::Value& v, SessionSummary* out, std::
     for (size_t k = 0; k < 6 && k < ca["recuperacion_fc_lpm"].a.size(); k++) C.recovery_hr[k] = nnum(ca["recuperacion_fc_lpm"][k]);
     C.ectopy_candidates = (int)ca["ectopia"]["candidatos"].num(0);
     C.ectopy_level = ca["ectopia"]["nivel"].str(); C.ectopy_text = ca["ectopia"]["texto"].str();
+    C.trimp = nnum(ca["trimp"]); C.trimp_coverage_pct = nnum(ca["trimp_cobertura_pct"]);
+    for (const auto& b : ca["histograma_fc"].a) {
+      double lo = nnum(b[0]), sec = nnum(b[1]);
+      if (std::isfinite(lo) && std::isfinite(sec) && sec > 0) C.hr_hist.push_back({lo, sec});
+    }
   }
   for (const auto& w : v["avisos"].a) s.warnings.push_back(w.str());
   *out = s;
@@ -569,6 +595,37 @@ bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::str
       }
       if (c->kb.canter_30d_watch_km > c->kb.canter_30d_limit_km) { if (err) *err = "base_cientifica: el aviso de canter debe ser ≤ el límite"; return false; }
     } else { if (err) *err = "«base_cientifica» debe ser true/false o un objeto"; return false; }
+  }
+  // CG1–CG3 (KB 1.30.0): «carga_cg»: true/false o un objeto
+  if (v.has("carga_cg")) {
+    const json::Value& k = v["carga_cg"];
+    if (k.type == json::Value::BOOL) c->cg.enabled = k.b;
+    else if (k.type == json::Value::OBJ) {
+      c->cg.enabled = k["activa"].boolean(true);
+      auto& T = c->cg.trimp;
+      const D kd[] = {{"fc_reposo_lpm", &T.hr_rest, 20, 60}, {"fc_max_lpm", &T.hr_max, 150, 260}, {"trimp_b", &T.b, 0.01, 10},
+                      {"trimp_c", &T.c, 0, 5}, {"fc_zona1_lpm", &T.zone1_bpm, 100, 260}, {"fc_zona2_lpm", &T.zone2_bpm, 100, 260},
+                      {"cobertura_min", &T.min_coverage, 0, 1}, {"fraccion_max_sin_dato", &c->cg.max_missing_fraction, 0, 1}};
+      for (const auto& d : kd) {
+        if (!k.has(d.k)) continue;
+        const json::Value& x = k[d.k];
+        if (x.type != json::Value::NUM || !(x.n >= d.lo && x.n <= d.hi)) { if (err) *err = std::string("opción fuera de rango: carga_cg.") + d.k; return false; }
+        *d.p = x.n;
+        if (d.p == &T.hr_rest) T.hr_rest_own = true;
+        if (d.p == &T.hr_max) T.hr_max_own = true;
+      }
+      const I ki[] = {{"dias_ewma_aguda", &c->cg.ewma_acute_days, 2, 60}, {"dias_ewma_cronica", &c->cg.ewma_chronic_days, 7, 180},
+                      {"dias_total_corto", &c->cg.window_short_days, 1, 60}, {"dias_total_largo", &c->cg.window_long_days, 7, 180},
+                      {"min_sesiones_fc_max", &c->cg.hr_max_min_sessions, 1, 50}};
+      for (const auto& d : ki) {
+        if (!k.has(d.k)) continue;
+        const json::Value& x = k[d.k];
+        if (x.type != json::Value::NUM || x.n != std::floor(x.n) || x.n < d.lo || x.n > d.hi) { if (err) *err = std::string("opción fuera de rango: carga_cg.") + d.k; return false; }
+        *d.p = (int)x.n;
+      }
+      if (c->cg.ewma_acute_days >= c->cg.ewma_chronic_days) { if (err) *err = "carga_cg: dias_ewma_aguda debe ser menor que dias_ewma_cronica"; return false; }
+      if (T.hr_max <= T.hr_rest + 50) { if (err) *err = "carga_cg: fc_max_lpm debe superar a fc_reposo_lpm en más de 50 lpm"; return false; }
+    } else { if (err) *err = "«carga_cg» debe ser true/false o un objeto"; return false; }
   }
   // A4: fechas de carrera previstas del caballo (lista de AAAA-MM-DD), en la raíz de las opciones.
   if (v.has("carreras_previstas")) {
@@ -680,6 +737,118 @@ double theil_sen(const std::vector<std::pair<double, double>>& xy, double* lo, d
   return median(slopes);
 }
 
+
+// CG1–CG3 (KB 1.30.0): carga interna (TRIMP) y externa (metros de trabajo rápido) solo descriptivas.
+bool cg_fast_session(const SessionSummary& s, const KbRuleConfig& kc) {
+  return s.race.present && ((std::isfinite(s.race.kb_gallop_m) && s.race.kb_gallop_m >= kc.gallop_session_min_m) || s.race.fast_efforts > 0);
+}
+double cg_session_trimp(const SessionSummary& s, const KbTrimpConfig& T) {
+  const CardioSummary& C = s.cardio;
+  if (!C.present || C.quality == "NO_UTILIZABLE") return kNaN;
+  if (!std::isfinite(C.trimp_coverage_pct) || C.trimp_coverage_pct < 100.0 * T.min_coverage) return kNaN;
+  if (C.hr_hist.empty()) return C.trimp;
+  std::vector<double> h(KB_HR_BINS, 0.0);
+  for (const auto& b : C.hr_hist) {
+    int k = (int)std::floor(b.first / KB_HR_BIN_BPM + 1e-9);
+    if (k >= 0 && k < KB_HR_BINS) h[k] += b.second;
+  }
+  return kb_trimp_from_histogram(h, T).trimp;
+}
+struct CgDaily { std::map<long, double> v; std::map<long, int> with, missing; };
+void cg_series(const CgDaily& D, long d, long first_day, const TrainingConfig& c, CgSeries* S) {
+  const auto& g = c.cg;
+  auto val = [&](long k) { auto it = D.v.find(k); return it == D.v.end() ? 0.0 : it->second; };
+  auto cnt = [](const std::map<long, int>& m, long k) { auto it = m.find(k); return it == m.end() ? 0 : it->second; };
+  int with_long = 0, miss_long = 0, with_short = 0, with_sum = 0;
+  double ss = 0, sl = 0;
+  for (long k = d - g.window_long_days + 1; k <= d; k++) { if (cnt(D.with, k)) { sl += val(k); with_sum++; } }
+  for (long k = d - g.window_short_days + 1; k <= d; k++) { if (cnt(D.with, k)) { ss += val(k); with_short++; } }
+  for (long k = d - g.ewma_chronic_days + 1; k <= d; k++) { with_long += cnt(D.with, k); miss_long += cnt(D.missing, k); }
+  S->sessions_long = with_long; S->missing_long = miss_long;
+  if (cnt(D.with, d)) S->session = val(d);
+  bool any = false; for (const auto& kv : D.with) if (kv.first <= d && kv.second) { any = true; break; }
+  if (!any) { S->reason = "sin datos"; return; }
+  S->sum_short = with_short ? ss : 0.0;   // días sin sesión = 0 (ya hay datos antes)
+  S->sum_long = with_sum ? sl : 0.0;
+  std::vector<double> daily;
+  for (long k = first_day; k <= d; k++) daily.push_back(val(k));
+  kb_ewma(daily, g.ewma_acute_days, g.ewma_chronic_days, &S->ewma_acute, &S->ewma_chronic);
+  std::vector<double> w;
+  for (long k = d - 6; k <= d; k++) w.push_back(k >= first_day ? val(k) : 0.0);
+  if (first_day <= d - 6) kb_foster(w, &S->monotony, &S->strain);
+  int tot = with_long + miss_long;
+  char b[160];
+  if (first_day > d - g.ewma_chronic_days + 1) { snprintf(b, sizeof(b), "historia menor de %d días", g.ewma_chronic_days); S->reason = b; }
+  else if (tot == 0) S->reason = "sin sesiones en la ventana crónica";
+  else if (miss_long > g.max_missing_fraction * tot) { snprintf(b, sizeof(b), "faltan datos en %d de %d sesiones de la ventana crónica", miss_long, tot); S->reason = b; }
+  else if (!(S->ewma_chronic > 1e-9)) S->reason = "carga crónica nula";
+  else S->ratio = S->ewma_acute / S->ewma_chronic;
+}
+
+CgStatus cg_evaluate(const std::vector<SessionSummary>& ok, long d, long first_day, const TrainingConfig& c, std::vector<double>* per_session) {
+  CgStatus st;
+  KbTrimpConfig T = c.cg.trimp;
+  st.hr_rest = T.hr_rest; st.hr_rest_origin = T.hr_rest_own ? "CABALLO" : "POR_DEFECTO";
+  if (T.hr_max_own) st.hr_max_origin = "CABALLO";
+  else {
+    // FM1: FC máxima propia = máximo de la FC pico de ≥ N trabajos rápidos con ECG utilizable [I]
+    double mx = kNaN; int n = 0;
+    for (const auto& s : ok) {
+      if (s.day > d || !s.cardio.present || !std::isfinite(s.cardio.hr_peak)) continue;
+      if (s.cardio.quality != "BUENA" && s.cardio.quality != "UTILIZABLE") continue;
+      if (!cg_fast_session(s, c.kb)) continue;
+      n++; if (std::isnan(mx) || s.cardio.hr_peak > mx) mx = s.cardio.hr_peak;
+    }
+    st.hr_max_sessions = n;
+    if (n >= c.cg.hr_max_min_sessions && mx > T.hr_rest + 50) { T.hr_max = mx; T.hr_max_own = true; st.hr_max_origin = "PROPIA_HISTORIA"; }
+    else st.hr_max_origin = "POR_DEFECTO";
+  }
+  st.hr_max = T.hr_max;
+  CgDaily in, ex;
+  CgDaily band[KB_CG_BANDS];
+  if (per_session) per_session->clear();
+  for (const auto& s : ok) {
+    double t = cg_session_trimp(s, T);
+    if (per_session) per_session->push_back(s.day <= d ? t : kNaN);
+    if (s.day > d) continue;
+    if (std::isfinite(t)) { in.v[s.day] += t; in.with[s.day]++; } else in.missing[s.day]++;
+    if (s.race.present && std::isfinite(s.race.kb_hs_m)) {
+      ex.v[s.day] += s.race.kb_hs_m; ex.with[s.day]++;
+      for (int k = 0; k < KB_CG_BANDS; k++) if (std::isfinite(s.race.kb_cg_band_m[k])) { band[k].v[s.day] += s.race.kb_cg_band_m[k]; band[k].with[s.day]++; }
+      if (st.scale.empty()) st.scale = s.race.kb_cg_scale;
+    } else ex.missing[s.day]++;
+  }
+  cg_series(in, d, first_day, c, &st.internal);
+  cg_series(ex, d, first_day, c, &st.external);
+  for (int k = 0; k < KB_CG_BANDS; k++) {
+    CgSeries b; cg_series(band[k], d, first_day, c, &b);
+    st.band_short_m[k] = b.sum_short; st.band_long_m[k] = b.sum_long;
+  }
+  st.available = !in.with.empty() || !ex.with.empty();
+  for (long k = d - c.cg.ewma_chronic_days + 1; k <= d; k++) {
+    if (k < first_day) continue;
+    auto f = [&](const CgDaily& D) {
+      auto w = D.with.find(k); auto m = D.missing.find(k);
+      if (w != D.with.end()) return D.v.at(k);
+      return m != D.missing.end() ? kNaN : 0.0;
+    };
+    st.daily.push_back({k, {f(ex), f(in)}});
+  }
+  char b[260];
+  if (st.hr_max_origin == "POR_DEFECTO")
+    { snprintf(b, sizeof(b), "FC máxima por defecto (%.0f lpm, no propia; FM1): el TRIMP solo es comparable dentro del mismo caballo", st.hr_max); st.notes.push_back(b); }
+  if (st.hr_rest_origin == "POR_DEFECTO")
+    { snprintf(b, sizeof(b), "FC de reposo por defecto (%.0f lpm, no propia)", st.hr_rest); st.notes.push_back(b); }
+  auto ratio_note = [&](const char* what, const CgSeries& S, const char* unit) {
+    if (!std::isfinite(S.ratio)) return;
+    snprintf(b, sizeof(b), "%s: media exponencial de %d d %.3g %s/día frente a %.3g de %d d (cociente %.2f); cambio relativo de carga, sin validar en caballos de carreras",
+             what, c.cg.ewma_acute_days, S.ewma_acute, unit, S.ewma_chronic, c.cg.ewma_chronic_days, S.ratio);
+    st.notes.push_back(b);
+  };
+  ratio_note("trabajo rápido", st.external, "m");
+  ratio_note("carga interna (TRIMP)", st.internal, "UA");
+  return st;
+}
 
 // A7 y A8 (KB 1.5.0): caída frente a la línea base propia en sesiones comparables (misma superficie).
 // A9 (KB 1.27.0): V200 / VHRmax del ECG frente a la línea base propia, misma superficie y mismo método.
@@ -974,6 +1143,11 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
   if (r.days_since_last <= c.acute_days) kb_drift_flags(ok, ok.size() - 1, c.kb, &r.kb.flags);
   kb_apply(r.kb, &r.level, &r.reasons);
   r.planner = planner_at(ok, kbdays, r.reference_day, first_day, c.kb);
+  if (c.cg.enabled) {
+    std::vector<double> per;
+    r.cg = cg_evaluate(ok, r.reference_day, first_day, c, &per);
+    for (size_t i = 0; i < r.sessions.size() && i < per.size(); i++) r.sessions[i].cg_trimp = per[i];
+  }
   if (!std::isnan(r.current.acwr) && r.current.acwr < c.acwr_low)
     r.reasons.push_back("carga reciente baja respecto a la habitual (ACWR " + num(r.current.acwr) + "): descarga o parada");
   if (r.days_since_last > c.rest_watch_days)
@@ -1035,6 +1209,36 @@ void load_json(std::ostringstream& o, const SessionLoad& L) {
 void strs(std::ostringstream& o, const std::vector<std::string>& v) {
   o << "["; for (size_t i = 0; i < v.size(); i++) o << (i ? "," : "") << q(v[i]); o << "]";
 }
+void cg_series_json(std::ostringstream& o, const CgSeries& S) {
+  o << "{\"sesion\":" << num(S.session) << ",\"total_corto\":" << num(S.sum_short) << ",\"total_largo\":" << num(S.sum_long)
+    << ",\"ewma_aguda\":" << num(S.ewma_acute) << ",\"ewma_cronica\":" << num(S.ewma_chronic) << ",\"cociente\":" << num(S.ratio)
+    << ",\"monotonia\":" << num(S.monotony) << ",\"strain\":" << num(S.strain) << ",\"sesiones_con_dato\":" << S.sessions_long
+    << ",\"sesiones_sin_dato\":" << S.missing_long << ",\"motivo\":" << (S.reason.empty() ? std::string("null") : q(S.reason)) << "}";
+}
+void cg_json(std::ostringstream& o, const CgStatus& g, const TrainingConfig& c) {
+  const auto& T = c.cg.trimp;
+  o << "{\"reglas\":[\"CG1\",\"CG2\",\"CG3\"],\"disponible\":" << (g.available ? "true" : "false") << ",\"nivel\":\"INFO\",\"validado\":false"
+    << ",\"parametros\":{\"dias_ewma_aguda\":" << c.cg.ewma_acute_days << ",\"dias_ewma_cronica\":" << c.cg.ewma_chronic_days
+    << ",\"lambda_aguda\":" << num(kb_ewma_lambda(c.cg.ewma_acute_days)) << ",\"lambda_cronica\":" << num(kb_ewma_lambda(c.cg.ewma_chronic_days))
+    << ",\"dias_total_corto\":" << c.cg.window_short_days << ",\"dias_total_largo\":" << c.cg.window_long_days
+    << ",\"fraccion_max_sin_dato\":" << num(c.cg.max_missing_fraction) << ",\"trimp_b\":" << num(T.b) << ",\"trimp_c\":" << num(T.c)
+    << ",\"cobertura_min\":" << num(T.min_coverage) << ",\"min_sesiones_fc_max\":" << c.cg.hr_max_min_sessions
+    << ",\"etiquetas\":{\"ewma\":\"E-r\",\"bandas_psi\":\"E\",\"bandas_arabe\":\"I-raza\",\"trimp_forma\":\"E-r\",\"trimp_coeficientes\":\"NV\",\"fc_reposo_defecto\":\"E-r\",\"fc_max_defecto\":\"I\",\"cortes\":\"I\"}}"
+    << ",\"fc_referencia\":{\"fc_reposo_lpm\":" << num(g.hr_rest) << ",\"fc_reposo_origen\":" << q(g.hr_rest_origin)
+    << ",\"fc_max_lpm\":" << num(g.hr_max) << ",\"fc_max_origen\":" << q(g.hr_max_origin) << ",\"trabajos_rapidos_con_fc\":" << g.hr_max_sessions << "}"
+    << ",\"interna\":"; cg_series_json(o, g.internal);
+  o << ",\"externa\":"; cg_series_json(o, g.external);
+  double e[KB_CG_BANDS - 1]; kb_cg_edges(false, NAN, e);
+  o << ",\"bandas\":{\"escala\":" << (g.scale.empty() ? std::string("null") : q(g.scale)) << ",\"bandas\":[";
+  for (int k = 0; k < KB_CG_BANDS; k++)
+    o << (k ? "," : "") << "{\"banda\":" << q(kb_cg_band_name(k)) << ",\"v_min_psi\":" << num(k ? e[k - 1] : 0.0) << ",\"v_max_psi\":" << num(k < KB_CG_BANDS - 1 ? e[k] : NAN)
+      << ",\"total_corto_m\":" << num(g.band_short_m[k]) << ",\"total_largo_m\":" << num(g.band_long_m[k]) << "}";
+  o << "]},\"diaria\":[";
+  for (size_t i = 0; i < g.daily.size(); i++)
+    o << (i ? "," : "") << "{\"fecha\":" << q(training_day_text(g.daily[i].first)) << ",\"rapido_m\":" << num(g.daily[i].second.first) << ",\"trimp\":" << num(g.daily[i].second.second) << "}";
+  o << "],\"notas\":"; strs(o, g.notes);
+  o << ",\"nota\":\"carga descriptiva: cambio relativo frente a la propia historia; no es un riesgo ni un semaforo de lesion y no cambia el estado\"}";
+}
 void dev_json(std::ostringstream& o, const Deviation& d) {
   o << "{\"metrica\":" << q(d.metric) << ",\"valor\":" << num(d.value) << ",\"linea_base\":" << num(d.baseline) << ",\"mad\":" << num(d.mad)
     << ",\"z\":" << num(d.z) << ",\"n\":" << d.n << ",\"nivel\":" << q(d.level);
@@ -1070,6 +1274,7 @@ std::string training_to_json(const TrainingResult& r, const TrainingConfig& c) {
       o << (i ? "," : "") << "{\"regla\":" << q(p.notes[i].rule) << ",\"texto\":" << q(p.notes[i].text) << ",\"evidencia\":" << q(p.notes[i].evidence) << "}";
     o << "],\"nota\":\"pautas informativas de la base científica; no suben el estado ni sustituyen el criterio del entrenador\"}";
   }
+  o << ",\"carga_cg\":"; cg_json(o, r.cg, c);
   o << ",\"nota\":\"orientativo; no es un diagnóstico veterinario\"}";
   o << ",\"carga_diaria\":[";
   for (size_t i = 0; i < r.daily_load.size(); i++) o << (i ? "," : "") << "{\"fecha\":" << q(training_day_text(r.daily_load[i].first)) << ",\"carga\":" << num(r.daily_load[i].second) << "}";
@@ -1086,6 +1291,7 @@ std::string training_to_json(const TrainingResult& r, const TrainingConfig& c) {
     o << (i ? "," : "") << "{\"id\":" << q(R.s.id) << ",\"fecha\":" << q(training_day_text(R.s.day)) << ",\"nivel\":" << q(R.level) << ",\"motivos\":"; strs(o, R.reasons);
     o << ",\"carga\":"; load_json(o, R.load);
     o << ",\"base_cientifica\":" << kb_status_json(R.kb);
+    o << ",\"carga_cg\":{\"trimp\":" << num(R.cg_trimp) << ",\"rapido_m\":" << num(R.s.race.present ? R.s.race.kb_hs_m : NAN) << "}";
     o << ",\"desvios\":["; for (size_t k = 0; k < R.deviations.size(); k++) { if (k) o << ","; dev_json(o, R.deviations[k]); } o << "]";
     o << ",\"resumen\":" << training_summary_to_json(R.s) << "}";
   }

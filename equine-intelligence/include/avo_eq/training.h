@@ -16,7 +16,7 @@
 
 namespace avoeq {
 
-static const char* const TRAINING_VERSION = "1.1.0";   // 1.1.0: ficha de campo, A4 y base del planificador
+static const char* const TRAINING_VERSION = "1.2.0";   // 1.1.0: ficha de campo, A4 y base del planificador; 1.2.0: carga CG1–CG3
 static const char* const TRAINING_LOAD_ALGORITHM = "AVO_TRAINING_LOAD_V1";
 
 // Aires que cuentan para la historia (los demás —transición, desconocido— solo suman tiempo).
@@ -39,6 +39,15 @@ struct TrainingConfig {
   int trend_min_sessions = 5;
   int rest_watch_days = 10;            // más días sin entrenar: aviso de vuelta al trabajo
   KbRuleConfig kb;                     // base científica KB-1 (knowledge.h)
+  // CG1–CG3 (KB 1.30.0): carga interna (TRIMP) y externa (bandas GNSS) solo descriptivas, nivel INFO.
+  struct LoadCg {
+    bool enabled = true;
+    KbTrimpConfig trimp;               // FC de reposo 33 y máxima 213 por defecto («no propias»)
+    int ewma_acute_days = 7, ewma_chronic_days = 28;   // Williams 2017 [E-r]
+    int window_short_days = 7, window_long_days = 30;  // totales de CG2
+    double max_missing_fraction = 0.20;                // más sesiones sin dato en la ventana crónica: sin cociente [I]
+    int hr_max_min_sessions = 3;                       // FM1: FC máxima propia = pico de ≥ 3 trabajos rápidos [I]
+  } cg;
 };
 
 // Métricas de un aire dentro de una sesión. NaN = no disponible.
@@ -76,6 +85,10 @@ struct RaceSummary {
   // base científica KB-1 (bloque "base_cientifica" de trabajo_pista; NaN en análisis anteriores)
   double kb_race_pace = NAN, kb_band_m[KB_BANDS] = {NAN, NAN, NAN}, kb_canter_m = NAN, kb_gallop_m = NAN;
   double kb_bone_pct = NAN, kb_bone_low_pct = NAN, kb_strides = NAN;
+  // CG2 (KB 1.30.0): bandas de velocidad de Morrice-West 2020; NaN en análisis anteriores
+  double kb_cg_band_m[KB_CG_BANDS] = {NAN, NAN, NAN, NAN, NAN, NAN};
+  double kb_hs_m = NAN;                         // metros de trabajo rápido (≥ 13,3 m/s en PSI)
+  std::string kb_cg_scale;                      // ABSOLUTAS_PSI | RELATIVAS_V_CARRERA
 };
 
 // ECG de la cincha 0.5.x (bloque "cardio" del análisis, motor 2.0.0-dev29). NaN / vacío = no disponible.
@@ -92,6 +105,9 @@ struct CardioSummary {
   double recovery_hr[6] = {NAN, NAN, NAN, NAN, NAN, NAN};   // 1, 2, 4, 5, 10 y 15 min
   int ectopy_candidates = 0;
   std::string ectopy_level, ectopy_text;        // candidatos a revisar; nunca un diagnóstico
+  // CG1 (KB 1.30.0, cardio 1.1.0): TRIMP de la sesión y su histograma de FC (para recalcular con la FC propia)
+  double trimp = NAN, trimp_coverage_pct = NAN;
+  std::vector<std::pair<double, double>> hr_hist;   // [límite inferior lpm, segundos]
 };
 
 struct SessionSummary {
@@ -149,9 +165,31 @@ struct SessionLoad {
   int rest_days_before = -1;   // días desde la sesión anterior (-1: primera)
 };
 
+// CG1–CG3 (KB 1.30.0): carga descriptiva. NaN = sin dato.
+struct CgSeries {
+  double session = NAN;                // valor de la sesión (o del día de referencia)
+  double sum_short = NAN, sum_long = NAN;   // totales de 7 y 30 días
+  double ewma_acute = NAN, ewma_chronic = NAN, ratio = NAN;
+  double monotony = NAN, strain = NAN;
+  int sessions_long = 0, missing_long = 0;  // sesiones con y sin dato en la ventana crónica
+  std::string reason;                  // por qué falta el cociente
+};
+struct CgStatus {
+  bool available = false;
+  double hr_rest = NAN, hr_max = NAN;
+  std::string hr_rest_origin, hr_max_origin;   // POR_DEFECTO | CABALLO | PROPIA_HISTORIA
+  int hr_max_sessions = 0;             // trabajos rápidos con FC pico usados para la FC máxima propia
+  CgSeries internal, external;         // TRIMP y metros de trabajo rápido
+  double band_short_m[KB_CG_BANDS] = {NAN, NAN, NAN, NAN, NAN, NAN}, band_long_m[KB_CG_BANDS] = {NAN, NAN, NAN, NAN, NAN, NAN};
+  std::string scale;
+  std::vector<std::pair<long, std::pair<double, double>>> daily;   // día, (metros rápidos, TRIMP) en la ventana crónica
+  std::vector<std::string> notes;
+};
+
 struct SessionResult {
   SessionSummary s;
   SessionLoad load;
+  double cg_trimp = NAN;       // CG1 recalculado con la FC de referencia de la historia
   std::vector<Deviation> deviations;
   std::string level = "NORMAL";
   std::vector<std::string> reasons;
@@ -193,6 +231,7 @@ struct TrainingResult {
   std::vector<Trend> trends;
   KbStatus kb;                                      // base científica a la fecha de referencia
   PlannerStatus planner;                            // base del planificador semanal a la fecha de referencia
+  CgStatus cg;                                      // CG1–CG3 a la fecha de referencia (solo descriptiva)
   std::string level = "NORMAL";
   std::vector<std::string> reasons, warnings;
 };

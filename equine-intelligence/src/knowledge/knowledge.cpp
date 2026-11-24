@@ -79,6 +79,12 @@ void KbSessionLoad::add(double dt_s, double dd_m, double v, const SpeedBandConfi
   double dd = std::isnan(dd_m) ? 0 : std::max(0.0, dd_m);
   int k = kb_speed_band(v, b);
   if (k >= 0) { band_m[k] += dd; band_s[k] += dt_s; }
+  {  // CG2 (KB 1.30.0)
+    double e[KB_CG_BANDS - 1];
+    kb_cg_edges(b.cg_relative, b.race_pace, e);
+    int g = kb_cg_band(v, e);
+    if (g >= 0) { cg_band_m[g] += dd; cg_band_s[g] += dt_s; if (g >= KB_CG_HS_BAND) hs_m += dd; }
+  }
   if (!std::isnan(b.race_pace)) {
     if (v > b.gallop_lo()) gallop_m += dd;
     else if (v >= b.canter_lo()) canter_m += dd;
@@ -495,6 +501,78 @@ KbDriftResult kb_drift_down(const std::vector<double>& x, const KbDriftConfig& c
     double d = v[i] - mean; mean += d / acc; m2 += d * (v[i] - mean);
   }
   return r;
+}
+
+// ------------------------------------------------------------------ carga CG1–CG3 (KB 1.30.0)
+double kb_trimp_delta(double hr, const KbTrimpConfig& c) {
+  if (!std::isfinite(hr) || !(c.hr_max > c.hr_rest)) return NAN;
+  double d = (hr - c.hr_rest) / (c.hr_max - c.hr_rest);
+  return std::min(1.0, std::max(0.0, d));
+}
+
+void kb_trimp_add(KbTrimp* t, double dt_s, double hr, const KbTrimpConfig& c, std::vector<double>* hist) {
+  if (!t || !(dt_s > 0) || !std::isfinite(hr) || hr <= 0) return;
+  double d = kb_trimp_delta(hr, c);
+  if (std::isnan(d)) return;
+  double m = dt_s / 60.0;
+  if (std::isnan(t->trimp)) { t->trimp = 0; t->trimp_unweighted = 0; }
+  t->trimp += m * d * c.b * std::exp(c.c * d);
+  t->trimp_unweighted += m * d;
+  t->minutes += m;
+  if (hr > c.zone1_bpm) t->s_above_z1 += dt_s;
+  if (hr > c.zone2_bpm) t->s_above_z2 += dt_s;
+  if (hr > c.hr_max) t->s_above_max += dt_s;
+  if (hist) {
+    if ((int)hist->size() != KB_HR_BINS) hist->assign(KB_HR_BINS, 0.0);
+    int k = (int)std::floor(hr / KB_HR_BIN_BPM);
+    k = std::min(KB_HR_BINS - 1, std::max(0, k));
+    (*hist)[k] += dt_s;
+  }
+}
+
+KbTrimp kb_trimp_from_histogram(const std::vector<double>& h, const KbTrimpConfig& c) {
+  KbTrimp t;
+  for (size_t k = 0; k < h.size() && (int)k < KB_HR_BINS; k++)
+    if (h[k] > 0) kb_trimp_add(&t, h[k], (k + 0.5) * KB_HR_BIN_BPM, c, nullptr);
+  return t;
+}
+
+const char* kb_cg_band_name(int k) {
+  static const char* const n[KB_CG_BANDS] = {"LENTO", "MEDIO", "RAPIDO_1", "RAPIDO_2", "RAPIDO_3", "RAPIDO_4"};
+  return k >= 0 && k < KB_CG_BANDS ? n[k] : "";
+}
+
+void kb_cg_edges(bool relative, double race_pace, double out[KB_CG_BANDS - 1]) {
+  double f = relative && std::isfinite(race_pace) && race_pace > 0 ? race_pace / KB_CG_PSI_PACE : 1.0;
+  for (int k = 0; k < KB_CG_BANDS - 1; k++) out[k] = KB_CG_EDGES_PSI[k] * f;
+}
+
+int kb_cg_band(double v, const double e[KB_CG_BANDS - 1]) {
+  if (!std::isfinite(v) || v < 0) return -1;
+  int k = 0;
+  while (k < KB_CG_BANDS - 1 && v >= e[k]) k++;
+  return k;
+}
+
+double kb_ewma_lambda(int n) { return n > 0 ? 2.0 / (n + 1.0) : 1.0; }
+
+void kb_ewma(const std::vector<double>& daily, int na, int nc, double* acute, double* chronic) {
+  double la = kb_ewma_lambda(na), lc = kb_ewma_lambda(nc), a = 0, c = 0;
+  for (double x : daily) { double l = std::isfinite(x) ? x : 0.0; a = la * l + (1 - la) * a; c = lc * l + (1 - lc) * c; }
+  if (acute) *acute = daily.empty() ? NAN : a;
+  if (chronic) *chronic = daily.empty() ? NAN : c;
+}
+
+bool kb_foster(const std::vector<double>& w, double* monotony, double* strain) {
+  if (w.empty()) return false;
+  double sum = 0; for (double x : w) sum += std::isfinite(x) ? x : 0.0;
+  double mean = sum / w.size(), var = 0;
+  for (double x : w) { double l = std::isfinite(x) ? x : 0.0; var += (l - mean) * (l - mean); }
+  double sd = std::sqrt(var / w.size());
+  if (!(sd > 1e-9) || !(mean > 0)) return false;
+  if (monotony) *monotony = mean / sd;
+  if (strain) *strain = sum * mean / sd;
+  return true;
 }
 
 }  // namespace avoeq

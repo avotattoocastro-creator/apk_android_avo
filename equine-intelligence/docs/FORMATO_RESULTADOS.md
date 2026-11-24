@@ -40,6 +40,13 @@ pendiente, intercepto, `r2`, `mesetas`), `vhrmax` (`metodo`), `recuperacion[]` (
 `rachas`, `nivel` INFO | VIGILAR, `texto`, `diagnostico: false`), `avisos`. Con series: `epocas` ([t0, FC, v, artefacto]
 cada 5 s) y `latidos_rr` ([t, RR, candidato]). Tiempos en s GNSS desde la primera época.
 
+**Cardio 1.1.0 (motor 2.0.0-dev34, KB 1.30.0):** `carga_interna` (CG1, descriptiva): `regla` `CG1`, `algoritmo`
+`TRIMP_BANISTER_EQUINO_CG1`, `validado: false`, `trimp` y `trimp_sin_ponderar` (UA; `null` con ECG NO_UTILIZABLE),
+`minutos_con_fc`, `cobertura_pct`, `cobertura_baja` (< 80 %), `s_mas_180`, `s_mas_200`, `s_sobre_fc_max`,
+`fc_reposo_lpm`/`fc_reposo_origen` y `fc_max_lpm`/`fc_max_origen` (POR_DEFECTO | CABALLO), `b`, `c`, `etiquetas`
+(`formula`, `coeficientes`, `fc_reposo`, `fc_max`), `histograma_fc` (`ancho_lpm` 5, `s`: [[límite inferior lpm, segundos], …]
+solo intervalos con tiempo) y `nota`. Opciones nuevas de `avo_eq_analyse_ex`: `fc_reposo_lpm` (20–60) y `fc_max_lpm` (150–260).
+
 ## Análisis de entrenamientos (AVO Training Analytics 1.0.0) — ficha 12
 API: `avo_eq_training_summary(analisis_json, extra_json, &json)` y `avo_eq_training_analyse(entrada_json, opciones_json, cancel, &json)`.
 Mismos códigos de retorno; el texto se libera con `avo_eq_free`.
@@ -58,6 +65,16 @@ Mismos códigos de retorno; el texto se libera con `avo_eq_free`.
 - Métricas: `AIRE.velocidad_media`, `AIRE.longitud_tranco_m`, `AIRE.cadencia_hz`, `AIRE.correlacion_ciclos`,
   `AIRE.cv_intervalos`, más `carga_externa` y `distancia_m` en las tendencias.
 
+**Training 1.2.0 (motor 2.0.0-dev34):** el resumen añade `trabajo_pista.base_cientifica.bandas_cg_m` (6), `rapido_m`,
+`escala_cg` y `cardio.trimp`, `cardio.trimp_cobertura_pct`, `cardio.histograma_fc`. La historia añade
+`estado.carga_cg` (CG1–CG3, `nivel` siempre INFO, `validado: false`): `parametros` (con `etiquetas`), `fc_referencia`
+(`fc_reposo_lpm`, `fc_reposo_origen`, `fc_max_lpm`, `fc_max_origen` POR_DEFECTO | CABALLO | PROPIA_HISTORIA,
+`trabajos_rapidos_con_fc`), `interna` y `externa` (`sesion`, `total_corto` 7 d, `total_largo` 30 d, `ewma_aguda`,
+`ewma_cronica`, `cociente`, `monotonia`, `strain`, `sesiones_con_dato`, `sesiones_sin_dato`, `motivo`), `bandas`
+(`escala`, `bandas[]`: `banda`, `v_min_psi`, `v_max_psi`, `total_corto_m`, `total_largo_m`), `diaria` (28 días:
+`fecha`, `rapido_m`, `trimp`), `notas`, `nota`; y `sesiones[].carga_cg` (`trimp` recalculado, `rapido_m`). Opción
+`carga_cg` (true/false u objeto; ficha 14, §3 quinquies).
+
 `avo-equine-analysis` v2 añade `sesion.inicio_utc` (primera época GNSS con fecha y hora UTC, o `null`).
 
 ## Bloque `trabajo_pista` (AVO Track Work 1.0.0: entrenamiento de caballos de carreras) — ficha 13
@@ -67,6 +84,8 @@ Opciones de `avo_eq_analyse_ex`: `raza` (GENERICO | PSI | ARABE), `parcial_m` (2
 - `modulo` = `AVO_TRACK_WORK`, `perfil`;
 - `cincha`: `escala`, `lsb_por_g`, `calidad_vertical`, `sentido_avance_confirmado`, `vedba_media_g`, `carga_vedba_g_min`,
   `vedba_por_aire_g`, `giros`, `giros_por_aire`, `muestras_saturadas`;
+- `base_cientifica.carga_externa` (KB 1.30.0, CG2): `regla`, `escala` (ABSOLUTAS_PSI | RELATIVAS_V_CARRERA), `etiqueta`,
+  `bandas[]` (`banda` LENTO…RAPIDO_4, `v_min`, `v_max`, `distancia_m`, `tiempo_s`), `v_rapido_m_s`, `rapido_m`, `nota`;
 - `zancadas`: medianas y `lista` con t0, t1, f_hz, v, l_m, pico_v_g, desp_v_m, vedba_g, rasgo_lateral, giro_deg_s, mano y curva;
 - `mano`: `signo`, `calibracion`, `acuerdo_curvas`, zancadas por mano, `cambios`, `mano_de_fuera_en_curva_pct`;
 - `trabajos`: distancias, `v_max`, `mejor_200m_s` y `lista` con, para cada trabajo: tipo, velocidades, `parciales`, `mejores`,
