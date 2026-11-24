@@ -24,6 +24,26 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-24 — Casco V5 PROTOTIPO A — PCB 60 × 60 sin vías en pads: PUERTA SUPERADA
+**Autor:** Claude · **Rama:** `claude/v5p-60mm` (incluye `claude/v5p-vias-fuera-de-pad`) · **CI PCB:** 45333668680,
+45334131803, 45334551187 (**puerta superada**) · **CI CAD:** 45334134646 (éxito, 0 interferencias)
+**Decisión del usuario (24/11, 00:50):** se puede ampliar la PCB si hace falta para que quede bien eléctricamente.
+**Qué cambia:**
+- Placa de **60 × 60** (antes 56 × 56): anillo LED, J16, pogo, J2/J6, J7, microSD y taladros de la caja (±26,5) se
+  desplazan 2 mm hacia fuera. La URTK1.2 y los pines de la placa de masa no cambian.
+- Separación entre patios 0,12 → **0,35 mm** (`place_v5.py`), para que las vías quepan fuera de los pads.
+- Ruteado: Freerouting (CI) + `repair.py` en local: pasada normal, `--clear` en la zona del J16 y la vía GND de C38.2
+  movida para liberar U12.7 (SCL). Restos colgantes podados.
+- Cápsula del CAD (calculada desde `pcb_mecanica.json`): **65,4 × 65,4 × 35,1 mm** (antes 61,4), base de casco 69,4;
+  0 interferencias. El texto de tornillos del informe CAD ya sale de `pcb_mecanica.json`.
+**Resultado (CI de KiCad 9):** DRC 0 errores, 0 conexiones incompletas, 0 cortocircuitos, paridad 0, ERC 0/0 y
+**0 vías dentro de pads con pasta**. Avisos: solo serigrafía (7) y 2 de anchura mínima del relleno GND en una esquina.
+Único caso de vía en un pad: **TP3** (punto de prueba GND **sin pasta**, no se suelda).
+**Validación:** COMPILADO / CI. **NO VERIFICADO** en hardware.
+**Pendiente:** revisar la vista previa de JLC (giros) y **confirmar con el usuario antes de pedir**. Revisar el soporte
+del casco (gomas GPA) con la cápsula de 65,4. Aplicar la misma corrección a la REV B del casco, al DOCK V1 y a la
+cincha REV D antes de pedirlas.
+
 ## 2026-11-24 — Casco V5 PROTOTIPO A — vías fuera de pads: estado del ruteado (sin cerrar)
 **Autor:** Claude · **Rama:** `claude/v5p-vias-fuera-de-pad` · **PR:** #128 · **CI:** 45234497647, 45249293042,
 45263403036 (las tres con la puerta en **fallo**; no hay Gerber nuevos)
