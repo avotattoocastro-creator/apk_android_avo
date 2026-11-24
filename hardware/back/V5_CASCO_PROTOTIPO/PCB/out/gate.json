@@ -39,8 +39,8 @@
  ],
  "drc_errors": {},
  "drc_warnings": {
-  "via_dangling": 2,
-  "track_dangling": 8,
+  "track_dangling": 4,
+  "via_dangling": 1,
   "silk_edge_clearance": 2,
   "silk_over_copper": 3
  }
