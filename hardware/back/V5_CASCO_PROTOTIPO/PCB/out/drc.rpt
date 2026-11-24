@@ -1,8 +1,41 @@
 ** Drc report for AVO_BACK_V5P_PCB.kicad_pcb **
-** Created on 2026-11-23T00:39:17+0000 **
+** Created on 2026-11-24T00:22:49+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 5 DRC violations **
+** Found 14 DRC violations **
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(98.4250 mm, 103.9750 mm): Track [+3V3_SD] on In2.Cu, length 0.0707 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(113.7250 mm, 95.3250 mm): Track [VBAT] on F.Cu, length 0.2000 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(96.5750 mm, 77.3250 mm): Track [VBUS] on In2.Cu, length 0.2828 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(89.2750 mm, 115.1250 mm): Track [VSYS] on In2.Cu, length 0.3000 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(87.4250 mm, 117.0750 mm): Track [VSYS] on In2.Cu, length 0.2000 mm
+[via_dangling]: Via is not connected or connected on only one layer
+    Local override; warning
+    @(92.9250 mm, 95.3250 mm): Via [BAT_ADC] on F.Cu - B.Cu
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(86.7250 mm, 114.1250 mm): Track [CHG_TS] on In2.Cu, length 0.1500 mm
+[via_dangling]: Via is not connected or connected on only one layer
+    Local override; warning
+    @(117.5250 mm, 92.3750 mm): Via [I2C_SCL] on F.Cu - B.Cu
+[via_dangling]: Via is not connected or connected on only one layer
+    Local override; warning
+    @(116.0750 mm, 93.4750 mm): Via [I2C_SDA] on F.Cu - B.Cu
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(83.5250 mm, 78.7250 mm): Track [VLED] on In2.Cu, length 0.0707 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(110.4404 mm, 86.6824 mm): Track [ZED_TX1] on In2.Cu, length 0.1427 mm
 [silk_edge_clearance]: Silkscreen clipped by board edge
     Rule: board setup constraints silk; warning
     @(125.0000 mm, 72.0000 mm): Segment on Edge.Cuts
@@ -14,15 +47,66 @@
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(78.4560 mm, 78.2830 mm): Segment on B.Silkscreen
-[silk_over_copper]: Silkscreen clipped by solder mask
-    Local override; warning
-    @(113.0000 mm, 95.0000 mm): Circle of U12 on F.Silkscreen
-[silk_over_copper]: Silkscreen clipped by solder mask
-    Local override; warning
-    @(82.4600 mm, 85.8000 mm): Circle of L71 on F.Silkscreen
 
-** Found 0 unconnected pads **
+** Found 12 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
+    @(75.1600 mm, 87.0700 mm): Pad 2 [GND] of C97 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
+    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(87.1300 mm, 93.3000 mm): Pad 1 [GND] of TP3 on F.Cu
+    @(88.5500 mm, 92.6800 mm): Pad 2 [GND] of R23 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(87.3100 mm, 87.1000 mm): Pad 2 [GND] of C27 on F.Cu
+    @(86.7000 mm, 85.5000 mm): Pad 4 [GND] of U11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(88.5500 mm, 92.6800 mm): Pad 2 [GND] of R23 on F.Cu
+    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(88.6800 mm, 75.1400 mm): Pad 2 [GND] of C90 on F.Cu
+    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
+    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
+    @(90.5300 mm, 112.2300 mm): Pad 2 [GND] of R12 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(90.5300 mm, 112.2300 mm): Pad 2 [GND] of R12 on F.Cu
+    @(89.5800 mm, 111.1600 mm): Pad 2 [GND] of C18 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(128.0000 mm, 125.0000 mm): Zone [GND] on In1.Cu, priority 0
+    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(128.0000 mm, 125.0000 mm): Zone [GND] on In1.Cu, priority 0
+    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
+    @(105.3250 mm, 106.0750 mm): Pad 11 [GND] of J3 on F.Cu
 
-** Found 0 Footprint errors **
+** Found 3 Footprint errors **
+[footprint_symbol_mismatch]: AVO:L0806_PROVISIONAL doesn't match footprint given by symbol (AVO:easyeda2kicad_IND-SMD_L2.0-W1.6_FNR2016XXS).
+    Local override; warning
+    @(83.2600 mm, 84.8000 mm): Footprint L71
+[footprint_symbol_mismatch]: AVO:SOT563_PROVISIONAL doesn't match footprint given by symbol (AVO:easyeda2kicad_SOT-563_L1.6-W1.2-P0.50-LS1.6-BR).
+    Local override; warning
+    @(86.0000 mm, 85.0000 mm): Footprint U11
+[footprint_symbol_mismatch]: AVO:TDFN8_PROVISIONAL doesn't match footprint given by symbol (AVO:easyeda2kicad_TDFN-8_L2.0-W2.0-P0.50-BL-EP1.2).
+    Local override; warning
+    @(114.0000 mm, 94.0000 mm): Footprint U12
 
 ** End of Report **

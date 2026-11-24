@@ -1,26 +1,48 @@
-# AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de fabricación
+# AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de diagnóstico
 
-- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `5b2aa59052bca4ff1ce1ec58aec19f594cc3fbc0` · ejecución de CI: 45089929588
+- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
+- Commit: `532364b78da01b3b5cfc4213151d04abdac3c9fb` · ejecución de CI: 45296519857
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 56 × 56 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo bajo la URTK1.2, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 137 en total, 110 para montar, 1 sin montar (DNP: C69), 26 a mano (pads de hilo y de prueba)
-- Pistas: 1103 · vías: 219 · ruteado completo (0 conexiones incompletas)
+- Pistas: 1307 · vías: 228 · ruteado INCOMPLETO (12 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | correcto | 0 |
+| DRC: conexiones incompletas | **FALLA** | 12 |
 | DRC: cortocircuitos | correcto | 0 |
-| DRC: paridad esquema ↔ placa | correcto | 0 |
+| DRC: paridad esquema ↔ placa | **FALLA** | 3 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
+| Vías en pads SMD (fuente/vias_en_pad.py) | correcto | 0 |
 
+
+### Conexiones incompletas
+- Zone [GND] on F.Cu, priority 0 ↔ Pad 2 [GND] of C97 on F.Cu
+- Zone [GND] on F.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
+- Pad 1 [GND] of TP3 on F.Cu ↔ Pad 2 [GND] of R23 on F.Cu
+- Pad 2 [GND] of C27 on F.Cu ↔ Pad 4 [GND] of U11 on F.Cu
+- Pad 2 [GND] of R23 on F.Cu ↔ Zone [GND] on F.Cu, priority 0
+- Pad 2 [GND] of C90 on F.Cu ↔ Zone [GND] on F.Cu, priority 0
+- Zone [GND] on F.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
+- Zone [GND] on F.Cu, priority 0 ↔ Pad 2 [GND] of R12 on F.Cu
+- Pad 2 [GND] of R12 on F.Cu ↔ Pad 2 [GND] of C18 on F.Cu
+- Zone [GND] on In1.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
+- Zone [GND] on In1.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
+- Zone [GND] on F.Cu, priority 0 ↔ Pad 11 [GND] of J3 on F.Cu
+
+### Paridad esquema ↔ placa
+- footprint_symbol_mismatch: AVO:L0806_PROVISIONAL doesn't match footprint given by symbol (AVO:easyeda2kicad_IND-SMD_L2.0-W1.6_FNR2016XXS).
+- footprint_symbol_mismatch: AVO:SOT563_PROVISIONAL doesn't match footprint given by symbol (AVO:easyeda2kicad_SOT-563_L1.6-W1.2-P0.50-LS1.6-BR).
+- footprint_symbol_mismatch: AVO:TDFN8_PROVISIONAL doesn't match footprint given by symbol (AVO:easyeda2kicad_TDFN-8_L2.0-W2.0-P0.50-BL-EP1.2).
 
 ## Advertencias de DRC (no bloqueantes)
-- silk_over_copper: 3
+- track_dangling: 8
+- via_dangling: 3
 - silk_edge_clearance: 2
+- silk_over_copper: 1
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: ninguna
@@ -74,8 +96,8 @@
 - Piezas sin existencias para 5 placas: C165948, C8598, C25905, C5378721
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **sí**
-- Apto para solicitar prototipos: **sí, pendiente de validación física**
+- Diseño verificado por software (KiCad 9 en el CI): **no**
+- Apto para solicitar prototipos: **no**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)
@@ -88,4 +110,4 @@
 - REV B: firmware nuevo (BACK 5.x): POWER_HOLD (GPIO46) al arrancar, pulsación larga, LED_PWR (GPIO48), I²C (MAX17048 + LSM6DSV16X).
 - Con el anillo apagado, GPIO47 a 0 (no alimentar los LED por DIN). PROTO A: 8 LED (D14 a la derecha de la salida de la microSD).
 - Nada de esto se ha fabricado ni medido: no es un prototipo validado.
-::notice title=Puerta de fabricación::SUPERADA
+::notice title=Puerta de fabricación::NO SUPERADA

@@ -1,5 +1,5 @@
 {
- "ok": true,
+ "ok": false,
  "checks": [
   {
    "name": "DRC: errores",
@@ -8,8 +8,8 @@
   },
   {
    "name": "DRC: conexiones incompletas",
-   "ok": true,
-   "n": 0
+   "ok": false,
+   "n": 12
   },
   {
    "name": "DRC: cortocircuitos",
@@ -18,8 +18,8 @@
   },
   {
    "name": "DRC: paridad esquema \u2194 placa",
-   "ok": true,
-   "n": 0
+   "ok": false,
+   "n": 3
   },
   {
    "name": "ERC: errores",
@@ -30,11 +30,18 @@
    "name": "ERC: advertencias",
    "ok": true,
    "n": 0
+  },
+  {
+   "name": "V\u00edas en pads SMD (fuente/vias_en_pad.py)",
+   "ok": true,
+   "n": 0
   }
  ],
  "drc_errors": {},
  "drc_warnings": {
+  "track_dangling": 8,
+  "via_dangling": 3,
   "silk_edge_clearance": 2,
-  "silk_over_copper": 3
+  "silk_over_copper": 1
  }
 }
