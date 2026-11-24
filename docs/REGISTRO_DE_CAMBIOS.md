@@ -24,6 +24,23 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-25 — iPad — Portada nueva: texto integrado en el atardecer
+**Autor:** Claude (petición del usuario 25/11) · **Rama:** `claude/ipad-portada-atardecer` · **CI:** `build-avo-ipad.yml` lanzado a mano en la rama con TestFlight (resultado en el PR)
+**Qué cambia:**
+- `avo_home_hero.jpg` del iPad pasa a ser la portada elegida por el usuario (1448×1086, atardecer en la playa) con
+  «AVO», «PERFORMANCE HORSE», «TRAINING ANALYSIS» y el lema «CIENCIA · TECNOLOGÍA · RENDIMIENTO» ya pintados en la
+  imagen con luz dorada. Se quitaron de la imagen la barra de estado y la marca de esquina de la captura.
+- `StartView`: deja de dibujar esos textos encima de la foto; solo dibuja **«INICIAR»** en las coordenadas de la imagen
+  (centrado, y = 882 de 1086, sobre la arena mojada y encima del lema), con borde cálido y cristal oscuro a juego. La
+  imagen se escala como «rellenar» y centrada. Se conservan `start.iniciar` (pruebas de capturas) y `start.motto`
+  (ahora en la imagen, con etiqueta de accesibilidad).
+**No se ha tocado:** Windows (sigue con su `HeroArt.xaml`), Android, motor, contratos, workflows, firmas, `Info.plist`
+ni número de build.
+**Validación:** IMPLEMENTADO. Compilación en CI pendiente en el PR. **NO VERIFICADO** en el iPad.
+**Pendiente:** ver en el iPad que «INICIAR» cae entre los caballos y el lema; si se quiere, la misma portada en Windows.
+
+---
+
 ## 2026-11-24 — iPad — Pulso del ECG y carga de la sesión en pantalla (motor 2.0.0-dev34)
 **Autor:** Claude (chat integrador, petición del usuario 24/11) · **Rama:** `claude/ipad-carga-entrenamiento` · **CI:** iPad en la rama (sin TestFlight) y al integrar
 **Qué cambia:**
