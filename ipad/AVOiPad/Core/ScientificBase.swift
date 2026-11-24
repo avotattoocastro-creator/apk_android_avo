@@ -63,6 +63,13 @@ struct KbSessionBlock: Equatable {
     var stridesLow: Double? = nil
     var calibrated: Bool? = nil             // false en árabe (parámetros de PSI)
     var boneNote: String = ""
+    // CG2 (KB 1.30.0, motor 2.0.0-dev34): carga externa de la sesión en 6 bandas (Morrice-West 2020)
+    var cgPresent: Bool = false
+    var cgScale: String = ""                // ABSOLUTAS_PSI | RELATIVAS_V_CARRERA
+    var cgBands: [KbBand] = []              // LENTO, MEDIO, RAPIDO_1…RAPIDO_4
+    var cgFastSpeed: Double? = nil          // m/s desde la que cuenta el trabajo rápido
+    var cgFastM: Double? = nil
+    var cgNote: String = ""
 
     init() {}
 
@@ -94,6 +101,20 @@ struct KbSessionBlock: Equatable {
         stridesLow = KbText.finite(KJ.num(fo, "zancadas_lentas_estimadas"))
         if let fo = fo, fo["calibrado"] is NSNumber { calibrated = KJ.bool(fo, "calibrado") }
         boneNote = KJ.str(fo, "nota")
+        if let cg = KJ.obj(o, "carga_externa") {
+            cgPresent = true
+            cgScale = KJ.str(cg, "escala")
+            var k: Int = 0
+            for b in KJ.objs(cg, "bandas") {
+                guard let b = b else { continue }
+                cgBands.append(KbBand(id: k, code: KJ.str(b, "banda"), vMin: KbText.finite(KJ.num(b, "v_min")), vMax: KbText.finite(KJ.num(b, "v_max")),
+                                      distanceM: KbText.finite(KJ.num(b, "distancia_m")), timeS: KbText.finite(KJ.num(b, "tiempo_s"))))
+                k += 1
+            }
+            cgFastSpeed = KbText.finite(KJ.num(cg, "v_rapido_m_s"))
+            cgFastM = KbText.finite(KJ.num(cg, "rapido_m"))
+            cgNote = KJ.str(cg, "nota")
+        }
     }
 
     func band(_ code: String) -> KbBand? { bands.first { $0.code == code } }

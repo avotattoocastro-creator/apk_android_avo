@@ -206,10 +206,29 @@ enum Gzip {
             guard p < bytes.count else { throw PpkError.failed("gzip cortado") }
             let (member, used) = try inflate(Array(bytes[p...]))
             out.append(member)
-            pos = p + used + 8   // CRC32 + ISIZE
+            pos = nextMember(bytes, from: p, used: used, size: member.count)
         }
         if out.isEmpty { throw PpkError.failed("gzip vacío") }
         return out
+    }
+
+    /// Inicio del miembro siguiente. El framework Compression puede dar por consumida toda la entrada aunque el flujo
+    /// deflate acabe antes, así que `used` no es fiable: se acepta p + used + 8 si ahí empieza una cabecera gzip y, si no,
+    /// se busca la siguiente cabecera 1F 8B 08 cuyo ISIZE previo (4 bytes LE) coincide con el tamaño descomprimido.
+    static func nextMember(_ b: [UInt8], from p: Int, used: Int, size: Int) -> Int {
+        func isHeader(_ q: Int) -> Bool { q >= 0 && q + 3 <= b.count && b[q] == 0x1F && b[q + 1] == 0x8B && b[q + 2] == 8 }
+        let direct: Int = p + used + 8   // CRC32 + ISIZE
+        if isHeader(direct) { return direct }
+        let isize: UInt32 = UInt32(truncatingIfNeeded: size)
+        var q: Int = p + 8
+        while q + 3 <= b.count {
+            if isHeader(q) {
+                let v: UInt32 = UInt32(b[q - 4]) | UInt32(b[q - 3]) << 8 | UInt32(b[q - 2]) << 16 | UInt32(b[q - 1]) << 24
+                if v == isize { return q }
+            }
+            q += 1
+        }
+        return b.count   // último miembro
     }
 
     /// Deflate en bruto; devuelve los datos y los bytes de entrada consumidos.

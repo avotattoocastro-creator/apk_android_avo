@@ -29,6 +29,10 @@ struct KbSessionCard: View {
                 boneBlock(kb)
                 Divider().overlay(Avo.line)
                 finalSpeedBlock
+                if kb.cgPresent {
+                    Divider().overlay(Avo.line)
+                    loadBlock(kb)
+                }
             }
         }
         .accessibilityIdentifier("trackwork.kb")
@@ -127,6 +131,28 @@ struct KbSessionCard: View {
     }
 
     // ---------------------------------------------------------------- últimos 600 m
+    // ---------------------------------------------------------------- carga externa CG2
+    private func loadBlock(_ kb: KbSessionBlock) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            KbSectionTitle(text: kb.cgScale == "RELATIVAS_V_CARRERA" ? "Carga de la sesión · bandas escaladas por la velocidad de carrera"
+                                                                      : "Carga de la sesión · bandas de Morrice-West 2020")
+            AvoMetric(label: "Trabajo rápido", value: KbText.metres(kb.cgFastM),
+                      caption: "Desde \(KbText.ms(kb.cgFastSpeed)) · entra en la carga de 7 y 30 días de la historia")
+            HStack(spacing: 8) { KbHead(text: "Banda", width: 130); KbHead(text: "Límites", width: 130); KbHead(text: "Distancia", width: 90); KbHead(text: "Tiempo", width: 80) }
+            ForEach(kb.cgBands) { (b: KbBand) in
+                HStack(spacing: 8) {
+                    Text(TrainingLoadCg.bandTitle(b.code)).frame(width: 130, alignment: .leading)
+                    KbCell(text: b.limitsText, width: 130)
+                    KbCell(text: KbText.metres(b.distanceM), width: 90)
+                    KbCell(text: b.timeS.map { TrackWorkText.seconds($0, 0) } ?? KbText.noData, width: 80)
+                }
+                .font(.footnote.monospacedDigit()).foregroundStyle(Avo.text)
+            }
+            Text("Descriptivo, sin validar en caballos de carreras: no cambia el estado del caballo.")
+                .font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
     private var finalSpeedBlock: some View {
         let list: [TrackWorkEffort] = tw.allEfforts
         return VStack(alignment: .leading, spacing: 6) {
