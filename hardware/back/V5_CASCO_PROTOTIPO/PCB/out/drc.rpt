@@ -1,108 +1,94 @@
 ** Drc report for AVO_BACK_V5P_PCB.kicad_pcb **
-** Created on 2026-11-23T20:51:06+0000 **
+** Created on 2026-11-24T00:27:00+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 14 DRC violations **
-[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.1491 mm)
-    Local override; error
-    @(90.3250 mm, 77.4750 mm): Track [GND] on F.Cu, length 0.8500 mm
-    @(89.7759 mm, 77.9974 mm): Via [LED_PWR] on F.Cu - B.Cu
-[track_dangling]: Track has unconnected end
-    Local override; warning
-    @(98.4250 mm, 103.9750 mm): Track [+3V3_SD] on In2.Cu, length 0.0707 mm
-[track_dangling]: Track has unconnected end
-    Local override; warning
-    @(98.2000 mm, 91.4600 mm): Track [GND] on F.Cu, length 0.7000 mm
-[track_dangling]: Track has unconnected end
-    Local override; warning
-    @(96.5750 mm, 77.3250 mm): Track [VBUS] on In2.Cu, length 0.2828 mm
-[via_dangling]: Via is not connected or connected on only one layer
-    Local override; warning
-    @(84.3750 mm, 88.5750 mm): Via [VSYS] on F.Cu - B.Cu
-[track_dangling]: Track has unconnected end
-    Local override; warning
-    @(89.2750 mm, 115.1250 mm): Track [VSYS] on In2.Cu, length 0.3000 mm
-[track_dangling]: Track has unconnected end
-    Local override; warning
-    @(87.4250 mm, 117.0750 mm): Track [VSYS] on In2.Cu, length 0.2000 mm
-[track_dangling]: Track has unconnected end
-    Local override; warning
-    @(83.8750 mm, 86.7750 mm): Track [VLED] on F.Cu, length 0.4500 mm
-[connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0428 mm) (F.Cu)
-    Rule: board setup constraints; warning
-    @(83.8750 mm, 86.7750 mm): Track [VLED] on F.Cu, length 0.4500 mm
-    @(83.3800 mm, 87.5000 mm): Pad 1 [VLED] of C99 on F.Cu
+** Found 9 DRC violations **
 [silk_edge_clearance]: Silkscreen clipped by board edge
     Rule: board setup constraints silk; warning
-    @(125.0000 mm, 72.0000 mm): Segment on Edge.Cuts
-    @(99.5000 mm, 73.6500 mm): Segment of J16 on F.Silkscreen
+    @(127.0000 mm, 70.0000 mm): Segment on Edge.Cuts
+    @(99.5000 mm, 71.6500 mm): Segment of J16 on F.Silkscreen
 [silk_edge_clearance]: Silkscreen clipped by board edge
     Rule: board setup constraints silk; warning
-    @(125.0000 mm, 72.0000 mm): Segment on Edge.Cuts
-    @(108.9000 mm, 73.6500 mm): Segment of J16 on F.Silkscreen
+    @(127.0000 mm, 70.0000 mm): Segment on Edge.Cuts
+    @(108.9000 mm, 71.6500 mm): Segment of J16 on F.Silkscreen
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
-    @(78.4560 mm, 78.2830 mm): Segment on B.Silkscreen
+    @(89.6500 mm, 74.9500 mm): PCB text 'GND' on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(95.0500 mm, 74.9500 mm): PCB text 'AUX' on F.Silkscreen
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(113.0000 mm, 95.0000 mm): Circle of U12 on F.Silkscreen
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
-    @(82.4600 mm, 85.8000 mm): Circle of L71 on F.Silkscreen
+    @(82.4900 mm, 86.4000 mm): Circle of L71 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(89.6500 mm, 74.9500 mm): PCB text 'GND' on F.Silkscreen
+    @(88.1500 mm, 75.8600 mm): Segment of D2 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(89.6500 mm, 74.9500 mm): PCB text 'GND' on F.Silkscreen
+    @(89.8500 mm, 75.8600 mm): Segment of D2 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(95.1200 mm, 75.1036 mm): Segment of R20 on F.Silkscreen
+    @(95.0500 mm, 74.9500 mm): PCB text 'AUX' on F.Silkscreen
 
 ** Found 13 unconnected pads **
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(75.1600 mm, 87.0700 mm): Pad 2 [GND] of C97 on F.Cu
-    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
+    @(97.0100 mm, 77.7625 mm): Pad 5 [VBUS] of U6 on F.Cu
+    @(89.4000 mm, 79.0000 mm): Pad 2 [VBUS] of F2 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
-    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
+    @(113.7500 mm, 93.0600 mm): Pad 7 [I2C_SCL] of U12 on F.Cu
+    @(114.0000 mm, 88.0875 mm): Track [I2C_SCL] on F.Cu, length 0.7275 mm
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(85.2800 mm, 87.5000 mm): Pad 2 [GND] of C99 on F.Cu
-    @(87.3100 mm, 87.1000 mm): Pad 2 [GND] of C27 on F.Cu
+    @(89.5750 mm, 71.7600 mm): Pad 1 [LED_D1] of D10 on F.Cu
+    @(103.3600 mm, 103.9000 mm): Pad 2 [LED_D1] of R24 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
-    @(85.2800 mm, 87.5000 mm): Pad 2 [GND] of C99 on F.Cu
+    @(99.3750 mm, 108.0750 mm): Pad 5 [SD_CLK] of J3 on F.Cu
+    @(100.2900 mm, 106.3200 mm): Pad 2 [SD_CLK] of R46 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
-    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
+    @(98.3650 mm, 102.2000 mm): Pad 20 [SD_CLK0] of U4 on F.Cu
+    @(99.2700 mm, 106.3200 mm): Pad 1 [SD_CLK0] of R46 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
-    @(88.6800 mm, 75.1400 mm): Pad 2 [GND] of C90 on F.Cu
+    @(102.6750 mm, 108.0750 mm): Pad 2 [SD_D3] of J3 on F.Cu
+    @(102.8600 mm, 105.1600 mm): Pad 1 [SD_D3] of R45 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(89.5800 mm, 111.1600 mm): Pad 2 [GND] of C18 on F.Cu
-    @(90.5300 mm, 112.2300 mm): Pad 2 [GND] of R12 on F.Cu
+    @(102.8600 mm, 105.1600 mm): Pad 1 [SD_D3] of R45 on F.Cu
+    @(90.2500 mm, 95.8700 mm): Pad 10 [SD_D3] of U4 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
-    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
+    @(101.2500 mm, 79.5700 mm): Pad 1 [USBC_CC2] of R31 on F.Cu
+    @(102.4500 mm, 77.6950 mm): Pad B5 [USBC_CC2] of J16 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
-    @(90.5300 mm, 112.2300 mm): Pad 2 [GND] of R12 on F.Cu
+    @(106.6500 mm, 77.6950 mm): Track [USBC_VBUS] on F.Cu, length 0.9767 mm
+    @(101.7500 mm, 77.6950 mm): Pad A9 [USBC_VBUS] of J16 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(90.5300 mm, 112.2300 mm): Pad 2 [GND] of R12 on F.Cu
-    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
+    @(85.2500 mm, 85.5000 mm): Pad 6 [VLED] of U11 on F.Cu
+    @(87.9500 mm, 86.0100 mm): Pad 1 [VLED] of R25 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(105.3250 mm, 106.0750 mm): Pad 11 [GND] of J3 on F.Cu
-    @(128.0000 mm, 125.0000 mm): Zone [GND] on F.Cu, priority 0
+    @(85.6000 mm, 89.5400 mm): Track [VLED] on F.Cu, length 0.7200 mm
+    @(85.2500 mm, 85.5000 mm): Pad 6 [VLED] of U11 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(89.4750 mm, 115.1250 mm): Track [VSYS] on F.Cu, length 0.3000 mm
-    @(89.2750 mm, 115.1250 mm): Track [VSYS] on In2.Cu, length 0.3000 mm
+    @(88.4500 mm, 71.7600 mm): Pad 2 [VLED] of D10 on F.Cu
+    @(86.2600 mm, 73.1500 mm): Track [VLED] on F.Cu, length 5.7684 mm
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(83.8750 mm, 86.7750 mm): Track [VLED] on F.Cu, length 0.4500 mm
-    @(83.3800 mm, 87.5000 mm): Pad 1 [VLED] of C99 on F.Cu
+    @(92.0150 mm, 102.2000 mm): Pad 15 [ZED_TX2] of U4 on F.Cu
+    @(106.2800 mm, 103.8700 mm): Pad 2 [ZED_TX2] of R54 on F.Cu
 
 ** Found 0 Footprint errors **
 
