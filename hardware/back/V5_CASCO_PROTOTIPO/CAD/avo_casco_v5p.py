@@ -1,6 +1,6 @@
 """AVO BACK V5 CASCO PROTOTIPO A (18/11/2026): cápsula de 61,4 mm para la PCB de 56 × 56 con la URTK1.2 (ZED-F9P)
 soldada sobre la cara B por tiras de pines (plástico 2,5), placa de masa de 0,8 mm sobre el ZED (con kapton) y la
-antena encima, desplazada para no pisar la pila de la URTK1.2. Tornillos a ±24,5 (fuera de la URTK1.2).
+antena encima, desplazada para no pisar la pila de la URTK1.2. Tornillos a ±24,5 (fuera de la URTK1.2); 24/11/2026: placa de 60 → ±26,5 (de pcb_mecanica.json).
 Workflow: .github/workflows/build-back-v5p-cad.yml. Lo de debajo es la descripción heredada de la REV B.
 
 AVO BACK V5 CASCO · cápsula estanca (base + tapa + junta) y base magnética desprendible para el casco.
@@ -317,7 +317,7 @@ def main():
                           z_cara_F=round(Z_F, 2), z_junta=round(Z_PCB_TOP, 2), anillo_z=[round(Z_RING0, 2), round(Z_RING1, 2)], sellado="pegamento (tipo B-7000/T-7000) en las 2 uniones del anillo y entre sus mitades; sin juntas TPU", z_techo=round(Z_CEIL, 2),
                           bateria_max_mm=[BAT["x"], BAT["y"], BAT["t"]], base_casco=kind,
                           altura_total_sobre_casco_mm=round(H + HB["t"], 2),
-                          tornillos="4 × M2,5 × 16 a ±24,5 (cabeza cilíndrica) + junta tórica 2,5 × 1 + inserto M2,5 Ø3,5 × 4",
+                          tornillos="4 × M2,5 × 16 a ±%.1f (cabeza cilíndrica)" % abs(MEC["taladros"][0][0]) + " + junta tórica 2,5 × 1 + inserto M2,5 Ø3,5 × 4",
                           urtk_z=[round(Z_URTK0, 2), round(Z_URTK1, 2)], placa_masa_z=[round(Z_PM0, 2), round(Z_PM1, 2)],
                           antena_xy=[round(ANT_C[0], 2), round(ANT_C[1], 2)], antena_z=[round(Z_ANT0, 2), round(Z_ANT0 + ANT["h"], 2)],
                           hall_xy=[round(HALL_XY[0], 2), round(HALL_XY[1], 2)],
