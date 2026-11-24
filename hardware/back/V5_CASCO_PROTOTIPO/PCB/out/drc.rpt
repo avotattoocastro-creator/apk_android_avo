@@ -1,11 +1,11 @@
 ** Drc report for AVO_BACK_V5P_PCB.kicad_pcb **
-** Created on 2026-11-24T05:37:54+0000 **
+** Created on 2026-11-24T05:41:32+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
 ** Found 10 DRC violations **
 [track_dangling]: Track has unconnected end
     Local override; warning
-    @(98.2250 mm, 80.9750 mm): Track [USB_DP_C] on F.Cu, length 0.7778 mm
+    @(96.2250 mm, 80.8750 mm): Track [USB_DP_C] on F.Cu, length 0.1414 mm
 [connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0811 mm) (F.Cu)
     Rule: board setup constraints; warning
     @(130.0000 mm, 127.0000 mm): Zone [GND] on F.Cu, priority 0
