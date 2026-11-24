@@ -63,7 +63,7 @@ DECAP = {"C21": ("U3", "1"), "C22": ("U3", "5"), "C60": ("U7", "1"), "C61": ("J1
 # auditoría 22/11/2026: piezas con objetivo fijo (no junto a un pin): la NTC sobre el centro de la batería, lejos del
 # BQ24072, y el Schottky del USB-C junto a J16
 OBJETIVO = {"RT2": (8.0, -3.0), "D18": (8.0, 21.0)}
-GAP = 0.12            # separación mínima entre patios
+GAP = 0.35            # separación mínima entre patios (24/11: 0,12 → 0,35, sitio para las vías fuera de los pads)
 STEP = 0.2
 
 
