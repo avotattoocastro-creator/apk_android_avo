@@ -36,6 +36,9 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
   de Morrice-West 2020 (o escaladas por la velocidad de carrera en árabes) con distancia y tiempo.
 - La tarjeta **«Carga de entrenamiento (CG1–CG3)»** de la historia del caballo ya la dejó el PR #129.
 - Pruebas: `SessionPulseLoadTests` (3) y `KeyDataTests` (4 casillas de pulso, vacías sin ECG).
+- **Corrección PPK (`Gzip.decompress`):** con dos miembros gzip seguidos solo leía el primero (300 de 600 B en
+  `PpkTests.testGzip`, CI del iPad en rojo desde el 23/11): el framework Compression da por consumida toda la entrada. El
+  miembro siguiente se localiza por su cabecera y el ISIZE del anterior.
 **No se ha tocado:** motor, contratos, firmware, workflows, firmas, `Info.plist` ni número de build.
 **Pendiente:** lo mismo en Android y Windows (`KeyData.cs` sigue con 3 casillas de pulso fijas; la prueba de paridad del
 SelfTest de Windows no cambia). Ver la pantalla con una sesión real con ECG de la cincha 0.5.0.
