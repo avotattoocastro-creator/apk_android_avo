@@ -2,8 +2,8 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.29.0",
-  "fecha": "2026-11-23",
+  "version": "1.30.0",
+  "fecha": "2026-11-24",
   "razas": [
     "PSI",
     "ARABE"
@@ -157,6 +157,11 @@
       "fecha": "2026-11-23",
       "titulo": "Investigación nocturna 23/11: auditoría de 9 fuentes (NIST, Lombard & Hawkins, Bosch 2018, Hopkins 2000, Efron & Morris 1975 reclasificadas; Frick 2019, Spargo 2019 y Davie 2026 a texto completo; 8 mejoradas), carga de entrenamiento con FC y GPS (TRIMP, ACWR) multirraza, y edad y sexo como covariables del prior",
       "archivo": "estudios/2026-11-23_noche_auditoria_estadistica_trimp_acwr_edad_sexo.md"
+    },
+    {
+      "fecha": "2026-11-24",
+      "titulo": "Motor nocturno 24/11: carga de entrenamiento CG1–CG3 y FM1 implementadas (TRIMP con histograma de FC, bandas de Morrice-West, EWMA 7/28 d, Foster)",
+      "archivo": "estudios/2026-11-24_motor_carga_trimp_bandas_ewma.md"
     }
   ],
   "fuentes": [
@@ -5440,6 +5445,67 @@
       ],
       "estado": "REFERENCIA",
       "nota": "KB 1.25.0: coherente con P3 (17–21 d) y P6 del planificador"
+    },
+    {
+      "id": "carga_cg_trimp",
+      "valor": {
+        "fc_reposo_defecto_lpm": 33,
+        "fc_max_defecto_lpm": 213,
+        "b": 0.64,
+        "c": 1.92,
+        "zonas_lpm": [
+          180,
+          200
+        ],
+        "cobertura_min": 0.8,
+        "ancho_histograma_lpm": 5
+      },
+      "evidencia": "E-r (forma, Morton 1990; reposo, Ohmura y Jones 2017) / NV (b y c en equinos) / I (recorte, cobertura, FCmax 213)",
+      "fuentes": [
+        "MORTON_BANISTER_1990_TRIMP",
+        "OHMURA_JONES_2017_FC_REPOSO",
+        "MUNSTERS_2020_ACWR",
+        "FLYRIN_HAGGLUND_2021_SLU"
+      ],
+      "estado": "IMPLEMENTADO",
+      "nota": "KB 1.30.0, motor 2.0.0-dev34; descriptivo, sin validar"
+    },
+    {
+      "id": "carga_cg_bandas_ewma",
+      "valor": {
+        "bordes_psi_m_s": [
+          10,
+          13.3,
+          14.4,
+          15.5,
+          16.8
+        ],
+        "rapido_desde_m_s": 13.3,
+        "escala_arabe": "v_carrera/16,7",
+        "ewma_dias": [
+          7,
+          28
+        ],
+        "lambda": [
+          0.25,
+          0.068966
+        ],
+        "totales_dias": [
+          7,
+          30
+        ],
+        "fraccion_max_sin_dato": 0.2
+      },
+      "evidencia": "E (bandas PSI, Morrice-West 2020; Wong 2023) / E-r (EWMA, Williams 2017; Foster 1998) / I-raza (árabes) / I (inicialización y cortes)",
+      "fuentes": [
+        "MORRICE_WEST_EVJ_13156_AAM",
+        "WONG_2023",
+        "WILLIAMS_2017_EWMA",
+        "FOSTER_1998_MONOTONIA",
+        "IMPELLIZZERI_2020_ACWR"
+      ],
+      "estado": "IMPLEMENTADO",
+      "nota": "KB 1.30.0, motor 2.0.0-dev34; cambio relativo de carga, nunca riesgo de lesión"
     }
   ],
   "reglas": [
@@ -5804,8 +5870,10 @@
         "MUKAI_2007_JES_CARRERA",
         "LEE_2019_KOREA"
       ],
-      "estado": "PROPUESTA",
-      "nota": "KB 1.25.0, sin implementar"
+      "estado": "IMPLEMENTADO",
+      "nota": "KB 1.25.0, sin implementar; KB 1.30.0: implementado como descriptivo [I], nunca predicción de lesiones",
+      "implementacion": "motor 2.0.0-dev34: FC máxima por defecto 213 lpm «no propia»; FC máxima propia = máximo de la FC pico de ≥ 3 trabajos rápidos con ECG BUENA/UTILIZABLE (fc_max_origen PROPIA_HISTORIA)",
+      "falta": "el pico puede inflarse por artefacto: revisar con sesiones reales; usar también en el % de FCmax de las apps"
     },
     {
       "id": "ECG_EJERCICIO_EC1",
@@ -5876,8 +5944,10 @@
         "MORTON_BANISTER_1990_TRIMP",
         "EDWARDS_1993_ZONAS"
       ],
-      "estado": "PROPUESTA",
-      "nota": "KB 1.29.0, sin implementar; nunca como predicción de lesiones"
+      "estado": "PARCIAL",
+      "nota": "KB 1.29.0, sin implementar; nunca como predicción de lesiones; KB 1.30.0: implementado como descriptivo [I], nunca predicción de lesiones",
+      "implementacion": "motor 2.0.0-dev34 (cardio 1.1.0, training 1.2.0): bloque cardio.carga_interna (TRIMP con épocas de 5 s válidas, sin ponderar, s > 180/200 lpm, cobertura, histograma de FC de 5 lpm) y recálculo en la historia con la FC de referencia común (opción carga_cg, FM1 por historia); nivel INFO",
+      "falta": "calibrar b y c en equinos (prueba estándar con lactato); FC de reposo propia (no se graba); validar la cobertura mínima del 80 % con sesiones reales del PROTOTIPO"
     },
     {
       "id": "CARGA_CG2",
@@ -5888,8 +5958,10 @@
         "WONG_2023",
         "VERHEYEN_2006"
       ],
-      "estado": "PROPUESTA",
-      "nota": "KB 1.29.0, sin implementar; nunca como predicción de lesiones"
+      "estado": "IMPLEMENTADO",
+      "nota": "KB 1.29.0, sin implementar; nunca como predicción de lesiones; KB 1.30.0: implementado como descriptivo [I], nunca predicción de lesiones",
+      "implementacion": "motor 2.0.0-dev34: trabajo_pista.base_cientifica.carga_externa (6 bandas de Morrice-West 2020 [E], árabes escaladas por v_carrera/16,7 [I-raza], metros ≥ 13,3 m/s) y totales de 7 y 30 d en estado.carga_cg",
+      "falta": "bandas propias de árabes con datos de carrera; comprobar la exactitud de la velocidad GNSS por banda (GN1)"
     },
     {
       "id": "CARGA_CG3",
@@ -5901,8 +5973,10 @@
         "IMPELLIZZERI_2020_ACWR",
         "FOSTER_1998_MONOTONIA"
       ],
-      "estado": "PROPUESTA",
-      "nota": "KB 1.29.0, sin implementar; nunca como predicción de lesiones"
+      "estado": "IMPLEMENTADO",
+      "nota": "KB 1.29.0, sin implementar; nunca como predicción de lesiones; KB 1.30.0: implementado como descriptivo [I], nunca predicción de lesiones",
+      "implementacion": "motor 2.0.0-dev34: EWMA 7/28 d (λ 0,25 y 2/29) de metros rápidos y de TRIMP por separado, cociente solo con historia ≥ 28 d y ≤ 20 % de sesiones sin dato, monotonía y strain de Foster; aguda y crónica siempre visibles; nunca sube el estado",
+      "falta": "inicialización del EWMA (0 antes del primer día [I]; Williams 2017 no leído en texto completo); DE poblacional de Foster [NV]; calibración nula: solo descriptivo"
     },
     {
       "id": "PRIOR_ES1",
@@ -5973,9 +6047,9 @@
     "RT1–RT3 y PE1–PE3 (estudio 20/11 20:08, KB 1.22.0): separación ≥ 72 h entre trabajos rápidos en el planificador; peso solo matinal con persistencia ≥ 3 d (AVISO ≥ 2 %, ALTO ≥ 4 %) y gracia tras transporte; [I], sin implementar",
     "GO1–GO4 y WU1–WU4 (estudio 20/11 21:08, KB 1.23.0): going como estrato y covariable de comparables A7/A8 (campo going/penetración en Session); calentamiento mínimo y clase de vuelta a la calma para A9 y CF2; [I], sin implementar",
     "TA1–TA2 y RB1 (estudio 20/11 22:09, KB 1.24.0): orden de presentación tendón/hueso por raza y bloques de repetibilidad (≥ 3 sesiones, ≤ 7 d) para el TE propio; [I], sin implementar",
-    "MV1, FM1 y EC1 (estudio noche 21/11, KB 1.25.0): método de V200 como atributo obligatorio de la línea base y FCmax por defecto 210–215 lpm marcada «no propia»; arritmias en galope solo como «revisar»; [I], sin implementar",
+    "MV1, FM1 y EC1 (estudio noche 21/11, KB 1.25.0): método de V200 como atributo obligatorio de la línea base y FCmax por defecto 210–215 lpm marcada «no propia»; arritmias en galope solo como «revisar»; [I], sin implementar · FM1 HECHO en 2.0.0-dev34 (FC máxima por defecto 213 «no propia» y propia con ≥ 3 trabajos rápidos)",
     "PD1, TE2, RC1 y FW1 (estudio noche 22/11, KB 1.28.0): pendiente como criterio de comparables, TE de V200 según condiciones, THR100 informativo y FC de calentamiento fijo como tendencia diaria; [I], sin implementar",
-    "CG1–CG3 y ES1–ES3 (estudio noche 23/11, KB 1.29.0): carga interna (TRIMP individual) y externa (bandas GNSS) solo descriptivas, agudo/crónico como cambio relativo; prior μ_pop por edad y raza, sexo solo en velocidad, FCmax común con DE ≈ 8 lpm; [I], sin implementar"
+    "CG1–CG3 y ES1–ES3 (estudio noche 23/11, KB 1.29.0): carga interna (TRIMP individual) y externa (bandas GNSS) solo descriptivas, agudo/crónico como cambio relativo; prior μ_pop por edad y raza, sexo solo en velocidad, FCmax común con DE ≈ 8 lpm; [I], sin implementar · CG1 (PARCIAL), CG2, CG3 y FM1 HECHOS en 2.0.0-dev34 (KB 1.30.0): TRIMP con FC de referencia común, bandas de Morrice-West, EWMA 7/28 d, Foster; falta calibrar b y c, la FC de reposo propia y ES1–ES3"
   ],
   "cola_investigacion": [
     "Texto completo de Verheyen 2006 (Bone, DOI 10.1016/j.bone.2006.05.025): ORs, cortes, límite inferior del canter, ventana de 60 d",
@@ -6232,6 +6306,11 @@
       "version": "1.29.0",
       "fecha": "2026-11-23",
       "cambio": "Investigación nocturna 23/11: auditoría de 9 fuentes (8 mejoradas; 5 SIN_AUDITAR del código estadístico reclasificadas; correcciones de Davie 2026 ICC 30 s 0,42 → 0,451, Spargo 2019 73,6 % de extremidades, Mukai 2007 ± = EE, ARL bilaterales propios); 30 fuentes nuevas (completo, trotón sueco, JRA, QREC, BHA, Turquía, Polonia, Brasil y fórmulas humanas de carga como plantilla); reglas CG1–CG3 y ES1–ES3 PROPUESTA [I]; motor 2.0.0-dev31 solo versión"
+    },
+    {
+      "version": "1.30.0",
+      "fecha": "2026-11-24",
+      "cambio": "CG1 PARCIAL, CG2, CG3 y FM1 IMPLEMENTADO (motor 2.0.0-dev34, cardio 1.1.0, training 1.2.0): carga interna y externa descriptiva en el análisis y en la historia, nivel INFO; parámetros carga_cg_trimp y carga_cg_bandas_ewma"
     }
   ]
 }

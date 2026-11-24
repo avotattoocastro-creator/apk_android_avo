@@ -129,6 +129,7 @@ std::string params_hash(const EngineConfig& c) {
   for (const auto& e : c.racing.manual_efforts_itow) { char x[64]; snprintf(x, sizeof(x), "|%.0f-%.0f", e.first, e.second); all += x; }
   { char x[160]; snprintf(x, sizeof(x), "|ECG%d|%g|%g|%g|%g|%g|%g|%g", c.cardio.enabled ? 1 : 0, c.cardio.band_lo_hz, c.cardio.band_hi_hz,
                           c.cardio.threshold_fraction, c.cardio.premature_pct, c.cardio.max_phase_bpm, c.cardio.recovery_bpm, c.cardio.v200_bpm); all += x; }
+  { char x[96]; snprintf(x, sizeof(x), "|CG1|%g|%g|%d%d", c.cardio.trimp.hr_rest, c.cardio.trimp.hr_max, c.cardio.trimp.hr_rest_own ? 1 : 0, c.cardio.trimp.hr_max_own ? 1 : 0); all += x; }
   uint64_t h = 1469598103934665603ull;
   for (const char* p = all.c_str(); *p; p++) { h ^= (uint8_t)*p; h *= 1099511628211ull; }
   char out[20]; snprintf(out, sizeof(out), "%016llx", (unsigned long long)h);

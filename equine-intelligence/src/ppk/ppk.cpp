@@ -305,7 +305,8 @@ Sol combine(const Sol& f, const Sol& b) {
 bool ppk_need(const std::vector<uint8_t>& ubx, PpkNeed* need) {
   *need = PpkNeed();
   Obs ro;
-  Nav nav;
+  std::unique_ptr<Nav> navp(new Nav());   // nav_t ocupa ~520 KB: en el montón (pila de 1 MB en Windows, 512 KB en hilos de iOS)
+  Nav& nav = *navp;
   std::string e;
   if (!decode_rover(ubx, &ro.o, &nav.n, &e) || ro.o.n == 0) return false;
   need->has_raw = true;
@@ -347,7 +348,8 @@ bool ppk_solve(const std::vector<uint8_t>& rover_ubx, const std::vector<std::str
   *r = PpkResult();
   r->rover = keep;
   Obs ro;
-  Nav nav;
+  std::unique_ptr<Nav> navp(new Nav());   // nav_t ocupa ~520 KB: en el montón (pila de 1 MB en Windows, 512 KB en hilos de iOS)
+  Nav& nav = *navp;
   if (!decode_rover(rover_ubx, &ro.o, &nav.n, error)) return false;
   if (ro.o.n == 0) { if (error) *error = "la sesión no tiene observaciones RAWX (espalda < 3.16.0 o salida en bruto no activada)"; return false; }
   return solve_core(ro, nav, base_files, o, r, error, cancel);
@@ -357,7 +359,8 @@ bool ppk_solve_rinex_rover(const std::vector<std::string>& rover_files, const st
                            const PpkOptions& o, PpkResult* r, std::string* error, const volatile int* cancel) {
   *r = PpkResult();
   Obs ro;
-  Nav nav;
+  std::unique_ptr<Nav> navp(new Nav());   // nav_t ocupa ~520 KB: en el montón (pila de 1 MB en Windows, 512 KB en hilos de iOS)
+  Nav& nav = *navp;
   for (const auto& f : rover_files) {
     std::string path;
     if (!prepare_rinex(f, o.work_dir, &path, error)) return false;

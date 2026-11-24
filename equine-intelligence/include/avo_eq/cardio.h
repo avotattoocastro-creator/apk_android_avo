@@ -31,12 +31,13 @@
 #include <cmath>
 #include <string>
 #include <vector>
+#include "avo_eq/knowledge.h"
 #include "avo_eq/sync.h"
 #include "avo_eq/types.h"
 
 namespace avoeq {
 
-static const char* const CARDIO_VERSION = "1.0.0";
+static const char* const CARDIO_VERSION = "1.1.0";   // 1.1.0: carga interna CG1 (TRIMP, KB 1.30.0)
 static const char* const CARDIO_DETECTOR_ID = "AVO_ECG_S_ANCHOR_V1";
 static const char* const V200_METHOD_CROSSING = "CRUCE_200_10S";
 static const char* const V200_METHOD_REGRESSION = "REGRESION_FC_VELOCIDAD";
@@ -72,6 +73,8 @@ struct CardioConfig {
   double premature_pct_60_100 = 10.0, premature_pct_below_60 = 20.0;
   int premature_ref_beats = 8, premature_min_ref = 4, premature_return_beats = 4;
   int ectopy_tolerated = 10;             // P90 de 5–10 en PSI sanos en el máximo (van Erck 2026 [E]); más = VIGILAR [I]
+  // CG1 carga interna (KB 1.30.0): TRIMP con las épocas de 5 s válidas; FC de reposo y máxima por defecto «no propias»
+  KbTrimpConfig trimp;
 };
 
 struct EcgBeat {
@@ -127,6 +130,9 @@ struct CardioResult {
   int candidates = 0, isolated = 0, pairs = 0, triplets = 0, runs = 0;
   std::string ectopy_level = "INFO", ectopy_text;
   std::string quality = "NO_UTILIZABLE";   // BUENA | UTILIZABLE | POBRE | NO_UTILIZABLE
+  KbTrimp trimp;                           // CG1 (épocas válidas)
+  std::vector<double> hr_hist;             // segundos por intervalo de 5 lpm (épocas válidas)
+  double trimp_coverage = NAN;             // fracción de la sesión con FC válida
   std::vector<std::string> warnings;
 };
 

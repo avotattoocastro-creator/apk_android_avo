@@ -83,6 +83,9 @@ struct HorseHistoryView: View {
         if r.baseCientifica.present {
             KbHistoryCard(status: r.baseCientifica, sessions: r.sesiones, referenceDate: dayText(r.fechaReferencia))
         }
+        if r.cargaCg.present {
+            TrainingLoadCgCard(cg: r.cargaCg, referenceDate: dayText(r.fechaReferencia))
+        }
         if r.sesiones.isEmpty {
             AvoCard { AvoNoData(text: "Sin sesiones con fecha y resumen para este caballo") }
         } else {

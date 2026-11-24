@@ -1,4 +1,4 @@
-# 12 · AVO Training Analytics 1.1.0 — análisis de la historia de entrenamientos
+# 12 · AVO Training Analytics 1.2.0 — análisis de la historia de entrenamientos
 
 Código: `include/avo_eq/training.h`, `src/training/training.cpp`, `src/capi/training_capi.cpp`.
 Herramienta: `tools/training/avo_training_cli.cpp`. Pruebas: `tests/test_training.cpp` (13 casos, suite `entreno`).
@@ -58,6 +58,10 @@ como motivo. El resto de campos se guarda para calibrar (going GO1, pesos PE1–
   ACWR > 1,5: subida brusca (VIGILAR). ACWR < 0,8: descarga o parada (informativo).
 - **Monotonía** (Foster) = media / desviación de la carga diaria de 7 días, con los días sin sesión a 0.
   Mayor que 2: VIGILAR. **Tensión** = aguda × monotonía.
+- **Carga descriptiva CG1–CG3 (TRAINING 1.2.0, motor 2.0.0-dev34):** bloque `estado.carga_cg` con TRIMP recalculado
+  desde el histograma de FC de cada sesión con una FC de referencia común (FM1), metros de trabajo rápido por bandas de
+  Morrice-West, EWMA 7/28 d, cociente, monotonía y strain. Siempre INFO: **no** cambia el estado (a diferencia del ACWR
+  de la carga heurística). Detalle, fórmulas y parámetros: ficha 14, §3 quinquies. Por sesión: `sesiones[].carga_cg`.
 
 ## 3. Línea base y desvíos
 - Por aire y por métrica, se toma la **mediana y la MAD** de las sesiones anteriores de los últimos 60 días.

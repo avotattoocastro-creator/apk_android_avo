@@ -173,6 +173,17 @@ bool parse_opts(const char* text, Opts* o, std::string* err) {
     if (!(s0 >= 100 && s0 <= 180)) { *err = "sigma0_mpa fuera de rango (100–180)"; return false; }
     o->cfg.racing.bone.sn_a_mpa = s0;
   }
+  // CG1 (KB 1.30.0): FC de reposo y máxima propias del caballo para la carga interna (TRIMP)
+  if (v.has("fc_reposo_lpm")) {
+    double x = v["fc_reposo_lpm"].num(-1);
+    if (!(x >= 20 && x <= 60)) { *err = "fc_reposo_lpm fuera de rango (20–60)"; return false; }
+    o->cfg.cardio.trimp.hr_rest = x; o->cfg.cardio.trimp.hr_rest_own = true;
+  }
+  if (v.has("fc_max_lpm")) {
+    double x = v["fc_max_lpm"].num(-1);
+    if (!(x >= 150 && x <= 260)) { *err = "fc_max_lpm fuera de rango (150–260)"; return false; }
+    o->cfg.cardio.trimp.hr_max = x; o->cfg.cardio.trimp.hr_max_own = true;
+  }
   if (v.has("signo_mano")) {
     double sm = v["signo_mano"].num(0);
     if (sm != 1 && sm != -1 && sm != 0) { *err = "signo_mano debe ser 1, -1 o 0"; return false; }

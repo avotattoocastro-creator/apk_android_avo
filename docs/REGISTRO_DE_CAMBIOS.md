@@ -24,6 +24,21 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-24 — Motor 2.0.0-dev34 (KB-1 1.30.0, cardio 1.1.0, training 1.2.0) · iPad — carga de entrenamiento CG1–CG3 y FC máxima FM1
+**Autor:** Claude (sesión nocturna del motor) · **Commits:** los de la rama `claude/motor-noche-2026-11-24` · **CI:** `build-equine-engine.yml` lanzado en la rama (resultado en el PR)
+**Qué cambia:**
+- **CG1 (cardio 1.1.0):** `cardio.carga_interna` con TRIMP de forma de Banister sobre las épocas de 5 s válidas (b 0,64 y c 1,92 [NV en equinos]), versión sin ponderar, segundos > 180 / > 200 lpm y sobre la FC máxima, cobertura y histograma de FC de 5 lpm; FC de reposo 33 y máxima 213 por defecto «no propias»; opciones `fc_reposo_lpm` y `fc_max_lpm` del análisis.
+- **CG2 (análisis):** `trabajo_pista.base_cientifica.carga_externa` con las 6 bandas de Morrice-West 2020 [E] y metros ≥ 13,3 m/s; en árabes escaladas por v_carrera/16,7 [I-raza].
+- **CG3 y FM1 (training 1.2.0):** `estado.carga_cg` con TRIMP recalculado desde el histograma con una FC de referencia común (FC máxima propia con ≥ 3 trabajos rápidos), totales 7/30 d, EWMA 7/28 d, cociente (solo con ≥ 28 d de historia y ≤ 20 % de sesiones sin dato), monotonía y strain; `sesiones[].carga_cg`; opción `carga_cg`. Siempre INFO: no cambia el estado.
+- **iPad:** tarjeta «Carga de entrenamiento (CG1–CG3)» en la historia del caballo (`TrainingLoadCgCard`, modelo `TrainingLoadCg`) con pruebas sobre una fixture escrita por el motor.
+- Fixtures de Android (`core/src/test/resources/equine/*_analysis.json`) regeneradas: solo versiones, hash de parámetros y el bloque nuevo `carga_externa`.
+- **Compilación de RTKLIB (PPK, dev33) en el CI:** el primer CI del motor tras fusionar el PPK falló en Linux (GCC 15 de Ubuntu 26.04 usa C23: `rcv/ublox.c` define su `bool`) y en Windows (`EXPORT` = `dllimport` y `__declspec(__thread)`). Se compila RTKLIB con `-std=gnu11` fuera de MSVC y se corrigen las dos macros de `rtklib.h` (anotado en `src/ppk/rtklib/README_AVO.md`). Con eso Windows compila, pero las pruebas PPK fallaban: `expath()` de RTKLIB en WIN32 solo reconocía `\` y perdía la carpeta de las rutas con `/`; ahora acepta los dos separadores. Después las pruebas reventaban la pila: `nav_t` de RTKLIB ocupa ~520 KB y estaba en la pila (1 MB en Windows, 512 KB en los hilos secundarios de iOS). Pasa al montón en `src/ppk/ppk.cpp` y en `tests/test_ppk.cpp`; reproducido y corregido en local con `ulimit -s 1024`. Sin cambio de lógica del PPK.
+- KB-1 1.30.0: CG1 PARCIAL, CG2, CG3 y FM1 IMPLEMENTADO; parámetros `carga_cg_trimp` y `carga_cg_bandas_ewma`; estudio `knowledge/estudios/2026-11-24_motor_carga_trimp_bandas_ewma.md`; fichas 12, 14 (§3 quinquies) y 15; `FORMATO_RESULTADOS.md`; protocolo de campo §6 bis.
+**Por qué:** decisión del usuario (23/11): cada noche código nuevo en el motor. CG1–CG3 estaban PROPUESTA con la evidencia ya leída y usan datos que ya graban los PROTOTIPOS (GNSS RTK y ECG de la cincha 0.5.0).
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, build de TestFlight.
+**Validación:** IMPLEMENTADO · pruebas locales ✅ (ASan/UBSan y Release, 125 casos, 2.751 comprobaciones; fixtures OK) · iPad **sin compilar** (sin Xcode en la sesión: lo compila su CI al fusionar) · **NO VERIFICADO** con caballos reales.
+**Pendiente:** Android y Windows (tarjeta de carga); calibrar FC de reposo propia, cobertura mínima y b/c; inicialización del EWMA y DE de Foster siguen [I]/[NV].
+
 ## 2026-11-23 — iPad · reglas de Storage — PPK en el iPad (base del IGN y resultado compartido en la nube)
 **Autor:** Claude · **Commits:** el de esta entrada · **CI:** al fusionar (TestFlight y `firebase-rules.yml`)
 **Qué cambia:**

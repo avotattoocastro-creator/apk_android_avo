@@ -3308,7 +3308,10 @@ extern int expath(const char *path, char *paths[], int nmax)
 
     trace(3,"expath  : path=%s nmax=%d\n",path,nmax);
 
-    if ((p=strrchr(path,'\\'))) {
+    /* AVO: también '/' como separador (rutas mixtas de std::string); el original solo miraba '\\' y perdía la carpeta */
+    if ((p=strrchr(path,'\\'))||(p=strrchr(path,'/'))) {
+        char *q=strrchr(path,'/');
+        if (q&&q>p) p=q;
         strncpy(dir,path,p-path+1); dir[p-path+1]='\0';
     }
     if ((h=FindFirstFile((LPCTSTR)path,&file))==INVALID_HANDLE_VALUE) {

@@ -286,6 +286,18 @@ void analyse_rr(std::vector<EcgBeat> beats, const std::vector<double>& gt, const
   }
   auto epoch_ok = [&](const HrEpoch& e) { return e.rr >= 2 && e.artifact <= c.epoch_max_artifact && std::isfinite(e.hr); };
   for (const auto& e : r->epochs) if (epoch_ok(e) && (std::isnan(r->hr_epoch_max) || e.hr > r->hr_epoch_max)) r->hr_epoch_max = e.hr;
+  // CG1 carga interna (KB 1.30.0): cada época válida pesa su duración dentro de [t_begin, t_end]
+  if (span > 0) {
+    double ok_s = 0;
+    for (const auto& e : r->epochs) {
+      if (!epoch_ok(e)) continue;
+      double dt = std::min(e.t0 + c.epoch_s, t_end) - std::max(e.t0, t_begin);
+      if (dt <= 0) continue;
+      kb_trimp_add(&r->trimp, dt, e.hr, c.trimp, &r->hr_hist);
+      ok_s += dt;
+    }
+    r->trimp_coverage = std::min(1.0, ok_s / span);
+  }
 
   // 4. fin del esfuerzo y fases
   double vmax = kNaN; size_t imax = 0;
@@ -593,6 +605,25 @@ std::string cardio_json(const CardioResult& r, const CardioConfig& c, bool serie
   o << "],\"ectopia\":{\"tipo\":\"CANDIDATO_A_REVISAR\",\"umbral_pct\":" << num(c.premature_pct) << ",\"candidatos\":" << r.candidates
     << ",\"aislados\":" << r.isolated << ",\"parejas\":" << r.pairs << ",\"tripletes\":" << r.triplets << ",\"rachas\":" << r.runs
     << ",\"nivel\":\"" << r.ectopy_level << "\",\"texto\":\"" << esc(r.ectopy_text) << "\",\"diagnostico\":false}";
+  {  // CG1 carga interna (KB 1.30.0): descriptiva, nunca un riesgo de lesión
+    const KbTrimpConfig& T = c.trimp;
+    bool usable = r.quality != "NO_UTILIZABLE" && std::isfinite(r.trimp.trimp);
+    bool low = !std::isfinite(r.trimp_coverage) || r.trimp_coverage < T.min_coverage;
+    o << ",\"carga_interna\":{\"regla\":\"CG1\",\"algoritmo\":\"" << KB_TRIMP_ALGORITHM << "\",\"validado\":false"
+      << ",\"trimp\":" << (usable ? num(r.trimp.trimp) : "null") << ",\"trimp_sin_ponderar\":" << (usable ? num(r.trimp.trimp_unweighted) : "null")
+      << ",\"minutos_con_fc\":" << num(r.trimp.minutes) << ",\"cobertura_pct\":" << num(std::isfinite(r.trimp_coverage) ? 100.0 * r.trimp_coverage : NAN)
+      << ",\"cobertura_baja\":" << (low ? "true" : "false")
+      << ",\"s_mas_180\":" << num(r.trimp.s_above_z1) << ",\"s_mas_200\":" << num(r.trimp.s_above_z2) << ",\"s_sobre_fc_max\":" << num(r.trimp.s_above_max)
+      << ",\"fc_reposo_lpm\":" << num(T.hr_rest) << ",\"fc_reposo_origen\":\"" << (T.hr_rest_own ? "CABALLO" : "POR_DEFECTO") << "\""
+      << ",\"fc_max_lpm\":" << num(T.hr_max) << ",\"fc_max_origen\":\"" << (T.hr_max_own ? "CABALLO" : "POR_DEFECTO") << "\""
+      << ",\"b\":" << num(T.b) << ",\"c\":" << num(T.c)
+      << ",\"etiquetas\":{\"formula\":\"E-r\",\"coeficientes\":\"NV\",\"fc_reposo\":\"" << (T.hr_rest_own ? "propia" : "E-r") << "\",\"fc_max\":\"" << (T.hr_max_own ? "propia" : "I") << "\"}"
+      << ",\"histograma_fc\":{\"ancho_lpm\":" << num(KB_HR_BIN_BPM) << ",\"s\":[";
+    bool first = true;
+    for (size_t k = 0; k < r.hr_hist.size(); k++)
+      if (r.hr_hist[k] > 0) { o << (first ? "" : ",") << "[" << num(k * KB_HR_BIN_BPM) << "," << num(r.hr_hist[k]) << "]"; first = false; }
+    o << "]},\"nota\":\"carga interna descriptiva (forma de Banister, coeficientes sin validar en caballos); no es un riesgo de lesion\"}";
+  }
   o << ",\"avisos\":[";
   for (size_t i = 0; i < r.warnings.size(); i++) o << (i ? "," : "") << "\"" << esc(r.warnings[i]) << "\"";
   o << "]";

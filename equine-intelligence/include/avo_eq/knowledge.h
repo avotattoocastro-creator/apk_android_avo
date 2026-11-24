@@ -20,7 +20,7 @@
 
 namespace avoeq {
 
-static const char* const KNOWLEDGE_VERSION = "1.29.0";
+static const char* const KNOWLEDGE_VERSION = "1.30.0";
 static const char* const KNOWLEDGE_ID = "AVO_KB_1";
 static const char* const BONE_MODEL_ALGORITHM = "SBFL_MORRICE_WEST_2022";
 
@@ -53,6 +53,7 @@ struct SpeedBandConfig {
   double race_pace = NAN;        // ritmo de carrera de referencia (m/s); NaN: todo en B1 y sin contadores de Verheyen
   double b2_fraction = 0.80, b3_fraction = 0.93;
   double canter_lo_fraction = 0.40, gallop_fraction = 14.0 / 16.7;
+  bool cg_relative = false;      // CG2: bandas relativas a v_carrera (árabes [I-raza]); false = absolutas de PSI [E]
   double b2_lo() const { return b2_fraction * race_pace; }
   double b3_lo() const { return b3_fraction * race_pace; }
   double canter_lo() const { return canter_lo_fraction * race_pace; }
@@ -66,6 +67,8 @@ struct KbSessionLoad {
   double canter_m = 0, gallop_m = 0;   // contadores de Verheyen (NaN si no hay v_carrera, ver finish())
   double strides = 0, bone_fl = 0;     // rango validado (fracción; ×100 = %)
   double strides_low = 0, bone_fl_low = 0;   // 4–12,57 m/s: extrapolado
+  double cg_band_m[6] = {0, 0, 0, 0, 0, 0}, cg_band_s[6] = {0, 0, 0, 0, 0, 0};   // CG2 (KB 1.30.0)
+  double hs_m = 0;                     // CG2: metros ≥ 13,3 m/s (PSI) o ≥ 13,3/16,7·v_carrera (relativas)
   void add(double dt_s, double dd_m, double v, const SpeedBandConfig& b, const BoneModelConfig& m);
 };
 
@@ -216,5 +219,60 @@ struct KbDriftResult {
   bool delta_alarm = false, cusum_alarm = false;
 };
 KbDriftResult kb_drift_down(const std::vector<double>& x, const KbDriftConfig& c);
+
+// ------------------------------------------------------------------ carga de entrenamiento CG1–CG3 (KB 1.30.0)
+// Estudio 2026-11-23 (noche) y 2026-11-24. Solo DESCRIPTIVA: no hay TRIMP ni ACWR validados en PSI ni en árabes de
+// carreras (el único equino es de completo, Munsters 2020 [I-raza]); nunca un riesgo ni un semáforo de lesión, nunca
+// sube el estado del caballo (nivel INFO).
+//
+// CG1 carga interna por sesión con la forma del TRIMP de Banister (Morton, Fitz-Clarke y Banister 1990 [E-r]):
+//   ΔFC = (FC − FC_reposo)/(FC_máx − FC_reposo), recortado a [0, 1] [I]
+//   TRIMP = Σ Δt(min) · ΔFC · b · e^(c·ΔFC)       b = 0,64 y c = 1,92 (humanos varones) [NV en equinos]
+//   sin ponderar = Σ Δt(min) · ΔFC ; tiempo por encima de 180 y 200 lpm (Flyrin y Hägglund 2021 [E, trotones]).
+//   FC de reposo por defecto 33 lpm (Ohmura y Jones 2017: 32,9 ± 3,5 lpm en PSI de 3–7 años [E-r]) y FC máxima por
+//   defecto 213 lpm (FM1: 210–215 lpm [I]) mientras no haya FC propias; ambas marcadas «no propia».
+// CG2 carga externa por bandas de velocidad GNSS (Morrice-West 2020, EVJ 10.1111/evj.13156 [E]): < 10 / 10–13,3 /
+//   13,3–14,4 / 14,4–15,5 / 15,5–16,8 / ≥ 16,8 m/s en PSI; trabajo rápido («fast work») ≥ 13,3 m/s (también Wong 2023
+//   [E]). En árabes las bandas se escalan por v_carrera/16,7 [I-raza].
+// CG3 agudo/crónico por EWMA (Williams 2017 [E-r]): EWMA_d = λ·carga_d + (1 − λ)·EWMA_(d−1), λ = 2/(N + 1), N = 7 y 28,
+//   EWMA = 0 el día anterior al primero de la historia [I]; cociente solo con la historia cubierta y ≤ 20 % de sesiones
+//   sin dato [I]. Monotonía de Foster 1998 [E-r] = media diaria de 7 d / DE (poblacional, días sin sesión = 0 [NV]);
+//   strain = carga de 7 d × monotonía. Impellizzeri 2020 [E-r]: el cociente no sirve para gestionar lesiones; se
+//   muestran siempre aguda y crónica por separado.
+static const char* const KB_TRIMP_ALGORITHM = "TRIMP_BANISTER_EQUINO_CG1";
+static const double KB_HR_BIN_BPM = 5.0;   // histograma de FC por sesión (para recalcular con la FC propia)
+static const int KB_HR_BINS = 60;          // 0–300 lpm
+struct KbTrimpConfig {
+  double hr_rest = 33.0;         // lpm [E-r] Ohmura y Jones 2017
+  double hr_max = 213.0;         // lpm [I] FM1 (210–215)
+  bool hr_rest_own = false, hr_max_own = false;   // true: FC del propio caballo (opción o historia)
+  double b = 0.64, c = 1.92;     // plantilla de Banister [NV en equinos]
+  double zone1_bpm = 180.0, zone2_bpm = 200.0;
+  double min_coverage = 0.80;    // fracción mínima de la sesión con FC válida para usar el TRIMP en la historia [I]
+};
+struct KbTrimp {
+  double trimp = NAN, trimp_unweighted = NAN, minutes = 0;
+  double s_above_z1 = 0, s_above_z2 = 0, s_above_max = 0;
+};
+double kb_trimp_delta(double hr, const KbTrimpConfig& c);    // ΔFC recortado a [0, 1]; NaN si hr no es finito
+// Acumula una época de dt_s segundos con FC hr en el acumulador (y en el histograma si hist no es nulo).
+void kb_trimp_add(KbTrimp* t, double dt_s, double hr, const KbTrimpConfig& c, std::vector<double>* hist = nullptr);
+// Recalcula el TRIMP desde el histograma (segundos por intervalo de 5 lpm, FC = centro del intervalo).
+KbTrimp kb_trimp_from_histogram(const std::vector<double>& seconds_per_bin, const KbTrimpConfig& c);
+
+static const int KB_CG_BANDS = 6;
+static const double KB_CG_PSI_PACE = 16.7;
+static const double KB_CG_EDGES_PSI[KB_CG_BANDS - 1] = {10.0, 13.3, 14.4, 15.5, 16.8};
+static const int KB_CG_HS_BAND = 2;        // primera banda de trabajo rápido (≥ 13,3 m/s)
+const char* kb_cg_band_name(int k);        // LENTO, MEDIO, RAPIDO_1 … RAPIDO_4
+// Bordes de las bandas: absolutos de PSI o escalados por race_pace/16,7 (relative y race_pace finito).
+void kb_cg_edges(bool relative, double race_pace, double out[KB_CG_BANDS - 1]);
+int kb_cg_band(double v, const double edges[KB_CG_BANDS - 1]);   // 0..5 (-1 con v NaN o < 0)
+
+double kb_ewma_lambda(int n_days);         // 2/(N + 1)
+// EWMA aguda y crónica al último día de la serie diaria (días consecutivos; empieza con EWMA = 0).
+void kb_ewma(const std::vector<double>& daily, int n_acute, int n_chronic, double* acute, double* chronic);
+// Monotonía y strain de Foster sobre los 7 últimos días (días sin sesión = 0). false si la DE es 0 o la media ≤ 0.
+bool kb_foster(const std::vector<double>& last7, double* monotony, double* strain);
 
 }  // namespace avoeq

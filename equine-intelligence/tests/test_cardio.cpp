@@ -224,6 +224,13 @@ EQ_TEST(cardio, rr_series_v200_crossing_and_ectopy_thresholds) {
   CardioConfig c5 = c; c5.premature_pct = 5.0; CardioResult r5;
   analyse_rr(b, gt, gv, {}, 0, 200, c5, &r5);
   CHECK(r5.candidates == 2);   // con el 5 % entra el de 5,5 %; el de 4 % sigue fuera
+  // CG1 (KB 1.30.0): 60 s a 205 lpm (60–120 s) por encima de 200 y de 180; cobertura completa
+  CHECK_NEAR(r.trimp.s_above_z2, 60, 6);
+  CHECK(r.trimp.s_above_z1 >= r.trimp.s_above_z2);
+  CHECK_NEAR(r.trimp_coverage, 1.0, 0.05);
+  CHECK(std::isfinite(r.trimp.trimp) && r.trimp.trimp > r.trimp.trimp_unweighted);
+  double hs = 0; for (double x : r.hr_hist) hs += x;
+  CHECK_NEAR(hs / 60.0, r.trimp.minutes, 1e-9);
 }
 
 EQ_TEST(cardio, full_session_v200_vhrmax_phases_recovery_ectopy) {
@@ -299,6 +306,11 @@ EQ_TEST(cardio, full_session_v200_vhrmax_phases_recovery_ectopy) {
   CHECK(!v["cardio"]["v200"]["validada"].boolean(true));
   CHECK(v["cardio"]["ectopia"]["tipo"].str() == "CANDIDATO_A_REVISAR");
   CHECK(!v["cardio"]["ectopia"]["diagnostico"].boolean(true));
+  const json::Value& ci = v["cardio"]["carga_interna"];   // CG1 (KB 1.30.0)
+  CHECK(ci["regla"].str() == "CG1" && !ci["validado"].boolean(true));
+  CHECK(ci["trimp"].type == json::Value::NUM && ci["trimp"].n > 0);
+  CHECK(ci["fc_max_origen"].str() == "POR_DEFECTO" && ci["etiquetas"]["coeficientes"].str() == "NV");
+  CHECK(!ci["histograma_fc"]["s"].a.empty());
   // resumen de entrenamiento: V200 y ectopia pasan al historial
   SessionSummary ss; TrainingConfig tc;
   CHECK(training_summary_from_analysis(v, tc, &ss, &je));
@@ -309,6 +321,9 @@ EQ_TEST(cardio, full_session_v200_vhrmax_phases_recovery_ectopy) {
   SessionSummary s2; CHECK(training_summary_from_json(back, &s2, &je));
   CHECK_NEAR(s2.cardio.v200, ss.cardio.v200, 1e-9);
   CHECK(s2.cardio.v200_method == ss.cardio.v200_method && s2.cardio.ectopy_level == ss.cardio.ectopy_level);
+  CHECK(!ss.cardio.hr_hist.empty() && s2.cardio.hr_hist.size() == ss.cardio.hr_hist.size());
+  CHECK_NEAR(s2.cardio.trimp, ss.cardio.trimp, 1e-4 * ss.cardio.trimp);
+  CHECK_NEAR(s2.cardio.trimp_coverage_pct, ss.cardio.trimp_coverage_pct, 1e-3);
 }
 
 EQ_TEST(cardio, session_without_ecg_has_empty_block) {

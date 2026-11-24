@@ -1,4 +1,4 @@
-# 14 · Base científica de la cuadra (KB-1) 1.26.0
+# 14 · Base científica de la cuadra (KB-1) 1.30.0
 
 Código: `include/avo_eq/knowledge.h`, `src/knowledge/knowledge.cpp`. Se calcula en Track Work (`src/racing/racing.cpp`,
 bloque `trabajo_pista.base_cientifica`) y se evalúa en Training Analytics (`src/training/training.cpp`, bloques
@@ -372,6 +372,54 @@ Detalle: `knowledge/estudios/2026-11-20_1908_dmd_potros_auditoria_sobreentrenami
 - **Auditoría de fuentes:** 15 obras duplicadas marcadas con `duplicado_de` y 52 fuentes con campos obligatorios
   ausentes completadas como `SIN_AUDITAR`/`[NV]`; AU1 [I]: ninguna regla nueva se apoya en fuentes sin auditar.
 Detalle: `knowledge/estudios/2026-11-20_1809_modeloB_tabla4_auditoria_fuentes.md`.
+
+## 3 quinquies. Carga de entrenamiento descriptiva CG1–CG3 y FC máxima FM1 (KB-1 1.30.0, motor 2.0.0-dev34)
+Solo **descriptiva** y nivel **INFO**: no hay TRIMP ni ACWR validados en PSI ni en árabes de carreras (el único
+equino es de completo, Munsters 2020 [I-raza]); Impellizzeri 2020 [E-r] desaconseja usar el cociente para gestionar
+lesiones. Nunca sube el estado, nunca es un riesgo ni un semáforo de lesión. Estudio:
+`knowledge/estudios/2026-11-24_motor_carga_trimp_bandas_ewma.md`.
+
+**CG1 · carga interna (análisis, `cardio.carga_interna`; cardio 1.1.0).** Con las épocas de 5 s válidas del ECG:
+
+    ΔFC = clamp((FC − FC_reposo)/(FC_máx − FC_reposo), 0, 1)                [forma E-r; recorte I]
+    TRIMP = Σ Δt(min) · ΔFC · b · e^(c·ΔFC)     b = 0,64, c = 1,92          [NV en equinos]
+    sin ponderar = Σ Δt(min) · ΔFC ;  s > 180 y > 200 lpm ; s sobre FC_máx
+
+FC de reposo 33 lpm (Ohmura y Jones 2017, 32,9 ± 3,5 lpm en PSI de 3–7 años [E-r]) y FC máxima 213 lpm (FM1,
+210–215 [I]) por defecto, marcadas `POR_DEFECTO`; opciones del análisis `fc_reposo_lpm` (20–60) y `fc_max_lpm`
+(150–260) → `CABALLO`. Se guarda el **histograma de FC** (segundos por intervalo de 5 lpm) para que la historia
+recalcule el TRIMP de todas las sesiones con la misma FC de referencia.
+*Ejemplo:* 10 min a 123 lpm con 33/213 → ΔFC 0,5 → 10 · 0,5 · 0,64 · e^0,96 = **8,357** UA (sin ponderar 5,0).
+
+**FM1 (historia).** FC máxima propia = máximo de la FC pico de ≥ 3 trabajos rápidos (galope Verheyen ≥ 100 m o un
+`TRABAJO_RAPIDO`) con ECG `BUENA` o `UTILIZABLE` → `PROPIA_HISTORIA`; si no, 213 «no propia».
+
+**CG2 · carga externa (análisis, `trabajo_pista.base_cientifica.carga_externa`).** Bandas de Morrice-West 2020 [E]:
+`LENTO` < 10, `MEDIO` 10–13,3, `RAPIDO_1` 13,3–14,4, `RAPIDO_2` 14,4–15,5, `RAPIDO_3` 15,5–16,8, `RAPIDO_4`
+≥ 16,8 m/s; «trabajo rápido» = ≥ 13,3 m/s (también Wong 2023 [E]). En árabes los bordes se multiplican por
+v_carrera/16,7 (14,5 → 8,68 / 11,55 / 12,50 / 13,46 / 14,59 m/s) [I-raza]. Totales de 7 y 30 días en la historia.
+
+**CG3 · agudo/crónico (historia, `estado.carga_cg`).** EWMA (Williams 2017 [E-r]):
+`EWMA_d = λ·carga_d + (1 − λ)·EWMA_(d−1)`, λ = 2/(N + 1): **0,25** (7 d) y **2/29 ≈ 0,0690** (28 d), por separado
+para los metros rápidos y para el TRIMP; EWMA = 0 antes del primer día de la historia [I]; días sin sesión = 0.
+Cociente solo con historia ≥ 28 días y ≤ 20 % de sesiones sin dato en la ventana crónica [I]; si no, `null` con
+`motivo`. Monotonía de Foster 1998 [E-r] = media diaria de 7 d / DE poblacional [NV]; strain = carga de 7 d ×
+monotonía. *Ejemplo:* 400 m rápidos cada 2 días durante 40 días → aguda 171,4, crónica 181,8 m/día, cociente 0,943.
+
+| Parámetro (`carga_cg`) | Defecto | Etiqueta |
+|---|---|---|
+| `fc_reposo_lpm` / `fc_max_lpm` | 33 / 213 (o FM1) | E-r / I |
+| `trimp_b` / `trimp_c` | 0,64 / 1,92 | NV |
+| `fc_zona1_lpm` / `fc_zona2_lpm` | 180 / 200 | E (trotones) |
+| `cobertura_min` | 0,80 | I |
+| `dias_ewma_aguda` / `dias_ewma_cronica` | 7 / 28 | E-r |
+| `dias_total_corto` / `dias_total_largo` | 7 / 30 | E |
+| `fraccion_max_sin_dato` | 0,20 | I |
+| `min_sesiones_fc_max` | 3 | I |
+
+**Calibración pendiente (PROTOTIPO):** FC de reposo en box con la cincha 0.5.0 (5 min parado antes de montar), FC
+pico de ≥ 3 trabajos rápidos por caballo, y ≥ 8 semanas seguidas de sesiones con ECG y GNSS para ver la dispersión
+del cociente propio. b y c solo se podrán ajustar con prueba estándar y lactato (fuera del alcance del PROTOTIPO).
 
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se

@@ -70,12 +70,10 @@
 extern "C" {
 #endif
 
-#ifdef _MSC_VER
-#ifdef WIN_DLL /* for Windows DLL */
+/* AVO: RTKLIB se compila dentro de la biblioteca del motor (estática o avo_equine.dll), nunca como DLL aparte:
+ * EXPORT vacío salvo con WIN_DLL (el original ponía dllimport y MSVC rechaza definir funciones y datos importados). */
+#if defined(_MSC_VER) && defined(WIN_DLL)
 #define EXPORT __declspec(dllexport)
-#else
-#define EXPORT __declspec(dllimport)
-#endif
 #else
 #define EXPORT
 #endif
@@ -85,7 +83,7 @@ extern "C" {
 #elif defined(__GNUC__)
 #define THREADLOCAL __thread
 #elif defined(_MSC_VER)
-#define THREADLOCAL __declspec(__thread)
+#define THREADLOCAL __declspec(thread) /* AVO: el original decía __declspec(__thread), que MSVC no reconoce */
 #else
 #define THREADLOCAL
 #endif

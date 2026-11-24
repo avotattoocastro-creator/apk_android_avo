@@ -312,7 +312,7 @@ EQ_TEST(kb, final_speed_last_600m) {
   double keep = -1;
   CHECK(!kb_final_speed(t, d, 600, &keep, nullptr)); CHECK_NEAR(keep, -1, 0);
   CHECK(!kb_final_speed({}, {}, 600, &keep, nullptr));
-  CHECK(std::string(KNOWLEDGE_VERSION) == "1.29.0");
+  CHECK(std::string(KNOWLEDGE_VERSION) == "1.30.0");
 }
 
 // Líneas base (KB 1.3.0, estudio extra 2026-11-19): valores de referencia del estudio ampliado del 18/11 y de la cadena
@@ -532,4 +532,83 @@ EQ_TEST(kb, rule_low_load_before_race) {
   KbStatus both = kb_evaluate(h3, 98, 0, c2);
   CHECK(both.races.size() == 1 && !both.races[0].planned);
   CHECK(kb_day_text(0) == "1970-01-01" && kb_day_text(20500) == "2026-02-16" && kb_day_text(19782) == "2024-02-29");
+}
+
+// ------------------------------------------------------------------ CG1–CG3 (KB 1.30.0)
+EQ_TEST(kb, cg1_trimp_reference_values) {
+  // FC de reposo 33 y máxima 213 (por defecto, «no propias»): ΔFC = (FC − 33)/180
+  KbTrimpConfig c;
+  CHECK_NEAR(c.hr_rest, 33.0, 1e-12); CHECK_NEAR(c.hr_max, 213.0, 1e-12); CHECK(!c.hr_rest_own && !c.hr_max_own);
+  CHECK_NEAR(kb_trimp_delta(123, c), 0.5, 1e-12);
+  CHECK_NEAR(kb_trimp_delta(20, c), 0.0, 1e-12);    // por debajo del reposo: 0
+  CHECK_NEAR(kb_trimp_delta(240, c), 1.0, 1e-12);   // por encima de la máxima: recortado a 1
+  CHECK(std::isnan(kb_trimp_delta(NAN, c)));
+  // 10 min a 123 lpm: 10 · 0,5 · 0,64 · e^0,96 = 8,357429 (a mano); sin ponderar 5
+  KbTrimp t; std::vector<double> h;
+  for (int i = 0; i < 120; i++) kb_trimp_add(&t, 5.0, 123.0, c, &h);
+  CHECK_NEAR(t.trimp, 8.357429, 1e-5);
+  CHECK_NEAR(t.trimp_unweighted, 5.0, 1e-9);
+  CHECK_NEAR(t.minutes, 10.0, 1e-9);
+  CHECK(t.s_above_z1 == 0 && t.s_above_z2 == 0);
+  CHECK((int)h.size() == KB_HR_BINS && h[24] == 600.0);   // 120–125 lpm
+  // 1 min a 213 lpm: 0,64 · e^1,92 = 4,365413 por minuto; > 180, > 200 y no por encima de la máxima
+  KbTrimp t2;
+  for (int i = 0; i < 12; i++) kb_trimp_add(&t2, 5.0, 213.0, c, nullptr);
+  CHECK_NEAR(t2.trimp, 4.365413, 1e-5);
+  CHECK_NEAR(t2.s_above_z1, 60, 1e-9); CHECK_NEAR(t2.s_above_z2, 60, 1e-9); CHECK_NEAR(t2.s_above_max, 0, 1e-9);
+  kb_trimp_add(&t2, 5.0, 230.0, c, nullptr);
+  CHECK_NEAR(t2.s_above_max, 5, 1e-9);
+  // sin épocas válidas: NaN (nunca 0 inventado)
+  KbTrimp t3; kb_trimp_add(&t3, 5.0, NAN, c, nullptr); kb_trimp_add(&t3, 0.0, 150, c, nullptr);
+  CHECK(std::isnan(t3.trimp) && t3.minutes == 0);
+  // desde el histograma: centro del intervalo 122,5 lpm → ΔFC 0,497222 → 10 · 0,826679 = 8,266791 (a mano)
+  KbTrimp th = kb_trimp_from_histogram(h, c);
+  CHECK_NEAR(th.trimp, 8.266791, 1e-5);
+  // con FC máxima propia más alta el mismo trabajo pesa menos
+  KbTrimpConfig own = c; own.hr_max = 233; own.hr_max_own = true;
+  CHECK(kb_trimp_from_histogram(h, own).trimp < th.trimp);
+  CHECK(std::isnan(kb_trimp_from_histogram(std::vector<double>(), c).trimp));
+}
+
+EQ_TEST(kb, cg2_speed_bands_morrice_west) {
+  double e[KB_CG_BANDS - 1];
+  kb_cg_edges(false, NAN, e);
+  CHECK_NEAR(e[0], 10.0, 1e-12); CHECK_NEAR(e[1], 13.3, 1e-12); CHECK_NEAR(e[4], 16.8, 1e-12);
+  CHECK(kb_cg_band(9.99, e) == 0 && kb_cg_band(10.0, e) == 1 && kb_cg_band(13.29, e) == 1 && kb_cg_band(13.3, e) == 2);
+  CHECK(kb_cg_band(14.4, e) == 3 && kb_cg_band(15.5, e) == 4 && kb_cg_band(16.8, e) == 5 && kb_cg_band(25, e) == 5);
+  CHECK(kb_cg_band(NAN, e) == -1 && kb_cg_band(-1, e) == -1);
+  CHECK(std::string(kb_cg_band_name(0)) == "LENTO" && std::string(kb_cg_band_name(5)) == "RAPIDO_4" && std::string(kb_cg_band_name(6)).empty());
+  // árabe (v_carrera 14,5): bordes × 14,5/16,7 → 8,682635 y 11,547904 m/s [I-raza]
+  kb_cg_edges(true, 14.5, e);
+  CHECK_NEAR(e[0], 8.682635, 1e-6); CHECK_NEAR(e[1], 11.547904, 1e-6);
+  kb_cg_edges(true, NAN, e);   // sin v_carrera: absolutas
+  CHECK_NEAR(e[1], 13.3, 1e-12);
+  // acumulador de sesión: 10 s a 14 m/s (140 m) en PSI = trabajo rápido; 10 s a 12 m/s no
+  SpeedBandConfig b; b.race_pace = 16.7; BoneModelConfig m; KbSessionLoad L;
+  L.add(10, 140, 14.0, b, m); L.add(10, 120, 12.0, b, m); L.add(10, 50, 5.0, b, m);
+  CHECK_NEAR(L.cg_band_m[2], 140, 1e-9); CHECK_NEAR(L.cg_band_m[1], 120, 1e-9); CHECK_NEAR(L.cg_band_m[0], 50, 1e-9);
+  CHECK_NEAR(L.hs_m, 140, 1e-9); CHECK_NEAR(L.cg_band_s[2], 10, 1e-9);
+  // el mismo trabajo a 12 m/s en un árabe ya es rápido (≥ 11,55 m/s)
+  SpeedBandConfig ba; ba.race_pace = 14.5; ba.cg_relative = true; KbSessionLoad La;
+  La.add(10, 120, 12.0, ba, m);
+  CHECK_NEAR(La.hs_m, 120, 1e-9);
+}
+
+EQ_TEST(kb, cg3_ewma_and_foster) {
+  CHECK_NEAR(kb_ewma_lambda(7), 0.25, 1e-12);
+  CHECK_NEAR(kb_ewma_lambda(28), 2.0 / 29.0, 1e-12);
+  double a = 0, c = 0;
+  kb_ewma({100, 0}, 7, 28, &a, &c);   // a mano: aguda 0,75 · 25 = 18,75; crónica 0,931034 · 6,896552 = 6,420927
+  CHECK_NEAR(a, 18.75, 1e-9); CHECK_NEAR(c, 6.420927, 1e-6);
+  std::vector<double> flat(400, 100.0);
+  kb_ewma(flat, 7, 28, &a, &c);       // carga constante: las dos convergen a la carga diaria
+  CHECK_NEAR(a, 100, 1e-6); CHECK_NEAR(c, 100, 1e-6);
+  kb_ewma({}, 7, 28, &a, &c);
+  CHECK(std::isnan(a) && std::isnan(c));
+  // Foster: 100 los días 3 y 6 de la semana → media 28,571 / DE 45,175 = 0,632456; strain 200 · 0,632456 = 126,4911
+  double mo = NAN, st = NAN;
+  CHECK(kb_foster({0, 0, 100, 0, 0, 100, 0}, &mo, &st));
+  CHECK_NEAR(mo, 0.632456, 1e-6); CHECK_NEAR(st, 126.4911, 1e-4);
+  CHECK(!kb_foster({50, 50, 50, 50, 50, 50, 50}, &mo, &st));   // DE 0: sin monotonía (no infinito)
+  CHECK(!kb_foster({0, 0, 0, 0, 0, 0, 0}, &mo, &st));
 }
