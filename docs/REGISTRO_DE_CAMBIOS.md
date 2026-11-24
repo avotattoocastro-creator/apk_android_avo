@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-24 — Casco V5 PROTOTIPO A — vías fuera de los pads (JLCPCB: «hole in pad», pedido W2026112308485306)
-**Autor:** Claude · **Rama:** `claude/casco-v5p-auditoria-22-11` (PR #125) · **CI:** 45296519857 (puerta en rojo: primera pasada, ver abajo) y la de este commit
+**Autor:** Claude · **Rama:** `claude/casco-v5p-auditoria-22-11` (PR #125) · **Commits:** `532364b`, `1098657`, `b341cf7` · **CI:** 45296519857 (puerta en rojo, primera pasada), 45311789892 y **45312273722 (puerta superada: DRC 0 errores, 0 conexiones incompletas, paridad 0, vías en pads 0)**
 **Qué pasó:** el 23/11 JLCPCB (Doris) paró el pedido SMT026112360152_Y17 porque había vías en pads, con riesgo de
 piezas torcidas, «tombstoning» y soldaduras abiertas. Ofreció soldar sin garantía (A) o cancelar y devolver el
 dinero (B). Revisando la placa salen **108 vías dentro de pads y 119 con el anillo a < 0,35 mm del cobre de un pad**:
@@ -48,8 +48,9 @@ centro del pad. La revisión del DFM del 23/11 no lo detectó. Recomendación al
 - Primera pasada (CI 45296519857): DRC 0 errores, pero 12 conexiones de masa incompletas y 3 fallos de paridad,
   porque en local faltaba la librería EasyEDA (`V5_CASCO/PCB/fuente/lib_easyeda`) y se usaron las huellas provisionales
   de U11/U12/L71. Rehecha entera con las huellas reales.
-**Validación:** comprobado en local (vías en pad, conectividad, masa) · DRC de KiCad 9 y puerta: el CI de este commit · NO VERIFICADO
-**Pendiente:** ficheros FINAL nuevos → nuevo pedido a JLCPCB.
+**Validación:** DRC de KiCad 9 y puerta superados en CI (45312273722). BOM y CPL idénticos a los del pedido anterior.
+Avisos no bloqueantes: 4 tramos sueltos, 1 vía colgante y 5 de serigrafía · NO VERIFICADO en placa
+**Pendiente:** cancelar el pedido con reembolso (opción B) y hacer uno nuevo con `out/FINAL`.
 
 ## 2026-11-23 — Casco V5 PROTOTIPO A — PEDIDO A JLCPCB
 **Autor:** Claude (registro) · **Pedido del usuario:** W2026112308485306 (23/11/2026 01:48), en producción
