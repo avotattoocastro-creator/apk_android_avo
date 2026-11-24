@@ -1,11 +1,11 @@
 # AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de fabricación
 
 - Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `fcbdcc7a82e359497fdec09ec1057172a83e9195` · ejecución de CI: 45229559538
+- Commit: `0bca793efa0fb5f93b22ef4a52daa2fff681d344` · ejecución de CI: 45334948802
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 56 × 56 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo bajo la URTK1.2, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 137 en total, 110 para montar, 1 sin montar (DNP: C69), 26 a mano (pads de hilo y de prueba)
-- Pistas: 1103 · vías: 219 · ruteado completo (0 conexiones incompletas)
+- Pistas: 1254 · vías: 232 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
@@ -16,11 +16,15 @@
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
+| Fabricación: vías dentro de pads SMD (o a < 0,10 mm) | correcto | 0 |
 
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 3
+- connection_width: 2
 - silk_edge_clearance: 2
+- silk_overlap: 2
+- track_dangling: 1
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: ninguna

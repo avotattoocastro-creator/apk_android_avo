@@ -2,41 +2,41 @@
  "piezas": {
   "AVO_CASCO_V5P_base": {
    "solidos": 1,
-   "volumen_mm3": 11322.9,
-   "peso_g": 14.4,
+   "volumen_mm3": 12395.7,
+   "peso_g": 15.7,
    "caja": [
-    61.4,
-    61.4,
+    65.4,
+    65.4,
     13.5
    ]
   },
   "AVO_CASCO_V5P_tapa": {
    "solidos": 1,
-   "volumen_mm3": 17249.4,
-   "peso_g": 21.9,
+   "volumen_mm3": 18618.9,
+   "peso_g": 23.6,
    "caja": [
-    61.4,
-    61.4,
+    65.4,
+    65.4,
     21.1
    ]
   },
   "AVO_CASCO_V5P_anillo_resina": {
    "solidos": 1,
-   "volumen_mm3": 1588.8,
-   "peso_g": 1.8,
+   "volumen_mm3": 1700.1,
+   "peso_g": 2.0,
    "caja": [
-    61.4,
-    61.4,
+    65.4,
+    65.4,
     2.9
    ]
   },
   "AVO_CASCO_V5P_base_casco": {
    "solidos": 1,
-   "volumen_mm3": 20154.4,
-   "peso_g": 25.6,
+   "volumen_mm3": 23551.3,
+   "peso_g": 29.9,
    "caja": [
-    65.4,
-    65.4,
+    69.4,
+    69.4,
     12.7
    ]
   }
@@ -44,11 +44,11 @@
  "interferencias": {},
  "medidas": {
   "capsula_mm": [
-   61.4,
-   61.4,
+   65.4,
+   65.4,
    35.1
   ],
-  "interior_mm": 56.6,
+  "interior_mm": 60.6,
   "z_cara_F": 13.5,
   "z_junta": 15.1,
   "anillo_z": [
@@ -82,12 +82,12 @@
    33.6
   ],
   "hall_xy": [
-   -23.9,
+   -24.1,
    -1.0
   ],
   "tactil": {
    "xy": [
-    25.7,
+    27.7,
     17.0
    ],
    "pared_mm": 1.4,

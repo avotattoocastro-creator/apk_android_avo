@@ -16,19 +16,20 @@ sys.path.insert(0, HERE)
 POSF = os.path.join(HERE, "colocacion_v5.json")
 
 FIJAS = {
-    # V5 CASCO PROTOTIPO A (18/11/2026): placa de 56 × 56. Tiras de la URTK1.2 en su sitio exacto (FILA9_POS / FILA10_POS).
+    # V5 CASCO PROTOTIPO A (18/11/2026): placa de 56 × 56. 24/11/2026: 60 × 60 (+2 mm por lado) para sacar las vías de los
+    # pads con sitio (aviso de JLCPCB, PCBA 13966268A): las piezas de canto se desplazan 2 mm hacia fuera. Tiras de la URTK1.2 en su sitio exacto (FILA9_POS / FILA10_POS).
     # Petición del usuario (16:37): WROOM a la izquierda, microSD abajo en el centro (la tarjeta sale por el canto
     # inferior) y el pogo al canto SUPERIOR (en la cápsula la copa del pogo pasa a la franja +Y del suelo).
     "J10": (20.62, 1.27, 0), "J11": (-20.02, 2.54, 0),
-    "U4": (-1.0, 7.3, 0), "J7": (-25.7, 17.0, 0), "J3": (1.0, -13.8, 0),
+    "U4": (-1.0, 7.3, 0), "J7": (-27.7, 17.0, 0), "J3": (1.0, -15.8, 0),
     # 19/11: USB-C de programación J16 en el canto superior (frente a ras, rot 180 = boca hacia +Y); el pogo pasa a 3 + 2
-    "J16": (4.2, 24.35, 180),
-    "P1": (-8.65, 25.5, 0), "P2": (-6.3, 25.5, 0), "P3": (-3.95, 25.5, 0), "P4": (-8.65, 23.05, 0), "P5": (-6.3, 23.05, 0),
-    "J2": (-17.9, -25.5, 0), "J6": (-15.4, -25.5, 0),
+    "J16": (4.2, 26.35, 180),
+    "P1": (-8.65, 27.5, 0), "P2": (-6.3, 27.5, 0), "P3": (-3.95, 27.5, 0), "P4": (-8.65, 25.05, 0), "P5": (-6.3, 25.05, 0),
+    "J2": (-17.9, -27.5, 0), "J6": (-15.4, -27.5, 0),
     "J12": (20.0, 23.0, 0), "J13": (-20.0, 23.0, 0), "J14": (-20.0, -23.0, 0), "J15": (20.0, -23.0, 0),
-    "D10": (-12.0, 26.25, 180), "D11": (12.0, 26.25, 180), "D12": (26.25, 12.0, 90), "D13": (26.25, -12.0, 90),
-    "D14": (12.0, -26.25, 0), "D15": (-12.0, -26.25, 0), "D16": (-26.25, -12.0, 270), "D17": (-26.25, 12.0, 270),   # D14/D15 alineados con D11/D10
-    "H1": (24.5, 24.5, 0), "H2": (-24.5, 24.5, 0), "H3": (-24.5, -24.5, 0), "H4": (24.5, -24.5, 0),
+    "D10": (-12.0, 28.25, 180), "D11": (12.0, 28.25, 180), "D12": (28.25, 12.0, 90), "D13": (28.25, -12.0, 90),
+    "D14": (12.0, -28.25, 0), "D15": (-12.0, -28.25, 0), "D16": (-28.25, -12.0, 270), "D17": (-28.25, 12.0, 270),   # D14/D15 alineados con D11/D10
+    "H1": (26.5, 26.5, 0), "H2": (-26.5, 26.5, 0), "H3": (-26.5, -26.5, 0), "H4": (26.5, -26.5, 0),
 }
 ANCLAS = {
     "U2": (-12.0, -15.0), "U6": (-2.0, 21.0), "F2": (-12.0, 21.0), "U3": (-12.0, -8.0), "U7": (14.0, 16.0),
@@ -62,7 +63,7 @@ DECAP = {"C21": ("U3", "1"), "C22": ("U3", "5"), "C60": ("U7", "1"), "C61": ("J1
 # auditoría 22/11/2026: piezas con objetivo fijo (no junto a un pin): la NTC sobre el centro de la batería, lejos del
 # BQ24072, y el Schottky del USB-C junto a J16
 OBJETIVO = {"RT2": (8.0, -3.0), "D18": (8.0, 21.0)}
-GAP = 0.12            # separación mínima entre patios
+GAP = 0.35            # separación mínima entre patios (24/11: 0,12 → 0,35, sitio para las vías fuera de los pads)
 STEP = 0.2
 
 
@@ -80,7 +81,7 @@ def main():
     import numpy as np
     from matplotlib.path import Path
     from scipy import ndimage
-    G = 0.1; X0, X1, Y0, Y1 = -29.5, 29.5, -29.5, 29.5
+    G = 0.1; X0, X1, Y0, Y1 = -31.5, 31.5, -31.5, 31.5   # 24/11: placa de 60
     W, H = int((X1 - X0) / G), int((Y1 - Y0) / G)
     xs = X0 + (np.arange(W) + 0.5) * G; ys = Y0 + (np.arange(H) + 0.5) * G
     XX, YY = np.meshgrid(xs, ys)
