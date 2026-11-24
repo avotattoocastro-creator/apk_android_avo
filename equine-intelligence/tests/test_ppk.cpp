@@ -1,4 +1,5 @@
 // AVO PPK 1.0.0: Hatanaka, RTKLIB driver, .avr extraction (GNSS_UBX_FRAG and whole GNSS_UBX) and C API.
+#include <memory>
 #include <array>
 #include <cmath>
 #include <cstdio>
@@ -188,7 +189,8 @@ EQ_TEST(ppk, hatanaka_crinex3_sample) {
   std::string p = tmp_dir() + "/avo_ppk_p433.rnx";
   { std::ofstream f(p, std::ios::binary); f << rnx; }
   obs_t o{};
-  nav_t nv{};
+  std::unique_ptr<nav_t> nvp(new nav_t());   // ~520 KB: en el montón (pila de 1 MB en Windows)
+  nav_t& nv = *nvp;
   sta_t st{};
   CHECK(readrnxt(p.c_str(), 1, gtime_t{}, gtime_t{}, 0.0, "", &o, &nv, &st) > 0);
   CHECK(o.n > 1500);
@@ -250,7 +252,8 @@ EQ_TEST(ppk, avr_fragments_whole_frames_and_c_api_give_the_same_solution) {
   Ref ref;
   std::string d = data_dir();
   obs_t o{};
-  nav_t nv{};
+  std::unique_ptr<nav_t> nvp(new nav_t());   // ~520 KB: en el montón (pila de 1 MB en Windows)
+  nav_t& nv = *nvp;
   sta_t st{};
   CHECK(readrnxt((d + "30400920.05o").c_str(), 1, gtime_t{}, gtime_t{}, 0.0, "", &o, &nv, &st) > 0);
   sortobs(&o);
@@ -335,7 +338,8 @@ EQ_TEST(ppk, session_without_raw_and_base_outside_the_session) {
   avo_eq_free(out);
   // base of another hour: clean error, not a wrong solution
   obs_t o{};
-  nav_t nv{};
+  std::unique_ptr<nav_t> nvp(new nav_t());   // ~520 KB: en el montón (pila de 1 MB en Windows)
+  nav_t& nv = *nvp;
   sta_t st{};
   readrnxt((d + "30400920.05o").c_str(), 1, gtime_t{}, gtime_t{}, 0.0, "", &o, &nv, &st);
   for (int i = 0; i < o.n; i++) o.data[i].time = timeadd(o.data[i].time, 7200.0);
