@@ -24,6 +24,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-24 — Casco V5 PROTOTIPO A — el pedido W2026112308485306 sigue con vías rellenas de epoxi y tapadas
+**Autor:** Claude (por indicación del usuario) · **Pedido:** JLCPCB W2026112308485306 / PCBA SMT026112360152_Y17
+**Qué cambia:** JLCPCB ofreció rellenar con epoxi y tapar las vías (via-in-pad plated over) por 17,3 $ adicionales en
+lugar de cancelar. El usuario aceptó y pagó el suplemento el 24/11 (16:07). El pedido continúa con el diseño **original**
+(commit `5b2aa59`, CI 45089929588), con vías rellenas y tapadas que dejan el pad plano. Así la soldadura no se escapa
+por el taladro.
+**No se ha tocado:** el diseño corregido sin vías en pads (`b341cf7`, CI 45312273722) queda en el PR #125 para los
+próximos pedidos. La puerta `vias_en_pad.py` sigue siendo bloqueante.
+**Validación:** NO VERIFICADO: falta recibir y probar la placa (pruebas M1–M10).
+
 ## 2026-11-24 — Casco V5 PROTOTIPO A — vías fuera de los pads (JLCPCB: «hole in pad», pedido W2026112308485306)
 **Autor:** Claude · **Rama:** `claude/casco-v5p-auditoria-22-11` (PR #125) · **Commits:** `532364b`, `1098657`, `b341cf7` · **CI:** 45296519857 (puerta en rojo, primera pasada), 45311789892 y **45312273722 (puerta superada: DRC 0 errores, 0 conexiones incompletas, paridad 0, vías en pads 0)**
 **Qué pasó:** el 23/11 JLCPCB (Doris) paró el pedido SMT026112360152_Y17 porque había vías en pads, con riesgo de
