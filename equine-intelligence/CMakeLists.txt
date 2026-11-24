@@ -29,7 +29,8 @@ file(GLOB RTKLIB_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/ppk/rtklib/*.c ${CMAKE_CURR
 if(MSVC)
   set_source_files_properties(${RTKLIB_SRC} PROPERTIES COMPILE_OPTIONS "/w")
 else()
-  set_source_files_properties(${RTKLIB_SRC} PROPERTIES COMPILE_OPTIONS "-w;-fno-sanitize=all")
+  # -std=gnu11: GCC 15 (Ubuntu 26.04 del CI) usa C23 por defecto, donde bool/false son palabras clave y ublox.c no compila
+  set_source_files_properties(${RTKLIB_SRC} PROPERTIES COMPILE_OPTIONS "-w;-fno-sanitize=all;-std=gnu11")
 endif()
 list(APPEND EQ_SRC ${RTKLIB_SRC})
 find_package(Threads)
