@@ -1,0 +1,58 @@
+** Drc report for AVO_BACK_V5P_PCB.kicad_pcb **
+** Created on 2026-11-24T02:22:43+0000 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 15 DRC violations **
+[via_dangling]: Via is not connected or connected on only one layer
+    Local override; warning
+    @(96.2250 mm, 107.0750 mm): Via [+3V3_SD] on F.Cu - B.Cu
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(91.0750 mm, 112.7250 mm): Track [VBUS] on F.Cu, length 0.0500 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(96.5750 mm, 77.3250 mm): Track [VBUS] on In2.Cu, length 0.2828 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(94.5250 mm, 78.1250 mm): Track [VSYS] on In2.Cu, length 0.2828 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(89.2750 mm, 115.1250 mm): Track [VSYS] on In2.Cu, length 0.3000 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(87.4250 mm, 117.0750 mm): Track [VSYS] on In2.Cu, length 0.2000 mm
+[via_dangling]: Via is not connected or connected on only one layer
+    Local override; warning
+    @(96.7390 mm, 98.4472 mm): Via [CHG_PG] on F.Cu - B.Cu
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(86.7250 mm, 114.1250 mm): Track [CHG_TS] on In2.Cu, length 0.1500 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(87.0134 mm, 75.6733 mm): Track [POGO_AUX_C] on F.Cu, length 0.0409 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(102.6750 mm, 106.9252 mm): Track [SD_D3] on F.Cu, length 0.0015 mm
+[silk_edge_clearance]: Silkscreen clipped by board edge
+    Rule: board setup constraints silk; warning
+    @(125.0000 mm, 72.0000 mm): Segment on Edge.Cuts
+    @(99.5000 mm, 73.6500 mm): Segment of J16 on F.Silkscreen
+[silk_edge_clearance]: Silkscreen clipped by board edge
+    Rule: board setup constraints silk; warning
+    @(125.0000 mm, 72.0000 mm): Segment on Edge.Cuts
+    @(108.9000 mm, 73.6500 mm): Segment of J16 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(78.4560 mm, 78.2830 mm): Segment on B.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(113.0000 mm, 95.0000 mm): Circle of U12 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(82.4600 mm, 85.8000 mm): Circle of L71 on F.Silkscreen
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** End of Report **
