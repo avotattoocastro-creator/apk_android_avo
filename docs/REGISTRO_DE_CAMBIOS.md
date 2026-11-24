@@ -24,6 +24,25 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-24 — iPad — Pulso del ECG y carga de la sesión en pantalla (motor 2.0.0-dev34)
+**Autor:** Claude (chat integrador, petición del usuario 24/11) · **Rama:** `claude/ipad-carga-entrenamiento` · **CI:** iPad en la rama (sin TestFlight) y al integrar
+**Qué cambia:**
+- **Análisis › Resumen › Parámetros clave › Pulso:** las casillas dejan de estar fijas a «—» y leen el bloque `cardio` del
+  motor (ECG de la cincha 0.5.x): **pulso máximo** (máxima por épocas de 5 s), **recuperación a 2 min** (con lo que baja),
+  **pulso al terminar** (época en la que acaba el esfuerzo) y una casilla nueva, **carga interna** (TRIMP CG1, «sin validar»,
+  con la cobertura de FC). Sin ECG siguen en «—» con «Llega con el ECG de la cincha»; con ECG NO_UTILIZABLE, «ECG de la
+  cincha no utilizable». Nada se estima en la app.
+- **Trabajo en pista › Base científica:** bloque nuevo **«Carga de la sesión»** (CG2): metros de trabajo rápido y las 6 bandas
+  de Morrice-West 2020 (o escaladas por la velocidad de carrera en árabes) con distancia y tiempo.
+- La tarjeta **«Carga de entrenamiento (CG1–CG3)»** de la historia del caballo ya la dejó el PR #129.
+- Pruebas: `SessionPulseLoadTests` (3) y `KeyDataTests` (4 casillas de pulso, vacías sin ECG).
+**No se ha tocado:** motor, contratos, firmware, workflows, firmas, `Info.plist` ni número de build.
+**Pendiente:** lo mismo en Android y Windows (`KeyData.cs` sigue con 3 casillas de pulso fijas; la prueba de paridad del
+SelfTest de Windows no cambia). Ver la pantalla con una sesión real con ECG de la cincha 0.5.0.
+**Validación:** compilado y probado en el CI del iPad. **NO VERIFICADO** en el iPad.
+
+---
+
 ## 2026-11-24 — Motor 2.0.0-dev34 (KB-1 1.30.0, cardio 1.1.0, training 1.2.0) · iPad — carga de entrenamiento CG1–CG3 y FC máxima FM1
 **Autor:** Claude (sesión nocturna del motor) · **Commits:** los de la rama `claude/motor-noche-2026-11-24` · **CI:** `build-equine-engine.yml` lanzado en la rama (resultado en el PR)
 **Qué cambia:**

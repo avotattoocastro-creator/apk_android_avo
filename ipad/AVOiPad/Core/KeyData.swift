@@ -169,9 +169,8 @@ struct KeyData: Equatable {
         let dur: Double? = metrics["duracion"]
         t.append(KeyTile(id: "duration", label: "Duración", value: dur.map { TimeText.clock($0) } ?? "—", unit: "",
                          caption: dur == nil ? "Sin datos" : "Toda la sesión", available: dur != nil, group: 0))
-        t.append(KeyTile(id: "hrmax", label: "Pulso máximo", value: "—", unit: "lpm", caption: ecgCaption, available: false, group: 1))
-        t.append(KeyTile(id: "rec2", label: "Recuperación a 2 min", value: "—", unit: "lpm", caption: ecgCaption, available: false, group: 1))
-        t.append(KeyTile(id: "hrend", label: "Pulso al terminar", value: "—", unit: "lpm", caption: ecgCaption, available: false, group: 1))
+        // pulso: bloque `cardio` del motor (ECG de la cincha 0.5.x, motor ≥ 2.0.0-dev29; TRIMP desde dev34)
+        t.append(contentsOf: pulseTiles(root["cardio"] as? [String: Any]))
         t.append(tile("lmax", "Tranco máximo", maxOf("l_max_m"), "0.00", "m", "En galope", girthCaption, 2))
         t.append(tile("fmax", "Frecuencia máxima", maxOf("f_max_hz"), "0.00", "tr/s", "En galope", girthCaption, 2))
         let refs: [Any] = ((tp?["perfil"] as? [String: Any])?["v_referencia"] as? [Any]) ?? []
@@ -250,6 +249,42 @@ struct KeyData: Equatable {
         let s: [Double] = v.sorted()
         let n: Int = s.count
         return n % 2 == 1 ? s[n / 2] : (s[n / 2 - 1] + s[n / 2]) / 2
+    }
+
+    /// Pulse tiles from the engine `cardio` block (AVO Cardio, ficha 15). Without ECG (or NO_UTILIZABLE) they stay «—»
+    /// with the reason; nothing is estimated in the app.
+    static func pulseTiles(_ c: [String: Any]?) -> [KeyTile] {
+        let present: Bool = (c?["presente"] as? Bool) ?? (c?["calidad"] != nil)
+        let quality: String = (c?["calidad"] as? String) ?? ""
+        let usable: Bool = present && quality != "NO_UTILIZABLE"
+        let miss: String = !present ? ecgCaption : "ECG de la cincha no utilizable"
+        let qText: String = quality.isEmpty ? "ECG de la cincha" : "ECG \(quality.lowercased())"
+        func t(_ id: String, _ label: String, _ v: Double?, _ fmt: String, _ unit: String, _ caption: String) -> KeyTile {
+            tile(id, label, usable ? v : nil, fmt, unit, caption, miss, 1)
+        }
+        let hrMax: Double? = num(c, "fc_max_epoca_lpm") ?? num(c, "fc_pico_lpm")
+        let recs: [[String: Any]] = (c?["recuperacion"] as? [Any] ?? []).compactMap { $0 as? [String: Any] }
+        let rec2: [String: Any]? = recs.first { num($0, "min") == 2 }
+        let drop2: Double? = num(rec2, "caida_lpm")
+        let rec2Caption: String = drop2.map { "Baja \(DotNetFormat.custom($0, "0", spanish: true)) lpm en 2 min" } ?? qText
+        // «al terminar»: FC de la época de 5 s en la que acaba el esfuerzo (fin_esfuerzo_s)
+        var hrEnd: Double? = nil
+        if let tEnd = num(c, "fin_esfuerzo_s") {
+            for e in (c?["epocas"] as? [Any] ?? []) {
+                guard let a = e as? [Any], a.count >= 2, let t0 = (a[0] as? NSNumber)?.doubleValue else { continue }
+                if t0 <= tEnd, tEnd < t0 + 5 { hrEnd = (a[1] as? NSNumber)?.doubleValue; break }
+            }
+        }
+        let load = c?["carga_interna"] as? [String: Any]
+        let trimp: Double? = num(load, "trimp")
+        let cover: Double? = num(load, "cobertura_pct")
+        let trimpCaption: String = "Carga interna (TRIMP, sin validar)" + (cover.map { " · \(DotNetFormat.custom($0, "0", spanish: true)) % con FC" } ?? "")
+        return [
+            t("hrmax", "Pulso máximo", hrMax, "0", "lpm", qText),
+            t("rec2", "Recuperación a 2 min", num(rec2, "fc_lpm"), "0", "lpm", rec2Caption),
+            t("hrend", "Pulso al terminar", hrEnd, "0", "lpm", "Al acabar el esfuerzo"),
+            t("trimp", "Carga interna", trimp, "0", "UA", trimpCaption),
+        ]
     }
 
     private static func tile(_ id: String, _ label: String, _ v: Double?, _ fmt: String, _ unit: String,

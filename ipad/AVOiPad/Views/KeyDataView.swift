@@ -294,6 +294,7 @@ struct KeyDataView: View {
         case "duration": return "clock"
         case "hrmax", "hrend": return "waveform.path.ecg"
         case "rec2", "rec15": return "heart.text.square"
+        case "trimp": return "flame"
         case "lmax", "lref1", "lref2": return "ruler"
         case "fmax", "fref1", "fref2": return "metronome"
         default: return "circle"
