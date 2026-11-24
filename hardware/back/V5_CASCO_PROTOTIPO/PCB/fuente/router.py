@@ -71,6 +71,9 @@ class Router:
         self.tracks = []        # (net, layer, (x, y), (x, y), width)
         self.vias = []          # (net, (x, y))
         self.edge_clear = edge_clear
+        # 24/11 (JLCPCB, pedido W2026112308485306): celdas donde NO puede ir una vía porque quedaría dentro o pegada a un
+        # pad SMD (de cualquier red, también la suya). La pone build_router; None = sin restricción.
+        self.via_keep = None
 
     # ---------------------------------------------------------------- coordinates
     def ij(self, x, y):
@@ -143,6 +146,8 @@ class Router:
             other = ((self.label[l] >= 0) & (self.label[l] != net)) | self.hard[l]
             d = ndimage.distance_transform_edt(~other) * GRID
             ok &= d >= r
+        if self.via_keep is not None:
+            ok &= ~self.via_keep
         return ok
 
     # ---------------------------------------------------------------- A*

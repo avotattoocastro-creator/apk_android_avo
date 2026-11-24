@@ -23,6 +23,11 @@ PLANES = {D.GND: "In1.Cu"}                 # In1 = plano GND macizo
 ROUTE_LAYERS = ["F.Cu", "In2.Cu"]   # V5: B.Cu = plano de masa de la antena GNSS, sin pistas
 CLEAR = 0.15
 VIA = (0.5, 0.3)
+# 24/11 (JLCPCB rechaza el pedido W2026112308485306 por «hole in pad»): centro de vía a ≥ 0,45 mm del borde de
+# cualquier pad SMD = radio de vía 0,25 + apertura de máscara 0,05 + franja de máscara ≥ 0,10 + margen 0,05.
+# La soldadura ya no se va por el taladro (piezas torcidas, «tombstoning», LGA sin soldar).
+VIA_PAD_GAP = 0.45
+EPS_KEEP = 0.035                        # error máximo del centro de celda (rejilla 0,05 mm)
 
 # widths per net (mm)
 WIDTH = {D.VBUS: 0.4, "POGO_VBUS": 0.4, "USBC_VBUS": 0.4, D.VSYS: 0.5, D.VBAT: 0.5, "BAT_IN": 0.5, D.VZED: 0.4, D.V3: 0.4, D.VSD: 0.3,
@@ -100,7 +105,20 @@ def build_router(pads):
             r.add_copper_poly(n, l, rec["poly"])
         if rec["pad"].kind == "thru_hole":       # drilled: inner planes are handled by KiCad
             pass
+    r.via_keep = smd_via_keep(r, pads)
     return r
+
+
+def smd_via_keep(r, pads):
+    """Celdas a menos de VIA_PAD_GAP de un pad SMD (cualquier red y capa): ninguna vía puede caer en ellas."""
+    from scipy import ndimage
+    m = np.zeros((r.H, r.W), bool)
+    for rec in pads:
+        if rec["npth"] or rec["pad"].kind != "smd":
+            continue
+        m |= poly_mask((r.H, r.W), r.x0, r.y0, rec["poly"])
+    d = ndimage.distance_transform_edt(~m) * GRID
+    return d < VIA_PAD_GAP + EPS_KEEP
 
 
 def pad_cells(r, rec, layer, free=None):
@@ -116,11 +134,14 @@ def pad_cells(r, rec, layer, free=None):
     return [(l, i, j)]
 
 
-def via_drops(r, pads, log):
-    """Connects every pad of a plane net (GND → In1, +3V3 → In2) with a short track and a via."""
+def via_drops(r, pads, log, only=None):
+    """Connects every pad of a plane net (GND → In1, +3V3 → In2) with a short track and a via.
+    only: set of (ref, pin) — solo esos pads (repair.py --vias-fuera)."""
     done = 0
     fails = []
     for rec in pads:
+        if only is not None and (rec["part"]["ref"], rec["pad"].num) not in only:
+            continue
         net = rec["net"]
         if net not in PLANES or rec["npth"]:
             continue

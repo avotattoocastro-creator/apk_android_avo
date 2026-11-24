@@ -19,6 +19,9 @@ parts = json.load(open("kicad/piezas.json", encoding="utf-8"))
 route_src = open(os.path.join(OUT, "ruteado", "ORIGEN.txt")).read().strip() if os.path.exists(
     os.path.join(OUT, "ruteado", "ORIGEN.txt")) else "desconocido"
 
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__))))
+import vias_en_pad   # noqa: E402
+vip, _ = vias_en_pad.check("kicad/AVO_BACK_V5P_PCB.kicad_pcb")
 viol = drc.get("violations", [])
 unconn = drc.get("unconnected_items", [])
 parity = drc.get("schematic_parity", [])
@@ -38,6 +41,8 @@ checks = [
     ("DRC: paridad esquema ↔ placa", len(parity) == 0, len(parity)),
     ("ERC: errores", len(erc_e) == 0, len(erc_e)),
     ("ERC: advertencias", len(erc_w) == 0, len(erc_w)),
+    # 24/11 (JLCPCB paró el pedido W2026112308485306 por «hole in pad»): ninguna vía con su anillo a < 0,10 mm de un pad SMD
+    ("Vías en pads SMD (fuente/vias_en_pad.py)", len(vip) == 0, len(vip)),
 ]
 ok = all(c[1] for c in checks)
 sha = os.environ.get("GITHUB_SHA") or subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True,

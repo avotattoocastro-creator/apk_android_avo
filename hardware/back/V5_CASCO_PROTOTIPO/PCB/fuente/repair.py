@@ -219,6 +219,54 @@ def prune(pads, segs, vias):
     return removed
 
 
+def vias_fuera(src, pads, segs, vias):
+    """24/11 (JLCPCB, «hole in pad»): quita las vías que tocan el cobre de un pad SMD (vias_en_pad, < GATE_GAP) y rehace
+    sus conexiones con la nueva regla del router (ninguna vía a < build.VIA_PAD_GAP de un pad SMD):
+    - masa (plano In1): se quita la vía y su tramo; el pad vuelve a bajar al plano con build.via_drops desde fuera;
+    - señal: se quita la vía, se podan los tramos sueltos y el bucle normal une otra vez la red."""
+    import vias_en_pad as V
+    bad, _ = V.check(src, limit=V.GATE_GAP)
+    at = set(b["via"] for b in bad)
+    hit = [v for v in vias if (round(v["p"][0], 3), round(v["p"][1], 3)) in at]
+    gnd_pads = set()
+    for v in hit:
+        vias.remove(v)
+        if v["net"] in build.PLANES:
+            for s_ in list(segs):
+                if s_["net"] == v["net"] and min(math.hypot(e[0] - v["p"][0], e[1] - v["p"][1]) for e in (s_["a"], s_["b"])) <= v["d"] / 2 + 1e-3:
+                    segs.remove(s_)
+            for b in bad:
+                if b["via"] == (round(v["p"][0], 3), round(v["p"][1], 3)) and b["net"] == v["net"]:
+                    gnd_pads.add((b["ref"], b["pin"]))
+    # las vías de masa quitadas pueden dejar tramos de masa sueltos (prune no toca los planos): fuera los que no
+    # terminan en pad ni en vía por ningún extremo
+    for s_ in list(segs):
+        if s_["net"] not in build.PLANES:
+            continue
+        ok = 0
+        for end in (s_["a"], s_["b"]):
+            if any(rec["net"] == s_["net"] and s_["layer"] in rec["layers"] and seg_poly(end, end, rec["poly"]) <= s_["w"] / 2 + 1e-3 for rec in pads) or \
+                    any(v["net"] == s_["net"] and math.hypot(v["p"][0] - end[0], v["p"][1] - end[1]) <= v["d"] / 2 + 1e-3 for v in vias) or \
+                    any(t is not s_ and t["net"] == s_["net"] and t["layer"] == s_["layer"] and seg_seg(end, end, t["a"], t["b"]) <= (s_["w"] + t["w"]) / 2 + 1e-3 for t in segs):
+                ok += 1
+        if ok < 2:
+            segs.remove(s_)
+    prune(pads, segs, vias)
+    r = make_router(pads, segs, vias)
+    nt, nv = len(r.tracks), len(r.vias)
+    log = []
+    fails = build.via_drops(r, pads, log, only=gnd_pads)
+    name = {c: n for n, c in D.CODE.items()}
+    for (net, layer, a, b, w) in r.tracks[nt:]:
+        segs.append(dict(net=name[net], layer=layer, a=a, b=b, w=w))
+    for (net, p) in r.vias[nv:]:
+        vias.append(dict(net=name[net], p=p, d=build.VIA[0], drill=build.VIA[1]))
+    print("Vías fuera de pads: %d quitadas (%d de masa), pads de masa con vía nueva: %d; %s" % (
+        len(hit), sum(1 for v in hit if v["net"] in build.PLANES), len(gnd_pads) - len(fails), "; ".join(log)))
+    if fails:
+        print("  SIN VÍA NUEVA: %s" % ", ".join(fails))
+
+
 def make_router(pads, segs, vias):
     r = build.build_router(pads)
     for s in segs:
@@ -251,6 +299,8 @@ def try_route(r, pads, net, nid, g):
 def main():
     src = os.path.join(D.OUT, "AVO_BACK_V5P_PCB_colocacion.kicad_pcb" if "--from-placement" in sys.argv
                        else "AVO_BACK_V5P_PCB.kicad_pcb")
+    if "--src" in sys.argv:                                     # p. ej. --src AVO_BACK_V5P_PCB_ruteado.kicad_pcb
+        src = os.path.join(D.OUT, sys.argv[sys.argv.index("--src") + 1])
     segs, vias, fps = read_board(src)
     bad = check_positions(fps)
     # --moved REF1,REF2: piezas movidas o nuevas a propósito; sus pistas viejas quedan sueltas y se podan, y las redes
@@ -262,6 +312,8 @@ def main():
         print("La placa ruteada no corresponde a la colocación actual: %s" % ", ".join(bad[:12]))
         sys.exit(2)
     pads = build.collect_pads()
+    if "--vias-fuera" in sys.argv:
+        vias_fuera(src, pads, segs, vias)
     r = make_router(pads, segs, vias)
     report = []
     pending = []
