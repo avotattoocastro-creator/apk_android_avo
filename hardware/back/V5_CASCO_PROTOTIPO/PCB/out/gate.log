@@ -1,17 +1,17 @@
-# AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de diagnóstico
+# AVO BACK V5 CASCO PROTOTIPO · PROTO A (ESP32-S3-WROOM-1U-N16R8 + URTK1.2 por tiras de pines) — informe de fabricación
 
-- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `e051aefba408430ee2f5d3a70822c5f4c72e97d2` · ejecución de CI: 45318959923
-- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
+- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
+- Commit: `175753f0ee7910da74b8c6ed0cec912fa70c980e` · ejecución de CI: 45333668680
+- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 56 × 56 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo bajo la URTK1.2, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 137 en total, 110 para montar, 1 sin montar (DNP: C69), 26 a mano (pads de hilo y de prueba)
-- Pistas: 1207 · vías: 201 · ruteado INCOMPLETO (9 conexiones)
+- Pistas: 1260 · vías: 232 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | **FALLA** | 9 |
+| DRC: conexiones incompletas | correcto | 0 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
@@ -19,19 +19,9 @@
 | Fabricación: vías dentro de pads SMD (o a < 0,10 mm) | correcto | 0 |
 
 
-### Conexiones incompletas
-- Track [+3V3_SD] on F.Cu, length 0.7661 mm ↔ Pad 2 [+3V3_SD] of R42 on F.Cu
-- Pad 1 [VBUS] of C18 on F.Cu ↔ Track [VBUS] on In2.Cu, length 2.5215 mm
-- Track [VBUS] on F.Cu, length 0.6918 mm ↔ Pad 5 [VBUS] of U6 on F.Cu
-- Track [EN] on F.Cu, length 1.4401 mm ↔ Track [EN] on F.Cu, length 0.2325 mm
-- Via [I2C_SCL] on F.Cu - B.Cu ↔ Pad 7 [I2C_SCL] of U12 on F.Cu
-- Pad 1 [LED_D6] of D15 on F.Cu ↔ Pad 3 [LED_D6] of D14 on F.Cu
-- Pad 20 [SD_CLK0] of U4 on F.Cu ↔ Pad 1 [SD_CLK0] of R46 on F.Cu
-- Pad 1 [USBC_CC2] of R31 on F.Cu ↔ Pad B5 [USBC_CC2] of J16 on F.Cu
-- Track [USBC_VBUS] on F.Cu, length 0.9767 mm ↔ Pad A9 [USBC_VBUS] of J16 on F.Cu
-
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 3
+- track_dangling: 2
 - connection_width: 2
 - silk_edge_clearance: 2
 - silk_overlap: 2
@@ -88,8 +78,8 @@
 - Piezas sin existencias para 5 placas: C165948, C8598, C25905, C5378721
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **no**
-- Apto para solicitar prototipos: **no**
+- Diseño verificado por software (KiCad 9 en el CI): **sí**
+- Apto para solicitar prototipos: **sí, pendiente de validación física**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)
@@ -102,4 +92,4 @@
 - REV B: firmware nuevo (BACK 5.x): POWER_HOLD (GPIO46) al arrancar, pulsación larga, LED_PWR (GPIO48), I²C (MAX17048 + LSM6DSV16X).
 - Con el anillo apagado, GPIO47 a 0 (no alimentar los LED por DIN). PROTO A: 8 LED (D14 a la derecha de la salida de la microSD).
 - Nada de esto se ha fabricado ni medido: no es un prototipo validado.
-::notice title=Puerta de fabricación::NO SUPERADA
+::notice title=Puerta de fabricación::SUPERADA

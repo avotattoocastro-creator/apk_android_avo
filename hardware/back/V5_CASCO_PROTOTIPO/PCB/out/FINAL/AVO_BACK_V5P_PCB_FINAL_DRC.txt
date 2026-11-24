@@ -1,0 +1,48 @@
+** Drc report for AVO_BACK_V5P_PCB.kicad_pcb **
+** Created on 2026-11-24T05:30:32+0000 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 11 DRC violations **
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(101.9750 mm, 76.7750 mm): Track [USBC_VBUS] on F.Cu, length 0.2121 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(98.7750 mm, 79.8750 mm): Track [USB_DP_C] on F.Cu, length 0.1414 mm
+[connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0811 mm) (F.Cu)
+    Rule: board setup constraints; warning
+    @(130.0000 mm, 127.0000 mm): Zone [GND] on F.Cu, priority 0
+[connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0620 mm) (F.Cu)
+    Rule: board setup constraints; warning
+    @(130.0000 mm, 127.0000 mm): Zone [GND] on F.Cu, priority 0
+[silk_edge_clearance]: Silkscreen clipped by board edge
+    Rule: board setup constraints silk; warning
+    @(127.0000 mm, 70.0000 mm): Segment on Edge.Cuts
+    @(99.5000 mm, 71.6500 mm): Segment of J16 on F.Silkscreen
+[silk_edge_clearance]: Silkscreen clipped by board edge
+    Rule: board setup constraints silk; warning
+    @(127.0000 mm, 70.0000 mm): Segment on Edge.Cuts
+    @(108.9000 mm, 71.6500 mm): Segment of J16 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(95.0500 mm, 74.9500 mm): PCB text 'AUX' on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(113.0000 mm, 95.0000 mm): Circle of U12 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(82.2500 mm, 85.9000 mm): Circle of L71 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(89.6500 mm, 74.9500 mm): PCB text 'GND' on F.Silkscreen
+    @(89.5000 mm, 76.0600 mm): Segment of D2 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(95.3200 mm, 75.1036 mm): Segment of R20 on F.Silkscreen
+    @(95.0500 mm, 74.9500 mm): PCB text 'AUX' on F.Silkscreen
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** End of Report **
