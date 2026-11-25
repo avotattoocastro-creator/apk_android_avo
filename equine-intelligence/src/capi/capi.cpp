@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "avo_eq/avo_eq_c.h"
 #include <cmath>
 #include <cstdlib>
@@ -192,6 +193,36 @@ bool parse_opts(const char* text, Opts* o, std::string* err) {
   // training course: "recorrido" {salida, meta, salida_meta: {a:[lat,lon], b:[lat,lon], sentido}, geocerca:[[lat,lon],…], nombre}
   // or "plan_geocercas": the geocercas.json object written by AVO Windows / iPad (Lines with Role/Direction, Fences)
   if (!course_from_options(v, &o->cfg.racing.course, err)) return false;
+  // AVO BEACH 1.0.0 (25/11/2026): "marea": {"curva": [[unix_s, altura_m], …], "fuente"} y
+  // "playa": {"linea_seca": {"a","b"}, "linea_bajamar": {"a","b"}, "altura_seca_m", "altura_bajamar_m", "orilla_m"}
+  if (v.has("marea")) {
+    const auto& m = v["marea"];
+    if (m.type != avoeq::json::Value::OBJ) { *err = "«marea» debe ser un objeto"; return false; }
+    for (const auto& p : m["curva"].a) {
+      double t = p[0].num(NAN), h = p[1].num(NAN);
+      if (std::isnan(t) || std::isnan(h) || h < -5 || h > 15) { *err = "marea: punto no válido (se espera [unix_s, altura_m])"; return false; }
+      o->cfg.beach.tide.push_back({t, h});
+    }
+    std::sort(o->cfg.beach.tide.begin(), o->cfg.beach.tide.end());
+    o->cfg.beach.tide_source = m["fuente"].str("");
+  }
+  if (v.has("playa")) {
+    const auto& pl = v["playa"];
+    if (pl.type != avoeq::json::Value::OBJ) { *err = "«playa» debe ser un objeto"; return false; }
+    auto line = [&](const avoeq::json::Value& x, avoeq::BeachLine* L, const char* what) {
+      if (x.is_null()) return true;
+      avoeq::GeoPoint a, b;
+      if (!point(x["a"], &a) || !point(x["b"], &b)) { *err = std::string("playa: «") + what + "» necesita a y b [lat, lon]"; return false; }
+      L->set = true; L->a_lat = a.lat; L->a_lon = a.lon; L->b_lat = b.lat; L->b_lon = b.lon;
+      return true;
+    };
+    if (!line(pl["linea_seca"], &o->cfg.beach.dry, "linea_seca") || !line(pl["linea_bajamar"], &o->cfg.beach.low, "linea_bajamar")) return false;
+    o->cfg.beach.h_dry = pl["altura_seca_m"].num(o->cfg.beach.h_dry);
+    o->cfg.beach.h_low = pl["altura_bajamar_m"].num(o->cfg.beach.h_low);
+    o->cfg.beach.shore_m = pl["orilla_m"].num(o->cfg.beach.shore_m);
+    if (!(o->cfg.beach.h_dry - o->cfg.beach.h_low >= 0.5) || o->cfg.beach.h_dry > 12 || o->cfg.beach.h_low < -3 ||
+        !(o->cfg.beach.shore_m >= 5 && o->cfg.beach.shore_m <= 300)) { *err = "playa: alturas u orilla_m fuera de rango"; return false; }
+  }
   // manual corrections (absolute GPS time, iTOW ms): "trabajos_manuales": [{"itow0_ms","itow1_ms"}, …] (empty = none),
   // "fases_manuales": {"inicio_trabajo_itow_ms", "fin_trabajo_itow_ms"} (either may be missing)
   if (v.has("trabajos_manuales")) {

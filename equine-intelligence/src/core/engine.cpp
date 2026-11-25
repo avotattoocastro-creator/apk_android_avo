@@ -103,7 +103,7 @@ std::vector<std::pair<std::string, std::string>> algorithm_versions() {
   return {{"motor", ENGINE_VERSION}, {"gnss", "1.1.0"}, {"aceleracion", KINEMATICS_VERSION}, {"curvas", CURVES_VERSION},
           {"cadencia", CADENCE_VERSION}, {GAIT_V1_ID, "1.0.1"}, {GAIT_V2_ID, "2.0.0"}, {"fusion", FUSION_VERSION},
           {"rendimiento", PERFORMANCE_VERSION}, {"eventos", EVENTS_VERSION}, {"simetria", SYMMETRY_VERSION}, {"trabajo_pista", RACING_VERSION},
-          {"base_cientifica", KNOWLEDGE_VERSION}, {"cardio", CARDIO_VERSION}};
+          {"base_cientifica", KNOWLEDGE_VERSION}, {"cardio", CARDIO_VERSION}, {"playa", BEACH_VERSION}};
 }
 
 std::string params_hash(const EngineConfig& c) {
@@ -130,6 +130,14 @@ std::string params_hash(const EngineConfig& c) {
   { char x[160]; snprintf(x, sizeof(x), "|ECG%d|%g|%g|%g|%g|%g|%g|%g", c.cardio.enabled ? 1 : 0, c.cardio.band_lo_hz, c.cardio.band_hi_hz,
                           c.cardio.threshold_fraction, c.cardio.premature_pct, c.cardio.max_phase_bpm, c.cardio.recovery_bpm, c.cardio.v200_bpm); all += x; }
   { char x[96]; snprintf(x, sizeof(x), "|CG1|%g|%g|%d%d", c.cardio.trimp.hr_rest, c.cardio.trimp.hr_max, c.cardio.trimp.hr_rest_own ? 1 : 0, c.cardio.trimp.hr_max_own ? 1 : 0); all += x; }
+  if (c.beach.any()) {   // AVO BEACH: líneas, alturas y curva de marea (resumida por FNV más abajo)
+    char x[256];
+    snprintf(x, sizeof(x), "|PL|%d,%.7f,%.7f,%.7f,%.7f|%d,%.7f,%.7f,%.7f,%.7f|%g|%g|%g|%zu", c.beach.dry.set ? 1 : 0, c.beach.dry.a_lat, c.beach.dry.a_lon,
+             c.beach.dry.b_lat, c.beach.dry.b_lon, c.beach.low.set ? 1 : 0, c.beach.low.a_lat, c.beach.low.a_lon, c.beach.low.b_lat, c.beach.low.b_lon,
+             c.beach.h_dry, c.beach.h_low, c.beach.shore_m, c.beach.tide.size());
+    all += x;
+    for (const auto& p : c.beach.tide) { char y[48]; snprintf(y, sizeof(y), "|%.0f:%.3f", p.first, p.second); all += y; }
+  }
   uint64_t h = 1469598103934665603ull;
   for (const char* p = all.c_str(); *p; p++) { h ^= (uint8_t)*p; h *= 1099511628211ull; }
   char out[20]; snprintf(out, sizeof(out), "%016llx", (unsigned long long)h);
@@ -187,6 +195,7 @@ Analysis analyse(const Session& s, const EngineConfig& c, const std::string& whe
   a.racing = analyse_racing(a.gnss, a.imu, a.girth_to_gnss, chosen, s.imu_units, c.racing,
                             s.gnss.empty() ? NAN : (double)s.gnss[0].itow_ms); step();
   a.cardio = analyse_cardio(s, a.chest_to_gnss, a.gnss.t, a.gnss.speed, c.sync, c.cardio); step();
+  a.beach = analyse_beach(s, a, c.beach);   // AVO BEACH 1.0.0: marea y franja automática (solo con opciones «marea» / «playa»)
   find_anomalies(a);
   assess_quality(s, a);
   return a;
@@ -425,6 +434,7 @@ std::string to_json(const Analysis& a, const Session& s, const EngineConfig& c, 
   write_v2_blocks(o, a, s);
   o << ",\"trabajo_pista\":" << racing_json(a.racing, c.racing);
   o << ",\"cardio\":" << cardio_json(a.cardio, c.cardio, series);
+  if (a.beach.present) o << ",\"entorno\":" << beach_json(a.beach);
   if (series) write_series(o, a, c);
   o << "}";
   return o.str();

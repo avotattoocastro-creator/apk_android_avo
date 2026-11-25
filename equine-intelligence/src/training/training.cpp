@@ -170,6 +170,13 @@ bool training_summary_from_analysis(const json::Value& a, const TrainingConfig& 
   s.id = ses["id"].str(); s.horse = ses["caballo"].str(); s.rider = ses["jinete"].str();
   s.date_utc = ses["inicio_utc"].str();
   s.has_imu = a["procedencia"]["tiene_cincha"].boolean(false);
+  {  // AVO BEACH 1.0.0: franja automática del trabajo y marea (la ficha de campo, que se aplica después, manda)
+    const json::Value& en = a["entorno"];
+    std::string fb = en["franjas"]["trabajo"].str();
+    if (!fb.empty()) { s.beach_band = fb; s.beach_band_auto = true; }
+    s.tide_level = en["marea"]["nivel"].str(); s.tide_trend = en["marea"]["tendencia"].str();
+    s.tide_height_m = nnum(en["marea"]["altura_trabajo_m"]);
+  }
 
   // Per-gait segments (rendimiento, format v2). Fallback: gait segments of v1 (durations only).
   std::vector<std::pair<double, double>> wm[3][4];   // stride, cadence, corr, cv : (value, duration)
@@ -367,7 +374,9 @@ std::string training_summary_to_json(const SessionSummary& s) {
     << ",\"calidad\":{\"gnss\":" << q(s.gnss_quality) << ",\"imu\":" << q(s.imu_quality) << "}"
     << ",\"valoracion\":{\"rpe\":" << num(s.rpe) << ",\"estado\":" << q(s.state) << ",\"nota\":" << q(s.note) << "}"
     << ",\"pista\":{\"superficie\":" << q(s.surface) << ",\"estado\":" << q(s.track_state) << ",\"franja\":" << q(s.beach_band)
-    << ",\"going\":" << q(s.going) << ",\"marea\":{\"hora\":" << q(s.tide_time) << ",\"tipo\":" << q(s.tide_type) << "}}"
+    << ",\"franja_origen\":" << q(s.beach_band.empty() ? "" : s.beach_band_auto ? "AUTO" : "MANUAL")
+    << ",\"going\":" << q(s.going) << ",\"marea\":{\"hora\":" << q(s.tide_time) << ",\"tipo\":" << q(s.tide_type)
+    << ",\"nivel\":" << q(s.tide_level) << ",\"tendencia\":" << q(s.tide_trend) << ",\"altura_m\":" << num(s.tide_height_m) << "}}"
     << ",\"tipo_sesion\":" << q(s.session_type)
     << ",\"condiciones\":{\"temperatura_c\":" << num(s.temperature_c) << ",\"humedad_pct\":" << num(s.humidity_pct) << "}"
     << ",\"pesos\":{\"jinete_kg\":" << num(s.rider_kg) << ",\"caballo_kg\":" << num(s.horse_kg) << "}"
@@ -436,6 +445,9 @@ bool training_summary_from_json(const json::Value& v, SessionSummary* out, std::
   s.rpe = nnum(v["valoracion"]["rpe"]); s.state = v["valoracion"]["estado"].str(); s.note = v["valoracion"]["nota"].str();
   s.surface = v["pista"]["superficie"].str(); s.track_state = v["pista"]["estado"].str();
   training_read_field_sheet(v, &s);
+  s.beach_band_auto = !s.beach_band.empty() && v["pista"]["franja_origen"].str() == "AUTO";   // AVO BEACH
+  s.tide_level = v["pista"]["marea"]["nivel"].str(); s.tide_trend = v["pista"]["marea"]["tendencia"].str();
+  s.tide_height_m = nnum(v["pista"]["marea"]["altura_m"]);
   const json::Value& rc = v["trabajo_pista"];
   if (rc.type == json::Value::OBJ) {
     RaceSummary& R = s.race;
@@ -514,7 +526,12 @@ void training_read_field_sheet(const json::Value& x, SessionSummary* s) {
   };
   code(x["tipo_sesion"], {"TRABAJO", "TRABAJO_REFERENCIA_1000", "CARRERA", "TRIAL", "DESCANSO_ACTIVO"}, "tipo de sesión", &s->session_type);
   const json::Value& p = x["pista"];
-  code(p["franja"], {"ORILLA_FIRME", "HUMEDA_PROFUNDA", "SECA_PROFUNDA", "TRANSICION"}, "franja de playa", &s->beach_band);
+  {
+    std::string before = s->beach_band;
+    code(p["franja"], {"ORILLA_FIRME", "HUMEDA_PROFUNDA", "SECA_PROFUNDA", "TRANSICION"}, "franja de playa", &s->beach_band);
+    if (p["franja"].type == json::Value::STR && !p["franja"].s.empty() && s->beach_band != before) s->beach_band_auto = false;   // la anotada manda
+    else if (p["franja"].type == json::Value::STR && !p["franja"].s.empty() && p["franja_origen"].str() != "AUTO") s->beach_band_auto = false;
+  }
   code(p["going"], {"FIRME", "BUENO_FIRME", "BUENO", "BUENO_BLANDO", "BLANDO", "PESADO"}, "going", &s->going);
   const json::Value& m = p["marea"];
   if (m["hora"].type == json::Value::STR && !m["hora"].s.empty()) {
