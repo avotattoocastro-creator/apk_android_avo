@@ -127,7 +127,8 @@ struct SummaryHero: View {
                             .font(.caption).foregroundStyle(rising ? Avo.cyan : Avo.warn)
                     }
                 }
-                Text("Modelo, no medición").font(.caption2).foregroundStyle(Avo.textDim)
+                Text(env.weatherSourceLine).font(.caption2).foregroundStyle(env.measured != nil ? Avo.cyan : Avo.textDim).lineLimit(1)
+                    .minimumScaleFactor(0.8)
             } else if env.loading {
                 ProgressView().controlSize(.small)
                 Text("Consultando el tiempo del entrenamiento…").font(.caption).foregroundStyle(Avo.textDim).multilineTextAlignment(.center)

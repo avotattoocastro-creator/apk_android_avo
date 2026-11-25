@@ -49,6 +49,10 @@ final class EnvironmentModel {
     var tempHeadline: String = "Sin datos"
     var pressureHeadline: String = "Sin datos"
     var waveHeadline: String = "Sin datos"
+    /// Procedencia del tiempo de la portada, en una línea (25/11/2026): «Medido · AEMET Treto (4 km)» o «Modelo, no medición».
+    var weatherSourceLine: String = "Modelo, no medición"
+    /// Observación medida de AEMET (estación oficial más cercana), si la hay para la hora del entrenamiento.
+    var measured: AemetObservation? = nil
 
     // place settings (Windows AppSettings.PlaceName / PlaceLatitude / PlaceLongitude) and online switch
     var placeName: String
@@ -192,10 +196,18 @@ final class EnvironmentModel {
             errors.append("meteorología: " + EnvironmentModel.message(error))
             app.log.warn("entorno", "Open-Meteo no disponible", error)
         }
+        // tiempo MEDIDO en la estación oficial de AEMET más cercana (si hay clave y el entrenamiento es reciente o ya se guardó)
+        var newMeasured: AemetObservation? = nil
+        do {
+            newMeasured = try await AemetService(cacheDir: app.paths.environmentCache).observation(sessionId: s.id, start: start, lat: lat, lon: lon)
+        } catch {
+            app.log.info("entorno", "AEMET: " + EnvironmentModel.message(error))
+        }
         if app.selected !== s || request != requestNo { return }   // a newer request owns the panels
         loading = false
         tides = newTides
         weather = newWeather
+        measured = newMeasured
         fill(s, start)
         status = errors.isEmpty ? "Datos de entorno cargados (con copia local para uso sin conexión)." : "Parcial — " + errors.joined(separator: " · ")
     }
@@ -213,6 +225,8 @@ final class EnvironmentModel {
         tideSeries = []; tideMarker = .nan; trainingBand = []
         tideHeadline = "Sin datos"; windHeadline = "Sin datos"; tempHeadline = "Sin datos"; pressureHeadline = "Sin datos"
         waveHeadline = "Sin datos"; coefficientHeadline = "Sin datos"
+        measured = nil
+        weatherSourceLine = "Modelo, no medición"
         tideTrend = "No disponible"
         tidePhasePct = nil
     }
@@ -293,6 +307,28 @@ final class EnvironmentModel {
                                             humidity: TimeText.num(h.humidityPct, "0", " %"), wave: TimeText.num(h.waveHeightM, "0.0", " m"),
                                             period: TimeText.num(h.wavePeriodS, "0", " s"), inTraining: inTraining))
             }
+        }
+        // AEMET medido: sustituye temperatura y viento de la portada y lo dice en una línea (mismo sitio, mismo tamaño)
+        if let m = measured {
+            if m.temperatureC != nil { tempHeadline = TimeText.num(m.temperatureC, "0.0", " °C") }
+            if let v = m.windKmh {
+                var wind: String = TimeText.num(v, "0", " km/h")
+                if let d = m.windDirDeg { wind += " " + EnvironmentModel.compass(d) }
+                windHeadline = wind
+            }
+            if m.pressureHpa != nil { pressureHeadline = TimeText.num(m.pressureHpa, "0", " hPa") }
+            weatherSourceLine = m.sourceLine
+            var mRows: [FeatureKV] = []
+            mRows.add("Medido en", "AEMET \(m.station) (\(m.idema)) · \(TimeText.num(m.distanceKm, "0.0", " km"))")
+            mRows.add("Hora de la medida", MadridTime.format(m.utc, "dd/MM HH:mm"))
+            mRows.add("Temperatura medida", TimeText.num(m.temperatureC, "0.0", " °C"))
+            mRows.add("Viento / racha medidos", "\(TimeText.num(m.windKmh, "0", " km/h")) / \(TimeText.num(m.gustKmh, "0", " km/h"))")
+            mRows.add("Humedad medida", TimeText.num(m.humidityPct, "0", " %"))
+            var all: [FeatureKV] = []   // ids consecutivos (ForEach)
+            for r in mRows + wRows { all.add(r.key, r.value) }
+            wRows = all
+        } else {
+            weatherSourceLine = "Modelo, no medición"
         }
         weatherRows = wRows
         weatherHours = hours

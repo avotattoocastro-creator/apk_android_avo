@@ -24,6 +24,13 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-25 — iPad — Tiempo MEDIDO de AEMET (Treto) en la portada del entrenamiento
+**Autor:** Claude · **Commits:** el de esta entrada · **CI:** TestFlight al fusionar
+**Qué cambia:** la portada (Resumen) usa la observación horaria de la estación oficial de AEMET más cercana a la pista (Bárcena de Cicero, **Treto 1096X**, ~4 km de la Playa del Regatón; reserva **Castro Urdiales 1083L**; como mucho 25 km) para temperatura, viento y presión, si la hay a ±40 min del inicio. La línea «Modelo, no medición» pasa a decir de dónde sale el dato: «Medido · AEMET Treto (4 km)» (en cian) o «Modelo, no medición» como antes: **misma línea, mismo sitio, sin cambiar la pantalla** (petición del usuario 25/11 09:07). En la tabla del tiempo se añaden las filas de la medida. Clave gratuita de AEMET OpenData en Configuración › «Tiempo medido (AEMET)», guardada en el Llavero (nunca en el repositorio). Lo medido se guarda por sesión en el iPad.
+**Limitación de AEMET:** su API solo da las observaciones horarias de las **últimas ~24 h**; los entrenamientos más antiguos (si no se abrieron a tiempo) siguen con el modelo, marcado como tal.
+**No incluido:** corrección de la marea con el mareógrafo de Santander (Puertos del Estado): su acceso de datos no está documentado públicamente; queda pendiente.
+**Archivos:** `ipad/AVOiPad/Core/AemetObservation.swift`, `App/EnvironmentModel.swift`, `Views/SummaryHero.swift`, `Views/SettingsView.swift`, `AVOiPadTests/AemetTests.swift`.
+**Validación:** IMPLEMENTADO, sin compilar en local (sin Xcode); NO VERIFICADO en el iPad ni con la API de AEMET.
 ## 2026-11-25 — Motor 2.0.0-dev35 (KB-1 1.31.0, training 1.3.0) · iPad — planificador semanal, capa 2 (semana siguiente)
 **Autor:** Claude (sesión nocturna del motor) · **Commits:** los de la rama `claude/motor-noche-2026-11-25` · **CI:** `build-equine-engine.yml` lanzado en la rama (resultado en el PR)
 **Qué cambia:**

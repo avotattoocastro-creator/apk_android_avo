@@ -64,6 +64,7 @@ private struct SettingsContent: View {
                         }
                     }
                 }
+                AemetKeyCard()
                 AvoCard(title: "Reloj y conexiones", subtitle: "Reloj de pecho, geocercas y servidor") {
                     VStack(alignment: .leading, spacing: 10) {
                         settingButton("wifi", "Reloj Wi-Fi", "Descargar los entrenamientos del reloj de pecho (Wi-Fi o Bluetooth)") {
@@ -123,5 +124,35 @@ private struct SettingsContent: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+    }
+}
+
+/// Clave de AEMET OpenData (25/11/2026): tiempo MEDIDO en la estación oficial más cercana a la pista (Treto, Castro Urdiales).
+/// Gratuita y personal (opendata.aemet.es › Obtención de API Key); se guarda en el Llavero del iPad, nunca en el código.
+private struct AemetKeyCard: View {
+    @State private var key: String = ""
+    @State private var saved: Bool = AemetConfig.apiKey != nil
+
+    var body: some View {
+        AvoCard(title: "Tiempo medido (AEMET)",
+                subtitle: saved ? "Clave guardada · los entrenamientos de las últimas 24 h muestran el tiempo medido en Treto"
+                                : "Pega tu clave gratuita de opendata.aemet.es para ver el tiempo medido en vez del modelo") {
+            HStack(spacing: 8) {
+                SecureField(saved ? "Clave guardada (pega otra para cambiarla)" : "Clave de API de AEMET", text: $key)
+                    .textFieldStyle(.roundedBorder)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .frame(maxWidth: 420)
+                    .accessibilityIdentifier("settings.aemetKey")
+                Button("Guardar") {
+                    let k: String = key.trimmingCharacters(in: .whitespacesAndNewlines)
+                    if !k.isEmpty { saved = AvoKeychain.write(k, AemetConfig.keychainAccount); key = "" }
+                }
+                .disabled(key.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                if saved {
+                    Button("Borrar", role: .destructive) { AvoKeychain.delete(AemetConfig.keychainAccount); saved = false }
+                }
+            }
+        }
     }
 }
