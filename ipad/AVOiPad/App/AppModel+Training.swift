@@ -163,7 +163,7 @@ extension AppModel {
     /// `until` limits the sessions (race card: before the day after the race). `progress(done, total)` while summaries
     /// are prepared. Returns the result and how many sessions have no summary.
     @MainActor
-    func analyseHorseHistory(_ key: String, reference: String?, until: Date? = nil,
+    func analyseHorseHistory(_ key: String, reference: String?, until: Date? = nil, calendarWeek: Bool = true,
                              progress: ((Int, Int) -> Void)? = nil) async throws -> (result: TrainingAnalysisResult, missing: Int) {
         let list: [SessionItem] = historySessions(key, until: until)
         var entries: [TrainingAnalytics.HistoryEntry] = []
@@ -183,7 +183,8 @@ extension AppModel {
             TrainingAnalytics.historyInput(horse: horse, reference: reference, entries: entries)
         }.value
         let birthYear: Int? = stable?.horses.allRows.first { (h: StableIdentityRow) -> Bool in h.code == key }?.record.birthYear
-        let options: String? = TrainingAnalytics.historyOptions(plannedRaces: plannedRaces(for: key), birthYear: birthYear)
+        let options: String? = TrainingAnalytics.historyOptions(plannedRaces: plannedRaces(for: key), birthYear: birthYear,
+                                                                calendarWeek: calendarWeek)
         let json: String = try await EquineEngine.trainingAnalyse(inputJson: input.json, optionsJson: options)
         let result: TrainingAnalysisResult = try await Task.detached(priority: .userInitiated) { () -> TrainingAnalysisResult in
             try TrainingAnalysisResult.parse(json)

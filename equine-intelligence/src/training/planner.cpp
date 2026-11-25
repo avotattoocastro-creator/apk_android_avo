@@ -175,6 +175,7 @@ WeekPlan training_plan_week(const std::vector<SessionSummary>& ok, const std::ve
     for (const auto& s : ok) if (s.day == d && s.counts_as_race()) race = true;
     auto it = daily.find(d);
     double g = it == daily.end() ? 0 : it->second.first;
+    if (it != daily.end()) x.done_fast_m = g;
     if (race) { x.type = "CARRERA"; x.reason = "realizado: carrera o trial"; }
     else if (g >= kc.gallop_session_min_m) {
       x.type = "RAPIDO"; w.fast_done++;
@@ -364,7 +365,7 @@ std::string training_week_plan_json(const WeekPlan& w, const TrainingConfig& c) 
   for (size_t i = 0; i < w.days.size(); i++) {
     const PlanDay& x = w.days[i];
     o << (i ? "," : "") << "{\"fecha\":" << q(kb_day_text(x.day)) << ",\"tipo\":" << q(x.type) << ",\"motivo\":" << q(x.reason)
-      << ",\"realizado\":" << (x.done ? "true" : "false") << ",\"rapido_max_m\":" << num(x.fast_max_m) << ",\"reglas\":[";
+      << ",\"realizado\":" << (x.done ? "true" : "false") << ",\"rapido_hecho_m\":" << num(x.done_fast_m) << ",\"rapido_max_m\":" << num(x.fast_max_m) << ",\"reglas\":[";
     for (size_t k = 0; k < x.rules.size(); k++) o << (k ? "," : "") << q(x.rules[k]);
     o << "]}";
   }

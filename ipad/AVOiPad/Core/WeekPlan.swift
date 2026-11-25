@@ -13,6 +13,8 @@ struct WeekPlanDay: Identifiable, Equatable {
     var rules: [String]
     /// Día ya pasado de la semana: lo realizado según las sesiones (motor 2.0.0-dev37), no una propuesta.
     var done: Bool
+    /// Metros de galope rápido hechos ese día (días pasados con datos de carga; motor 2.0.0-dev38).
+    var doneFastM: Double?
     var id: String { date }
 
     init(_ o: [String: Any]?) {
@@ -23,6 +25,17 @@ struct WeekPlanDay: Identifiable, Equatable {
         fastMaxM = KbText.finite(J.num(o, "rapido_max_m"))
         rules = J.arr(o, "reglas").compactMap { $0 as? String }
         done = J.bool(o, "realizado")
+        doneFastM = KbText.finite(J.num(o, "rapido_hecho_m"))
+    }
+
+    init(date: String, type: String, reason: String, fastMaxM: Double?, rules: [String]) {
+        self.date = date
+        self.type = type
+        self.reason = reason
+        self.fastMaxM = fastMaxM
+        self.rules = rules
+        self.done = false
+        self.doneFastM = nil
     }
 
     var typeText: String { WeekPlan.typeTitle(type) }

@@ -8,13 +8,16 @@ struct CalendarView: View {
     @State private var year: Int = TrainingCalendar.yearMonth(Date()).year
     @State private var month: Int = TrainingCalendar.yearMonth(Date()).month
     /// 0 = semana, 1 = mes, 2 = año (trainer's sketch 13/11/2026 added «Semana»).
-    @State private var mode: Int = 1
+    /// Vista semanal por defecto (boceto del entrenador 25/11/2026: el calendario es para la semana del planificador).
+    @State private var mode: Int = 0
     @State private var weekStart: Date = TrainingCalendar.weekStart(Date())
     private var yearView: Bool { mode == 2 }
     @State private var hiddenHorses: Set<String> = []
     @State private var didJump: Bool = false
     /// Día abierto (AAAA-MM-DD): entrenamientos hechos y entrenamiento recomendado por el planificador.
     @State private var openDay: CalendarOpenDay? = nil
+    /// Ficha de un caballo y un día: recomendado (rojo) o recomendado frente a realizado (verde).
+    @State private var fichaReq: PlanFichaRequest? = nil
 
     var body: some View {
         let all: [CalendarEntry] = entries
@@ -40,10 +43,10 @@ struct CalendarView: View {
             app.weekPlans.loadAll()
             // first visit: open the month of the most recent training
             if !didJump, let last = all.max(by: { $0.start < $1.start }) {
+                // la vista semanal se queda en la semana en curso (la del planificador); el mes salta al último entrenamiento
                 let ym = TrainingCalendar.yearMonth(last.start)
                 year = ym.year
                 month = ym.month
-                weekStart = TrainingCalendar.weekStart(last.start)
                 didJump = true
             }
         }
@@ -54,6 +57,15 @@ struct CalendarView: View {
 
     // ------------------------------------------------------------------ header
     private var header: some View {
+        headerRow
+            .sheet(item: $fichaReq) { (r: PlanFichaRequest) in
+                PlanFichaView(request: r, close: { fichaReq = nil }, openSession: { (id: String) in fichaReq = nil; openSessionId(id) })
+                    .environment(app)
+                    .avoColorScheme()
+            }
+    }
+
+    private var headerRow: some View {
         HStack(spacing: 10) {
             Button { step(-1) } label: { Image(systemName: "chevron.left") }
                 .buttonStyle(.avoSecondary).accessibilityLabel(["Semana anterior", "Mes anterior", "Año anterior"][mode])
@@ -117,23 +129,12 @@ struct CalendarView: View {
                 Spacer()
                 Text("\(d.day)").font(.footnote.weight(.semibold)).foregroundStyle(d.inMonth ? Avo.text : Avo.unknown.opacity(0.6))
             }
-            ForEach(d.entries.prefix(3)) { (e: CalendarEntry) in
-                Button { open(e) } label: {
-                    Text("\(e.horse) · \(MadridTime.format(e.start, "HH:mm"))")
-                        .font(.caption2).foregroundStyle(Avo.text).lineLimit(1)
-                        .padding(.horizontal, 6).padding(.vertical, 3)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(Avo.blue.opacity(0.16), in: RoundedRectangle(cornerRadius: 5))
-                        .overlay(alignment: .leading) { Rectangle().fill(Avo.blue).frame(width: 3) }
-                }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("calendar.entry.\(e.id)")
+            let cs: [CalendarHorseChip] = horseChips(d.id, entries: d.entries)
+            ForEach(Array(cs.prefix(3))) { (c: CalendarHorseChip) in
+                horseChip(c, day: Self.isoDay(d.id), compact: true)
             }
-            if d.entries.count > 3 {
-                Text("+\(d.entries.count - 3) más").font(.caption2).foregroundStyle(Avo.textDim)
-            }
-            ForEach(Array(plannedChips(d.id).prefix(max(0, 3 - min(3, d.entries.count))))) { (p: CalendarPlanChip) in
-                planChip(p, compact: true)
+            if cs.count > 3 {
+                Text("+\(cs.count - 3) más").font(.caption2).foregroundStyle(Avo.textDim)
             }
             Spacer(minLength: 0)
         }
@@ -157,24 +158,8 @@ struct CalendarView: View {
                         Spacer()
                         Text("\(p.element.day)").font(.title3.weight(.semibold)).foregroundStyle(Avo.text)
                     }
-                    ForEach(p.element.entries) { (e: CalendarEntry) in
-                        Button { open(e) } label: {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(MadridTime.format(e.start, "HH:mm")).font(.caption.monospacedDigit()).foregroundStyle(Avo.textDim)
-                                Text(e.horse).font(.callout.weight(.semibold)).foregroundStyle(Avo.text).lineLimit(2)
-                                Text(DotNetFormat.custom(e.distanceKm, "0.00", spanish: true) + " km · " + TimeText.clock(e.durationS))
-                                    .font(.caption.monospacedDigit()).foregroundStyle(Avo.silver)
-                            }
-                            .padding(8)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .background(Avo.blue.opacity(0.16), in: RoundedRectangle(cornerRadius: 6))
-                            .overlay(alignment: .leading) { Rectangle().fill(Avo.blue).frame(width: 3) }
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityIdentifier("calendar.week.\(e.id)")
-                    }
-                    ForEach(plannedChips(p.element.id)) { (c: CalendarPlanChip) in
-                        planChip(c, compact: false)
+                    ForEach(horseChips(p.element.id, entries: p.element.entries)) { (c: CalendarHorseChip) in
+                        horseChip(c, day: Self.isoDay(p.element.id), compact: false)
                     }
                     Spacer(minLength: 0)
                 }
@@ -255,22 +240,63 @@ struct CalendarView: View {
         return p[0] + "-" + (p[1].count < 2 ? "0" + p[1] : p[1]) + "-" + (p[2].count < 2 ? "0" + p[2] : p[2])
     }
 
-    /// Recomendaciones del planificador (no los días ya realizados) para un día de la cuadrícula.
-    private func plannedChips(_ id: String) -> [CalendarPlanChip] {
+    /// Un recuadro por caballo y día: VERDE si ese día ya entrenó (abre recomendado frente a realizado) y ROJO con el
+    /// entrenamiento recomendado por el planificador si aún no (abre la ficha del recomendado).
+    private func horseChips(_ id: String, entries: [CalendarEntry]) -> [CalendarHorseChip] {
         let day: String = Self.isoDay(id)
-        return app.weekPlans.items(on: day).filter { !$0.day.done }.map { (i: WeekPlanItem) -> CalendarPlanChip in
-            CalendarPlanChip(key: i.id, horse: i.name, type: i.day.type)
+        var order: [String] = []
+        var byKey: [String: [CalendarEntry]] = [:]
+        var nameOf: [String: String] = [:]
+        for e in entries.sorted(by: { $0.start < $1.start }) {
+            let key: String = app.sessions.first(where: { $0.id == e.id }).map { app.horseKey($0) } ?? e.horse
+            if byKey[key] == nil { order.append(key) }
+            byKey[key, default: []].append(e)
+            nameOf[key] = e.horse
         }
+        var out: [CalendarHorseChip] = []
+        var trained: Set<String> = []
+        for k in order {
+            let es: [CalendarEntry] = byKey[k] ?? []
+            let km: Double = es.reduce(0) { $0 + $1.distanceKm }
+            trained.insert(k.lowercased())
+            let first: String = es.first.map { MadridTime.format($0.start, "HH:mm") } ?? ""
+            out.append(CalendarHorseChip(id: "hecho|" + k, horseKey: k, horse: nameOf[k] ?? k, done: true,
+                                         detail: first + " · " + DotNetFormat.custom(km, "0.00", spanish: true) + " km"))
+        }
+        for i in app.weekPlans.items(on: day) where !i.day.done && !trained.contains(i.key.lowercased()) {
+            let extra: String = i.day.fastMaxM.map { " · hasta " + KbText.metres($0) } ?? ""
+            out.append(CalendarHorseChip(id: "plan|" + i.key, horseKey: i.key, horse: i.name, done: false,
+                                         detail: WeekPlan.typeTitle(i.day.type) + extra))
+        }
+        return out
     }
 
-    private func planChip(_ p: CalendarPlanChip, compact: Bool) -> some View {
-        let c: Color = CalendarDayDetail.color(p.type)
-        return Text(compact ? "\(p.horse) · \(WeekPlan.typeTitle(p.type))" : "\(WeekPlan.typeTitle(p.type)) · \(p.horse)")
-            .font(compact ? .caption2 : .caption.weight(.semibold)).foregroundStyle(c).lineLimit(compact ? 1 : 2)
-            .padding(.horizontal, 6).padding(.vertical, 3)
+    private func horseChip(_ c: CalendarHorseChip, day: String, compact: Bool) -> some View {
+        let color: Color = c.done ? Avo.ok : Avo.red
+        return Button {
+            fichaReq = PlanFichaRequest(horseKey: c.horseKey, horseName: c.horse, day: day)
+        } label: {
+            VStack(alignment: .leading, spacing: 1) {
+                Text(c.horse).font(compact ? .caption2.weight(.semibold) : .callout.weight(.semibold)).foregroundStyle(color).lineLimit(compact ? 1 : 2)
+                if !compact {
+                    Text(c.done ? "Hecho · " + c.detail : "Recomendado · " + c.detail).font(.caption).foregroundStyle(Avo.textDim).lineLimit(2)
+                }
+            }
+            .padding(.horizontal, 6).padding(.vertical, compact ? 3 : 6)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .overlay(RoundedRectangle(cornerRadius: 5).strokeBorder(c.opacity(0.7), style: StrokeStyle(lineWidth: 1, dash: [3, 2])))
-            .accessibilityLabel("Recomendado: \(WeekPlan.typeTitle(p.type)) para \(p.horse)")
+            .background(color.opacity(0.14), in: RoundedRectangle(cornerRadius: 5))
+            .overlay(alignment: .leading) { Rectangle().fill(color).frame(width: 3) }
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(c.done ? "\(c.horse): entrenado, comparar con lo recomendado" : "\(c.horse): entrenamiento recomendado, \(c.detail)")
+        .accessibilityIdentifier("calendar.chip.\(c.id)")
+    }
+
+    private func openSessionId(_ id: String) {
+        if let s = app.sessions.first(where: { $0.id == id }) {
+            app.select(s)
+            app.page = .keyData
+        }
     }
 
     private func open(_ e: CalendarEntry) {
@@ -286,12 +312,14 @@ struct CalendarOpenDay: Identifiable {
     let id: String
 }
 
-/// Recomendación del planificador en una celda del calendario.
-struct CalendarPlanChip: Identifiable {
-    var id: String { key }
-    let key: String
+/// Recuadro de un caballo en un día del calendario.
+struct CalendarHorseChip: Identifiable {
+    let id: String
+    let horseKey: String
     let horse: String
-    let type: String
+    /// true: ese día ya entrenó (verde); false: entrenamiento recomendado (rojo).
+    let done: Bool
+    let detail: String
 }
 
 /// Detalle de un día del calendario (boceto del entrenador 25/11/2026): los entrenamientos hechos ese día y, para los días

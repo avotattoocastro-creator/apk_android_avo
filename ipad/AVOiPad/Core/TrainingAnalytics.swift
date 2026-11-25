@@ -221,9 +221,11 @@ enum TrainingAnalytics {
     /// options_json of avo_eq_training_analyse: «carreras_previstas» (A4 and planner) and «fecha_nacimiento» (year of
     /// birth of the stable record, 1 January: racing age for the 2-year-old rules DM1–DM4 of the weekly planner).
     /// Nil when there is nothing to pass.
-    static func historyOptions(plannedRaces: [String], birthYear: Int? = nil) -> String? {
+    static func historyOptions(plannedRaces: [String], birthYear: Int? = nil, calendarWeek: Bool = true) -> String? {
         let days: [String] = plannedRaces.filter { (d: String) -> Bool in day(d) != nil }.map { String($0.prefix(10)) }
         var o: [String: Any] = [:]
+        // planificador: semana natural (por defecto en el motor ≥ 2.0.0-dev37) o los 7 días siguientes a la referencia
+        if !calendarWeek { o["planificador"] = ["semana_calendario": false] }
         if !days.isEmpty { o["carreras_previstas"] = Array(Set(days)).sorted() }
         if let y = birthYear, y >= 1980, y <= 2100 { o["fecha_nacimiento"] = String(format: "%04d-01-01", y) }
         if o.isEmpty { return nil }

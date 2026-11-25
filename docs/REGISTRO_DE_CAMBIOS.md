@@ -24,6 +24,27 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-25 — iPad · Motor 2.0.0-dev38 — Calendario semanal con fichas: recomendado (rojo) y recomendado frente a realizado (verde), con informe PDF
+**Autor:** Claude (chat integrador, petición del usuario 25/11 10:10) · **Rama:** `claude/calendario-fichas` · **CI:** motor e iPad (sin TestFlight) en la rama y al integrar
+**Qué cambia:**
+- **Calendario:** se abre en **vista semanal** (la semana en curso, la del planificador). Cada día lleva un recuadro por
+  caballo: **rojo** con el nombre y el entrenamiento recomendado (abre la ficha del recomendado) o **verde** si ese día ya
+  entrenó (abre la ficha de **recomendado frente a realizado**). Lo mismo, compacto, en la vista de mes.
+- **Ficha** (ventana nueva): entrenamiento recomendado (tipo de día, indicación, distancia rápida, fase, pautas y de dónde
+  sale), lo realizado (tipo de día según el motor, galope rápido y las sesiones, que se abren) y la comparación
+  (SEGÚN LO RECOMENDADO / DISTINTO, con frases). Botón **«Informe PDF»** (estilo de los informes AVO) y «Enviar PDF»; se
+  guarda en `exportaciones` y la sincronización lo deja en Archivos › AVO Horse › Informes › caballo.
+- **Recomendaciones guardadas** (`planes_recomendados.json`): cada vez que la app calcula la semana de un caballo guarda la
+  propuesta de hoy y de los días que quedan; los días pasados no se sobrescriben. Así la comparación usa lo que se recomendó
+  antes del día. Si no se guardó, se recalcula con el motor con los datos hasta la víspera (y se dice en la ficha).
+- **Motor 2.0.0-dev38:** cada día pasado del planificador añade `rapido_hecho_m` (metros de galope rápido hechos), para
+  comparar con el tope recomendado. Prueba ampliada; 137 casos, 0 fallos (ASan/UBSan); fixtures (solo versión).
+- Pruebas iPad: `PlanFichaTests` (comparación, guardado y PDF).
+**No se ha tocado:** contratos, firmware, workflows, firmas, `Info.plist` ni número de build.
+**Pendiente:** Android y Windows. **NO VERIFICADO** en el iPad.
+
+---
+
 ## 2026-11-25 — Motor 2.0.0-dev37 (TRAINING 1.4.0) · iPad — Planificador en semana natural, botón «Planificador semanal» y «Calendario» con el entrenamiento recomendado
 **Autor:** Claude (chat integrador, peticiones y boceto del usuario 25/11) · **Rama:** `claude/planificador-desde-hoy` · **CI:** motor e iPad (sin TestFlight) en la rama y al integrar
 **Qué cambia:**
