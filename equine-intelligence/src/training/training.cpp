@@ -651,6 +651,10 @@ bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::str
     if (k.type == json::Value::BOOL) P.enabled = k.b;
     else if (k.type == json::Value::OBJ) {
       P.enabled = k["activo"].boolean(true);
+      if (k.has("semana_calendario")) {
+        if (k["semana_calendario"].type != json::Value::BOOL) { if (err) *err = "planificador.semana_calendario debe ser true/false"; return false; }
+        P.calendar_week = k["semana_calendario"].b;
+      }
       const D kd[] = {{"p7_fraccion_distancia", &P.p7_distance_fraction, 0.1, 1}, {"p5_percentil", &P.p5_percentile, 50, 99},
                       {"dm1_rapido_max_m", &P.dm1_fast_max_m, 100, 2000}, {"dm2_ratio", &P.dm2_ratio, 1, 10},
                       {"dm2_min_rapido_m", &P.dm2_min_fast_m, 0, 10000}, {"dm2_min_canter_m", &P.dm2_min_canter_m, 0, 100000},

@@ -47,6 +47,7 @@ final class AppModel {
     @ObservationIgnored var trainingList: TrainingListModel! // «Listado»: table + filters + recovery of lost trainings
     @ObservationIgnored var races: RacesModel!            // «Carreras»: tracking PDFs of races + analysis vs trainings
     @ObservationIgnored var horseHistory: HorseHistoryModel! // «Historia del caballo» (AVO Training Analytics), full-screen cover
+    @ObservationIgnored var weekPlans: WeekPlansModel!    // planificador semanal (lunes–domingo) de cada caballo: Cuadra y Calendario
     @ObservationIgnored var corrections: CorrectionsModel!  // zones moved by the user (correcciones.json) for the engine
     @ObservationIgnored var franceGalop: FranceGalopModel! // France Galop: horse sheets / whole stable read in an in-app browser
     @ObservationIgnored var stretch: StretchModel!        // «Análisis del tramo» (full-screen) + stretches saved per horse
@@ -129,6 +130,7 @@ final class AppModel {
         self.trainingList = TrainingListModel(app: self)
         self.races = RacesModel(app: self)
         self.horseHistory = HorseHistoryModel(app: self)
+        self.weekPlans = WeekPlansModel(app: self)
         self.corrections = CorrectionsModel(app: self)
         self.trackWork = TrackWorkModel(app: self)
         self.assistant = AssistantModel(app: self)

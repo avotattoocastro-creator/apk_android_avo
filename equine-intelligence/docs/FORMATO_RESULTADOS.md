@@ -75,6 +75,10 @@ Mismos códigos de retorno; el texto se libera con `avo_eq_free`.
 `fecha`, `rapido_m`, `trimp`), `notas`, `nota`; y `sesiones[].carga_cg` (`trimp` recalculado, `rapido_m`). Opción
 `carga_cg` (true/false u objeto; ficha 14, §3 quinquies).
 
+**Training 1.4.0 (motor 2.0.0-dev37):** `semana_siguiente` añade `semana_calendario` (bool), `planifica_desde`
+(AAAA-MM-DD) y `rapidos_hechos`; cada día de `dias` añade `realizado` (bool: día pasado, lo hecho según las sesiones). Con la
+semana natural (por defecto) `desde`/`hasta` son el lunes y el domingo. Opción `planificador.semana_calendario` (true/false).
+
 **Training 1.3.0 (motor 2.0.0-dev35):** `estado.planificador` añade `semana_siguiente` (capa 2 del planificador,
 `validado: false`, nunca cambia el estado): `disponible` (y `motivo` si no lo está), `desde`, `hasta`, `fase` (NORMAL |
 POTRO_2_ANOS | REINCORPORACION_LENTA | REINCORPORACION_RAPIDO), `limitada`, `edad_anos`, `edad_origen`

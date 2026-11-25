@@ -11,6 +11,8 @@ struct WeekPlanDay: Identifiable, Equatable {
     var reason: String
     var fastMaxM: Double?
     var rules: [String]
+    /// Día ya pasado de la semana: lo realizado según las sesiones (motor 2.0.0-dev37), no una propuesta.
+    var done: Bool
     var id: String { date }
 
     init(_ o: [String: Any]?) {
@@ -20,6 +22,7 @@ struct WeekPlanDay: Identifiable, Equatable {
         reason = J.str(o, "motivo")
         fastMaxM = KbText.finite(J.num(o, "rapido_max_m"))
         rules = J.arr(o, "reglas").compactMap { $0 as? String }
+        done = J.bool(o, "realizado")
     }
 
     var typeText: String { WeekPlan.typeTitle(type) }
@@ -45,6 +48,11 @@ struct WeekPlan: Equatable {
     var ageOrigin: String
     var fastTarget: Int
     var fastPlanned: Int
+    /// Rápidos ya hechos en los días pasados de la semana (semana natural, motor 2.0.0-dev37).
+    var fastDone: Int
+    var calendarWeek: Bool
+    /// Primer día planificado (AAAA-MM-DD): hoy si aún no hay sesión, si no mañana.
+    var planFrom: String
     var fastRefM: Double?
     var fastMaxM: Double?
     var p5MeanM: Double?
@@ -68,6 +76,9 @@ struct WeekPlan: Equatable {
         ageOrigin = J.str(o, "edad_origen")
         fastTarget = J.int(J.num(o, "rapidos_objetivo") ?? 0)
         fastPlanned = J.int(J.num(o, "rapidos_propuestos") ?? 0)
+        fastDone = J.int(J.num(o, "rapidos_hechos") ?? 0)
+        calendarWeek = J.bool(o, "semana_calendario")
+        planFrom = J.str(o, "planifica_desde")
         fastRefM = KbText.finite(J.num(o, "rapido_ref_m"))
         fastMaxM = KbText.finite(J.num(o, "rapido_max_m"))
         p5MeanM = KbText.finite(J.num(o, "p5_media_60d_m"))
@@ -89,10 +100,24 @@ struct WeekPlan: Equatable {
         }
     }
 
-    /// «2 de 2 rápidos» o «1 de 2 rápidos (no caben más)».
+    /// «2 de 2 rápidos» (hechos + propuestos) o «1 de 2 rápidos (no caben más)».
     var fastText: String {
-        let base: String = "\(fastPlanned) de \(fastTarget) rápido\(fastTarget == 1 ? "" : "s")"
-        return fastPlanned < fastTarget ? base + " (no caben más)" : base
+        let total: Int = fastDone + fastPlanned
+        let base: String = "\(total) de \(fastTarget) rápido\(fastTarget == 1 ? "" : "s")"
+        return total < fastTarget ? base + " (no caben más)" : base
+    }
+
+    /// «1 hecho · 1 propuesto» (semana natural) o «≥ 72 h entre rápidos».
+    var fastCaption: String {
+        guard calendarWeek else { return "≥ 72 h entre rápidos" }
+        return "\(fastDone) hecho\(fastDone == 1 ? "" : "s") · \(fastPlanned) propuesto\(fastPlanned == 1 ? "" : "s") · ≥ 72 h entre rápidos"
+    }
+
+    /// Día de la semana corto de una fecha AAAA-MM-DD («lun», «mar»…), en Europe/Madrid.
+    static func weekdayShort(_ day: String) -> String {
+        let f: DateFormatter = AvoTime.formatter("yyyy-MM-dd")
+        guard let d = f.date(from: String(day.prefix(10))) else { return "" }
+        return AvoTime.formatter("EEE").string(from: d).replacingOccurrences(of: ".", with: "")
     }
 
     static func typeTitle(_ t: String) -> String {

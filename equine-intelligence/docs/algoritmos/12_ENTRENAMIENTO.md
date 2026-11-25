@@ -99,6 +99,15 @@ Es **orientativo, no es un diagnóstico veterinario**, y no usa términos clíni
   `evidencia`) con P1, RT1, A4 y P3. Nunca sube el estado; no es un plan automático.
 
 ## 5 ter. Planificador semanal, capa 2: la semana siguiente (TRAINING 1.3.0, motor 2.0.0-dev35)
+
+**TRAINING 1.4.0 (motor 2.0.0-dev37, 25/11/2026, petición del usuario): semana natural de lunes a domingo.** Por defecto
+(`planificador.semana_calendario`: true) la ventana es la semana natural que contiene la fecha de referencia (hoy en las
+apps). Los días ya pasados salen con `realizado: true` y lo hecho según las sesiones: RAPIDO si ese día hubo ≥ el mínimo de
+galope rápido de la sesión, CARRERA si fue carrera o trial, LENTO si hubo entrenamiento sin rápido y LIBRE «sin
+entrenamiento registrado». Se planifica desde hoy (o desde mañana si hoy ya hay sesión) hasta el domingo: los rápidos que
+faltan son el objetivo de la pauta menos los ya hechos (`rapidos_hechos`), con las mismas separaciones (que cuentan los
+rápidos hechos) y el día libre (los días pasados sin entrenamiento cuentan). Si el domingo ya está entrenado, se
+planifica la semana siguiente entera. Con `semana_calendario`: false, los 7 días siguientes como en 1.3.0.
 `estado.planificador.semana_siguiente` propone los 7 días siguientes a la fecha de referencia. **Sin calibrar:** nunca
 cambia el estado del caballo, no es una predicción de lesiones y el entrenador decide (`validado: false`). Código:
 `src/training/planner.cpp`.

@@ -13,6 +13,8 @@ struct CalendarView: View {
     private var yearView: Bool { mode == 2 }
     @State private var hiddenHorses: Set<String> = []
     @State private var didJump: Bool = false
+    /// Día abierto (AAAA-MM-DD): entrenamientos hechos y entrenamiento recomendado por el planificador.
+    @State private var openDay: CalendarOpenDay? = nil
 
     var body: some View {
         let all: [CalendarEntry] = entries
@@ -28,7 +30,14 @@ struct CalendarView: View {
         .padding(16)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(Avo.bg)
+        .sheet(item: $openDay) { (d: CalendarOpenDay) in
+            CalendarDayDetail(day: d.id, close: { openDay = nil }, openSession: { (e: CalendarEntry) in openDay = nil; open(e) })
+                .environment(app)
+                .avoColorScheme()
+        }
         .onAppear {
+            // planificador semanal de cada caballo (semana en curso, motor ≥ 2.0.0-dev37)
+            app.weekPlans.loadAll()
             // first visit: open the month of the most recent training
             if !didJump, let last = all.max(by: { $0.start < $1.start }) {
                 let ym = TrainingCalendar.yearMonth(last.start)
@@ -55,6 +64,10 @@ struct CalendarView: View {
             Button { step(1) } label: { Image(systemName: "chevron.right") }
                 .buttonStyle(.avoSecondary).accessibilityLabel(["Semana siguiente", "Mes siguiente", "Año siguiente"][mode])
             Spacer()
+            if app.weekPlans.loading {
+                ProgressView().controlSize(.small)
+                Text(app.weekPlans.progressText).font(.caption).foregroundStyle(Avo.textDim).lineLimit(1)
+            }
             Picker("Vista", selection: $mode) {
                 Text("Semana").tag(0)
                 Text("Mes").tag(1)
@@ -119,9 +132,14 @@ struct CalendarView: View {
             if d.entries.count > 3 {
                 Text("+\(d.entries.count - 3) más").font(.caption2).foregroundStyle(Avo.textDim)
             }
+            ForEach(Array(plannedChips(d.id).prefix(max(0, 3 - min(3, d.entries.count))))) { (p: CalendarPlanChip) in
+                planChip(p, compact: true)
+            }
             Spacer(minLength: 0)
         }
         .padding(6)
+        .contentShape(Rectangle())
+        .onTapGesture { openDay = CalendarOpenDay(id: Self.isoDay(d.id)) }
         .frame(maxWidth: .infinity, minHeight: 60, maxHeight: .infinity, alignment: .topLeading)
         .background(d.inMonth ? Avo.surface : Avo.bg, in: RoundedRectangle(cornerRadius: 8))
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(d.isToday ? Avo.red : Avo.line, lineWidth: d.isToday ? 2 : 1))
@@ -155,9 +173,14 @@ struct CalendarView: View {
                         .buttonStyle(.plain)
                         .accessibilityIdentifier("calendar.week.\(e.id)")
                     }
+                    ForEach(plannedChips(p.element.id)) { (c: CalendarPlanChip) in
+                        planChip(c, compact: false)
+                    }
                     Spacer(minLength: 0)
                 }
                 .padding(8)
+                .contentShape(Rectangle())
+                .onTapGesture { openDay = CalendarOpenDay(id: Self.isoDay(p.element.id)) }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .background(Avo.surface, in: RoundedRectangle(cornerRadius: 8))
                 .overlay(RoundedRectangle(cornerRadius: 8).stroke(p.element.isToday ? Avo.red : Avo.line, lineWidth: p.element.isToday ? 2 : 1))
@@ -224,10 +247,160 @@ struct CalendarView: View {
         }
     }
 
+    // ------------------------------------------------------------------ planificador
+    /// "2026-11-5" (id de CalendarDay) → "2026-11-05".
+    static func isoDay(_ id: String) -> String {
+        let p: [String] = id.split(separator: "-").map(String.init)
+        guard p.count == 3 else { return id }
+        return p[0] + "-" + (p[1].count < 2 ? "0" + p[1] : p[1]) + "-" + (p[2].count < 2 ? "0" + p[2] : p[2])
+    }
+
+    /// Recomendaciones del planificador (no los días ya realizados) para un día de la cuadrícula.
+    private func plannedChips(_ id: String) -> [CalendarPlanChip] {
+        let day: String = Self.isoDay(id)
+        return app.weekPlans.items(on: day).filter { !$0.day.done }.map { (i: WeekPlanItem) -> CalendarPlanChip in
+            CalendarPlanChip(key: i.id, horse: i.name, type: i.day.type)
+        }
+    }
+
+    private func planChip(_ p: CalendarPlanChip, compact: Bool) -> some View {
+        let c: Color = CalendarDayDetail.color(p.type)
+        return Text(compact ? "\(p.horse) · \(WeekPlan.typeTitle(p.type))" : "\(WeekPlan.typeTitle(p.type)) · \(p.horse)")
+            .font(compact ? .caption2 : .caption.weight(.semibold)).foregroundStyle(c).lineLimit(compact ? 1 : 2)
+            .padding(.horizontal, 6).padding(.vertical, 3)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .overlay(RoundedRectangle(cornerRadius: 5).strokeBorder(c.opacity(0.7), style: StrokeStyle(lineWidth: 1, dash: [3, 2])))
+            .accessibilityLabel("Recomendado: \(WeekPlan.typeTitle(p.type)) para \(p.horse)")
+    }
+
     private func open(_ e: CalendarEntry) {
         if let s = app.sessions.first(where: { $0.id == e.id }) {
             app.select(s)
             app.page = .keyData
+        }
+    }
+}
+
+/// Día abierto del calendario (AAAA-MM-DD).
+struct CalendarOpenDay: Identifiable {
+    let id: String
+}
+
+/// Recomendación del planificador en una celda del calendario.
+struct CalendarPlanChip: Identifiable {
+    var id: String { key }
+    let key: String
+    let horse: String
+    let type: String
+}
+
+/// Detalle de un día del calendario (boceto del entrenador 25/11/2026): los entrenamientos hechos ese día y, para los días
+/// de la semana en curso que aún no han pasado, el entrenamiento recomendado por el planificador del motor para cada
+/// caballo. Orientativo y sin calibrar: el entrenador decide.
+struct CalendarDayDetail: View {
+    @Environment(AppModel.self) private var app
+    let day: String
+    let close: () -> Void
+    let openSession: (CalendarEntry) -> Void
+
+    var body: some View {
+        let sessions: [CalendarEntry] = app.calendarEntries.filter { AvoTime.formatter("yyyy-MM-dd").string(from: $0.start) == day }
+            .sorted { $0.start < $1.start }
+        let plans: [WeekPlanItem] = app.weekPlans.items(on: day)
+        let pending: [WeekPlanItem] = plans.filter { !$0.day.done }
+        let done: [WeekPlanItem] = plans.filter { $0.day.done }
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 12) {
+                    AvoCard(title: "Entrenamientos hechos", subtitle: sessions.isEmpty ? "Ninguno registrado ese día" : "\(sessions.count) entrenamiento\(sessions.count == 1 ? "" : "s") · toca uno para abrirlo") {
+                        if sessions.isEmpty {
+                            AvoNoData(text: "Sin entrenamientos ese día")
+                        } else {
+                            ForEach(sessions) { (e: CalendarEntry) in
+                                Button { openSession(e) } label: {
+                                    HStack(spacing: 10) {
+                                        Text(MadridTime.format(e.start, "HH:mm")).font(.callout.monospacedDigit()).foregroundStyle(Avo.textDim)
+                                        Text(e.horse).font(.callout.weight(.semibold)).foregroundStyle(Avo.text)
+                                        Spacer()
+                                        Text(DotNetFormat.custom(e.distanceKm, "0.00", spanish: true) + " km · " + TimeText.clock(e.durationS))
+                                            .font(.caption.monospacedDigit()).foregroundStyle(Avo.silver)
+                                        Image(systemName: "chevron.right").font(.caption).foregroundStyle(Avo.textDim)
+                                    }
+                                    .padding(.vertical, 4)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                        }
+                    }
+                    AvoCard(title: "Entrenamiento recomendado (planificador)",
+                            subtitle: "Propuesta orientativa del motor para cada caballo, sin calibrar · el entrenador decide") {
+                        if app.weekPlans.loading && plans.isEmpty {
+                            HStack(spacing: 8) {
+                                ProgressView().controlSize(.small)
+                                Text(app.weekPlans.progressText.isEmpty ? "Calculando…" : app.weekPlans.progressText)
+                                    .font(.callout).foregroundStyle(Avo.textDim)
+                            }
+                        } else if pending.isEmpty {
+                            AvoNoData(text: plans.isEmpty ? "El planificador propone la semana en curso (de lunes a domingo); para este día no hay propuesta."
+                                                          : "Día ya pasado: abajo está lo realizado según los entrenamientos.")
+                        } else {
+                            ForEach(pending) { (p: WeekPlanItem) in
+                                planRow(p.name, p.day)
+                            }
+                        }
+                        if !done.isEmpty {
+                            Divider().overlay(Avo.line)
+                            Text("REALIZADO SEGÚN LOS ENTRENAMIENTOS").font(.caption2.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.textDim)
+                            ForEach(done) { (p: WeekPlanItem) in
+                                planRow(p.name, p.day).opacity(0.7)
+                            }
+                        }
+                    }
+                }
+                .padding(16)
+            }
+            .background(Avo.bg)
+            .navigationTitle(title)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) { Button("Cerrar") { close() } }
+                ToolbarItem(placement: .primaryAction) {
+                    Button { app.weekPlans.loadAll(force: true) } label: { Label("Recalcular", systemImage: "arrow.clockwise") }
+                        .disabled(app.weekPlans.loading)
+                }
+            }
+        }
+        .accessibilityIdentifier("calendar.day")
+    }
+
+    private var title: String {
+        let f: DateFormatter = AvoTime.formatter("yyyy-MM-dd")
+        guard let d = f.date(from: day) else { return day }
+        return AvoTime.formatter("EEEE d 'de' MMMM").string(from: d).capitalized
+    }
+
+    private func planRow(_ horse: String, _ d: WeekPlanDay) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: 10) {
+            Text(horse).font(.callout.weight(.semibold)).foregroundStyle(Avo.text).frame(width: 170, alignment: .leading)
+            Text(d.typeText).fontWeight(.semibold).foregroundStyle(d.done ? Avo.textDim : Self.color(d.type)).frame(width: 70, alignment: .leading)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(KbText.sentence(d.reason)).font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+                if let m = d.fastMaxM, !d.done {
+                    Text("Distancia rápida hasta \(KbText.metres(m))").font(.caption2).foregroundStyle(Avo.textDim)
+                }
+            }
+            Spacer(minLength: 4)
+            Text(d.rules.map { WeekPlan.ruleTitle($0) }.joined(separator: " · ")).font(.caption2).foregroundStyle(Avo.textDim)
+        }
+        .padding(.vertical, 3)
+    }
+
+    static func color(_ t: String) -> Color {
+        switch t {
+        case "RAPIDO": return Avo.red
+        case "CARRERA": return Avo.warn
+        case "LIBRE": return Avo.ok
+        default: return Avo.text
         }
     }
 }
