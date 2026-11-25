@@ -161,6 +161,11 @@ struct SessionSummary {
   std::string going;          // FIRME | BUENO_FIRME | BUENO | BUENO_BLANDO | BLANDO | PESADO
   std::string tide_time;      // HH:MM (hora local) de la bajamar o pleamar de referencia
   std::string tide_type;      // BAJAMAR | PLEAMAR
+  // AVO BEACH 1.0.0 (motor dev36): franja AUTOMÁTICA (GPS + líneas de playa + marea) y marea del trabajo (predicción).
+  bool beach_band_auto = false;   // true = beach_band viene del análisis; la ficha de campo la sustituye
+  std::string tide_level;         // BAJA | MEDIA | ALTA en el inicio del trabajo
+  std::string tide_trend;         // SUBE | BAJA
+  double tide_height_m = NAN;
   double temperature_c = NAN, humidity_pct = NAN;
   double rider_kg = NAN, horse_kg = NAN;        // peso del jinete (con equipo) y peso corporal del caballo
   std::string incident_type, incident_text;     // NINGUNA | TROPIEZO | CAIDA | ESPANTADA | COJERA | HERRAJE | EQUIPO | OTRA
