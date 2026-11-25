@@ -1,0 +1,1987 @@
+{
+ "formato": "avo-training-analysis",
+ "version_formato": 1,
+ "version": "1.3.0",
+ "algoritmo_carga": "AVO_TRAINING_LOAD_V1",
+ "caballo": "LUNA",
+ "fecha_referencia": "2026-11-11",
+ "sesiones_usadas": 42,
+ "parametros": {
+  "factor_paso": 1,
+  "factor_trote": 3,
+  "factor_galope": 6,
+  "alta_velocidad_m_s": 11,
+  "factor_alta_velocidad": 1,
+  "dias_aguda": 7,
+  "dias_cronica": 28,
+  "acwr_alto": 1.5,
+  "acwr_bajo": 0.8,
+  "monotonia_alta": 2,
+  "dias_linea_base": 60,
+  "min_sesiones_linea_base": 4,
+  "z_vigilar": 2,
+  "z_revisar": 3,
+  "min_segundos_aire": 60,
+  "dias_tendencia": 56,
+  "min_sesiones_tendencia": 5,
+  "dias_descanso_aviso": 10
+ },
+ "estado": {
+  "nivel": "NORMAL",
+  "motivos": [],
+  "dias_desde_ultima": 0,
+  "carga": {
+   "externa": 0,
+   "srpe": null,
+   "aguda": 0,
+   "cronica_semanal": 0,
+   "acwr": null,
+   "aguda_srpe": null,
+   "cronica_semanal_srpe": null,
+   "acwr_srpe": null,
+   "vedba": null,
+   "aguda_vedba": null,
+   "cronica_semanal_vedba": null,
+   "acwr_vedba": null,
+   "monotonia": null,
+   "tension": null,
+   "dias_desde_anterior": null
+  },
+  "base_cientifica": {
+   "base": "AVO_KB_1",
+   "version": "1.31.0",
+   "disponible": true,
+   "d7": {
+    "bandas_m": [
+     8400,
+     0,
+     700
+    ],
+    "canter_m": 8400,
+    "galope_rapido_m": 700,
+    "fatiga_osea_pct": 2.1,
+    "sesiones": 7,
+    "sesiones_sin_datos": 0
+   },
+   "d30": {
+    "bandas_m": [
+     36000,
+     0,
+     2800
+    ],
+    "canter_m": 36000,
+    "galope_rapido_m": 2800,
+    "fatiga_osea_pct": 9,
+    "sesiones": 30,
+    "sesiones_sin_datos": 0
+   },
+   "d30_anteriores": {
+    "bandas_m": [
+     14400,
+     0,
+     1050
+    ],
+    "canter_m": 14400,
+    "galope_rapido_m": 1050,
+    "fatiga_osea_pct": 3.6,
+    "sesiones": 12,
+    "sesiones_sin_datos": 0
+   },
+   "d60": {
+    "bandas_m": [
+     50400,
+     0,
+     3850
+    ],
+    "canter_m": 50400,
+    "galope_rapido_m": 3850,
+    "fatiga_osea_pct": 12.6,
+    "sesiones": 42,
+    "sesiones_sin_datos": 0
+   },
+   "fatiga_osea_mediana_semanal_pct": 2.1,
+   "fatiga_osea_ratio_7d": 1,
+   "dias_sin_trabajo_rapido": 1,
+   "dias_galope_60d": 11,
+   "cociente_galope": null,
+   "carreras": [
+    {
+     "fecha": "2026-11-17",
+     "origen": "PREVISTA",
+     "dias_hasta": 6,
+     "dias_rapidos_28d": 6,
+     "sesiones_sin_datos": 0,
+     "ventana_cubierta": true,
+     "aviso": false
+    }
+   ],
+   "vuelta_descanso": null,
+   "reglas": [],
+   "nota": "orientativo: reglas de la literatura con umbrales de partida, sin validar con la cuadra; la fatiga ósea es un índice relativo, no una probabilidad de lesión"
+  },
+  "planificador": {
+   "disponible": true,
+   "dias_rapidos_7d": 2,
+   "dias_desde_rapido": 1,
+   "dias_entre_ultimos_rapidos": 4,
+   "dias_desde_carrera": null,
+   "proxima_carrera": {
+    "fecha": "2026-11-17",
+    "dias_hasta": 6,
+    "dias_rapidos_28d": 6,
+    "faltan_para_minimo": 0
+   },
+   "pautas": [],
+   "semana_siguiente": {
+    "disponible": true,
+    "desde": "2026-11-12",
+    "hasta": "2026-11-18",
+    "fase": "POTRO_2_ANOS",
+    "limitada": false,
+    "edad_anos": 2,
+    "edad_origen": "FECHA_NACIMIENTO",
+    "raza": "PSI",
+    "rapidos_objetivo": 2,
+    "rapidos_propuestos": 1,
+    "dias_lentos_bloque": null,
+    "vuelta_rapido": null,
+    "semanas_preparacion": 5,
+    "rapido_ref_m": 350,
+    "rapido_max_m": 400,
+    "p5_media_60d_m": null,
+    "p5_p75_m": null,
+    "dias_desde_descanso": null,
+    "dias": [
+     {
+      "fecha": "2026-11-12",
+      "tipo": "LENTO",
+      "motivo": "trabajo lento (paso, trote y canter suave)",
+      "rapido_max_m": null,
+      "reglas": [
+       "PLANIFICADOR_P2"
+      ]
+     },
+     {
+      "fecha": "2026-11-13",
+      "tipo": "RAPIDO",
+      "motivo": "trabajo rápido de hasta 400 m; ese día menos canter (DM3)",
+      "rapido_max_m": 400,
+      "reglas": [
+       "PLANIFICADOR_P1",
+       "RECUPERACION_RT1",
+       "PLANIFICADOR_DM1"
+      ]
+     },
+     {
+      "fecha": "2026-11-14",
+      "tipo": "SUAVE",
+      "motivo": "día siguiente al trabajo rápido: paso o trote suave",
+      "rapido_max_m": null,
+      "reglas": [
+       "RECUPERACION_RT2"
+      ]
+     },
+     {
+      "fecha": "2026-11-15",
+      "tipo": "LENTO",
+      "motivo": "trabajo lento (paso, trote y canter suave)",
+      "rapido_max_m": null,
+      "reglas": [
+       "PLANIFICADOR_P2"
+      ]
+     },
+     {
+      "fecha": "2026-11-16",
+      "tipo": "LENTO",
+      "motivo": "trabajo lento (paso, trote y canter suave)",
+      "rapido_max_m": null,
+      "reglas": [
+       "PLANIFICADOR_P2"
+      ]
+     },
+     {
+      "fecha": "2026-11-17",
+      "tipo": "CARRERA",
+      "motivo": "carrera prevista",
+      "rapido_max_m": null,
+      "reglas": [
+       "PLANIFICADOR_P3"
+      ]
+     },
+     {
+      "fecha": "2026-11-18",
+      "tipo": "LIBRE",
+      "motivo": "día siguiente a la carrera",
+      "rapido_max_m": null,
+      "reglas": [
+       "RECUPERACION_RT2",
+       "PLANIFICADOR_P2"
+      ]
+     }
+    ],
+    "pautas": [
+     {
+      "regla": "PLANIFICADOR_DM1",
+      "texto": "potro de 2 años en la semana 6 de preparación: trabajos rápidos cortos (≈ 200–400 m), 1–2 por semana, y menos canter el día de rápido (DM1, DM3)",
+      "evidencia": "Oliveira 2006 [E] (n = 42) y Boston & Nunamaker 2000 [E-r]: rápido corto acumulado poco a poco; cortes [I]; pauta de carga, nunca una predicción"
+     },
+     {
+      "regla": "PLANIFICADOR_P2",
+      "texto": "solo cabe 1 de los 2 rápidos de la pauta en la semana por las separaciones (≥ 3 días entre rápidos y días sin rápido alrededor de las carreras)",
+      "evidencia": "Morrice-West 2020: 2,0 rápidos/semana en maduros y 1,7 en 2 años (práctica) [E]; objetivo [I]; día libre semanal (práctica de entrenadores) [E]; ≥ 2 días lentos entre rápidos [I] (sin evidencia directa); glucógeno muscular 48–72 h tras el trabajo rápido [E-r]; pauta de 72 h y día siguiente suave [I]; intervalo de 17–21 d entre carreras (Morrice-West 2020/2021) [E]; días sin rápido alrededor de la carrera [I]"
+     }
+    ],
+    "parametros": {
+     "rapidos_semana_maduro": 2,
+     "rapidos_semana_2anos": 2,
+     "dias_min_entre_rapidos": 3,
+     "dias_libres": 1,
+     "dias_sin_rapido_precarrera": 3,
+     "dias_sin_rapido_poscarrera": 5,
+     "p4_dias_lentos": 28,
+     "p7_dias_ventana": 21,
+     "p7_fraccion_distancia": 0.75,
+     "p5_dias": 60,
+     "p5_percentil": 75,
+     "p6_descanso_min_dias": 40,
+     "p6_intervalo_dias": 183,
+     "dm1_rapido_max_m": 400,
+     "dm2_ratio": 1.5,
+     "dm4_semanas": 12,
+     "dm4_desde_m": 500,
+     "dm4_hasta_m": 700,
+     "etiquetas": {
+      "rapidos_semana": "E (práctica) / I (objetivo)",
+      "separaciones": "I",
+      "p4_dias_lentos": "E",
+      "p7": "E-r / I",
+      "p5": "E-r / I",
+      "p6": "E / I",
+      "dm1_dm4": "E (Oliveira 2006, n = 42) / I",
+      "dm2": "I"
+     }
+    },
+    "validado": false,
+    "nota": "propuesta orientativa sin calibrar con datos propios; no sube el estado, no predice lesiones y el entrenador decide"
+   },
+   "nota": "pautas informativas de la base científica; no suben el estado ni sustituyen el criterio del entrenador"
+  },
+  "carga_cg": {
+   "reglas": [
+    "CG1",
+    "CG2",
+    "CG3"
+   ],
+   "disponible": true,
+   "nivel": "INFO",
+   "validado": false,
+   "parametros": {
+    "dias_ewma_aguda": 7,
+    "dias_ewma_cronica": 28,
+    "lambda_aguda": 0.25,
+    "lambda_cronica": 0.0689655,
+    "dias_total_corto": 7,
+    "dias_total_largo": 30,
+    "fraccion_max_sin_dato": 0.2,
+    "trimp_b": 0.64,
+    "trimp_c": 1.92,
+    "cobertura_min": 0.8,
+    "min_sesiones_fc_max": 3,
+    "etiquetas": {
+     "ewma": "E-r",
+     "bandas_psi": "E",
+     "bandas_arabe": "I-raza",
+     "trimp_forma": "E-r",
+     "trimp_coeficientes": "NV",
+     "fc_reposo_defecto": "E-r",
+     "fc_max_defecto": "I",
+     "cortes": "I"
+    }
+   },
+   "fc_referencia": {
+    "fc_reposo_lpm": 33,
+    "fc_reposo_origen": "POR_DEFECTO",
+    "fc_max_lpm": 190,
+    "fc_max_origen": "PROPIA_HISTORIA",
+    "trabajos_rapidos_con_fc": 11
+   },
+   "interna": {
+    "sesion": 15.266,
+    "total_corto": 106.862,
+    "total_largo": 457.979,
+    "ewma_aguda": 15.2659,
+    "ewma_cronica": 14.5069,
+    "cociente": 1.05232,
+    "monotonia": null,
+    "strain": null,
+    "sesiones_con_dato": 28,
+    "sesiones_sin_dato": 0,
+    "motivo": null
+   },
+   "externa": {
+    "sesion": 0,
+    "total_corto": 700,
+    "total_largo": 2800,
+    "ewma_aguda": 95.9997,
+    "ewma_cronica": 86.498,
+    "cociente": 1.10985,
+    "monotonia": 0.632456,
+    "strain": 442.719,
+    "sesiones_con_dato": 28,
+    "sesiones_sin_dato": 0,
+    "motivo": null
+   },
+   "bandas": {
+    "escala": "ABSOLUTAS_PSI",
+    "bandas": [
+     {
+      "banda": "LENTO",
+      "v_min_psi": 0,
+      "v_max_psi": 10,
+      "total_corto_m": 21000,
+      "total_largo_m": 90000
+     },
+     {
+      "banda": "MEDIO",
+      "v_min_psi": 10,
+      "v_max_psi": 13.3,
+      "total_corto_m": 10500,
+      "total_largo_m": 45000
+     },
+     {
+      "banda": "RAPIDO_1",
+      "v_min_psi": 13.3,
+      "v_max_psi": 14.4,
+      "total_corto_m": 2100,
+      "total_largo_m": 9000
+     },
+     {
+      "banda": "RAPIDO_2",
+      "v_min_psi": 14.4,
+      "v_max_psi": 15.5,
+      "total_corto_m": 700,
+      "total_largo_m": 3000
+     },
+     {
+      "banda": "RAPIDO_3",
+      "v_min_psi": 15.5,
+      "v_max_psi": 16.8,
+      "total_corto_m": 0,
+      "total_largo_m": 0
+     },
+     {
+      "banda": "RAPIDO_4",
+      "v_min_psi": 16.8,
+      "v_max_psi": null,
+      "total_corto_m": 0,
+      "total_largo_m": 0
+     }
+    ]
+   },
+   "diaria": [
+    {
+     "fecha": "2026-10-15",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-10-16",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-10-17",
+     "rapido_m": 350,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-10-18",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-10-19",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-10-20",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-10-21",
+     "rapido_m": 350,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-10-22",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-10-23",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-10-24",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-10-25",
+     "rapido_m": 350,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-10-26",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-10-27",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-10-28",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-10-29",
+     "rapido_m": 350,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-10-30",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-10-31",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-11-01",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-11-02",
+     "rapido_m": 350,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-11-03",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-11-04",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-11-05",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-11-06",
+     "rapido_m": 350,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-11-07",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-11-08",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-11-09",
+     "rapido_m": 0,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-11-10",
+     "rapido_m": 350,
+     "trimp": 15.266
+    },
+    {
+     "fecha": "2026-11-11",
+     "rapido_m": 0,
+     "trimp": 15.266
+    }
+   ],
+   "notas": [
+    "FC de reposo por defecto (33 lpm, no propia)",
+    "trabajo rápido: media exponencial de 7 d 96 m/día frente a 86.5 de 28 d (cociente 1.11); cambio relativo de carga, sin validar en caballos de carreras",
+    "carga interna (TRIMP): media exponencial de 7 d 15.3 UA/día frente a 14.5 de 28 d (cociente 1.05); cambio relativo de carga, sin validar en caballos de carreras"
+   ],
+   "nota": "carga descriptiva: cambio relativo frente a la propia historia; no es un riesgo ni un semaforo de lesion y no cambia el estado"
+  },
+  "nota": "orientativo; no es un diagnóstico veterinario"
+ },
+ "carga_diaria": [
+  {
+   "fecha": "2026-10-15",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-10-16",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-10-17",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-10-18",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-10-19",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-10-20",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-10-21",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-10-22",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-10-23",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-10-24",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-10-25",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-10-26",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-10-27",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-10-28",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-10-29",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-10-30",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-10-31",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-11-01",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-11-02",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-11-03",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-11-04",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-11-05",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-11-06",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-11-07",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-11-08",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-11-09",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-11-10",
+   "carga": 0
+  },
+  {
+   "fecha": "2026-11-11",
+   "carga": 0
+  }
+ ],
+ "lineas_base": [
+  {
+   "metrica": "PASO.velocidad_media",
+   "mediana": null,
+   "mad": null,
+   "n": 0,
+   "estado": "INSUFICIENTE"
+  },
+  {
+   "metrica": "PASO.longitud_tranco_m",
+   "mediana": null,
+   "mad": null,
+   "n": 0,
+   "estado": "INSUFICIENTE"
+  },
+  {
+   "metrica": "PASO.cadencia_hz",
+   "mediana": null,
+   "mad": null,
+   "n": 0,
+   "estado": "INSUFICIENTE"
+  },
+  {
+   "metrica": "PASO.correlacion_ciclos",
+   "mediana": null,
+   "mad": null,
+   "n": 0,
+   "estado": "INSUFICIENTE"
+  },
+  {
+   "metrica": "PASO.cv_intervalos",
+   "mediana": null,
+   "mad": null,
+   "n": 0,
+   "estado": "INSUFICIENTE"
+  },
+  {
+   "metrica": "TROTE.velocidad_media",
+   "mediana": null,
+   "mad": null,
+   "n": 0,
+   "estado": "INSUFICIENTE"
+  },
+  {
+   "metrica": "TROTE.longitud_tranco_m",
+   "mediana": null,
+   "mad": null,
+   "n": 0,
+   "estado": "INSUFICIENTE"
+  },
+  {
+   "metrica": "TROTE.cadencia_hz",
+   "mediana": null,
+   "mad": null,
+   "n": 0,
+   "estado": "INSUFICIENTE"
+  },
+  {
+   "metrica": "TROTE.correlacion_ciclos",
+   "mediana": null,
+   "mad": null,
+   "n": 0,
+   "estado": "INSUFICIENTE"
+  },
+  {
+   "metrica": "TROTE.cv_intervalos",
+   "mediana": null,
+   "mad": null,
+   "n": 0,
+   "estado": "INSUFICIENTE"
+  },
+  {
+   "metrica": "GALOPE.velocidad_media",
+   "mediana": null,
+   "mad": null,
+   "n": 0,
+   "estado": "INSUFICIENTE"
+  },
+  {
+   "metrica": "GALOPE.longitud_tranco_m",
+   "mediana": null,
+   "mad": null,
+   "n": 0,
+   "estado": "INSUFICIENTE"
+  },
+  {
+   "metrica": "GALOPE.cadencia_hz",
+   "mediana": null,
+   "mad": null,
+   "n": 0,
+   "estado": "INSUFICIENTE"
+  },
+  {
+   "metrica": "GALOPE.correlacion_ciclos",
+   "mediana": null,
+   "mad": null,
+   "n": 0,
+   "estado": "INSUFICIENTE"
+  },
+  {
+   "metrica": "GALOPE.cv_intervalos",
+   "mediana": null,
+   "mad": null,
+   "n": 0,
+   "estado": "INSUFICIENTE"
+  }
+ ],
+ "tendencias": [
+  {
+   "metrica": "PASO.velocidad_media",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "PASO.longitud_tranco_m",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "PASO.cadencia_hz",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "PASO.correlacion_ciclos",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "PASO.cv_intervalos",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TROTE.velocidad_media",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TROTE.longitud_tranco_m",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TROTE.cadencia_hz",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TROTE.correlacion_ciclos",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TROTE.cv_intervalos",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "GALOPE.velocidad_media",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "GALOPE.longitud_tranco_m",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "GALOPE.cadencia_hz",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "GALOPE.correlacion_ciclos",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "GALOPE.cv_intervalos",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TRABAJO.f_v1_hz",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TRABAJO.l_v1_m",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TRABAJO.f_v2_hz",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TRABAJO.l_v2_m",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TRABAJO.mano_de_fuera_curva_pct",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TRABAJO.indice_caida_pct",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TRABAJO.v_max",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TRABAJO.mejor_200m_s",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TRABAJO.f_en_v_max_hz",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TRABAJO.l_en_v_max_m",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TRABAJO.desplazamiento_vertical_m",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "CINCHA.vedba_galope_g",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TRABAJO.recuperacion_hasta_paso_s",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TRABAJO.caida_entre_series_pct",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "TRABAJO.calentamiento_s",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "RECORRIDO.mejor_pasada_s",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "RECORRIDO.v_media_mejor",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "carga_vedba",
+   "pendiente_semana": null,
+   "pendiente_p10": null,
+   "pendiente_p90": null,
+   "relativa_semana": null,
+   "n": 0,
+   "direccion": "SIN_DATOS"
+  },
+  {
+   "metrica": "carga_externa",
+   "pendiente_semana": 0,
+   "pendiente_p10": 0,
+   "pendiente_p90": 0,
+   "relativa_semana": null,
+   "n": 42,
+   "direccion": "ESTABLE"
+  },
+  {
+   "metrica": "distancia_m",
+   "pendiente_semana": 0,
+   "pendiente_p10": 0,
+   "pendiente_p90": 0,
+   "relativa_semana": 0,
+   "n": 42,
+   "direccion": "ESTABLE"
+  }
+ ],
+ "sesiones": [
+  {
+   "id": "W39",
+   "fecha": "2026-11-09",
+   "nivel": "NORMAL",
+   "motivos": [],
+   "carga": {
+    "externa": 0,
+    "srpe": null,
+    "aguda": 0,
+    "cronica_semanal": 0,
+    "acwr": null,
+    "aguda_srpe": null,
+    "cronica_semanal_srpe": null,
+    "acwr_srpe": null,
+    "vedba": null,
+    "aguda_vedba": null,
+    "cronica_semanal_vedba": null,
+    "acwr_vedba": null,
+    "monotonia": null,
+    "tension": null,
+    "dias_desde_anterior": 1
+   },
+   "base_cientifica": {
+    "base": "AVO_KB_1",
+    "version": "1.31.0",
+    "disponible": true,
+    "d7": {
+     "bandas_m": [
+      8400,
+      0,
+      350
+     ],
+     "canter_m": 8400,
+     "galope_rapido_m": 350,
+     "fatiga_osea_pct": 2.1,
+     "sesiones": 7,
+     "sesiones_sin_datos": 0
+    },
+    "d30": {
+     "bandas_m": [
+      36000,
+      0,
+      2450
+     ],
+     "canter_m": 36000,
+     "galope_rapido_m": 2450,
+     "fatiga_osea_pct": 9,
+     "sesiones": 30,
+     "sesiones_sin_datos": 0
+    },
+    "d30_anteriores": {
+     "bandas_m": [
+      12000,
+      0,
+      1050
+     ],
+     "canter_m": 12000,
+     "galope_rapido_m": 1050,
+     "fatiga_osea_pct": 3,
+     "sesiones": 10,
+     "sesiones_sin_datos": 0
+    },
+    "d60": {
+     "bandas_m": [
+      48000,
+      0,
+      3500
+     ],
+     "canter_m": 48000,
+     "galope_rapido_m": 3500,
+     "fatiga_osea_pct": 12,
+     "sesiones": 40,
+     "sesiones_sin_datos": 0
+    },
+    "fatiga_osea_mediana_semanal_pct": 2.1,
+    "fatiga_osea_ratio_7d": 1,
+    "dias_sin_trabajo_rapido": 3,
+    "dias_galope_60d": 10,
+    "cociente_galope": null,
+    "carreras": [
+     {
+      "fecha": "2026-11-17",
+      "origen": "PREVISTA",
+      "dias_hasta": 8,
+      "dias_rapidos_28d": 5,
+      "sesiones_sin_datos": 0,
+      "ventana_cubierta": true,
+      "aviso": false
+     }
+    ],
+    "vuelta_descanso": null,
+    "reglas": [],
+    "nota": "orientativo: reglas de la literatura con umbrales de partida, sin validar con la cuadra; la fatiga ósea es un índice relativo, no una probabilidad de lesión"
+   },
+   "carga_cg": {
+    "trimp": 15.266,
+    "rapido_m": 0
+   },
+   "desvios": [],
+   "resumen": {
+    "formato": "avo-training-session",
+    "version_formato": 1,
+    "version": "1.3.0",
+    "id": "W39",
+    "caballo": "LUNA",
+    "jinete": "",
+    "fecha_utc": "2026-11-09",
+    "tiempo_movimiento_s": 1980,
+    "distancia_m": 8000,
+    "velocidad_max": null,
+    "distancia_alta_velocidad_m": 0,
+    "tiene_cincha": false,
+    "aires": {
+     "PASO": {
+      "duracion_s": 0,
+      "distancia_m": 0,
+      "velocidad_media": null,
+      "velocidad_max": null,
+      "longitud_tranco_m": null,
+      "cadencia_hz": null,
+      "correlacion_ciclos": null,
+      "cv_intervalos": null
+     },
+     "TROTE": {
+      "duracion_s": 0,
+      "distancia_m": 0,
+      "velocidad_media": null,
+      "velocidad_max": null,
+      "longitud_tranco_m": null,
+      "cadencia_hz": null,
+      "correlacion_ciclos": null,
+      "cv_intervalos": null
+     },
+     "GALOPE": {
+      "duracion_s": 0,
+      "distancia_m": 0,
+      "velocidad_media": null,
+      "velocidad_max": null,
+      "longitud_tranco_m": null,
+      "cadencia_hz": null,
+      "correlacion_ciclos": null,
+      "cv_intervalos": null
+     }
+    },
+    "aceleraciones": {
+     "sostenidas": 0,
+     "frenadas_sostenidas": 0,
+     "picos_laterales": 0,
+     "pico_aceleracion_m_s2": null,
+     "pico_frenada_m_s2": null,
+     "fuente": "TRAYECTORIA_GNSS"
+    },
+    "calidad": {
+     "gnss": "",
+     "imu": ""
+    },
+    "valoracion": {
+     "rpe": null,
+     "estado": "",
+     "nota": ""
+    },
+    "pista": {
+     "superficie": "",
+     "estado": "",
+     "franja": "",
+     "going": "",
+     "marea": {
+      "hora": "",
+      "tipo": ""
+     }
+    },
+    "tipo_sesion": "",
+    "condiciones": {
+     "temperatura_c": null,
+     "humedad_pct": null
+    },
+    "pesos": {
+     "jinete_kg": null,
+     "caballo_kg": null
+    },
+    "incidencia": {
+     "tipo": "",
+     "texto": ""
+    },
+    "trabajo_pista": {
+     "raza": "PSI",
+     "carga_vedba_g_min": null,
+     "vedba_galope_g": null,
+     "galope_girando_izquierda_s": 0,
+     "galope_girando_derecha_s": 0,
+     "mano": {
+      "calibracion": "",
+      "izquierda": 0,
+      "derecha": 0,
+      "cambios": 0,
+      "mano_de_fuera_en_curva_pct": null
+     },
+     "trabajos": 0,
+     "trabajos_rapidos": 0,
+     "v_max": null,
+     "mejor_200m_s": null,
+     "distancia_rapida_m": 0,
+     "distancia_galope_trabajo_m": 0,
+     "indice_caida_pct": null,
+     "v_ultimos_600m": null,
+     "referencia": [
+      {
+       "v": null,
+       "f_hz": null,
+       "l_m": null
+      },
+      {
+       "v": null,
+       "f_hz": null,
+       "l_m": null
+      }
+     ],
+     "f_en_v_max_hz": null,
+     "l_en_v_max_m": null,
+     "desplazamiento_vertical_m": null,
+     "eventos": {
+      "impactos_atipicos": 0,
+      "laterales_bruscos": 0,
+      "saturacion": 0
+     },
+     "sesion": {
+      "calentamiento_s": null,
+      "vuelta_a_la_calma_s": null,
+      "repeticiones": 0,
+      "rapidas": 0,
+      "caida_v_max_pct": null,
+      "caida_zancada_pct": null,
+      "recuperacion_media_s": null,
+      "calentamiento_corto": false
+     },
+     "recorrido": {
+      "nombre": "",
+      "pasadas": 0,
+      "mejor_pasada_s": null,
+      "v_media_mejor": null,
+      "indice_caida_mejor_pct": null
+     },
+     "base_cientifica": {
+      "v_carrera_m_s": 16.7,
+      "bandas_m": [
+       1200,
+       0,
+       0
+      ],
+      "canter_m": 1200,
+      "galope_rapido_m": 0,
+      "fatiga_osea_pct": 0.3,
+      "fatiga_osea_lenta_pct": 0.1,
+      "zancadas_estimadas": 800,
+      "bandas_cg_m": [
+       3000,
+       1500,
+       300,
+       100,
+       0,
+       0
+      ],
+      "rapido_m": 0,
+      "escala_cg": "ABSOLUTAS_PSI"
+     }
+    },
+    "cardio": {
+     "calidad": "BUENA",
+     "v200_m_s": null,
+     "v200_metodo": "",
+     "v200_calentamiento_suficiente": false,
+     "v200_regresion_m_s": null,
+     "vhrmax_m_s": null,
+     "vhrmax_metodo": "",
+     "fc_pico_lpm": 190,
+     "recuperacion_fc_lpm": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ],
+     "ectopia": {
+      "candidatos": 0,
+      "nivel": "INFO",
+      "texto": ""
+     },
+     "trimp": 10,
+     "trimp_cobertura_pct": 95,
+     "histograma_fc": [
+      [
+       120,
+       600
+      ],
+      [
+       200,
+       60
+      ]
+     ]
+    },
+    "avisos": []
+   }
+  },
+  {
+   "id": "W40",
+   "fecha": "2026-11-10",
+   "nivel": "NORMAL",
+   "motivos": [],
+   "carga": {
+    "externa": 0,
+    "srpe": null,
+    "aguda": 0,
+    "cronica_semanal": 0,
+    "acwr": null,
+    "aguda_srpe": null,
+    "cronica_semanal_srpe": null,
+    "acwr_srpe": null,
+    "vedba": null,
+    "aguda_vedba": null,
+    "cronica_semanal_vedba": null,
+    "acwr_vedba": null,
+    "monotonia": null,
+    "tension": null,
+    "dias_desde_anterior": 1
+   },
+   "base_cientifica": {
+    "base": "AVO_KB_1",
+    "version": "1.31.0",
+    "disponible": true,
+    "d7": {
+     "bandas_m": [
+      8400,
+      0,
+      700
+     ],
+     "canter_m": 8400,
+     "galope_rapido_m": 700,
+     "fatiga_osea_pct": 2.1,
+     "sesiones": 7,
+     "sesiones_sin_datos": 0
+    },
+    "d30": {
+     "bandas_m": [
+      36000,
+      0,
+      2800
+     ],
+     "canter_m": 36000,
+     "galope_rapido_m": 2800,
+     "fatiga_osea_pct": 9,
+     "sesiones": 30,
+     "sesiones_sin_datos": 0
+    },
+    "d30_anteriores": {
+     "bandas_m": [
+      13200,
+      0,
+      1050
+     ],
+     "canter_m": 13200,
+     "galope_rapido_m": 1050,
+     "fatiga_osea_pct": 3.3,
+     "sesiones": 11,
+     "sesiones_sin_datos": 0
+    },
+    "d60": {
+     "bandas_m": [
+      49200,
+      0,
+      3850
+     ],
+     "canter_m": 49200,
+     "galope_rapido_m": 3850,
+     "fatiga_osea_pct": 12.3,
+     "sesiones": 41,
+     "sesiones_sin_datos": 0
+    },
+    "fatiga_osea_mediana_semanal_pct": 2.1,
+    "fatiga_osea_ratio_7d": 1,
+    "dias_sin_trabajo_rapido": 0,
+    "dias_galope_60d": 11,
+    "cociente_galope": null,
+    "carreras": [
+     {
+      "fecha": "2026-11-17",
+      "origen": "PREVISTA",
+      "dias_hasta": 7,
+      "dias_rapidos_28d": 6,
+      "sesiones_sin_datos": 0,
+      "ventana_cubierta": true,
+      "aviso": false
+     }
+    ],
+    "vuelta_descanso": null,
+    "reglas": [],
+    "nota": "orientativo: reglas de la literatura con umbrales de partida, sin validar con la cuadra; la fatiga ósea es un índice relativo, no una probabilidad de lesión"
+   },
+   "carga_cg": {
+    "trimp": 15.266,
+    "rapido_m": 350
+   },
+   "desvios": [],
+   "resumen": {
+    "formato": "avo-training-session",
+    "version_formato": 1,
+    "version": "1.3.0",
+    "id": "W40",
+    "caballo": "LUNA",
+    "jinete": "",
+    "fecha_utc": "2026-11-10",
+    "tiempo_movimiento_s": 1980,
+    "distancia_m": 8000,
+    "velocidad_max": null,
+    "distancia_alta_velocidad_m": 0,
+    "tiene_cincha": false,
+    "aires": {
+     "PASO": {
+      "duracion_s": 0,
+      "distancia_m": 0,
+      "velocidad_media": null,
+      "velocidad_max": null,
+      "longitud_tranco_m": null,
+      "cadencia_hz": null,
+      "correlacion_ciclos": null,
+      "cv_intervalos": null
+     },
+     "TROTE": {
+      "duracion_s": 0,
+      "distancia_m": 0,
+      "velocidad_media": null,
+      "velocidad_max": null,
+      "longitud_tranco_m": null,
+      "cadencia_hz": null,
+      "correlacion_ciclos": null,
+      "cv_intervalos": null
+     },
+     "GALOPE": {
+      "duracion_s": 0,
+      "distancia_m": 0,
+      "velocidad_media": null,
+      "velocidad_max": null,
+      "longitud_tranco_m": null,
+      "cadencia_hz": null,
+      "correlacion_ciclos": null,
+      "cv_intervalos": null
+     }
+    },
+    "aceleraciones": {
+     "sostenidas": 0,
+     "frenadas_sostenidas": 0,
+     "picos_laterales": 0,
+     "pico_aceleracion_m_s2": null,
+     "pico_frenada_m_s2": null,
+     "fuente": "TRAYECTORIA_GNSS"
+    },
+    "calidad": {
+     "gnss": "",
+     "imu": ""
+    },
+    "valoracion": {
+     "rpe": null,
+     "estado": "",
+     "nota": ""
+    },
+    "pista": {
+     "superficie": "",
+     "estado": "",
+     "franja": "",
+     "going": "",
+     "marea": {
+      "hora": "",
+      "tipo": ""
+     }
+    },
+    "tipo_sesion": "",
+    "condiciones": {
+     "temperatura_c": null,
+     "humedad_pct": null
+    },
+    "pesos": {
+     "jinete_kg": null,
+     "caballo_kg": null
+    },
+    "incidencia": {
+     "tipo": "",
+     "texto": ""
+    },
+    "trabajo_pista": {
+     "raza": "PSI",
+     "carga_vedba_g_min": null,
+     "vedba_galope_g": null,
+     "galope_girando_izquierda_s": 0,
+     "galope_girando_derecha_s": 0,
+     "mano": {
+      "calibracion": "",
+      "izquierda": 0,
+      "derecha": 0,
+      "cambios": 0,
+      "mano_de_fuera_en_curva_pct": null
+     },
+     "trabajos": 0,
+     "trabajos_rapidos": 0,
+     "v_max": null,
+     "mejor_200m_s": null,
+     "distancia_rapida_m": 0,
+     "distancia_galope_trabajo_m": 0,
+     "indice_caida_pct": null,
+     "v_ultimos_600m": null,
+     "referencia": [
+      {
+       "v": null,
+       "f_hz": null,
+       "l_m": null
+      },
+      {
+       "v": null,
+       "f_hz": null,
+       "l_m": null
+      }
+     ],
+     "f_en_v_max_hz": null,
+     "l_en_v_max_m": null,
+     "desplazamiento_vertical_m": null,
+     "eventos": {
+      "impactos_atipicos": 0,
+      "laterales_bruscos": 0,
+      "saturacion": 0
+     },
+     "sesion": {
+      "calentamiento_s": null,
+      "vuelta_a_la_calma_s": null,
+      "repeticiones": 0,
+      "rapidas": 0,
+      "caida_v_max_pct": null,
+      "caida_zancada_pct": null,
+      "recuperacion_media_s": null,
+      "calentamiento_corto": false
+     },
+     "recorrido": {
+      "nombre": "",
+      "pasadas": 0,
+      "mejor_pasada_s": null,
+      "v_media_mejor": null,
+      "indice_caida_mejor_pct": null
+     },
+     "base_cientifica": {
+      "v_carrera_m_s": 16.7,
+      "bandas_m": [
+       1200,
+       0,
+       350
+      ],
+      "canter_m": 1200,
+      "galope_rapido_m": 350,
+      "fatiga_osea_pct": 0.3,
+      "fatiga_osea_lenta_pct": 0.1,
+      "zancadas_estimadas": 800,
+      "bandas_cg_m": [
+       3000,
+       1500,
+       300,
+       100,
+       0,
+       0
+      ],
+      "rapido_m": 350,
+      "escala_cg": "ABSOLUTAS_PSI"
+     }
+    },
+    "cardio": {
+     "calidad": "BUENA",
+     "v200_m_s": null,
+     "v200_metodo": "",
+     "v200_calentamiento_suficiente": false,
+     "v200_regresion_m_s": null,
+     "vhrmax_m_s": null,
+     "vhrmax_metodo": "",
+     "fc_pico_lpm": 190,
+     "recuperacion_fc_lpm": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ],
+     "ectopia": {
+      "candidatos": 0,
+      "nivel": "INFO",
+      "texto": ""
+     },
+     "trimp": 10,
+     "trimp_cobertura_pct": 95,
+     "histograma_fc": [
+      [
+       120,
+       600
+      ],
+      [
+       200,
+       60
+      ]
+     ]
+    },
+    "avisos": []
+   }
+  },
+  {
+   "id": "W41",
+   "fecha": "2026-11-11",
+   "nivel": "NORMAL",
+   "motivos": [],
+   "carga": {
+    "externa": 0,
+    "srpe": null,
+    "aguda": 0,
+    "cronica_semanal": 0,
+    "acwr": null,
+    "aguda_srpe": null,
+    "cronica_semanal_srpe": null,
+    "acwr_srpe": null,
+    "vedba": null,
+    "aguda_vedba": null,
+    "cronica_semanal_vedba": null,
+    "acwr_vedba": null,
+    "monotonia": null,
+    "tension": null,
+    "dias_desde_anterior": 1
+   },
+   "base_cientifica": {
+    "base": "AVO_KB_1",
+    "version": "1.31.0",
+    "disponible": true,
+    "d7": {
+     "bandas_m": [
+      8400,
+      0,
+      700
+     ],
+     "canter_m": 8400,
+     "galope_rapido_m": 700,
+     "fatiga_osea_pct": 2.1,
+     "sesiones": 7,
+     "sesiones_sin_datos": 0
+    },
+    "d30": {
+     "bandas_m": [
+      36000,
+      0,
+      2800
+     ],
+     "canter_m": 36000,
+     "galope_rapido_m": 2800,
+     "fatiga_osea_pct": 9,
+     "sesiones": 30,
+     "sesiones_sin_datos": 0
+    },
+    "d30_anteriores": {
+     "bandas_m": [
+      14400,
+      0,
+      1050
+     ],
+     "canter_m": 14400,
+     "galope_rapido_m": 1050,
+     "fatiga_osea_pct": 3.6,
+     "sesiones": 12,
+     "sesiones_sin_datos": 0
+    },
+    "d60": {
+     "bandas_m": [
+      50400,
+      0,
+      3850
+     ],
+     "canter_m": 50400,
+     "galope_rapido_m": 3850,
+     "fatiga_osea_pct": 12.6,
+     "sesiones": 42,
+     "sesiones_sin_datos": 0
+    },
+    "fatiga_osea_mediana_semanal_pct": 2.1,
+    "fatiga_osea_ratio_7d": 1,
+    "dias_sin_trabajo_rapido": 1,
+    "dias_galope_60d": 11,
+    "cociente_galope": null,
+    "carreras": [
+     {
+      "fecha": "2026-11-17",
+      "origen": "PREVISTA",
+      "dias_hasta": 6,
+      "dias_rapidos_28d": 6,
+      "sesiones_sin_datos": 0,
+      "ventana_cubierta": true,
+      "aviso": false
+     }
+    ],
+    "vuelta_descanso": null,
+    "reglas": [],
+    "nota": "orientativo: reglas de la literatura con umbrales de partida, sin validar con la cuadra; la fatiga ósea es un índice relativo, no una probabilidad de lesión"
+   },
+   "carga_cg": {
+    "trimp": 15.266,
+    "rapido_m": 0
+   },
+   "desvios": [],
+   "resumen": {
+    "formato": "avo-training-session",
+    "version_formato": 1,
+    "version": "1.3.0",
+    "id": "W41",
+    "caballo": "LUNA",
+    "jinete": "",
+    "fecha_utc": "2026-11-11",
+    "tiempo_movimiento_s": 1980,
+    "distancia_m": 8000,
+    "velocidad_max": null,
+    "distancia_alta_velocidad_m": 0,
+    "tiene_cincha": false,
+    "aires": {
+     "PASO": {
+      "duracion_s": 0,
+      "distancia_m": 0,
+      "velocidad_media": null,
+      "velocidad_max": null,
+      "longitud_tranco_m": null,
+      "cadencia_hz": null,
+      "correlacion_ciclos": null,
+      "cv_intervalos": null
+     },
+     "TROTE": {
+      "duracion_s": 0,
+      "distancia_m": 0,
+      "velocidad_media": null,
+      "velocidad_max": null,
+      "longitud_tranco_m": null,
+      "cadencia_hz": null,
+      "correlacion_ciclos": null,
+      "cv_intervalos": null
+     },
+     "GALOPE": {
+      "duracion_s": 0,
+      "distancia_m": 0,
+      "velocidad_media": null,
+      "velocidad_max": null,
+      "longitud_tranco_m": null,
+      "cadencia_hz": null,
+      "correlacion_ciclos": null,
+      "cv_intervalos": null
+     }
+    },
+    "aceleraciones": {
+     "sostenidas": 0,
+     "frenadas_sostenidas": 0,
+     "picos_laterales": 0,
+     "pico_aceleracion_m_s2": null,
+     "pico_frenada_m_s2": null,
+     "fuente": "TRAYECTORIA_GNSS"
+    },
+    "calidad": {
+     "gnss": "",
+     "imu": ""
+    },
+    "valoracion": {
+     "rpe": null,
+     "estado": "",
+     "nota": ""
+    },
+    "pista": {
+     "superficie": "",
+     "estado": "",
+     "franja": "",
+     "going": "",
+     "marea": {
+      "hora": "",
+      "tipo": ""
+     }
+    },
+    "tipo_sesion": "",
+    "condiciones": {
+     "temperatura_c": null,
+     "humedad_pct": null
+    },
+    "pesos": {
+     "jinete_kg": null,
+     "caballo_kg": null
+    },
+    "incidencia": {
+     "tipo": "",
+     "texto": ""
+    },
+    "trabajo_pista": {
+     "raza": "PSI",
+     "carga_vedba_g_min": null,
+     "vedba_galope_g": null,
+     "galope_girando_izquierda_s": 0,
+     "galope_girando_derecha_s": 0,
+     "mano": {
+      "calibracion": "",
+      "izquierda": 0,
+      "derecha": 0,
+      "cambios": 0,
+      "mano_de_fuera_en_curva_pct": null
+     },
+     "trabajos": 0,
+     "trabajos_rapidos": 0,
+     "v_max": null,
+     "mejor_200m_s": null,
+     "distancia_rapida_m": 0,
+     "distancia_galope_trabajo_m": 0,
+     "indice_caida_pct": null,
+     "v_ultimos_600m": null,
+     "referencia": [
+      {
+       "v": null,
+       "f_hz": null,
+       "l_m": null
+      },
+      {
+       "v": null,
+       "f_hz": null,
+       "l_m": null
+      }
+     ],
+     "f_en_v_max_hz": null,
+     "l_en_v_max_m": null,
+     "desplazamiento_vertical_m": null,
+     "eventos": {
+      "impactos_atipicos": 0,
+      "laterales_bruscos": 0,
+      "saturacion": 0
+     },
+     "sesion": {
+      "calentamiento_s": null,
+      "vuelta_a_la_calma_s": null,
+      "repeticiones": 0,
+      "rapidas": 0,
+      "caida_v_max_pct": null,
+      "caida_zancada_pct": null,
+      "recuperacion_media_s": null,
+      "calentamiento_corto": false
+     },
+     "recorrido": {
+      "nombre": "",
+      "pasadas": 0,
+      "mejor_pasada_s": null,
+      "v_media_mejor": null,
+      "indice_caida_mejor_pct": null
+     },
+     "base_cientifica": {
+      "v_carrera_m_s": 16.7,
+      "bandas_m": [
+       1200,
+       0,
+       0
+      ],
+      "canter_m": 1200,
+      "galope_rapido_m": 0,
+      "fatiga_osea_pct": 0.3,
+      "fatiga_osea_lenta_pct": 0.1,
+      "zancadas_estimadas": 800,
+      "bandas_cg_m": [
+       3000,
+       1500,
+       300,
+       100,
+       0,
+       0
+      ],
+      "rapido_m": 0,
+      "escala_cg": "ABSOLUTAS_PSI"
+     }
+    },
+    "cardio": {
+     "calidad": "BUENA",
+     "v200_m_s": null,
+     "v200_metodo": "",
+     "v200_calentamiento_suficiente": false,
+     "v200_regresion_m_s": null,
+     "vhrmax_m_s": null,
+     "vhrmax_metodo": "",
+     "fc_pico_lpm": 190,
+     "recuperacion_fc_lpm": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+     ],
+     "ectopia": {
+      "candidatos": 0,
+      "nivel": "INFO",
+      "texto": ""
+     },
+     "trimp": 10,
+     "trimp_cobertura_pct": 95,
+     "histograma_fc": [
+      [
+       120,
+       600
+      ],
+      [
+       200,
+       60
+      ]
+     ]
+    },
+    "avisos": []
+   }
+  }
+ ],
+ "avisos": [
+  "carga externa = heurística por aires (AVO_TRAINING_LOAD_V1), sin validar con datos fisiológicos"
+ ]
+}

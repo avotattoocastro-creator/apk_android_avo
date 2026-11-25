@@ -16,7 +16,8 @@
 
 namespace avoeq {
 
-static const char* const TRAINING_VERSION = "1.2.0";   // 1.1.0: ficha de campo, A4 y base del planificador; 1.2.0: carga CG1–CG3
+static const char* const TRAINING_VERSION = "1.3.0";   // 1.1.0: ficha de campo, A4 y base del planificador; 1.2.0: carga CG1–CG3;
+                                                       // 1.3.0: planificador semanal, capa 2 (semana siguiente)
 static const char* const TRAINING_LOAD_ALGORITHM = "AVO_TRAINING_LOAD_V1";
 
 // Aires que cuentan para la historia (los demás —transición, desconocido— solo suman tiempo).
@@ -48,6 +49,36 @@ struct TrainingConfig {
     double max_missing_fraction = 0.20;                // más sesiones sin dato en la ventana crónica: sin cociente [I]
     int hr_max_min_sessions = 3;                       // FM1: FC máxima propia = pico de ≥ 3 trabajos rápidos [I]
   } cg;
+  // Planificador semanal, capa 2 (TRAINING 1.3.0, KB 1.31.0): propuesta orientativa de la semana siguiente con P1, P2,
+  // P4–P7, RT1–RT3 y DM1–DM4. Todo SIN CALIBRAR: sale como pautas informativas y nunca cambia el estado del caballo.
+  struct Planner {
+    bool enabled = true;
+    int horizon_days = 7;
+    int fast_per_week_mature = 2;      // P1: 2,0 rápidos/semana en maduros (Morrice-West 2020) [E]; objetivo 2 [I]
+    int fast_per_week_2y = 2;          // P1/DM1: 1,7 rápidos/semana en 2 años (Morrice-West 2020) [E]; tope 2 [I]
+    int min_days_between_fast = 3;     // RT1/P2: ≥ 72 h y ≥ 2 días lentos entre rápidos [I] (sin evidencia directa)
+    int free_days = 1;                 // P2: un día libre por semana (práctica) [E]
+    int prerace_no_fast_days = 3;      // sin rápido en los 3 días previos a una carrera [I]
+    int postrace_no_fast_days = 5;     // sin rápido en los 5 días siguientes a una carrera; el siguiente, libre [I]
+    int p4_slow_days = 28;             // P4: ~4 semanas de trabajo lento tras > 60 d sin rápido (Morrice-West 2020: 4,0) [E]
+    int p4_block_gap_days = 14;        // hueco sin sesiones que abre un bloque nuevo de trabajo [I]
+    int p7_window_days = 21;           // P7: 21 d (prudente 30) con 1 rápido/semana tras volver (Carrier 1998 [E-r]) [I]
+    double p7_distance_fraction = 0.75;// P4/P7: «distancia reducida» = 75 % de la mediana propia anterior [I]
+    int p5_window_days = 60;           // P5: media diaria de distancia rápida en 60 d (Estberg 1998 [E-r])
+    double p5_percentile = 75;         // P5: frente al P75 propio [I]
+    int p5_min_history_days = 180;     // P5: historia mínima para el P75 propio [I]
+    int p6_break_min_days = 40;        // P6: descanso ≥ 40 d sin sesiones (6,3 semanas, IC 5,7–6,8; Morrice-West 2020) [E/I]
+    int p6_interval_days = 183;        // P6: ~2 descansos al año (1,9–2,1; Morrice-West 2020) [E]; corte [I]
+    double dm1_fast_max_m = 400;       // DM1: rápidos cortos de 200–400 m en 2 años (Oliveira 2006 [E], Boston 2000 [E-r]) [I]
+    int dm4_weeks = 12;                // DM4: escalones antes de 12–16 semanas de preparación (Oliveira 2006, n = 42) [E/I]
+    double dm4_from_m = 500, dm4_to_m = 700;   // DM4: aviso al pasar de ≈ 500 a ≥ 700 m [E/I]
+    double dm2_ratio = 1.5;            // DM2: subida brusca frente a la media acumulada propia [I]
+    double dm2_min_fast_m = 200, dm2_min_canter_m = 2000;   // DM2: volumen mínimo de la ventana para avisar [I]
+    int dm2_min_history_days = 28;     // DM2: historia propia mínima antes de la ventana [I]
+    int age_years = -1;                // edad de carreras (opción «edad_anos»); -1: sin dato
+    long birth_day = -1000000;         // fecha de nacimiento (opción «fecha_nacimiento»); edad = año de referencia − año
+    bool has_birth = false;            //   de nacimiento (convenio del 1 de enero, hemisferio norte) [OFICIAL]
+  } planner;
 };
 
 // Métricas de un aire dentro de una sesión. NaN = no disponible.
@@ -220,6 +251,35 @@ struct PlannerStatus {
   std::vector<PlannerNote> notes;
 };
 
+// Planificador semanal, capa 2 (TRAINING 1.3.0): propuesta de la semana siguiente. Orientativa y sin calibrar.
+struct PlanDay {
+  long day = 0;
+  std::string type;                    // RAPIDO | LENTO | SUAVE | LIBRE | CARRERA
+  std::string reason;
+  std::vector<std::string> rules;
+  double fast_max_m = NAN;             // distancia rápida máxima propuesta (solo días RAPIDO; NaN: sin tope propio)
+};
+struct WeekPlan {
+  bool available = false;
+  std::string reason;                  // por qué no hay propuesta
+  long from_day = 0, to_day = 0;
+  std::string phase;                   // NORMAL | POTRO_2_ANOS | REINCORPORACION_LENTA | REINCORPORACION_RAPIDO
+  bool limited = false;                // A1/A2 en LIMITAR: un solo rápido
+  int age_years = -1;
+  std::string age_origin;              // FECHA_NACIMIENTO | EDAD_ANOS | "" (sin dato)
+  std::string breed;
+  int fast_target = 0, fast_planned = 0;
+  int slow_days_done = -1;             // P4: días del bloque lento actual (-1: no aplica)
+  long return_fast_day = -1;           // P7: primer rápido tras > 60 d sin rápido (-1: no aplica)
+  int prep_weeks = -1;                 // semanas del bloque de preparación actual (DM4)
+  double fast_ref_m = NAN;             // mediana propia de metros rápidos por día rápido (60 d)
+  double fast_max_m = NAN;             // tope propuesto (DM1 o P7); NaN: sin tope
+  double p5_mean_m = NAN, p5_p75_m = NAN;   // P5: media diaria de 60 d y su P75 propio
+  int days_since_break = -1;           // P6: días desde el final del último descanso ≥ p6_break_min_days (-1: ninguno)
+  std::vector<PlanDay> days;
+  std::vector<PlannerNote> notes;
+};
+
 struct TrainingResult {
   std::string horse, reference_date;
   long reference_day = 0;
@@ -231,6 +291,7 @@ struct TrainingResult {
   std::vector<Trend> trends;
   KbStatus kb;                                      // base científica a la fecha de referencia
   PlannerStatus planner;                            // base del planificador semanal a la fecha de referencia
+  WeekPlan week;                                    // capa 2: propuesta de la semana siguiente (TRAINING 1.3.0)
   CgStatus cg;                                      // CG1–CG3 a la fecha de referencia (solo descriptiva)
   std::string level = "NORMAL";
   std::vector<std::string> reasons, warnings;
@@ -242,6 +303,12 @@ std::string training_day_text(long day);
 
 TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std::string& reference_date, const TrainingConfig& c);
 std::string training_to_json(const TrainingResult& r, const TrainingConfig& c);
+
+// Capa 2 del planificador (src/training/planner.cpp). ok: sesiones en orden cronológico hasta «at»; kbdays: una
+// entrada por sesión; kb: base científica a la fecha «at» (para A1/A2 LIMITAR y A3).
+WeekPlan training_plan_week(const std::vector<SessionSummary>& ok, const std::vector<KbDay>& kbdays, long at, long first_day,
+                            const KbStatus& kb, const TrainingConfig& c);
+std::string training_week_plan_json(const WeekPlan& w, const TrainingConfig& c);
 
 // Opciones JSON (todas opcionales): factores, ventanas y umbrales de TrainingConfig con nombres en español.
 bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::string* err);

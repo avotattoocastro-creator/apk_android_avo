@@ -98,6 +98,53 @@ Es **orientativo, no es un diagnóstico veterinario**, y no usa términos clíni
   `proxima_carrera` (`fecha`, `dias_hasta`, `dias_rapidos_28d`, `faltan_para_minimo`) y `pautas[]` (`regla`, `texto`,
   `evidencia`) con P1, RT1, A4 y P3. Nunca sube el estado; no es un plan automático.
 
+## 5 ter. Planificador semanal, capa 2: la semana siguiente (TRAINING 1.3.0, motor 2.0.0-dev35)
+`estado.planificador.semana_siguiente` propone los 7 días siguientes a la fecha de referencia. **Sin calibrar:** nunca
+cambia el estado del caballo, no es una predicción de lesiones y el entrenador decide (`validado: false`). Código:
+`src/training/planner.cpp`.
+
+**Fase** (por orden): `REINCORPORACION_LENTA` si hace > 60 d (`base_cientifica.dias_descanso_vuelta`) del último rápido
+(P4): 0 rápidos hasta llevar 28 d de trabajo lento en el bloque actual y después 1 rápido; `REINCORPORACION_RAPIDO`
+durante los 21 d siguientes al primer rápido tras > 60 d sin él (P7): 1 rápido por semana (≥ 7 d entre rápidos);
+`POTRO_2_ANOS` con edad de carreras 2 (DM1); `NORMAL` en otro caso. Con A1/A2/A3/A5 en LIMITAR, 1 rápido como mucho.
+Edad = año de referencia − año de nacimiento (convenio del 1 de enero) o la opción `edad_anos`.
+
+**Colocación** (determinista): carreras previstas → `CARRERA`; rápidos lo antes posible con ≥ 3 días desde el rápido o
+la carrera anterior (RT1/P2), sin rápido en los 3 días previos ni en los 5 siguientes a una carrera; el día siguiente a
+un rápido `SUAVE` (RT2) y el siguiente a una carrera `LIBRE`; un día `LIBRE` por semana (P2: el último día lento que no
+precede a un rápido); el resto `LENTO`. Si no caben todos los rápidos, pauta P2.
+
+**Distancias:** `rapido_ref_m` = mediana de metros rápidos (> 14 m/s en PSI, escalados en árabes) por día rápido en
+60 d; tope `rapido_max_m` = 75 % de la mediana anterior en la vuelta (P4/P7 [I]) y 400 m en potros antes de 12 semanas de
+preparación (DM1 [E/I]).
+
+**Pautas (solo texto):** P5 media diaria de 60 d > P75 propio de esa media (≥ 180 d de historia) y también en los días
+60–31 (no penaliza el último mes); P6 ≥ 183 d sin un hueco de ≥ 40 d sin sesiones; DM2 canter o rápido de 7/14/30 d
+> 1,5 × media acumulada del bloque (≥ 28 d antes de la ventana; la de 30 d se omite si ya salta A3); DM3 canter del último
+día rápido > mediana de los días lentos de 30 d; DM4 salto a ≥ 700 m sin haber pasado de 700 antes de 12 semanas;
+aviso [I-raza] en árabes y aviso sin edad.
+
+| Parámetro (`planificador.*`) | Defecto | Etiqueta |
+|---|---|---|
+| `rapidos_semana_maduro` / `rapidos_semana_2anos` | 2 / 2 | [E] práctica 2,0 y 1,7 (Morrice-West 2020); objetivo [I] |
+| `dias_min_entre_rapidos` | 3 | [I] (sin evidencia directa; glucógeno 48–72 h [E-r]) |
+| `dias_libres` | 1 | [E] práctica |
+| `dias_sin_rapido_precarrera` / `dias_sin_rapido_poscarrera` | 3 / 5 | [I] |
+| `p4_dias_lentos` / `p4_dias_hueco_bloque` | 28 / 14 | [E] 4,0 semanas (Morrice-West 2020) / [I] |
+| `p7_dias_ventana` / `p7_fraccion_distancia` | 21 / 0,75 | [E-r] Carrier 1998 / [I] |
+| `p5_dias` / `p5_percentil` / `p5_min_historia_dias` | 60 / 75 / 180 | [E-r] Estberg 1998 / [I] |
+| `p6_descanso_min_dias` / `p6_intervalo_dias` | 40 / 183 | [E] 1,9–2,1 descansos de 6,3–6,6 sem / [I] |
+| `dm1_rapido_max_m` | 400 | [E] Oliveira 2006 (n = 42) / [I] |
+| `dm2_ratio`, `dm2_min_rapido_m`, `dm2_min_canter_m`, `dm2_min_historia_dias` | 1,5 / 200 / 2000 / 28 | [I] |
+| `dm4_semanas` / `dm4_desde_m` / `dm4_hasta_m` | 12 / 500 / 700 | [E] Oliveira 2006 / [I] |
+| `dias_horizonte` | 7 | — |
+Opciones en la raíz: `fecha_nacimiento` (AAAA-MM-DD) y `edad_anos`; `planificador: false` lo desactiva.
+
+**Ejemplo (prueba `planner_week_mature`):** maduro con rápido de 600 m cada 4 días y referencia el día de un rápido →
+`SUAVE, LENTO, RAPIDO, SUAVE, LENTO, RAPIDO, LIBRE` (rápidos a +3 y +6 d). Potro de 2 años con carrera a +6 d → `SUAVE,
+LENTO, LENTO, LENTO, LENTO, CARRERA, LIBRE` y pauta P2 (no cabe ningún rápido). Vuelta tras 82 d sin rápido con 10 d de
+lento → semana sin rápidos y tope de 450 m (75 % de 600).
+
 ## Parámetros (opciones JSON)
 | Opción | Defecto | Opción | Defecto |
 |---|---|---|---|
@@ -114,6 +161,8 @@ Es **orientativo, no es un diagnóstico veterinario**, y no usa términos clíni
   0,1 m/s por semana, duplicados y fechas futuras, API C y determinismo. Todo con ASan y UBSan.
 - TRAINING 1.1.0: ficha de campo (ida y vuelta y valores no válidos), incidencias, A4 con fechas previstas y con
   sesión TRIAL, planificador (P1, P3, días que faltan) y comparables por franja, con ASan y UBSan.
+- TRAINING 1.3.0: planificador de la semana siguiente (fase normal, potro con carrera, vuelta P4/P7, P5 con y sin el
+  último mes, P6, DM2–DM4, árabes y opciones) con ASan y UBSan.
 - **NO VERIFICADO** con sesiones reales. Los factores de carga y los umbrales son valores de partida y hay que
   ajustarlos con la historia real de cada cuadra.
 - Las tendencias con pocas sesiones son orientativas. El intervalo p10–p90 no es un intervalo de confianza formal.

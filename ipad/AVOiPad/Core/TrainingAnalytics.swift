@@ -218,11 +218,16 @@ enum TrainingAnalytics {
         return o
     }
 
-    /// options_json of avo_eq_training_analyse: «carreras_previstas» (A4 and planner). Nil when there is nothing to pass.
-    static func historyOptions(plannedRaces: [String]) -> String? {
+    /// options_json of avo_eq_training_analyse: «carreras_previstas» (A4 and planner) and «fecha_nacimiento» (year of
+    /// birth of the stable record, 1 January: racing age for the 2-year-old rules DM1–DM4 of the weekly planner).
+    /// Nil when there is nothing to pass.
+    static func historyOptions(plannedRaces: [String], birthYear: Int? = nil) -> String? {
         let days: [String] = plannedRaces.filter { (d: String) -> Bool in day(d) != nil }.map { String($0.prefix(10)) }
-        if days.isEmpty { return nil }
-        return String(decoding: AvoJSON.data(["carreras_previstas": Array(Set(days)).sorted()]), as: UTF8.self)
+        var o: [String: Any] = [:]
+        if !days.isEmpty { o["carreras_previstas"] = Array(Set(days)).sorted() }
+        if let y = birthYear, y >= 1980, y <= 2100 { o["fecha_nacimiento"] = String(format: "%04d-01-01", y) }
+        if o.isEmpty { return nil }
+        return String(decoding: AvoJSON.data(o), as: UTF8.self)
     }
 
     static func extraJson(id: String, horse: String, rider: String, dateUtc: String?, rating: TrainingRating?) -> String {
@@ -792,6 +797,8 @@ struct TrainingAnalysisResult: Equatable {
     var baseCientifica: KbHistoryStatus
     /// «estado.carga_cg» (CG1–CG3, motor 2.0.0-dev34): carga descriptiva, siempre INFO.
     var cargaCg: TrainingLoadCg
+    /// «estado.planificador.semana_siguiente» (capa 2 del planificador, motor 2.0.0-dev35): propuesta orientativa.
+    var semanaSiguiente: WeekPlan
     var nota: String
     var cargaDiaria: [TrainingDailyLoad]
     var lineasBase: [TrainingBaseline]
@@ -827,6 +834,7 @@ struct TrainingAnalysisResult: Equatable {
         carga = TrainingLoad(TJ.obj(e, "carga"))
         baseCientifica = KbHistoryStatus(TJ.obj(e, "base_cientifica"))
         cargaCg = TrainingLoadCg(TJ.obj(e, "carga_cg"))
+        semanaSiguiente = WeekPlan(TJ.obj(TJ.obj(e, "planificador"), "semana_siguiente"))
         nota = TJ.str(e, "nota")
         cargaDiaria = TJ.objs(o, "carga_diaria").map { TrainingDailyLoad(fecha: TJ.str($0, "fecha"), carga: TJ.num($0, "carga") ?? 0) }
         lineasBase = TJ.objs(o, "lineas_base").map { TrainingBaseline($0) }
