@@ -1,4 +1,8 @@
-// Planificador semanal, capa 2 (TRAINING 1.3.0, KB-1 1.31.0): propuesta orientativa de la semana siguiente.
+// Planificador semanal, capa 2 (TRAINING 1.3.0, KB-1 1.31.0): propuesta orientativa de la semana.
+// TRAINING 1.4.0 (25/11/2026, petición del usuario): por defecto, semana natural de LUNES a DOMINGO que contiene la fecha
+// de referencia (hoy en las apps). Los días ya pasados muestran lo realizado según las sesiones y cuentan para la pauta
+// (rápidos hechos, separaciones, día libre); se planifica el resto de la semana. Con «semana_calendario»: false, los 7 días
+// siguientes a la referencia, como en 1.3.0.
 // Reglas de la base científica: P1 (rápidos por semana), P2 (día libre y días lentos entre rápidos), P4 (cuatro semanas
 // lentas tras > 60 d sin rápido), P5 (distancia rápida de 60 d frente al P75 propio), P6 (descansos anuales), P7 (ventana
 // de reincorporación), RT1–RT3 (recuperación) y DM1–DM4 (potros de 2 años). Todo SIN CALIBRAR: pautas informativas que
@@ -52,7 +56,16 @@ WeekPlan training_plan_week(const std::vector<SessionSummary>& ok, const std::ve
   const auto& P = c.planner;
   const auto& kc = c.kb;
   WeekPlan w;
-  w.from_day = at + 1; w.to_day = at + P.horizon_days;
+  // Ventana: semana natural (lunes–domingo) que contiene «at», o los horizon_days siguientes.
+  bool session_today = false;
+  for (const auto& s : ok) if (s.day == at) session_today = true;
+  if (P.calendar_week) {
+    long wd = ((at % 7) + 7 + 3) % 7;          // día 0 = 1970-01-01, jueves → 0 = lunes
+    w.from_day = at - wd; w.to_day = w.from_day + 6;
+    w.plan_from_day = session_today ? at + 1 : at;
+    if (w.plan_from_day > w.to_day) { w.from_day += 7; w.to_day += 7; w.plan_from_day = w.from_day; }   // domingo ya entrenado
+    w.calendar_week = true;
+  } else { w.from_day = at + 1; w.to_day = at + P.horizon_days; w.plan_from_day = w.from_day; }
   if (!P.enabled) { w.reason = "planificador desactivado"; return w; }
   // metros rápidos y de canter por día (bloque de carga de la base científica)
   std::map<long, std::pair<double, double>> daily;   // día → (galope rápido m, canter m)
@@ -73,9 +86,9 @@ WeekPlan training_plan_week(const std::vector<SessionSummary>& ok, const std::ve
   for (const auto& s : ok) if (s.day <= at) { session_days.insert(s.day); if (s.counts_as_race()) races.push_back(s.day); }
   for (const auto& s : ok) if (!s.race.breed.empty()) w.breed = s.race.breed;
   std::vector<long> planned;
-  for (long d : kc.planned_race_days) if (d > at && d <= w.to_day) planned.push_back(d);
+  for (long d : kc.planned_race_days) if (d >= w.plan_from_day && d <= w.to_day) planned.push_back(d);
   std::vector<long> all_races = races;
-  for (long d : kc.planned_race_days) if (d > at) all_races.push_back(d);
+  for (long d : kc.planned_race_days) if (d >= w.plan_from_day && std::find(races.begin(), races.end(), d) == races.end()) all_races.push_back(d);
   char b[480];
 
   // Edad de carreras: opción «edad_anos» o año de referencia − año de nacimiento (convenio del 1 de enero).
@@ -148,12 +161,30 @@ WeekPlan training_plan_week(const std::vector<SessionSummary>& ok, const std::ve
     }
   w.fast_target = target;
 
-  // Colocación: carreras previstas, rápidos (lo antes posible respetando las separaciones) y días libres/suaves.
-  const int H = P.horizon_days;
+  // Colocación. Días pasados de la semana: lo realizado. Días a planificar: carreras previstas, rápidos (lo antes posible
+  // respetando las separaciones, contando los ya hechos) y días libres/suaves.
+  const int H = (int)(w.to_day - w.from_day + 1);
+  const int hp = (int)(w.plan_from_day - w.from_day);   // índice del primer día a planificar
   w.days.resize(H);
-  for (int h = 0; h < H; h++) { w.days[h].day = at + 1 + h; w.days[h].type = "LENTO"; }
+  for (int h = 0; h < H; h++) { w.days[h].day = w.from_day + h; w.days[h].type = "LENTO"; }
+  for (int h = 0; h < hp; h++) {
+    PlanDay& x = w.days[h];
+    long d = x.day;
+    x.done = true;
+    bool race = false, sess = session_days.count(d) > 0;
+    for (const auto& s : ok) if (s.day == d && s.counts_as_race()) race = true;
+    auto it = daily.find(d);
+    double g = it == daily.end() ? 0 : it->second.first;
+    if (race) { x.type = "CARRERA"; x.reason = "realizado: carrera o trial"; }
+    else if (g >= kc.gallop_session_min_m) {
+      x.type = "RAPIDO"; w.fast_done++;
+      snprintf(b, sizeof(b), "realizado: trabajo rápido (%.0f m de galope rápido)", g); x.reason = b;
+    } else if (sess) { x.type = "LENTO"; x.reason = "realizado: entrenamiento sin trabajo rápido"; }
+    else { x.type = "LIBRE"; x.reason = "sin entrenamiento registrado"; }
+    x.rules = {};
+  }
   for (long d : planned) {
-    PlanDay& x = w.days[d - at - 1];
+    PlanDay& x = w.days[d - w.from_day];
     x.type = "CARRERA"; x.reason = "carrera prevista"; x.rules = {"PLANIFICADOR_P3"};
   }
   auto blocked = [&](long d, std::string* why) {
@@ -166,14 +197,14 @@ WeekPlan training_plan_week(const std::vector<SessionSummary>& ok, const std::ve
   };
   long prev_hard = last_fast;
   for (long r : races) prev_hard = std::max(prev_hard, r);
+  const int remaining = std::max(0, target - w.fast_done);
   int placed = 0;
-  for (int h = 0; h < H && placed < target; h++) {
-    long d = at + 1 + h;
+  for (int h = hp; h < H && placed < remaining; h++) {
+    long d = w.from_day + h;
     std::string why;
     if (w.days[h].type == "CARRERA") { prev_hard = d; continue; }
     if (blocked(d, &why)) continue;
     if (prev_hard >= 0 && d - prev_hard < min_gap) continue;
-    // el rápido no puede dejar sin margen a una carrera prevista dentro del horizonte (ya cubierto por blocked)
     PlanDay& x = w.days[h];
     x.type = "RAPIDO"; x.fast_max_m = w.fast_max_m;
     x.rules = {"PLANIFICADOR_P1", "RECUPERACION_RT1"};
@@ -186,30 +217,35 @@ WeekPlan training_plan_week(const std::vector<SessionSummary>& ok, const std::ve
   }
   w.fast_planned = placed;
   // día siguiente a un rápido: SUAVE (RT2); día siguiente a una carrera: LIBRE
-  for (int h = 0; h < H; h++) {
-    long d = at + 1 + h;
+  for (int h = hp; h < H; h++) {
+    long d = w.from_day + h;
     if (w.days[h].type != "LENTO") continue;
     bool after_race = std::find(all_races.begin(), all_races.end(), d - 1) != all_races.end();
-    bool after_fast = (h > 0 && w.days[h - 1].type == "RAPIDO") || (h == 0 && last_fast == at);
+    bool after_fast = (h > 0 && w.days[h - 1].type == "RAPIDO") || (d - 1 == last_fast);
     if (after_race) { w.days[h].type = "LIBRE"; w.days[h].reason = "día siguiente a la carrera"; w.days[h].rules = {"RECUPERACION_RT2", "PLANIFICADOR_P2"}; }
     else if (after_fast) { w.days[h].type = "SUAVE"; w.days[h].reason = "día siguiente al trabajo rápido: paso o trote suave"; w.days[h].rules = {"RECUPERACION_RT2"}; }
   }
   int free_now = 0;
-  for (const auto& x : w.days) if (x.type == "LIBRE") free_now++;
-  for (int h = H - 1; h >= 0 && free_now < P.free_days; h--) {   // el último día lento que no precede a un rápido o carrera
+  for (const auto& x : w.days) if (x.type == "LIBRE") free_now++;   // los días pasados sin entrenamiento cuentan
+  for (int h = H - 1; h >= hp && free_now < P.free_days; h--) {   // el último día lento que no precede a un rápido o carrera
     if (w.days[h].type != "LENTO") continue;
     if (h + 1 < H && (w.days[h + 1].type == "RAPIDO" || w.days[h + 1].type == "CARRERA")) continue;
     w.days[h].type = "LIBRE"; w.days[h].reason = "día libre de la semana"; w.days[h].rules = {"PLANIFICADOR_P2"}; free_now++;
   }
-  for (int h = H - 1; h >= 0 && free_now < P.free_days; h--)
+  for (int h = H - 1; h >= hp && free_now < P.free_days; h--)
     if (w.days[h].type == "SUAVE" || w.days[h].type == "LENTO") {
       w.days[h].type = "LIBRE"; w.days[h].reason = "día libre de la semana"; w.days[h].rules.push_back("PLANIFICADOR_P2"); free_now++;
     }
   for (auto& x : w.days)
-    if (x.type == "LENTO") { x.reason = "trabajo lento (paso, trote y canter suave)"; x.rules = {"PLANIFICADOR_P2"}; }
-  if (placed < target) {
-    snprintf(b, sizeof(b), "solo cabe%s %d de los %d rápidos de la pauta en la semana por las separaciones (≥ %d días entre rápidos y días sin rápido alrededor de las carreras)",
-             placed == 1 ? "" : "n", placed, target, min_gap);
+    if (!x.done && x.type == "LENTO") { x.reason = "trabajo lento (paso, trote y canter suave)"; x.rules = {"PLANIFICADOR_P2"}; }
+  if (w.fast_done > 0) {
+    snprintf(b, sizeof(b), "%d de los %d rápidos de la pauta ya hechos esta semana: se planifica%s %d en los días que quedan",
+             w.fast_done, target, remaining == 1 ? "" : "n", remaining);
+    w.notes.push_back({"PLANIFICADOR_P1", b, kEvP1});
+  }
+  if (placed < remaining) {
+    snprintf(b, sizeof(b), "solo cabe%s %d de los %d rápidos que faltan de la pauta en la semana por las separaciones (≥ %d días entre rápidos y días sin rápido alrededor de las carreras)",
+             placed == 1 ? "" : "n", placed, remaining, min_gap);
     w.notes.push_back({"PLANIFICADOR_P2", b, std::string(kEvP1) + "; " + kEvP2 + "; " + kEvRT + "; " + kEvRace});
   }
 
@@ -318,7 +354,8 @@ std::string training_week_plan_json(const WeekPlan& w, const TrainingConfig& c) 
     << ",\"limitada\":" << (w.limited ? "true" : "false") << ",\"edad_anos\":" << opt(w.age_years)
     << ",\"edad_origen\":" << (w.age_origin.empty() ? std::string("null") : q(w.age_origin))
     << ",\"raza\":" << (w.breed.empty() ? std::string("null") : q(w.breed))
-    << ",\"rapidos_objetivo\":" << w.fast_target << ",\"rapidos_propuestos\":" << w.fast_planned
+    << ",\"semana_calendario\":" << (w.calendar_week ? "true" : "false") << ",\"planifica_desde\":" << q(kb_day_text(w.plan_from_day))
+    << ",\"rapidos_objetivo\":" << w.fast_target << ",\"rapidos_hechos\":" << w.fast_done << ",\"rapidos_propuestos\":" << w.fast_planned
     << ",\"dias_lentos_bloque\":" << opt(w.slow_days_done)
     << ",\"vuelta_rapido\":" << (w.return_fast_day < 0 ? std::string("null") : q(kb_day_text(w.return_fast_day)))
     << ",\"semanas_preparacion\":" << opt(w.prep_weeks) << ",\"rapido_ref_m\":" << num(w.fast_ref_m)
@@ -327,7 +364,7 @@ std::string training_week_plan_json(const WeekPlan& w, const TrainingConfig& c) 
   for (size_t i = 0; i < w.days.size(); i++) {
     const PlanDay& x = w.days[i];
     o << (i ? "," : "") << "{\"fecha\":" << q(kb_day_text(x.day)) << ",\"tipo\":" << q(x.type) << ",\"motivo\":" << q(x.reason)
-      << ",\"rapido_max_m\":" << num(x.fast_max_m) << ",\"reglas\":[";
+      << ",\"realizado\":" << (x.done ? "true" : "false") << ",\"rapido_max_m\":" << num(x.fast_max_m) << ",\"reglas\":[";
     for (size_t k = 0; k < x.rules.size(); k++) o << (k ? "," : "") << q(x.rules[k]);
     o << "]}";
   }
@@ -335,7 +372,7 @@ std::string training_week_plan_json(const WeekPlan& w, const TrainingConfig& c) 
   for (size_t i = 0; i < w.notes.size(); i++)
     o << (i ? "," : "") << "{\"regla\":" << q(w.notes[i].rule) << ",\"texto\":" << q(w.notes[i].text) << ",\"evidencia\":" << q(w.notes[i].evidence) << "}";
   o << "],\"parametros\":{\"rapidos_semana_maduro\":" << P.fast_per_week_mature << ",\"rapidos_semana_2anos\":" << P.fast_per_week_2y
-    << ",\"dias_min_entre_rapidos\":" << P.min_days_between_fast << ",\"dias_libres\":" << P.free_days
+    << ",\"semana_calendario\":" << (P.calendar_week ? "true" : "false") << ",\"dias_min_entre_rapidos\":" << P.min_days_between_fast << ",\"dias_libres\":" << P.free_days
     << ",\"dias_sin_rapido_precarrera\":" << P.prerace_no_fast_days << ",\"dias_sin_rapido_poscarrera\":" << P.postrace_no_fast_days
     << ",\"p4_dias_lentos\":" << P.p4_slow_days << ",\"p7_dias_ventana\":" << P.p7_window_days << ",\"p7_fraccion_distancia\":" << num(P.p7_distance_fraction)
     << ",\"p5_dias\":" << P.p5_window_days << ",\"p5_percentil\":" << num(P.p5_percentile) << ",\"p6_descanso_min_dias\":" << P.p6_break_min_days

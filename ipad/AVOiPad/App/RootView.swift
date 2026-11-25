@@ -25,6 +25,9 @@ struct RootView: View {
         // trainer's sketch 08/11/2026: «Entrenamientos» → «Dashboard», «Listado» → «Entrenamientos», Mapa before Análisis
         RootNavEntry(page: .sessions, title: "Dashboard", icon: "square.grid.2x2"),
         RootNavEntry(page: .trainingList, title: "Entrenamientos", icon: "list.bullet.rectangle"),
+        // trainer's sketch 25/11/2026: «Calendario» en el menú, debajo de «Entrenamientos» (días entrenados y, al abrir un día,
+        // el entrenamiento recomendado por el planificador del motor)
+        RootNavEntry(page: .calendar, title: "Calendario", icon: "calendar"),
         // trainer's sketch 14/11/2026: «Calendario» is a button of «Entrenamientos»; «Biomecánica» right after «Análisis»;
         // «Carreras» after «Jinetes». «Mapa» is a tab of the training; «Análisis» opens it at «Resumen»
         RootNavEntry(page: .analysis, title: "Análisis", icon: "waveform.path.ecg"),
@@ -101,6 +104,11 @@ struct RootView: View {
         }
         .sheet(isPresented: Binding(get: { app.stable.assignVisible }, set: { app.stable.assignVisible = $0 })) {
             AssignSheet()
+                .environment(app)
+                .avoColorScheme()
+        }
+        .sheet(isPresented: Binding(get: { app.weekPlans.sheetVisible }, set: { (v: Bool) in if !v { app.weekPlans.close() } })) {
+            WeekPlanSheet()
                 .environment(app)
                 .avoColorScheme()
         }

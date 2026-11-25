@@ -24,6 +24,30 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-25 — Motor 2.0.0-dev37 (TRAINING 1.4.0) · iPad — Planificador en semana natural, botón «Planificador semanal» y «Calendario» con el entrenamiento recomendado
+**Autor:** Claude (chat integrador, peticiones y boceto del usuario 25/11) · **Rama:** `claude/planificador-desde-hoy` · **CI:** motor e iPad (sin TestFlight) en la rama y al integrar
+**Qué cambia:**
+- **Motor (planificador, TRAINING 1.4.0):** la semana es la **natural de lunes a domingo** que contiene la fecha de
+  referencia. Los días pasados muestran lo **realizado** según las sesiones (rápido, carrera, entrenamiento sin rápido o
+  «sin entrenamiento registrado») y cuentan para la pauta: rápidos ya hechos, separaciones y día libre. Se planifica el resto
+  de la semana desde hoy (o mañana si hoy ya hay sesión); si el domingo ya está entrenado, la semana siguiente. JSON:
+  `semana_calendario`, `planifica_desde`, `rapidos_hechos` y `dias[].realizado`; opción `planificador.semana_calendario`.
+  Pruebas: `entreno.planner_calendar_week` (miércoles con y sin sesión hoy, última sesión hace semanas, domingo entrenado,
+  opción); las de 1.3.0 siguen con los 7 días siguientes. 137 casos, 0 fallos (ASan/UBSan).
+- **iPad · historia a hoy:** la historia del caballo llamaba al motor sin `fecha_referencia` y todo (estado, ventanas,
+  reglas, carga y planificador) quedaba en el día del último entrenamiento (la «semana siguiente» salía 09/11–15/11 con la
+  última sesión el 08/11). Ahora se calcula a hoy (Europe/Madrid); el caballo de demostración sigue en su última sesión.
+- **iPad · Cuadra:** botón **«Planificador semanal»** junto a «Historia de entrenamientos»: hoja con la semana del caballo.
+- **iPad · «Calendario» en el menú** (debajo de «Entrenamientos»; el botón de «Entrenamientos» se mantiene): las celdas
+  muestran, además de los entrenamientos hechos, el entrenamiento **recomendado** de cada caballo activo en los días que
+  quedan de la semana (borde discontinuo). Al tocar un día: los entrenamientos hechos (se abren) y la recomendación del
+  planificador para cada caballo, o lo realizado si el día ya pasó.
+- La tarjeta del planificador marca HECHO y HOY, con el día de la semana, y cuenta los rápidos hechos + propuestos.
+- Pruebas iPad: `WeekPlanTests.testCalendarWeekWithDoneDays`.
+**No se ha tocado:** contratos, firmware, workflows, firmas, `Info.plist` ni número de build.
+**Pendiente:** Android y Windows (no tienen historia del caballo ni planificador). **NO VERIFICADO** en el iPad.
+---
+
 ## 2026-11-25 — Motor 2.0.0-dev36 (AVO BEACH 1.0.0) · iPad — Marea del trabajo y franja de playa automática
 **Autor:** Claude · **Commits:** los de esta rama (`claude/marea-franja-auto`) · **CI:** al fusionar (motor, iPad/TestFlight)
 **Qué cambia:**

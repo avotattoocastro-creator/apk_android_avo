@@ -315,14 +315,25 @@ private struct StableDetailPane: View {
                             }
                         }
                         if page.isHorse {
-                            Button {
-                                app.horseHistory.open(horseKey: sel.code, name: sel.name)
-                            } label: {
-                                Label("Historia de entrenamientos", systemImage: "chart.line.uptrend.xyaxis")
+                            // trainer's sketch 25/11/2026: «Planificador semanal» junto a «Historia de entrenamientos»
+                            HStack(spacing: 10) {
+                                Button {
+                                    app.horseHistory.open(horseKey: sel.code, name: sel.name)
+                                } label: {
+                                    Label("Historia de entrenamientos", systemImage: "chart.line.uptrend.xyaxis")
+                                }
+                                .buttonStyle(.avoPrimary)
+                                .disabled(sel.count == 0)
+                                .accessibilityIdentifier("stable.horseHistory")
+                                Button {
+                                    app.weekPlans.open(horseKey: sel.code, name: sel.name)
+                                } label: {
+                                    Label("Planificador semanal", systemImage: "calendar.badge.clock")
+                                }
+                                .buttonStyle(.avoPrimary)
+                                .disabled(sel.count == 0)
+                                .accessibilityIdentifier("stable.weekPlan")
                             }
-                            .buttonStyle(.avoPrimary)
-                            .disabled(sel.count == 0)
-                            .accessibilityIdentifier("stable.horseHistory")
                             StablePlannedRacesCard(row: sel)
                             StableRacesCard(row: sel)
                             FranceGalopHorseCard(row: sel)

@@ -16,7 +16,7 @@
 
 namespace avoeq {
 
-static const char* const TRAINING_VERSION = "1.3.0";   // 1.1.0: ficha de campo, A4 y base del planificador; 1.2.0: carga CG1–CG3;
+static const char* const TRAINING_VERSION = "1.4.0";   // 1.4.0: planificador en semana natural (lunes–domingo) con lo realizado; 1.1.0: ficha de campo, A4 y base del planificador; 1.2.0: carga CG1–CG3;
                                                        // 1.3.0: planificador semanal, capa 2 (semana siguiente)
 static const char* const TRAINING_LOAD_ALGORITHM = "AVO_TRAINING_LOAD_V1";
 
@@ -53,7 +53,8 @@ struct TrainingConfig {
   // P4–P7, RT1–RT3 y DM1–DM4. Todo SIN CALIBRAR: sale como pautas informativas y nunca cambia el estado del caballo.
   struct Planner {
     bool enabled = true;
-    int horizon_days = 7;
+    int horizon_days = 7;                 // solo con calendar_week = false (7 días desde el día siguiente a la referencia)
+    bool calendar_week = true;            // semana natural de lunes a domingo que contiene la fecha de referencia (25/11/2026)
     int fast_per_week_mature = 2;      // P1: 2,0 rápidos/semana en maduros (Morrice-West 2020) [E]; objetivo 2 [I]
     int fast_per_week_2y = 2;          // P1/DM1: 1,7 rápidos/semana en 2 años (Morrice-West 2020) [E]; tope 2 [I]
     int min_days_between_fast = 3;     // RT1/P2: ≥ 72 h y ≥ 2 días lentos entre rápidos [I] (sin evidencia directa)
@@ -263,6 +264,7 @@ struct PlanDay {
   std::string reason;
   std::vector<std::string> rules;
   double fast_max_m = NAN;             // distancia rápida máxima propuesta (solo días RAPIDO; NaN: sin tope propio)
+  bool done = false;                   // día ya pasado de la semana: lo realizado según las sesiones (no es propuesta)
 };
 struct WeekPlan {
   bool available = false;
@@ -274,6 +276,9 @@ struct WeekPlan {
   std::string age_origin;              // FECHA_NACIMIENTO | EDAD_ANOS | "" (sin dato)
   std::string breed;
   int fast_target = 0, fast_planned = 0;
+  int fast_done = 0;                   // rápidos ya hechos en los días pasados de la semana
+  long plan_from_day = 0;              // primer día que se planifica (hoy si aún no hay sesión, si no mañana)
+  bool calendar_week = false;
   int slow_days_done = -1;             // P4: días del bloque lento actual (-1: no aplica)
   long return_fast_day = -1;           // P7: primer rápido tras > 60 d sin rápido (-1: no aplica)
   int prep_weeks = -1;                 // semanas del bloque de preparación actual (DM4)

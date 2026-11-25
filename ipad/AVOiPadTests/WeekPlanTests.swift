@@ -57,4 +57,33 @@ final class WeekPlanTests: XCTestCase {
         XCTAssertNil(TrainingAnalytics.historyOptions(plannedRaces: [], birthYear: nil))
         XCTAssertNil(TrainingAnalytics.historyOptions(plannedRaces: [], birthYear: 1800))
     }
+
+    /// Motor 2.0.0-dev37 (TRAINING 1.4.0): semana natural de lunes a domingo con lo realizado (boceto del entrenador 25/11/2026).
+    func testCalendarWeekWithDoneDays() throws {
+        let o: [String: Any] = try EngineJSON.root(#"""
+            {"disponible":true,"desde":"2026-11-23","hasta":"2026-11-29","fase":"NORMAL","limitada":false,"edad_anos":3,
+             "semana_calendario":true,"planifica_desde":"2026-11-25","rapidos_objetivo":2,"rapidos_hechos":1,"rapidos_propuestos":1,
+             "dias":[{"fecha":"2026-11-23","tipo":"RAPIDO","motivo":"realizado: trabajo rápido (600 m de galope rápido)","realizado":true,"rapido_max_m":null,"reglas":[]},
+                     {"fecha":"2026-11-24","tipo":"LIBRE","motivo":"sin entrenamiento registrado","realizado":true,"rapido_max_m":null,"reglas":[]},
+                     {"fecha":"2026-11-25","tipo":"LENTO","motivo":"trabajo lento","realizado":false,"rapido_max_m":null,"reglas":["PLANIFICADOR_P2"]},
+                     {"fecha":"2026-11-26","tipo":"RAPIDO","motivo":"trabajo rápido","realizado":false,"rapido_max_m":null,"reglas":["PLANIFICADOR_P1"]}],
+             "pautas":[],"validado":false}
+            """#)
+        let w: WeekPlan = WeekPlan(o)
+        XCTAssertTrue(w.calendarWeek)
+        XCTAssertEqual(w.planFrom, "2026-11-25")
+        XCTAssertEqual(w.fastDone, 1)
+        XCTAssertEqual(w.fastText, "2 de 2 rápidos")
+        XCTAssertEqual(w.fastCaption, "1 hecho · 1 propuesto · ≥ 72 h entre rápidos")
+        XCTAssertEqual(w.days.map { $0.done }, [true, true, false, false])
+        XCTAssertEqual(WeekPlan.weekdayShort("2026-11-23"), "lun")
+        XCTAssertEqual(CalendarView.isoDay("2026-11-5"), "2026-11-05")
+        XCTAssertEqual(CalendarView.isoDay("2026-1-25"), "2026-01-25")
+        // análisis anteriores (dev35, 7 días siguientes): sin campos nuevos
+        let old: WeekPlan = WeekPlan(try EngineJSON.root(#"{"disponible":true,"rapidos_objetivo":2,"rapidos_propuestos":1,"dias":[{"fecha":"2026-11-12","tipo":"LENTO"}]}"#))
+        XCTAssertFalse(old.calendarWeek)
+        XCTAssertEqual(old.fastDone, 0)
+        XCTAssertFalse(old.days[0].done)
+        XCTAssertEqual(old.fastCaption, "≥ 72 h entre rápidos")
+    }
 }

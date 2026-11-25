@@ -134,7 +134,11 @@ final class HorseHistoryModel {
         errorText = nil
         progressText = "Preparando los resúmenes de las sesiones…"
         do {
-            let r: (result: TrainingAnalysisResult, missing: Int) = try await app.analyseHorseHistory(key, reference: nil) { [weak self] (done: Int, total: Int) in
+            // estado, cargas, reglas y planificador A HOY (Europe/Madrid), no al día del último entrenamiento (usuario
+            // 25/11/2026: «el planificador crea la semana justo después del último entrenamiento, no en la que estamos»).
+            // El caballo de demostración sigue en su última sesión sintética.
+            let today: String? = app.isDemoHorse(key) ? nil : AvoTime.formatter("yyyy-MM-dd").string(from: Date())
+            let r: (result: TrainingAnalysisResult, missing: Int) = try await app.analyseHorseHistory(key, reference: today) { [weak self] (done: Int, total: Int) in
                 self?.progressText = "Preparando resúmenes de sesión \(done)/\(total)…"
             }
             if Task.isCancelled || key != horseKey { return }

@@ -512,10 +512,17 @@ bool has_note(const WeekPlan& w, const char* rule) {
   for (const auto& n : w.notes) if (n.rule == rule) return true;
   return false;
 }
-TrainingConfig plan_cfg(const std::string& opts) {
+// Las pruebas de la capa 2 (1.3.0) usan los 7 días siguientes a la referencia; la semana natural tiene su propia prueba.
+TrainingConfig plan_cfg(const std::string& opts, bool calendar = false) {
   TrainingConfig c; json::Value v; std::string err;
   if (!opts.empty()) { CHECK(json::parse(opts, &v, &err)); CHECK(training_config_from_json(v, &c, &err)); }
+  c.planner.calendar_week = calendar;
   return c;
+}
+std::string plan_done(const WeekPlan& w) {
+  std::string t;
+  for (const auto& d : w.days) t += d.done ? "H" : "P";
+  return t;
 }
 }  // namespace
 
@@ -671,4 +678,52 @@ EQ_TEST(entreno, planner_options) {
     TrainingConfig k; json::Value v; std::string err;
     CHECK(json::parse(b, &v, &err) && !training_config_from_json(v, &k, &err) && !err.empty());
   }
+}
+
+// TRAINING 1.4.0: semana natural de lunes a domingo con lo realizado en los días pasados (petición del usuario, 25/11/2026).
+EQ_TEST(entreno, planner_calendar_week) {
+  // referencia en miércoles: busca el primer miércoles ≥ D0 + 40 (día 0 = 1970-01-01, jueves)
+  long at = D0 + 40;
+  while (((at % 7) + 7 + 3) % 7 != 2) at++;
+  const long mon = at - 2;
+  std::vector<SessionSummary> h;
+  for (long d = at - 40; d <= at; d++) h.push_back(plan_day(d, (mon - d) % 4 == 0 ? 600 : 0, 1000));   // rápido el lunes y cada 4 días antes
+  TrainingConfig c = plan_cfg("", true);
+  TrainingResult r = analyse_training(h, training_day_text(at), c);
+  const WeekPlan& w = r.week;
+  CHECK(w.calendar_week && w.from_day == mon && w.to_day == mon + 6 && w.plan_from_day == at + 1);   // hoy ya entrenado
+  CHECK(w.fast_target == 2 && w.fast_done == 1 && w.fast_planned == 1);
+  CHECK(plan_types(w) == "RAPIDO,LENTO,LENTO,RAPIDO,SUAVE,LENTO,LIBRE");
+  CHECK(plan_done(w) == "HHHPPPP");
+  CHECK(w.days[0].reason.find("realizado") != std::string::npos && w.days[0].rules.empty());
+  CHECK(has_note(w, "PLANIFICADOR_P1"));
+  std::string js = training_to_json(r, c);
+  json::Value v; std::string err;
+  CHECK(json::parse(js, &v, &err));
+  const json::Value& sw = v["estado"]["planificador"]["semana_siguiente"];
+  CHECK(sw["desde"].str() == training_day_text(mon) && sw["planifica_desde"].str() == training_day_text(at + 1));
+  CHECK(sw["semana_calendario"].boolean(false) && sw["rapidos_hechos"].num() == 1);
+  CHECK(sw["dias"][0]["realizado"].boolean(false) && !sw["dias"][3]["realizado"].boolean(true));
+  // hoy sin entrenar todavía (última sesión ayer): se planifica desde hoy
+  std::vector<SessionSummary> h2(h.begin(), h.end() - 1);
+  TrainingResult r2 = analyse_training(h2, training_day_text(at), c);
+  CHECK(r2.week.plan_from_day == at && plan_done(r2.week) == "HHPPPPP");
+  CHECK(plan_types(r2.week) == "RAPIDO,LENTO,LENTO,RAPIDO,SUAVE,LENTO,LIBRE");
+  // última sesión hace semanas (como en el iPad con la última sesión el 08/11 y hoy 25/11): días pasados sin entrenamiento
+  std::vector<SessionSummary> h3;
+  for (long d = at - 60; d <= at - 17; d++) h3.push_back(plan_day(d, (at - 17 - d) % 4 == 0 ? 600 : 0, 1000));
+  TrainingResult r3 = analyse_training(h3, training_day_text(at), c);
+  CHECK(r3.week.from_day == mon && r3.week.plan_from_day == at && r3.week.fast_done == 0);
+  CHECK(r3.week.days[0].type == "LIBRE" && r3.week.days[0].done && r3.week.days[1].type == "LIBRE");
+  CHECK(r3.week.fast_planned == 2 && plan_types(r3.week) == "LIBRE,LIBRE,RAPIDO,SUAVE,LENTO,RAPIDO,SUAVE");
+  // domingo ya entrenado: se planifica la semana siguiente entera
+  long sun = mon + 6;
+  std::vector<SessionSummary> h4;
+  for (long d = sun - 40; d <= sun; d++) h4.push_back(plan_day(d, (sun - d) % 4 == 0 ? 600 : 0, 1000));
+  TrainingResult r4 = analyse_training(h4, training_day_text(sun), c);
+  CHECK(r4.week.from_day == sun + 1 && r4.week.plan_from_day == sun + 1 && plan_done(r4.week) == "PPPPPPP");
+  // opción: la semana natural se puede desactivar
+  TrainingConfig c5; json::Value o;
+  CHECK(json::parse("{\"planificador\":{\"semana_calendario\":false}}", &o, &err) && training_config_from_json(o, &c5, &err) && !c5.planner.calendar_week);
+  CHECK(json::parse("{\"planificador\":{\"semana_calendario\":1}}", &o, &err) && !training_config_from_json(o, &c5, &err));
 }
