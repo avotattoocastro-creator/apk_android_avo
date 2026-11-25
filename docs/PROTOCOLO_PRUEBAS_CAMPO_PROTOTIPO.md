@@ -144,6 +144,20 @@ Para calibrar la carga descriptiva (hoy con valores por defecto «no propios»):
   (con > 20 % de sesiones sin dato en 28 días el motor no lo calcula).
 - Los coeficientes b y c del TRIMP no se pueden calibrar con el PROTOTIPO (harían falta prueba estándar y lactato).
 
+## 6 ter. Planificador semanal, capa 2 (motor 2.0.0-dev35)
+La historia propone la semana siguiente (`estado.planificador.semana_siguiente`) con separaciones y topes **sin
+calibrar**. Para calibrarlos con el PROTOTIPO hace falta:
+- **Registrar todas las sesiones**, también las lentas, con la espalda (GNSS RTK): el planificador deduce los descansos
+  (P6) y el inicio del bloque (P4, DM1–DM4) de los días sin sesión; una sesión no grabada parece un día libre.
+- **Año de nacimiento** de cada caballo en la Cuadra (el iPad lo pasa como `fecha_nacimiento`): sin él no se aplican
+  las pautas de potros de 2 años.
+- **Anotar la semana que hizo de verdad el entrenador** frente a la propuesta durante ≥ 8 semanas por caballo
+  (rápidos por semana, días entre rápidos, días libres, distancia del rápido) para ajustar `rapidos_semana_*`,
+  `dias_min_entre_rapidos`, `dias_sin_rapido_precarrera` y `dias_sin_rapido_poscarrera` a la práctica de la cuadra.
+- **Vuelta de un descanso ≥ 60 d:** anotar cuándo vuelve el primer rápido y su distancia (P4/P7: 28 días lentos y
+  75 % de la mediana anterior son [I]).
+- **P5:** ≥ 180 días de historia continua para tener el P75 propio de la distancia rápida de 60 d.
+
 ## 7. Registro
 
 Cada jornada se anota en `docs/REGISTRO_DE_CAMBIOS.md` (o en un informe de sesiones reales) con: fecha, caballos,

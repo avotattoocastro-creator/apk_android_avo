@@ -86,6 +86,9 @@ struct HorseHistoryView: View {
         if r.cargaCg.present {
             TrainingLoadCgCard(cg: r.cargaCg, referenceDate: dayText(r.fechaReferencia))
         }
+        if r.semanaSiguiente.present {
+            WeekPlanCard(plan: r.semanaSiguiente)
+        }
         if r.sesiones.isEmpty {
             AvoCard { AvoNoData(text: "Sin sesiones con fecha y resumen para este caballo") }
         } else {
