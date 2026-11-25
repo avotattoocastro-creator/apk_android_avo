@@ -577,7 +577,7 @@ extension AppModel {
         let segs: [String] = item.session.rawSegmentPaths
         do {
             // breed profile of the horse + zones corrected by the user (CorrectionsModel), part of the engine parameters
-            let options: String = EquineEngine.options(series: true, cacheDir: dir, force: force, extra: corrections.engineOptions(item))
+            let options: String = EquineEngine.options(series: true, cacheDir: dir, force: force, extra: await engineExtra(item))
             let json: String = try await EquineEngine.analyseJson(segs, options)
             let analysis: EquineAnalysis = try await Task.detached(priority: .userInitiated) { () -> EquineAnalysis in
                 try EquineAnalysis.parse(json)

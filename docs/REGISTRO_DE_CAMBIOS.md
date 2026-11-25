@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-25 — Motor 2.0.0-dev36 (AVO BEACH 1.0.0) · iPad — Marea del trabajo y franja de playa automática
+**Autor:** Claude · **Commits:** los de esta rama (`claude/marea-franja-auto`) · **CI:** al fusionar (motor, iPad/TestFlight)
+**Qué cambia:**
+- **Motor:** opciones nuevas «marea» (curva de predicción) y «playa» (línea seca y línea de bajamar con sus alturas, por defecto 4,6 y 0,4 m). Calcula la marea al inicio del trabajo (altura, sube/baja, % del ciclo, nivel BAJA/MEDIA/ALTA, última pleamar) y la **franja de cada época** con un perfil de playa lineal [I, sin validar]: a menos de 40 m del agua → ORILLA_FIRME; arena que cubrió la última pleamar → TRANSICION; más arriba → SECA_PROFUNDA (HUMEDA_PROFUNDA solo a mano). Bloque «entorno» del análisis con la franja dominante del trabajo y los metros por franja. Sin estas opciones el análisis es idéntico al de antes.
+- **Resumen de entrenamiento:** la franja automática rellena `pista.franja` (`franja_origen` AUTO) y la de la ficha de campo manda (MANUAL); las alertas A7 (caída de zancada) y A8 comparan así por franja también sin anotarla. Marea del trabajo: `nivel`, `tendencia`, `altura_m`.
+- **iPad:** pasa al motor la predicción del IHM del puerto más cercano (16 h antes – 3 h después) y la playa dibujada en **Geocercas como polígono llamado «Playa»** (vértices 1–2 en el pie de la duna o paseo, 3–4 en la orilla de una bajamar viva; **desactivado**, para que no vaya al reloj ni haga de recorrido). Todas las llamadas al motor usan las mismas opciones (`engineExtra`).
+**Por qué:** petición del usuario (25/11 09:18–09:21): que el motor tenga en cuenta la marea y la zona por la que pasan los caballos.
+**Archivos:** `equine-intelligence/include/avo_eq/beach.h`, `src/core/beach.cpp`, `engine.*`, `capi.cpp`, `training.*`, `tests/test_beach.cpp`, fixtures; `ipad/AVOiPad/App/AppModel+Beach.swift`, `AppModel+Shell.swift`, `AppModel+Training.swift`.
+**Validación:** motor 136 casos / 2846 comprobaciones (GCC con ASan/UBSan), fixtures OK; 5 pruebas con playa SINTÉTICA. iPad sin compilar en local. **NO VERIFICADO** con sesiones reales de Laredo: hay que comprobar con vídeo o con el jinete que la franja calculada es la real y ajustar las alturas y los 40 m.
+**Pendiente:** Android y Windows (pasar «marea» y «playa»); V200 por franja (PL5) y el resto de PL2–PL6.
+
 ## 2026-11-25 — iPad — Tiempo MEDIDO de AEMET (Treto) en la portada del entrenamiento
 **Autor:** Claude · **Commits:** el de esta entrada · **CI:** TestFlight al fusionar
 **Qué cambia:** la portada (Resumen) usa la observación horaria de la estación oficial de AEMET más cercana a la pista (Bárcena de Cicero, **Treto 1096X**, ~4 km de la Playa del Regatón; reserva **Castro Urdiales 1083L**; como mucho 25 km) para temperatura, viento y presión, si la hay a ±40 min del inicio. La línea «Modelo, no medición» pasa a decir de dónde sale el dato: «Medido · AEMET Treto (4 km)» (en cian) o «Modelo, no medición» como antes: **misma línea, mismo sitio, sin cambiar la pantalla** (petición del usuario 25/11 09:07). En la tabla del tiempo se añaden las filas de la medida. Clave gratuita de AEMET OpenData en Configuración › «Tiempo medido (AEMET)», guardada en el Llavero (nunca en el repositorio). Lo medido se guarda por sesión en el iPad.
