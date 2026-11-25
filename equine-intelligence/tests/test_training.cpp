@@ -696,6 +696,9 @@ EQ_TEST(entreno, planner_calendar_week) {
   CHECK(plan_types(w) == "RAPIDO,LENTO,LENTO,RAPIDO,SUAVE,LENTO,LIBRE");
   CHECK(plan_done(w) == "HHHPPPP");
   CHECK(w.days[0].reason.find("realizado") != std::string::npos && w.days[0].rules.empty());
+  CHECK_NEAR(w.days[0].done_fast_m, 600, 1e-9);
+  CHECK_NEAR(w.days[1].done_fast_m, 0, 1e-9);
+  CHECK(std::isnan(w.days[3].done_fast_m));
   CHECK(has_note(w, "PLANIFICADOR_P1"));
   std::string js = training_to_json(r, c);
   json::Value v; std::string err;
@@ -704,6 +707,7 @@ EQ_TEST(entreno, planner_calendar_week) {
   CHECK(sw["desde"].str() == training_day_text(mon) && sw["planifica_desde"].str() == training_day_text(at + 1));
   CHECK(sw["semana_calendario"].boolean(false) && sw["rapidos_hechos"].num() == 1);
   CHECK(sw["dias"][0]["realizado"].boolean(false) && !sw["dias"][3]["realizado"].boolean(true));
+  CHECK(sw["dias"][0]["rapido_hecho_m"].num() == 600 && sw["dias"][3]["rapido_hecho_m"].is_null());
   // hoy sin entrenar todavía (última sesión ayer): se planifica desde hoy
   std::vector<SessionSummary> h2(h.begin(), h.end() - 1);
   TrainingResult r2 = analyse_training(h2, training_day_text(at), c);

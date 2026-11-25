@@ -19,6 +19,11 @@ final class WeekPlansModel {
     var loading: Bool = false
     var progressText: String = ""
 
+    /// Recomendaciones guardadas (planes_recomendados.json) para comparar después con lo realizado.
+    @ObservationIgnored private var bookLoaded: Bool = false
+    @ObservationIgnored private var book: RecommendationStore.Book = [:]
+    private var bookPath: String { AvoFiles.join(app.paths.root, "planes_recomendados.json") }
+
     // hoja «Planificador semanal» de un caballo
     var sheetVisible: Bool = false
     var sheetKey: String = ""
@@ -92,6 +97,7 @@ final class WeekPlansModel {
             if Task.isCancelled { return }
             plans[key] = r.result.semanaSiguiente
             names[key] = name
+            remember(key, r.result.semanaSiguiente)
             errors[key] = nil
             computedDay = Self.today
         } catch is CancellationError {
@@ -100,6 +106,89 @@ final class WeekPlansModel {
             errors[key] = error.localizedDescription
             names[key] = name
         }
+    }
+
+    // ---------------------------------------------------------------- recomendaciones guardadas
+    @MainActor
+    private func ensureBook() {
+        if bookLoaded { return }
+        book = RecommendationStore.load(bookPath)
+        bookLoaded = true
+    }
+
+    @MainActor
+    private func remember(_ key: String, _ plan: WeekPlan) {
+        ensureBook()
+        if RecommendationStore.merge(&book, horseKey: key, plan: plan, today: Self.today, now: Date(), engine: app.engineShort) {
+            RecommendationStore.save(book, to: bookPath)
+        }
+    }
+
+    @MainActor
+    func saved(_ key: String, _ day: String) -> SavedRecommendation? {
+        ensureBook()
+        return book[key]?[day]
+    }
+
+    // ---------------------------------------------------------------- ficha de un caballo y un día
+    /// Lo recomendado (guardado o, si no, recalculado con los datos hasta la víspera) y lo realizado ese día.
+    @MainActor
+    func ficha(horseKey key: String, name: String, day: String) async -> PlanFicha {
+        var f = PlanFicha(horseKey: key, horseName: name, day: day)
+        f.engine = app.engineShort
+        let dayFmt: DateFormatter = AvoTime.formatter("yyyy-MM-dd")
+        f.sessions = app.historySessions(key).filter { (s: SessionItem) -> Bool in
+            guard let d = s.start else { return false }
+            return dayFmt.string(from: d) == day
+        }.compactMap { (s: SessionItem) -> PlanFichaSession? in
+            guard let d = s.start else { return nil }
+            let e: CalendarEntry? = app.calendarEntries.first { $0.id == s.id }
+            return PlanFichaSession(id: s.id, start: d, rider: s.rider, distanceKm: e?.distanceKm ?? 0, durationS: e?.durationS ?? 0)
+        }.sorted { $0.start < $1.start }
+        // recomendado
+        if let r = saved(key, day) {
+            f.recommended = r.asDay
+            f.phase = r.phase
+            f.recommendedOrigin = "Recomendación guardada el \(AvoTime.text(r.savedAt, "dd/MM/yyyy HH:mm")) (motor \(r.engine))"
+        } else if day >= Self.today, let p = plans[key], let d = p.days.first(where: { $0.date == day && !$0.done }) {
+            f.recommended = d
+            f.phase = p.phase
+            f.recommendedOrigin = "Recomendación actual del planificador"
+        } else if let prev = Self.shift(day, -1) {
+            do {
+                // la víspera: el día pedido es el primero que se planifica (semana natural o, si cae fuera, 7 días siguientes)
+                var r = try await app.analyseHorseHistory(key, reference: prev)
+                var d: WeekPlanDay? = r.result.semanaSiguiente.days.first { $0.date == day && !$0.done }
+                if d == nil {
+                    r = try await app.analyseHorseHistory(key, reference: prev, calendarWeek: false)
+                    d = r.result.semanaSiguiente.days.first { $0.date == day && !$0.done }
+                }
+                if let d = d {
+                    f.recommended = d
+                    f.phase = r.result.semanaSiguiente.phase
+                    f.recommendedOrigin = "Recalculada con el motor con los datos hasta la víspera (no se había guardado)"
+                }
+            } catch {
+                f.error = error.localizedDescription
+            }
+        }
+        // realizado (el motor a ese día: tipo de día y metros de galope rápido)
+        if f.hasRealized {
+            do {
+                let r = try await app.analyseHorseHistory(key, reference: day)
+                f.realized = r.result.semanaSiguiente.days.first { $0.date == day && $0.done }
+            } catch {
+                f.error = error.localizedDescription
+            }
+        }
+        return f
+    }
+
+    /// AAAA-MM-DD ± días.
+    static func shift(_ day: String, _ delta: Int) -> String? {
+        let f: DateFormatter = AvoTime.formatter("yyyy-MM-dd")
+        guard let d = f.date(from: day), let n = Calendar(identifier: .gregorian).date(byAdding: .day, value: delta, to: d) else { return nil }
+        return f.string(from: n)
     }
 
     // ---------------------------------------------------------------- consulta por día

@@ -265,6 +265,7 @@ struct PlanDay {
   std::vector<std::string> rules;
   double fast_max_m = NAN;             // distancia rápida máxima propuesta (solo días RAPIDO; NaN: sin tope propio)
   bool done = false;                   // día ya pasado de la semana: lo realizado según las sesiones (no es propuesta)
+  double done_fast_m = NAN;            // metros de galope rápido hechos ese día (solo días pasados con datos de carga)
 };
 struct WeekPlan {
   bool available = false;
