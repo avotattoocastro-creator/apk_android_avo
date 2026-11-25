@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-25 — iPad — Tiempo MEDIDO de AEMET (Treto) en la portada del entrenamiento
+**Autor:** Claude · **Commits:** el de esta entrada · **CI:** TestFlight al fusionar
+**Qué cambia:** la portada (Resumen) usa la observación horaria de la estación oficial de AEMET más cercana a la pista (Bárcena de Cicero, **Treto 1096X**, ~4 km de la Playa del Regatón; reserva **Castro Urdiales 1083L**; como mucho 25 km) para temperatura, viento y presión, si la hay a ±40 min del inicio. La línea «Modelo, no medición» pasa a decir de dónde sale el dato: «Medido · AEMET Treto (4 km)» (en cian) o «Modelo, no medición» como antes: **misma línea, mismo sitio, sin cambiar la pantalla** (petición del usuario 25/11 09:07). En la tabla del tiempo se añaden las filas de la medida. Clave gratuita de AEMET OpenData en Configuración › «Tiempo medido (AEMET)», guardada en el Llavero (nunca en el repositorio). Lo medido se guarda por sesión en el iPad.
+**Limitación de AEMET:** su API solo da las observaciones horarias de las **últimas ~24 h**; los entrenamientos más antiguos (si no se abrieron a tiempo) siguen con el modelo, marcado como tal.
+**No incluido:** corrección de la marea con el mareógrafo de Santander (Puertos del Estado): su acceso de datos no está documentado públicamente; queda pendiente.
+**Archivos:** `ipad/AVOiPad/Core/AemetObservation.swift`, `App/EnvironmentModel.swift`, `Views/SummaryHero.swift`, `Views/SettingsView.swift`, `AVOiPadTests/AemetTests.swift`.
+**Validación:** IMPLEMENTADO, sin compilar en local (sin Xcode); NO VERIFICADO en el iPad ni con la API de AEMET.
+
 ## 2026-11-24 — iPad — Pulso del ECG y carga de la sesión en pantalla (motor 2.0.0-dev34)
 **Autor:** Claude (chat integrador, petición del usuario 24/11) · **Rama:** `claude/ipad-carga-entrenamiento` · **CI:** iPad en la rama (sin TestFlight) y al integrar
 **Qué cambia:**
