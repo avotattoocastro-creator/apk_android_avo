@@ -182,7 +182,8 @@ extension AppModel {
             () -> (json: String, used: Int, missing: [String]) in
             TrainingAnalytics.historyInput(horse: horse, reference: reference, entries: entries)
         }.value
-        let options: String? = TrainingAnalytics.historyOptions(plannedRaces: plannedRaces(for: key))
+        let birthYear: Int? = stable?.horses.allRows.first { (h: StableIdentityRow) -> Bool in h.code == key }?.record.birthYear
+        let options: String? = TrainingAnalytics.historyOptions(plannedRaces: plannedRaces(for: key), birthYear: birthYear)
         let json: String = try await EquineEngine.trainingAnalyse(inputJson: input.json, optionsJson: options)
         let result: TrainingAnalysisResult = try await Task.detached(priority: .userInitiated) { () -> TrainingAnalysisResult in
             try TrainingAnalysisResult.parse(json)

@@ -75,6 +75,15 @@ Mismos códigos de retorno; el texto se libera con `avo_eq_free`.
 `fecha`, `rapido_m`, `trimp`), `notas`, `nota`; y `sesiones[].carga_cg` (`trimp` recalculado, `rapido_m`). Opción
 `carga_cg` (true/false u objeto; ficha 14, §3 quinquies).
 
+**Training 1.3.0 (motor 2.0.0-dev35):** `estado.planificador` añade `semana_siguiente` (capa 2 del planificador,
+`validado: false`, nunca cambia el estado): `disponible` (y `motivo` si no lo está), `desde`, `hasta`, `fase` (NORMAL |
+POTRO_2_ANOS | REINCORPORACION_LENTA | REINCORPORACION_RAPIDO), `limitada`, `edad_anos`, `edad_origen`
+(FECHA_NACIMIENTO | EDAD_ANOS | null), `raza`, `rapidos_objetivo`, `rapidos_propuestos`, `dias_lentos_bloque`,
+`vuelta_rapido`, `semanas_preparacion`, `rapido_ref_m`, `rapido_max_m`, `p5_media_60d_m`, `p5_p75_m`,
+`dias_desde_descanso`, `dias[]` (`fecha`, `tipo` RAPIDO | LENTO | SUAVE | LIBRE | CARRERA, `motivo`, `rapido_max_m`,
+`reglas[]`), `pautas[]` (`regla`, `texto`, `evidencia`), `parametros` (con `etiquetas`) y `nota`. Campos sin dato:
+`null`. Opciones nuevas: `planificador` (true/false u objeto), `fecha_nacimiento`, `edad_anos` (ficha 12, §5 ter).
+
 `avo-equine-analysis` v2 añade `sesion.inicio_utc` (primera época GNSS con fecha y hora UTC, o `null`).
 
 ## Bloque `trabajo_pista` (AVO Track Work 1.0.0: entrenamiento de caballos de carreras) — ficha 13

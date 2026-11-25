@@ -31,6 +31,19 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **No incluido:** corrección de la marea con el mareógrafo de Santander (Puertos del Estado): su acceso de datos no está documentado públicamente; queda pendiente.
 **Archivos:** `ipad/AVOiPad/Core/AemetObservation.swift`, `App/EnvironmentModel.swift`, `Views/SummaryHero.swift`, `Views/SettingsView.swift`, `AVOiPadTests/AemetTests.swift`.
 **Validación:** IMPLEMENTADO, sin compilar en local (sin Xcode); NO VERIFICADO en el iPad ni con la API de AEMET.
+## 2026-11-25 — Motor 2.0.0-dev35 (KB-1 1.31.0, training 1.3.0) · iPad — planificador semanal, capa 2 (semana siguiente)
+**Autor:** Claude (sesión nocturna del motor) · **Commits:** los de la rama `claude/motor-noche-2026-11-25` · **CI:** `build-equine-engine.yml` lanzado en la rama (resultado en el PR)
+**Qué cambia:**
+- **Motor (`src/training/planner.cpp`, training 1.3.0):** `estado.planificador.semana_siguiente` propone los 7 días siguientes (RAPIDO / LENTO / SUAVE / LIBRE / CARRERA) con fase NORMAL, POTRO_2_ANOS, REINCORPORACION_LENTA (P4: 28 d de lento tras > 60 d sin rápido) o REINCORPORACION_RAPIDO (P7: 21 d con 1 rápido/semana y tope del 75 % de la mediana anterior); P1 2 rápidos/semana, P2/RT1 ≥ 3 días entre rápidos y un día libre, RT2 día siguiente suave, sin rápido 3 d antes y 5 d después de una carrera; con A1/A2/A3/A5 en LIMITAR, un solo rápido. Pautas P5 (60 d > P75 propio sin penalizar el último mes), P6 (≥ 183 d sin descanso ≥ 40 d), DM1 (tope 400 m), DM2, DM3 y DM4 en potros de 2 años, aviso [I-raza] en árabes. Opciones `planificador`, `fecha_nacimiento`, `edad_anos`. Todo sin calibrar (`validado: false`): nunca cambia el estado.
+- **iPad:** tarjeta «Semana siguiente (planificador)» en la historia del caballo (`WeekPlan`, `WeekPlanCard`); el año de nacimiento de la Cuadra se pasa al motor como `fecha_nacimiento`; pruebas `WeekPlanTests` sobre una fixture escrita por el motor.
+- Fixtures de Android (`core/src/test/resources/equine/*_analysis.json`) regeneradas: solo versiones.
+- KB-1 1.31.0: `PLANIFICADOR_RESTRICCIONES_P1_P6`, `PLANIFICADOR_DMD_DM1_DM4` y `RECUPERACION_RT1_RT3` IMPLEMENTADO (sin calibrar); parámetro `planificador_capa2`; estudio `knowledge/estudios/2026-11-25_motor_planificador_semanal_capa2.md`; fichas 12 (§5 ter) y 14 (§3 sexies); `FORMATO_RESULTADOS.md`; protocolo de campo §6 ter.
+**Por qué:** decisión del usuario (23/11): cada noche código nuevo en el motor. El planificador era la pieza grande pendiente con la evidencia ya leída y solo usa lo que graba el PROTOTIPO (GNSS RTK de la espalda, fechas, carreras previstas y Cuadra del iPad). La playa por franjas (PL2–PL6) sigue esperando campos de la ficha.
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist`, build de TestFlight.
+**Validación:** IMPLEMENTADO · pruebas locales ✅ (ASan/UBSan y Release, 131 casos, 2.819 comprobaciones; fixtures OK) · iPad **sin compilar** (sin Xcode en la sesión: lo compila su CI) · **NO VERIFICADO** con caballos reales.
+**Pendiente:** Android y Windows (tarjeta de la semana); capa 3 (explicación con confianza); calibrar separaciones, días alrededor de la carrera y topes con ≥ 8 semanas de práctica real por caballo.
+
+---
 
 ## 2026-11-24 — iPad — Pulso del ECG y carga de la sesión en pantalla (motor 2.0.0-dev34)
 **Autor:** Claude (chat integrador, petición del usuario 24/11) · **Rama:** `claude/ipad-carga-entrenamiento` · **CI:** iPad en la rama (sin TestFlight) y al integrar

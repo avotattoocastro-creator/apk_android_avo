@@ -627,6 +627,51 @@ bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::str
       if (T.hr_max <= T.hr_rest + 50) { if (err) *err = "carga_cg: fc_max_lpm debe superar a fc_reposo_lpm en más de 50 lpm"; return false; }
     } else { if (err) *err = "«carga_cg» debe ser true/false o un objeto"; return false; }
   }
+  // Planificador semanal, capa 2 (TRAINING 1.3.0): «planificador»: true/false o un objeto
+  if (v.has("planificador")) {
+    const json::Value& k = v["planificador"];
+    auto& P = c->planner;
+    if (k.type == json::Value::BOOL) P.enabled = k.b;
+    else if (k.type == json::Value::OBJ) {
+      P.enabled = k["activo"].boolean(true);
+      const D kd[] = {{"p7_fraccion_distancia", &P.p7_distance_fraction, 0.1, 1}, {"p5_percentil", &P.p5_percentile, 50, 99},
+                      {"dm1_rapido_max_m", &P.dm1_fast_max_m, 100, 2000}, {"dm2_ratio", &P.dm2_ratio, 1, 10},
+                      {"dm2_min_rapido_m", &P.dm2_min_fast_m, 0, 10000}, {"dm2_min_canter_m", &P.dm2_min_canter_m, 0, 100000},
+                      {"dm4_desde_m", &P.dm4_from_m, 100, 3000}, {"dm4_hasta_m", &P.dm4_to_m, 100, 3000}};
+      for (const auto& d : kd) {
+        if (!k.has(d.k)) continue;
+        const json::Value& x = k[d.k];
+        if (x.type != json::Value::NUM || !(x.n >= d.lo && x.n <= d.hi)) { if (err) *err = std::string("opción fuera de rango: planificador.") + d.k; return false; }
+        *d.p = x.n;
+      }
+      const I ki[] = {{"dias_horizonte", &P.horizon_days, 7, 14}, {"rapidos_semana_maduro", &P.fast_per_week_mature, 0, 4},
+                      {"rapidos_semana_2anos", &P.fast_per_week_2y, 0, 4}, {"dias_min_entre_rapidos", &P.min_days_between_fast, 1, 7},
+                      {"dias_libres", &P.free_days, 0, 3}, {"dias_sin_rapido_precarrera", &P.prerace_no_fast_days, 0, 14},
+                      {"dias_sin_rapido_poscarrera", &P.postrace_no_fast_days, 0, 21}, {"p4_dias_lentos", &P.p4_slow_days, 0, 120},
+                      {"p4_dias_hueco_bloque", &P.p4_block_gap_days, 3, 90}, {"p7_dias_ventana", &P.p7_window_days, 7, 60},
+                      {"p5_dias", &P.p5_window_days, 14, 180}, {"p5_min_historia_dias", &P.p5_min_history_days, 60, 1000},
+                      {"p6_descanso_min_dias", &P.p6_break_min_days, 7, 180}, {"p6_intervalo_dias", &P.p6_interval_days, 60, 730},
+                      {"dm4_semanas", &P.dm4_weeks, 1, 52}, {"dm2_min_historia_dias", &P.dm2_min_history_days, 7, 180}};
+      for (const auto& d : ki) {
+        if (!k.has(d.k)) continue;
+        const json::Value& x = k[d.k];
+        if (x.type != json::Value::NUM || x.n != std::floor(x.n) || x.n < d.lo || x.n > d.hi) { if (err) *err = std::string("opción fuera de rango: planificador.") + d.k; return false; }
+        *d.p = (int)x.n;
+      }
+      if (P.dm4_from_m > P.dm4_to_m) { if (err) *err = "planificador: dm4_desde_m debe ser ≤ dm4_hasta_m"; return false; }
+    } else { if (err) *err = "«planificador» debe ser true/false o un objeto"; return false; }
+  }
+  // Edad del caballo (planificador, DM1–DM4): «fecha_nacimiento» (AAAA-MM-DD) o «edad_anos» (edad de carreras).
+  if (v.has("fecha_nacimiento")) {
+    long d = 0;
+    if (v["fecha_nacimiento"].type != json::Value::STR || !training_parse_day(v["fecha_nacimiento"].s, &d)) { if (err) *err = "«fecha_nacimiento» no válida"; return false; }
+    c->planner.birth_day = d; c->planner.has_birth = true;
+  }
+  if (v.has("edad_anos")) {
+    const json::Value& x = v["edad_anos"];
+    if (x.type != json::Value::NUM || x.n != std::floor(x.n) || x.n < 1 || x.n > 30) { if (err) *err = "opción fuera de rango: edad_anos"; return false; }
+    c->planner.age_years = (int)x.n;
+  }
   // A4: fechas de carrera previstas del caballo (lista de AAAA-MM-DD), en la raíz de las opciones.
   if (v.has("carreras_previstas")) {
     const json::Value& l = v["carreras_previstas"];
@@ -1143,6 +1188,7 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
   if (r.days_since_last <= c.acute_days) kb_drift_flags(ok, ok.size() - 1, c.kb, &r.kb.flags);
   kb_apply(r.kb, &r.level, &r.reasons);
   r.planner = planner_at(ok, kbdays, r.reference_day, first_day, c.kb);
+  r.week = training_plan_week(ok, kbdays, r.reference_day, first_day, r.kb, c);
   if (c.cg.enabled) {
     std::vector<double> per;
     r.cg = cg_evaluate(ok, r.reference_day, first_day, c, &per);
@@ -1272,7 +1318,9 @@ std::string training_to_json(const TrainingResult& r, const TrainingConfig& c) {
     o << ",\"pautas\":[";
     for (size_t i = 0; i < p.notes.size(); i++)
       o << (i ? "," : "") << "{\"regla\":" << q(p.notes[i].rule) << ",\"texto\":" << q(p.notes[i].text) << ",\"evidencia\":" << q(p.notes[i].evidence) << "}";
-    o << "],\"nota\":\"pautas informativas de la base científica; no suben el estado ni sustituyen el criterio del entrenador\"}";
+    o << "]";
+    o << ",\"semana_siguiente\":" << training_week_plan_json(r.week, c);
+    o << ",\"nota\":\"pautas informativas de la base científica; no suben el estado ni sustituyen el criterio del entrenador\"}";
   }
   o << ",\"carga_cg\":"; cg_json(o, r.cg, c);
   o << ",\"nota\":\"orientativo; no es un diagnóstico veterinario\"}";

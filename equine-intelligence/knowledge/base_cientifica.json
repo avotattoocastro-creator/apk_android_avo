@@ -2,8 +2,8 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.30.0",
-  "fecha": "2026-11-24",
+  "version": "1.31.0",
+  "fecha": "2026-11-25",
   "razas": [
     "PSI",
     "ARABE"
@@ -162,6 +162,11 @@
       "fecha": "2026-11-24",
       "titulo": "Motor nocturno 24/11: carga de entrenamiento CG1–CG3 y FM1 implementadas (TRIMP con histograma de FC, bandas de Morrice-West, EWMA 7/28 d, Foster)",
       "archivo": "estudios/2026-11-24_motor_carga_trimp_bandas_ewma.md"
+    },
+    {
+      "fecha": "2026-11-25",
+      "titulo": "Motor nocturno 25/11: planificador semanal capa 2 (semana siguiente con P1, P2, P4–P7, RT1–RT3 y DM1–DM4)",
+      "archivo": "estudios/2026-11-25_motor_planificador_semanal_capa2.md"
     }
   ],
   "fuentes": [
@@ -5506,6 +5511,58 @@
       ],
       "estado": "IMPLEMENTADO",
       "nota": "KB 1.30.0, motor 2.0.0-dev34; cambio relativo de carga, nunca riesgo de lesión"
+    },
+    {
+      "id": "planificador_capa2",
+      "valor": {
+        "rapidos_semana": {
+          "maduro": 2,
+          "potro_2_anos": 2
+        },
+        "dias_min_entre_rapidos": 3,
+        "dias_libres": 1,
+        "dias_sin_rapido_precarrera": 3,
+        "dias_sin_rapido_poscarrera": 5,
+        "p4_dias_lentos": 28,
+        "p4_dias_hueco_bloque": 14,
+        "p7_dias_ventana": 21,
+        "p7_fraccion_distancia": 0.75,
+        "p5": {
+          "dias": 60,
+          "percentil": 75,
+          "min_historia_dias": 180
+        },
+        "p6": {
+          "descanso_min_dias": 40,
+          "intervalo_dias": 183
+        },
+        "dm1_rapido_max_m": 400,
+        "dm2": {
+          "ratio": 1.5,
+          "min_rapido_m": 200,
+          "min_canter_m": 2000,
+          "min_historia_dias": 28
+        },
+        "dm4": {
+          "semanas": 12,
+          "desde_m": 500,
+          "hasta_m": 700
+        }
+      },
+      "evidencia": "E (práctica: Morrice-West 2020; Wong 2023; Oliveira 2006 n = 42) / E-r (Carrier 1998; Estberg 1998) / I (separaciones, días alrededor de la carrera, topes, cortes de DM2) / I-raza (árabes)",
+      "fuentes": [
+        "MORRICE_WEST_2020_PRACTICAS",
+        "WONG_2023_DESCANSOS",
+        "CARRIER_1998",
+        "ESTBERG_1998",
+        "HITCHENS_2018_CALIFORNIA",
+        "OLIVEIRA_2006_DMD_BR",
+        "BOSTON_NUNAMAKER_2000",
+        "VERHEYEN_2005_DMD",
+        "CRAWFORD_2021_DMD"
+      ],
+      "estado": "IMPLEMENTADO",
+      "nota": "KB 1.31.0, motor 2.0.0-dev35; propuesta orientativa sin calibrar, nunca sube el estado ni predice lesiones"
     }
   ],
   "reglas": [
@@ -5711,10 +5768,11 @@
         "HITCHENS_2018_CALIFORNIA",
         "GEORGOPOULOS_PARKIN_2017"
       ],
-      "estado": "PARCIAL",
-      "falta": "capa 2 del planificador (P2, P4–P6, propuesta de semana); sin evidencia publicada de días entre trabajos rápidos ni datos de árabes de llano",
+      "estado": "IMPLEMENTADO",
+      "falta": "calibrar con la práctica de la cuadra (≥ 8 semanas por caballo, protocolo de campo §6 ter): separación entre rápidos, días alrededor de la carrera, topes de distancia; sin evidencia publicada de días entre rápidos ni datos de árabes de llano",
       "implementacion": "motor 2.0.0-dev27: base informativa en estado.planificador (P1 0 o > 3 días rápidos en semana activa, P3 < 14 d entre carreras, días que faltan para A4); nunca sube el estado",
-      "nota_1_28_0": "auditoría 22/11: Morrice-West 2020 en texto completo (manuscrito aceptado): 1,7 rápidos/semana a 2 años y 2,0 en mayores; 2,1 / 1,9 descansos al año de 6,6 / 6,3 semanas; 2,3 semanas entre salidas → P1, P3 y P6 pasan a [E]; Georgopoulos & Parkin 2017 es de Norteamérica (EID), actividad 0–30 d protectora (OR 0,71) y 60–180 d de riesgo (1,06–1,07)"
+      "nota_1_28_0": "auditoría 22/11: Morrice-West 2020 en texto completo (manuscrito aceptado): 1,7 rápidos/semana a 2 años y 2,0 en mayores; 2,1 / 1,9 descansos al año de 6,6 / 6,3 semanas; 2,3 semanas entre salidas → P1, P3 y P6 pasan a [E]; Georgopoulos & Parkin 2017 es de Norteamérica (EID), actividad 0–30 d protectora (OR 0,71) y 60–180 d de riesgo (1,06–1,07)",
+      "implementacion_1_31_0": "motor 2.0.0-dev35 (TRAINING 1.3.0): capa 2 en estado.planificador.semana_siguiente (src/training/planner.cpp); propuesta de 7 días sin calibrar, nunca sube el estado: P1 objetivo 2 rápidos/semana (2 en potros), P2 ≥ 3 días entre rápidos y 1 día libre, P4 0 rápidos hasta 28 d de lento tras > 60 d sin rápido y luego 1, P5 media diaria de 60 d > P75 propio también en los días 60–31, P6 ≥ 183 d sin hueco ≥ 40 d sin sesiones; todos los cortes son parámetros planificador.* con etiqueta"
     },
     {
       "id": "PLAYA_LINEA_BASE_PL1_PL6",
@@ -5750,9 +5808,10 @@
         "VERHEYEN_2005_DMD",
         "OLIVEIRA_2006_DMD_BR"
       ],
-      "estado": "PROPUESTA",
-      "falta": "capa 2 del planificador; HR de Verheyen 2005 en texto completo; sin datos de árabes [I-raza]",
-      "nota": "estudio 20/11 19:08; pautas de carga, nunca predicción de DMD"
+      "estado": "IMPLEMENTADO",
+      "falta": "HR de Verheyen 2005 en texto completo; cortes de DM2 sin calibrar; edad del caballo obligatoria (fecha_nacimiento / edad_anos); sin datos de árabes [I-raza]",
+      "nota": "estudio 20/11 19:08; pautas de carga, nunca predicción de DMD",
+      "implementacion_1_31_0": "motor 2.0.0-dev35 (TRAINING 1.3.0): capa 2 en estado.planificador.semana_siguiente (src/training/planner.cpp); propuesta de 7 días sin calibrar, nunca sube el estado: DM1 tope de 400 m antes de 12 semanas de bloque, DM2 canter/rápido 7/14/30 d > 1,5 × media acumulada del bloque (30 d omitida si salta A3), DM3 canter del día rápido > mediana de días lentos, DM4 salto a ≥ 700 m antes de 12 semanas; solo pautas"
     },
     {
       "id": "SOBREENTRENO_SO1_SO3",
@@ -5780,9 +5839,10 @@
         "HITCHENS_2018",
         "MORRICE_WEST_2021_INTERVALO"
       ],
-      "estado": "PROPUESTA",
+      "estado": "IMPLEMENTADO",
       "nota": "estudio 20/11 20:08; cifras exactas de diseño [I]",
-      "implementacion": "motor 2.0.0-dev27: RT1 (< 72 h entre los dos últimos días rápidos) y RT3 (vía P3, < 14 d entre carreras) como pautas informativas del planificador; RT2 sin implementar"
+      "implementacion": "motor 2.0.0-dev27: RT1 (< 72 h entre los dos últimos días rápidos) y RT3 (vía P3, < 14 d entre carreras) como pautas informativas del planificador; RT2 sin implementar",
+      "implementacion_1_31_0": "motor 2.0.0-dev35 (TRAINING 1.3.0): capa 2 en estado.planificador.semana_siguiente (src/training/planner.cpp); propuesta de 7 días sin calibrar, nunca sube el estado: RT1 ≥ 3 días entre rápidos al colocar, RT2 día siguiente SUAVE (LIBRE tras carrera), RT3 sin rápido 3 días antes y 5 después de una carrera [I]"
     },
     {
       "id": "PESO_PE1_PE3",
@@ -6026,13 +6086,13 @@
     "Conectar las líneas base a A9 (V200) cuando el análisis traiga el ECG; A7 y A8 conectadas en 2.0.0-dev7 (KB 1.5.0) con superficie como criterio de comparables; falta el TE propio por métrica y la playa por franja · HECHO en 2.0.0-dev27 (KB 1.25.0): A9 conectada con kb_change_threshold + kb_drift_down sobre la V200 del ECG; falta el TE propio",
     "Velocidad final relativa propia de AVO (France Galop no publica ningún IDF; estudio extra 2 2026-11-19): v(últimos 600/400 m)/v media con par propio por pista y superficie, al estilo de la Finishing Speed % de Timeform; importador de los PDF de tracking por 200 m solo informativo; KB 1.10.0: FS % de Timeform = v final/v media frente al par de pista y distancia, sin umbrales; Wong 2023 usa v200 absoluta y longitudinal; ninguna fuente da umbral de riesgo: solo métrica descriptiva con par propio",
     "Índice tendinoso heurístico por bandas cualitativas (prioritario en árabes de 3–4 años): sin exponente de carga; faltan en la app la lesión previa, la CSA ecográfica y la firmeza del suelo (estudio extra 2026-11-19); extra 4: sin OR de árabes (Golfo, Turquía, Polonia); edad 3–4 años con 3 fuentes; no añadir término de carga (Çalışkan 2020b, Perkins 2005); CSA árabe de referencia 62–94 mm²; KB 1.12.0: OR de Takahashi 2004 y Lam 2007 AJVR siguen [NV] (AVMA 403); entradas cualitativas propuestas [I]: lesión o exploración tendinosa previa (Lam 2007) y peso en carrera alto para la cuadra (Takahashi 2004, Ikeda 2019)",
-    "Planificador semanal por restricciones (capa 2) con P1–P6 del estudio extra 3 (práctica [E], forma [I]) y explicación con confianza (capa 3)",
+    "Planificador semanal por restricciones (capa 2) con P1–P6 del estudio extra 3 (práctica [E], forma [I]) y explicación con confianza (capa 3) · HECHO en 2.0.0-dev35 (KB 1.31.0): estado.planificador.semana_siguiente con P1, P2, P4–P7; falta la capa 3 (explicación con confianza) y calibrar",
     "Línea base separada para la playa por franja (PL1–PL6 del extra 5): orilla firme, húmeda profunda, seca profunda, transición; marea, lluvia, humedad y nota del jinete; comparables de A7/A8/A9 por franja (Pfau 2024: el suelo cambia la zancada hasta 0,186 m); KB 1.14.0: sin cifras absolutas por franja en texto completo; anotar humedad volumétrica (sonda tipo ML3) si existe [I]",
     "Regla combinada A1+A2 de Verheyen cuando se lea el texto completo",
     "Contador de muestras saturadas de la cincha en el análisis (si el firmware lo envía); KB 1.18.0: umbral |a| ≥ 7,9 g por eje, invalidar picos del tramo si > 0,1 % en galope [I]; en la cincha BETA (LSM6DSV16X) usar ±16 g como StrideSAFE/MTw (estudio 20/11 16:10)",
     "A1/A2 de Verheyen: el resumen da un umbral CONJUNTO (> 44 km de canter Y > 6 km de galope en 30 d) y galope acumulado protector en añojos; con el texto completo, decidir si A2 por separado se rebaja a INFO o se sustituye por la regla combinada (KB 1.9.0)",
     "A8: añadir la velocidad del último parcial de 200 m (unidad de Wong 2023, HR 1,18 por 0,1 m/s) junto a la de 600 m, y documentar el umbral como diseño (KB 1.9.0); KB 1.14.0: mostrarlo solo junto a su dispersión propia (DE de las comparables), nunca como umbral fijo: el ruido entre carreras es ≈ 0,66 m/s [I]",
-    "Planificador P7 (estudio 20/11 11:10): ventana de reincorporación de 21 d (prudente 30 d) tras ≥ 60 d sin trabajo rápido, sin dos trabajos rápidos seguidos ni picos de canter; evidencia Carrier 1998 y Choi 2026 solo por resumen; implementar con el planificador (capa 2)",
+    "Planificador P7 (estudio 20/11 11:10): ventana de reincorporación de 21 d (prudente 30 d) tras ≥ 60 d sin trabajo rápido, sin dos trabajos rápidos seguidos ni picos de canter; evidencia Carrier 1998 y Choi 2026 solo por resumen; implementar con el planificador (capa 2) · HECHO en 2.0.0-dev35: fase REINCORPORACION_RAPIDO (21 d, 1 rápido/semana, tope 75 % de la mediana anterior [I]); «picos de canter» sin regla propia (A1/A3)",
     "Comparables por temperatura y peso (estudio 20/11 13:12, KB 1.15.0): campos de temperatura, humedad/WBGT, jinete y peso cargado en Session; A9 y recuperación solo con |ΔT| ≤ 5 °C y marca «no comparable por calor» (WBGT ≥ 28 °C); A7/A8 con |Δpeso| ≤ 3 kg y mismo jinete preferente; todo [I], sin coeficiente de corrección hasta calibrarlo con datos propios",
     "VC1–VC4 (estudio 20/11 14:10, KB 1.16.0): regla combinada Verheyen (canter > 44 km Y galope > 6 km en 30 d) como LIMITAR; A1 aislada solo AVISO; A2 aislada a INFO; base: resumen [E-r] + 3 secundarios en texto completo; OR [NV]; cambia severidades de alertas existentes, implementar con aprobación del usuario",
     "VT1–VT3 (estudio 20/11 14:10): TE por defecto de V200 del 3 % marcado «no validado» hasta TE propio (≥ 3 pruebas); aviso de posible artefacto si |ΔV200| > 5 % en ≤ 31 d; V200 de árabes (Piccione 2004) solo como contexto · VT1 y VT2 HECHOS en 2.0.0-dev27 (te_v200_pct 3, salto 5 % en 31 d); VT3 solo contexto",
@@ -6042,9 +6102,9 @@
     "GN1 (estudio 20/11 17:09, KB 1.19.0): calidad de la velocidad GNSS: menor confianza en tramos con radio < 200 m o aceleración longitudinal alta; no usarlos como mesetas de V200; comparar parciales de 200 m (A8) solo con igual geometría; longitud de zancada solo promediada por tramos ≥ 100–200 m (error ≈ 1–1,5 % [I]); velocidad solo-IMU únicamente como relleno de cortes cortos",
     "ML1 (estudio 20/11 17:09): mano de galope EXPERIMENTAL desde la IMU de la cincha (fase de balanceo/guiñada respecto al pico vertical, curvatura RTK como a priori) hasta validar con vídeo ≥ 120 fps; % de zancadas en mano incorrecta en curva y % de tiempo por mano, recta y curva por separado; sentido de la pista como campo y criterio de comparables; nunca como riesgo de lesión",
     "AU1 (estudio 20/11 18:09, KB 1.20.0): no citar fuentes con duplicado_de en reglas nuevas (usar la canónica) ni fuentes con acceso SIN_AUDITAR como base de un cambio de lógica hasta reclasificarlas; prueba futura que lo compruebe al empaquetar la KB [I]",
-    "DM1–DM4 (estudio 20/11 19:08, KB 1.21.0): pautas de carga del planificador para potros de 2 años frente a la DMD (rápido corto y frecuente, sin picos agudos de canter, escalones de distancia); [I], sin implementar con la capa 2",
+    "DM1–DM4 (estudio 20/11 19:08, KB 1.21.0): pautas de carga del planificador para potros de 2 años frente a la DMD (rápido corto y frecuente, sin picos agudos de canter, escalones de distancia); [I], sin implementar con la capa 2 · HECHO en 2.0.0-dev35 (pautas del planificador; sin calibrar)",
     "SO1–SO3 (estudio 20/11 19:08): A9 con caída de V200/rendimiento y dos señales coincidentes; VLa4 al alza con rendimiento a la baja = sospechoso; A10 relativa a la tendencia de crecimiento en 2 años; [I], sin implementar",
-    "RT1–RT3 y PE1–PE3 (estudio 20/11 20:08, KB 1.22.0): separación ≥ 72 h entre trabajos rápidos en el planificador; peso solo matinal con persistencia ≥ 3 d (AVISO ≥ 2 %, ALTO ≥ 4 %) y gracia tras transporte; [I], sin implementar",
+    "RT1–RT3 y PE1–PE3 (estudio 20/11 20:08, KB 1.22.0): separación ≥ 72 h entre trabajos rápidos en el planificador; peso solo matinal con persistencia ≥ 3 d (AVISO ≥ 2 %, ALTO ≥ 4 %) y gracia tras transporte; [I], sin implementar · RT1–RT3 HECHOS en 2.0.0-dev35 (planificador); PE1–PE3 siguen sin implementar",
     "GO1–GO4 y WU1–WU4 (estudio 20/11 21:08, KB 1.23.0): going como estrato y covariable de comparables A7/A8 (campo going/penetración en Session); calentamiento mínimo y clase de vuelta a la calma para A9 y CF2; [I], sin implementar",
     "TA1–TA2 y RB1 (estudio 20/11 22:09, KB 1.24.0): orden de presentación tendón/hueso por raza y bloques de repetibilidad (≥ 3 sesiones, ≤ 7 d) para el TE propio; [I], sin implementar",
     "MV1, FM1 y EC1 (estudio noche 21/11, KB 1.25.0): método de V200 como atributo obligatorio de la línea base y FCmax por defecto 210–215 lpm marcada «no propia»; arritmias en galope solo como «revisar»; [I], sin implementar · FM1 HECHO en 2.0.0-dev34 (FC máxima por defecto 213 «no propia» y propia con ≥ 3 trabajos rápidos)",
@@ -6311,6 +6371,11 @@
       "version": "1.30.0",
       "fecha": "2026-11-24",
       "cambio": "CG1 PARCIAL, CG2, CG3 y FM1 IMPLEMENTADO (motor 2.0.0-dev34, cardio 1.1.0, training 1.2.0): carga interna y externa descriptiva en el análisis y en la historia, nivel INFO; parámetros carga_cg_trimp y carga_cg_bandas_ewma"
+    },
+    {
+      "version": "1.31.0",
+      "fecha": "2026-11-25",
+      "cambio": "PLANIFICADOR_RESTRICCIONES_P1_P6, PLANIFICADOR_DMD_DM1_DM4 y RECUPERACION_RT1_RT3 IMPLEMENTADO (motor 2.0.0-dev35, training 1.3.0): propuesta de la semana siguiente en estado.planificador.semana_siguiente, sin calibrar; parámetro planificador_capa2"
     }
   ]
 }

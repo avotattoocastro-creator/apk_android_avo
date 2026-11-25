@@ -421,6 +421,18 @@ monotonía. *Ejemplo:* 400 m rápidos cada 2 días durante 40 días → aguda 17
 pico de ≥ 3 trabajos rápidos por caballo, y ≥ 8 semanas seguidas de sesiones con ECG y GNSS para ver la dispersión
 del cociente propio. b y c solo se podrán ajustar con prueba estándar y lactato (fuera del alcance del PROTOTIPO).
 
+## 3 sexies. Planificador semanal, capa 2 (KB-1 1.31.0, motor 2.0.0-dev35, TRAINING 1.3.0)
+La historia propone la semana siguiente en `estado.planificador.semana_siguiente` con **P1, P2, P4, P5, P6, P7, RT1,
+RT2, RT3 (vía las carreras) y DM1–DM4**. Detalle, fórmulas, parámetros y ejemplos: ficha 12, §5 ter; estudio
+`knowledge/estudios/2026-11-25_motor_planificador_semanal_capa2.md`. Todo **sin calibrar**: la propuesta y sus pautas son
+informativas, no suben el estado del caballo y no predicen lesiones (`validado: false`).
+- Práctica [E] (Morrice-West 2020: 2,0 / 1,7 rápidos por semana, 1,9–2,1 descansos de 6,3–6,6 semanas, 4,0 semanas de
+  trabajo lento tras el descanso; Wong 2023: descansos cortos y frecuentes en 2 años), riesgo de la vuelta [E-r] (Carrier
+  1998), P75 de 60 d [E-r] (Estberg 1998) y escalones en potros [E] (Oliveira 2006, n = 42). Separaciones, días
+  alrededor de la carrera, topes y cortes de DM2: [I]. Árabes: extrapolación del PSI [I-raza].
+- Reglas en la KB: `PLANIFICADOR_RESTRICCIONES_P1_P6` y `PLANIFICADOR_DMD_DM1_DM4` pasan a **IMPLEMENTADO** (sin
+  calibrar); `RECUPERACION_RT1_RT3` a **IMPLEMENTADO** (RT2 en el plan).
+
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se
    guarda en `knowledge/estudios/AAAA-MM-DD_<tema>.md` con fuentes y etiquetas [E]/[I]/[NV].

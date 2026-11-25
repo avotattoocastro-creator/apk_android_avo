@@ -493,3 +493,182 @@ EQ_TEST(entreno, load_cg_trimp_bands_ewma) {
   CHECK(json::parse("{\"carga_cg\":{\"dias_ewma_aguda\":28,\"dias_ewma_cronica\":7}}", &opt, &err) && !training_config_from_json(opt, &c7, &err));
   CHECK(json::parse("{\"carga_cg\":false}", &opt, &err) && training_config_from_json(opt, &c7, &err) && !c7.cg.enabled);
 }
+
+// ---------------------------------------------------------------- planificador semanal, capa 2 (TRAINING 1.3.0)
+namespace {
+SessionSummary plan_day(long day, double gallop_m, double canter_m, const char* breed = "PSI") {
+  SessionSummary s = make("S" + std::to_string(day), day, 15, 10, 8);
+  s.race.present = true; s.race.breed = breed;
+  s.race.kb_band_m[0] = canter_m; s.race.kb_band_m[1] = 0; s.race.kb_band_m[2] = gallop_m;
+  s.race.kb_canter_m = canter_m; s.race.kb_gallop_m = gallop_m; s.race.kb_bone_pct = 0.2;
+  return s;
+}
+std::string plan_types(const WeekPlan& w) {
+  std::string t;
+  for (const auto& d : w.days) t += (t.empty() ? "" : ",") + d.type;
+  return t;
+}
+bool has_note(const WeekPlan& w, const char* rule) {
+  for (const auto& n : w.notes) if (n.rule == rule) return true;
+  return false;
+}
+TrainingConfig plan_cfg(const std::string& opts) {
+  TrainingConfig c; json::Value v; std::string err;
+  if (!opts.empty()) { CHECK(json::parse(opts, &v, &err)); CHECK(training_config_from_json(v, &c, &err)); }
+  return c;
+}
+}  // namespace
+
+// Maduro, rápido de 600 m cada 4 días: dos rápidos a ≥ 72 h (días +3 y +6), suave al día siguiente y un día libre.
+EQ_TEST(entreno, planner_week_mature) {
+  std::vector<SessionSummary> h;
+  for (int d = 0; d <= 40; d++) h.push_back(plan_day(D0 + d, d % 4 == 0 ? 600 : 0, 1000));
+  TrainingConfig c = plan_cfg("");
+  TrainingResult r = analyse_training(h, training_day_text(D0 + 40), c);
+  const WeekPlan& w = r.week;
+  CHECK(w.available && w.phase == "NORMAL" && !w.limited);
+  CHECK(w.from_day == D0 + 41 && w.to_day == D0 + 47 && w.days.size() == 7);
+  CHECK(w.fast_target == 2 && w.fast_planned == 2);
+  CHECK(plan_types(w) == "SUAVE,LENTO,RAPIDO,SUAVE,LENTO,RAPIDO,LIBRE");
+  CHECK_NEAR(w.fast_ref_m, 600, 1e-9);
+  CHECK(std::isnan(w.fast_max_m) && w.age_years == -1 && has_note(w, "PLANIFICADOR_EDAD"));
+  CHECK(r.level == analyse_training(h, training_day_text(D0 + 40), plan_cfg("{\"planificador\":false}")).level);   // nunca cambia el estado
+  std::string js = training_to_json(r, c);
+  CHECK(js.find("\"semana_siguiente\":{\"disponible\":true,\"desde\":\"" + training_day_text(D0 + 41) + "\"") != std::string::npos);
+  CHECK(js.find("\"fase\":\"NORMAL\"") != std::string::npos && js.find("\"validado\":false") != std::string::npos);
+  json::Value v; std::string err;
+  CHECK(json::parse(js, &v, &err));
+  const json::Value& sw = v["estado"]["planificador"]["semana_siguiente"];
+  CHECK(sw["dias"].a.size() == 7 && sw["dias"][2]["tipo"].str() == "RAPIDO" && sw["dias"][2]["rapido_max_m"].is_null());
+  CHECK(sw["edad_anos"].is_null() && sw["rapido_max_m"].is_null() && sw["parametros"]["dias_min_entre_rapidos"].num() == 3);
+  // desactivado: sin propuesta
+  TrainingResult off = analyse_training(h, "", plan_cfg("{\"planificador\":false}"));
+  CHECK(!off.week.available && off.week.days.empty());
+  // sin bloque de carga de la base científica: sin propuesta y motivo
+  std::vector<SessionSummary> plain;
+  for (int d = 0; d < 10; d++) plain.push_back(make("N" + std::to_string(d), D0 + d, 15, 20, 5));
+  TrainingResult rn = analyse_training(plain, "", c);
+  CHECK(!rn.week.available && !rn.week.reason.empty());
+  CHECK(training_to_json(rn, c).find("\"semana_siguiente\":{\"disponible\":false,\"motivo\":") != std::string::npos);
+}
+
+// Potro de 2 años con carrera prevista: sin rápido en los 3 días previos ni el siguiente; DM1 tope de 400 m.
+EQ_TEST(entreno, planner_week_colt_race) {
+  std::vector<SessionSummary> h;
+  for (int d = 0; d <= 20; d++) h.push_back(plan_day(D0 + d, d % 4 == 0 ? 300 : 0, 800));
+  TrainingConfig c = plan_cfg("{\"edad_anos\":2,\"carreras_previstas\":[\"" + training_day_text(D0 + 26) + "\"]}");
+  TrainingResult r = analyse_training(h, training_day_text(D0 + 20), c);
+  const WeekPlan& w = r.week;
+  CHECK(w.phase == "POTRO_2_ANOS" && w.age_years == 2 && w.age_origin == "EDAD_ANOS" && w.prep_weeks == 2);
+  CHECK_NEAR(w.fast_max_m, 400, 1e-9);
+  CHECK(w.fast_target == 2 && w.fast_planned == 0);
+  CHECK(plan_types(w) == "SUAVE,LENTO,LENTO,LENTO,LENTO,CARRERA,LIBRE");
+  CHECK(has_note(w, "PLANIFICADOR_DM1") && has_note(w, "PLANIFICADOR_P2") && !has_note(w, "PLANIFICADOR_EDAD"));
+  // sin carrera: dos rápidos con el tope de DM1
+  TrainingResult r2 = analyse_training(h, training_day_text(D0 + 20), plan_cfg("{\"fecha_nacimiento\":\"2024-03-01\"}"));
+  CHECK(r2.week.age_years == 2 && r2.week.age_origin == "FECHA_NACIMIENTO" && r2.week.fast_planned == 2);
+  CHECK(plan_types(r2.week) == "SUAVE,LENTO,RAPIDO,SUAVE,LENTO,RAPIDO,LIBRE");
+  CHECK_NEAR(r2.week.days[2].fast_max_m, 400, 1e-9);
+}
+
+// P4 y P7: vuelta tras > 60 d sin rápido (rápidos de 600 m hasta el día 28, parado 31–100, lento desde el 101).
+EQ_TEST(entreno, planner_week_return) {
+  std::vector<SessionSummary> base;
+  for (int d = 0; d <= 30; d++) base.push_back(plan_day(D0 + d, d % 4 == 0 ? 600 : 0, 1000));
+  // 10 días de lento: semana sin rápidos, un día libre al final; tope 75 % de 600 = 450 m
+  std::vector<SessionSummary> h = base;
+  for (int d = 101; d <= 110; d++) h.push_back(plan_day(D0 + d, 0, 1000));
+  TrainingConfig c = plan_cfg("");
+  TrainingResult r = analyse_training(h, training_day_text(D0 + 110), c);
+  CHECK(r.week.phase == "REINCORPORACION_LENTA" && r.week.slow_days_done == 10 && r.week.fast_target == 0 && r.week.fast_planned == 0);
+  CHECK(plan_types(r.week) == "LENTO,LENTO,LENTO,LENTO,LENTO,LENTO,LIBRE");
+  CHECK_NEAR(r.week.fast_max_m, 450, 1e-9);
+  CHECK(has_note(r.week, "PLANIFICADOR_P4") && r.week.days_since_break == 9);
+  // 30 días de lento: un solo rápido de 450 m
+  h = base;
+  for (int d = 101; d <= 130; d++) h.push_back(plan_day(D0 + d, 0, 1000));
+  r = analyse_training(h, training_day_text(D0 + 130), c);
+  CHECK(r.week.phase == "REINCORPORACION_LENTA" && r.week.slow_days_done == 30 && r.week.fast_target == 1 && r.week.fast_planned == 1);
+  CHECK(plan_types(r.week) == "RAPIDO,SUAVE,LENTO,LENTO,LENTO,LENTO,LIBRE");
+  CHECK_NEAR(r.week.days[0].fast_max_m, 450, 1e-9);
+  // primer rápido de la vuelta el día 131: ventana P7, el siguiente rápido 7 días después
+  h.push_back(plan_day(D0 + 131, 600, 1000));
+  for (int d = 132; d <= 135; d++) h.push_back(plan_day(D0 + d, 0, 1000));
+  r = analyse_training(h, training_day_text(D0 + 135), c);
+  CHECK(r.week.phase == "REINCORPORACION_RAPIDO" && r.week.return_fast_day == D0 + 131 && r.week.fast_target == 1);
+  CHECK(plan_types(r.week) == "LENTO,LENTO,RAPIDO,SUAVE,LENTO,LENTO,LIBRE");
+  CHECK_NEAR(r.week.fast_max_m, 450, 1e-9);
+  CHECK(has_note(r.week, "PLANIFICADOR_P7"));
+  // pasada la ventana de 21 d: fase normal
+  for (int d = 136; d <= 155; d++) h.push_back(plan_day(D0 + d, d % 4 == 0 ? 600 : 0, 1000));
+  r = analyse_training(h, training_day_text(D0 + 155), c);
+  CHECK(r.week.phase == "NORMAL" && r.week.fast_target == 2);
+}
+
+// P5 (60 d frente al P75 propio, sin penalizar el último mes) y P6 (sin descanso en ≥ 183 d).
+EQ_TEST(entreno, planner_week_p5_p6) {
+  // rápido cada 4 días: 200 m los 100 primeros días y luego 200 + 6·(d − 100) m (acumulación sostenida)
+  std::vector<SessionSummary> h;
+  for (int d = 0; d <= 199; d++) h.push_back(plan_day(D0 + d, d % 4 == 0 ? (d < 100 ? 200 : 200 + 6.0 * (d - 100)) : 0, 800));
+  TrainingResult r = analyse_training(h, training_day_text(D0 + 199), plan_cfg(""));
+  // ventana 140–199: 15 rápidos, Σ = 15·200 + 6·(40 + 44 + … + 96) = 9120 m → 152 m/día
+  CHECK_NEAR(r.week.p5_mean_m, 152, 1e-9);
+  CHECK(r.week.p5_mean_m > r.week.p5_p75_m && has_note(r.week, "PLANIFICADOR_P5"));
+  CHECK(has_note(r.week, "PLANIFICADOR_P6") && r.week.days_since_break == -1);
+  // mismo volumen pero solo en el último mes (rápido cada 5 días): no se avisa
+  std::vector<SessionSummary> h2;
+  for (int d = 0; d <= 199; d++) h2.push_back(plan_day(D0 + d, d % 5 == 0 ? (d < 170 ? 200 : 2000) : 0, 800));
+  TrainingResult r2 = analyse_training(h2, training_day_text(D0 + 199), plan_cfg(""));
+  CHECK(r2.week.p5_mean_m > r2.week.p5_p75_m && !has_note(r2.week, "PLANIFICADOR_P5"));
+  // historia corta: sin P5 ni P6
+  TrainingResult r3 = analyse_training(std::vector<SessionSummary>(h.begin(), h.begin() + 100), "", plan_cfg(""));
+  CHECK(std::isnan(r3.week.p5_mean_m) && !has_note(r3.week, "PLANIFICADOR_P5") && !has_note(r3.week, "PLANIFICADOR_P6"));
+}
+
+// DM2–DM4 en potros de 2 años.
+EQ_TEST(entreno, planner_week_dmd) {
+  // DM2: canter 1000 m/día hasta el día 34 y 2500 m/día del 35 al 41 → 7 d: ×2,5; 14 d: ×1,75
+  std::vector<SessionSummary> h;
+  for (int d = 0; d <= 41; d++) h.push_back(plan_day(D0 + d, 0, d < 35 ? 1000 : 2500));
+  TrainingResult r = analyse_training(h, training_day_text(D0 + 41), plan_cfg("{\"edad_anos\":2}"));
+  int dm2 = 0;
+  for (const auto& n : r.week.notes) if (n.rule == "PLANIFICADOR_DM2") dm2++;
+  CHECK(dm2 == 2);
+  bool x25 = false, x175 = false;
+  for (const auto& n : r.week.notes) { if (n.text.find("2.5 veces") != std::string::npos || n.text.find("2,5 veces") != std::string::npos) x25 = true;
+                                       if (n.text.find("1.8 veces") != std::string::npos || n.text.find("1,8 veces") != std::string::npos) x175 = true; }
+  CHECK(x25 && x175);
+  // el mismo caballo sin edad: sin DM
+  TrainingResult rm = analyse_training(h, training_day_text(D0 + 41), plan_cfg(""));
+  CHECK(!has_note(rm.week, "PLANIFICADOR_DM2"));
+  // DM3 y DM4: rápidos de 400 m y salto a 750 m el día 40 con 1500 m de canter (lentos 1000 m)
+  std::vector<SessionSummary> h2;
+  for (int d = 0; d <= 41; d++) {
+    double g = d == 40 ? 750 : (d % 4 == 0 && d <= 36 ? 400 : 0);
+    h2.push_back(plan_day(D0 + d, g, d == 40 ? 1500 : 1000));
+  }
+  TrainingResult r2 = analyse_training(h2, training_day_text(D0 + 41), plan_cfg("{\"edad_anos\":2}"));
+  CHECK(has_note(r2.week, "PLANIFICADOR_DM3") && has_note(r2.week, "PLANIFICADOR_DM4"));
+  // árabe: aviso de extrapolación [I-raza]
+  std::vector<SessionSummary> h3;
+  for (int d = 0; d <= 20; d++) h3.push_back(plan_day(D0 + d, d % 4 == 0 ? 600 : 0, 1000, "ARABE"));
+  CHECK(has_note(analyse_training(h3, "", plan_cfg("")).week, "PLANIFICADOR_ARABE"));
+}
+
+// Opciones del planificador: rangos y errores.
+EQ_TEST(entreno, planner_options) {
+  TrainingConfig c = plan_cfg("{\"planificador\":{\"rapidos_semana_maduro\":3,\"dias_min_entre_rapidos\":2,\"dias_libres\":0,\"p7_fraccion_distancia\":0.5}}");
+  CHECK(c.planner.fast_per_week_mature == 3 && c.planner.min_days_between_fast == 2 && c.planner.free_days == 0);
+  CHECK_NEAR(c.planner.p7_distance_fraction, 0.5, 1e-12);
+  std::vector<SessionSummary> h;
+  for (int d = 0; d <= 40; d++) h.push_back(plan_day(D0 + d, d % 4 == 0 ? 600 : 0, 1000));
+  TrainingResult r = analyse_training(h, training_day_text(D0 + 40), c);
+  CHECK(r.week.fast_planned == 3 && plan_types(r.week) == "SUAVE,RAPIDO,SUAVE,RAPIDO,SUAVE,RAPIDO,SUAVE");
+  const char* bad[] = {"{\"planificador\":{\"dias_min_entre_rapidos\":0}}", "{\"planificador\":{\"p7_fraccion_distancia\":2}}",
+                       "{\"planificador\":\"si\"}", "{\"fecha_nacimiento\":\"ayer\"}", "{\"edad_anos\":2.5}",
+                       "{\"planificador\":{\"dm4_desde_m\":900,\"dm4_hasta_m\":700}}"};
+  for (const char* b : bad) {
+    TrainingConfig k; json::Value v; std::string err;
+    CHECK(json::parse(b, &v, &err) && !training_config_from_json(v, &k, &err) && !err.empty());
+  }
+}
