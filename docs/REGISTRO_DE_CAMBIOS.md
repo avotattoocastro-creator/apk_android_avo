@@ -24,6 +24,18 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-25 — iPad — La historia del caballo y el planificador se calculan a hoy
+**Autor:** Claude (chat integrador, aviso del usuario 25/11) · **Rama:** `claude/planificador-desde-hoy` · **CI:** iPad en la rama (sin TestFlight) y al integrar
+**Qué cambia:** la historia del caballo llamaba al motor sin `fecha_referencia`, así que todo (estado, ventanas de 7/30/60 d,
+reglas, carga CG y **planificador**) quedaba en el día del último entrenamiento: con la última sesión el 08/11, la «semana
+siguiente» salía 09/11–15/11. Ahora se pasa la fecha de hoy (Europe/Madrid): el planificador propone los 7 días siguientes a
+hoy y los días sin trabajo, la carga aguda y las reglas de vuelta tras descanso cuentan los días transcurridos hasta hoy. El
+caballo de demostración sigue en su última sesión sintética. La tarjeta de carreras (estado a la fecha de la carrera) no cambia.
+**No se ha tocado:** motor (ya aceptaba `fecha_referencia`), contratos, firmware, workflows, firmas, `Info.plist` ni número de build.
+**Pendiente:** Android y Windows no tienen todavía la historia del caballo. **NO VERIFICADO** en el iPad.
+
+---
+
 ## 2026-11-25 — Motor 2.0.0-dev36 (AVO BEACH 1.0.0) · iPad — Marea del trabajo y franja de playa automática
 **Autor:** Claude · **Commits:** los de esta rama (`claude/marea-franja-auto`) · **CI:** al fusionar (motor, iPad/TestFlight)
 **Qué cambia:**
