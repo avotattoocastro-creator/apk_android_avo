@@ -107,6 +107,12 @@ es una superficie distinta**.
 - **Rápidos sobre orilla compactada y cambios bruscos de franja** dentro de una semana: anotarlos (PL6); son los casos
   que la base marca para revisar.
 - Las primeras 4–6 sesiones en cada franja forman su línea base; hasta entonces A7/A8 no juzgan esa franja.
+- **Motor 2.0.0-dev39 (PL2–PL6, `estado.playa`):** para calibrarlo hace falta, por caballo, ≥ 4 sesiones en cada franja
+  usada (mínimo `min_sesiones_franja`), con la cincha y la espalda (zancada a las 2 velocidades de referencia y
+  velocidades distintas entre sesiones: la pendiente propia pide ≥ 8 pares y DE de la velocidad ≥ 0,5 m/s). En la ficha:
+  `humedad_suelo_pct` (3–5 lecturas con sonda TDR en la franja del trabajo, mismo operador), `lluvia_48h_mm` (AEMET
+  Treto o pluviómetro de la cuadra) y `nota_suelo` del jinete. Con esos datos se ajustan los cortes de humedad (13/19 %),
+  el de orilla compacta, el 70 % de franja dominante y el efecto de cada franja frente a la orilla firme.
 
 ## 5. Cómo se usan los datos para calibrar A7, A8 y A9
 

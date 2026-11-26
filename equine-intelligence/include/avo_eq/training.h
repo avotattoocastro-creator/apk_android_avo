@@ -16,7 +16,7 @@
 
 namespace avoeq {
 
-static const char* const TRAINING_VERSION = "1.4.0";   // 1.4.0: planificador en semana natural (lunes–domingo) con lo realizado; 1.1.0: ficha de campo, A4 y base del planificador; 1.2.0: carga CG1–CG3;
+static const char* const TRAINING_VERSION = "1.5.0";   // 1.5.0: línea base de la playa por franja PL2–PL6 (AVO BEACH, KB 1.32.0); 1.4.0: planificador en semana natural (lunes–domingo) con lo realizado; 1.1.0: ficha de campo, A4 y base del planificador; 1.2.0: carga CG1–CG3;
                                                        // 1.3.0: planificador semanal, capa 2 (semana siguiente)
 static const char* const TRAINING_LOAD_ALGORITHM = "AVO_TRAINING_LOAD_V1";
 
@@ -49,6 +49,24 @@ struct TrainingConfig {
     double max_missing_fraction = 0.20;                // más sesiones sin dato en la ventana crónica: sin cociente [I]
     int hr_max_min_sessions = 3;                       // FM1: FC máxima propia = pico de ≥ 3 trabajos rápidos [I]
   } cg;
+  // Línea base de la playa por franja (TRAINING 1.5.0, KB 1.32.0): PL2–PL6. Todo SIN CALIBRAR: descriptivo, marcas INFO,
+  // nunca cambia el estado del caballo. Etiquetas en la ficha 13_TRABAJO_PISTA.md y en el JSON («etiquetas»).
+  struct Beach {
+    bool enabled = true;
+    int window_days = 180;             // sesiones de playa usadas para la línea base [I]
+    int min_sessions_band = 4;         // PL5: 4–6 sesiones por caballo y franja antes de usarla [I]
+    double slope_sl_prior = 0.359;     // PL3: +0,359 m de zancada por m/s (Pfau 2024, PSI en tierra) [E]
+    double slope_sf_prior = 0.018;     // PL3: +0,018 Hz por m/s (Pfau 2024) [E]
+    int min_pairs_own_slope = 8;       // PL3: pares (v, zancada) para usar la pendiente propia [I]
+    double min_speed_sd = 0.5;         // PL3: dispersión mínima de la velocidad dentro de la franja (m/s) para la pendiente propia [I]
+    double soil_dry_max_pct = 13;      // PL2: humedad ≤ 13 % = SECA (cortes de Pfau 2024 en tierra [E]; en playa [I])
+    double soil_wet_min_pct = 19;      // PL2: humedad > 19 % = HUMEDA (Pfau 2024 [E]; Crevier-Denoix 2011: 19 % en orilla firme [E-r]; en playa [I])
+    double compact_soil_max_pct = 13;  // PL6: rápido en orilla firme con humedad ≤ 13 % o nota DURO = orilla muy compactada [I]
+    double band_pct_min = 70;          // PL6: franja dominante < 70 % del trabajo rápido = cambio de franja en el galope [I]
+    int band_change_days = 7;          // PL6: rápido en otra franja que el anterior de ≤ 7 días [I]
+    double rain_recent_mm = 5;         // PL2: lluvia ≥ 5 mm en 48 h = suelo distinto del de sus comparables [I]
+    int marks_days = 14;               // marcas PL2/PL6 de las sesiones de los últimos 14 días [I]
+  } beach;
   // Planificador semanal, capa 2 (TRAINING 1.3.0, KB 1.31.0): propuesta orientativa de la semana siguiente con P1, P2,
   // P4–P7, RT1–RT3 y DM1–DM4. Todo SIN CALIBRAR: sale como pautas informativas y nunca cambia el estado del caballo.
   struct Planner {
@@ -167,6 +185,11 @@ struct SessionSummary {
   std::string tide_level;         // BAJA | MEDIA | ALTA en el inicio del trabajo
   std::string tide_trend;         // SUBE | BAJA
   double tide_height_m = NAN;
+  double beach_band_pct = NAN;    // % de los metros del trabajo en la franja dominante (solo franja AUTO; PL6)
+  // PL2 (TRAINING 1.5.0): registro del suelo de la playa en la ficha de campo. NaN / vacío = sin anotar.
+  double soil_moisture_pct = NAN; // humedad volumétrica del suelo (sonda TDR, media de 3–5 lecturas en la franja)
+  double rain_48h_mm = NAN;       // lluvia de las 48 h anteriores
+  std::string ground_note;        // nota del jinete sobre el suelo: DURO | NORMAL | BLANDO | PROFUNDO
   double temperature_c = NAN, humidity_pct = NAN;
   double rider_kg = NAN, horse_kg = NAN;        // peso del jinete (con equipo) y peso corporal del caballo
   std::string incident_type, incident_text;     // NINGUNA | TROPIEZO | CAIDA | ESPANTADA | COJERA | HERRAJE | EQUIPO | OTRA
@@ -222,6 +245,42 @@ struct CgStatus {
   std::vector<std::pair<long, std::pair<double, double>>> daily;   // día, (metros rápidos, TRIMP) en la ventana crónica
   std::vector<std::string> notes;
 };
+
+// Línea base de la playa por franja (TRAINING 1.5.0): una entrada por franja con sesiones en la ventana.
+struct BeachStat { double median = NAN, mad = NAN; int n = 0; };
+struct BeachBandBaseline {
+  std::string band;
+  int sessions = 0, auto_n = 0, manual_n = 0, fast_sessions = 0;
+  long last_day = -1;
+  bool usable = false;                 // PL5: sesiones ≥ min_sessions_band
+  BeachStat stride, freq, v600, v200, impacts_km, soil;   // zancada y frecuencia a la 1.ª v de referencia, últimos 600 m, V200, impactos/km, humedad
+  int pairs = 0;
+  double v_mean = NAN, sl_mean = NAN, sf_mean = NAN;   // medias de los pares (v, zancada, frecuencia)
+  double sl_adj = NAN, sf_adj = NAN;   // PL3: zancada y frecuencia ajustadas a la velocidad común
+  double sl_effect_m = NAN, sf_effect_hz = NAN;   // PL3: efecto de la franja frente a la de referencia
+};
+struct BeachMark { long day = 0; std::string id, rule, text, evidence; };
+struct BeachBaseline {
+  bool available = false;
+  std::string reason;
+  int beach_sessions = 0;
+  std::string ref_band;                // ORILLA_FIRME si es utilizable; si no, la franja utilizable con más sesiones
+  double slope_sl = NAN, slope_sf = NAN, v_common = NAN;
+  std::string slope_origin;            // PROPIA | PFAU_2024
+  int pairs = 0;
+  std::vector<BeachBandBaseline> bands;
+  // última sesión de playa
+  std::string last_id, last_band, last_soil_class;
+  long last_day = -1;
+  double last_impacts_km = NAN, last_impacts_rel = NAN;   // PL4: impactos/km y relativo a la mediana de su franja
+  int fast_firm_7d = 0;                // PL6: rápidos en orilla firme en los 7 días hasta la referencia
+  std::vector<BeachMark> marks;
+  std::vector<std::string> notes;
+};
+// PL2: clase de humedad del suelo (SECA | MEDIA | HUMEDA, "" sin dato).
+std::string training_soil_class(double pct, const TrainingConfig& c);
+BeachBaseline training_beach_baseline(const std::vector<SessionSummary>& ok, long at, const TrainingConfig& c);
+std::string training_beach_json(const BeachBaseline& b, const TrainingConfig& c);
 
 struct SessionResult {
   SessionSummary s;
@@ -303,6 +362,7 @@ struct TrainingResult {
   KbStatus kb;                                      // base científica a la fecha de referencia
   PlannerStatus planner;                            // base del planificador semanal a la fecha de referencia
   WeekPlan week;                                    // capa 2: propuesta de la semana siguiente (TRAINING 1.3.0)
+  BeachBaseline beach;                              // PL2–PL6: línea base de la playa por franja (TRAINING 1.5.0)
   CgStatus cg;                                      // CG1–CG3 a la fecha de referencia (solo descriptiva)
   std::string level = "NORMAL";
   std::vector<std::string> reasons, warnings;

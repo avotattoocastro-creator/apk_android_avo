@@ -37,6 +37,9 @@ se pasan a mayúsculas; un valor no reconocido o fuera de rango se descarta con 
 |---|---|
 | `tipo_sesion` | `TRABAJO`, `TRABAJO_REFERENCIA_1000`, `CARRERA`, `TRIAL`, `DESCANSO_ACTIVO` |
 | `pista.franja` | `ORILLA_FIRME`, `HUMEDA_PROFUNDA`, `SECA_PROFUNDA`, `TRANSICION` (franja de playa, PL1) |
+| `pista.humedad_suelo_pct` | 0–60: humedad volumétrica del suelo (sonda TDR, media de 3–5 lecturas en la franja; PL2, motor 2.0.0-dev39) |
+| `pista.lluvia_48h_mm` | 0–500: lluvia de las 48 h anteriores (PL2) |
+| `pista.nota_suelo` | `DURO`, `NORMAL`, `BLANDO`, `PROFUNDO` (nota del jinete sobre el suelo; PL2/PL6) |
 | `pista.going` | `FIRME`, `BUENO_FIRME`, `BUENO`, `BUENO_BLANDO`, `BLANDO`, `PESADO` (estratos de GO1) |
 | `pista.marea` | `{"hora":"HH:MM", "tipo":"BAJAMAR"\|"PLEAMAR"}` (hora local de la marea de referencia) |
 | `condiciones` | `temperatura_c` (−30–55), `humedad_pct` (0–100) |
@@ -153,6 +156,13 @@ Opciones en la raíz: `fecha_nacimiento` (AAAA-MM-DD) y `edad_anos`; `planificad
 `SUAVE, LENTO, RAPIDO, SUAVE, LENTO, RAPIDO, LIBRE` (rápidos a +3 y +6 d). Potro de 2 años con carrera a +6 d → `SUAVE,
 LENTO, LENTO, LENTO, LENTO, CARRERA, LIBRE` y pauta P2 (no cabe ningún rápido). Vuelta tras 82 d sin rápido con 10 d de
 lento → semana sin rápidos y tope de 450 m (75 % de 600).
+
+## 5 quater. Playa por franjas: línea base PL2–PL6 (TRAINING 1.5.0, motor 2.0.0-dev39)
+`estado.playa` resume las sesiones de playa con franja por franja (mediana y MAD de zancada y frecuencia a la 1.ª
+velocidad de referencia, últimos 600 m, V200, impactos por km y humedad del suelo), el efecto de cada franja sobre la
+zancada a una velocidad común (PL3), los impactos de la última sesión relativos a su franja (PL4) y marcas INFO de
+suelo (PL2/PL6). La V200 de A9 solo se compara dentro de la misma franja (PL5). Fórmulas, parámetros, etiquetas y
+ejemplo: ficha 14, §3 septies. Sin calibrar; no cambia el estado.
 
 ## Parámetros (opciones JSON)
 | Opción | Defecto | Opción | Defecto |

@@ -801,6 +801,8 @@ struct TrainingAnalysisResult: Equatable {
     var cargaCg: TrainingLoadCg
     /// «estado.planificador.semana_siguiente» (capa 2 del planificador, motor 2.0.0-dev35): propuesta orientativa.
     var semanaSiguiente: WeekPlan
+    /// «estado.playa» (PL2–PL6, motor 2.0.0-dev39): línea base de la playa por franja, siempre INFO.
+    var playa: TrainingBeachBaseline
     var nota: String
     var cargaDiaria: [TrainingDailyLoad]
     var lineasBase: [TrainingBaseline]
@@ -837,6 +839,7 @@ struct TrainingAnalysisResult: Equatable {
         baseCientifica = KbHistoryStatus(TJ.obj(e, "base_cientifica"))
         cargaCg = TrainingLoadCg(TJ.obj(e, "carga_cg"))
         semanaSiguiente = WeekPlan(TJ.obj(TJ.obj(e, "planificador"), "semana_siguiente"))
+        playa = TrainingBeachBaseline(TJ.obj(e, "playa"))
         nota = TJ.str(e, "nota")
         cargaDiaria = TJ.objs(o, "carga_diaria").map { TrainingDailyLoad(fecha: TJ.str($0, "fecha"), carga: TJ.num($0, "carga") ?? 0) }
         lineasBase = TJ.objs(o, "lineas_base").map { TrainingBaseline($0) }

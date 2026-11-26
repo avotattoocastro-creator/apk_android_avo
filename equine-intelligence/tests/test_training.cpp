@@ -731,3 +731,187 @@ EQ_TEST(entreno, planner_calendar_week) {
   CHECK(json::parse("{\"planificador\":{\"semana_calendario\":false}}", &o, &err) && training_config_from_json(o, &c5, &err) && !c5.planner.calendar_week);
   CHECK(json::parse("{\"planificador\":{\"semana_calendario\":1}}", &o, &err) && !training_config_from_json(o, &c5, &err));
 }
+
+// Línea base de la playa por franja (TRAINING 1.5.0, KB 1.32.0): PL2–PL6. Valores calculados a mano.
+namespace {
+SessionSummary beach_day(const std::string& id, long day, const char* band, double v0, double l0, double f0, double v1, double l1, double f1,
+                         int impacts) {
+  SessionSummary s = make(id, day, 15, 10, 8);
+  s.surface = "PLAYA"; s.beach_band = band; s.race.present = true; s.race.breed = "PSI"; s.race.fast_efforts = 1;
+  s.race.ref_speed[0] = v0; s.race.sl_ref[0] = l0; s.race.sf_ref[0] = f0;
+  s.race.ref_speed[1] = v1; s.race.sl_ref[1] = l1; s.race.sf_ref[1] = f1;
+  s.race.dist_work_m = 2000; s.race.impacts = impacts;
+  return s;
+}
+bool has_mark(const BeachBaseline& b, const char* rule, const char* id = nullptr) {
+  for (const auto& m : b.marks) if (m.rule == rule && (!id || m.id == id)) return true;
+  return false;
+}
+const BeachBandBaseline* band_of(const BeachBaseline& b, const char* name) {
+  for (const auto& f : b.bands) if (f.band == name) return &f;
+  return nullptr;
+}
+std::vector<SessionSummary> beach_history() {
+  std::vector<SessionSummary> h;
+  // 4 sesiones en seca profunda (días 0, 3, 6, 9): pares (13 m/s; 5,90 m; 2,15 Hz) y (15; 6,60; 2,22)
+  for (int i = 0; i < 4; i++) h.push_back(beach_day("S" + std::to_string(i), D0 + 3 * i, "SECA_PROFUNDA", 13, 5.90, 2.15, 15, 6.60, 2.22, 2));
+  // 5 en orilla firme (días 12–24): (14; 6,60; 2,12) y (16; 7,30; 2,19); impactos 2, 3, 3, 4, 6 en 2 km
+  const int imp[5] = {2, 3, 3, 4, 6};
+  for (int i = 0; i < 5; i++) h.push_back(beach_day("O" + std::to_string(i), D0 + 12 + 3 * i, "ORILLA_FIRME", 14, 6.60, 2.12, 16, 7.30, 2.19, imp[i]));
+  h[7].rain_48h_mm = 8;                                   // día 21: lluvia reciente
+  h[8].soil_moisture_pct = 11; h[8].beach_band_auto = true; h[8].beach_band_pct = 60;   // día 24: orilla compacta y repartida
+  return h;
+}
+}  // namespace
+
+EQ_TEST(entreno, beach_baseline_pl3_pl6) {
+  std::vector<SessionSummary> h = beach_history();
+  TrainingResult r = analyse_training(h, "", TrainingConfig());
+  const BeachBaseline& b = r.beach;
+  CHECK(b.available);
+  CHECK(b.beach_sessions == 9);
+  CHECK(b.ref_band == "ORILLA_FIRME");
+  // PL3: pendiente común dentro de franja = 0,70 m / 2 m/s = 0,35 m por m/s (propia, 18 pares, DE de v = 1 m/s)
+  CHECK(b.slope_origin == "PROPIA");
+  CHECK(b.pairs == 18);
+  CHECK_NEAR(b.slope_sl, 0.35, 1e-9);
+  CHECK_NEAR(b.slope_sf, 0.035, 1e-9);
+  CHECK_NEAR(b.v_common, 14.5, 1e-9);   // mediana de 4×13, 5×14, 4×15, 5×16
+  const BeachBandBaseline* o = band_of(b, "ORILLA_FIRME");
+  const BeachBandBaseline* s = band_of(b, "SECA_PROFUNDA");
+  CHECK(o && s);
+  if (o && s) {
+    CHECK(o->usable && s->usable);   // 5 y 4 sesiones (mínimo 4)
+    CHECK(o->sessions == 5 && s->sessions == 4 && o->fast_sessions == 5);
+    // orilla: 6,95 + 0,35·(14,5 − 15) = 6,775 m; seca: 6,25 + 0,35·(14,5 − 14) = 6,425 m
+    CHECK_NEAR(o->sl_adj, 6.775, 1e-9);
+    CHECK_NEAR(s->sl_adj, 6.425, 1e-9);
+    CHECK_NEAR(s->sl_effect_m, -0.35, 1e-9);
+    CHECK_NEAR(o->sl_effect_m, 0.0, 1e-12);
+    // frecuencia: orilla 2,155 − 0,0175 = 2,1375; seca 2,185 + 0,0175 = 2,2025 → +0,065 Hz
+    CHECK_NEAR(s->sf_effect_hz, 0.065, 1e-9);
+    CHECK_NEAR(o->stride.median, 6.60, 1e-9);
+    // PL4: impactos/km de la orilla 1; 1,5; 1,5; 2; 3 → mediana 1,5 y MAD 0,5
+    CHECK_NEAR(o->impacts_km.median, 1.5, 1e-9);
+    CHECK_NEAR(o->impacts_km.mad, 0.5, 1e-9);
+  }
+  CHECK(b.last_id == "O4" && b.last_band == "ORILLA_FIRME");
+  CHECK_NEAR(b.last_impacts_km, 3.0, 1e-9);
+  CHECK_NEAR(b.last_impacts_rel, 2.0, 1e-9);
+  CHECK(b.last_soil_class == "SECA");   // 11 % ≤ 13 %
+  CHECK(b.fast_firm_7d == 3);           // días 18, 21 y 24
+  // PL6 / PL2: marcas de los últimos 14 días (después del día 10)
+  CHECK(has_mark(b, "PL6_CAMBIO_FRANJA", "O0"));            // rápido en orilla 3 días después del de seca
+  CHECK(!has_mark(b, "PL6_CAMBIO_FRANJA", "O1"));
+  CHECK(has_mark(b, "PL6_RAPIDO_ORILLA_COMPACTA", "O4"));   // humedad 11 %
+  CHECK(has_mark(b, "PL6_CAMBIO_FRANJA_EN_GALOPE", "O4"));  // solo el 60 % en la franja dominante
+  CHECK(has_mark(b, "PL2_LLUVIA_RECIENTE", "O3"));
+  CHECK(!has_mark(b, "PL6_RAPIDO_ORILLA_COMPACTA", "O3"));  // sin humedad ni nota del jinete
+  {  // nunca cambia el estado: mismo nivel y mismos motivos con la playa desactivada
+    TrainingConfig off; off.beach.enabled = false;
+    TrainingResult r0 = analyse_training(h, "", off);
+    CHECK(r.level == r0.level && r.reasons == r0.reasons);
+    CHECK(!r0.beach.available);
+  }
+  std::string js = training_to_json(r, TrainingConfig());
+  json::Value v; std::string err;
+  CHECK(json::parse(js, &v, &err));
+  const json::Value& p = v["estado"]["playa"];
+  CHECK(p["disponible"].boolean(false));
+  CHECK(p["validado"].type == json::Value::BOOL && !p["validado"].b);
+  CHECK(p["pl3"]["origen_pendiente"].str() == "PROPIA");
+  CHECK(p["franjas"].a.size() == 2);
+  CHECK(p["franjas"][0]["franja"].str() == "ORILLA_FIRME");
+  CHECK_NEAR(p["franjas"][1]["efecto_zancada_m"].num(0), -0.35, 1e-6);
+  CHECK(p["parametros"]["etiquetas"]["pendientes_previas"].str() == "E");
+  CHECK(p["ultima_sesion"]["clase_humedad"].str() == "SECA");
+  CHECK(p["marcas"].a.size() == 4);
+}
+
+EQ_TEST(entreno, beach_baseline_prior_and_options) {
+  std::vector<SessionSummary> h = beach_history();
+  TrainingConfig c;
+  json::Value o; std::string err;
+  CHECK(json::parse("{\"playa\":{\"min_pares_pendiente_propia\":100,\"min_sesiones_franja\":5}}", &o, &err));
+  CHECK(training_config_from_json(o, &c, &err));
+  TrainingResult r = analyse_training(h, "", c);
+  // pendiente de Pfau 2024: orilla 6,95 − 0,1795 = 6,7705; seca profunda (4 < 5 sesiones) sin efecto
+  CHECK(r.beach.slope_origin == "PFAU_2024");
+  CHECK_NEAR(r.beach.slope_sl, 0.359, 1e-12);
+  const BeachBandBaseline* o2 = band_of(r.beach, "ORILLA_FIRME");
+  const BeachBandBaseline* s2 = band_of(r.beach, "SECA_PROFUNDA");
+  CHECK(o2 && s2);
+  if (o2 && s2) {
+    CHECK_NEAR(o2->sl_adj, 6.7705, 1e-9);
+    CHECK_NEAR(s2->sl_adj, 6.4295, 1e-9);   // se calcula, pero no hay efecto: franja no utilizable
+    CHECK(!s2->usable && std::isnan(s2->sl_effect_m));
+  }
+  // opciones no válidas
+  TrainingConfig c2;
+  CHECK(json::parse("{\"playa\":{\"humedad_seca_max_pct\":25}}", &o, &err));
+  CHECK(!training_config_from_json(o, &c2, &err));
+  CHECK(json::parse("{\"playa\":{\"min_sesiones_franja\":1}}", &o, &err));
+  CHECK(!training_config_from_json(o, &c2, &err));
+  // desactivada
+  CHECK(json::parse("{\"playa\":false}", &o, &err));
+  TrainingConfig c3; CHECK(training_config_from_json(o, &c3, &err));
+  CHECK(!analyse_training(h, "", c3).beach.available);
+}
+
+EQ_TEST(entreno, beach_baseline_no_data_and_field_sheet) {
+  // sin franja: bloque no disponible y JSON con nulls
+  std::vector<SessionSummary> h;
+  for (int i = 0; i < 3; i++) h.push_back(make("P" + std::to_string(i), D0 + i, 15, 10, 8));
+  TrainingResult r = analyse_training(h, "", TrainingConfig());
+  CHECK(!r.beach.available && r.beach.bands.empty());
+  json::Value v; std::string err;
+  CHECK(json::parse(training_to_json(r, TrainingConfig()), &v, &err));
+  CHECK(v["estado"]["playa"]["ultima_sesion"].is_null());
+  CHECK(v["estado"]["playa"]["franja_referencia"].is_null());
+  // una sola sesión de playa sin zancada: franja no utilizable, sin pendiente ni efecto
+  SessionSummary one = make("U", D0 + 5, 15, 10, 8); one.beach_band = "TRANSICION";
+  TrainingResult r1 = analyse_training({one}, "", TrainingConfig());
+  CHECK(r1.beach.available && r1.beach.pairs == 0 && r1.beach.ref_band.empty());
+  CHECK(std::isnan(r1.beach.v_common) && std::isnan(r1.beach.last_impacts_km));
+  // ficha de campo PL2
+  SessionSummary s;
+  CHECK(json::parse("{\"pista\":{\"franja\":\"orilla_firme\",\"humedad_suelo_pct\":14.5,\"lluvia_48h_mm\":3,\"nota_suelo\":\"duro\"}}", &v, &err));
+  training_read_field_sheet(v, &s);
+  CHECK_NEAR(s.soil_moisture_pct, 14.5, 1e-12);
+  CHECK_NEAR(s.rain_48h_mm, 3, 1e-12);
+  CHECK(s.ground_note == "DURO");
+  CHECK(training_soil_class(s.soil_moisture_pct, TrainingConfig()) == "MEDIA");
+  CHECK(training_soil_class(19.5, TrainingConfig()) == "HUMEDA");
+  CHECK(training_soil_class(NAN, TrainingConfig()).empty());
+  SessionSummary bad;
+  CHECK(json::parse("{\"pista\":{\"humedad_suelo_pct\":80,\"nota_suelo\":\"mojado\"}}", &v, &err));
+  training_read_field_sheet(v, &bad);
+  CHECK(std::isnan(bad.soil_moisture_pct) && bad.ground_note.empty() && bad.warnings.size() == 2);
+  // ida y vuelta por el resumen JSON (franja AUTO con su %)
+  s.id = "RT"; s.date_utc = "2026-03-01"; s.beach_band_auto = true; s.beach_band_pct = 64;
+  SessionSummary back;
+  CHECK(json::parse(training_summary_to_json(s), &v, &err));
+  CHECK(training_summary_from_json(v, &back, &err));
+  CHECK_NEAR(back.soil_moisture_pct, 14.5, 1e-12);
+  CHECK(back.ground_note == "DURO" && back.beach_band == "ORILLA_FIRME" && back.beach_band_auto);
+  CHECK_NEAR(back.beach_band_pct, 64, 1e-12);
+}
+
+// PL5: A9 compara la V200 solo con sesiones de la misma franja.
+EQ_TEST(entreno, beach_band_a9_v200) {
+  std::vector<SessionSummary> h;
+  for (int i = 0; i < 12; i++) {
+    SessionSummary s = make("V" + std::to_string(i), D0 + 3 * i, 15, 10, 8);
+    s.surface = "PLAYA"; s.beach_band = i < 9 ? "ORILLA_FIRME" : "SECA_PROFUNDA";
+    s.cardio.present = true; s.cardio.quality = "BUENA"; s.cardio.v200_method = "CRUCE_200_10S";
+    s.cardio.v200 = i < 9 ? 9.0 + 0.01 * (i % 3) : 8.0;   // arena seca profunda: V200 más baja, no es pérdida de forma
+    h.push_back(s);
+  }
+  auto a9 = [](const TrainingResult& r) {
+    for (const auto& f : r.sessions.back().kb.flags) if (f.rule == "A9_PERDIDA_FORMA") return true;
+    return false;
+  };
+  CHECK(!a9(analyse_training(h, "", TrainingConfig())));
+  for (auto& s : h) s.beach_band.clear();
+  CHECK(a9(analyse_training(h, "", TrainingConfig())));
+}

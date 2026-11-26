@@ -89,6 +89,9 @@ struct HorseHistoryView: View {
         if r.semanaSiguiente.present {
             WeekPlanCard(plan: r.semanaSiguiente)
         }
+        if r.playa.present && r.playa.available {
+            BeachBaselineCard(beach: r.playa)
+        }
         if r.sesiones.isEmpty {
             AvoCard { AvoNoData(text: "Sin sesiones con fecha y resumen para este caballo") }
         } else {
