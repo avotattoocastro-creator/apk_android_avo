@@ -24,6 +24,38 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-26 — Motor 2.0.0-dev39 (KB-1 1.32.0, TRAINING 1.5.0) · iPad — Playa por franjas: línea base PL2–PL6 y A9 por franja
+**Autor:** Claude (sesión nocturna del motor, sin supervisión) · **Rama:** `claude/motor-noche-2026-11-26` (desde `develop`) · **CI:** motor en la rama (ver PR)
+**Qué cambia:**
+- **Motor:** `estado.playa` en la historia (`src/training/beach_baseline.cpp`), con las sesiones con franja anotada o
+  automática de los últimos 180 días:
+  - **PL2:** ficha `pista.humedad_suelo_pct`, `lluvia_48h_mm` y `nota_suelo`; clase de humedad SECA, MEDIA o HUMEDA
+    (13/19 %).
+  - **PL3:** efecto de cada franja sobre la zancada y la frecuencia a una velocidad común, con pendiente común dentro de
+    franja propia o la de Pfau 2024 (+0,359 m y +0,018 Hz por m/s).
+  - **PL4:** impactos atípicos por km relativos a la mediana de su franja.
+  - **PL5:** línea base por franja con ≥ 4 sesiones.
+  - **PL6:** marcas INFO (rápido en orilla compactada, cambio de franja en el galope o entre rápidos de ≤ 7 días, lluvia
+    ≥ 5 mm).
+  - **A9 (V200)** compara solo la misma franja.
+  - El resumen guarda `pista.franja_trabajo_pct` (franja AUTO).
+  - Opción JSON `playa`.
+  - Todo INFO y sin calibrar: no cambia el estado.
+- **iPad:** tarjeta «Playa por franjas (PL2–PL6)» en la historia del caballo (`BeachBaselineCard`, `TrainingBeachBaseline`)
+  y `BeachBaselineTests` con una fixture escrita por el motor.
+- **Base científica 1.32.0:** `PLAYA_LINEA_BASE_PL1_PL6` sigue PARCIAL, con lo que falta; parámetro `playa_linea_base`;
+  estudio `knowledge/estudios/2026-11-26_motor_playa_franjas_pl2_pl6.md`; fichas 12, 13 y 14 (§3 septies),
+  `FORMATO_RESULTADOS.md` y protocolo de campo §4.
+- **Pruebas:** 4 casos nuevos (`entreno.beach_baseline_*`, `entreno.beach_band_a9_v200`), con ASan/UBSan.
+- **Fixtures:** las de análisis solo cambian de versión.
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist` ni número de build.
+**Validación:** IMPLEMENTADO · pruebas locales ✅ (141 casos, 0 fallos, ASan/UBSan) · **NO VERIFICADO** con caballos reales ni en el iPad (Swift sin
+compilar en local).
+**Pendiente:** calibrar en Laredo (≥ 4 sesiones por franja, sonda TDR), penetrómetro, PL3 por zancada, PL4 con picos en
+g; Android y Windows.
+
+---
+
 ## 2026-11-25 — iPad · Motor 2.0.0-dev38 — Calendario semanal con fichas: recomendado (rojo) y recomendado frente a realizado (verde), con informe PDF
 **Autor:** Claude (chat integrador, petición del usuario 25/11 10:10) · **Rama:** `claude/calendario-fichas` · **CI:** motor e iPad (sin TestFlight) en la rama y al integrar
 **Qué cambia:**

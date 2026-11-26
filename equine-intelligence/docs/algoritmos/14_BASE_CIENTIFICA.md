@@ -433,6 +433,28 @@ informativas, no suben el estado del caballo y no predicen lesiones (`validado: 
 - Reglas en la KB: `PLANIFICADOR_RESTRICCIONES_P1_P6` y `PLANIFICADOR_DMD_DM1_DM4` pasan a **IMPLEMENTADO** (sin
   calibrar); `RECUPERACION_RT1_RT3` a **IMPLEMENTADO** (RT2 en el plan).
 
+## 3 septies. Playa por franjas: línea base PL2–PL6 (KB-1 1.32.0, motor 2.0.0-dev39, TRAINING 1.5.0)
+La historia añade `estado.playa` (`nivel` INFO, `validado: false`, nunca cambia el estado). Solo usa sesiones con franja
+(anotada en la ficha o automática de AVO BEACH) en los últimos 180 días. Código: `src/training/beach_baseline.cpp`.
+
+| Regla | Cálculo | Parámetro (por defecto) | Etiqueta |
+|---|---|---|---|
+| PL2 | Ficha: `pista.humedad_suelo_pct`, `lluvia_48h_mm`, `nota_suelo`. Clase SECA ≤ 13 %, MEDIA, HUMEDA > 19 %. Marca `PL2_LLUVIA_RECIENTE` con ≥ 5 mm en 48 h | `playa.humedad_seca_max_pct` 13, `humedad_humeda_min_pct` 19, `lluvia_reciente_mm` 5 | cortes [E] en tierra (Pfau 2024), [I] en playa; lluvia [I] |
+| PL3 | Pares (v_ref, zancada, frecuencia) de las 2 velocidades de referencia. Pendiente común dentro de franja b = Σ(v − v̄_f)(l − l̄_f) / Σ(v − v̄_f)². Zancada ajustada l*_f = l̄_f + b·(v_c − v̄_f), con v_c = mediana de las v. Efecto = l*_f − l*_ref (ref: ORILLA_FIRME si es utilizable). Igual con la frecuencia | `min_pares_pendiente_propia` 8, `dispersion_v_min_m_s` 0,5; sin ellos, b = 0,359 m y 0,018 Hz por m/s | pendientes [E] Pfau 2024 (PSI en tierra); efecto fijo [I] |
+| PL4 | Impactos atípicos de la cincha por km de galope de trabajo; relativo = última / mediana de su franja (con ≥ 4 sesiones) | — | [I] |
+| PL5 | Línea base por franja utilizable con ≥ 4 sesiones (zancada, frecuencia, v 600 m, V200, impactos/km, humedad: mediana y MAD). **A9 compara la V200 solo con sesiones de la misma franja** | `min_sesiones_franja` 4 | [I] (4–6 sesiones, sin dato publicado) |
+| PL6 | Marcas INFO de los últimos 14 días: `PL6_RAPIDO_ORILLA_COMPACTA` (rápido en orilla firme con humedad ≤ 13 % o nota DURO), `PL6_CAMBIO_FRANJA_EN_GALOPE` (franja AUTO dominante < 70 % del trabajo), `PL6_CAMBIO_FRANJA` (rápido en otra franja que el rápido anterior de ≤ 7 días) | `humedad_compacta_max_pct` 13, `franja_dominante_min_pct` 70, `dias_cambio_franja` 7, `dias_marcas` 14 | [E] White Paper 2012 (humedad y cambio de superficie); cortes [I] |
+
+**Ejemplo (prueba `entreno.beach_baseline_pl3_pl6`).** 4 sesiones en seca profunda con pares (13 m/s; 5,90 m) y
+(15; 6,60) y 5 en orilla firme con (14; 6,60) y (16; 7,30). Pendiente propia b = 0,70/2 = 0,35 m por m/s (18 pares);
+v_c = 14,5 m/s. Orilla: 6,95 + 0,35·(−0,5) = 6,775 m; seca: 6,25 + 0,35·0,5 = 6,425 m → efecto de la seca profunda
+−0,35 m (frecuencia +0,065 Hz). Con la pendiente de Pfau (0,359): 6,7705 y 6,4295 m. Impactos de la orilla 1; 1,5;
+1,5; 2; 3 /km → mediana 1,5; la última (3/km) es × 2,0 de su franja.
+
+Lo que falta calibrar (protocolo de campo, §4): ≥ 4 sesiones por franja y caballo en Laredo, humedad con sonda TDR,
+el TE propio por franja; el penetrómetro (PL2), la velocidad por zancada en PL3 y los picos de impacto en g (PL4).
+Detalle: `knowledge/estudios/2026-11-26_motor_playa_franjas_pl2_pl6.md`.
+
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se
    guarda en `knowledge/estudios/AAAA-MM-DD_<tema>.md` con fuentes y etiquetas [E]/[I]/[NV].

@@ -176,6 +176,7 @@ bool training_summary_from_analysis(const json::Value& a, const TrainingConfig& 
     if (!fb.empty()) { s.beach_band = fb; s.beach_band_auto = true; }
     s.tide_level = en["marea"]["nivel"].str(); s.tide_trend = en["marea"]["tendencia"].str();
     s.tide_height_m = nnum(en["marea"]["altura_trabajo_m"]);
+    if (!fb.empty()) s.beach_band_pct = nnum(en["franjas"]["trabajo_pct"]);   // PL6
   }
 
   // Per-gait segments (rendimiento, format v2). Fallback: gait segments of v1 (durations only).
@@ -376,7 +377,9 @@ std::string training_summary_to_json(const SessionSummary& s) {
     << ",\"pista\":{\"superficie\":" << q(s.surface) << ",\"estado\":" << q(s.track_state) << ",\"franja\":" << q(s.beach_band)
     << ",\"franja_origen\":" << q(s.beach_band.empty() ? "" : s.beach_band_auto ? "AUTO" : "MANUAL")
     << ",\"going\":" << q(s.going) << ",\"marea\":{\"hora\":" << q(s.tide_time) << ",\"tipo\":" << q(s.tide_type)
-    << ",\"nivel\":" << q(s.tide_level) << ",\"tendencia\":" << q(s.tide_trend) << ",\"altura_m\":" << num(s.tide_height_m) << "}}"
+    << ",\"nivel\":" << q(s.tide_level) << ",\"tendencia\":" << q(s.tide_trend) << ",\"altura_m\":" << num(s.tide_height_m) << "}"
+    << ",\"franja_trabajo_pct\":" << num(s.beach_band_pct) << ",\"humedad_suelo_pct\":" << num(s.soil_moisture_pct)
+    << ",\"lluvia_48h_mm\":" << num(s.rain_48h_mm) << ",\"nota_suelo\":" << q(s.ground_note) << "}"
     << ",\"tipo_sesion\":" << q(s.session_type)
     << ",\"condiciones\":{\"temperatura_c\":" << num(s.temperature_c) << ",\"humedad_pct\":" << num(s.humidity_pct) << "}"
     << ",\"pesos\":{\"jinete_kg\":" << num(s.rider_kg) << ",\"caballo_kg\":" << num(s.horse_kg) << "}"
@@ -448,6 +451,7 @@ bool training_summary_from_json(const json::Value& v, SessionSummary* out, std::
   s.beach_band_auto = !s.beach_band.empty() && v["pista"]["franja_origen"].str() == "AUTO";   // AVO BEACH
   s.tide_level = v["pista"]["marea"]["nivel"].str(); s.tide_trend = v["pista"]["marea"]["tendencia"].str();
   s.tide_height_m = nnum(v["pista"]["marea"]["altura_m"]);
+  s.beach_band_pct = s.beach_band_auto ? nnum(v["pista"]["franja_trabajo_pct"]) : NAN;   // PL6 (solo franja AUTO)
   const json::Value& rc = v["trabajo_pista"];
   if (rc.type == json::Value::OBJ) {
     RaceSummary& R = s.race;
@@ -532,6 +536,11 @@ void training_read_field_sheet(const json::Value& x, SessionSummary* s) {
     if (p["franja"].type == json::Value::STR && !p["franja"].s.empty() && s->beach_band != before) s->beach_band_auto = false;   // la anotada manda
     else if (p["franja"].type == json::Value::STR && !p["franja"].s.empty() && p["franja_origen"].str() != "AUTO") s->beach_band_auto = false;
   }
+  if (!s->beach_band_auto) s->beach_band_pct = NAN;   // el % de la franja dominante solo vale para la automática
+  // PL2 (TRAINING 1.5.0): suelo de la playa
+  number(p["humedad_suelo_pct"], 0, 60, "humedad del suelo", &s->soil_moisture_pct);
+  number(p["lluvia_48h_mm"], 0, 500, "lluvia de 48 h", &s->rain_48h_mm);
+  code(p["nota_suelo"], {"DURO", "NORMAL", "BLANDO", "PROFUNDO"}, "nota del suelo", &s->ground_note);
   code(p["going"], {"FIRME", "BUENO_FIRME", "BUENO", "BUENO_BLANDO", "BLANDO", "PESADO"}, "going", &s->going);
   const json::Value& m = p["marea"];
   if (m["hora"].type == json::Value::STR && !m["hora"].s.empty()) {
@@ -643,6 +652,35 @@ bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::str
       if (c->cg.ewma_acute_days >= c->cg.ewma_chronic_days) { if (err) *err = "carga_cg: dias_ewma_aguda debe ser menor que dias_ewma_cronica"; return false; }
       if (T.hr_max <= T.hr_rest + 50) { if (err) *err = "carga_cg: fc_max_lpm debe superar a fc_reposo_lpm en más de 50 lpm"; return false; }
     } else { if (err) *err = "«carga_cg» debe ser true/false o un objeto"; return false; }
+  }
+  // Línea base de la playa por franja (TRAINING 1.5.0): «playa»: true/false o un objeto
+  if (v.has("playa")) {
+    const json::Value& k = v["playa"];
+    auto& P = c->beach;
+    if (k.type == json::Value::BOOL) P.enabled = k.b;
+    else if (k.type == json::Value::OBJ) {
+      P.enabled = k["activa"].boolean(true);
+      const D kd[] = {{"pendiente_zancada_previa_m_por_m_s", &P.slope_sl_prior, 0, 1}, {"pendiente_frecuencia_previa_hz_por_m_s", &P.slope_sf_prior, -0.1, 0.2},
+                      {"dispersion_v_min_m_s", &P.min_speed_sd, 0, 5}, {"humedad_seca_max_pct", &P.soil_dry_max_pct, 0, 60},
+                      {"humedad_humeda_min_pct", &P.soil_wet_min_pct, 0, 60}, {"humedad_compacta_max_pct", &P.compact_soil_max_pct, 0, 60},
+                      {"franja_dominante_min_pct", &P.band_pct_min, 0, 100}, {"lluvia_reciente_mm", &P.rain_recent_mm, 0, 500}};
+      for (const auto& d : kd) {
+        if (!k.has(d.k)) continue;
+        const json::Value& x = k[d.k];
+        if (x.type != json::Value::NUM || !(x.n >= d.lo && x.n <= d.hi)) { if (err) *err = std::string("opción fuera de rango: playa.") + d.k; return false; }
+        *d.p = x.n;
+      }
+      const I ki[] = {{"dias_ventana", &P.window_days, 14, 730}, {"min_sesiones_franja", &P.min_sessions_band, 2, 30},
+                      {"min_pares_pendiente_propia", &P.min_pairs_own_slope, 3, 200}, {"dias_cambio_franja", &P.band_change_days, 1, 60},
+                      {"dias_marcas", &P.marks_days, 1, 120}};
+      for (const auto& d : ki) {
+        if (!k.has(d.k)) continue;
+        const json::Value& x = k[d.k];
+        if (x.type != json::Value::NUM || x.n != std::floor(x.n) || x.n < d.lo || x.n > d.hi) { if (err) *err = std::string("opción fuera de rango: playa.") + d.k; return false; }
+        *d.p = (int)x.n;
+      }
+      if (P.soil_dry_max_pct >= P.soil_wet_min_pct) { if (err) *err = "playa: humedad_seca_max_pct debe ser menor que humedad_humeda_min_pct"; return false; }
+    } else { if (err) *err = "«playa» debe ser true/false o un objeto"; return false; }
   }
   // Planificador semanal, capa 2 (TRAINING 1.3.0): «planificador»: true/false o un objeto
   if (v.has("planificador")) {
@@ -922,14 +960,14 @@ CgStatus cg_evaluate(const std::vector<SessionSummary>& ok, long d, long first_d
 void kb_cardio_flags(const std::vector<SessionSummary>& ok, size_t i, const KbRuleConfig& kc, std::vector<KbFlag>* out) {
   const SessionSummary& s = ok[i];
   if (!s.cardio.present) return;
-  std::string surf = s.surface.empty() ? "sin anotar" : s.surface;
+  std::string surf = (s.surface.empty() ? "sin anotar" : s.surface) + (s.beach_band.empty() ? "" : " · " + s.beach_band);   // PL5
   char b[520];
   auto a9 = [&](const char* what, std::function<double(const SessionSummary&)> get, std::function<std::string(const SessionSummary&)> method) {
     double last = get(s);
     if (std::isnan(last) || method(s).empty()) return;
     std::vector<double> x; std::vector<long> days;
     for (size_t j = 0; j <= i; j++)
-      if (ok[j].cardio.present && ok[j].surface == s.surface && method(ok[j]) == method(s) && !std::isnan(get(ok[j]))) { x.push_back(get(ok[j])); days.push_back(ok[j].day); }
+      if (ok[j].cardio.present && ok[j].surface == s.surface && ok[j].beach_band == s.beach_band && method(ok[j]) == method(s) && !std::isnan(get(ok[j]))) { x.push_back(get(ok[j])); days.push_back(ok[j].day); }
     // VT2: salto > 5 % frente a la anterior comparable en ≤ 31 días = posible artefacto o condiciones distintas
     if (x.size() >= 2 && s.day - days[days.size() - 2] <= kc.v200_jump_days) {
       double prev = x[x.size() - 2], rel = 100.0 * (last - prev) / prev;
@@ -1210,6 +1248,7 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
   kb_apply(r.kb, &r.level, &r.reasons);
   r.planner = planner_at(ok, kbdays, r.reference_day, first_day, c.kb);
   r.week = training_plan_week(ok, kbdays, r.reference_day, first_day, r.kb, c);
+  r.beach = training_beach_baseline(ok, r.reference_day, c);   // PL2–PL6 (TRAINING 1.5.0)
   if (c.cg.enabled) {
     std::vector<double> per;
     r.cg = cg_evaluate(ok, r.reference_day, first_day, c, &per);
@@ -1344,6 +1383,7 @@ std::string training_to_json(const TrainingResult& r, const TrainingConfig& c) {
     o << ",\"nota\":\"pautas informativas de la base científica; no suben el estado ni sustituyen el criterio del entrenador\"}";
   }
   o << ",\"carga_cg\":"; cg_json(o, r.cg, c);
+  o << ",\"playa\":" << training_beach_json(r.beach, c);
   o << ",\"nota\":\"orientativo; no es un diagnóstico veterinario\"}";
   o << ",\"carga_diaria\":[";
   for (size_t i = 0; i < r.daily_load.size(); i++) o << (i ? "," : "") << "{\"fecha\":" << q(training_day_text(r.daily_load[i].first)) << ",\"carga\":" << num(r.daily_load[i].second) << "}";

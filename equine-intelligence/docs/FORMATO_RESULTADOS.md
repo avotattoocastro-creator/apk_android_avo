@@ -75,6 +75,18 @@ Mismos códigos de retorno; el texto se libera con `avo_eq_free`.
 `fecha`, `rapido_m`, `trimp`), `notas`, `nota`; y `sesiones[].carga_cg` (`trimp` recalculado, `rapido_m`). Opción
 `carga_cg` (true/false u objeto; ficha 14, §3 quinquies).
 
+**Training 1.5.0 (motor 2.0.0-dev39):** el resumen añade en `pista`: `franja_trabajo_pct` (solo franja AUTO),
+`humedad_suelo_pct`, `lluvia_48h_mm` y `nota_suelo` (DURO | NORMAL | BLANDO | PROFUNDO; `null` sin anotar). La historia
+añade `estado.playa` (PL2–PL6, `nivel` INFO, `validado: false`): `reglas`, `disponible`, `motivo`, `parametros` (con
+`etiquetas`), `sesiones_playa`, `franja_referencia`, `pl3` (`pendiente_zancada_m_por_m_s`, `pendiente_frecuencia_hz_por_m_s`,
+`origen_pendiente` PROPIA | PFAU_2024, `pares`, `velocidad_comun_m_s`), `franjas[]` (`franja`, `lectura`, `sesiones`,
+`automaticas`, `anotadas`, `rapidas`, `ultima`, `linea_base_utilizable`, `zancada_ref_m`, `frecuencia_ref_hz`,
+`v_ultimos_600m_m_s`, `v200_m_s`, `impactos_por_km`, `humedad_suelo_pct` como `{mediana, mad, n}`, `pares`,
+`zancada_ajustada_m`, `frecuencia_ajustada_hz`, `efecto_zancada_m`, `efecto_frecuencia_hz`), `ultima_sesion` (`id`,
+`fecha`, `franja`, `clase_humedad` SECA | MEDIA | HUMEDA, `impactos_por_km`, `impacto_relativo_franja`) o `null`,
+`rapidos_orilla_firme_7d`, `marcas[]` (`fecha`, `id`, `regla`, `nivel`, `texto`, `evidencia`), `notas` y `nota`. Opción
+`playa` (true/false u objeto; ficha 14, §3 septies). A9 compara solo la misma franja.
+
 **Training 1.4.0 (motor 2.0.0-dev37):** `semana_siguiente` añade `semana_calendario` (bool), `planifica_desde`
 (AAAA-MM-DD) y `rapidos_hechos`; cada día de `dias` añade `realizado` (bool: día pasado, lo hecho según las sesiones) y, desde 2.0.0-dev38, `rapido_hecho_m` (metros de galope rápido hechos ese día; `null` sin datos de carga). Con la
 semana natural (por defecto) `desde`/`hasta` son el lunes y el domingo. Opción `planificador.semana_calendario` (true/false).

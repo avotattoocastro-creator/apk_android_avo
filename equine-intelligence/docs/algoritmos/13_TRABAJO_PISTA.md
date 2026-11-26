@@ -149,6 +149,11 @@ La historia incluye:
   de todos los trabajos si no hay ninguno rápido. Es lo que el entrenador llama «el trabajo», y las apps lo seleccionan tal cual.
 - `distancia_rapida_m` (metros por encima del umbral rápido) se mantiene en el JSON.
 
+## Playa por franjas (motor 2.0.0-dev39)
+La historia usa la franja de cada sesión (anotada o automática) para una línea base propia por franja: zancada y
+frecuencia ajustadas a una velocidad común, impactos atípicos por km relativos a la franja y marcas de suelo
+(`estado.playa`, PL2–PL6). Detalle: ficha 14, §3 septies.
+
 ## Base científica KB-1 (18/11/2026)
 - El perfil árabe compara la zancada a **13 y 14 m/s** (antes 13 y 15) y los perfiles llevan `v_carrera` (PSI 16,7; árabe 14,5).
 - Bloque nuevo `base_cientifica`: bandas relativas al ritmo de carrera, contadores de Verheyen y fatiga ósea por zancada. Ficha 14.

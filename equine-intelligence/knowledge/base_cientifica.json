@@ -2,8 +2,8 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.31.0",
-  "fecha": "2026-11-25",
+  "version": "1.32.0",
+  "fecha": "2026-11-26",
   "razas": [
     "PSI",
     "ARABE"
@@ -167,6 +167,11 @@
       "fecha": "2026-11-25",
       "titulo": "Motor nocturno 25/11: planificador semanal capa 2 (semana siguiente con P1, P2, P4–P7, RT1–RT3 y DM1–DM4)",
       "archivo": "estudios/2026-11-25_motor_planificador_semanal_capa2.md"
+    },
+    {
+      "fecha": "2026-11-26",
+      "titulo": "Motor nocturno 26/11: línea base de la playa por franja (PL2–PL6) y A9 por franja",
+      "archivo": "estudios/2026-11-26_motor_playa_franjas_pl2_pl6.md"
     }
   ],
   "fuentes": [
@@ -5563,6 +5568,33 @@
       ],
       "estado": "IMPLEMENTADO",
       "nota": "KB 1.31.0, motor 2.0.0-dev35; propuesta orientativa sin calibrar, nunca sube el estado ni predice lesiones"
+    },
+    {
+      "id": "playa_linea_base",
+      "valor": {
+        "dias_ventana": 180,
+        "min_sesiones_franja": 4,
+        "pendiente_zancada_previa_m_por_m_s": 0.359,
+        "pendiente_frecuencia_previa_hz_por_m_s": 0.018,
+        "min_pares_pendiente_propia": 8,
+        "dispersion_v_min_m_s": 0.5,
+        "humedad_seca_max_pct": 13,
+        "humedad_humeda_min_pct": 19,
+        "humedad_compacta_max_pct": 13,
+        "franja_dominante_min_pct": 70,
+        "dias_cambio_franja": 7,
+        "lluvia_reciente_mm": 5,
+        "dias_marcas": 14
+      },
+      "evidencia": "E (Pfau 2024: pendientes y cortes de humedad en tierra; White Paper 2012: humedad y cambio de superficie) / E-r (Crevier-Denoix 2011, Chateau 2011) / I (mínimos, cortes en playa, ventanas)",
+      "fuentes": [
+        "PFAU_2024",
+        "CREVIER_DENOIX_2011",
+        "CHATEAU_2011",
+        "WHITE_PAPER_SUPERFICIES_2012"
+      ],
+      "estado": "IMPLEMENTADO",
+      "nota": "KB 1.32.0, motor 2.0.0-dev39; opción JSON «playa»; descriptivo e INFO, sin calibrar; no es una predicción de lesiones"
     }
   ],
   "reglas": [
@@ -5785,8 +5817,18 @@
         "WHITE_PAPER_SUPERFICIES_2012"
       ],
       "estado": "PARCIAL",
-      "falta": "PL2 lluvia 24–48 h, humedad TDR y penetrómetro; PL3–PL6; A9 por franja",
-      "implementacion": "motor 2.0.0-dev27: campo pista.franja y hora/tipo de marea en el resumen; PL1 aplicado a A7/A8 (comparables de la misma superficie y franja cuando la franja está anotada)"
+      "falta": "calibrar con datos de campo del PROTOTIPO en Laredo (≥ 4 sesiones por franja y caballo, humedad TDR); PL2 penetrómetro; PL3 con la velocidad del par de cada zancada (hoy las 2 velocidades de referencia); PL4 con picos de impacto de la cincha en g (hoy recuento de impactos atípicos); registro propio de incidencias por franja (PL6); TE propio por franja",
+      "implementacion": "motor 2.0.0-dev27: campo pista.franja y hora/tipo de marea en el resumen; PL1 aplicado a A7/A8 (comparables de la misma superficie y franja cuando la franja está anotada); motor 2.0.0-dev39 (KB 1.32.0, training 1.5.0): bloque estado.playa con PL2 (ficha pista.humedad_suelo_pct, lluvia_48h_mm y nota_suelo; clase SECA ≤ 13 % / MEDIA / HUMEDA > 19 %), PL3 (pendiente común dentro de franja, efecto fijo de la franja frente a ORILLA_FIRME a una velocidad común; sin ≥ 8 pares con DE de v ≥ 0,5 m/s, pendiente de Pfau 2024 +0,359 m y +0,018 Hz por m/s), PL4 (impactos atípicos de la cincha por km relativos a la mediana de su franja), PL5 (línea base por franja utilizable con ≥ 4 sesiones; A9 compara la V200 solo con la misma franja) y PL6 (marcas INFO: rápido en orilla muy compactada, cambio de franja en el galope y entre rápidos de ≤ 7 días, lluvia ≥ 5 mm); todo INFO, sin calibrar, nunca sube el estado",
+      "umbral_valores": {
+        "min_sesiones_franja": "4 [I]",
+        "pendiente_zancada_m_por_m_s": "0,359 [E] Pfau 2024",
+        "pendiente_frecuencia_hz_por_m_s": "0,018 [E] Pfau 2024",
+        "humedad_cortes_pct": "≤ 13 / 13–19 / > 19 [E en tierra, Pfau 2024; I en playa]",
+        "humedad_compacta_max_pct": "13 [I]",
+        "franja_dominante_min_pct": "70 [I]",
+        "dias_cambio_franja": "7 [I]",
+        "lluvia_reciente_mm": "5 [I]"
+      }
     },
     {
       "id": "A6C_COCIENTE_GALOPE",
@@ -6087,7 +6129,7 @@
     "Velocidad final relativa propia de AVO (France Galop no publica ningún IDF; estudio extra 2 2026-11-19): v(últimos 600/400 m)/v media con par propio por pista y superficie, al estilo de la Finishing Speed % de Timeform; importador de los PDF de tracking por 200 m solo informativo; KB 1.10.0: FS % de Timeform = v final/v media frente al par de pista y distancia, sin umbrales; Wong 2023 usa v200 absoluta y longitudinal; ninguna fuente da umbral de riesgo: solo métrica descriptiva con par propio",
     "Índice tendinoso heurístico por bandas cualitativas (prioritario en árabes de 3–4 años): sin exponente de carga; faltan en la app la lesión previa, la CSA ecográfica y la firmeza del suelo (estudio extra 2026-11-19); extra 4: sin OR de árabes (Golfo, Turquía, Polonia); edad 3–4 años con 3 fuentes; no añadir término de carga (Çalışkan 2020b, Perkins 2005); CSA árabe de referencia 62–94 mm²; KB 1.12.0: OR de Takahashi 2004 y Lam 2007 AJVR siguen [NV] (AVMA 403); entradas cualitativas propuestas [I]: lesión o exploración tendinosa previa (Lam 2007) y peso en carrera alto para la cuadra (Takahashi 2004, Ikeda 2019)",
     "Planificador semanal por restricciones (capa 2) con P1–P6 del estudio extra 3 (práctica [E], forma [I]) y explicación con confianza (capa 3) · HECHO en 2.0.0-dev35 (KB 1.31.0): estado.planificador.semana_siguiente con P1, P2, P4–P7; falta la capa 3 (explicación con confianza) y calibrar",
-    "Línea base separada para la playa por franja (PL1–PL6 del extra 5): orilla firme, húmeda profunda, seca profunda, transición; marea, lluvia, humedad y nota del jinete; comparables de A7/A8/A9 por franja (Pfau 2024: el suelo cambia la zancada hasta 0,186 m); KB 1.14.0: sin cifras absolutas por franja en texto completo; anotar humedad volumétrica (sonda tipo ML3) si existe [I]",
+    "Línea base separada para la playa por franja (PL1–PL6 del extra 5): orilla firme, húmeda profunda, seca profunda, transición; marea, lluvia, humedad y nota del jinete; comparables de A7/A8/A9 por franja (Pfau 2024: el suelo cambia la zancada hasta 0,186 m); KB 1.14.0: sin cifras absolutas por franja en texto completo; anotar humedad volumétrica (sonda tipo ML3) si existe [I] · PARCIAL en 2.0.0-dev39 (KB 1.32.0): estado.playa con PL2–PL6 por franja y A9 por franja; falta calibrar con Laredo, el penetrómetro, la velocidad por zancada en PL3 y los picos de impacto en g en PL4",
     "Regla combinada A1+A2 de Verheyen cuando se lea el texto completo",
     "Contador de muestras saturadas de la cincha en el análisis (si el firmware lo envía); KB 1.18.0: umbral |a| ≥ 7,9 g por eje, invalidar picos del tramo si > 0,1 % en galope [I]; en la cincha BETA (LSM6DSV16X) usar ±16 g como StrideSAFE/MTw (estudio 20/11 16:10)",
     "A1/A2 de Verheyen: el resumen da un umbral CONJUNTO (> 44 km de canter Y > 6 km de galope en 30 d) y galope acumulado protector en añojos; con el texto completo, decidir si A2 por separado se rebaja a INFO o se sustituye por la regla combinada (KB 1.9.0)",
@@ -6376,6 +6418,11 @@
       "version": "1.31.0",
       "fecha": "2026-11-25",
       "cambio": "PLANIFICADOR_RESTRICCIONES_P1_P6, PLANIFICADOR_DMD_DM1_DM4 y RECUPERACION_RT1_RT3 IMPLEMENTADO (motor 2.0.0-dev35, training 1.3.0): propuesta de la semana siguiente en estado.planificador.semana_siguiente, sin calibrar; parámetro planificador_capa2"
+    },
+    {
+      "version": "1.32.0",
+      "fecha": "2026-11-26",
+      "cambio": "PLAYA_LINEA_BASE_PL1_PL6 sigue PARCIAL con PL2–PL6 implementados (motor 2.0.0-dev39, training 1.5.0): bloque estado.playa (línea base por franja, efecto de la franja en zancada y frecuencia, impactos relativos, marcas de suelo) y A9 por franja; parámetro playa_linea_base; sin calibrar"
     }
   ]
 }
