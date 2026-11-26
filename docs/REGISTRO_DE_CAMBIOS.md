@@ -24,6 +24,13 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-26 — CI espalda PROTOTIPO 3.16.0 — el empaquetado buscaba todavía la cadena 3.15.0
+**Autor:** Claude · **Commits:** ver PR · **CI:** la ejecución 56 de `build-back-v380.yml` (`910fe989`, 23/11) falló en «Package» con `faltan [b'3.15.0\x00AVO-BACK']`; la nueva ejecución queda pendiente de este PR
+**Qué cambia:** `build-back-v380.yml` pasa de 3.15.0 a 3.16.0: nombre del workflow, ficheros `AVO_BACK_V3_16_0_*.bin`, comprobación de la versión dentro de la imagen y artefacto `AVO-BACK-V3-16-0-HELTEC`. Se añade también la cadena `PPK: RAWX/SFRBX` a las comprobaciones de la imagen. No cambia la compilación ni el firmware.
+**Por qué:** el firmware se subió a 3.16.0 (PPK), pero el workflow seguía comprobando 3.15.0. Sin artefacto, «Publicar descargas directas» seguía sirviendo la 3.15.0 en `AVO_ESPALDA_PROTOTIPO_FW.zip`.
+**Archivos:** `.github/workflows/build-back-v380.yml`, este registro.
+**Aviso:** cambio en un workflow YAML, comunicado al usuario. No se tocan firmas, `Info.plist` ni el número de build. Espalda 3.16.0 **NO VERIFICADA** en hardware.
+
 ## 2026-11-26 — Motor 2.0.0-dev39 (KB-1 1.32.0, TRAINING 1.5.0) · iPad — Playa por franjas: línea base PL2–PL6 y A9 por franja
 **Autor:** Claude (sesión nocturna del motor, sin supervisión) · **Rama:** `claude/motor-noche-2026-11-26` (desde `develop`) · **CI:** motor en la rama (ver PR)
 **Qué cambia:**
