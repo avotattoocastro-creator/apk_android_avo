@@ -24,6 +24,12 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-27 — PPK de punta a punta PROBADO FÍSICAMENTE (espalda 3.16.3 + iPad build 242, motor 2.0.0-dev40)
+**Autor:** Claude · **Commits:** solo documentación
+**Evidencia:** sesión `AVO_20261127_1328` (interior junto a una ventana), base IGN **CANT** a 47 km descargada y descomprimida por el motor en el iPad. Resultado: **255 épocas, FLOAT 252 y FIX 3**. 1 mensaje RAWX perdido por radio.
+**Conclusión:** los datos del receptor (fase de portadora) son buenos. Con ellos se resuelve FLOAT incluso a cubierto y con una base a 47 km. En tiempo real, con IMAX3 y LARE2 de `gnss.cantabria.es`, nunca ha habido FLOAT: el sospechoso pasa a ser la cadena de correcciones en tiempo real o el punto de montaje, no la antena ni el receptor.
+**Pendiente:** estación del IGN a menos de 20–30 km para el PPK; prueba a cielo abierto (tiempo real + PPK juntos); motor: usar las posiciones PPK en la trazada.
+
 ## 2026-11-27 — Motor 2.0.0-dev40 (API `avo_eq_gunzip`) · iPad — las bases del IGN se descomprimen en el motor
 **Autor:** Claude · **Commits:** ver PR · **CI:** pendiente
 **Qué cambia:** el motor tiene su propio descompresor gzip/DEFLATE (`src/ppk/gunzip.cpp`, sin librerías externas). Admite varios miembros seguidos y comprueba CRC-32 e ISIZE en cada uno: un fichero cortado o dañado da error, nunca datos a medias. API C nueva: `avo_eq_gunzip(datos, tamaño, ruta_salida, json)`. El iPad la usa al descargar la base del IGN en lugar del framework Compression; si falla, muestra el error del motor y el tamaño descargado.
