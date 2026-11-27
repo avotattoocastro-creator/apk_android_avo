@@ -20,7 +20,7 @@
 
 namespace avoeq {
 
-static const char* const KNOWLEDGE_VERSION = "1.32.0";
+static const char* const KNOWLEDGE_VERSION = "1.33.0";
 static const char* const KNOWLEDGE_ID = "AVO_KB_1";
 static const char* const BONE_MODEL_ALGORITHM = "SBFL_MORRICE_WEST_2022";
 
@@ -109,6 +109,7 @@ struct KbRuleConfig {
   // superficie y mismo método). Umbral max(2·TE·√(1 + 1/n), SWC) (kb_change_threshold) con TE por defecto del 3 % de la
   // línea base, NO VALIDADO hasta tener el TE propio con ≥ 3 pruebas (VT1 [I]); aviso de posible artefacto si la V200
   // cambia > 5 % en ≤ 31 días (VT2 [I]).
+  double v200_warmup_match_pct = 20.0; // WU3 (KB 1.33.0) [I]: A9 compara solo calentamientos con distancia ±20 % (si ambos la tienen); 0 = sin filtro
   double v200_te_pct = 3.0;
   double v200_swc_pct = 0.0;
   double v200_jump_pct = 5.0;

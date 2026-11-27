@@ -803,6 +803,8 @@ struct TrainingAnalysisResult: Equatable {
     var semanaSiguiente: WeekPlan
     /// «estado.playa» (PL2–PL6, motor 2.0.0-dev39): línea base de la playa por franja, siempre INFO.
     var playa: TrainingBeachBaseline
+    /// «estado.cinetica_fc» (CF2, RC1, FW1, WU3; motor 2.0.0-dev40): cinética de la FC, siempre INFO.
+    var cineticaFc: TrainingHrKinetics
     var nota: String
     var cargaDiaria: [TrainingDailyLoad]
     var lineasBase: [TrainingBaseline]
@@ -840,6 +842,7 @@ struct TrainingAnalysisResult: Equatable {
         cargaCg = TrainingLoadCg(TJ.obj(e, "carga_cg"))
         semanaSiguiente = WeekPlan(TJ.obj(TJ.obj(e, "planificador"), "semana_siguiente"))
         playa = TrainingBeachBaseline(TJ.obj(e, "playa"))
+        cineticaFc = TrainingHrKinetics(TJ.obj(e, "cinetica_fc"))
         nota = TJ.str(e, "nota")
         cargaDiaria = TJ.objs(o, "carga_diaria").map { TrainingDailyLoad(fecha: TJ.str($0, "fecha"), carga: TJ.num($0, "carga") ?? 0) }
         lineasBase = TJ.objs(o, "lineas_base").map { TrainingBaseline($0) }

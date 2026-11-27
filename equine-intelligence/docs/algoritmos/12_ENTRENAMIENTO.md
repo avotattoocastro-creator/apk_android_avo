@@ -164,6 +164,13 @@ zancada a una velocidad común (PL3), los impactos de la última sesión relativ
 suelo (PL2/PL6). La V200 de A9 solo se compara dentro de la misma franja (PL5). Fórmulas, parámetros, etiquetas y
 ejemplo: ficha 14, §3 septies. Sin calibrar; no cambia el estado.
 
+## 5 quinquies. Cinética de la FC en la historia (TRAINING 1.6.0, motor 2.0.0-dev40)
+`estado.cinetica_fc` (`src/training/hr_kinetics.cpp`): τ de recuperación (CF2), THR100 (RC1) y FC del tramo fijo del
+calentamiento (FW1) de la última sesión con ECG frente a la mediana de ≥ 3 comparables anteriores (misma superficie y
+franja; τ y THR100 con la misma vuelta a la calma y calentamiento ±20 %, WU3; FW1 a la misma velocidad ±0,3 m/s).
+Marcas INFO con +25 % (τ, THR100) o +8 lpm (FW1), **sin calibrar**, nunca suben el estado. WU3 filtra también A9.
+Opción `cinetica_fc`. Detalle en la ficha 15, §7 ter.
+
 ## Parámetros (opciones JSON)
 | Opción | Defecto | Opción | Defecto |
 |---|---|---|---|

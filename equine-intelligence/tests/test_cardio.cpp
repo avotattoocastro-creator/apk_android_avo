@@ -273,6 +273,17 @@ EQ_TEST(cardio, full_session_v200_vhrmax_phases_recovery_ectopy) {
   CHECK(r.phases[PH_REC_EARLY].duration_s == 120.0);
   CHECK(!std::isnan(r.below_120_after_s));
   CHECK(r.cooldown_class == "PASO");
+  // cinética (cardio 1.2.0): el modelo baja la FC con τ 60 s hacia 60 + 9·1,5 = 73,5 lpm; el calentamiento acaba en la
+  // primera época ≥ 60 % de 17 m/s (la meseta de 12 m/s, t = 480 s) e incluye la de 8 m/s: desde el inicio del ECG (t0)
+  // son 1,5·(120 − t0) + 4·300 + 8·60 m (WU1 suficiente); tramo fijo al trote a 4 m/s; CF1 en las mesetas de 8–17 m/s
+  CHECK_NEAR(r.tau.tau_s, 60.0, 6.0);
+  CHECK_NEAR(r.tau.asymptote, 73.5, 3.0);
+  CHECK(std::isfinite(r.thr100_s) && r.thr100_s > r.below_120_after_s);
+  CHECK_NEAR(r.warmup.t0 + r.warmup.duration_s, 480, 5.1);
+  CHECK_NEAR(r.warmup.distance_m, 1.5 * (120 - r.warmup.t0) + 1200 + 480, 30);
+  CHECK(r.warmup.sufficient);
+  CHECK_NEAR(r.fixed_warmup.speed, 4.0, 0.05);
+  CHECK(r.cf1_plateaus >= 3);
   // V200: cruce de 200 lpm mantenido 10 s (meseta de 17 m/s) y, aparte, la regresión FC–velocidad (15,56 m/s)
   CHECK(r.v200.method == V200_METHOD_CROSSING);
   CHECK_NEAR(r.v200.t_cross, tr.t_cross, 1.5);
@@ -388,4 +399,188 @@ EQ_TEST(cardio, phase_quality_gate_blocks_escalation) {
   CHECK(!gated.phases[PH_MAX].interpretable);
   CHECK(gated.ectopy_level == "INFO");
   CHECK(gated.candidates > 0);   // se siguen contando como candidatos a revisar
+}
+
+// Cinética de la FC (cardio 1.2.0, KB 1.33.0): WU2, FW1, CF2 y RC1 con verdad analítica.
+// Calentamiento: 0–100 s parado a 110 lpm (FC alta sin velocidad solo si ≥ 120: aquí no), 100–700 s al trote a 4 m/s y
+// 100 lpm; 700–760 s a 16 m/s y 205 lpm; desde 760 s al paso (1,5 m/s) con FC = 70 + 135·e^(−(t−760)/90).
+// THR100 = 90·ln(135/30) = 135,4 s; τ = 90 s y asíntota 70 lpm; calentamiento 700 s y 100·0 + 600·4 = 2400 m.
+EQ_TEST(cardio, kinetics_warmup_fixed_segment_tau_thr100) {
+  std::vector<EcgBeat> b; std::vector<double> gt, gv; double t = 0;
+  auto hr_at = [](double x) { return x < 100 ? 110.0 : x < 700 ? 100.0 : x < 760 ? 205.0 : 70.0 + 135.0 * std::exp(-(x - 760) / 90.0); };
+  auto v_at = [](double x) { return x < 100 ? 0.0 : x < 700 ? 4.0 : x < 760 ? 16.0 : 1.5; };
+  for (double x = 0; x <= 1500; x += 0.1) { gt.push_back(x); gv.push_back(v_at(x)); }
+  while (t < 1500) { t += 60.0 / hr_at(t); EcgBeat e; e.t = t; b.push_back(e); }
+  CardioConfig c; CardioResult r;
+  analyse_rr(b, gt, gv, {}, 0, 1500, c, &r);
+  CHECK_NEAR(r.effort_end_t, 760, 0.1);
+  // RC1
+  CHECK_NEAR(r.thr100_s, 90.0 * std::log(135.0 / 30.0), 3.0);
+  // CF2
+  CHECK(std::isfinite(r.tau.tau_s));
+  CHECK_NEAR(r.tau.tau_s, 90.0, 3.0);
+  CHECK_NEAR(r.tau.asymptote, 70.0, 1.0);
+  CHECK(r.tau.r2 > 0.99);
+  CHECK(r.tau.points >= 100);
+  CHECK(r.cooldown_class == "PASO");
+  // WU2
+  CHECK(r.warmup.origin == "VELOCIDAD");
+  CHECK_NEAR(r.warmup.duration_s, 700, 0.1);
+  CHECK_NEAR(r.warmup.distance_m, 2400, 5);
+  CHECK(r.warmup.sufficient);
+  CHECK_NEAR(r.warmup.high_hr_still_s, 0, 1e-9);
+  // FW1: últimos 60 s al trote (640–700 s) a 4 m/s y 100 lpm
+  CHECK_NEAR(r.fixed_warmup.t0, 640, 0.1);
+  CHECK_NEAR(r.fixed_warmup.hr, 100, 0.5);
+  CHECK_NEAR(r.fixed_warmup.speed, 4.0, 0.01);
+  // con el umbral de FC alta a 105 lpm, los 100 s parados a 110 lpm cuentan y salen como aviso
+  CardioConfig c2 = c; c2.wu_high_hr_bpm = 105; CardioResult r2;
+  analyse_rr(b, gt, gv, {}, 0, 1500, c2, &r2);
+  CHECK_NEAR(r2.warmup.high_hr_still_s, 100, 5.1);
+  bool warn = false; for (const auto& w : r2.warnings) if (w.find("WU2") != std::string::npos) warn = true;
+  CHECK(warn);
+  // JSON: bloque «cinetica» con etiquetas y nulls coherentes
+  r.present = true;   // analyse_rr no marca el bloque como presente (lo hace analyse_cardio)
+  std::string js = cardio_json(r, c, false);
+  json::Value v; std::string je;
+  CHECK(json::parse(js, &v, &je));
+  const json::Value& k = v["cinetica"];
+  CHECK(!k["validado"].boolean(true));
+  CHECK(k["calentamiento"]["regla"].str() == "WU2" && k["calentamiento"]["suficiente"].boolean(false));
+  CHECK(k["tramo_fijo"]["regla"].str() == "FW1" && k["tramo_fijo"]["fuente"].str() == "YAMANOBE_1993_JRA");
+  CHECK_NEAR(k["recuperacion_tau"]["tau_s"].num(0), 90.0, 3.0);
+  CHECK(k["recuperacion_tau"]["motivo"].type == json::Value::NUL);
+  CHECK(k["thr100"]["etiqueta"].str() == "OFICIAL");
+  CHECK_NEAR(k["thr100"]["referencia_jra_s"].num(0), 200, 1e-9);
+}
+
+// CF2 sin datos: grabación que termina 3 min después del esfuerzo → sin τ y con motivo; sin GNSS, calentamiento por FC.
+EQ_TEST(cardio, kinetics_no_data_cases) {
+  std::vector<EcgBeat> b; double t = 0;
+  auto hr_at = [](double x) { return x < 300 ? 110.0 : x < 360 ? 205.0 : 80.0 + 125.0 * std::exp(-(x - 360) / 60.0); };
+  while (t < 540) { t += 60.0 / hr_at(t); EcgBeat e; e.t = t; b.push_back(e); }
+  CardioConfig c; CardioResult r;
+  analyse_rr(b, {}, {}, {}, 0, 540, c, &r);
+  CHECK(std::isnan(r.tau.tau_s));
+  CHECK(!r.tau.reason.empty());
+  CHECK(r.warmup.origin == "FC");
+  CHECK_NEAR(r.warmup.duration_s, 300, 5.1);
+  CHECK(std::isnan(r.warmup.distance_m));
+  CHECK(std::isnan(r.fixed_warmup.hr));
+  json::Value v; std::string je;
+  r.present = true;
+  CHECK(json::parse(cardio_json(r, c, false), &v, &je));
+  CHECK(v["cinetica"]["tramo_fijo"]["fc_media_lpm"].type == json::Value::NUL);
+  CHECK(v["cinetica"]["recuperacion_tau"]["tau_s"].type == json::Value::NUL);
+  // ajuste puro: exponencial exacta y FC plana
+  std::vector<double> tt, hh, flat;
+  for (double x = 60; x <= 600; x += 5) { tt.push_back(x); hh.push_back(65 + 100 * std::exp(-x / 120.0)); flat.push_back(90); }
+  CardioResult::TauFit f = fit_hr_recovery(tt, hh, 5, 900);
+  CHECK_NEAR(f.tau_s, 120.0, 0.5);
+  CHECK_NEAR(f.asymptote, 65.0, 0.2);
+  CHECK_NEAR(f.amplitude, 100.0, 0.5);
+  CHECK(std::isnan(fit_hr_recovery(tt, flat, 5, 900).tau_s));
+  CHECK(std::isnan(fit_hr_recovery({1, 2, 3}, {3, 2, 1}, 5, 900).tau_s));
+}
+
+// CF1: una meseta rápida de 40 s (tras un salto de 8 m/s) vale con la regla antigua (≥ 30 s) y no con CF1 (≥ 45 s).
+EQ_TEST(cardio, cf1_fast_plateau_needs_45s) {
+  std::vector<double> gt, gv;
+  auto v_at = [](double x) { return x < 100 ? 4.0 : x < 160 ? 8.0 : x < 220 ? 11.0 : x < 260 ? 16.0 : 1.5; };
+  for (double x = 0; x <= 600; x += 0.1) { gt.push_back(x); gv.push_back(v_at(x)); }
+  std::vector<EcgBeat> b; double t = 0;
+  while (t < 600) { t += 60.0 / (60.0 + 9.0 * v_at(t)); EcgBeat e; e.t = t; b.push_back(e); }
+  CardioConfig on; CardioResult r1; analyse_rr(b, gt, gv, {}, 0, 600, on, &r1);
+  CardioConfig off = on; off.cf1_enabled = false; CardioResult r0; analyse_rr(b, gt, gv, {}, 0, 600, off, &r0);
+  CHECK(r0.v200_regression.points == r1.v200_regression.points + 1);
+  CHECK(r1.cf1_plateaus >= 1);
+  CHECK(r0.cf1_plateaus == 0);
+}
+
+// Cinética de la FC en la historia (TRAINING 1.6.0): CF2, RC1 y FW1 frente a la mediana propia; WU3 en A9.
+EQ_TEST(cardio, history_kinetics_marks_and_wu3) {
+  auto mk = [](int i, double tau, double thr, double fw, double warm_m) {
+    SessionSummary s; s.id = "K" + std::to_string(i); s.horse = "H";
+    char d[32]; snprintf(d, sizeof(d), "2026-10-%02d", i + 1); s.date_utc = d; s.surface = "arena";
+    s.cardio.present = true; s.cardio.cooldown_class = "PASO"; s.cardio.warmup_m = warm_m;
+    s.cardio.tau_s = tau; s.cardio.thr100_s = thr; s.cardio.fw_hr = fw; s.cardio.fw_speed = 4.0;
+    s.moving_s = 1800; s.distance_m = 8000;
+    return s;
+  };
+  std::vector<SessionSummary> h;
+  // cuatro sesiones de base: τ 80, 90, 100, 90 (mediana 90); THR100 150, 160, 140, 150 (mediana 150); FW1 100, 102, 98, 100
+  const double tau[] = {80, 90, 100, 90}, thr[] = {150, 160, 140, 150}, fw[] = {100, 102, 98, 100};
+  for (int i = 0; i < 4; i++) h.push_back(mk(i, tau[i], thr[i], fw[i], 2000));
+  // última: τ 117 (+30 %), THR100 180 (+20 %, sin marca con el 25 %), FW1 109 (+9 lpm)
+  h.push_back(mk(4, 117, 180, 109, 2100));
+  TrainingConfig c;
+  TrainingResult r = analyse_training(h, "2026-10-05", c);
+  const HrKinetics& k = r.hrkin;
+  CHECK(k.available && k.ecg_sessions == 5 && k.last_id == "K4");
+  CHECK(k.metrics.size() == 3);
+  if (k.metrics.size() == 3) {
+    CHECK(k.metrics[0].rule == "CF2" && k.metrics[0].n == 4);
+    CHECK_NEAR(k.metrics[0].baseline, 90, 1e-9);
+    CHECK_NEAR(k.metrics[0].change, 30, 1e-9);
+    CHECK(k.metrics[0].marked);
+    CHECK_NEAR(k.metrics[1].change, 20, 1e-9);
+    CHECK(!k.metrics[1].marked);
+    CHECK_NEAR(k.metrics[2].baseline, 100, 1e-9);
+    CHECK_NEAR(k.metrics[2].change, 9, 1e-9);
+    CHECK(k.metrics[2].marked);
+  }
+  int cf2 = 0, fw1 = 0, rc1 = 0;
+  for (const auto& m : k.marks) { if (m.rule == "CF2") cf2++; if (m.rule == "FW1") fw1++; if (m.rule == "RC1") rc1++; }
+  CHECK(cf2 == 1 && fw1 == 1 && rc1 == 0);
+  CHECK(r.level == "NORMAL");   // nunca sube el estado
+  // otra vuelta a la calma (TROTE) o un calentamiento un 50 % más largo: sin comparables para τ y THR100
+  std::vector<SessionSummary> h2 = h; h2[4].cardio.cooldown_class = "TROTE";
+  TrainingResult r2 = analyse_training(h2, "2026-10-05", c);
+  CHECK(r2.hrkin.metrics[0].n == 0 && !r2.hrkin.metrics[0].marked);
+  CHECK(r2.hrkin.metrics[2].n == 4);   // FW1 no depende de la vuelta a la calma
+  std::vector<SessionSummary> h3 = h; h3[4].cardio.warmup_m = 3000;
+  TrainingResult r3 = analyse_training(h3, "2026-10-05", c);
+  CHECK(r3.hrkin.metrics[0].n == 0);
+  // JSON y opción
+  json::Value v; std::string je;
+  CHECK(json::parse(training_to_json(r, c), &v, &je));
+  const json::Value& kj = v["estado"]["cinetica_fc"];
+  CHECK(kj["disponible"].boolean(false) && !kj["validado"].boolean(true));
+  CHECK(kj["ultima"]["metricas"][0]["regla"].str() == "CF2");
+  CHECK(kj["parametros"]["etiquetas"]["thr100_referencia_200_s"].str() == "OFICIAL");
+  CHECK(kj["marcas"].a.size() == 2);
+  json::Value opt; CHECK(json::parse("{\"cinetica_fc\":{\"tau_subida_pct\":40,\"calentamiento_dif_pct\":0}}", &opt, &je));
+  TrainingConfig c2; CHECK(training_config_from_json(opt, &c2, &je));
+  CHECK_NEAR(c2.hrkin.tau_rise_pct, 40, 1e-9);
+  CHECK_NEAR(c2.kb.v200_warmup_match_pct, 0, 1e-9);
+  json::Value bad; CHECK(json::parse("{\"cinetica_fc\":{\"tau_subida_pct\":0}}", &bad, &je));
+  TrainingConfig c3; CHECK(!training_config_from_json(bad, &c3, &je));
+  // sin ECG
+  std::vector<SessionSummary> none = h; for (auto& s : none) s.cardio = CardioSummary();
+  TrainingResult rn = analyse_training(none, "2026-10-05", c);
+  CHECK(!rn.hrkin.available && !rn.hrkin.reason.empty());
+  // resumen ida y vuelta
+  json::Value back; CHECK(json::parse(training_summary_to_json(h[4]), &back, &je));
+  SessionSummary s2; CHECK(training_summary_from_json(back, &s2, &je));
+  CHECK_NEAR(s2.cardio.tau_s, 117, 1e-9);
+  CHECK_NEAR(s2.cardio.fw_speed, 4.0, 1e-9);
+  CHECK(s2.cardio.cooldown_class == "PASO");
+  // WU3 en A9: 8 V200 de base con calentamiento de 2000 m y 3 caídas con 4000 m → no comparables, sin A9
+  auto mv = [](int i, double v200, double wm) {
+    SessionSummary s; s.id = "V" + std::to_string(i); s.horse = "H";
+    char d[32]; snprintf(d, sizeof(d), "2026-09-%02d", i + 1); s.date_utc = d; s.surface = "arena";
+    s.cardio.present = true; s.cardio.v200 = v200; s.cardio.v200_method = V200_METHOD_CROSSING; s.cardio.warmup_m = wm;
+    s.moving_s = 1800; s.distance_m = 8000;
+    return s;
+  };
+  std::vector<SessionSummary> hv;
+  for (int i = 0; i < 8; i++) hv.push_back(mv(i, 15.0, 2000));
+  for (int i = 8; i < 11; i++) hv.push_back(mv(i, 13.8, 4000));
+  TrainingResult ra = analyse_training(hv, "2026-09-12", c);
+  bool a9 = false; for (const auto& f : ra.sessions.back().kb.flags) if (f.rule == "A9_PERDIDA_FORMA") a9 = true;
+  CHECK(!a9);
+  TrainingConfig coff = c; coff.kb.v200_warmup_match_pct = 0;
+  TrainingResult rb = analyse_training(hv, "2026-09-12", coff);
+  bool a9b = false; for (const auto& f : rb.sessions.back().kb.flags) if (f.rule == "A9_PERDIDA_FORMA") a9b = true;
+  CHECK(a9b);
 }

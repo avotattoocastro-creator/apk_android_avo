@@ -92,6 +92,9 @@ struct HorseHistoryView: View {
         if r.playa.present && r.playa.available {
             BeachBaselineCard(beach: r.playa)
         }
+        if r.cineticaFc.present && r.cineticaFc.available {
+            HrKineticsCard(kin: r.cineticaFc)
+        }
         if r.sesiones.isEmpty {
             AvoCard { AvoNoData(text: "Sin sesiones con fecha y resumen para este caballo") }
         } else {

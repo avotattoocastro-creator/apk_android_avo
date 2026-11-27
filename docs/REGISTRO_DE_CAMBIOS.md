@@ -24,6 +24,42 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-27 — Motor 2.0.0-dev40 (KB-1 1.33.0, CARDIO 1.2.0, TRAINING 1.6.0) · iPad — Cinética de la FC: calentamiento, recuperación y THR100
+**Autor:** Claude (sesión nocturna del motor, sin supervisión) · **Rama:** `claude/motor-noche-2026-11-27` (desde `develop`) · **CI:** motor en la rama (ver PR)
+**Qué cambia:**
+- **Motor, análisis de la sesión** (`cardio.cinetica`, `src/cardio/cardio.cpp`):
+  - **CF1:** en la regresión FC–velocidad, las mesetas rápidas (≥ 70 % de la v máxima, o tras un salto ≥ 3 m/s)
+    descartan 30 s y exigen ≥ 45 s.
+  - **WU2:** calentamiento (duración, distancia, FC y velocidad media) y segundos con FC ≥ 120 lpm al paso o parado,
+    con aviso si suman ≥ 60 s.
+  - **FW1:** FC del tramo fijo de trote (últimos 60 s a 3–6 m/s con CV ≤ 10 %).
+  - **CF2:** τ de recuperación por ajuste A + B·e^(−t/τ) de 60 a 600 s tras el esfuerzo.
+  - **RC1:** THR100, con 200 s solo como referencia de la JRA.
+- **Motor, historia** (`estado.cinetica_fc`, `src/training/hr_kinetics.cpp`):
+  - τ, THR100 y FC del tramo fijo frente a la mediana de ≥ 3 comparables: misma superficie y franja; para τ y THR100,
+    además la misma vuelta a la calma y calentamiento ±20 % (**WU3**).
+  - Marcas INFO con +25 % o +8 lpm.
+  - **A9** compara solo calentamientos parecidos (WU3).
+  - Opción JSON `cinetica_fc`.
+  - Todo sin calibrar: nunca sube el estado.
+- **iPad:** tarjeta «Calentamiento y recuperación (FC)» en la historia del caballo (`HrKineticsCard`,
+  `TrainingHrKinetics`) y `HrKineticsTests` con una fixture escrita por el motor.
+- **Base científica 1.33.0:**
+  - regla nueva `CINETICA_FC_CF1_CF2` (IMPLEMENTADO); `RECUPERACION_RC1` pasa a IMPLEMENTADO; `CALENTAMIENTO_WU1_WU4` y
+    `CALENTAMIENTO_FW1` a PARCIAL;
+  - parámetro `cinetica_fc` y fuente `HADA_2007_EVJ_TAU`;
+  - notas de Mukai 2010, Langsetmo 1997 y Rugh 1992 releídas (resúmenes); JRA 134 y Yamanobe 1993 no accesibles hoy;
+  - estudio `knowledge/estudios/2026-11-27_motor_cinetica_fc_cf_wu_rc1.md`; fichas 12, 14 (§3 octies) y 15 (§7 ter),
+    `FORMATO_RESULTADOS.md` y protocolo de campo §6 quater.
+- **Pruebas:** 4 casos nuevos (`cardio.kinetics_*`, `cardio.cf1_fast_plateau_needs_45s`,
+  `cardio.history_kinetics_marks_and_wu3`) y comprobaciones nuevas en `cardio.full_session_*`; con ASan/UBSan.
+- **Fixtures:** las de análisis solo cambian de versión, porque no traen ECG.
+**No se ha tocado:** firmware, contratos binarios, workflows, firmas, `Info.plist` ni número de build.
+**Validación:** IMPLEMENTADO · pruebas locales ✅ (ASan/UBSan) · **NO VERIFICADO** con caballos reales ni en el iPad (Swift sin
+compilar en local).
+**Pendiente:** calibrar con el PROTOTIPO (≥ 10 min de ECG tras el esfuerzo, el mismo calentamiento fijo y ≥ 3 sesiones en
+≤ 7 días); temperatura (TC1) y going (GO1) como criterios de comparables; WU3 por intensidad; Android y Windows.
+
 ## 2026-11-27 — Espalda PROTOTIPO 3.16.2 — el receptor descartaba RAWX: SFRBX apagado y calidad cada 5 s
 **Autor:** Claude · **Commits:** ver PR · **CI:** pendiente (`build-back-v380.yml`)
 **Qué cambia:** RXM-SFRBX apagado (la clave se envía con 0). NAV-SAT y NAV-SIG pasan a salir cada 5 s, y el sondeo de respaldo de NAV-SIG también, en vez de cada segundo (`kQualityEveryS = 5`). RXM-RAWX sigue a 1 Hz. Workflow a 3.16.2.

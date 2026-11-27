@@ -16,7 +16,7 @@
 
 namespace avoeq {
 
-static const char* const TRAINING_VERSION = "1.5.0";   // 1.5.0: línea base de la playa por franja PL2–PL6 (AVO BEACH, KB 1.32.0); 1.4.0: planificador en semana natural (lunes–domingo) con lo realizado; 1.1.0: ficha de campo, A4 y base del planificador; 1.2.0: carga CG1–CG3;
+static const char* const TRAINING_VERSION = "1.6.0";   // 1.6.0: cinética de la FC en la historia (CF2, RC1, FW1, WU3; KB 1.33.0); 1.5.0: línea base de la playa por franja PL2–PL6 (AVO BEACH, KB 1.32.0); 1.4.0: planificador en semana natural (lunes–domingo) con lo realizado; 1.1.0: ficha de campo, A4 y base del planificador; 1.2.0: carga CG1–CG3;
                                                        // 1.3.0: planificador semanal, capa 2 (semana siguiente)
 static const char* const TRAINING_LOAD_ALGORITHM = "AVO_TRAINING_LOAD_V1";
 
@@ -67,6 +67,21 @@ struct TrainingConfig {
     double rain_recent_mm = 5;         // PL2: lluvia ≥ 5 mm en 48 h = suelo distinto del de sus comparables [I]
     int marks_days = 14;               // marcas PL2/PL6 de las sesiones de los últimos 14 días [I]
   } beach;
+  // Cinética de la FC en la historia (TRAINING 1.6.0, KB 1.33.0): τ de recuperación (CF2), THR100 (RC1) y FC del tramo
+  // fijo del calentamiento (FW1) frente a la línea base propia en sesiones comparables (WU3). SIN CALIBRAR: marcas INFO,
+  // nunca cambian el estado del caballo.
+  struct HrKin {
+    bool enabled = true;
+    int window_days = 90;              // sesiones anteriores usadas para la línea base [I]
+    int min_baseline = 3;              // comparables mínimas (RB1: bloques de ≥ 3 sesiones, Poinsard 2026 [E-r]) [I]
+    int max_baseline = 10;             // las 10 comparables más recientes [I]
+    double tau_rise_pct = 25;          // CF2: τ ≥ 25 % más lento que su mediana = marca INFO [I]
+    double thr100_rise_pct = 25;       // RC1: THR100 ≥ 25 % más largo = marca INFO [I]
+    double fw_hr_rise_bpm = 8;         // FW1: FC del tramo fijo ≥ 8 lpm más alta a la misma velocidad = marca INFO [I]
+    double fw_speed_match_m_s = 0.3;   // FW1: tramos comparables con |Δv| ≤ 0,3 m/s [I]
+    double warmup_match_pct = 20;      // WU3: calentamiento parecido (distancia ±20 %) para comparar τ y THR100 [I]
+    int marks_days = 14;               // marcas de las sesiones de los últimos 14 días [I]
+  } hrkin;
   // Planificador semanal, capa 2 (TRAINING 1.3.0, KB 1.31.0): propuesta orientativa de la semana siguiente con P1, P2,
   // P4–P7, RT1–RT3 y DM1–DM4. Todo SIN CALIBRAR: sale como pautas informativas y nunca cambia el estado del caballo.
   struct Planner {
@@ -158,6 +173,12 @@ struct CardioSummary {
   // CG1 (KB 1.30.0, cardio 1.1.0): TRIMP de la sesión y su histograma de FC (para recalcular con la FC propia)
   double trimp = NAN, trimp_coverage_pct = NAN;
   std::vector<std::pair<double, double>> hr_hist;   // [límite inferior lpm, segundos]
+  // Cinética de la FC (cardio 1.2.0, KB 1.33.0); NaN / vacío en análisis anteriores
+  double warmup_s = NAN, warmup_m = NAN, warmup_hr = NAN, high_hr_still_s = NAN;   // WU2
+  double fw_hr = NAN, fw_speed = NAN;           // FW1
+  double tau_s = NAN, tau_r2 = NAN;             // CF2
+  double thr100_s = NAN;                        // RC1
+  std::string cooldown_class;                   // WU4: PARADO | PASO | TROTE
 };
 
 struct SessionSummary {
@@ -282,6 +303,27 @@ std::string training_soil_class(double pct, const TrainingConfig& c);
 BeachBaseline training_beach_baseline(const std::vector<SessionSummary>& ok, long at, const TrainingConfig& c);
 std::string training_beach_json(const BeachBaseline& b, const TrainingConfig& c);
 
+// Cinética de la FC en la historia (TRAINING 1.6.0): una entrada por métrica de la última sesión con ECG.
+struct HrKinMetric {
+  std::string metric, rule, unit, comparable;   // TAU_RECUPERACION (CF2) | THR100 (RC1) | FC_TRAMO_FIJO (FW1)
+  double last = NAN, baseline = NAN, mad = NAN, change = NAN;   // change: % (τ, THR100) o lpm (FW1)
+  int n = 0;
+  bool marked = false;
+};
+struct HrKinMark { long day = 0; std::string id, rule, text, evidence; };
+struct HrKinetics {
+  bool available = false;
+  std::string reason, last_id, cooldown_class;
+  long last_day = -1;
+  int ecg_sessions = 0;
+  double warmup_m = NAN, warmup_s = NAN;
+  std::vector<HrKinMetric> metrics;
+  std::vector<HrKinMark> marks;
+  std::vector<std::string> notes;
+};
+HrKinetics training_hr_kinetics(const std::vector<SessionSummary>& ok, long at, const TrainingConfig& c);
+std::string training_hr_kinetics_json(const HrKinetics& k, const TrainingConfig& c);
+
 struct SessionResult {
   SessionSummary s;
   SessionLoad load;
@@ -363,6 +405,7 @@ struct TrainingResult {
   PlannerStatus planner;                            // base del planificador semanal a la fecha de referencia
   WeekPlan week;                                    // capa 2: propuesta de la semana siguiente (TRAINING 1.3.0)
   BeachBaseline beach;                              // PL2–PL6: línea base de la playa por franja (TRAINING 1.5.0)
+  HrKinetics hrkin;                                 // CF2, RC1, FW1, WU3: cinética de la FC (TRAINING 1.6.0)
   CgStatus cg;                                      // CG1–CG3 a la fecha de referencia (solo descriptiva)
   std::string level = "NORMAL";
   std::vector<std::string> reasons, warnings;

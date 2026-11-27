@@ -179,6 +179,48 @@ std::vector<EcgBeat> detect_beats(const std::vector<double>& mv_in, double fs, c
 }
 
 // ------------------------------------------------------------------ análisis sobre la serie RR
+CardioResult::TauFit fit_hr_recovery(const std::vector<double>& t, const std::vector<double>& hr, double tau_min, double tau_max) {
+  CardioResult::TauFit f;
+  const size_t n = std::min(t.size(), hr.size());
+  f.points = (int)n;
+  if (n < 6) { f.reason = "menos de 6 épocas válidas en la recuperación"; return f; }
+  double my = 0; for (size_t i = 0; i < n; i++) my += hr[i]; my /= n;
+  double sst = 0; for (size_t i = 0; i < n; i++) sst += (hr[i] - my) * (hr[i] - my);
+  if (!(sst > 0)) { f.reason = "FC constante en la recuperación"; return f; }
+  // para un τ dado, A y B salen por regresión lineal de FC sobre x = e^(−t/τ)
+  auto solve = [&](double tau, double* A, double* B) {
+    double sx = 0, sy = 0, sxx = 0, sxy = 0;
+    for (size_t i = 0; i < n; i++) { double x = std::exp(-t[i] / tau); sx += x; sy += hr[i]; sxx += x * x; sxy += x * hr[i]; }
+    double den = n * sxx - sx * sx;
+    if (!(den > 1e-12)) return (double)INFINITY;
+    *B = (n * sxy - sx * sy) / den; *A = (sy - *B * sx) / n;
+    double sse = 0; for (size_t i = 0; i < n; i++) { double e = hr[i] - (*A + *B * std::exp(-t[i] / tau)); sse += e * e; }
+    return sse;
+  };
+  // búsqueda logarítmica gruesa y refinado por sección áurea
+  double best = INFINITY, bt = NAN;
+  const int K = 400;
+  for (int k = 0; k <= K; k++) {
+    double tau = tau_min * std::pow(tau_max / tau_min, (double)k / K), A, B;
+    double e = solve(tau, &A, &B);
+    if (e < best) { best = e; bt = tau; }
+  }
+  if (!std::isfinite(bt)) { f.reason = "ajuste exponencial no resoluble"; return f; }
+  double step = std::pow(tau_max / tau_min, 1.0 / K);
+  double lo = std::max(tau_min, bt / step), hi = std::min(tau_max, bt * step);
+  const double g = 0.5 * (std::sqrt(5.0) - 1.0);
+  for (int it = 0; it < 60; it++) {
+    double a = hi - g * (hi - lo), b = lo + g * (hi - lo), A, B;
+    if (solve(a, &A, &B) < solve(b, &A, &B)) hi = b; else lo = a;
+  }
+  double tau = 0.5 * (lo + hi), A, B;
+  double sse = solve(tau, &A, &B);
+  f.tau_s = tau; f.asymptote = A; f.amplitude = B; f.r2 = 1.0 - sse / sst;
+  if (!(B > 0)) { f.reason = "la FC no baja en la recuperación"; f.tau_s = NAN; }
+  else if (tau <= tau_min * 1.01 || tau >= tau_max * 0.99) { f.reason = "τ en el límite de la búsqueda (sin meseta final o caída demasiado rápida)"; f.tau_s = NAN; }
+  return f;
+}
+
 void analyse_rr(std::vector<EcgBeat> beats, const std::vector<double>& gt, const std::vector<double>& gv,
                 const std::vector<std::pair<double, double>>& gaps_in, double t_begin, double t_end, const CardioConfig& c,
                 CardioResult* r) {
@@ -362,6 +404,71 @@ void analyse_rr(std::vector<EcgBeat> beats, const std::vector<double>& gt, const
     double cov, v = window_mean(gt, gv, t_end_effort, t_end_effort + 600.0, &cov);
     if (std::isfinite(v) && cov >= 0.5) r->cooldown_class = v < 0.5 ? "PARADO" : v < 2.0 ? "PASO" : "TROTE";
   }
+  // RC1: THR100 (tiempo hasta FC < 100 lpm tras el fin del esfuerzo), solo tendencia propia
+  if (std::isfinite(t_end_effort)) {
+    for (size_t i = 0; i < ht.size(); i++) if (ht[i] >= t_end_effort && hs[i] < c.thr100_bpm) { r->thr100_s = ht[i] - t_end_effort; break; }
+  }
+  // CF2: τ de recuperación por ajuste monoexponencial sobre las épocas válidas de 60 a 600 s tras el fin del esfuerzo
+  if (std::isfinite(t_end_effort)) {
+    std::vector<double> tt, hh;
+    for (const auto& e : r->epochs) {
+      double tc = e.t0 + 0.5 * c.epoch_s - t_end_effort;
+      if (tc >= c.tau_from_s && tc <= c.tau_to_s && e.t0 + c.epoch_s <= t_end + 1e-9 && epoch_ok(e)) { tt.push_back(tc); hh.push_back(e.hr); }
+    }
+    const double expected = std::max(1.0, (c.tau_to_s - c.tau_from_s) / c.epoch_s);
+    double cov = std::min(1.0, tt.size() / expected);
+    if (t_end - t_end_effort < c.tau_from_s + 0.5 * (c.tau_to_s - c.tau_from_s)) { r->tau.reason = "grabación demasiado corta tras el esfuerzo (< 5,5 min)"; r->tau.coverage = cov; r->tau.points = (int)tt.size(); }
+    else if (cov < c.tau_min_coverage) { r->tau.reason = "menos del 60 % de épocas válidas en la recuperación"; r->tau.coverage = cov; r->tau.points = (int)tt.size(); }
+    else {
+      r->tau = fit_hr_recovery(tt, hh, c.tau_min_s, c.tau_max_s);
+      r->tau.coverage = cov;
+      if (std::isfinite(r->tau.tau_s) && !(r->tau.r2 >= c.tau_r2_min)) { r->tau.reason = "R² del ajuste exponencial < 0,80"; r->tau.tau_s = kNaN; }
+    }
+  } else r->tau.reason = "sin fin del esfuerzo";
+  // WU2: calentamiento hasta la primera época rápida (≥ 60 % de la velocidad máxima) o, sin GNSS, hasta la fase MAXIMA
+  {
+    CardioResult::Warmup& w = r->warmup;
+    double t1 = kNaN;
+    if (std::isfinite(vmax) && vmax >= 3.0) {
+      for (const auto& e : r->epochs) if (std::isfinite(e.speed) && e.speed >= c.wu_fast_fraction * vmax) { t1 = e.t0; break; }
+      if (std::isfinite(t1)) w.origin = "VELOCIDAD";
+    } else if (std::isfinite(t_hi_first)) { t1 = t_hi_first; w.origin = "FC"; }
+    if (std::isfinite(t1) && t1 > t_begin) {
+      w.t0 = t_begin; w.t1 = t1; w.duration_s = t1 - t_begin;
+      double hsum = 0, hn = 0, still = 0;
+      for (const auto& e : r->epochs) {
+        if (e.t0 < t_begin - 1e-9 || e.t0 + c.epoch_s > t1 + 1e-9 || !epoch_ok(e)) continue;
+        hsum += e.hr; hn++;
+        if (std::isfinite(e.speed) && e.speed < c.wu_low_speed_m_s && e.hr >= c.wu_high_hr_bpm) still += c.epoch_s;
+      }
+      if (hn > 0) w.hr_mean = hsum / hn;
+      if (have_speed) {
+        double d = 0, cov; 
+        for (size_t i = 1; i < gt.size(); i++) {
+          if (gt[i] <= t_begin || gt[i - 1] >= t1) continue;
+          if (std::isfinite(gv[i]) && std::isfinite(gv[i - 1])) d += 0.5 * (gv[i] + gv[i - 1]) * (std::min(gt[i], t1) - std::max(gt[i - 1], t_begin));
+        }
+        w.distance_m = d; w.high_hr_still_s = still;
+        double vm = window_mean(gt, gv, t_begin, t1, &cov);
+        if (std::isfinite(vm) && cov >= 0.5) w.speed_mean = vm;
+      }
+      w.sufficient = w.duration_s >= c.warmup_min_s || (std::isfinite(w.distance_m) && w.distance_m >= c.warmup_min_m);
+      // FW1: últimos fw_window_s seguidos de épocas válidas al trote estable dentro del calentamiento
+      const int need = std::max(2, (int)std::lround(c.fw_window_s / c.epoch_s));
+      int run = 0;
+      for (size_t i = 0; i < r->epochs.size(); i++) {
+        const HrEpoch& e = r->epochs[i];
+        bool in = e.t0 >= t_begin - 1e-9 && e.t0 + c.epoch_s <= t1 + 1e-9 && epoch_ok(e) && std::isfinite(e.speed) && e.speed >= c.fw_v_lo && e.speed <= c.fw_v_hi;
+        run = in ? run + 1 : 0;
+        if (run >= need) {
+          double sv = 0, sv2 = 0, sh = 0;
+          for (size_t k = i + 1 - need; k <= i; k++) { sv += r->epochs[k].speed; sv2 += r->epochs[k].speed * r->epochs[k].speed; sh += r->epochs[k].hr; }
+          double m = sv / need, cv = std::sqrt(std::max(0.0, sv2 / need - m * m)) / m;
+          if (cv <= c.fw_cv) { auto& F = r->fixed_warmup; F.t0 = r->epochs[i + 1 - need].t0; F.duration_s = need * c.epoch_s; F.hr = sh / need; F.speed = m; F.cv = cv; }
+        }
+      }
+    }
+  }
 
   // 5. V200 por el cruce de 200 lpm mantenido 10 s (Poinsard 2026)
   auto warmup_before = [&](double t) {
@@ -402,6 +509,7 @@ void analyse_rr(std::vector<EcgBeat> beats, const std::vector<double>& gt, const
     std::vector<std::pair<double, double>> pts;   // (v, FC)
     std::vector<double> pt_t;
     if (have_speed) {
+      double vtop = kNaN; for (double x : gv) if (std::isfinite(x) && (std::isnan(vtop) || x > vtop)) vtop = x;
       size_t i = 0;
       while (i < gt.size()) {
         if (!(std::isfinite(gv[i]) && gv[i] >= c.plateau_min_speed)) { i++; continue; }
@@ -414,14 +522,23 @@ void analyse_rr(std::vector<EcgBeat> beats, const std::vector<double>& gt, const
           s = ns; s2 = ns2; k = nk;
         }
         size_t last = j > i ? j - 1 : i;
-        if (gt[last] - gt[i] >= c.plateau_min_s) {
-          double b = gt[last], a = gt[i] + c.plateau_discard_s;
+        // CF1 [I]: meseta rápida o tras un salto grande de velocidad: descartar más y exigir más duración
+        bool cf1 = false;
+        if (c.cf1_enabled && k > 0) {
+          double pm = s / k, cov0, prev = window_mean(gt, gv, gt[i] - 10.0, gt[i], &cov0);
+          cf1 = (std::isfinite(vtop) && pm >= c.cf1_fast_fraction * vtop) || (std::isfinite(prev) && cov0 >= 0.5 && pm - prev >= c.cf1_jump_m_s);
+        }
+        const double need_s = cf1 ? std::max(c.plateau_min_s, c.cf1_min_s) : c.plateau_min_s;
+        const double discard_s = cf1 ? std::max(c.plateau_discard_s, c.cf1_discard_s) : c.plateau_discard_s;
+        if (cf1 && gt[last] - gt[i] >= c.plateau_min_s && gt[last] - gt[i] < need_s) { i = last + 1; continue; }   // demasiado corta con CF1
+        if (gt[last] - gt[i] >= need_s) {
+          double b = gt[last], a = gt[i] + discard_s;
           if (b - a >= c.plateau_avg_s) {
             double w0 = b - c.plateau_avg_s, cov;
             double sp = window_mean(gt, gv, w0, b, &cov);
             double hsum = 0; int hk = 0; double rrsum = 0;
             for (size_t q = 0; q < ht.size(); q++) if (ht[q] >= w0 && ht[q] <= b) { hsum += hv[q]; hk++; rrsum += 60.0 / hv[q]; }
-            if (std::isfinite(sp) && cov >= 0.8 && hk >= 3 && rrsum >= 0.8 * c.plateau_avg_s) { pts.push_back({sp, hsum / hk}); pt_t.push_back(w0); }
+            if (std::isfinite(sp) && cov >= 0.8 && hk >= 3 && rrsum >= 0.8 * c.plateau_avg_s) { pts.push_back({sp, hsum / hk}); pt_t.push_back(w0); if (cf1) r->cf1_plateaus++; }
           }
           i = last + 1;
         } else i++;
@@ -492,6 +609,12 @@ void analyse_rr(std::vector<EcgBeat> beats, const std::vector<double>& gt, const
       r->warnings.push_back(std::string("fase ") + cardio_phase_name(p) + " NO INTERPRETABLE (artefacto > 10 % o < 5 latidos)");
   if (std::isfinite(r->v200.value)) r->warnings.push_back("V200 NO VALIDADA: falta el error típico propio del caballo (≥ 3 pruebas comparables)");
   if (std::isfinite(r->v200.value) && !r->v200.warmup_ok) r->warnings.push_back("V200 con calentamiento corto (< 1000 m y < 10 min, WU1)");
+  if (std::isfinite(r->warmup.high_hr_still_s) && r->warmup.high_hr_still_s >= c.wu_high_hr_mark_s) {
+    char wb[200];
+    snprintf(wb, sizeof(wb), "FC ≥ %.0f lpm al paso o parado durante %.0f s del calentamiento (WU2): excitación, calor o artefacto; sin calibrar",
+             c.wu_high_hr_bpm, r->warmup.high_hr_still_s);
+    r->warnings.push_back(wb);
+  }
 }
 
 // ------------------------------------------------------------------ sesión completa
@@ -623,6 +746,32 @@ std::string cardio_json(const CardioResult& r, const CardioConfig& c, bool serie
     for (size_t k = 0; k < r.hr_hist.size(); k++)
       if (r.hr_hist[k] > 0) { o << (first ? "" : ",") << "[" << num(k * KB_HR_BIN_BPM) << "," << num(r.hr_hist[k]) << "]"; first = false; }
     o << "]},\"nota\":\"carga interna descriptiva (forma de Banister, coeficientes sin validar en caballos); no es un riesgo de lesion\"}";
+  }
+  {  // cinética de la FC (cardio 1.2.0, KB 1.33.0): atributos y tendencia propia, sin calibrar
+    const auto& w = r.warmup; const auto& F = r.fixed_warmup; const auto& T = r.tau;
+    auto sq = [](const std::string& x) { return x.empty() ? std::string("null") : "\"" + esc(x) + "\""; };
+    bool high = std::isfinite(w.high_hr_still_s) && w.high_hr_still_s >= c.wu_high_hr_mark_s;
+    o << ",\"cinetica\":{\"validado\":false"
+      << ",\"calentamiento\":{\"regla\":\"WU2\",\"origen\":" << sq(w.origin) << ",\"t0\":" << num(w.t0) << ",\"t1\":" << num(w.t1)
+      << ",\"duracion_s\":" << num(w.duration_s) << ",\"distancia_m\":" << num(w.distance_m) << ",\"fc_media_lpm\":" << num(w.hr_mean)
+      << ",\"velocidad_media_m_s\":" << num(w.speed_mean) << ",\"suficiente\":" << (std::isfinite(w.duration_s) ? (w.sufficient ? "true" : "false") : "null")
+      << ",\"s_fc_alta_sin_velocidad\":" << num(w.high_hr_still_s) << ",\"fc_alta_sin_velocidad\":" << (high ? "true" : "false")
+      << ",\"umbrales\":{\"fraccion_rapida\":" << num(c.wu_fast_fraction) << ",\"fc_alta_lpm\":" << num(c.wu_high_hr_bpm) << ",\"v_lenta_m_s\":" << num(c.wu_low_speed_m_s)
+      << ",\"marca_s\":" << num(c.wu_high_hr_mark_s) << ",\"min_m\":" << num(c.warmup_min_m) << ",\"min_s\":" << num(c.warmup_min_s) << "}"
+      << ",\"etiquetas\":{\"minimo\":\"E-r\",\"umbrales\":\"I\"}}"
+      << ",\"tramo_fijo\":{\"regla\":\"FW1\",\"t0\":" << num(F.t0) << ",\"duracion_s\":" << num(F.duration_s) << ",\"fc_media_lpm\":" << num(F.hr)
+      << ",\"velocidad_media_m_s\":" << num(F.speed) << ",\"cv_velocidad_pct\":" << num(std::isfinite(F.cv) ? 100.0 * F.cv : NAN)
+      << ",\"banda_m_s\":[" << num(c.fw_v_lo) << "," << num(c.fw_v_hi) << "],\"etiquetas\":{\"idea\":\"E-r\",\"tramo\":\"I\"},\"fuente\":\"YAMANOBE_1993_JRA\"}"
+      << ",\"recuperacion_tau\":{\"regla\":\"CF2\",\"modelo\":\"A+B*exp(-t/tau)\",\"tau_s\":" << num(T.tau_s) << ",\"asintota_lpm\":" << num(std::isfinite(T.tau_s) ? T.asymptote : NAN)
+      << ",\"amplitud_lpm\":" << num(std::isfinite(T.tau_s) ? T.amplitude : NAN) << ",\"r2\":" << num(T.r2) << ",\"epocas\":" << T.points
+      << ",\"cobertura_pct\":" << num(std::isfinite(T.coverage) ? 100.0 * T.coverage : NAN) << ",\"desde_s\":" << num(c.tau_from_s) << ",\"hasta_s\":" << num(c.tau_to_s)
+      << ",\"vuelta_calma\":" << sq(r.cooldown_class) << ",\"motivo\":" << sq(T.reason)
+      << ",\"etiquetas\":{\"modelo\":\"E-r\",\"ventana\":\"I\"},\"nota\":\"solo tendencia del propio caballo con la misma vuelta a la calma; sin valores de referencia\"}"
+      << ",\"thr100\":{\"regla\":\"RC1\",\"s\":" << num(r.thr100_s) << ",\"fc_lpm\":" << num(c.thr100_bpm) << ",\"referencia_jra_s\":" << num(c.thr100_jra_ref_s)
+      << ",\"etiqueta\":\"OFICIAL\",\"nota\":\"referencia institucional de la JRA, nunca una alerta\"}"
+      << ",\"cf1\":{\"regla\":\"CF1\",\"activa\":" << (c.cf1_enabled ? "true" : "false") << ",\"mesetas_afectadas\":" << r.cf1_plateaus
+      << ",\"descarte_s\":" << num(c.cf1_discard_s) << ",\"meseta_min_s\":" << num(c.cf1_min_s) << ",\"fraccion_rapida\":" << num(c.cf1_fast_fraction)
+      << ",\"salto_m_s\":" << num(c.cf1_jump_m_s) << ",\"etiquetas\":{\"tau_vo2\":\"E-r\",\"umbrales\":\"I\"}}}";
   }
   o << ",\"avisos\":[";
   for (size_t i = 0; i < r.warnings.size(); i++) o << (i ? "," : "") << "\"" << esc(r.warnings[i]) << "\"";

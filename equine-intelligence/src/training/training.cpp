@@ -342,6 +342,15 @@ bool training_summary_from_analysis(const json::Value& a, const TrainingConfig& 
     for (size_t k = 0; k < 6 && k < ca["recuperacion"].a.size(); k++) C.recovery_hr[k] = nnum(ca["recuperacion"][k]["fc_lpm"]);
     C.ectopy_candidates = (int)ca["ectopia"]["candidatos"].num(0);
     C.ectopy_level = ca["ectopia"]["nivel"].str(); C.ectopy_text = ca["ectopia"]["texto"].str();
+    C.cooldown_class = ca["vuelta_calma"].str();
+    const json::Value& kn = ca["cinetica"];   // cardio 1.2.0 (KB 1.33.0)
+    if (kn.type == json::Value::OBJ) {
+      C.warmup_s = nnum(kn["calentamiento"]["duracion_s"]); C.warmup_m = nnum(kn["calentamiento"]["distancia_m"]);
+      C.warmup_hr = nnum(kn["calentamiento"]["fc_media_lpm"]); C.high_hr_still_s = nnum(kn["calentamiento"]["s_fc_alta_sin_velocidad"]);
+      C.fw_hr = nnum(kn["tramo_fijo"]["fc_media_lpm"]); C.fw_speed = nnum(kn["tramo_fijo"]["velocidad_media_m_s"]);
+      C.tau_s = nnum(kn["recuperacion_tau"]["tau_s"]); C.tau_r2 = nnum(kn["recuperacion_tau"]["r2"]);
+      C.thr100_s = nnum(kn["thr100"]["s"]);
+    }
     const json::Value& ci = ca["carga_interna"];   // CG1 (cardio 1.1.0)
     if (ci.type == json::Value::OBJ) {
       C.trimp = nnum(ci["trimp"]); C.trimp_coverage_pct = nnum(ci["cobertura_pct"]);
@@ -420,7 +429,10 @@ std::string training_summary_to_json(const SessionSummary& s) {
     o << "],\"ectopia\":{\"candidatos\":" << C.ectopy_candidates << ",\"nivel\":" << q(C.ectopy_level) << ",\"texto\":" << q(C.ectopy_text) << "}"
       << ",\"trimp\":" << num(C.trimp) << ",\"trimp_cobertura_pct\":" << num(C.trimp_coverage_pct) << ",\"histograma_fc\":[";
     for (size_t k = 0; k < C.hr_hist.size(); k++) o << (k ? "," : "") << "[" << num(C.hr_hist[k].first) << "," << num(C.hr_hist[k].second) << "]";
-    o << "]}";
+    o << "],\"vuelta_calma\":" << q(C.cooldown_class) << ",\"cinetica\":{\"calentamiento_s\":" << num(C.warmup_s) << ",\"calentamiento_m\":" << num(C.warmup_m)
+      << ",\"calentamiento_fc_lpm\":" << num(C.warmup_hr) << ",\"s_fc_alta_sin_velocidad\":" << num(C.high_hr_still_s)
+      << ",\"tramo_fijo_fc_lpm\":" << num(C.fw_hr) << ",\"tramo_fijo_v_m_s\":" << num(C.fw_speed)
+      << ",\"tau_s\":" << num(C.tau_s) << ",\"tau_r2\":" << num(C.tau_r2) << ",\"thr100_s\":" << num(C.thr100_s) << "}}";
   }
   o << ",\"avisos\":[";
   for (size_t i = 0; i < s.warnings.size(); i++) o << (i ? "," : "") << q(s.warnings[i]);
@@ -498,6 +510,11 @@ bool training_summary_from_json(const json::Value& v, SessionSummary* out, std::
     C.ectopy_candidates = (int)ca["ectopia"]["candidatos"].num(0);
     C.ectopy_level = ca["ectopia"]["nivel"].str(); C.ectopy_text = ca["ectopia"]["texto"].str();
     C.trimp = nnum(ca["trimp"]); C.trimp_coverage_pct = nnum(ca["trimp_cobertura_pct"]);
+    C.cooldown_class = ca["vuelta_calma"].str();
+    const json::Value& kn = ca["cinetica"];
+    C.warmup_s = nnum(kn["calentamiento_s"]); C.warmup_m = nnum(kn["calentamiento_m"]); C.warmup_hr = nnum(kn["calentamiento_fc_lpm"]);
+    C.high_hr_still_s = nnum(kn["s_fc_alta_sin_velocidad"]); C.fw_hr = nnum(kn["tramo_fijo_fc_lpm"]); C.fw_speed = nnum(kn["tramo_fijo_v_m_s"]);
+    C.tau_s = nnum(kn["tau_s"]); C.tau_r2 = nnum(kn["tau_r2"]); C.thr100_s = nnum(kn["thr100_s"]);
     for (const auto& b : ca["histograma_fc"].a) {
       double lo = nnum(b[0]), sec = nnum(b[1]);
       if (std::isfinite(lo) && std::isfinite(sec) && sec > 0) C.hr_hist.push_back({lo, sec});
@@ -681,6 +698,34 @@ bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::str
       }
       if (P.soil_dry_max_pct >= P.soil_wet_min_pct) { if (err) *err = "playa: humedad_seca_max_pct debe ser menor que humedad_humeda_min_pct"; return false; }
     } else { if (err) *err = "«playa» debe ser true/false o un objeto"; return false; }
+  }
+  // Cinética de la FC (TRAINING 1.6.0): «cinetica_fc»: true/false o un objeto
+  if (v.has("cinetica_fc")) {
+    const json::Value& k = v["cinetica_fc"];
+    auto& P = c->hrkin;
+    if (k.type == json::Value::BOOL) P.enabled = k.b;
+    else if (k.type == json::Value::OBJ) {
+      P.enabled = k["activa"].boolean(true);
+      const D kd[] = {{"tau_subida_pct", &P.tau_rise_pct, 1, 500}, {"thr100_subida_pct", &P.thr100_rise_pct, 1, 500},
+                      {"tramo_fijo_subida_lpm", &P.fw_hr_rise_bpm, 1, 60}, {"tramo_fijo_dif_v_m_s", &P.fw_speed_match_m_s, 0.05, 3},
+                      {"calentamiento_dif_pct", &P.warmup_match_pct, 0, 200}};
+      for (const auto& d : kd) {
+        if (!k.has(d.k)) continue;
+        const json::Value& x = k[d.k];
+        if (x.type != json::Value::NUM || !(x.n >= d.lo && x.n <= d.hi)) { if (err) *err = std::string("opción fuera de rango: cinetica_fc.") + d.k; return false; }
+        *d.p = x.n;
+      }
+      const I ki[] = {{"dias_ventana", &P.window_days, 14, 730}, {"min_comparables", &P.min_baseline, 2, 30},
+                      {"max_comparables", &P.max_baseline, 2, 60}, {"dias_marcas", &P.marks_days, 1, 120}};
+      for (const auto& d : ki) {
+        if (!k.has(d.k)) continue;
+        const json::Value& x = k[d.k];
+        if (x.type != json::Value::NUM || x.n != std::floor(x.n) || x.n < d.lo || x.n > d.hi) { if (err) *err = std::string("opción fuera de rango: cinetica_fc.") + d.k; return false; }
+        *d.p = (int)x.n;
+      }
+      if (P.min_baseline > P.max_baseline) { if (err) *err = "cinetica_fc: min_comparables no puede superar a max_comparables"; return false; }
+      c->kb.v200_warmup_match_pct = P.warmup_match_pct;
+    } else { if (err) *err = "«cinetica_fc» debe ser true/false o un objeto"; return false; }
   }
   // Planificador semanal, capa 2 (TRAINING 1.3.0): «planificador»: true/false o un objeto
   if (v.has("planificador")) {
@@ -957,6 +1002,13 @@ CgStatus cg_evaluate(const std::vector<SessionSummary>& ok, long d, long first_d
 // A7 y A8 (KB 1.5.0): caída frente a la línea base propia en sesiones comparables (misma superficie).
 // A9 (KB 1.27.0): V200 / VHRmax del ECG frente a la línea base propia, misma superficie y mismo método.
 // A11 (KB 1.27.0): ectopia del ECG, siempre «candidatos a revisar», nunca un diagnóstico.
+// WU3 (KB 1.33.0) [I]: calentamientos comparables si la distancia difiere ≤ pct % de la de la sesión evaluada; sin dato en
+// alguna de las dos (análisis anteriores) se mantiene la comparación.
+bool kb_warmup_comparable(double ref_m, double other_m, double pct) {
+  if (!(pct > 0) || !std::isfinite(ref_m) || !std::isfinite(other_m) || !(ref_m > 0)) return true;
+  return std::fabs(other_m - ref_m) <= pct / 100.0 * ref_m;
+}
+
 void kb_cardio_flags(const std::vector<SessionSummary>& ok, size_t i, const KbRuleConfig& kc, std::vector<KbFlag>* out) {
   const SessionSummary& s = ok[i];
   if (!s.cardio.present) return;
@@ -967,7 +1019,8 @@ void kb_cardio_flags(const std::vector<SessionSummary>& ok, size_t i, const KbRu
     if (std::isnan(last) || method(s).empty()) return;
     std::vector<double> x; std::vector<long> days;
     for (size_t j = 0; j <= i; j++)
-      if (ok[j].cardio.present && ok[j].surface == s.surface && ok[j].beach_band == s.beach_band && method(ok[j]) == method(s) && !std::isnan(get(ok[j]))) { x.push_back(get(ok[j])); days.push_back(ok[j].day); }
+      if (ok[j].cardio.present && ok[j].surface == s.surface && ok[j].beach_band == s.beach_band && method(ok[j]) == method(s) && !std::isnan(get(ok[j])) &&
+          kb_warmup_comparable(s.cardio.warmup_m, ok[j].cardio.warmup_m, kc.v200_warmup_match_pct)) { x.push_back(get(ok[j])); days.push_back(ok[j].day); }
     // VT2: salto > 5 % frente a la anterior comparable en ≤ 31 días = posible artefacto o condiciones distintas
     if (x.size() >= 2 && s.day - days[days.size() - 2] <= kc.v200_jump_days) {
       double prev = x[x.size() - 2], rel = 100.0 * (last - prev) / prev;
@@ -1249,6 +1302,7 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
   r.planner = planner_at(ok, kbdays, r.reference_day, first_day, c.kb);
   r.week = training_plan_week(ok, kbdays, r.reference_day, first_day, r.kb, c);
   r.beach = training_beach_baseline(ok, r.reference_day, c);   // PL2–PL6 (TRAINING 1.5.0)
+  r.hrkin = training_hr_kinetics(ok, r.reference_day, c);    // CF2, RC1, FW1, WU3 (TRAINING 1.6.0)
   if (c.cg.enabled) {
     std::vector<double> per;
     r.cg = cg_evaluate(ok, r.reference_day, first_day, c, &per);
@@ -1384,6 +1438,7 @@ std::string training_to_json(const TrainingResult& r, const TrainingConfig& c) {
   }
   o << ",\"carga_cg\":"; cg_json(o, r.cg, c);
   o << ",\"playa\":" << training_beach_json(r.beach, c);
+  o << ",\"cinetica_fc\":" << training_hr_kinetics_json(r.hrkin, c);
   o << ",\"nota\":\"orientativo; no es un diagnóstico veterinario\"}";
   o << ",\"carga_diaria\":[";
   for (size_t i = 0; i < r.daily_load.size(); i++) o << (i ? "," : "") << "{\"fecha\":" << q(training_day_text(r.daily_load[i].first)) << ",\"carga\":" << num(r.daily_load[i].second) << "}";

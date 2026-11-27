@@ -455,6 +455,14 @@ Lo que falta calibrar (protocolo de campo, §4): ≥ 4 sesiones por franja y cab
 el TE propio por franja; el penetrómetro (PL2), la velocidad por zancada en PL3 y los picos de impacto en g (PL4).
 Detalle: `knowledge/estudios/2026-11-26_motor_playa_franjas_pl2_pl6.md`.
 
+## 3 octies. Cinética de la FC: CF1, CF2, WU1–WU4, FW1 y RC1 (KB-1 1.33.0, motor 2.0.0-dev40, cardio 1.2.0, TRAINING 1.6.0)
+Regla nueva `CINETICA_FC_CF1_CF2` (IMPLEMENTADO); `RECUPERACION_RC1` pasa a IMPLEMENTADO; `CALENTAMIENTO_WU1_WU4` y
+`CALENTAMIENTO_FW1` a PARCIAL; parámetro `cinetica_fc`. Fórmulas, parámetros, etiquetas y ejemplo numérico en la ficha
+15, §7 ter. Evidencia: Langsetmo 1997 (τ del VO2 10,0 y 20,7 s) [E-r], Rugh 1992 (ponis, biexponencial) [E-r], Hada
+2007 (τ de la FC en PSI baja con el entrenamiento; sin cifra leída) [E-r], Yamanobe 1993 (FC del calentamiento fijo)
+[E-r], JRA informe 134 (THR100, 200 s) [OFICIAL]; todos los cortes y umbrales son [I]. Todo INFO: no sube el estado.
+Estudio: `knowledge/estudios/2026-11-27_motor_cinetica_fc_cf_wu_rc1.md`.
+
 ## 4. Ciclo semanal de mejora (durante las pruebas de campo del PROTOTIPO)
 1. **Estudio de la semana:** revisión de la `cola_investigacion` de `base_cientifica.json` y de estudios nuevos. Se
    guarda en `knowledge/estudios/AAAA-MM-DD_<tema>.md` con fuentes y etiquetas [E]/[I]/[NV].

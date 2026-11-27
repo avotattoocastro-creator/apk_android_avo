@@ -37,7 +37,7 @@
 
 namespace avoeq {
 
-static const char* const CARDIO_VERSION = "1.1.0";   // 1.1.0: carga interna CG1 (TRIMP, KB 1.30.0)
+static const char* const CARDIO_VERSION = "1.2.0";   // 1.2.0: cinética de la FC CF1, CF2, WU2, FW1 y RC1 (KB 1.33.0); 1.1.0: carga interna CG1 (TRIMP, KB 1.30.0)
 static const char* const CARDIO_DETECTOR_ID = "AVO_ECG_S_ANCHOR_V1";
 static const char* const V200_METHOD_CROSSING = "CRUCE_200_10S";
 static const char* const V200_METHOD_REGRESSION = "REGRESION_FC_VELOCIDAD";
@@ -75,6 +75,24 @@ struct CardioConfig {
   int ectopy_tolerated = 10;             // P90 de 5–10 en PSI sanos en el máximo (van Erck 2026 [E]); más = VIGILAR [I]
   // CG1 carga interna (KB 1.30.0): TRIMP con las épocas de 5 s válidas; FC de reposo y máxima por defecto «no propias»
   KbTrimpConfig trimp;
+  // Cinética de la FC (cardio 1.2.0, KB 1.33.0). Todo SIN CALIBRAR: atributos y tendencia propia, nunca un estado.
+  // CF1 [I] (τ del VO2 10 → 21 s sobre el umbral, Langsetmo 1997 [E-r]): en las mesetas rápidas (≥ 70 % de la velocidad
+  // máxima de la sesión) o tras un salto ≥ 3 m/s respecto a los 10 s previos se descartan 30 s y se exigen ≥ 45 s.
+  bool cf1_enabled = true;
+  double cf1_fast_fraction = 0.70, cf1_jump_m_s = 3.0, cf1_discard_s = 30.0, cf1_min_s = 45.0;
+  // WU2 [I]: calentamiento = desde el inicio hasta la primera época ≥ 60 % de la velocidad máxima; «FC alta sin
+  // velocidad» = épocas válidas con FC ≥ 120 lpm y velocidad < 1,7 m/s (paso o parado); marca si suman ≥ 60 s.
+  double wu_fast_fraction = 0.60, wu_high_hr_bpm = 120.0, wu_low_speed_m_s = 1.7, wu_high_hr_mark_s = 60.0;
+  // FW1 [I] (Yamanobe 1993 [E-r]): tramo fijo del calentamiento = últimos 60 s seguidos de épocas válidas entre 3 y
+  // 6 m/s con CV de la velocidad ≤ 10 %; su FC media es la tendencia diaria sustituta de la V200.
+  double fw_window_s = 60.0, fw_v_lo = 3.0, fw_v_hi = 6.0, fw_cv = 0.10;
+  // CF2 [I]: τ de recuperación de la FC por ajuste monoexponencial FC(t) = A + B·e^(−t/τ) sobre las épocas válidas de
+  // 60 s a 600 s tras el fin del esfuerzo (sin el primer minuto: fase rápida de Rugh 1992 [E-r, ponis]); cobertura ≥ 60 %,
+  // R² ≥ 0,80, τ entre 5 y 900 s. Solo tendencia del propio caballo, sin valores de referencia.
+  double tau_from_s = 60.0, tau_to_s = 600.0, tau_min_coverage = 0.60, tau_r2_min = 0.80, tau_min_s = 5.0, tau_max_s = 900.0;
+  // RC1: THR100 = tiempo desde el fin del esfuerzo hasta FC (mediana de 5 latidos) < 100 lpm; el corte de 200 s de la
+  // JRA es solo una referencia institucional, nunca una alerta.
+  double thr100_bpm = 100.0, thr100_jra_ref_s = 200.0;
 };
 
 struct EcgBeat {
@@ -133,8 +151,22 @@ struct CardioResult {
   KbTrimp trimp;                           // CG1 (épocas válidas)
   std::vector<double> hr_hist;             // segundos por intervalo de 5 lpm (épocas válidas)
   double trimp_coverage = NAN;             // fracción de la sesión con FC válida
+  // Cinética de la FC (cardio 1.2.0, KB 1.33.0)
+  struct Warmup {           // WU2
+    double t0 = NAN, t1 = NAN, duration_s = NAN, distance_m = NAN, hr_mean = NAN, speed_mean = NAN, high_hr_still_s = NAN;
+    bool sufficient = false;  // WU1: ≥ 1000 m o ≥ 10 min
+    std::string origin;       // VELOCIDAD | FC (sin GNSS: hasta la primera época > 185 lpm) | "" (sin calentamiento)
+  } warmup;
+  struct FixedSegment { double t0 = NAN, duration_s = NAN, hr = NAN, speed = NAN, cv = NAN; } fixed_warmup;   // FW1
+  struct TauFit { double tau_s = NAN, asymptote = NAN, amplitude = NAN, r2 = NAN, coverage = NAN; int points = 0; std::string reason; } tau;   // CF2
+  double thr100_s = NAN;    // RC1
+  int cf1_plateaus = 0;     // mesetas a las que se aplicó CF1
   std::vector<std::string> warnings;
 };
+
+// Ajuste FC(t) = A + B·e^(−t/τ) por mínimos cuadrados (búsqueda de τ en [tau_min, tau_max] con A y B lineales).
+// t en segundos desde el fin del esfuerzo. Expuesto para las pruebas.
+CardioResult::TauFit fit_hr_recovery(const std::vector<double>& t, const std::vector<double>& hr, double tau_min, double tau_max);
 
 // Detector puro sobre una serie uniforme (mV, NaN = muestra no válida) a fs Hz. Devuelve las posiciones de los latidos
 // en segundos desde la primera muestra y la amplitud; polarity_out recibe el signo de la S. Expuesto para las pruebas.
