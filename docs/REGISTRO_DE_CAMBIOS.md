@@ -24,6 +24,11 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-27 — Espalda PROTOTIPO 3.16.3 — PPK PROBADO FÍSICAMENTE (RAWX a 1 Hz continuo en el `.avr`)
+**Autor:** Claude · **Commits:** solo documentación
+**Evidencia:** grabación `AVO_20261127_1328` (espalda 3.16.3, pecho 3.7.11, receptor HPG 1.51 en UART2 a 230 400 baudios, interior junto a una ventana). 255 RXM-RAWX completos en 255 s (12:28:14–12:32:29 UTC), cada uno en 8–9 trozos 0x12. El motor (`avo_eq_ppk_need`) los reconstruye: `tiene_rawx=true`, 1 mensaje perdido por radio. BackStatus v5: 347 RAWX recibidos y 344 enviados al pecho, 3 abandonados, 70 NAV-SIG y 417 UBX ≥ 512 B. MON-COMMS sin errores de TX del receptor.
+**Pendiente:** cálculo PPK completo con la base del IGN (en el iPad) y prueba a cielo abierto (FIX en tiempo real y PPK juntos). La posición aproximada que devuelve `avo_eq_ppk_need` sale a 0 sin SFRBX; no afecta, porque la estación se elige a mano y las efemérides vienen del RINEX `_MN` de la base.
+
 ## 2026-11-27 — Espalda PROTOTIPO 3.16.3 — el cambio de velocidad del UART2 se reintenta (se quedaba a 38 400)
 **Autor:** Claude · **Commits:** ver PR · **CI:** pendiente (`build-back-v380.yml`)
 **Qué cambia:** al buscar el puerto, si el ZED no contesta tras pedir 230 400 por el UART2, la espalda vuelve a 38 400 y lo intenta hasta 3 veces antes de dar por hecho que está en el UART1. La configuración apaga ahora el NMEA en los dos puertos del ZED. Workflow a 3.16.3.
