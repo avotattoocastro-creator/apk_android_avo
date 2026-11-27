@@ -209,6 +209,7 @@ struct SimZed {
   uint32_t sat_every[3] = {0, 0, 0}, sig_every[3] = {0, 0, 0};   // V3.9.0 NAV-SAT/SIG output rate
   bool l2_antenna = true;
   bool no_sig_key = false;   // older receiver firmware: NAV-SIG key unknown
+  int ignore_baud2 = 0;                          // V3.16.3: the next N UART2 baud changes are lost (field 27/11 12:43)
   bool sig_stuck = false; uint32_t sig_polls = 0; bool sig_kick = false;   // V3.14.7: periodic NAV-SIG stuck (firmware), polls still answered; OFF->ON restarts it if sig_kick
   bool comms_answer = true; uint8_t comms_tx_peak = 41, comms_tx_err = 0; uint16_t comms_overruns = 0; uint32_t comms_polls = 0;   // V3.14.4
   uint8_t carr = 2;                                           // carrSoln reported in NAV-PVT
@@ -282,7 +283,7 @@ struct SimZed {
       else if (k == zedkey::SIGNAL_GPS_ENA) { gnss[0] = v; sig = true; } else if (k == zedkey::SIGNAL_GLO_ENA) { gnss[1] = v; sig = true; }
       else if (k == zedkey::SIGNAL_GAL_ENA) { gnss[2] = v; sig = true; } else if (k == zedkey::SIGNAL_BDS_ENA) { gnss[3] = v; sig = true; }
       if (k == zedkey::RATE_MEAS) meas_ms = (uint16_t)v;
-      else if (k == zedkey::UART1_BAUDRATE) baud[1] = v; else if (k == zedkey::UART2_BAUDRATE) baud[2] = v;
+      else if (k == zedkey::UART1_BAUDRATE) baud[1] = v; else if (k == zedkey::UART2_BAUDRATE) { if (ignore_baud2 > 0) ignore_baud2--; else baud[2] = v; }
       else if (k == zedkey::UART1INPROT_UBX) in_ubx[1] = v; else if (k == zedkey::UART2INPROT_UBX) in_ubx[2] = v;
       else if (k == zedkey::UART1INPROT_RTCM3X) in_rtcm[1] = v; else if (k == zedkey::UART2INPROT_RTCM3X) in_rtcm[2] = v;
       else if (k == zedkey::UART1OUTPROT_UBX) out_ubx[1] = v; else if (k == zedkey::UART2OUTPROT_UBX) out_ubx[2] = v;
@@ -1606,6 +1607,18 @@ TEST(ppk, ubx_stream_counts_long_frames) {
   size_t m = ubx_build(UBX_CLS_RXM, UBX_ID_RXM_SFRBX, pl.data(), 8, sm, sizeof(sm));
   us.feed(sm, m);
   CHECK_EQ(got, 2); CHECK_EQ(us.long_frames(), 1u);
+}
+
+TEST(ppk, uart2_baud_change_lost_once_is_retried) {
+  // V3.16.3: field 27/11/2026 12:43: one lost UART2 baud change made the back pick UART1 and stay at 38400.
+  World w(2, 8);
+  w.zed.ignore_baud2 = 1;
+  w.run_ms(20000);
+  CHECK_EQ((int)w.back->zed().state(), (int)ZedManager::RUNNING);
+  CHECK_EQ((int)w.back->zed().port(), 2);
+  CHECK_EQ(w.back->zed().baud(), 230400u);
+  CHECK_EQ(w.zed.out_nmea[1], 0u); CHECK_EQ(w.zed.out_nmea[2], 0u);   // NMEA off on both ports
+  CHECK_EQ(w.back->zed().raw_state(), 1);
 }
 
 int main(int argc, char** argv) { return tt_run_all(argc > 1 ? argv[1] : nullptr); }

@@ -338,6 +338,7 @@ static size_t config_keys(uint8_t port, bool with_rate, uint8_t rate, uint32_t b
     kv[n++] = {zedkey::UART1INPROT_RTCM3X, 1};
     kv[n++] = {zedkey::UART1OUTPROT_UBX, 1};
     if (port == 1) kv[n++] = {zedkey::UART1OUTPROT_NMEA, 0};   // the back does not use NMEA: frees bandwidth
+    if (port == 1) kv[n++] = {zedkey::UART2OUTPROT_NMEA, 0};   // V3.16.3: also the other port (wrong port guess = no NMEA flood)
     if (port == 1) kv[n++] = {zedkey::UART1OUTPROT_RTCM3X, 0}; // V3.14.7: nor RTCM from the receiver (saved base config)
     kv[n++] = {zedkey::MSGOUT_NAV_PVT_UART1, 1};
     kv[n++] = {zedkey::MSGOUT_RXM_RTCM_UART1, 1};
@@ -347,6 +348,7 @@ static size_t config_keys(uint8_t port, bool with_rate, uint8_t rate, uint32_t b
     kv[n++] = {zedkey::UART2INPROT_RTCM3X, 1};
     kv[n++] = {zedkey::UART2OUTPROT_UBX, 1};
     if (port == 2) kv[n++] = {zedkey::UART2OUTPROT_NMEA, 0};
+    if (port == 2) kv[n++] = {zedkey::UART1OUTPROT_NMEA, 0};   // V3.16.3
     if (port == 2) kv[n++] = {zedkey::UART2OUTPROT_RTCM3X, 0};   // V3.14.7
     kv[n++] = {zedkey::MSGOUT_NAV_PVT_UART2, 1};
     kv[n++] = {zedkey::MSGOUT_RXM_RTCM_UART2, 1};
@@ -436,6 +438,7 @@ void ZedManager::send_raw(uint8_t raw_hz) {
 }
 
 void ZedManager::go(State s, uint32_t now_ms) {
+  if (s == PROBE_PORT) probe2_tries_ = 0;   // V3.16.3
   st_ = s;
   step_ = 0;
   tries_ = 0;
@@ -504,9 +507,13 @@ void ZedManager::tick(uint32_t now_ms) {
         case 4:
           if (dt >= 400) {
             if (got_ubx_) { port_ = 2; cfg_with_rate_ = true; go(CONFIGURE, now_ms); break; }
-            io_->zed_set_baud(found_); baud_ = found_; t0_ = now_ms; got_ubx_ = false; step_ = 5;      // not UART2: back to the old baud
+            io_->zed_set_baud(found_); baud_ = found_; t0_ = now_ms; got_ubx_ = false;                 // not UART2: back to the old baud
+            // V3.16.3: field 27/11/2026 12:43 (HPG 1.51, wired to UART2): the UART2 change did not answer once, the back
+            // decided "UART1", stayed at 38400 and its 8 Hz turned the UART2 NMEA into a flood. UART2 is tried 3 times.
+            step_ = (++probe2_tries_ < 3) ? 12 : 5;
           }
           break;
+        case 12: if (dt >= 300) { step_ = 0; } break;                                                   // V3.16.3: retry UART2
         case 5: if (dt >= 30) { poll_ver(); step_ = 6; } break;
         case 6: if (dt >= 180) { poll_ver(); step_ = 7; } break;
         case 7:

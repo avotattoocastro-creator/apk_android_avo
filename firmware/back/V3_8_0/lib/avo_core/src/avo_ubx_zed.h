@@ -263,6 +263,7 @@ class ZedManager {
   uint32_t baud_ = 38400, found_ = 0;
   uint8_t port_ = 0;
   uint8_t step_ = 0, cand_ = 0, tries_ = 0;
+  uint8_t probe2_tries_ = 0;   // V3.16.3: attempts to raise the UART2 baud before deciding it is UART1
   uint32_t t0_ = 0, last_ubx_ms_ = 0, last_nmea_count_ = 0;
   bool got_ubx_ = false, got_nmea_ = false;
   bool cfg_ok_ = false, rate_ok_ = false, cfg_with_rate_ = true;
