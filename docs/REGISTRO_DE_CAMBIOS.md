@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-27 — Espalda PROTOTIPO 3.16.3 — el cambio de velocidad del UART2 se reintenta (se quedaba a 38 400)
+**Autor:** Claude · **Commits:** ver PR · **CI:** pendiente (`build-back-v380.yml`)
+**Qué cambia:** al buscar el puerto, si el ZED no contesta tras pedir 230 400 por el UART2, la espalda vuelve a 38 400 y lo intenta hasta 3 veces antes de dar por hecho que está en el UART1. La configuración apaga ahora el NMEA en los dos puertos del ZED. Workflow a 3.16.3.
+**Por qué:** en la grabación de las 12:43 del 27/11 (3.16.2, HPG 1.51) la espalda eligió el UART1 y se quedó a 38 400. Los arranques anteriores con el mismo cableado habían detectado UART2. Como solo apagó el NMEA del UART1 y puso 8 Hz, el NMEA del UART2 (~57 frases/s) llenó la línea: configuración sin ACK, sin calidad y sin RAWX («UART del receptor demasiado lenta»). Con el NMEA apagado en los dos puertos, una detección equivocada ya no satura la línea, y la vigilancia de NAV-PVT vuelve a detectar el receptor.
+**Pruebas:** anfitrión de la espalda, 70 casos ✅. Nuevo: se pierde el primer cambio de velocidad del UART2 y termina en UART2 a 230 400 con RAWX activo.
+**Archivos:** `firmware/back/V3_8_0/lib/avo_core/src/avo_ubx_zed.*`, `avo_version.h`, `test/test_espnow.cpp`, `.github/workflows/build-back-v380.yml`, `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`, este registro.
+**Aviso:** cambio en un workflow YAML, comunicado al usuario. **NO VERIFICADO** en hardware.
+
 ## 2026-11-27 — Motor 2.0.0-dev40 (KB-1 1.33.0, CARDIO 1.2.0, TRAINING 1.6.0) · iPad — Cinética de la FC: calentamiento, recuperación y THR100
 **Autor:** Claude (sesión nocturna del motor, sin supervisión) · **Rama:** `claude/motor-noche-2026-11-27` (desde `develop`) · **CI:** motor en la rama (ver PR)
 **Qué cambia:**
