@@ -353,3 +353,48 @@ EQ_TEST(ppk, session_without_raw_and_base_outside_the_session) {
   CHECK(!avoeq::ppk_solve(ubx, {bo, d + "07590920.05n"}, opt, &r, &err));
   CHECK(err.find("no cubre") != std::string::npos);
 }
+
+// 27/11/2026: bases del IGN (.crx.gz / .rnx.gz) descomprimidas por el motor (el iPad decía «gzip cortado»).
+static std::vector<uint8_t> read_all(const std::string& p) {
+  std::ifstream f(p, std::ios::binary);
+  return std::vector<uint8_t>((std::istreambuf_iterator<char>(f)), std::istreambuf_iterator<char>());
+}
+
+EQ_TEST(ppk, gunzip_matches_originals_and_rejects_damage) {
+  const std::string d = data_dir();
+  const auto crx = read_all(d + "P43300USA_R_20190012056_17M_15S_MO.crx"), nav = read_all(d + "07590920.05n");
+  CHECK(avoeq::ppk_crc32((const uint8_t*)"123456789", 9) == 0xCBF43926u);
+  std::vector<uint8_t> out;
+  std::string err;
+  auto gz = read_all(d + "gz/crx_l6.crx.gz");
+  CHECK(avoeq::ppk_gunzip(gz.data(), gz.size(), &out, &err) && out == crx);
+  for (const char* n : {"gz/nav_l1.rnx.gz", "gz/nav_l9.rnx.gz"}) {
+    auto g = read_all(d + n);
+    CHECK(avoeq::ppk_gunzip(g.data(), g.size(), &out, &err) && out == nav);
+  }
+  auto two = read_all(d + "gz/two_members.gz");
+  std::vector<uint8_t> both(crx.begin(), crx.begin() + 5000);
+  both.insert(both.end(), nav.begin(), nav.end());
+  CHECK(avoeq::ppk_gunzip(two.data(), two.size(), &out, &err) && out == both);
+  // cortado en cualquier punto o con un byte cambiado: error, nunca datos a medias
+  for (size_t cut : {gz.size() - 1, gz.size() - 8, gz.size() / 2, (size_t)20}) {
+    CHECK(!avoeq::ppk_gunzip(gz.data(), cut, &out, &err) && !err.empty());
+  }
+  auto bad = gz;
+  bad[bad.size() / 2] ^= 0x10;
+  CHECK(!avoeq::ppk_gunzip(bad.data(), bad.size(), &out, &err));
+  const char* txt = "no es gzip, es texto normal y corriente";
+  CHECK(!avoeq::ppk_gunzip((const uint8_t*)txt, std::strlen(txt), &out, &err));
+  // API C: escribe el fichero y devuelve los bytes
+  const std::string op = tmp_dir() + "/avo_gunzip_test.crx";
+  char* js = nullptr;
+  CHECK(avo_eq_gunzip(gz.data(), (long long)gz.size(), op.c_str(), &js) == 0);
+  avoeq::json::Value v;
+  CHECK(avoeq::json::parse(js ? js : "", &v) && (size_t)v["bytes"].num() == crx.size());
+  avo_eq_free(js);
+  CHECK(read_all(op) == crx);
+  js = nullptr;
+  CHECK(avo_eq_gunzip(gz.data(), (long long)gz.size() / 2, op.c_str(), &js) == 1);
+  avo_eq_free(js);
+}
+

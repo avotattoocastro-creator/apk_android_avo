@@ -1,4 +1,5 @@
 // C API of AVO PPK (see avo_eq_c.h).
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <sstream>
@@ -32,6 +33,26 @@ std::string rover_json(const avoeq::PpkRoverStats& r) {
 }  // namespace
 
 extern "C" {
+
+AVO_EQ_API int avo_eq_gunzip(const unsigned char* data, long long size, const char* out_path, char** out) {
+  if (!out) return 2;
+  *out = nullptr;
+  if (!data || size <= 0 || !out_path) return pfail(out, 2, "faltan datos");
+  try {
+    std::vector<uint8_t> plain;
+    std::string err;
+    if (!avoeq::ppk_gunzip(data, (size_t)size, &plain, &err)) return pfail(out, 1, err);
+    FILE* f = std::fopen(out_path, "wb");
+    if (!f) return pfail(out, 1, "no se pudo escribir el fichero");
+    const size_t w = plain.empty() ? 0 : std::fwrite(plain.data(), 1, plain.size(), f);
+    const bool ok = std::fclose(f) == 0 && w == plain.size();
+    if (!ok) { std::remove(out_path); return pfail(out, 1, "no se pudo escribir el fichero"); }
+    *out = pdup("{\"bytes\":" + std::to_string(plain.size()) + "}");
+    return 0;
+  } catch (...) {
+    return pfail(out, 3, "error interno");
+  }
+}
 
 AVO_EQ_API int avo_eq_ppk_need(const char* const* paths, int n, char** out) {
   if (!out) return 2;
