@@ -19,7 +19,8 @@ cp "$tmp/package/build/three.module.js" "$OUT/three/build/"
 # solo lo que usa la página (FBXLoader y sus dependencias, OrbitControls, RoomEnvironment, RoundedBoxGeometry, fflate)
 J="$tmp/package/examples/jsm"
 cp "$J/loaders/FBXLoader.js" "$OUT/three/examples/jsm/loaders/"
-for d in libs curves controls environments geometries; do cp -R "$J/$d" "$OUT/three/examples/jsm/"; done
+mkdir -p "$OUT/three/examples/jsm/libs" && cp "$J/libs/fflate.module.js" "$OUT/three/examples/jsm/libs/"
+for d in curves controls environments geometries; do cp -R "$J/$d" "$OUT/three/examples/jsm/"; done
 
 # página 3D: importmap y módulos a la copia local de three
 sed -e 's#https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js#../three/build/three.module.js#' \
