@@ -2,8 +2,8 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.32.0",
-  "fecha": "2026-11-26",
+  "version": "1.33.0",
+  "fecha": "2026-11-27",
   "razas": [
     "PSI",
     "ARABE"
@@ -172,6 +172,11 @@
       "fecha": "2026-11-26",
       "titulo": "Motor nocturno 26/11: línea base de la playa por franja (PL2–PL6) y A9 por franja",
       "archivo": "estudios/2026-11-26_motor_playa_franjas_pl2_pl6.md"
+    },
+    {
+      "fecha": "2026-11-27",
+      "titulo": "Motor nocturno 27/11: cinética de la FC (CF1, CF2, WU2–WU3, FW1, RC1)",
+      "archivo": "estudios/2026-11-27_motor_cinetica_fc_cf_wu_rc1.md"
     }
   ],
   "fuentes": [
@@ -826,7 +831,7 @@
       "idioma": "en",
       "raza_fuente": "[NV] (caballos adultos en cinta)",
       "doi": "10.1152/jappl.1997.83.4.1235",
-      "nota": "KB 1.28.0 (auditoría 22/11): τ1 10,0 ± 0,9 s (bajo el umbral, 3→7 m/s) y 20,7 ± 3,4 s (sobre el umbral, 3→12,3 m/s); retraso 18,9/20,3 s; componente lento en 4/5 caballos [E-r]; texto completo de journals.physiology.org con error"
+      "nota": "KB 1.28.0 (auditoría 22/11): τ1 10,0 ± 0,9 s (bajo el umbral, 3→7 m/s) y 20,7 ± 3,4 s (sobre el umbral, 3→12,3 m/s); retraso 18,9/20,3 s; componente lento en 4/5 caballos [E-r]; texto completo de journals.physiology.org con error; 27/11: resumen releído, coincide (τ 10,0 ± 0,9 y 20,7 ± 3,4 s; retraso 18,9 y 20,3 s; componente lento desde ~136 s)"
     },
     {
       "id": "NIST_CUSUM",
@@ -2572,7 +2577,7 @@
       "idioma": "en",
       "raza_fuente": "ponis",
       "verificado_fecha": "2026-11-20",
-      "nota": "recuperación biexponencial τ 15 ± 2 s y 455 ± 78 s; reseña automática, verificar"
+      "nota": "recuperación biexponencial τ 15 ± 2 s y 455 ± 78 s; reseña automática, verificar; 27/11: resumen (PMID 1643220) releído: fase rápida τ 15 ± 2 s, lenta τ 455 ± 78 s; con atropina monoexponencial τ 174 ± 46 s en 4 ponis [E-r, ponis]"
     },
     {
       "id": "LINDNER_2020_ARABES_CINTA",
@@ -3240,7 +3245,7 @@
       "acceso": "RESUMEN",
       "pais": "Japón",
       "raza_fuente": "PSI",
-      "nota": "calentamiento intenso: FC mayor durante el sprint"
+      "nota": "calentamiento intenso: FC mayor durante el sprint; 27/11: título «Effects of three warm-up regimens of equal distance on VO2 kinetics during supramaximal exercise», págs. 33–39, 9 PSI: calentamiento de igual distancia al 30, 60 o 100 % del VO2max (400, 200 o 120 s) y sprint al 115 % a los 10 min; con el intenso, FC más alta en todo el sprint y VO2 más rápido; un agregador lo fecha en 2011 (comprobar en el DOI)"
     },
     {
       "verificado_fecha": "2026-11-20",
@@ -3632,7 +3637,7 @@
       "idioma": "ja",
       "raza_fuente": "PSI",
       "doi": "10.11535/jes1977.1993.5",
-      "nota": "5 PSI de 3 años; FC en calentamiento fijo (1.250 m a ~400 m/min) baja hasta el día 60; |r| 0,765 con V200 (negativa) [E-r]; base de FW1",
+      "nota": "5 PSI de 3 años; FC en calentamiento fijo (1.250 m a ~400 m/min) baja hasta el día 60; |r| 0,765 con V200 (negativa) [E-r]; base de FW1; 27/11: página no accesible desde la nube (no se esquivó); cifras sin releer",
       "verificado_fecha": "2026-11-22"
     },
     {
@@ -3740,7 +3745,7 @@
       "idioma": "ja",
       "raza_fuente": "PSI",
       "doi": "",
-      "nota": "THR100 = tiempo hasta FC < 100 lpm; ≤ 200 s carga relativamente baja, > 200 s alta; GPS poco fiable en pista cubierta [E]; base de RC1",
+      "nota": "THR100 = tiempo hasta FC < 100 lpm; ≤ 200 s carga relativamente baja, > 200 s alta; GPS poco fiable en pista cubierta [E]; base de RC1; 27/11: página no accesible desde la nube (no se esquivó); cifras sin releer",
       "verificado_fecha": "2026-11-22"
     },
     {
@@ -4330,6 +4335,18 @@
       "verificado_fecha": "2026-11-23",
       "nota": "n 30; conducta, no carga; galope en la prueba del objeto nuevo 1,9 → 11,4 s (p < 0,001) [E parcial] (KB 1.29.0)",
       "doi": "10.3389/fvets.2026.1927282"
+    },
+    {
+      "id": "HADA_2007_EVJ_TAU",
+      "cita": "Hada T, Ohmura H, Mukai K, Eto D, Takahashi T, Hiraga A 2007, Equine Vet J Suppl 36:141–145 (control autónomo de la recuperación de la FC tras el ejercicio en PSI)",
+      "url": "https://doi.org/10.1111/j.2042-3306.2006.tb05530.x",
+      "acceso": "RESUMEN",
+      "verificado_fecha": "2026-11-27",
+      "pais": "Japón (JRA)",
+      "idioma": "en",
+      "raza_fuente": "PSI",
+      "doi": "10.1111/j.2042-3306.2006.tb05530.x",
+      "nota": "resumen leído en agregador (27/11): τ de la recuperación de la FC tras 2,5 min a 8 m/s con 10 % de pendiente; los bloqueos autonómicos alargan τ, τ baja con 11 semanas de entrenamiento y se relaciona inversamente con el VO2max (r 0,43); sin valores de τ en segundos [NV]; base de CF2 como tendencia propia"
     }
   ],
   "parametros": [
@@ -5595,6 +5612,68 @@
       ],
       "estado": "IMPLEMENTADO",
       "nota": "KB 1.32.0, motor 2.0.0-dev39; opción JSON «playa»; descriptivo e INFO, sin calibrar; no es una predicción de lesiones"
+    },
+    {
+      "id": "cinetica_fc",
+      "valor": {
+        "cf1": {
+          "fraccion_rapida": 0.7,
+          "salto_m_s": 3.0,
+          "descarte_s": 30,
+          "meseta_min_s": 45
+        },
+        "calentamiento": {
+          "fraccion_rapida": 0.6,
+          "fc_alta_lpm": 120,
+          "v_lenta_m_s": 1.7,
+          "marca_s": 60
+        },
+        "tramo_fijo": {
+          "ventana_s": 60,
+          "v_m_s": [
+            3.0,
+            6.0
+          ],
+          "cv_max": 0.1
+        },
+        "tau": {
+          "desde_s": 60,
+          "hasta_s": 600,
+          "cobertura_min": 0.6,
+          "r2_min": 0.8,
+          "tau_s": [
+            5,
+            900
+          ]
+        },
+        "thr100": {
+          "fc_lpm": 100,
+          "referencia_jra_s": 200
+        },
+        "historia": {
+          "dias_ventana": 90,
+          "min_comparables": 3,
+          "max_comparables": 10,
+          "tau_subida_pct": 25,
+          "thr100_subida_pct": 25,
+          "tramo_fijo_subida_lpm": 8,
+          "tramo_fijo_dif_v_m_s": 0.3,
+          "calentamiento_dif_pct": 20,
+          "dias_marcas": 14
+        }
+      },
+      "evidencia": "E-r (Langsetmo 1997, Rugh 1992, Hada 2007, Yamanobe 1993) / OFICIAL (JRA THR100 200 s) / I (todos los cortes y umbrales)",
+      "fuentes": [
+        "LANGSETMO_1997",
+        "RUGH_1992_PONIS",
+        "HADA_2007_EVJ_TAU",
+        "YAMANOBE_1993_JRA",
+        "JRA_HANEDA_134_THR100",
+        "DE_MARE_2017_VDT",
+        "MUKAI_2010_EVJ_WARMUP"
+      ],
+      "estado": "IMPLEMENTADO",
+      "nota": "KB 1.33.0, motor 2.0.0-dev40; opción JSON «cinetica_fc» en la historia; todo INFO y sin calibrar; nunca sube el estado"
     }
   ],
   "reglas": [
@@ -5925,8 +6004,18 @@
         "LOVELL_ROSE_1995",
         "HUBBELL_1997_AJVR"
       ],
-      "estado": "PROPUESTA",
-      "nota": "efecto del calentamiento en la V200 de campo no publicado [NV]"
+      "estado": "PARCIAL",
+      "nota": "efecto del calentamiento en la V200 de campo no publicado [NV]",
+      "implementacion": "motor 2.0.0-dev40 (KB 1.33.0, cardio 1.2.0, training 1.6.0): WU1 atributo «suficiente» (≥ 1000 m o ≥ 10 min); WU2 bloque cardio.cinetica.calentamiento (duración, distancia, FC y velocidad media hasta la primera época ≥ 60 % de la velocidad máxima; sin GNSS, hasta la fase MAXIMA; segundos con FC ≥ 120 lpm a < 1,7 m/s y aviso si suman ≥ 60 s); WU3 A9, τ y THR100 comparan solo calentamientos con distancia ±20 %; WU4 clase de vuelta a la calma (ya en dev29) como criterio de comparables de CF2 y RC1",
+      "falta": "calibrar con datos propios del PROTOTIPO (calentamiento corto frente a largo el mismo día de la semana); efecto del calentamiento en la V200 de campo [NV]; WU3 por intensidad y no solo por distancia (Mukai 2010: igual distancia, distinta intensidad)",
+      "umbral_valores": {
+        "fraccion_rapida": "0,60 [I]",
+        "fc_alta_lpm": "120 [I]",
+        "v_lenta_m_s": "1,7 [I]",
+        "marca_s": "60 [I]",
+        "calentamiento_dif_pct": "20 [I]",
+        "min_m_s": "1000 m / 600 s [E-r De Mare 2017; uso I]"
+      }
     },
     {
       "id": "TENDON_ARABES_TA1_TA2",
@@ -6023,8 +6112,10 @@
       "fuentes": [
         "JRA_HANEDA_134_THR100"
       ],
-      "estado": "PROPUESTA",
-      "nota": "KB 1.28.0, sin implementar"
+      "estado": "IMPLEMENTADO",
+      "nota": "KB 1.28.0, sin implementar",
+      "implementacion": "motor 2.0.0-dev40 (KB 1.33.0, cardio 1.2.0, training 1.6.0): cardio.cinetica.thr100 (tiempo desde el fin del esfuerzo hasta la mediana de 5 latidos < 100 lpm) y tendencia propia en estado.cinetica_fc (mediana de ≥ 3 comparables con la misma superficie, vuelta a la calma y calentamiento ±20 %; marca INFO con ≥ +25 %); 200 s solo como referencia_jra_s y nota",
+      "falta": "calibrar el +25 % con el error típico propio (RB1); leer el informe 134 de la JRA (blog no accesible el 27/11)"
     },
     {
       "id": "CALENTAMIENTO_FW1",
@@ -6033,8 +6124,10 @@
       "fuentes": [
         "YAMANOBE_1993_JRA"
       ],
-      "estado": "PROPUESTA",
-      "nota": "KB 1.28.0, sin implementar"
+      "estado": "PARCIAL",
+      "nota": "KB 1.28.0, sin implementar",
+      "implementacion": "motor 2.0.0-dev40 (KB 1.33.0, cardio 1.2.0, training 1.6.0): cardio.cinetica.tramo_fijo = últimos 60 s seguidos de épocas válidas entre 3 y 6 m/s con CV ≤ 10 % dentro del calentamiento; tendencia en estado.cinetica_fc con la misma superficie y velocidad ±0,3 m/s; marca INFO con ≥ +8 lpm",
+      "falta": "TC1 (temperatura ±5 °C) y GO1 (going) como criterios de comparables; pendiente (PD1); umbral de 8 lpm sin calibrar; Yamanobe 1993 solo por resumen"
     },
     {
       "id": "CARGA_CG1",
@@ -6119,6 +6212,21 @@
       ],
       "estado": "PROPUESTA",
       "nota": "KB 1.29.0, sin implementar; nunca como predicción de lesiones"
+    },
+    {
+      "id": "CINETICA_FC_CF1_CF2",
+      "umbral": "CF1 mesetas rápidas (≥ 70 % de la v máxima) o tras un salto ≥ 3 m/s: descartar 30 s y exigir ≥ 45 s en la regresión de la V200; CF2 τ de recuperación por ajuste A + B·e^(−t/τ) de 60 a 600 s tras el esfuerzo (cobertura ≥ 60 %, R² ≥ 0,80, τ 5–900 s), solo tendencia propia con la misma vuelta a la calma; marca INFO con τ ≥ +25 % sobre la mediana de ≥ 3 comparables",
+      "evidencia": "E-r (Langsetmo 1997: τ del VO2 10,0 s bajo el umbral y 20,7 s sobre él; Rugh 1992: recuperación biexponencial en ponis τ 15 y 455 s; Hada 2007: τ de la FC baja con el entrenamiento en PSI) / I (ventanas, cortes y umbral)",
+      "fuentes": [
+        "LANGSETMO_1997",
+        "RUGH_1992_PONIS",
+        "HADA_2007_EVJ_TAU",
+        "EVANS_ROSE_1988_CINETICA"
+      ],
+      "estado": "IMPLEMENTADO",
+      "implementacion": "motor 2.0.0-dev40 (KB 1.33.0, cardio 1.2.0, training 1.6.0): cardio.cinetica.cf1 (mesetas afectadas) y cardio.cinetica.recuperacion_tau; estado.cinetica_fc con la métrica TAU_RECUPERACION; opción JSON «cinetica_fc»",
+      "falta": "calibrar el +25 % con el error típico propio; τ de PSI y árabes con cifra [NV]; modelo biexponencial si la grabación tiene el primer minuto limpio",
+      "nota": "KB 1.33.0; nunca con valores de referencia; no es un diagnóstico"
     }
   ],
   "pendiente_motor": [
@@ -6139,18 +6247,18 @@
     "VC1–VC4 (estudio 20/11 14:10, KB 1.16.0): regla combinada Verheyen (canter > 44 km Y galope > 6 km en 30 d) como LIMITAR; A1 aislada solo AVISO; A2 aislada a INFO; base: resumen [E-r] + 3 secundarios en texto completo; OR [NV]; cambia severidades de alertas existentes, implementar con aprobación del usuario",
     "VT1–VT3 (estudio 20/11 14:10): TE por defecto de V200 del 3 % marcado «no validado» hasta TE propio (≥ 3 pruebas); aviso de posible artefacto si |ΔV200| > 5 % en ≤ 31 d; V200 de árabes (Piccione 2004) solo como contexto · VT1 y VT2 HECHOS en 2.0.0-dev27 (te_v200_pct 3, salto 5 % en 31 d); VT3 solo contexto",
     "NV1 (estudio 20/11 15:10, KB 1.17.0): subir severidad de A7/A8 solo con persistencia en ≥ 3 sesiones comparables (Hall 2026 StrideSAFE [E-r]: VPP 0,08–0,09 de una carrera frente a 0,74 con 3 salidas seguidas); [I], sin implementar",
-    "CF1 (estudio 20/11 16:10, KB 1.18.0): en mesetas cerca del galope de trabajo o tras un salto grande de velocidad, descartar 30 s y exigir meseta ≥ 45–60 s para la V200 (τ del VO₂ 10→21 s sobre el umbral, Langsetmo 1997 [E-r]; deriva 204→221 lpm, Evans & Rose 1988 [E-r²]); [I], sin implementar hasta leer las fuentes completas",
-    "CF2 (estudio 20/11 16:10): τ de recuperación de la FC solo como tendencia del propio caballo (exponencial sobre 1–10 min sin el primer minuto); nunca con valores de referencia (τ de PSI [NV]; solo ponis, Rugh 1992); velocidad de recuperación como covariable",
+    "CF1 (estudio 20/11 16:10, KB 1.18.0): en mesetas cerca del galope de trabajo o tras un salto grande de velocidad, descartar 30 s y exigir meseta ≥ 45–60 s para la V200 (τ del VO₂ 10→21 s sobre el umbral, Langsetmo 1997 [E-r]; deriva 204→221 lpm, Evans & Rose 1988 [E-r²]); [I], sin implementar hasta leer las fuentes completas · HECHO en 2.0.0-dev40 (KB 1.33.0): mesetas rápidas o tras salto ≥ 3 m/s con 30 s de descarte y ≥ 45 s, activo por defecto (opción cf1 en CardioConfig)",
+    "CF2 (estudio 20/11 16:10): τ de recuperación de la FC solo como tendencia del propio caballo (exponencial sobre 1–10 min sin el primer minuto); nunca con valores de referencia (τ de PSI [NV]; solo ponis, Rugh 1992); velocidad de recuperación como covariable · HECHO en 2.0.0-dev40: cardio.cinetica.recuperacion_tau y tendencia en estado.cinetica_fc (INFO, sin calibrar)",
     "GN1 (estudio 20/11 17:09, KB 1.19.0): calidad de la velocidad GNSS: menor confianza en tramos con radio < 200 m o aceleración longitudinal alta; no usarlos como mesetas de V200; comparar parciales de 200 m (A8) solo con igual geometría; longitud de zancada solo promediada por tramos ≥ 100–200 m (error ≈ 1–1,5 % [I]); velocidad solo-IMU únicamente como relleno de cortes cortos",
     "ML1 (estudio 20/11 17:09): mano de galope EXPERIMENTAL desde la IMU de la cincha (fase de balanceo/guiñada respecto al pico vertical, curvatura RTK como a priori) hasta validar con vídeo ≥ 120 fps; % de zancadas en mano incorrecta en curva y % de tiempo por mano, recta y curva por separado; sentido de la pista como campo y criterio de comparables; nunca como riesgo de lesión",
     "AU1 (estudio 20/11 18:09, KB 1.20.0): no citar fuentes con duplicado_de en reglas nuevas (usar la canónica) ni fuentes con acceso SIN_AUDITAR como base de un cambio de lógica hasta reclasificarlas; prueba futura que lo compruebe al empaquetar la KB [I]",
     "DM1–DM4 (estudio 20/11 19:08, KB 1.21.0): pautas de carga del planificador para potros de 2 años frente a la DMD (rápido corto y frecuente, sin picos agudos de canter, escalones de distancia); [I], sin implementar con la capa 2 · HECHO en 2.0.0-dev35 (pautas del planificador; sin calibrar)",
     "SO1–SO3 (estudio 20/11 19:08): A9 con caída de V200/rendimiento y dos señales coincidentes; VLa4 al alza con rendimiento a la baja = sospechoso; A10 relativa a la tendencia de crecimiento en 2 años; [I], sin implementar",
     "RT1–RT3 y PE1–PE3 (estudio 20/11 20:08, KB 1.22.0): separación ≥ 72 h entre trabajos rápidos en el planificador; peso solo matinal con persistencia ≥ 3 d (AVISO ≥ 2 %, ALTO ≥ 4 %) y gracia tras transporte; [I], sin implementar · RT1–RT3 HECHOS en 2.0.0-dev35 (planificador); PE1–PE3 siguen sin implementar",
-    "GO1–GO4 y WU1–WU4 (estudio 20/11 21:08, KB 1.23.0): going como estrato y covariable de comparables A7/A8 (campo going/penetración en Session); calentamiento mínimo y clase de vuelta a la calma para A9 y CF2; [I], sin implementar",
+    "GO1–GO4 y WU1–WU4 (estudio 20/11 21:08, KB 1.23.0): going como estrato y covariable de comparables A7/A8 (campo going/penetración en Session); calentamiento mínimo y clase de vuelta a la calma para A9 y CF2; [I], sin implementar · WU1–WU4 PARCIAL en 2.0.0-dev40 (calentamiento, FC alta sin velocidad, comparables ±20 % en A9/CF2/RC1); GO1–GO4 sin implementar",
     "TA1–TA2 y RB1 (estudio 20/11 22:09, KB 1.24.0): orden de presentación tendón/hueso por raza y bloques de repetibilidad (≥ 3 sesiones, ≤ 7 d) para el TE propio; [I], sin implementar",
     "MV1, FM1 y EC1 (estudio noche 21/11, KB 1.25.0): método de V200 como atributo obligatorio de la línea base y FCmax por defecto 210–215 lpm marcada «no propia»; arritmias en galope solo como «revisar»; [I], sin implementar · FM1 HECHO en 2.0.0-dev34 (FC máxima por defecto 213 «no propia» y propia con ≥ 3 trabajos rápidos)",
-    "PD1, TE2, RC1 y FW1 (estudio noche 22/11, KB 1.28.0): pendiente como criterio de comparables, TE de V200 según condiciones, THR100 informativo y FC de calentamiento fijo como tendencia diaria; [I], sin implementar",
+    "PD1, TE2, RC1 y FW1 (estudio noche 22/11, KB 1.28.0): pendiente como criterio de comparables, TE de V200 según condiciones, THR100 informativo y FC de calentamiento fijo como tendencia diaria; [I], sin implementar · RC1 HECHO y FW1 PARCIAL en 2.0.0-dev40 (THR100 y FC del tramo fijo como tendencia propia); PD1 y TE2 sin implementar",
     "CG1–CG3 y ES1–ES3 (estudio noche 23/11, KB 1.29.0): carga interna (TRIMP individual) y externa (bandas GNSS) solo descriptivas, agudo/crónico como cambio relativo; prior μ_pop por edad y raza, sexo solo en velocidad, FCmax común con DE ≈ 8 lpm; [I], sin implementar · CG1 (PARCIAL), CG2, CG3 y FM1 HECHOS en 2.0.0-dev34 (KB 1.30.0): TRIMP con FC de referencia común, bandas de Morrice-West, EWMA 7/28 d, Foster; falta calibrar b y c, la FC de reposo propia y ES1–ES3"
   ],
   "cola_investigacion": [
@@ -6423,6 +6531,11 @@
       "version": "1.32.0",
       "fecha": "2026-11-26",
       "cambio": "PLAYA_LINEA_BASE_PL1_PL6 sigue PARCIAL con PL2–PL6 implementados (motor 2.0.0-dev39, training 1.5.0): bloque estado.playa (línea base por franja, efecto de la franja en zancada y frecuencia, impactos relativos, marcas de suelo) y A9 por franja; parámetro playa_linea_base; sin calibrar"
+    },
+    {
+      "version": "1.33.0",
+      "fecha": "2026-11-27",
+      "cambio": "Cinética de la FC implementada (motor 2.0.0-dev40, cardio 1.2.0, training 1.6.0): CF1 en la regresión de la V200, CF2 τ de recuperación, WU2 calentamiento y FC alta sin velocidad, WU3 comparables por calentamiento en A9/CF2/RC1, FW1 FC del tramo fijo y RC1 THR100; regla CINETICA_FC_CF1_CF2 IMPLEMENTADO, RC1 IMPLEMENTADO, WU1–WU4 y FW1 PARCIAL; parámetro cinetica_fc; fuente HADA_2007_EVJ_TAU; todo INFO y sin calibrar"
     }
   ]
 }

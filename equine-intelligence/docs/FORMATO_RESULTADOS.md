@@ -75,6 +75,23 @@ Mismos códigos de retorno; el texto se libera con `avo_eq_free`.
 `fecha`, `rapido_m`, `trimp`), `notas`, `nota`; y `sesiones[].carga_cg` (`trimp` recalculado, `rapido_m`). Opción
 `carga_cg` (true/false u objeto; ficha 14, §3 quinquies).
 
+**Cardio 1.2.0 / Training 1.6.0 (motor 2.0.0-dev40):** el bloque `cardio` del análisis añade `cinetica` (`validado:
+false`): `calentamiento` (WU2: `origen` VELOCIDAD | FC, `t0`, `t1`, `duracion_s`, `distancia_m`, `fc_media_lpm`,
+`velocidad_media_m_s`, `suficiente` (WU1), `s_fc_alta_sin_velocidad`, `fc_alta_sin_velocidad`, `umbrales`, `etiquetas`),
+`tramo_fijo` (FW1: `t0`, `duracion_s`, `fc_media_lpm`, `velocidad_media_m_s`, `cv_velocidad_pct`, `banda_m_s`,
+`etiquetas`, `fuente`), `recuperacion_tau` (CF2: `modelo`, `tau_s`, `asintota_lpm`, `amplitud_lpm`, `r2`, `epocas`,
+`cobertura_pct`, `desde_s`, `hasta_s`, `vuelta_calma`, `motivo`, `etiquetas`, `nota`), `thr100` (RC1: `s`, `fc_lpm`,
+`referencia_jra_s`, `etiqueta` OFICIAL, `nota`) y `cf1` (`activa`, `mesetas_afectadas`, `descarte_s`, `meseta_min_s`,
+`fraccion_rapida`, `salto_m_s`, `etiquetas`). Sin dato, `null`. El resumen de entrenamiento añade `cardio.vuelta_calma` y
+`cardio.cinetica` (`calentamiento_s`, `calentamiento_m`, `calentamiento_fc_lpm`, `s_fc_alta_sin_velocidad`,
+`tramo_fijo_fc_lpm`, `tramo_fijo_v_m_s`, `tau_s`, `tau_r2`, `thr100_s`). La historia añade `estado.cinetica_fc`
+(`nivel` INFO, `validado: false`): `reglas`, `disponible`, `motivo`, `parametros` (con `etiquetas`), `sesiones_ecg`,
+`ultima` (`id`, `fecha`, `vuelta_calma`, `calentamiento_m`, `calentamiento_s`, `metricas[]`: `metrica`
+TAU_RECUPERACION | THR100 | FC_TRAMO_FIJO, `regla`, `unidad`, `valor`, `mediana`, `mad`, `n`, `cambio`,
+`cambio_unidad` % | lpm, `comparables`, `marcada`) o `null`, `marcas[]` (`fecha`, `id`, `regla`, `nivel`, `texto`,
+`evidencia`), `notas` y `nota`. Opción `cinetica_fc` (true/false u objeto; ficha 15, §7 ter). A9 compara solo
+calentamientos con distancia ±20 % (WU3).
+
 **Training 1.5.0 (motor 2.0.0-dev39):** el resumen añade en `pista`: `franja_trabajo_pct` (solo franja AUTO),
 `humedad_suelo_pct`, `lluvia_48h_mm` y `nota_suelo` (DURO | NORMAL | BLANDO | PROFUNDO; `null` sin anotar). La historia
 añade `estado.playa` (PL2–PL6, `nivel` INFO, `validado: false`): `reglas`, `disponible`, `motivo`, `parametros` (con

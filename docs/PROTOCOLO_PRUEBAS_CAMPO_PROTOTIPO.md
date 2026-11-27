@@ -164,6 +164,18 @@ calibrar**. Para calibrarlos con el PROTOTIPO hace falta:
   75 % de la mediana anterior son [I]).
 - **P5:** ≥ 180 días de historia continua para tener el P75 propio de la distancia rápida de 60 d.
 
+## 6 quater. Cinética de la FC: calentamiento y recuperación (motor 2.0.0-dev40)
+El motor calcula el calentamiento (WU2), la FC de un tramo fijo de trote (FW1), la τ de recuperación (CF2) y el THR100
+(RC1), todo **sin calibrar**. Para calibrarlos con el PROTOTIPO (cincha 0.5.0 con ECG, espalda con GNSS RTK):
+- **Tramo fijo:** el mismo calentamiento cada día, con ≥ 60 s seguidos de trote estable entre 3 y 6 m/s justo antes del
+  trabajo rápido, en la misma superficie (y franja en la playa).
+- **Recuperación:** dejar el ECG grabando **≥ 10 min** tras el último rápido, sin quitar la cincha, y hacer siempre la
+  misma vuelta a la calma (al paso de la mano o montado); anotarla si cambia. Sin ≥ 5,5 min no hay τ.
+- **Error típico propio:** ≥ 3 sesiones iguales en ≤ 7 días para ver cuánto varían τ, THR100 y la FC del tramo fijo de
+  un día a otro; con eso se sustituirán el +25 % y los +8 lpm por defecto.
+- **Temperatura:** anotar la temperatura en la ficha de campo; aún no es criterio de comparables (TC1 pendiente) y el
+  calor alarga la recuperación.
+
 ## 7. Registro
 
 Cada jornada se anota en `docs/REGISTRO_DE_CAMBIOS.md` (o en un informe de sesiones reales) con: fecha, caballos,
