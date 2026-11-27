@@ -1,1 +1,7 @@
 windows/native/
+
+# Modelos 3D de Enozone descifrados (licencia: no publicar en claro; ver demo/avo-3d/README.md)
+demo/avo-3d/web-3d/modelos/
+demo/avo-3d/web-3d/tex/
+demo/avo-3d/herramientas/muybridge/work/*
+!demo/avo-3d/herramientas/muybridge/work/.gitkeep

@@ -24,6 +24,18 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-27 — Demo 3D (web) caballo + jockey con casco prototipo A y cincha · plan del Modo demostración del iPad
+**Autor:** Claude · **Commits:** ver PR · **CI:** no aplica (ningún workflow vigila `demo/` ni `docs/`)
+**Qué cambia:** nueva carpeta `demo/avo-3d/`:
+- `web-3d/`: página three.js 0.160 con el caballo de carreras y el jockey de Enozone (FBX), aires paso/trote/galope/sprint/parado, 13 chaquetillas, **casco prototipo A** (cápsula ≈ 61 × 61 × 32 mm con anillo de 8 LED por estado RTK) unido a la cabeza y **cincha** bajo la barriga; paquetes cincha → casco (220 B, ESP-NOW), casco → móvil (`TELEMETRY v3`, 116 B, BLE) y RTCM3 móvil → casco; móvil con la sesión en directo (velocidad, zancada, RTK, traza GNSS, aceleración de la cincha, baterías). Telemetría simulada.
+- `web-muybridge/`: versión 2D con los 11 fotogramas de Muybridge (1878, dominio público) coloreados; `herramientas/muybridge/` la regenera bit a bit.
+- `modelos_cifrados/enozone_3d.zip.enc`: FBX y texturas de Enozone **cifrados** (AES-256-CBC, PBKDF2) y `descifrar.sh`. La clave va en el secreto `AVO_ASSETS_3D_KEY` (lo crea el usuario); no está en el repositorio.
+- `docs/PLAN_MODO_DEMOSTRACION_IPAD.md`: plan del modo demostración nativo (RealityKit) en la app del iPad, fases F0–F5.
+**Por qué:** petición del usuario (27/11) de una demo visual del sistema y de tenerlo todo en GitHub. El usuario tiene licencia de los modelos para la app privada; el repositorio es público, por eso se suben cifrados (borrarlos después no los quitaría del historial).
+**No se ha tocado:** apps, firmware, motor, contratos binarios, workflows, firmas, `Info.plist`.
+**Validación:** IMPLEMENTADO. Probado en Chrome de escritorio (página 2D y panel del móvil); la escena 3D no se pudo ver desde la sesión en la nube (sin acceso a la CDN). **NO VERIFICADO** en iPad.
+**Pendiente:** crear el secreto `AVO_ASSETS_3D_KEY`; F0 (conversión a USDZ en un Mac); avisar antes de añadir al workflow del iPad el paso que descifre los modelos.
+
 ## 2026-11-27 — PPK de punta a punta PROBADO FÍSICAMENTE (espalda 3.16.3 + iPad build 242, motor 2.0.0-dev40)
 **Autor:** Claude · **Commits:** solo documentación
 **Evidencia:** sesión `AVO_20261127_1328` (interior junto a una ventana), base IGN **CANT** a 47 km descargada y descomprimida por el motor en el iPad. Resultado: **255 épocas, FLOAT 252 y FIX 3**. 1 mensaje RAWX perdido por radio.
