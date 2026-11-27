@@ -28,6 +28,11 @@ targets:
         type: folder
         optional: true
         buildPhase: resources
+      # Demostración 3D (27/11/2026): la monta el CI con scripts/demo3d/preparar_demo3d.sh
+      - path: demo3d
+        type: folder
+        optional: true
+        buildPhase: resources
     settings:
       base:
         PRODUCT_NAME: AVO Horse

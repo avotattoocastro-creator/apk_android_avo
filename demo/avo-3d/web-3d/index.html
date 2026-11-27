@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AVO en 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: hipódromo de noche, técnico pero vivo.
+   IDEA: la pista bajo focos con un caballo 3D real (WildMesh 3D) llevando AVO.
+   PICTURE: modelo 3D con texturas reales, sombras de focos, cámara orbitable; paquetes AVO superpuestos; esfera AMOLED con la misma escena.
+   COLOUR and TYPE: noche de césped #07110c, datos en blanco; Barlow Condensed + Inter.
+   LAYOUT: escena a ancho completo con controles; luego reloj y leyenda; apilado en móvil. */
+:root{color-scheme:dark;--bg:#07110c;--bg2:#0d1c14;--ink:#eef3ee;--mute:#9db3a4;--line:#1d3326;--c-back:#ffd166}
+:root[data-theme=light],:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;overflow-x:clip}
+.band{padding:clamp(24px,4vw,56px) max(5vw,16px)}.wrap{max-width:1240px;margin:0 auto}
+h1,h2{font-family:"Barlow Condensed",sans-serif;font-weight:700;line-height:1.05;text-wrap:balance;margin:0 0 10px}
+h1{font-size:clamp(32px,5vw,52px)}h2{font-size:clamp(28px,3.6vw,40px)}
+p{margin:0 0 12px;max-width:68ch}.mute{color:var(--mute)}.small{font-size:13px;color:var(--mute)}
+.fig{position:relative;height:clamp(340px,52vw,600px);border-radius:14px;overflow:hidden;background:#050b08;border:1px solid var(--line);touch-action:pan-y}
+.fig canvas{position:absolute;inset:0;width:100%;height:100%;display:block}#ov{pointer-events:none}
+#load{position:absolute;inset:0;display:grid;place-items:center;color:var(--mute);font-size:15px;text-align:center;padding:20px}
+.hint{position:absolute;left:12px;bottom:10px;font-size:13px;color:#cfd6d2;background:#0008;padding:4px 10px;border-radius:12px}
+.ctrls{display:flex;flex-wrap:wrap;gap:14px 24px;margin:16px 0 6px;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.seg span{font-size:13px;color:var(--mute);margin-right:4px}
+button{font:600 15px Inter,sans-serif;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);cursor:pointer}
+button[aria-pressed=true]{background:var(--ink);color:#07110c;border-color:var(--ink)}
+button:focus-visible{outline:3px solid var(--c-back);outline-offset:2px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:12px}
+.kpis div{background:var(--bg2);padding:12px 14px}.kpis b{display:block;font:700 30px/1.1 "Barlow Condensed",sans-serif;white-space:nowrap}.kpis small{color:var(--mute);font-size:13px}
+.watch{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:start}
+.dev{width:min(340px,82vw);aspect-ratio:410/502;padding:14px;border-radius:64px;background:linear-gradient(150deg,#3a3f44,#15181b 45%,#2a2e33);box-shadow:0 30px 60px #0009,inset 0 1px 0 #ffffff30}
+.dev canvas{width:100%;height:100%;border-radius:50px;display:block;background:#000}
+@media(max-width:760px){.watch{grid-template-columns:minmax(0,1fr)}.dev{margin:0 auto}}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+</head>
+<body>
+<header class="band" style="padding-bottom:0"><div class="wrap">
+<h1>AVO Performance Horse: caballo y jockey en 3D</h1>
+<p class="mute">Caballo de carreras y jockey en 3D, con texturas, mapas de relieve y animaciones hechas por un artista (paso, trote, galope y sprint), iluminados como bajo los focos de la pista. Arrastra para girar la cámara. Lleva el sistema de la versión oficial: el <strong>casco prototipo A</strong> (GNSS RTK, grabación y enlace con el móvil) y la <strong>cincha</strong> (IMU). Los puntos de color son los paquetes entre ellos y el móvil, que muestra abajo a la derecha lo que verías en la app en directo.</p>
+</div></header>
+
+<section class="band"><div class="wrap">
+<div class="fig" id="fig"><canvas id="gl"></canvas><canvas id="ov"></canvas><div id="load">Cargando caballo y jockey 3D…</div><div class="hint">Arrastra para girar · pellizca o rueda para acercar</div></div>
+<div class="ctrls">
+ <div class="seg" id="gait"><span>Aire</span><button data-v="idle">Parado</button><button data-v="walk">Paso</button><button data-v="trot">Trote</button><button data-v="run" aria-pressed="true">Galope</button><button data-v="speed">Sprint</button></div>
+ <div class="seg" id="silk"><span>Chaquetilla</span><button data-v="01" aria-pressed="true">Celeste</button><button data-v="05">Fucsia</button><button data-v="03">3</button><button data-v="07">7</button><button data-v="10">10</button><button data-v="00">Blanca</button></div>
+ <div class="seg" id="rtk"><span>GNSS</span><button data-v="fix" aria-pressed="true">RTK Fix</button><button data-v="float">RTK Float</button><button data-v="sin">Sin correcciones</button></div>
+ <div class="seg"><span>Cincha</span><button id="girthBtn" aria-pressed="true">Conectada</button><button id="pausa" aria-pressed="false">Pausa</button></div>
+</div>
+<div class="kpis" id="kpis"></div>
+<p class="small" style="margin-top:12px">Modelos: «Race Horse Jockey» de Enozone (Unity Asset Store), con sus texturas y animaciones originales; materiales adaptados a la web. Uso interno de demostración. Telemetría simulada; los tamaños de paquete son los de los contratos vigentes.</p>
+</div></section>
+
+
+
+<script type="module">
+import * as THREE from 'three';
+import {FBXLoader} from 'three/addons/loaders/FBXLoader.js';
+import {unzipSync} from 'three/addons/libs/fflate.module.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
+{
+const $=s=>document.querySelector(s);
+const ZIP_URL='modelos/modelos.zip'; /* no está en el repositorio: ver README */
+const S={gait:'run',rtk:'fix',girth:true,paused:false,t:0,rec:754,dist:0,bat:{casco:82,girth:64}};
+const RTK={fix:{l:'RTK Fix',acc:'± 1,4 cm',sat:24,c:'#38d27a'},float:{l:'RTK Float',acc:'± 28 cm',sat:19,c:'#ffb020'},sin:{l:'Sin RTK',acc:'± 1,8 m',sat:14,c:'#ff4d4d'}};
+/* tramos de la toma única (30 fps), según el importador de Unity del paquete */
+const CLIPS={walk:[0,159],run:[241,302],speed:[304,362],idle:[365,409],trot:[541,604]};
+const LINKS=[{id:'girth',col:'#5ac8fa'},{id:'tel',col:'#ffffff'},{id:'rtcm',col:'#ff7a45'}];
+const fmt=(x,n=1)=>x.toFixed(n).replace('.',',');
+const showErr=m=>{const l=$('#load');if(l){l.textContent=m}};
+function seg(id,key,cb){const el=$(id);el.addEventListener('click',e=>{const b=e.target.closest('button[data-v]');if(!b)return;S[key]=b.dataset.v;el.querySelectorAll('button[data-v]').forEach(x=>x.setAttribute('aria-pressed',x===b));cb&&cb()})}
+
+/* ---------- escena ---------- */
+const fig=$('#fig'),gl=$('#gl'),ov=$('#ov'),ox=ov.getContext('2d');
+const R=new THREE.WebGLRenderer({canvas:gl,antialias:true});R.setPixelRatio(Math.min(devicePixelRatio,2));
+R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=1.1;R.outputColorSpace=THREE.SRGBColorSpace;R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;
+const scene=new THREE.Scene();scene.background=new THREE.Color('#06100b');scene.fog=new THREE.Fog('#06100b',10,30);
+const pm=new THREE.PMREMGenerator(R);const envTex=pm.fromScene(new RoomEnvironment(),0.04).texture;scene.environment=envTex;scene.environmentIntensity=0.4;
+const cam=new THREE.PerspectiveCamera(32,1,0.1,80);cam.position.set(1.4,1.9,7.2);
+const ctl=new OrbitControls(cam,gl);ctl.target.set(0.55,1.25,0);ctl.enableDamping=true;ctl.minDistance=2.2;ctl.maxDistance=14;ctl.maxPolarAngle=Math.PI*0.49;ctl.enablePan=false;
+scene.add(new THREE.HemisphereLight('#9fb8ff','#1b3a22',0.6));
+const key=new THREE.DirectionalLight('#fff3dc',3.0);key.position.set(-4,8,5);key.castShadow=true;key.shadow.mapSize.set(2048,2048);
+Object.assign(key.shadow.camera,{left:-4,right:4,top:4,bottom:-2,near:1,far:22});key.shadow.bias=-0.0004;key.shadow.normalBias=0.02;scene.add(key);
+const rim=new THREE.DirectionalLight('#cfe0ff',2.0);rim.position.set(3,4,-6);scene.add(rim);
+const gc=document.createElement('canvas');gc.width=gc.height=512;{const c=gc.getContext('2d');c.fillStyle='#1d4a2a';c.fillRect(0,0,512,512);for(let i=0;i<26000;i++){const g=40+Math.random()*60;c.fillStyle=`rgba(${g*0.45|0},${g+30|0},${g*0.5|0},0.55)`;c.fillRect(Math.random()*512,Math.random()*512,1,2+Math.random()*3)}
+ for(let x=0;x<512;x+=128){c.fillStyle='rgba(255,255,255,0.035)';c.fillRect(x,0,64,512)}}
+const gt=new THREE.CanvasTexture(gc);gt.colorSpace=THREE.SRGBColorSpace;gt.wrapS=gt.wrapT=THREE.RepeatWrapping;gt.repeat.set(14,14);gt.anisotropy=8;
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(60,60),new THREE.MeshStandardMaterial({map:gt,roughness:0.95}));ground.rotation.x=-Math.PI/2;ground.receiveShadow=true;ground.layers.set(1);scene.add(ground);
+const rail=new THREE.Group();const wm=new THREE.MeshStandardMaterial({color:'#e8ece8',roughness:0.5});
+const bar=new THREE.Mesh(new THREE.BoxGeometry(60,0.08,0.08),wm);bar.position.set(0,1.05,-3.4);rail.add(bar);
+const posts=[];for(let i=0;i<24;i++){const p=new THREE.Mesh(new THREE.BoxGeometry(0.07,1.05,0.07),wm);p.position.set(-24+i*2.1,0.52,-3.4);p.castShadow=true;rail.add(p);posts.push(p)}
+rail.traverse(o=>o.layers.set(1));scene.add(rail);
+for(let i=0;i<4;i++){const s=new THREE.Mesh(new THREE.SphereGeometry(0.12,12,12),new THREE.MeshBasicMaterial({color:'#fffbe8'}));s.position.set(-9+i*6,7,-14);s.layers.set(1);scene.add(s)}
+cam.layers.enable(1);
+
+/* ---------- unidades AVO ---------- */
+const mk=(w,h,d,col,em)=>new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshStandardMaterial({color:col,roughness:0.4,metalness:0.2,emissive:em||'#000'}));
+const U={girth:new THREE.Group(),helmet:new THREE.Group()};
+U.girth.add(mk(0.08,0.03,0.1,'#22262b'));const gled=mk(0.022,0.012,0.022,'#5ac8fa','#5ac8fa');gled.position.y=-0.02;U.girth.add(gled);
+/* casco prototipo A: cápsula estanca ≈ 61 × 61 × 32 mm sobre el casco, anillo de 8 LED */
+const capMat=new THREE.MeshPhysicalMaterial({color:'#2a2f35',roughness:0.42,clearcoat:0.4,clearcoatRoughness:0.5});
+const cap=new THREE.Mesh(new RoundedBoxGeometry(0.061,0.032,0.061,4,0.008),capMat);U.helmet.add(cap);
+const lid=new THREE.Mesh(new RoundedBoxGeometry(0.05,0.004,0.05,2,0.0018),new THREE.MeshStandardMaterial({color:'#3a4048',roughness:0.6}));lid.position.y=0.0165;U.helmet.add(lid);
+const leds=[];for(let i=0;i<8;i++){const a=i/8*Math.PI*2,l=new THREE.Mesh(new THREE.SphereGeometry(0.0032,10,8),new THREE.MeshStandardMaterial({color:'#38d27a',emissive:'#38d27a',emissiveIntensity:2}));l.position.set(Math.cos(a)*0.031,0.006,Math.sin(a)*0.031);U.helmet.add(l);leds.push(l)}
+Object.values(U).forEach(g=>g.traverse(o=>{if(o.isMesh)o.castShadow=true}));
+
+/* ---------- materiales ---------- */
+const TL=new THREE.TextureLoader();
+const tex=(u,srgb=true)=>{const t=TL.load(u);t.flipY=true;if(srgb)t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;return t};
+const M={
+ body:new THREE.MeshPhysicalMaterial({map:tex('tex/horse_body.jpg'),normalMap:tex('tex/horse_body_n.jpg',false),roughness:0.5,sheen:0.35,sheenRoughness:0.45,sheenColor:new THREE.Color('#8a5a3a')}),
+ hair:new THREE.MeshStandardMaterial({map:tex('tex/horse_hair.png'),normalMap:tex('tex/horse_hair_n.jpg',false),roughness:0.6,alphaTest:0.35,side:THREE.DoubleSide}),
+ saddle:new THREE.MeshStandardMaterial({map:tex('tex/saddle.jpg'),normalMap:tex('tex/saddle_n.jpg',false),roughness:0.55}),
+ jockey:new THREE.MeshPhysicalMaterial({map:tex('tex/silk_01.jpg'),normalMap:tex('tex/jockey_n.jpg',false),roughness:0.45,sheen:0.5,sheenRoughness:0.3,sheenColor:new THREE.Color('#ffffff')}),
+ whip:new THREE.MeshStandardMaterial({color:'#1a1410',roughness:0.6})};
+const silkTex={};const setSilk=()=>{const k=S.silk||'01';if(!silkTex[k])silkTex[k]=tex('tex/silk_'+k+'.jpg');M.jockey.map=silkTex[k];M.jockey.needsUpdate=true};
+const HIDE=/lod|enodata|^point|platform|upvector|footstep|^bip|^base_?human/i;
+function dress(root,isJockey){root.traverse(o=>{if(!o.isMesh)return;
+ if(HIDE.test(o.name)&&!/^whip$/i.test(o.name)){o.visible=false;return}
+ o.castShadow=true;o.receiveShadow=true;o.frustumCulled=false;
+ const pick=m=>{const n=(m&&m.name||'').toLowerCase();if(isJockey)return /whip|material #1|material_1/.test(n)||/whip/i.test(o.name)?M.whip:M.jockey;
+  if(n.includes('hair'))return M.hair;if(/saddle/i.test(o.name))return M.saddle;return M.body};
+ o.material=Array.isArray(o.material)?o.material.map(pick):pick(o.material)})}
+
+/* ---------- carga ---------- */
+const rig=new THREE.Group();scene.add(rig);
+let horse=null,jockey=null,mixH=null,mixJ=null,actH={},actJ={},speeds={idle:0},cyc={},strides={};
+const find=(root,name)=>root.getObjectByName(name)||root.getObjectByName(name.replace(/ /g,'_'));
+const loader=new FBXLoader();
+fetch(ZIP_URL).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.arrayBuffer()}).then(buf=>{const z=unzipSync(new Uint8Array(buf));
+ const ab=u=>u.buffer.slice(u.byteOffset,u.byteOffset+u.byteLength);return[loader.parse(ab(z['horse.fbx']),''),loader.parse(ab(z['jockey.fbx']),'')]}).then(([h,j])=>{
+ horse=h;jockey=j;dress(h,false);dress(j,true);rig.add(h,j);
+ mixH=new THREE.AnimationMixer(h);mixJ=new THREE.AnimationMixer(j);
+ const ch=h.animations[0],cj=j.animations[0];
+ for(const k in CLIPS){const [a,b]=CLIPS[k];cyc[k]=(b-a)/30;
+  if(ch)actH[k]=mixH.clipAction(THREE.AnimationUtils.subclip(ch,'H_'+k,a,b,30));
+  if(cj)actJ[k]=mixJ.clipAction(THREE.AnimationUtils.subclip(cj,'J_'+k,a,b,30))}
+ /* escala: altura del caballo ~ 2,35 m hasta las orejas; orientación cabeza hacia +X */
+ rig.updateMatrixWorld(true);const box=new THREE.Box3();h.traverse(o=>{if(o.isMesh&&o.visible)box.expandByObject(o)});
+ const sz=box.getSize(new THREE.Vector3()),sc=2.35/Math.max(sz.y,1e-6);rig.scale.setScalar(sc);rig.updateMatrixWorld(true);
+ const sk=find(h,'HorseScull'),pv=find(h,'HorsePelvis');
+ if(sk&&pv){const a=new THREE.Vector3(),b=new THREE.Vector3();sk.getWorldPosition(a);pv.getWorldPosition(b);const f=a.sub(b);f.y=0;f.normalize();rig.rotation.y=Math.atan2(f.z,f.x);rig.updateMatrixWorld(true)}
+ box.makeEmpty();h.traverse(o=>{if(o.isMesh&&o.visible)box.expandByObject(o)});const c=box.getCenter(new THREE.Vector3());rig.position.x-=c.x;rig.position.z-=c.z;rig.position.y-=box.min.y;rig.updateMatrixWorld(true);
+ /* velocidad de suelo por aire: casco delantero durante el apoyo */
+ const hoof=find(h,'HorseLFrontHoof')||find(h,'HorseFrontRLegFrontHoof');
+ for(const k in actH){if(k==='idle'||!hoof)continue;const a=actH[k];a.reset().play();const N=48,T=cyc[k],P=[];
+  for(let i=0;i<N;i++){mixH.setTime(T*i/N);rig.updateMatrixWorld(true);const v=new THREE.Vector3();hoof.getWorldPosition(v);P.push(v)}
+  const lo=Math.min(...P.map(p=>p.y))+0.04;let s=0,n=0,st=0;for(let i=0;i<N;i++){if(P[i].y<lo&&P[(i+N-1)%N].y>=lo)st++}strides[k]=Math.max(1,st);for(let i=0;i<N;i++){const p=P[i],q=P[(i+1)%N];if(p.y<lo&&q.y<lo){const d=(p.x-q.x)/(T/N);if(d>0){s+=d;n++}}}
+  speeds[k]=n>1?s/n:({walk:1.7,trot:4,run:12,speed:16})[k];a.stop()}
+ /* colocar unidades AVO con rayos contra las mallas, en la pose del galope */
+ if(actH.run){actH.run.play();actJ.run&&actJ.run.play();mixH.setTime(0);mixJ.setTime(0);rig.updateMatrixWorld(true)}
+ const meshesH=[],meshesJ=[];h.traverse(o=>{if(o.isMesh&&o.visible)meshesH.push(o)});j.traverse(o=>{if(o.isMesh&&o.visible)meshesJ.push(o)});
+ const rc=new THREE.Raycaster();const hit=(list,o,d)=>{rc.set(o,d.clone().normalize());const r=rc.intersectObjects(list,false);return r.length?r[0].point:null};
+ const W3=n=>{const b=find(h,n)||find(j,n);const v=new THREE.Vector3();b&&b.getWorldPosition(v);return[b,v]};
+ const [bHum,pHum]=W3('HorseLHumerus'),[bRib,pRib]=W3('HorseRibcage'),[bSp,pSp]=W3('Base HumanSpine3'),[bRj,pRj]=W3('Base HumanRibcage');
+ const gx=(bHum?pHum.x:0.4)-0.28,gz=bRib?pRib.z:0;
+ const belly=hit(meshesH,new THREE.Vector3(gx,-0.5,gz),new THREE.Vector3(0,1,0));U.girth.position.copy(belly||new THREE.Vector3(gx,1.0,gz)).add(new THREE.Vector3(0,-0.02,0));
+ const [bHead,pHead]=W3('Base HumanHead');const hp=bHead?pHead:new THREE.Vector3(0,2.3,0);
+ const top=hit(meshesJ,hp.clone().add(new THREE.Vector3(0,1.5,0)),new THREE.Vector3(0,-1,0));
+ U.helmet.position.copy(top||hp.clone().add(new THREE.Vector3(0,0.13,0))).add(new THREE.Vector3(0,0.014,0));
+ scene.add(U.girth,U.helmet);(bRib||bHum||h).attach(U.girth);(bHead||j).attach(U.helmet);
+ setSilk();setGait(true);$('#load').remove();
+}).catch(e=>{console.error(e);showErr('No se ha podido cargar el 3D: '+(e&&e.message||e))});
+
+function setGait(first){if(!mixH)return;const k=S.gait;for(const [m,acts] of [[mixH,actH],[mixJ,actJ]]){const to=acts[k];Object.values(acts).forEach(a=>{if(a!==to)first?a.stop():a.fadeOut(0.35)});if(to){to.reset();first?to.play():to.fadeIn(0.35).play()}}kpis()}
+seg('#gait','gait',()=>setGait(false));seg('#rtk','rtk',kpis);seg('#silk','silk',setSilk);
+$('#girthBtn').addEventListener('click',e=>{S.girth=!S.girth;e.currentTarget.setAttribute('aria-pressed',S.girth);e.currentTarget.textContent=S.girth?'Conectada':'Desconectada';kpis()});
+const pb=$('#pausa');pb.addEventListener('click',()=>{S.paused=!S.paused;pb.setAttribute('aria-pressed',S.paused);pb.textContent=S.paused?'Seguir':'Pausa'});
+if(matchMedia('(prefers-reduced-motion: reduce)').matches)pb.click();
+
+function vals(){const k=S.gait,T=cyc[k]||1;const v=(speeds[k]??0)*(1+0.02*Math.sin(S.t*0.7)),f=k==='idle'?0:(strides[k]||1)/T;return{v,f,len:f?v/f:0,kmh:v*3.6}}
+function kpis(){const V=vals(),Rk=RTK[S.rtk];$('#kpis').innerHTML=[[fmt(V.kmh,1)+' km/h','Velocidad'],[V.f?fmt(V.f,2)+' Hz':'—','Frecuencia de zancada'],[V.len?fmt(V.len,2)+' m':'—','Longitud de zancada'],[Rk.l,Rk.acc+' · '+Rk.sat+' satélites'],[S.girth?'Llegando':'Sin enlace','Lotes de cincha']].map(k=>`<div><b>${k[0]}</b><small>${k[1]}</small></div>`).join('')}
+kpis();
+
+/* ---------- tamaño ---------- */
+let W=0,H=0;const fit=()=>{const r=fig.getBoundingClientRect();W=r.width;H=r.height;R.setSize(W,H,false);cam.aspect=W/H;cam.updateProjectionMatrix();const d=devicePixelRatio||1;ov.width=W*d;ov.height=H*d;ox.setTransform(d,0,0,d,0,0)};
+const ro=new ResizeObserver(fit);ro.observe(fig);
+
+
+/* ---------- superposición de paquetes ---------- */
+const pk=[],last={girth:0,back:0,tel:0,rtcm:0};
+const proj=o=>{const v=new THREE.Vector3();o.getWorldPosition(v);v.project(cam);return[(v.x+1)/2*W,(1-v.y)/2*H,v.z<1]};
+function overlay(){ox.clearRect(0,0,W,H);if(!horse)return;
+ const PH=phoneRect();drawPhone(PH);
+ const A={girth:proj(U.girth),helmet:proj(U.helmet),phone:[PH.x+4,PH.y+PH.h*0.32,true]};
+ const routes={girth:[[A.girth,A.helmet]],tel:[[A.helmet,A.phone]],rtcm:[[A.phone,A.helmet]]};
+ const q=(a,b)=>[(a[0]+b[0])/2,Math.min(a[1],b[1])-40];
+ ox.setLineDash([4,6]);for(const l of LINKS){ox.strokeStyle=l.col+'70';ox.lineWidth=1.2;for(const [a,b] of routes[l.id]){const c=q(a,b);ox.beginPath();ox.moveTo(a[0],a[1]);ox.quadraticCurveTo(c[0],c[1],b[0],b[1]);ox.stroke()}}ox.setLineDash([]);
+ const rate={girth:0.22,tel:0.5,rtcm:1.0};
+ if(!S.paused)for(const id in rate){if(id==='girth'&&!S.girth)continue;if(id==='rtcm'&&S.rtk==='sin')continue;if(S.t-last[id]>rate[id]){last[id]=S.t;pk.push({id,t0:S.t})}}
+ for(let i=pk.length-1;i>=0;i--){const p=pk[i],L=LINKS.find(l=>l.id===p.id),sg=routes[p.id],u=(S.t-p.t0)/(0.9*sg.length);if(u>=1){pk.splice(i,1);continue}
+  const si=Math.min(sg.length-1,Math.floor(u*sg.length)),lu=u*sg.length-si,[a,b]=sg[si],c=q(a,b);
+  const x=(1-lu)**2*a[0]+2*(1-lu)*lu*c[0]+lu*lu*b[0],y=(1-lu)**2*a[1]+2*(1-lu)*lu*c[1]+lu*lu*b[1];
+  ox.fillStyle=L.col;ox.shadowColor=L.col;ox.shadowBlur=10;ox.beginPath();ox.arc(x,y,4.5,0,7);ox.fill();ox.shadowBlur=0}
+ ox.font=`600 ${W<520?11:13}px Inter`;ox.textAlign='left';
+ const tag=(t,p,dx,dy,col)=>{const w=ox.measureText(t).width+12,x=Math.max(4,Math.min(W-w-4,p[0]+dx));ox.fillStyle='#000000b0';ox.beginPath();ox.roundRect(x,p[1]+dy-15,w,22,6);ox.fill();ox.fillStyle=col;ox.fillText(t,x+6,p[1]+dy)};
+ tag('Casco · GNSS RTK',A.helmet,-170,-16,'#ffd166');tag(S.girth?'Cincha · IMU':'Cincha · sin enlace',A.girth,-46,40,S.girth?'#5ac8fa':'#999');
+}
+
+/* ---------- móvil: pantalla de la app en directo ---------- */
+const imu=new Array(90).fill(0),trail=[];
+function phoneRect(){let w=Math.max(124,Math.min(196,W*0.21));let h=w*2.05;if(h>H-24){h=H-24;w=h/2.05}return{x:W-w-12,y:H-h-12,w,h}}
+function drawPhone(P){const c=ox,V=vals(),Rk=RTK[S.rtk];c.save();c.translate(P.x,P.y);const s=P.w/180;c.scale(s,s);const w=180,h=P.h/s;
+ c.shadowColor='#000';c.shadowBlur=24;c.fillStyle='#16191d';c.beginPath();c.roundRect(0,0,w,h,26);c.fill();c.shadowBlur=0;c.strokeStyle='#5b636b';c.lineWidth=2;c.stroke();
+ c.fillStyle='#050807';c.beginPath();c.roundRect(7,7,w-14,h-14,20);c.fill();c.save();c.beginPath();c.roundRect(7,7,w-14,h-14,20);c.clip();
+ c.fillStyle='#000';c.beginPath();c.roundRect(w/2-22,11,44,11,6);c.fill();
+ c.fillStyle='#cfd6d2';c.font='600 10px Inter';c.textAlign='left';c.fillText(new Date().toTimeString().slice(0,5),20,21);c.textAlign='right';c.fillText('BLE ●',w-18,21);
+ let y=40;c.textAlign='left';c.fillStyle='#eef3ee';c.font='700 15px "Barlow Condensed"';c.fillText('En directo',16,y);
+ const m=Math.floor(S.rec/60),sg=Math.floor(S.rec%60);c.textAlign='right';c.fillStyle='#ff4d4d';c.font='600 11px Inter';c.fillText('● '+String(m).padStart(2,'0')+':'+String(sg).padStart(2,'0'),w-16,y);
+ y+=44;c.textAlign='left';c.fillStyle='#fff';c.font='700 46px "Barlow Condensed"';const sp=fmt(V.kmh,1);c.fillText(sp,16,y);const sw=c.measureText(sp).width;c.fillStyle='#9db3a4';c.font='600 13px "Barlow Condensed"';c.fillText('km/h',20+sw,y-2);
+ y+=18;c.fillStyle='#cfd6d2';c.font='500 11px Inter';c.fillText(V.f?'Zancada '+fmt(V.f,2)+' Hz · '+fmt(V.len,1)+' m':'Parado',16,y);
+ y+=12;c.fillStyle=Rk.c;c.beginPath();c.roundRect(16,y,70,20,10);c.fill();c.fillStyle='#000';c.font='700 11px Inter';c.textAlign='center';c.fillText(Rk.l,51,y+14);
+ c.textAlign='left';c.fillStyle='#cfd6d2';c.font='500 10px Inter';c.fillText(Rk.acc,92,y+9);c.fillText(Rk.sat+' satélites',92,y+20);
+ /* pista con la traza GNSS */
+ y+=30;const tw=w-32,th=Math.min(124,h*0.27),cx=16+tw/2,cy=y+th/2,rx=tw/2-8,ry=th/2-8;c.fillStyle='#0d1c14';c.beginPath();c.roundRect(16,y,tw,th,10);c.fill();
+ c.strokeStyle='#2f7d43';c.lineWidth=7;c.beginPath();c.ellipse(cx,cy,rx,ry,0,0,7);c.stroke();
+ const ang=-(S.dist/1200)*Math.PI*2,px=cx+Math.cos(ang)*rx,py=cy+Math.sin(ang)*ry;if(!S.paused){trail.push([ang]);if(trail.length>60)trail.shift()}
+ c.strokeStyle=Rk.c;c.lineWidth=2.5;c.beginPath();trail.forEach((t,i)=>{const a=t[0];const jx=S.rtk==='sin'?Math.sin(i*1.7)*3:S.rtk==='float'?Math.sin(i*1.3):0;i?c.lineTo(cx+Math.cos(a)*rx+jx,cy+Math.sin(a)*ry+jx):c.moveTo(cx+Math.cos(a)*rx,cy+Math.sin(a)*ry)});c.stroke();
+ c.fillStyle='#fff';c.beginPath();c.arc(px,py,4,0,7);c.fill();c.fillStyle='#9db3a4';c.font='500 10px Inter';c.fillText('Traza GNSS',22,y+14);
+ /* IMU de la cincha */
+ y+=th+10;const ih=Math.min(92,h*0.19);c.fillStyle='#0d1c14';c.beginPath();c.roundRect(16,y,tw,ih,10);c.fill();
+ c.fillStyle='#9db3a4';c.font='500 10px Inter';c.fillText(S.girth?'Cincha · aceleración vertical':'Cincha · sin enlace',22,y+14);
+ if(S.girth){c.strokeStyle='#5ac8fa';c.lineWidth=1.8;c.beginPath();imu.forEach((v,i)=>{const xx=22+i*(tw-12)/(imu.length-1),yy=y+ih*0.6-v*ih*0.28;i?c.lineTo(xx,yy):c.moveTo(xx,yy)});c.stroke()}
+ /* baterías */
+ y+=ih+22;c.font='600 12px Inter';c.fillStyle='#cfd6d2';c.fillText('Casco '+Math.round(S.bat.casco)+' %',16,y);c.textAlign='right';c.fillStyle=S.girth?'#cfd6d2':'#666';c.fillText('Cincha '+(S.girth?Math.round(S.bat.girth)+' %':'—'),w-16,y);
+ c.restore();c.restore()}
+/* ---------- bucle ---------- */
+const clock=new THREE.Clock();let kt=0;const hv=new THREE.Vector3(),wv=new THREE.Vector3();
+R.setAnimationLoop(()=>{const dt=Math.min(clock.getDelta(),0.05);ctl.update();
+ if(!S.paused){S.t+=dt;S.rec+=dt;if(mixH){mixH.update(dt);mixJ.update(dt)}const V=vals();S.dist+=V.v*dt;
+  gt.offset.x=S.dist/60*14;for(const p of posts){p.position.x-=V.v*dt;if(p.position.x<-25.2)p.position.x+=50.4}
+  S.bat.casco=Math.max(5,S.bat.casco-dt*0.003);if(S.girth)S.bat.girth=Math.max(5,S.bat.girth-dt*0.004);
+  kt+=dt;if(kt>0.6){kt=0;kpis()}}
+ gled.material.emissive.set(S.girth?'#5ac8fa':'#000');gled.material.color.set(S.girth?'#5ac8fa':'#333');
+ const lc=RTK[S.rtk].c;leds.forEach((l,i)=>{const on=S.rtk!=='float'||Math.floor(S.t*2)%2===0;l.material.emissive.set(on?lc:'#000');l.material.color.set(lc)});
+ if(!S.paused){const V=vals(),ph=S.t*V.f*Math.PI*2;imu.push(V.f?Math.sin(ph)+0.35*Math.sin(2*ph+0.8)+0.08*(Math.random()-0.5):0.03*(Math.random()-0.5));imu.shift()}
+ R.render(scene,cam);
+ overlay()});
+}
+</script>
+</body>
+</html>

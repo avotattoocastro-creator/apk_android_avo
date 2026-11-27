@@ -24,6 +24,26 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-27 — iPad — página «Demostración» (caballo y jockey 3D con casco prototipo A y cincha) · workflow del iPad
+**Autor:** Claude · **Commits:** ver PR #138 · **CI:** pendiente (`build-avo-ipad.yml`)
+**Qué cambia:** nueva página **«Demostración»** en la barra lateral, debajo de «LIVE» (`ipad/AVOiPad/Views/DemoView.swift`, `Page.demo`). Muestra la página web de `demo/avo-3d/web-3d` dentro de un `WKWebView` servida por un esquema propio `avo-demo://` (carpeta de recursos `demo3d`), con **three.js 0.160.0 dentro de la app** (funciona sin conexión). Si la compilación no lleva los modelos de Enozone, muestra la versión 2D de Muybridge. Datos SIMULADOS (la fuente real es la fase F3 del plan). Pruebas unitarias nuevas: `DemoTests` (tipos MIME y página de inicio).
+**Workflow (avisado al usuario, 27/11):** `build-avo-ipad.yml` ejecuta `scripts/demo3d/preparar_demo3d.sh` antes de `xcodegen` en los dos trabajos, recibe el secreto **`AVO_ASSETS_3D_KEY`** y se dispara también con cambios en `demo/avo-3d/**` y `scripts/demo3d/**`. El script copia las páginas, baja three.js de npm y, si hay clave, descifra los modelos. `project.yml` añade la carpeta opcional `demo3d` como recurso.
+**No se ha tocado:** firmas, `Info.plist`, número de build, contratos binarios, firmware.
+**Validación:** el script se probó en Linux con un paquete de three.js sustituto y la clave real (descifrado correcto). Swift sin compilar en local (no hay Xcode en la sesión). **NO VERIFICADO** en el iPad.
+**Pendiente:** crear el secreto `AVO_ASSETS_3D_KEY`; lanzar la compilación; probar en el iPad (rendimiento WebGL, carga sin conexión).
+
+## 2026-11-27 — Demo 3D (web) caballo + jockey con casco prototipo A y cincha · plan del Modo demostración del iPad
+**Autor:** Claude · **Commits:** ver PR · **CI:** no aplica (ningún workflow vigila `demo/` ni `docs/`)
+**Qué cambia:** nueva carpeta `demo/avo-3d/`:
+- `web-3d/`: página three.js 0.160 con el caballo de carreras y el jockey de Enozone (FBX), aires paso/trote/galope/sprint/parado, 13 chaquetillas, **casco prototipo A** (cápsula ≈ 61 × 61 × 32 mm con anillo de 8 LED por estado RTK) unido a la cabeza y **cincha** bajo la barriga; paquetes cincha → casco (220 B, ESP-NOW), casco → móvil (`TELEMETRY v3`, 116 B, BLE) y RTCM3 móvil → casco; móvil con la sesión en directo (velocidad, zancada, RTK, traza GNSS, aceleración de la cincha, baterías). Telemetría simulada.
+- `web-muybridge/`: versión 2D con los 11 fotogramas de Muybridge (1878, dominio público) coloreados; `herramientas/muybridge/` la regenera bit a bit.
+- `modelos_cifrados/enozone_3d.zip.enc`: FBX y texturas de Enozone **cifrados** (AES-256-CBC, PBKDF2) y `descifrar.sh`. La clave va en el secreto `AVO_ASSETS_3D_KEY` (lo crea el usuario); no está en el repositorio.
+- `docs/PLAN_MODO_DEMOSTRACION_IPAD.md`: plan del modo demostración nativo (RealityKit) en la app del iPad, fases F0–F5.
+**Por qué:** petición del usuario (27/11) de una demo visual del sistema y de tenerlo todo en GitHub. El usuario tiene licencia de los modelos para la app privada; el repositorio es público, por eso se suben cifrados (borrarlos después no los quitaría del historial).
+**No se ha tocado:** apps, firmware, motor, contratos binarios, workflows, firmas, `Info.plist`.
+**Validación:** IMPLEMENTADO. Probado en Chrome de escritorio (página 2D y panel del móvil); la escena 3D no se pudo ver desde la sesión en la nube (sin acceso a la CDN). **NO VERIFICADO** en iPad.
+**Pendiente:** crear el secreto `AVO_ASSETS_3D_KEY`; F0 (conversión a USDZ en un Mac); avisar antes de añadir al workflow del iPad el paso que descifre los modelos.
+
 ## 2026-11-27 — PPK de punta a punta PROBADO FÍSICAMENTE (espalda 3.16.3 + iPad build 242, motor 2.0.0-dev40)
 **Autor:** Claude · **Commits:** solo documentación
 **Evidencia:** sesión `AVO_20261127_1328` (interior junto a una ventana), base IGN **CANT** a 47 km descargada y descomprimida por el motor en el iPad. Resultado: **255 épocas, FLOAT 252 y FIX 3**. 1 mensaje RAWX perdido por radio.
