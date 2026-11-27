@@ -18,6 +18,15 @@ final class PpkTests: XCTestCase {
         XCTAssertThrowsError(try Gzip.decompress(Data("no es gzip".utf8)))
     }
 
+    /// 27/11/2026: «gzip cortado» con la base real del IGN. El pie gzip decide si el miembro está completo.
+    func testGzipTrailerAndTruncation() throws {
+        XCTAssertEqual(Gzip.crc32(Data("123456789".utf8)), 0xCBF4_3926)
+        let plain: Data = Data(String(repeating: "AVO PPK prueba\n", count: 20).utf8)
+        XCTAssertTrue(Gzip.trailerMatches(gz, end: gz.count, data: plain))
+        XCTAssertFalse(Gzip.trailerMatches(gz, end: gz.count, data: plain.dropLast()))
+        XCTAssertThrowsError(try Gzip.decompress(Data(gz.dropLast(12))))   // descarga cortada: error, nunca datos a medias
+    }
+
     func testIgnNamesAndFolders() {
         // 29/05/2026 09:00 UTC = día 149 (captura del servidor del IGN del 23/11/2026)
         var c = DateComponents()

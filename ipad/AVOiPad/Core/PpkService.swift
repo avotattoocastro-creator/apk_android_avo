@@ -166,15 +166,27 @@ enum IgnBase {
                 let target: String = AvoFiles.join(dir, String(name.dropLast(3)))
                 if FileManager.default.fileExists(atPath: target) { out.append(target); continue }
                 guard let u = URL(string: hourFolder(h) + name) else { continue }
-                var r = URLRequest(url: u)
-                r.timeoutInterval = 300
-                let (data, resp) = try await session.data(for: r)
-                let code: Int = (resp as? HTTPURLResponse)?.statusCode ?? 0
-                if !(200...299).contains(code) {
-                    if name == o { throw PpkError.failed("IGN: \(name) respondió \(code)") }
-                    continue   // la navegación es opcional (la sesión trae SFRBX)
+                var plain: Data? = nil
+                var skip: Bool = false
+                for attempt in 0..<2 {   // 27/11/2026: una descarga cortada se repite una vez, sin caché
+                    var r = URLRequest(url: u)
+                    r.timeoutInterval = 300
+                    if attempt > 0 { r.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData; try await Task.sleep(nanoseconds: 2_000_000_000) }
+                    let (data, resp) = try await session.data(for: r)
+                    let code: Int = (resp as? HTTPURLResponse)?.statusCode ?? 0
+                    if !(200...299).contains(code) {
+                        if name == o { throw PpkError.failed("IGN: \(name) respondió \(code)") }
+                        skip = true   // navegación: sin ella el PPK solo funciona si la sesión trae SFRBX (espalda < 3.16.2)
+                        break
+                    }
+                    do { plain = try Gzip.decompress(data); break } catch {
+                        if attempt == 1 {
+                            throw PpkError.failed("La descarga del IGN (\(name)) llegó incompleta. Vuelve a intentarlo en unos minutos.")
+                        }
+                    }
                 }
-                let plain: Data = try Gzip.decompress(data)
+                if skip { continue }
+                guard let plain else { continue }
                 try plain.write(to: URL(fileURLWithPath: target), options: .atomic)
                 out.append(target)
             }
@@ -204,9 +216,15 @@ enum Gzip {
             if flg & 0x10 != 0 { while p < bytes.count && bytes[p] != 0 { p += 1 }; p += 1 }   // FCOMMENT
             if flg & 0x02 != 0 { p += 2 }                                                     // FHCRC
             guard p < bytes.count else { throw PpkError.failed("gzip cortado") }
-            let (member, used) = try inflate(Array(bytes[p...]))
+            let (member, used, ended) = try inflate(Array(bytes[p...]))
+            let next: Int = nextMember(bytes, from: p, used: used, size: member.count)
+            if !ended {
+                // 27/11/2026: el framework Compression puede consumir toda la entrada sin devolver END aunque el flujo esté
+                // completo. Se da por bueno si el pie del miembro (CRC-32 + ISIZE) coincide con lo descomprimido.
+                guard trailerMatches(bytes, end: next, data: member) else { throw PpkError.failed("gzip cortado") }
+            }
             out.append(member)
-            pos = nextMember(bytes, from: p, used: used, size: member.count)
+            pos = next
         }
         if out.isEmpty { throw PpkError.failed("gzip vacío") }
         return out
@@ -231,8 +249,31 @@ enum Gzip {
         return b.count   // último miembro
     }
 
-    /// Deflate en bruto; devuelve los datos y los bytes de entrada consumidos.
-    private static func inflate(_ src: [UInt8]) throws -> (Data, Int) {
+    /// Pie gzip del miembro que acaba en `end`: CRC-32 (4 B LE) + ISIZE (4 B LE) igual a los datos descomprimidos.
+    static func trailerMatches(_ b: [UInt8], end: Int, data: Data) -> Bool {
+        let t: Int = end - 8
+        guard t >= 0, end <= b.count else { return false }
+        func le(_ q: Int) -> UInt32 { UInt32(b[q]) | UInt32(b[q + 1]) << 8 | UInt32(b[q + 2]) << 16 | UInt32(b[q + 3]) << 24 }
+        return le(t) == crc32(data) && le(t + 4) == UInt32(truncatingIfNeeded: data.count)
+    }
+
+    private static let crcTable: [UInt32] = (0..<256).map { (i: Int) -> UInt32 in
+        var c: UInt32 = UInt32(i)
+        for _ in 0..<8 { c = (c & 1) != 0 ? 0xEDB8_8320 ^ (c >> 1) : c >> 1 }
+        return c
+    }
+
+    /// CRC-32 (ISO-HDLC, el de gzip).
+    static func crc32(_ d: Data) -> UInt32 {
+        var c: UInt32 = 0xFFFF_FFFF
+        d.withUnsafeBytes { (raw: UnsafeRawBufferPointer) in
+            for x in raw { c = crcTable[Int((c ^ UInt32(x)) & 0xFF)] ^ (c >> 8) }
+        }
+        return c ^ 0xFFFF_FFFF
+    }
+
+    /// Deflate en bruto; devuelve los datos, los bytes de entrada consumidos y si el flujo terminó (END).
+    private static func inflate(_ src: [UInt8]) throws -> (Data, Int, Bool) {
         let stream = UnsafeMutablePointer<compression_stream>.allocate(capacity: 1)
         defer { stream.deallocate() }
         guard compression_stream_init(stream, COMPRESSION_STREAM_DECODE, COMPRESSION_ZLIB) == COMPRESSION_STATUS_OK else {
@@ -244,6 +285,7 @@ enum Gzip {
         defer { dst.deallocate() }
         var out = Data()
         var used: Int = 0
+        var ended: Bool = false
         try src.withUnsafeBufferPointer { (sb: UnsafeBufferPointer<UInt8>) in
             guard let base = sb.baseAddress else { return }
             stream.pointee.src_ptr = base
@@ -253,13 +295,13 @@ enum Gzip {
                 stream.pointee.dst_size = chunk
                 let st: compression_status = compression_stream_process(stream, Int32(COMPRESSION_STREAM_FINALIZE.rawValue))
                 out.append(dst, count: chunk - stream.pointee.dst_size)
-                if st == COMPRESSION_STATUS_END { break }
+                if st == COMPRESSION_STATUS_END { ended = true; break }
                 if st != COMPRESSION_STATUS_OK { throw PpkError.failed("Datos gzip dañados") }
-                if stream.pointee.dst_size != 0 && stream.pointee.src_size == 0 { throw PpkError.failed("gzip cortado") }
+                if stream.pointee.dst_size != 0 && stream.pointee.src_size == 0 { break }   // sin END: lo decide el pie gzip
             }
             used = sb.count - stream.pointee.src_size
         }
-        return (out, used)
+        return (out, used, ended)
     }
 }
 
