@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-27 — Motor 2.0.0-dev40 (API `avo_eq_gunzip`) · iPad — las bases del IGN se descomprimen en el motor
+**Autor:** Claude · **Commits:** ver PR · **CI:** pendiente
+**Qué cambia:** el motor tiene su propio descompresor gzip/DEFLATE (`src/ppk/gunzip.cpp`, sin librerías externas). Admite varios miembros seguidos y comprueba CRC-32 e ISIZE en cada uno: un fichero cortado o dañado da error, nunca datos a medias. API C nueva: `avo_eq_gunzip(datos, tamaño, ruta_salida, json)`. El iPad la usa al descargar la base del IGN en lugar del framework Compression; si falla, muestra el error del motor y el tamaño descargado.
+**Por qué:** con la build 241 la base `CANT…_MO.crx.gz` de las 12 UTC del 27/11 seguía fallando dos veces seguidas con Compression. Ahora es el mismo código en todas las apps y se prueba en Linux.
+**Pruebas:** motor, 146 casos ✅. Nueva prueba: ficheros reales del repositorio comprimidos con niveles 1, 6 y 9, dos miembros (uno guardado sin comprimir), cortes en 4 puntos, un byte cambiado y la API C. 30 MB se descomprimen en 0,35 s (x86 -O2). Datos: `tests/data/ppk/gz/`.
+**Archivos:** `equine-intelligence/src/ppk/gunzip.cpp`, `include/avo_eq/ppk.h`, `include/avo_eq/avo_eq_c.h`, `src/capi/ppk_capi.cpp`, `tests/test_ppk.cpp`, `tests/data/ppk/gz/*`, `tests/data/ppk/README.md`, `ipad/AVOiPad/Engine/EquineEngine.swift`, `ipad/AVOiPad/Core/PpkService.swift`, este registro.
+**Estado:** NO VERIFICADO en el iPad.
+
 ## 2026-11-27 — iPad — PPK: «gzip cortado» con la base del IGN
 **Autor:** Claude · **Commits:** ver PR · **CI:** pendiente (`build-avo-ipad.yml`)
 **Qué cambia:** el descompresor gzip ya no da error cuando el framework Compression consume toda la entrada sin devolver END. En ese caso comprueba el pie del miembro (CRC-32 e ISIZE) y, si coincide, acepta los datos. Si no coincide, la descarga del IGN se repite una vez sin caché. Si vuelve a fallar, avisa de que la descarga llegó incompleta. Se añaden pruebas de CRC-32, del pie y de un gzip cortado. Nota: desde la espalda 3.16.2 no hay SFRBX, así que la navegación `_MN` del IGN es necesaria.

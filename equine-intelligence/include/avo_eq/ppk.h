@@ -85,4 +85,9 @@ bool ppk_solve_rinex_rover(const std::vector<std::string>& rover_files, const st
 
 std::string ppk_result_json(const PpkResult& r, bool with_epochs);
 
+// gzip (RFC 1952, several members concatenated) decoded without external libraries (27/11/2026: the IGN bases).
+// Each member is checked with its CRC-32 and ISIZE: a truncated or damaged file returns false, never partial data.
+bool ppk_gunzip(const uint8_t* data, size_t n, std::vector<uint8_t>* out, std::string* error);
+uint32_t ppk_crc32(const uint8_t* data, size_t n, uint32_t crc = 0);
+
 }  // namespace avoeq

@@ -166,7 +166,7 @@ enum IgnBase {
                 let target: String = AvoFiles.join(dir, String(name.dropLast(3)))
                 if FileManager.default.fileExists(atPath: target) { out.append(target); continue }
                 guard let u = URL(string: hourFolder(h) + name) else { continue }
-                var plain: Data? = nil
+                var done: Bool = false
                 var skip: Bool = false
                 for attempt in 0..<2 {   // 27/11/2026: una descarga cortada se repite una vez, sin caché
                     var r = URLRequest(url: u)
@@ -179,15 +179,15 @@ enum IgnBase {
                         skip = true   // navegación: sin ella el PPK solo funciona si la sesión trae SFRBX (espalda < 3.16.2)
                         break
                     }
-                    do { plain = try Gzip.decompress(data); break } catch {
+                    // 27/11/2026: descomprime el motor (mismo código en todas las apps, comprueba CRC-32/ISIZE de cada miembro)
+                    do { try EquineEngine.gunzip(data, to: target); done = true; break } catch {
                         if attempt == 1 {
-                            throw PpkError.failed("La descarga del IGN (\(name)) llegó incompleta. Vuelve a intentarlo en unos minutos.")
+                            throw PpkError.failed("La base del IGN (\(name)) no se pudo descomprimir: \(error.localizedDescription) (\(data.count) B). Vuelve a intentarlo en unos minutos.")
                         }
                     }
                 }
                 if skip { continue }
-                guard let plain else { continue }
-                try plain.write(to: URL(fileURLWithPath: target), options: .atomic)
+                guard done else { continue }
                 out.append(target)
             }
         }

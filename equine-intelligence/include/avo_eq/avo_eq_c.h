@@ -90,6 +90,9 @@ AVO_EQ_API int avo_eq_training_analyse(const char* input_json, const char* optio
  *   Devuelve "avo-ppk" (rover, base, resultado, avisos, epocas[]: semana, tow_s, utc_ms, lat, lon, h, q 1 FIX/2 FLOAT/5 SINGLE,
  *   ns, sdn/sde/sdu, ratio, edad_s, vn/ve/vu). Mismos códigos de retorno que la API 2. */
 AVO_EQ_API int avo_eq_ppk_need(const char* const* paths, int n, char** json_out);
+/* avo_eq_gunzip (27/11/2026, motor 2.0.0-dev40): decodes a gzip file in memory (IGN base, .crx.gz / .rnx.gz) and writes the result to
+ * out_path. Returns 0 and {"bytes": N}; on error non-zero and {"error": "..."} (truncated or damaged: CRC-32/ISIZE). */
+AVO_EQ_API int avo_eq_gunzip(const unsigned char* data, long long size, const char* out_path, char** json_out);
 AVO_EQ_API int avo_eq_ppk(const char* const* paths, int n, const char* const* base_paths, int nb, const char* options_json,
                           const volatile int* cancel, char** json_out);
 

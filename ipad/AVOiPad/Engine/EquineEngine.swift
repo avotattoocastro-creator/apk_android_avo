@@ -189,6 +189,19 @@ enum EquineEngine {
         return text
     }
 
+    /// gzip of an IGN base decoded by the engine (avo_eq_gunzip, 27/11/2026) and written to `path`. Checks CRC-32/ISIZE.
+    static func gunzip(_ data: Data, to path: String) throws {
+        if !available { throw AvoError.invalidOperation(unavailableReason ?? "motor no disponible") }
+        var json: UnsafeMutablePointer<CChar>? = nil
+        let rc: Int32 = data.withUnsafeBytes { (raw: UnsafeRawBufferPointer) -> Int32 in
+            let p: UnsafePointer<UInt8>? = raw.bindMemory(to: UInt8.self).baseAddress
+            return avo_eq_gunzip(p, Int64(data.count), path, &json)
+        }
+        defer { if let j = json { avo_eq_free(j) } }
+        let text: String = json.map { String(cString: $0) } ?? ""
+        if rc != 0 { throw AvoError.invalidData(errorOf(text)) }
+    }
+
     /// PPK of the session against the base RINEX files (observation, plain or Hatanaka, already without gzip; navigation
     /// optional). Returns «avo-ppk». Runs off the caller's thread; Task cancellation sets the native flag.
     static func ppk(_ segments: [String], base: [String], optionsJson: String?) async throws -> String {
