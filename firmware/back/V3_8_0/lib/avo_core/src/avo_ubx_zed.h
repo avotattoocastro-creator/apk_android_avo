@@ -195,6 +195,7 @@ class ZedManager {
   uint32_t monitor_rearms() const { return mon_rearms_; }
   uint32_t receiver_resets() const { return zed_resets_; }
   static const uint32_t kMonitorLostMs = 10000;
+  static const uint32_t kQualityEveryS = 5;   // V3.16.2: NAV-SAT/NAV-SIG period (s); < kMonitorLostMs / 1000
   // V3.14.4: per-message counters and arrival times (ms, 0 = never) of what the receiver really sends.
   uint32_t nav_pvt_count() const { return n_pvt_; }
   uint32_t nav_sat_count() const { return n_sat_; }

@@ -24,6 +24,15 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-27 — Espalda PROTOTIPO 3.16.2 — el receptor descartaba RAWX: SFRBX apagado y calidad cada 5 s
+**Autor:** Claude · **Commits:** ver PR · **CI:** pendiente (`build-back-v380.yml`)
+**Qué cambia:** RXM-SFRBX apagado (la clave se envía con 0). NAV-SAT y NAV-SIG pasan a salir cada 5 s, y el sondeo de respaldo de NAV-SIG también, en vez de cada segundo (`kQualityEveryS = 5`). RXM-RAWX sigue a 1 Hz. Workflow a 3.16.2.
+**Por qué:** la grabación de las 01:34 del 27/11 con la 3.16.1 (BackStatus v5) muestra receptor HPG 1.51 en UART2 a 230 400 baudios. Llegaron 5 RAWX y 5 NAV-SIG en los primeros segundos y luego ningún UBX de 512 B o más, con 0 UBX malos y 3481 SFRBX. MON-COMMS informó de errores de TX del receptor (memoria y reserva) y de un pico del 106 %: el receptor descartaba su propia salida. Las efemérides para el PPK salen del RINEX de navegación del IGN (`_MN`), que el iPad ya descarga.
+**Pruebas:** anfitrión de la espalda, 69 casos ✅ (pruebas de calidad y PPK ajustadas a 5 s y sin SFRBX).
+**Efecto en la app:** el resumen de señales se actualiza cada 5 s, no cada segundo.
+**Archivos:** `firmware/back/V3_8_0/lib/avo_core/src/avo_ubx_zed.*`, `avo_version.h`, `test/test_espnow.cpp`, `.github/workflows/build-back-v380.yml`, `docs/PPK.md`, `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`, este registro.
+**Aviso:** cambio en un workflow YAML, comunicado al usuario. **NO VERIFICADO** en hardware.
+
 ## 2026-11-27 — Espalda PROTOTIPO 3.16.1 — contadores PPK y UBX en `BackStatus v5` (166 B)
 **Autor:** Claude · **Commits:** ver PR · **CI:** pendiente (`build-back-v380.yml`)
 **Qué cambia:** el estado de la espalda (`STATUS` 0x41) añade 36 B al final (v5): estado y ritmo del RAWX, RAWX y SFRBX recibidos del receptor, tramas RAW enviadas, abandonadas y demasiado largas, UBX con checksum malo o longitud imposible, UBX válidos de 512 B o más, NAV-SIG recibidos, MON-COMMS (errores y pico de TX) y versión del firmware del receptor. El monitor serie muestra también «UBX de 512 B o mas». Workflow `build-back-v380.yml` a 3.16.1, con esa cadena entre las comprobaciones de la imagen.
