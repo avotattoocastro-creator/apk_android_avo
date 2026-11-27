@@ -24,6 +24,15 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-27 — Espalda PROTOTIPO 3.16.1 — contadores PPK y UBX en `BackStatus v5` (166 B)
+**Autor:** Claude · **Commits:** ver PR · **CI:** pendiente (`build-back-v380.yml`)
+**Qué cambia:** el estado de la espalda (`STATUS` 0x41) añade 36 B al final (v5): estado y ritmo del RAWX, RAWX y SFRBX recibidos del receptor, tramas RAW enviadas, abandonadas y demasiado largas, UBX con checksum malo o longitud imposible, UBX válidos de 512 B o más, NAV-SIG recibidos, MON-COMMS (errores y pico de TX) y versión del firmware del receptor. El monitor serie muestra también «UBX de 512 B o mas». Workflow `build-back-v380.yml` a 3.16.1, con esa cadena entre las comprobaciones de la imagen.
+**Por qué:** en la grabación real de las 00:49 del 27/11 (espalda 3.16.0, pecho 3.7.11) llegaron 407 RXM-SFRBX íntegros, pero ningún RXM-RAWX, y tampoco NAV-SIG. El ZED está en su UART2 y solo faltan los mensajes largos. Con la v5 basta una grabación para saber si el receptor no los envía o se pierden en la espalda, sin monitor USB.
+**Compatibilidad:** el pecho 3.7.11 y las apps leen los primeros 130 B (v4) e ignoran el resto: no hay que cambiar el pecho ni las apps para grabar. Mostrar los campos v5 en las apps queda pendiente. El casco V5 recibe los mismos `avo_payloads` (idénticos).
+**Pruebas:** anfitrión de la espalda, 69 casos y 865 comprobaciones ✅ (3 nuevas: ida y vuelta de la v5 con vector, versión del receptor, contador de tramas largas).
+**Archivos:** `firmware/back/V3_8_0/lib/avo_core/src/avo_payloads.*`, `avo_back_core.cpp`, `avo_ubx_zed.*`, `avo_version.h`, `AVO_BACK_V3_8_0.ino`, `test/test_espnow.cpp`, `.github/workflows/build-back-v380.yml`, `docs/PPK.md`, `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`, este registro.
+**Aviso:** cambio en un workflow YAML, comunicado al usuario. **NO VERIFICADO** en hardware.
+
 ## 2026-11-26 — CI espalda PROTOTIPO 3.16.0 — el empaquetado buscaba todavía la cadena 3.15.0
 **Autor:** Claude · **Commits:** ver PR · **CI:** la ejecución 56 de `build-back-v380.yml` (`910fe989`, 23/11) falló en «Package» con `faltan [b'3.15.0\x00AVO-BACK']`; la nueva ejecución queda pendiente de este PR
 **Qué cambia:** `build-back-v380.yml` pasa de 3.15.0 a 3.16.0: nombre del workflow, ficheros `AVO_BACK_V3_16_0_*.bin`, comprobación de la versión dentro de la imagen y artefacto `AVO-BACK-V3-16-0-HELTEC`. Se añade también la cadena `PPK: RAWX/SFRBX` a las comprobaciones de la imagen. No cambia la compilación ni el firmware.

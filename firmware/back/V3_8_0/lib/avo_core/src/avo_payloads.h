@@ -127,6 +127,23 @@ struct BackStatus {
   uint32_t fixed_ms = 0, float_ms = 0;   // time spent in RTK FIX / FLOAT since boot
   // ---- v4 (BACK V3.15.0, 21/11/2026): diagnosis of "no RTK FIX"; appended (v3 decoders ignore it). 0xFF / 0xFFFF = unknown.
   bool v4 = false;
+  // V3.16.1 (v5, +36 B = 166 B): PPK and UBX reception counters, so a recording (.avr) shows without a USB monitor
+  // whether the receiver sends RXM-RAWX and whether long UBX frames reach the back at all.
+  bool v5 = false;
+  uint8_t raw_state = 0;           // 0 not requested, 1 active, 2 rejected, 3 skipped (slow UART), 7 waiting for ACK
+  uint8_t raw_hz = 0;              // RXM-RAWX rate requested (Hz)
+  uint32_t rawx_rx = 0;            // RXM-RAWX frames received from the receiver
+  uint32_t sfrbx_rx = 0;           // RXM-SFRBX frames received from the receiver
+  uint32_t raw_sent = 0;           // UBX raw frames sent whole to the chest
+  uint32_t raw_failed = 0;         // abandoned (a piece failed on ESP-NOW)
+  uint16_t raw_too_long = 0;       // longer than 4096 B (never sent)
+  uint32_t ubx_bad = 0;            // UBX frames with a bad checksum (bytes lost or corrupted on the UART)
+  uint16_t ubx_oversize = 0;       // length field larger than the back buffer (false sync or garbage)
+  uint32_t ubx_long = 0;           // valid UBX frames of 512 B or more (NAV-SIG, RAWX): 0 = no long frame ever arrives
+  uint16_t nav_sig_rx = 0;         // UBX-NAV-SIG frames received
+  uint8_t comms_flags = 0;         // b0 MON-COMMS answered, b1-2 receiver TX errors (b1 mem, b2 alloc: it drops output)
+  uint8_t comms_tx_peak = 0;       // receiver TX buffer peak (%) on the back's port
+  uint8_t fw_major = 0, fw_minor = 0;   // receiver firmware from MON-VER ("HPG 1.32" -> 1, 32); 0, 0 = not read
   uint8_t rf_ant_status = 0xFF;    // UBX-MON-RF block L1 antStatus: 0 INIT, 1 DONTKNOW, 2 OK, 3 SHORT, 4 OPEN
   uint8_t rf_ant_power = 0xFF;     // antPower: 0 OFF, 1 ON, 2 DONTKNOW
   uint8_t rf_jam_state = 0xFF;     // flags b0-1 (L1): 0 unknown, 1 OK, 2 warning, 3 critical
@@ -165,6 +182,7 @@ static const size_t BACK_STATUS_V1_LEN = 52;
 static const size_t BACK_STATUS_V2_LEN = 82;
 static const size_t BACK_STATUS_V3_LEN = 82 + 14 + 4 + 8;
 static const size_t BACK_STATUS_V4_LEN = BACK_STATUS_V3_LEN + 22;   // 130 B
+static const size_t BACK_STATUS_V5_LEN = BACK_STATUS_V4_LEN + 36;   // 166 B (V3.16.1)
 size_t encode_status(const BackStatus& s, uint8_t* out, size_t cap);
 bool decode_status(const uint8_t* p, size_t n, BackStatus* s);
 

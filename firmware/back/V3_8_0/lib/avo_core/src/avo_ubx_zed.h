@@ -91,6 +91,8 @@ ZedUartBudget zed_uart_budget_raw(uint32_t baud, uint8_t nav_hz, uint8_t raw_hz,
 // Raw output rate chosen by the back: 2 Hz when the line runs at >= 460800 baud and the budget allows it, otherwise
 // 1 Hz when the budget allows it, otherwise 0 (raw output not requested).
 uint8_t zed_raw_rate_for(uint32_t baud, uint8_t nav_hz);
+// V3.16.1: "HPG 1.32" -> 1, 32 (first "d.dd" in the text); 0, 0 if there is none.
+void zed_fw_numbers(const char* fw, uint8_t* major, uint8_t* minor);
 
 // V3.14.4: UBX-MON-COMMS, the receiver's own view of the port wired to the back.
 struct ZedComms {
@@ -131,6 +133,7 @@ class UbxStream {
   // V3.14.4: frames longer than the buffer, and times the parser searched again for a frame start after a bad
   // frame (instead of throwing away every byte of the bad frame, which also lost the frame that followed it).
   uint32_t oversize() const { return oversize_; }
+  uint32_t long_frames() const { return long_; }   // V3.16.1: valid frames of 512 B or more
   uint32_t resyncs() const { return resyncs_; }
  private:
   void byte(uint8_t b);
@@ -141,7 +144,7 @@ class UbxStream {
   void* ctx_;
   uint8_t buf_[4200];   // V3.9.0: NAV-SIG with ~120 signals is ~1.9 KB · V3.16.0: RXM-RAWX up to 4088 B (127 measurements)
   size_t have_ = 0, need_ = 0;
-  uint32_t frames_ = 0, bad_ = 0, nmea_ = 0, oversize_ = 0, resyncs_ = 0;
+  uint32_t frames_ = 0, bad_ = 0, nmea_ = 0, oversize_ = 0, resyncs_ = 0, long_ = 0;
   char nm_[96];
   size_t nm_len_ = 0;
   bool nm_on_ = false;

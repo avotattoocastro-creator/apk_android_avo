@@ -78,6 +78,22 @@ ZedUartBudget zed_uart_budget_raw(uint32_t baud, uint8_t nav_hz, uint8_t raw_hz,
   return b;
 }
 
+void zed_fw_numbers(const char* fw, uint8_t* major, uint8_t* minor) {
+  *major = 0; *minor = 0;
+  if (!fw) return;
+  for (const char* p = fw; *p; p++) {
+    if (*p < '0' || *p > '9') continue;
+    unsigned a = 0, b = 0;
+    const char* q = p;
+    while (*q >= '0' && *q <= '9' && a < 1000) a = a * 10 + (unsigned)(*q++ - '0');
+    if (*q != '.' || q[1] < '0' || q[1] > '9') { p = q - 1; continue; }
+    q++;
+    while (*q >= '0' && *q <= '9' && b < 1000) b = b * 10 + (unsigned)(*q++ - '0');
+    *major = (uint8_t)(a > 255 ? 255 : a); *minor = (uint8_t)(b > 255 ? 255 : b);
+    return;
+  }
+}
+
 uint8_t zed_raw_rate_for(uint32_t baud, uint8_t nav_hz) {
   if (nav_hz == 0) nav_hz = 1;
   if (baud >= 460800 && nav_hz >= 2 && zed_uart_budget_raw(baud, nav_hz, 2).ok) return 2;
@@ -200,6 +216,7 @@ void UbxStream::process() {
     uint16_t plen;
     if (ubx_check_frame(buf_, need_, &cls, &id, &pl, &plen)) {
       frames_++;
+      if (need_ >= 512) long_++;   // V3.16.1
       if (cb_) cb_(buf_, need_, ctx_);
       drop(need_);
     } else {
