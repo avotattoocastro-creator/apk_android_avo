@@ -328,12 +328,29 @@ BackStatus BackCore::status() const {
     const ZedGnssSet& g = zed_.gnss_set();
     s.gnss_set = (uint8_t)((g.gps ? 1 : 0) | (g.glo ? 2 : 0) | (g.gal ? 4 : 0) | (g.bds ? 8 : 0));
   }
+  // V3.16.1 (v5): PPK and UBX reception counters.
+  s.v5 = true;
+  {
+    s.raw_state = zed_.raw_state(); s.raw_hz = zed_.raw_rate_hz();
+    s.rawx_rx = zed_.rawx_count(); s.sfrbx_rx = zed_.sfrbx_count();
+    s.raw_sent = st_.raw_sent; s.raw_failed = st_.raw_failed;
+    s.raw_too_long = (uint16_t)(st_.raw_too_long > 0xFFFF ? 0xFFFF : st_.raw_too_long);
+    const UbxStream& us = zed_.stream();
+    s.ubx_bad = us.bad_checksum();
+    s.ubx_oversize = (uint16_t)(us.oversize() > 0xFFFF ? 0xFFFF : us.oversize());
+    s.ubx_long = us.long_frames();
+    s.nav_sig_rx = (uint16_t)(zed_.nav_sig_count() > 0xFFFF ? 0xFFFF : zed_.nav_sig_count());
+    const ZedComms& cm = zed_.comms();
+    s.comms_flags = (uint8_t)((cm.valid ? 1 : 0) | ((cm.tx_errors & 3) << 1));
+    s.comms_tx_peak = cm.valid ? cm.tx_peak : 0;
+    zed_fw_numbers(zed_.receiver_fw(), &s.fw_major, &s.fw_minor);
+  }
   return s;
 }
 
 void BackCore::send_status() {
   BackStatus s = status();
-  uint8_t b[BACK_STATUS_V4_LEN + 8];
+  uint8_t b[BACK_STATUS_V5_LEN + 8];
   size_t n = encode_status(s, b, sizeof(b));
   if (n) queue_frame(FrameType::STATUS, 0, b, n, false);
 }

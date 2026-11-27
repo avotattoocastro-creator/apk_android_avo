@@ -369,10 +369,11 @@ static void print_status() {
     }
     {  // V3.14.4: where the quality messages get lost, stage by stage
       const uint32_t now = millis(), ts = z.last_nav_sat_ms(), tg = z.last_nav_sig_ms();
-      Serial.printf("  MENSAJES ZED: NAV-PVT=%lu NAV-SAT=%lu (hace %s) NAV-SIG=%lu (hace %s) | UBX malos=%lu demasiado largos=%lu resincronizaciones=%lu\n",
+      Serial.printf("  MENSAJES ZED: NAV-PVT=%lu NAV-SAT=%lu (hace %s) NAV-SIG=%lu (hace %s) | UBX malos=%lu demasiado largos=%lu resincronizaciones=%lu | UBX de 512 B o mas=%lu\n",
                     (unsigned long)z.nav_pvt_count(), (unsigned long)z.nav_sat_count(), ts ? String((now - ts) / 1000.0, 1).c_str() : "nunca",
                     (unsigned long)z.nav_sig_count(), tg ? String((now - tg) / 1000.0, 1).c_str() : "nunca",
-                    (unsigned long)z.stream().bad_checksum(), (unsigned long)z.stream().oversize(), (unsigned long)z.stream().resyncs());
+                    (unsigned long)z.stream().bad_checksum(), (unsigned long)z.stream().oversize(), (unsigned long)z.stream().resyncs(),
+                    (unsigned long)z.stream().long_frames());
       Serial.printf("  UART ESP32 (ZED): FIFO desbordada=%lu bufer lleno=%lu trama=%lu paridad=%lu break=%lu | umbral FIFO %u B\n",
                     (unsigned long)s_uart_err[3], (unsigned long)s_uart_err[2], (unsigned long)s_uart_err[4], (unsigned long)s_uart_err[5],
                     (unsigned long)s_uart_err[1], AVO_ZED_UART_TUNE ? (unsigned)ZED_RX_FIFO_FULL : 0u);

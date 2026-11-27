@@ -90,6 +90,11 @@ size_t encode_status(const BackStatus& s, uint8_t* out, size_t cap) {
         w.u8(s.rf_agc_l1); w.u8(s.rf_agc_l2); w.u16(s.rf_noise_l1); w.u16(s.rf_noise_l2); w.u8(s.rf_age_s);
         w.u16(s.rtcm_types); w.u16(s.rtcm_used_types); w.u16(s.base_id); w.u16(s.base_dist_dam);
         w.u8(s.dyn_model); w.u8(s.gnss_set);
+        if (s.v5) {
+          w.u8(s.raw_state); w.u8(s.raw_hz); w.u32(s.rawx_rx); w.u32(s.sfrbx_rx); w.u32(s.raw_sent); w.u32(s.raw_failed);
+          w.u16(s.raw_too_long); w.u32(s.ubx_bad); w.u16(s.ubx_oversize); w.u32(s.ubx_long); w.u16(s.nav_sig_rx);
+          w.u8(s.comms_flags); w.u8(s.comms_tx_peak); w.u8(s.fw_major); w.u8(s.fw_minor);
+        }
       }
     }
   }
@@ -127,6 +132,14 @@ bool decode_status(const uint8_t* p, size_t n, BackStatus* s) {
     s->rtcm_types = r.u16(); s->rtcm_used_types = r.u16(); s->base_id = r.u16(); s->base_dist_dam = r.u16();
     s->dyn_model = r.u8(); s->gnss_set = r.u8();
     s->v4 = r.ok();
+  }
+  s->v5 = false;
+  if (s->v4 && r.remaining() >= BACK_STATUS_V5_LEN - BACK_STATUS_V4_LEN) {
+    s->raw_state = r.u8(); s->raw_hz = r.u8(); s->rawx_rx = r.u32(); s->sfrbx_rx = r.u32(); s->raw_sent = r.u32();
+    s->raw_failed = r.u32(); s->raw_too_long = r.u16(); s->ubx_bad = r.u32(); s->ubx_oversize = r.u16();
+    s->ubx_long = r.u32(); s->nav_sig_rx = r.u16(); s->comms_flags = r.u8(); s->comms_tx_peak = r.u8();
+    s->fw_major = r.u8(); s->fw_minor = r.u8();
+    s->v5 = r.ok();
   }
   return true;
 }

@@ -92,6 +92,36 @@ Carga útil (little-endian), definida en `firmware/back/V3_8_0/lib/avo_core/src/
   `sha256` y `avo_sha256`). Pruebas en `firebase/test/storage.test.js`. **Hay que publicarlas en la consola** (Storage ›
   Reglas). Las apps antiguas solo listan `.avo`: no ven el fichero nuevo.
 
+## Diagnóstico desde la grabación: `BackStatus v5` (espalda 3.16.1)
+
+La primera grabación real (27/11/2026 00:49, espalda 3.16.0, pecho 3.7.11) llevaba 407 `RXM-SFRBX` íntegros en tramas
+0x12, pero **ningún `RXM-RAWX`**, y tampoco llegaba `NAV-SIG`. El receptor estaba en su **UART2**. Los mensajes cortos
+(< 200 B) llegaban y los largos (1–2,5 KB) no. Para saber si el receptor no los envía o se pierden en la espalda sin
+necesitar el monitor USB, la 3.16.1 añade 36 B al final del estado de la espalda (`STATUS` 0x41, 130 → **166 B**). El
+pecho lo graba en el `.avr` tal cual. Los lectores v4 (pecho 3.7.11, apps) leen los primeros 130 B e ignoran el resto.
+
+| Offset (desde 130) | Tipo | Campo |
+|---|---|---|
+| 0 | u8 | estado RAW (0 sin pedir, 1 activo, 2 rechazado, 3 UART lenta, 7 esperando ACK) |
+| 1 | u8 | RAWX pedido (Hz) |
+| 2 | u32 | `RXM-RAWX` recibidos del receptor |
+| 6 | u32 | `RXM-SFRBX` recibidos del receptor |
+| 10 | u32 | tramas RAW enviadas enteras al pecho |
+| 14 | u32 | abandonadas (falló un trozo en ESP-NOW) |
+| 18 | u16 | demasiado largas (> 4096 B) |
+| 20 | u32 | UBX con checksum malo |
+| 24 | u16 | UBX con longitud imposible |
+| 26 | u32 | UBX válidos de **512 B o más** (0 = no llega ningún mensaje largo) |
+| 30 | u16 | `NAV-SIG` recibidos |
+| 32 | u8 | MON-COMMS: b0 respondido, b1–2 errores de TX del receptor (descarta salida) |
+| 33 | u8 | pico del búfer TX del receptor (%) |
+| 34 | u8 + u8 | firmware del receptor (`HPG 1.32` → 1, 32; 0, 0 sin leer) |
+
+Vector de prueba en `firmware/back/V3_8_0/test/test_espnow.cpp` (`ppk.status_v5_roundtrip_and_shared_vector`).
+
+Lectura: RAWX recibidos = 0 y UBX de ≥ 512 B = 0 con checksum malo ≈ 0 → el receptor no envía mensajes largos por
+ese puerto (revisar el cableado al UART1). RAWX recibidos > 0 y enviados = 0 → fallo en la espalda.
+
 ## Pendiente
 1. Android y Windows: mismo flujo que el iPad (descarga del IGN, gzip, `avo_eq_ppk`, `.ppk.json` en la nube).
 2. Usar las posiciones PPK en el análisis del motor (parciales, distancia y velocidad media por tramo) cuando existan.

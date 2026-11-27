@@ -841,12 +841,13 @@ TEST(quality, nav_sat_sig_enabled_at_1hz_and_summarised) {
   CHECK_EQ(q.sig_used, 36); CHECK_EQ(q.sig_cr_used, 36); CHECK_EQ(q.sig_weak, 4);
   CHECK_EQ(q.cno_mean, 44); CHECK_EQ(q.cno_min, 44); CHECK_EQ(q.cno_max, 44);
   BackStatus st = w.back->status();
-  uint8_t b[BACK_STATUS_V4_LEN + 8];
+  uint8_t b[BACK_STATUS_V5_LEN + 8];
   size_t n = encode_status(st, b, sizeof(b));
-  CHECK_EQ(n, BACK_STATUS_V4_LEN);   // V3.15.0: v4 (130 B)
+  CHECK_EQ(n, BACK_STATUS_V5_LEN);   // V3.16.1: v5 (166 B)
   BackStatus d;
   CHECK(decode_status(b, n, &d));
-  CHECK(d.v2 && d.v3 && d.v4);
+  CHECK(d.v2 && d.v3 && d.v4 && d.v5);
+  CHECK(d.ubx_long >= 1);            // the simulated NAV-SIG with 40 signals is longer than 512 B
   // an old chest (v3 decoder) reads the first 108 bytes: same result for the v3 fields
   BackStatus d3;
   CHECK(decode_status(b, BACK_STATUS_V3_LEN, &d3));
@@ -1559,6 +1560,52 @@ TEST(ppk, slow_uart_skips_raw_output) {
   uint8_t r = w.back->zed().raw_state();
   CHECK(r == 1 || r == 3);
   if (w.back->zed().baud() < 230400) CHECK_EQ(r, 3);
+}
+
+// ---------------------------------------------------------------- V3.16.1: BackStatus v5 (PPK / UBX counters)
+TEST(ppk, status_v5_roundtrip_and_shared_vector) {
+  BackStatus s;
+  s.v2 = s.v3 = s.v4 = s.v5 = true;
+  s.raw_state = 1; s.raw_hz = 1; s.rawx_rx = 0x01020304; s.sfrbx_rx = 407; s.raw_sent = 400; s.raw_failed = 7;
+  s.raw_too_long = 2; s.ubx_bad = 9; s.ubx_oversize = 3; s.ubx_long = 0; s.nav_sig_rx = 300; s.comms_flags = 5;
+  s.comms_tx_peak = 99; s.fw_major = 1; s.fw_minor = 32;
+  uint8_t b[BACK_STATUS_V5_LEN + 8];
+  size_t n = encode_status(s, b, sizeof(b));
+  CHECK_EQ(n, BACK_STATUS_V5_LEN);
+  CHECK_EQ(BACK_STATUS_V5_LEN, (size_t)166);
+  BackStatus d;
+  CHECK(decode_status(b, n, &d));
+  CHECK(d.v4); CHECK(d.v5); CHECK_EQ(d.rawx_rx, 0x01020304u); CHECK_EQ(d.sfrbx_rx, 407u); CHECK_EQ(d.raw_failed, 7u);
+  CHECK_EQ(d.ubx_bad, 9u); CHECK_EQ(d.ubx_long, 0u); CHECK_EQ(d.nav_sig_rx, 300); CHECK_EQ(d.comms_tx_peak, 99);
+  CHECK_EQ(d.fw_major, 1); CHECK_EQ(d.fw_minor, 32);
+  static const uint8_t v5[36] = {1, 1, 4, 3, 2, 1, 0x97, 1, 0, 0, 0x90, 1, 0, 0, 7, 0, 0, 0, 2, 0, 9, 0, 0, 0, 3, 0,
+                                 0, 0, 0, 0, 0x2C, 1, 5, 99, 1, 32};
+  CHECK(memcmp(b + BACK_STATUS_V4_LEN, v5, sizeof(v5)) == 0);
+  // a v4 reader (chest 3.7.11, apps) reads the first 130 B and ignores the rest
+  BackStatus d4;
+  CHECK(decode_status(b, BACK_STATUS_V4_LEN, &d4));
+  CHECK(d4.v4); CHECK(!d4.v5);
+}
+
+TEST(ppk, receiver_fw_numbers) {
+  uint8_t a = 9, b = 9;
+  zed_fw_numbers("HPG 1.32", &a, &b); CHECK_EQ(a, 1); CHECK_EQ(b, 32);
+  zed_fw_numbers("HPG 1.13", &a, &b); CHECK_EQ(a, 1); CHECK_EQ(b, 13);
+  zed_fw_numbers("", &a, &b); CHECK_EQ(a, 0); CHECK_EQ(b, 0);
+  zed_fw_numbers("ZED-F9P HPG 1.51", &a, &b); CHECK_EQ(a, 1); CHECK_EQ(b, 51);
+}
+
+static void count_frames(const uint8_t*, size_t, void* c) { (*(int*)c)++; }
+TEST(ppk, ubx_stream_counts_long_frames) {
+  int got = 0;
+  UbxStream us(count_frames, &got);
+  std::vector<uint8_t> pl(2000, 0x55), f(2008);
+  size_t n = ubx_build(UBX_CLS_RXM, UBX_ID_RXM_RAWX, pl.data(), (uint16_t)pl.size(), f.data(), f.size());
+  us.feed(f.data(), n);
+  uint8_t sm[16];
+  size_t m = ubx_build(UBX_CLS_RXM, UBX_ID_RXM_SFRBX, pl.data(), 8, sm, sizeof(sm));
+  us.feed(sm, m);
+  CHECK_EQ(got, 2); CHECK_EQ(us.long_frames(), 1u);
 }
 
 int main(int argc, char** argv) { return tt_run_all(argc > 1 ? argv[1] : nullptr); }
