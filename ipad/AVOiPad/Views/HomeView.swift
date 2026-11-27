@@ -1,36 +1,33 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-/// «Dashboard» = port of windows/AVO.Windows/Views/HomeView.xaml (top part): banner, figures at a glance and the latest
-/// trainings. The older cards below (list, watch, horses, sensors…) are no longer shown.
+/// «Dashboard» (trainer's sketch 27/11/2026): no banner image; one row of 6 figures at the top, then the latest
+/// trainings and the LIVE list, each with its own scroll, so the whole page fits on the screen without a page scroll.
+/// Before 27/11/2026: banner with the logo, figures in a right column and 5 cards of latest trainings at the bottom.
 struct HomeView: View {
     @Environment(AppModel.self) private var app
 
+    /// Trainings listed in «Últimos entrenamientos» (scroll inside the list).
+    static let latestCount: Int = 60
+
     var body: some View {
-        let d: DashboardSummary = DashboardSummary.from(app.calendarEntries, today: Date())
+        let d: DashboardSummary = DashboardSummary.from(app.calendarEntries, today: Date(), latest: HomeView.latestCount)
         GeometryReader { geo in
             let wide: Bool = geo.size.width >= 980
-            // «Dashboard» (trainer's sketch 13/11/2026): the banner is only the image; on the right, figures needed at a
-            // glance (caballos, jockeys, entrenamientos, esta semana, por revisar) instead of buttons; at the bottom the
-            // latest trainings instead of the totals row. Same rules as Windows (Core DashboardSummary).
             if wide {
                 VStack(alignment: .leading, spacing: 14) {
-                    HStack(alignment: .top, spacing: 14) {
-                        heroBanner.frame(maxWidth: .infinity, maxHeight: .infinity)
-                        counters(d).frame(width: 340).frame(maxHeight: .infinity)
-                    }
-                    .frame(maxHeight: .infinity)
-                    latestRow(d, columns: 5)
-                        .fixedSize(horizontal: false, vertical: true)
+                    counters(d, columns: 6)
+                    latestList(d).frame(maxHeight: .infinity)
+                    liveList.frame(maxHeight: .infinity)
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 16)
             } else {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 14) {
-                        heroBanner.frame(height: 300)
-                        counters(d)
-                        latestRow(d, columns: 2)
+                        counters(d, columns: 3)
+                        latestList(d).frame(height: 380)
+                        liveList.frame(height: 280)
                     }
                     .padding(.horizontal, 20)
                     .padding(.vertical, 16)
@@ -41,111 +38,153 @@ struct HomeView: View {
         .accessibilityIdentifier("page.dashboard")
     }
 
-    // ------------------------------------------------------------------ banner (image only)
-    private var heroBanner: some View {
-        // the image fills the box WITHOUT asking for more width (scaledToFill inside an overlay): it used to push the
-        // figures column off the screen (build 88, the numbers were not visible)
-        Color.black
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-            // whole logo always visible (trainer 14/11/2026: «PERFORMANCE» was cut and the page unbalanced without the
-            // sidebar): the image fits inside the box on the logo's own black background
-            .overlay { Image("avo_brand_hero").resizable().scaledToFit() }
-            .clipped()
-        .clipShape(RoundedRectangle(cornerRadius: 8))
-        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
-    }
-
-    // ------------------------------------------------------------------ figures at a glance
-    private func counters(_ d: DashboardSummary) -> some View {
-        VStack(spacing: 8) {
+    // ------------------------------------------------------------------ figures at a glance (one row)
+    private func counters(_ d: DashboardSummary, columns: Int) -> some View {
+        let live: Int = app.bleLinks.count + (app.live?.activeSessions.count ?? 0)
+        return LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: columns), spacing: 10) {
             counter("figure.equestrian.sports", "\(app.stable.horseNames.count)", "Caballos", "Activos en la cuadra") { app.page = .stable }
             counter("person", "\(app.stable.riderNames.count)", "Jockeys", "Jinetes activos") { app.page = .riders }
             counter("list.bullet.rectangle", "\(d.trainings)", "Entrenamientos", "En el iPad") { app.page = .trainingList }
             counter("calendar", "\(d.thisWeek)", "Esta semana", "De lunes a domingo") { app.page = .calendar }
             counter("exclamationmark.circle", "\(d.pending)", "Por revisar", "Sin caballo o sin analizar",
                     accent: d.pending > 0 ? Avo.warn : Avo.ok) { app.page = .trainingList }
-            // trainer's sketch 14/11/2026: «LIVE» = equipment connected in real time (caballo/jockey, máximo 4)
-            counter("dot.radiowaves.left.and.right", "\(min(4, app.bleLinks.count))", "Live", "Conectados en tiempo real · máx. 4",
-                    accent: app.bleLinks.isEmpty ? Avo.textDim : Avo.ok) { if !app.bleLinks.isEmpty { app.hardwareVisible = true } }
+            counter("dot.radiowaves.left.and.right", "\(live)", "Live", "Conectados en tiempo real",
+                    accent: live == 0 ? Avo.textDim : Avo.ok) { app.page = .live }
         }
-        .padding(8)
-        .frame(maxHeight: .infinity, alignment: .top)
-        .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 8))
-        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
     }
 
     private func counter(_ icon: String, _ value: String, _ title: String, _ caption: String, accent: Color = Avo.text,
                          perform: @escaping () -> Void) -> some View {
         Button(action: perform) {
-            HStack(spacing: 12) {
-                ZStack {
-                    Circle().fill(Avo.redSoft).frame(width: 40, height: 40)
-                    Image(systemName: icon).font(.system(size: 16)).foregroundStyle(Avo.redLight)
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(alignment: .center, spacing: 8) {
+                    ZStack {
+                        Circle().fill(Avo.redSoft).frame(width: 34, height: 34)
+                        Image(systemName: icon).font(.system(size: 14)).foregroundStyle(Avo.redLight)
+                    }
+                    Spacer(minLength: 4)
+                    Text(value).font(.system(size: 32, weight: .semibold, design: .rounded)).monospacedDigit()
+                        .foregroundStyle(accent).lineLimit(1).minimumScaleFactor(0.6)
                 }
-                VStack(alignment: .leading, spacing: 1) {
-                    Text(title.uppercased()).font(.caption.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.silver)
-                    Text(caption).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1)
-                }
-                .layoutPriority(0)
-                Spacer(minLength: 4)
-                Text(value).font(.system(size: 34, weight: .semibold, design: .rounded)).monospacedDigit().foregroundStyle(accent)
-                    .lineLimit(1).fixedSize().layoutPriority(1)
+                Text(title.uppercased()).font(.caption.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.silver).lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                Text(caption).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1)
             }
-            .padding(.horizontal, 12).padding(.vertical, 8)
-            .frame(maxHeight: .infinity)
+            .padding(12)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 8))
+            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityIdentifier("dash.\(title)")
     }
 
-    // ------------------------------------------------------------------ latest trainings
-    private func latestRow(_ d: DashboardSummary, columns: Int) -> some View {
+    // ------------------------------------------------------------------ section frame (title + own scroll)
+    private func section<Content: View>(_ title: String, _ trailing: String,
+                                        @ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("ÚLTIMOS ENTRENAMIENTOS").font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
-            if d.latest.isEmpty {
-                AvoNoData(text: "Sin entrenamientos todavía · ábrelos desde «Entrenamientos» o el «Reloj Wi-Fi»")
-            } else {
-                // always 5 slots of the same size (trainer's sketch 13/11/2026: «misma medida todos»)
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: columns), spacing: 10) {
-                    ForEach(d.latest) { (c: DashCard) in latestCard(c) }
-                    ForEach(0..<max(0, 5 - d.latest.count), id: \.self) { (_: Int) in
-                        RoundedRectangle(cornerRadius: 8).stroke(Avo.line, style: StrokeStyle(lineWidth: 1, dash: [5, 4]))
-                            .frame(height: Self.latestHeight)
-                    }
-                }
+            HStack {
+                Text(title).font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
+                Spacer()
+                Text(trailing).font(.caption2.monospacedDigit()).foregroundStyle(Avo.textDim)
             }
+            ScrollView {
+                LazyVStack(spacing: 6) { content() }.padding(8)
+            }
+            .frame(maxHeight: .infinity)
+            .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 8))
+            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
         }
     }
 
-    static let latestHeight: CGFloat = 104
+    // ------------------------------------------------------------------ latest trainings (scroll)
+    private func latestList(_ d: DashboardSummary) -> some View {
+        section("ÚLTIMOS ENTRENAMIENTOS", d.latest.isEmpty ? "" : "\(d.latest.count) más recientes") {
+            if d.latest.isEmpty {
+                AvoNoData(text: "Sin entrenamientos todavía · ábrelos desde «Entrenamientos» o el «Reloj Wi-Fi»")
+            } else {
+                ForEach(d.latest) { (c: DashCard) in latestRow(c) }
+            }
+        }
+        .accessibilityIdentifier("dash.latest")
+    }
 
-    private func latestCard(_ c: DashCard) -> some View {
+    private func latestRow(_ c: DashCard) -> some View {
         Button {
             if let s = app.sessions.first(where: { $0.id == c.id }) {
                 app.select(s)
                 app.page = .keyData
             }
         } label: {
-            VStack(alignment: .leading, spacing: 4) {
-                HStack {
-                    Text(c.dayText).font(.caption.weight(.bold)).foregroundStyle(Avo.redLight).lineLimit(1).fixedSize()
-                    Text(c.timeText).font(.caption.monospacedDigit()).foregroundStyle(Avo.textDim).lineLimit(1)
-                    Spacer(minLength: 0)
-                    Text(c.quality).font(.caption2.weight(.semibold)).lineLimit(1).fixedSize()
-                        .foregroundStyle(c.quality == "RTK FIX" ? Avo.ok : (c.quality == "Sin FIX" ? Avo.warn : Avo.unknown))
-                }
+            HStack(spacing: 14) {
+                Text(c.dayText).font(.callout.weight(.bold)).foregroundStyle(Avo.redLight).lineLimit(1)
+                    .frame(width: 120, alignment: .leading)
+                Text(c.timeText).font(.callout.monospacedDigit()).foregroundStyle(Avo.textDim).frame(width: 52, alignment: .leading)
                 Text(c.horse).font(.headline).foregroundStyle(Avo.text).lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 Text(c.distanceText + " · " + c.durationText).font(.callout.monospacedDigit()).foregroundStyle(Avo.silver)
+                    .lineLimit(1).fixedSize()
+                Text(c.quality).font(.caption.weight(.semibold)).lineLimit(1)
+                    .foregroundStyle(c.quality == "RTK FIX" ? Avo.ok : (c.quality == "Sin FIX" ? Avo.warn : Avo.unknown))
+                    .frame(width: 92, alignment: .trailing)
+                Image(systemName: "chevron.right").font(.footnote.weight(.semibold)).foregroundStyle(Avo.textDim)
             }
-            .padding(12)
-            .frame(maxWidth: .infinity, minHeight: Self.latestHeight, maxHeight: Self.latestHeight, alignment: .topLeading)
-            .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 8))
-            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
+            .padding(.horizontal, 12).padding(.vertical, 10)
+            .background(Avo.surface2.opacity(0.5), in: RoundedRectangle(cornerRadius: 6))
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityIdentifier("dash.latest.\(c.id)")
+    }
+
+    // ------------------------------------------------------------------ LIVE (scroll)
+    /// Directos del servidor (un pecho encendido cada uno) y equipos conectados por Bluetooth a este iPad.
+    private var liveList: some View {
+        let server: [LiveSessionRef] = app.live?.activeSessions ?? []
+        let links: [BleLink] = app.bleLinks
+        return section("LIVE", server.isEmpty && links.isEmpty ? "" : "\(server.count + links.count) conectados") {
+            if server.isEmpty && links.isEmpty {
+                AvoNoData(text: "Nadie en directo ahora · aparecen aquí al encender el pecho o conectar un equipo por Bluetooth")
+            } else {
+                ForEach(server) { (r: LiveSessionRef) in
+                    liveRow(icon: r.meta.state == "REC" ? "record.circle" : "location.circle",
+                            color: r.meta.state == "REC" ? Avo.red : Avo.ok,
+                            title: r.meta.horseName.isEmpty ? "Caballo sin asignar" : r.meta.horseName,
+                            detail: [r.meta.riderName, r.meta.stateText].filter { !$0.isEmpty }.joined(separator: " · "),
+                            tag: "EN DIRECTO") {
+                        app.page = .live
+                        if let live = app.live, live.current?.id != r.id { live.open(r) }
+                    }
+                }
+                ForEach(links) { (l: BleLink) in
+                    liveRow(icon: "antenna.radiowaves.left.and.right", color: Avo.ok, title: l.name,
+                            detail: "Conectado desde las \(MadridTime.format(l.since, "HH:mm"))", tag: "BLUETOOTH") {
+                        app.hardwareVisible = true
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("dash.live")
+    }
+
+    private func liveRow(icon: String, color: Color, title: String, detail: String, tag: String,
+                         perform: @escaping () -> Void) -> some View {
+        Button(action: perform) {
+            HStack(spacing: 12) {
+                Image(systemName: icon).font(.title3).frame(width: 28).foregroundStyle(color)
+                Text(title).font(.headline).foregroundStyle(Avo.text).lineLimit(1)
+                Text(detail).font(.callout).foregroundStyle(Avo.textDim).lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text(tag).font(.caption2.weight(.bold)).tracking(0.8).foregroundStyle(color)
+                Image(systemName: "chevron.right").font(.footnote.weight(.semibold)).foregroundStyle(Avo.textDim)
+            }
+            .padding(.horizontal, 12).padding(.vertical, 10)
+            .background(color.opacity(0.10), in: RoundedRectangle(cornerRadius: 6))
+            .overlay(RoundedRectangle(cornerRadius: 6).stroke(color.opacity(0.45), lineWidth: 1))
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
     }
 
     // ------------------------------------------------------------------ trainings
