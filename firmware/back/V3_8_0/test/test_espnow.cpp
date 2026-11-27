@@ -831,7 +831,7 @@ TEST(quality, nav_sat_sig_enabled_at_1hz_and_summarised) {
   World w(2);
   w.run_ms(15000);
   CHECK_EQ((int)w.back->zed().monitor_state(), 1);
-  CHECK_EQ(w.zed.sig_every[w.zed.port], (uint32_t)w.back->zed().nav_rate());   // once per second at any rate
+  CHECK_EQ(w.zed.sig_every[w.zed.port], (uint32_t)w.back->zed().nav_rate() * ZedManager::kQualityEveryS);   // V3.16.2: every 5 s at any rate
   const GnssQuality& q = w.back->quality();
   CHECK(q.have_sig && !q.have_sat);                                             // V3.14.6: NAV-SAT off, counts from NAV-SIG
   CHECK_EQ(w.zed.sat_every[w.zed.port], 0u);
@@ -853,7 +853,7 @@ TEST(quality, nav_sat_sig_enabled_at_1hz_and_summarised) {
   CHECK(decode_status(b, BACK_STATUS_V3_LEN, &d3));
   CHECK(d3.v3 && !d3.v4);
   CHECK_EQ(d3.sig_l2, 20);
-  CHECK_EQ(d.sig_l2, 20); CHECK_EQ(d.quality_mon, 1); CHECK(d.quality_age_s <= 2);
+  CHECK_EQ(d.sig_l2, 20); CHECK_EQ(d.quality_mon, 1); CHECK(d.quality_age_s <= 6);
   CHECK(d.fixed_ms > 5000); CHECK_EQ(d.fix_lost, 0); CHECK(d.ttff_fix_s < 15);
   // a v2 decoder (old chest) still reads it, a v2 frame still decodes here
   BackStatus v2 = st; v2.v3 = false;
@@ -995,18 +995,18 @@ TEST(quality, lost_nav_sig_output_is_requested_again) {
   w.run_ms(8000);
   CHECK_EQ(w.back->zed().monitor_rearms(), 1u);
   CHECK_EQ((int)w.back->zed().monitor_state(), 1);
-  CHECK_EQ(w.zed.sig_every[w.zed.port], (uint32_t)w.back->zed().nav_rate());
+  CHECK_EQ(w.zed.sig_every[w.zed.port], (uint32_t)w.back->zed().nav_rate() * ZedManager::kQualityEveryS);
   CHECK(w.chest.gnss.size() > before + 50);                           // positions never stopped
   CHECK_EQ(w.back->zed().receiver_resets(), resets);                  // not a receiver reset
   BackStatus st = w.back->status();
   CHECK_EQ(st.quality_mon & 0x0F, 1); CHECK_EQ((st.quality_mon >> 4) & 3, 1); CHECK_EQ(st.quality_mon >> 6, 0);
-  CHECK(st.quality_age_s <= 2);                                       // summary fresh again
+  CHECK(st.quality_age_s <= 6);                                       // summary fresh again
   w.run_ms(30000);
   CHECK_EQ(w.back->zed().monitor_rearms(), 1u);                       // no more requests while it arrives
   w.zed.sig_every[w.zed.port] = 0;                                    // only NAV-SIG lost, NAV-SAT still arriving
   w.run_ms(13000);
   CHECK_EQ(w.back->zed().monitor_rearms(), 2u);
-  CHECK_EQ(w.zed.sig_every[w.zed.port], (uint32_t)w.back->zed().nav_rate());
+  CHECK_EQ(w.zed.sig_every[w.zed.port], (uint32_t)w.back->zed().nav_rate() * ZedManager::kQualityEveryS);
 }
 
 TEST(quality, silent_receiver_counts_as_reset) {
@@ -1151,11 +1151,11 @@ TEST(quality, nav_sat_is_switched_off_and_counts_come_from_nav_sig) {
   w.run_ms(15000);
   CHECK_EQ((int)w.back->zed().monitor_state(), 1);
   CHECK_EQ(w.zed.sat_every[2], 0u);
-  CHECK_EQ(w.zed.sig_every[2], (uint32_t)w.back->zed().nav_rate());
+  CHECK_EQ(w.zed.sig_every[2], (uint32_t)w.back->zed().nav_rate() * ZedManager::kQualityEveryS);
   uint32_t sat0 = w.back->zed().nav_sat_count();
   w.run_ms(10000);
   CHECK_EQ(w.back->zed().nav_sat_count(), sat0);                   // nothing more
-  CHECK(w.back->zed().nav_sig_count() >= 9);
+  CHECK(w.back->zed().nav_sig_count() >= 1);                    // V3.16.2: one every 5 s
   BackStatus st = w.back->status();
   CHECK_EQ((int)st.sv_tracked, 20); CHECK_EQ((int)st.sv_used, 18);
   CHECK_EQ(w.back->zed().monitor_rearms(), 0u);
@@ -1187,8 +1187,8 @@ TEST(quality, stuck_nav_sig_is_restarted_off_on) {
   CHECK_EQ(w.back->zed().sig_toggles(), 1u);
   CHECK(!w.back->zed().sig_polling());
   CHECK(!w.zed.sig_stuck);
-  w.run_ms(3000);
-  CHECK(w.back->status().quality_age_s <= 2);
+  w.run_ms(6000);
+  CHECK(w.back->status().quality_age_s <= 6);
 }
 
 TEST(quality, stuck_nav_sig_falls_back_to_polling) {
@@ -1201,13 +1201,13 @@ TEST(quality, stuck_nav_sig_falls_back_to_polling) {
   CHECK(w.zed.sig_polls >= 2);
   w.run_ms(10000);
   BackStatus st = w.back->status();
-  CHECK(st.quality_age_s <= 2);                                  // summary fresh again, from polls
+  CHECK(st.quality_age_s <= 6);                                  // summary fresh again, from polls
   CHECK_EQ((int)st.sv_tracked, 20);
   CHECK_EQ(st.quality_mon & 0x0F, 1);
   uint32_t r = w.back->zed().monitor_rearms();
   w.run_ms(30000);
   CHECK_EQ(w.back->zed().monitor_rearms(), r);                   // no more re-requests while polls are answered
-  CHECK(w.zed.sig_polls >= 35);                                  // ~1 per second
+  CHECK(w.zed.sig_polls >= 5);                                   // V3.16.2: ~1 every 5 s
   CHECK(w.chest.gnss.size() > pvt0 + 500);                       // positions never stopped
   CHECK_EQ(w.back->zed().receiver_resets(), 0u);
 }
@@ -1514,12 +1514,12 @@ TEST(ppk, rawx_and_sfrbx_reach_the_chest_byte_exact) {
   CHECK_EQ(w.back->zed().raw_state(), 1);
   CHECK_EQ(w.back->zed().raw_rate_hz(), 1);
   CHECK_EQ(w.zed.rawx_every[2], 8u);          // 8 Hz navigation: every 8th epoch = 1 Hz
-  CHECK_EQ(w.zed.sfrbx_on[2], 1u);
+  CHECK_EQ(w.zed.sfrbx_on[2], 0u);           // V3.16.2: SFRBX off (ephemerides from the base navigation RINEX)
   CHECK(w.chest.have_caps && (w.chest.caps.caps & CAP_GNSS_RAW));
   size_t before = w.zed.raw_sent.size(), got0 = w.chest.raw_frames.size();
   w.run_ms(10000, 5);
   size_t sent = w.zed.raw_sent.size() - before, got = w.chest.raw_frames.size() - got0;
-  CHECK(sent >= 30);                          // 10 RXM-RAWX + ~26 RXM-SFRBX in 10 s
+  CHECK(sent >= 9);                           // 10 RXM-RAWX in 10 s (V3.16.2: no SFRBX)
   CHECK(got + 1 >= sent);                     // clean radio: every frame (the last one may still be in flight)
   // byte-exact: the chest got the very frames the receiver put on the UART, in order
   size_t match = 0;

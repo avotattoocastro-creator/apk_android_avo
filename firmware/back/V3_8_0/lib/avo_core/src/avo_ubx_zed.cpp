@@ -403,7 +403,10 @@ void ZedManager::send_tune(bool full) {
 // of 101 %, i.e. output dropped by the receiver; NAV-SAT + NAV-SIG left in the same epoch were the largest burst
 // (~1.3 KB). NAV-SAT alone (which = 1) only when the receiver refuses NAV-SIG.
 void ZedManager::send_monitor(uint8_t which) {
-  uint32_t every = rate_ ? rate_ : 1;
+  // V3.16.2: NAV-SAT/NAV-SIG once every kQualityEveryS seconds, not every second. Field 27/11/2026 (HPG 1.51, UART2,
+  // 230400): with NAV-SIG + RXM-RAWX + RXM-SFRBX every second the receiver reported TX buffer errors (MON-COMMS
+  // mem/alloc, peak 106 %) and stopped sending every message of 512 B or more after ~5 s: no RAWX for PPK.
+  uint32_t every = (rate_ ? rate_ : 1) * kQualityEveryS;
   ZedKV kv[2];
   size_t n = 0;
   const uint32_t sat = port_ == 2 ? zedkey::MSGOUT_NAV_SAT_UART2 : zedkey::MSGOUT_NAV_SAT_UART1;
@@ -421,8 +424,11 @@ void ZedManager::send_monitor(uint8_t which) {
 // rejects them keeps NAV-PVT, RTCM and NAV-SIG exactly as before). RAM layer only, like the rest.
 void ZedManager::send_raw(uint8_t raw_hz) {
   uint32_t every = raw_hz ? (rate_ > raw_hz ? rate_ / raw_hz : 1) : 0;
+  // V3.16.2: RXM-SFRBX OFF (~19 frames/s, ~1.5 KB/s on HPG 1.51). The ephemerides come from the base navigation
+  // RINEX (IGN _MN file), which the PPK already downloads (docs/PPK.md). The key is still sent, with 0, so a receiver
+  // left with SFRBX on by 3.16.0/3.16.1 (RAM) stops it.
   ZedKV kv[2] = {{port_ == 2 ? zedkey::MSGOUT_RXM_RAWX_UART2 : zedkey::MSGOUT_RXM_RAWX_UART1, every},
-                 {port_ == 2 ? zedkey::MSGOUT_RXM_SFRBX_UART2 : zedkey::MSGOUT_RXM_SFRBX_UART1, raw_hz ? 1u : 0u}};
+                 {port_ == 2 ? zedkey::MSGOUT_RXM_SFRBX_UART2 : zedkey::MSGOUT_RXM_SFRBX_UART1, 0u}};
   uint8_t b[48];
   size_t len = ubx_valset_ram(kv, 2, b, sizeof(b));
   ack_ = 0;
@@ -619,7 +625,7 @@ void ZedManager::tick(uint32_t now_ms) {
         mon_rearms_++; if (mon_streak_ < 255) mon_streak_++;
         mon_ = 0; mon_t0_ = 0; mon_try_ = 2; mon_ok_ = 0; mon_rounds_ = 0; mon_last_ms_ = 0;
       }
-      if (sig_poll_ && mon_ == 1 && (sig_poll_t_ == 0 || now_ms - sig_poll_t_ >= 1000)) {   // V3.14.7
+      if (sig_poll_ && mon_ == 1 && (sig_poll_t_ == 0 || now_ms - sig_poll_t_ >= kQualityEveryS * 1000u)) {   // V3.14.7 · V3.16.2: every 5 s
         uint8_t b[8];
         size_t n = ubx_poll(UBX_CLS_NAV, UBX_ID_NAV_SIG, b, sizeof(b));
         io_->zed_write(b, n);

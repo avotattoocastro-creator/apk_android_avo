@@ -122,6 +122,18 @@ Vector de prueba en `firmware/back/V3_8_0/test/test_espnow.cpp` (`ppk.status_v5_
 Lectura: RAWX recibidos = 0 y UBX de ≥ 512 B = 0 con checksum malo ≈ 0 → el receptor no envía mensajes largos por
 ese puerto (revisar el cableado al UART1). RAWX recibidos > 0 y enviados = 0 → fallo en la espalda.
 
+### Resultado de la v5 y cambio en la 3.16.2
+
+En la grabación de las 01:34 del 27/11 (espalda 3.16.1, receptor **HPG 1.51** en UART2 a 230 400 baudios), en los
+primeros ~5 s llegaron 5 RAWX y 5 NAV-SIG. Después dejó de llegar cualquier mensaje de ≥ 512 B, con 0 UBX malos en la
+espalda. MON-COMMS informó de **errores de TX del receptor** (memoria y reserva) con pico de búfer del 106 %. El
+receptor descarta salida: no es la espalda.
+
+La 3.16.2 reduce la salida del receptor: **RXM-SFRBX apagado** (unos 19 mensajes/s; las efemérides salen del RINEX de
+navegación de la base, `_01H_MN.rnx.gz`, que el PPK ya descarga) y **NAV-SAT/NAV-SIG cada 5 s** en vez de cada
+segundo, también el sondeo de respaldo. RAWX sigue a 1 Hz. Si con esto el receptor sigue descartando, el siguiente paso
+es cablear la espalda al UART1 del ZED.
+
 ## Pendiente
 1. Android y Windows: mismo flujo que el iPad (descarga del IGN, gzip, `avo_eq_ppk`, `.ppk.json` en la nube).
 2. Usar las posiciones PPK en el análisis del motor (parciales, distancia y velocidad media por tramo) cuando existan.
