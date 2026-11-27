@@ -5,8 +5,11 @@
 set -euo pipefail
 : "${AVO_ASSETS_3D_KEY:?Falta AVO_ASSETS_3D_KEY}"
 cd "$(dirname "$0")"
+# en macOS, «openssl» es LibreSSL: se usa el OpenSSL 3 de Homebrew si está (mismo formato que al cifrar)
+OPENSSL=openssl
+if command -v brew >/dev/null 2>&1 && [ -x "$(brew --prefix openssl@3 2>/dev/null)/bin/openssl" ]; then OPENSSL="$(brew --prefix openssl@3)/bin/openssl"; fi
 tmp="$(mktemp -d)"; trap 'rm -rf "$tmp"' EXIT
-openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -in enozone_3d.zip.enc -out "$tmp/m.zip" -pass env:AVO_ASSETS_3D_KEY
+"$OPENSSL" enc -d -aes-256-cbc -pbkdf2 -iter 200000 -in enozone_3d.zip.enc -out "$tmp/m.zip" -pass env:AVO_ASSETS_3D_KEY
 python3 - "$tmp/m.zip" <<'PY'
 import sys, zipfile, os
 z = zipfile.ZipFile(sys.argv[1])

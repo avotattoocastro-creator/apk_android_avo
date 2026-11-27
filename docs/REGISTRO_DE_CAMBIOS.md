@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-27 — iPad — página «Demostración» (caballo y jockey 3D con casco prototipo A y cincha) · workflow del iPad
+**Autor:** Claude · **Commits:** ver PR #138 · **CI:** pendiente (`build-avo-ipad.yml`)
+**Qué cambia:** nueva página **«Demostración»** en la barra lateral, debajo de «LIVE» (`ipad/AVOiPad/Views/DemoView.swift`, `Page.demo`). Muestra la página web de `demo/avo-3d/web-3d` dentro de un `WKWebView` servida por un esquema propio `avo-demo://` (carpeta de recursos `demo3d`), con **three.js 0.160.0 dentro de la app** (funciona sin conexión). Si la compilación no lleva los modelos de Enozone, muestra la versión 2D de Muybridge. Datos SIMULADOS (la fuente real es la fase F3 del plan). Pruebas unitarias nuevas: `DemoTests` (tipos MIME y página de inicio).
+**Workflow (avisado al usuario, 27/11):** `build-avo-ipad.yml` ejecuta `scripts/demo3d/preparar_demo3d.sh` antes de `xcodegen` en los dos trabajos, recibe el secreto **`AVO_ASSETS_3D_KEY`** y se dispara también con cambios en `demo/avo-3d/**` y `scripts/demo3d/**`. El script copia las páginas, baja three.js de npm y, si hay clave, descifra los modelos. `project.yml` añade la carpeta opcional `demo3d` como recurso.
+**No se ha tocado:** firmas, `Info.plist`, número de build, contratos binarios, firmware.
+**Validación:** el script se probó en Linux con un paquete de three.js sustituto y la clave real (descifrado correcto). Swift sin compilar en local (no hay Xcode en la sesión). **NO VERIFICADO** en el iPad.
+**Pendiente:** crear el secreto `AVO_ASSETS_3D_KEY`; lanzar la compilación; probar en el iPad (rendimiento WebGL, carga sin conexión).
+
 ## 2026-11-27 — Demo 3D (web) caballo + jockey con casco prototipo A y cincha · plan del Modo demostración del iPad
 **Autor:** Claude · **Commits:** ver PR · **CI:** no aplica (ningún workflow vigila `demo/` ni `docs/`)
 **Qué cambia:** nueva carpeta `demo/avo-3d/`:

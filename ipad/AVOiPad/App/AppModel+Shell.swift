@@ -127,7 +127,7 @@ extension AppModel {
         case .assistant: assistant?.pageShown()
         case .camera: camera?.pageShown()
         case .live: break   // LiveView llama a pageShown()/pageHidden() al aparecer y desaparecer
-        case .home, .sessions, .server, .engine, .summary, .calendar, .keyData, .settings: break
+        case .home, .sessions, .server, .engine, .summary, .calendar, .keyData, .settings, .demo: break
         }
     }
 
@@ -135,7 +135,7 @@ extension AppModel {
     var showEmptyState: Bool {
         if !sessions.isEmpty { return false }
         switch page {
-        case .home, .sessions, .trainingList, .races, .server, .engine, .stable, .riders, .geofences, .watchWifi, .calendar, .settings, .camera, .live: return false
+        case .home, .sessions, .trainingList, .races, .server, .engine, .stable, .riders, .geofences, .watchWifi, .calendar, .settings, .camera, .live, .demo: return false
         default: return true
         }
     }

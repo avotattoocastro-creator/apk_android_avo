@@ -9,6 +9,8 @@ on:
       - 'equine-intelligence/**'
       - 'firmware/back/V3_8_0/lib/avo_core/**'
       - 'windows/tools/demo-fixtures/**'
+      - 'demo/avo-3d/**'
+      - 'scripts/demo3d/**'
       - '.github/workflows/build-avo-ipad.yml'
   workflow_dispatch:
     inputs:
@@ -44,6 +46,13 @@ jobs:
           mkdir -p ipad/demo
           ./demofx/make_demo_sessions ipad/demo
           ls -la ipad/demo
+
+      # Demostración 3D (27/11/2026): página web empaquetada en ipad/demo3d; modelos de Enozone descifrados con el secreto
+      # AVO_ASSETS_3D_KEY (sin el secreto, solo la versión 2D de Muybridge). Ver demo/avo-3d/README.md.
+      - name: Demo 3D resources (ipad/demo3d)
+        env:
+          AVO_ASSETS_3D_KEY: ${{ secrets.AVO_ASSETS_3D_KEY }}
+        run: scripts/demo3d/preparar_demo3d.sh
 
       - name: Generate Xcode project
         working-directory: ipad
@@ -165,6 +174,7 @@ jobs:
       ASC_KEY_P8_BASE64: ${{ secrets.ASC_KEY_P8_BASE64 }}
       ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
       APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+      AVO_ASSETS_3D_KEY: ${{ secrets.AVO_ASSETS_3D_KEY }}
     steps:
       - name: Check signing secrets
         id: check
@@ -187,6 +197,7 @@ jobs:
           cmake -S windows/tools/demo-fixtures -B demofx -DCMAKE_BUILD_TYPE=Release
           cmake --build demofx --config Release -j 4
           mkdir -p ipad/demo && ./demofx/make_demo_sessions ipad/demo
+          scripts/demo3d/preparar_demo3d.sh
           (cd ipad && xcodegen generate)
           mkdir -p ~/private_keys
           # the key can be given as the plain text of the .p8 (ASC_KEY_P8, easy to paste from an iPad) or in base64

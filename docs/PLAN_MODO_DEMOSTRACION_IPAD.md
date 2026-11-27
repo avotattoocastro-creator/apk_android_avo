@@ -1,6 +1,6 @@
 # Plan · Modo demostración 3D en la app del iPad (27/11/2026)
 
-**Estado:** PLAN. Nada implementado en la app ni probado en el iPad. Referencia visual: `demo/avo-3d/web-3d`.
+**Estado:** primera versión IMPLEMENTADA (27/11, PR #138): página «Demostración» con la web de `demo/avo-3d/web-3d` en un `WKWebView` (three.js dentro de la app, modelos descifrados en el CI). Es un paso intermedio hasta la versión nativa de este plan. NO VERIFICADA en el iPad.
 
 ## Resumen
 La app del iPad tendrá un **Modo demostración** nativo: el caballo y el jockey de Enozone en 3D con RealityKit, el
