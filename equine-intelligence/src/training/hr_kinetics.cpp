@@ -8,6 +8,7 @@
 //  FW1  FC media del tramo fijo de trote del calentamiento a la misma velocidad (±0,3 m/s) y superficie: tendencia diaria
 //       sustituta de la V200 (Yamanobe 1993 [E-r]).
 //  WU3  comparables solo con calentamiento parecido (distancia ±20 %) [I]; la misma regla se aplica a A9 (training.cpp).
+//  TC2/TC3/GO1 (TRAINING 1.7.0): además, temperatura ±5 °C, misma clase de calor y mismo estrato de going (conditions.cpp).
 // Todo SIN CALIBRAR: las marcas son INFO y nunca cambian el estado del caballo. No es un diagnóstico.
 #include <algorithm>
 #include <cmath>
@@ -71,6 +72,7 @@ HrKinMetric eval_metric(const std::vector<SessionSummary>& ok, size_t i, const T
     if (s.day - z.day > P.window_days) break;
     if (!z.cardio.present || !std::isfinite(get(z))) continue;
     if (z.surface != s.surface || z.beach_band != s.beach_band) continue;
+    if (!training_conditions_comparable(s, z, CondUse::FC, c, nullptr)) continue;   // TC2/TC3/GO1 (TRAINING 1.7.0)
     if (m.rule == "FW1") {
       if (!std::isfinite(z.cardio.fw_speed) || !std::isfinite(s.cardio.fw_speed) || std::fabs(z.cardio.fw_speed - s.cardio.fw_speed) > P.fw_speed_match_m_s) continue;
     } else {

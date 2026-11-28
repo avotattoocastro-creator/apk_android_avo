@@ -2,8 +2,8 @@
   "formato": "avo-base-cientifica",
   "version_formato": 1,
   "base": "AVO_KB_1",
-  "version": "1.33.0",
-  "fecha": "2026-11-27",
+  "version": "1.34.0",
+  "fecha": "2026-11-28",
   "razas": [
     "PSI",
     "ARABE"
@@ -177,6 +177,11 @@
       "fecha": "2026-11-27",
       "titulo": "Motor nocturno 27/11: cinética de la FC (CF1, CF2, WU2–WU3, FW1, RC1)",
       "archivo": "estudios/2026-11-27_motor_cinetica_fc_cf_wu_rc1.md"
+    },
+    {
+      "fecha": "2026-11-28",
+      "titulo": "Motor nocturno 28/11: comparables por condiciones (temperatura y calor TC1–TC4, peso y jinete PC1–PC3, going GO1)",
+      "archivo": "estudios/2026-11-28_motor_condiciones_tc_pc_go1.md"
     }
   ],
   "fuentes": [
@@ -4347,6 +4352,17 @@
       "raza_fuente": "PSI",
       "doi": "10.1111/j.2042-3306.2006.tb05530.x",
       "nota": "resumen leído en agregador (27/11): τ de la recuperación de la FC tras 2,5 min a 8 m/s con 10 % de pendiente; los bloqueos autonómicos alargan τ, τ baja con 11 semanas de entrenamiento y se relaciona inversamente con el VO2max (r 0,43); sin valores de τ en segundos [NV]; base de CF2 como tendencia propia"
+    },
+    {
+      "id": "BOM_WBGT_APROX",
+      "cita": "Australian Bureau of Meteorology, «Thermal comfort observations» (aproximación del WBGT: 0,567·T + 0,393·e + 3,94; e = HR/100 · 6,105 · exp(17,27·T/(237,7+T)) hPa), citada en el cuaderno GeoCAT «Humid Heat Metrics» de NCAR",
+      "url": "https://ncar.github.io/geocat-applications/applications/humid_heat_metrics.html",
+      "acceso": "AGREGADOR",
+      "verificado_fecha": "2026-11-28",
+      "pais": "Australia / EE. UU.",
+      "idioma": "en",
+      "raza_fuente": "no aplica",
+      "nota": "fórmula leída en fuente secundaria (NCAR GeoCAT); supone sol pleno y brisa ligera y tiende a sobrestimar frente a otros modelos (4–7 °C más que Bernard en un caso de Chicago); la página del BoM y la validación frente a WBGT medido (PMC7240860) no se pudieron leer [NV]; uso [E-r/I]"
     }
   ],
   "parametros": [
@@ -5674,6 +5690,34 @@
       ],
       "estado": "IMPLEMENTADO",
       "nota": "KB 1.33.0, motor 2.0.0-dev40; opción JSON «cinetica_fc» en la historia; todo INFO y sin calibrar; nunca sube el estado"
+    },
+    {
+      "id": "condiciones",
+      "valor": {
+        "temperatura_dif_c": 5,
+        "wbgt_calor_c": 28,
+        "calor_temperatura_c": 30,
+        "calor_humedad_pct": 70,
+        "wbgt_estimado": true,
+        "dias_aclimatacion": 10,
+        "dias_corte_calor": 14,
+        "peso_dif_kg": 3,
+        "mismo_jinete": true,
+        "peso_cargado_info_pct": 13,
+        "estrato_going": true,
+        "dias_marcas": 14
+      },
+      "evidencia": "E-r / I",
+      "fuentes": [
+        "HARGREAVES_1999_CALOR",
+        "NOMURA_2019_GOLPE_CALOR",
+        "GEOR_1996_ACLIMATACION",
+        "LEE_PARK_2011_CWBW",
+        "BOM_WBGT_APROX"
+      ],
+      "estado": "IMPLEMENTADO",
+      "opcion": "condiciones",
+      "nota": "KB 1.34.0, motor 2.0.0-dev41; opción JSON «condiciones» en la historia; solo filtra comparables; sin calibrar; nunca sube el estado"
     }
   ],
   "reglas": [
@@ -5989,8 +6033,10 @@
         "SCHMITT_2024_ANIMALS",
         "YILDIRIM_2019_KOCATEPE"
       ],
-      "estado": "PROPUESTA",
-      "nota": "estudio 20/11 21:08; nunca predicción de lesiones"
+      "estado": "PARCIAL",
+      "nota": "estudio 20/11 21:08; nunca predicción de lesiones",
+      "implementacion": "motor 2.0.0-dev41 (KB 1.34.0, training 1.7.0): GO1 estrato de going (FIRME = firme y bueno-firme; BUENO; BLANDO = bueno-blando y blando; PESADO) como criterio de comparables de A7, A8, A9 y la cinética de la FC; GO2 solo por estratos",
+      "falta": "GO2 going como covariable continua (penetrómetro); GO3 sin implementar (no hay going oficial en el análisis); GO4 sin implementar"
     },
     {
       "id": "CALENTAMIENTO_WU1_WU4",
@@ -6127,7 +6173,7 @@
       "estado": "PARCIAL",
       "nota": "KB 1.28.0, sin implementar",
       "implementacion": "motor 2.0.0-dev40 (KB 1.33.0, cardio 1.2.0, training 1.6.0): cardio.cinetica.tramo_fijo = últimos 60 s seguidos de épocas válidas entre 3 y 6 m/s con CV ≤ 10 % dentro del calentamiento; tendencia en estado.cinetica_fc con la misma superficie y velocidad ±0,3 m/s; marca INFO con ≥ +8 lpm",
-      "falta": "TC1 (temperatura ±5 °C) y GO1 (going) como criterios de comparables; pendiente (PD1); umbral de 8 lpm sin calibrar; Yamanobe 1993 solo por resumen"
+      "falta": "pendiente (PD1); umbral de 8 lpm sin calibrar; Yamanobe 1993 solo por resumen · TC1 y GO1 HECHOS en 2.0.0-dev41"
     },
     {
       "id": "CARGA_CG1",
@@ -6227,6 +6273,39 @@
       "implementacion": "motor 2.0.0-dev40 (KB 1.33.0, cardio 1.2.0, training 1.6.0): cardio.cinetica.cf1 (mesetas afectadas) y cardio.cinetica.recuperacion_tau; estado.cinetica_fc con la métrica TAU_RECUPERACION; opción JSON «cinetica_fc»",
       "falta": "calibrar el +25 % con el error típico propio; τ de PSI y árabes con cifra [NV]; modelo biexponencial si la grabación tiene el primer minuto limpio",
       "nota": "KB 1.33.0; nunca con valores de referencia; no es un diagnóstico"
+    },
+    {
+      "id": "TEMPERATURA_TC1_TC5",
+      "umbral": "TC1 temperatura, humedad y WBGT (medido o estimado con la aproximación del Bureau of Meteorology) en la ficha de campo; TC2 A9 y cinética de la FC (CF2, RC1, FW1) solo con |ΔT| ≤ 5 °C; TC3 «no comparable por calor» con WBGT ≥ 28 °C o ≥ 30 °C con humedad ≥ 70 % (sin humedad, ≥ 30 °C): A9 no juzga la sesión y las de calor solo se comparan entre sí; TC4 primeros 10 días de un periodo de calor (cortado por 14 d sin calor) = transición de aclimatación, INFO; TC5 sin coeficiente de corrección",
+      "evidencia": "E (Ebisuda 2023: FC de pico sin cambio con calor) / E-r (Hargreaves 1999 ≈ +12 lpm a 7 m/s; Geor 1995 y 1996; Nomura 2019 WBGT 28–33 °C como norma citada; fórmula BoM por fuente secundaria) / I (cortes)",
+      "fuentes": [
+        "HARGREAVES_1999_CALOR",
+        "EBISUDA_2023_CALOR",
+        "NOMURA_2019_GOLPE_CALOR",
+        "GEOR_1995_CALOR_HUMEDO",
+        "GEOR_1996_ACLIMATACION",
+        "SCHRURS_2024_FCR_TEMP",
+        "BOM_WBGT_APROX"
+      ],
+      "estado": "PARCIAL",
+      "implementacion": "motor 2.0.0-dev41 (KB 1.34.0, training 1.7.0): estado.condiciones (TC1–TC4), filtro de comparables en A9 y estado.cinetica_fc, marca A9_NO_COMPARABLE_CALOR (INFO) y marcas TC3/TC4; opción JSON «condiciones»",
+      "falta": "TC5: coeficiente propio (modelo mixto por caballo con T o WBGT) con datos de campo del PROTOTIPO; validar la aproximación del WBGT frente a un medidor; cortes sin calibrar",
+      "nota": "estudio 20/11 13:12 y estudio motor 28/11; INFO, nunca sube el estado"
+    },
+    {
+      "id": "PESO_CARGADO_PC1_PC4",
+      "umbral": "PC1 peso del jinete con equipo y peso corporal en la ficha; PC2 A7/A8 solo con |Δpeso| ≤ 3 kg y el mismo jinete si hay ≥ min_linea_base + 3 comparables suyas; PC3 peso cargado / peso corporal > 13 % = INFO; PC4 sin coeficiente",
+      "evidencia": "E (Lee & Park 2011: óptimo 12–12,7 % en 1000 m; Bugislaus 2004: confusión peso–calidad; Schrurs 2022: el jinete no cambia la zancada en galope fuerte) / I (cortes)",
+      "fuentes": [
+        "LEE_PARK_2011_CWBW",
+        "BUGISLAUS_2004_PESO",
+        "SCHRURS_2022_JINETE",
+        "MORRICE_WEST_EVJ_13156_AAM"
+      ],
+      "estado": "PARCIAL",
+      "implementacion": "motor 2.0.0-dev41 (KB 1.34.0, training 1.7.0): filtro de comparables en A7/A8 (training_comparables), recuento en estado.condiciones.ultima.comparables y marca PC3",
+      "falta": "PC4: coeficiente propio con el mismo caballo y jinetes distintos; peso cargado oficial en carreras (handicap)",
+      "nota": "INFO; no es un umbral de riesgo"
     }
   ],
   "pendiente_motor": [
@@ -6243,7 +6322,7 @@
     "A1/A2 de Verheyen: el resumen da un umbral CONJUNTO (> 44 km de canter Y > 6 km de galope en 30 d) y galope acumulado protector en añojos; con el texto completo, decidir si A2 por separado se rebaja a INFO o se sustituye por la regla combinada (KB 1.9.0)",
     "A8: añadir la velocidad del último parcial de 200 m (unidad de Wong 2023, HR 1,18 por 0,1 m/s) junto a la de 600 m, y documentar el umbral como diseño (KB 1.9.0); KB 1.14.0: mostrarlo solo junto a su dispersión propia (DE de las comparables), nunca como umbral fijo: el ruido entre carreras es ≈ 0,66 m/s [I]",
     "Planificador P7 (estudio 20/11 11:10): ventana de reincorporación de 21 d (prudente 30 d) tras ≥ 60 d sin trabajo rápido, sin dos trabajos rápidos seguidos ni picos de canter; evidencia Carrier 1998 y Choi 2026 solo por resumen; implementar con el planificador (capa 2) · HECHO en 2.0.0-dev35: fase REINCORPORACION_RAPIDO (21 d, 1 rápido/semana, tope 75 % de la mediana anterior [I]); «picos de canter» sin regla propia (A1/A3)",
-    "Comparables por temperatura y peso (estudio 20/11 13:12, KB 1.15.0): campos de temperatura, humedad/WBGT, jinete y peso cargado en Session; A9 y recuperación solo con |ΔT| ≤ 5 °C y marca «no comparable por calor» (WBGT ≥ 28 °C); A7/A8 con |Δpeso| ≤ 3 kg y mismo jinete preferente; todo [I], sin coeficiente de corrección hasta calibrarlo con datos propios",
+    "Comparables por temperatura y peso (estudio 20/11 13:12, KB 1.15.0): campos de temperatura, humedad/WBGT, jinete y peso cargado en Session; A9 y recuperación solo con |ΔT| ≤ 5 °C y marca «no comparable por calor» (WBGT ≥ 28 °C); A7/A8 con |Δpeso| ≤ 3 kg y mismo jinete preferente; todo [I], sin coeficiente de corrección hasta calibrarlo con datos propios · HECHO en 2.0.0-dev41 (KB 1.34.0): TC1–TC4 y PC1–PC3 en estado.condiciones y en los comparables de A7, A8, A9 y la cinética de la FC; faltan TC5 y PC4 (coeficientes propios)",
     "VC1–VC4 (estudio 20/11 14:10, KB 1.16.0): regla combinada Verheyen (canter > 44 km Y galope > 6 km en 30 d) como LIMITAR; A1 aislada solo AVISO; A2 aislada a INFO; base: resumen [E-r] + 3 secundarios en texto completo; OR [NV]; cambia severidades de alertas existentes, implementar con aprobación del usuario",
     "VT1–VT3 (estudio 20/11 14:10): TE por defecto de V200 del 3 % marcado «no validado» hasta TE propio (≥ 3 pruebas); aviso de posible artefacto si |ΔV200| > 5 % en ≤ 31 d; V200 de árabes (Piccione 2004) solo como contexto · VT1 y VT2 HECHOS en 2.0.0-dev27 (te_v200_pct 3, salto 5 % en 31 d); VT3 solo contexto",
     "NV1 (estudio 20/11 15:10, KB 1.17.0): subir severidad de A7/A8 solo con persistencia en ≥ 3 sesiones comparables (Hall 2026 StrideSAFE [E-r]: VPP 0,08–0,09 de una carrera frente a 0,74 con 3 salidas seguidas); [I], sin implementar",
@@ -6255,7 +6334,7 @@
     "DM1–DM4 (estudio 20/11 19:08, KB 1.21.0): pautas de carga del planificador para potros de 2 años frente a la DMD (rápido corto y frecuente, sin picos agudos de canter, escalones de distancia); [I], sin implementar con la capa 2 · HECHO en 2.0.0-dev35 (pautas del planificador; sin calibrar)",
     "SO1–SO3 (estudio 20/11 19:08): A9 con caída de V200/rendimiento y dos señales coincidentes; VLa4 al alza con rendimiento a la baja = sospechoso; A10 relativa a la tendencia de crecimiento en 2 años; [I], sin implementar",
     "RT1–RT3 y PE1–PE3 (estudio 20/11 20:08, KB 1.22.0): separación ≥ 72 h entre trabajos rápidos en el planificador; peso solo matinal con persistencia ≥ 3 d (AVISO ≥ 2 %, ALTO ≥ 4 %) y gracia tras transporte; [I], sin implementar · RT1–RT3 HECHOS en 2.0.0-dev35 (planificador); PE1–PE3 siguen sin implementar",
-    "GO1–GO4 y WU1–WU4 (estudio 20/11 21:08, KB 1.23.0): going como estrato y covariable de comparables A7/A8 (campo going/penetración en Session); calentamiento mínimo y clase de vuelta a la calma para A9 y CF2; [I], sin implementar · WU1–WU4 PARCIAL en 2.0.0-dev40 (calentamiento, FC alta sin velocidad, comparables ±20 % en A9/CF2/RC1); GO1–GO4 sin implementar",
+    "GO1–GO4 y WU1–WU4 (estudio 20/11 21:08, KB 1.23.0): going como estrato y covariable de comparables A7/A8 (campo going/penetración en Session); calentamiento mínimo y clase de vuelta a la calma para A9 y CF2; [I], sin implementar · WU1–WU4 PARCIAL en 2.0.0-dev40 (calentamiento, FC alta sin velocidad, comparables ±20 % en A9/CF2/RC1); GO1–GO4 sin implementar · GO1 HECHO en 2.0.0-dev41 (estratos de going en los comparables de A7, A8, A9 y la cinética de la FC); GO2–GO4 pendientes",
     "TA1–TA2 y RB1 (estudio 20/11 22:09, KB 1.24.0): orden de presentación tendón/hueso por raza y bloques de repetibilidad (≥ 3 sesiones, ≤ 7 d) para el TE propio; [I], sin implementar",
     "MV1, FM1 y EC1 (estudio noche 21/11, KB 1.25.0): método de V200 como atributo obligatorio de la línea base y FCmax por defecto 210–215 lpm marcada «no propia»; arritmias en galope solo como «revisar»; [I], sin implementar · FM1 HECHO en 2.0.0-dev34 (FC máxima por defecto 213 «no propia» y propia con ≥ 3 trabajos rápidos)",
     "PD1, TE2, RC1 y FW1 (estudio noche 22/11, KB 1.28.0): pendiente como criterio de comparables, TE de V200 según condiciones, THR100 informativo y FC de calentamiento fijo como tendencia diaria; [I], sin implementar · RC1 HECHO y FW1 PARCIAL en 2.0.0-dev40 (THR100 y FC del tramo fijo como tendencia propia); PD1 y TE2 sin implementar",
@@ -6364,7 +6443,8 @@
     "Originales de Morton/Banister 1990 (J Appl Physiol), Williams 2017 (BJSM; repositorio de Bath sin probar), Foster 1998 (MSSE) e Impellizzeri 2020 en texto completo: fórmulas ya confirmadas en fuentes secundarias legales; multiplicador 0,86 femenino del TRIMP sin fuente fiable (23/11)",
     "Ringmark 2015 (Acta Vet Scand 10.1186/s13028-015-0107-1, trotones con menos distancia de alta intensidad) y tesis de Melbourne (Morrice-West) y Massey (Legg) sobre cargas: texto completo (23/11)",
     "V200/VHRmax/FCmax por sexo o castración dentro de PSI o árabe de carreras: no publicado (búsqueda EN, JA, KO, ZH, AR, TR, PL, ES/PT 23/11); figuras por sexo de Takahashi 2015 y suplemento S1 de Sharman & Wilson 2022",
-    "Golfo y China: siguen sin datos de carga, edad o sexo con FC en árabes de llano (búsqueda en árabe y chino 23/11)"
+    "Golfo y China: siguen sin datos de carga, edad o sexo con FC en árabes de llano (búsqueda en árabe y chino 23/11)",
+    "Validación de la aproximación del WBGT del BoM frente a WBGT medido (PMC7240860, bloqueado el 28/11) y página original del BoM; coeficiente de la V200 por °C en PSI/árabe (TC5)"
   ],
   "historial": [
     {
@@ -6536,6 +6616,11 @@
       "version": "1.33.0",
       "fecha": "2026-11-27",
       "cambio": "Cinética de la FC implementada (motor 2.0.0-dev40, cardio 1.2.0, training 1.6.0): CF1 en la regresión de la V200, CF2 τ de recuperación, WU2 calentamiento y FC alta sin velocidad, WU3 comparables por calentamiento en A9/CF2/RC1, FW1 FC del tramo fijo y RC1 THR100; regla CINETICA_FC_CF1_CF2 IMPLEMENTADO, RC1 IMPLEMENTADO, WU1–WU4 y FW1 PARCIAL; parámetro cinetica_fc; fuente HADA_2007_EVJ_TAU; todo INFO y sin calibrar"
+    },
+    {
+      "version": "1.34.0",
+      "fecha": "2026-11-28",
+      "cambio": "Comparables por condiciones implementados (motor 2.0.0-dev41, training 1.7.0): TC1–TC4 (temperatura ±5 °C, calor por WBGT ≥ 28 °C o ≥ 30 °C con humedad ≥ 70 %, aclimatación 10 d), PC1–PC3 (peso del jinete ±3 kg, mismo jinete preferente, peso cargado > 13 % INFO) y GO1 (estrato de going) en A7, A8, A9 y la cinética de la FC; reglas TEMPERATURA_TC1_TC5 y PESO_CARGADO_PC1_PC4 PARCIAL, GOING_GO1_GO4 PARCIAL; parámetro condiciones; fuente BOM_WBGT_APROX; todo INFO y sin calibrar"
     }
   ]
 }

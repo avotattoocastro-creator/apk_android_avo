@@ -173,8 +173,22 @@ El motor calcula el calentamiento (WU2), la FC de un tramo fijo de trote (FW1), 
   misma vuelta a la calma (al paso de la mano o montado); anotarla si cambia. Sin ≥ 5,5 min no hay τ.
 - **Error típico propio:** ≥ 3 sesiones iguales en ≤ 7 días para ver cuánto varían τ, THR100 y la FC del tramo fijo de
   un día a otro; con eso se sustituirán el +25 % y los +8 lpm por defecto.
-- **Temperatura:** anotar la temperatura en la ficha de campo; aún no es criterio de comparables (TC1 pendiente) y el
-  calor alarga la recuperación.
+- **Temperatura:** anotar la temperatura en la ficha de campo; desde el motor 2.0.0-dev41 es criterio de comparables
+  (±5 °C, TC2) y el calor alarga la recuperación.
+
+## 6 quinquies. Condiciones del trabajo: temperatura, calor, peso y going (motor 2.0.0-dev41)
+El motor separa las comparables por temperatura (±5 °C), calor (WBGT ≥ 28 °C o ≥ 30 °C con humedad ≥ 70 %), peso del
+jinete (±3 kg), jinete y going. Los cortes son **sin calibrar**. Para calibrarlos con el PROTOTIPO:
+- **Cada sesión:** temperatura y humedad (estación o móvil, a la hora del trabajo rápido), going (o nota del suelo en la
+  playa), jinete y **peso del jinete con equipo** en la ficha de campo. Si hay un medidor de WBGT, anotar `wbgt_c`: con
+  él se valida la aproximación del Bureau of Meteorology, que tiende a sobrestimar.
+- **Peso del caballo:** en báscula, por la mañana, al menos una vez por semana (para el peso cargado relativo, PC3).
+- **Temperatura (TC5):** repetir el mismo trabajo de referencia (V200 con la cincha 0.5.0) en días frescos y en días con
+  calor, ≥ 3 de cada, misma pista y going; con eso se estima un coeficiente propio de V200 por °C o por WBGT y se decide
+  si los ±5 °C y los 28 °C sirven.
+- **Aclimatación (TC4):** en la primera ola de calor, repetir el trabajo de referencia los días 1–3 y 10–14.
+- **Peso y jinete (PC4):** el mismo caballo con dos jinetes distintos (≥ 3 sesiones cada uno, misma pista y franja) para
+  ver si la zancada y los últimos 600 m cambian más que su ruido propio.
 
 ## 7. Registro
 

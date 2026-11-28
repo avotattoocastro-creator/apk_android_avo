@@ -95,6 +95,9 @@ struct HorseHistoryView: View {
         if r.cineticaFc.present && r.cineticaFc.available {
             HrKineticsCard(kin: r.cineticaFc)
         }
+        if r.condiciones.present && r.condiciones.available {
+            ConditionsCard(cond: r.condiciones)
+        }
         if r.sesiones.isEmpty {
             AvoCard { AvoNoData(text: "Sin sesiones con fecha y resumen para este caballo") }
         } else {

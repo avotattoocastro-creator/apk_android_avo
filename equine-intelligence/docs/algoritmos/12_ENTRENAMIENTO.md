@@ -171,6 +171,32 @@ franja; τ y THR100 con la misma vuelta a la calma y calentamiento ±20 %, WU3; 
 Marcas INFO con +25 % (τ, THR100) o +8 lpm (FW1), **sin calibrar**, nunca suben el estado. WU3 filtra también A9.
 Opción `cinetica_fc`. Detalle en la ficha 15, §7 ter.
 
+## 5 sexies. Comparables por condiciones: temperatura, calor, peso y going (TRAINING 1.7.0, motor 2.0.0-dev41)
+`src/training/conditions.cpp`. Solo **filtra** las sesiones con las que se compara cada métrica; no corrige valores
+(TC5, PC4: sin coeficiente hasta calibrarlo con datos propios). Si a una de las dos sesiones le falta el dato, la
+comparación se mantiene (análisis anteriores). Todo **sin calibrar**: marcas INFO, nunca sube el estado.
+
+| Regla | Qué hace | Defecto (opción) | Etiqueta |
+|---|---|---|---|
+| TC1 | WBGT medido (`condiciones.wbgt_c` de la ficha) o estimado: WBGT = 0,567·T + 0,393·e + 3,94, e = HR/100 · 6,105 · exp(17,27·T/(237,7+T)) hPa (Bureau of Meteorology; supone sol y brisa, tiende a sobrestimar) | `wbgt_estimado` true | E-r / I |
+| TC2 | A9 (V200/VHRmax) y cinética de la FC (CF2, RC1, FW1) solo con \|ΔT\| ≤ 5 °C | `temperatura_dif_c` 5 | I |
+| TC3 | «Calor» si WBGT ≥ 28 °C, o T ≥ 30 °C con HR ≥ 70 % (sin HR, T ≥ 30 °C). A9 no juzga esa sesión (marca `A9_NO_COMPARABLE_CALOR`, INFO) y las sesiones con calor solo se comparan entre sí | `wbgt_calor_c` 28, `calor_temperatura_c` 30, `calor_humedad_pct` 70 | E-r / I |
+| TC4 | Día del periodo de calor (se corta con 14 d sin sesiones con calor); los 10 primeros = transición de aclimatación (INFO) | `dias_aclimatacion` 10, `dias_corte_calor` 14 | E-r / I |
+| PC2 | A7 y A8 solo con \|Δpeso del jinete con equipo\| ≤ 3 kg; mismo jinete si tiene ≥ `drift_min_baseline` + 3 = 8 comparables | `peso_dif_kg` 3, `mismo_jinete` true | I |
+| PC3 | Peso del jinete / peso del caballo > 13 %: INFO (no es un umbral de riesgo) | `peso_cargado_info_pct` 13 | E / I |
+| GO1 | Mismo estrato de going: FIRME (firme, bueno-firme), BUENO, BLANDO (bueno-blando, blando), PESADO; en A7, A8, A9 y la cinética de la FC | `estrato_going` true | I |
+
+**Ejemplo (calculado a mano y en `tests/test_conditions.cpp`).** T = 30 °C y HR = 50 %: e = 0,5 · 6,105 ·
+exp(17,27·30/267,7) = 21,14 hPa y WBGT = 17,01 + 8,31 + 3,94 = **29,3 °C ≥ 28 → calor**. Con 25 °C y 60 %, WBGT ≈ 25,6 °C:
+sin calor. Ocho sesiones a 12 °C con V200 ≈ 15 m/s y tres a 24 °C con 13,8 m/s: A9 no ve pérdida de forma (las de 24 °C
+no tienen comparables a ±5 °C); sin temperatura anotada, sí. 62 kg de jinete sobre 450 kg = 13,8 % → marca PC3.
+
+Salida: `estado.condiciones` (ver `docs/FORMATO_RESULTADOS.md`) con la última sesión, sus condiciones, el recuento de
+comparables por regla (A9, A7, A8, CF2: `sesiones_base`, `sesiones_comparables` —incluye la propia sesión— y
+`excluidas` por temperatura, calor, going, peso u otro jinete), marcas TC3/TC4/PC3 y notas de lo que falta anotar; y
+`sesiones[].condiciones` (`wbgt_c`, `wbgt_origen`, `calor`, `estrato_going`, `peso_cargado_pct`). Opción
+`condiciones` (true/false u objeto). Evidencia: estudio `knowledge/estudios/2026-11-28_motor_condiciones_tc_pc_go1.md`.
+
 ## Parámetros (opciones JSON)
 | Opción | Defecto | Opción | Defecto |
 |---|---|---|---|
