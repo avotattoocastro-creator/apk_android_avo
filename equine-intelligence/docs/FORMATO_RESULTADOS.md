@@ -92,6 +92,19 @@ TAU_RECUPERACION | THR100 | FC_TRAMO_FIJO, `regla`, `unidad`, `valor`, `mediana`
 `evidencia`), `notas` y `nota`. Opción `cinetica_fc` (true/false u objeto; ficha 15, §7 ter). A9 compara solo
 calentamientos con distancia ±20 % (WU3).
 
+**Training 1.7.0 (motor 2.0.0-dev41):** el resumen añade `condiciones.wbgt_c` (WBGT medido de la ficha de campo). Cada
+`sesiones[]` añade `condiciones` (`wbgt_c`, `wbgt_origen` MEDIDO | ESTIMADO_T_HR, `calor` CALOR | NORMAL,
+`estrato_going` FIRME | BUENO | BLANDO | PESADO, `peso_cargado_pct`; `null` sin dato). La historia añade
+`estado.condiciones` (`nivel` INFO, `validado: false`): `reglas` (TC1–TC4, PC1–PC3, GO1), `disponible`, `activa`,
+`motivo`, `parametros` (`temperatura_dif_c`, `wbgt_calor_c`, `calor_temperatura_c`, `calor_humedad_pct`,
+`wbgt_estimado`, `dias_aclimatacion`, `dias_corte_calor`, `peso_dif_kg`, `mismo_jinete`, `peso_cargado_info_pct`,
+`estrato_going`, `dias_marcas`, `etiquetas`), `ultima` (`id`, `fecha`, `temperatura_c`, `humedad_pct`, `going`,
+`jinete`, `peso_jinete_kg`, `peso_caballo_kg`, `condiciones`, `dia_periodo_calor`, `comparables[]`: `regla` A9 | A7 |
+A8 | CF2, `metrica`, `sesiones_base`, `sesiones_comparables` (incluyen la propia sesión), `excluidas` {`temperatura`,
+`calor`, `going`, `peso`, `otro_jinete`}, `mismo_jinete`) o `null`, `marcas[]` (`fecha`, `id`, `regla` TC3 | TC4 | PC3,
+`nivel`, `texto`, `evidencia`), `notas` y `nota`. Regla nueva en `base_cientifica`: `A9_NO_COMPARABLE_CALOR` (INFO,
+AVISO). Opción `condiciones` (true/false u objeto). Ficha 12, §5 sexies.
+
 **Training 1.5.0 (motor 2.0.0-dev39):** el resumen añade en `pista`: `franja_trabajo_pct` (solo franja AUTO),
 `humedad_suelo_pct`, `lluvia_48h_mm` y `nota_suelo` (DURO | NORMAL | BLANDO | PROFUNDO; `null` sin anotar). La historia
 añade `estado.playa` (PL2–PL6, `nivel` INFO, `validado: false`): `reglas`, `disponible`, `motivo`, `parametros` (con

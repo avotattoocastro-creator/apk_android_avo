@@ -218,6 +218,13 @@ Detalle: `knowledge/estudios/2026-11-20_1110_regreso_layup_sensores_2025_2026.md
     No cambia el umbral.
 Detalle: `knowledge/estudios/2026-11-20_1210_playa_franjas_parcial_final_200m.md`.
 
+**Motor nocturno 28/11 (KB-1 1.34.0, motor 2.0.0-dev41, training 1.7.0): comparables por condiciones.**
+- TC1–TC4 implementados: WBGT medido o estimado (aproximación del Bureau of Meteorology [E-r/I]), A9 y la cinética de la
+  FC solo con |ΔT| ≤ 5 °C, «no comparable por calor» con WBGT ≥ 28 °C o ≥ 30 °C y humedad ≥ 70 %, y aclimatación de
+  10 días (INFO). PC1–PC3: A7/A8 con |Δpeso del jinete| ≤ 3 kg y el mismo jinete si hay ≥ 8 comparables; peso cargado
+  > 13 % como INFO. GO1: estratos de going en A7, A8, A9 y la cinética de la FC. Todo [I], sin calibrar, nunca sube el
+  estado; sin coeficiente (TC5, PC4). Ficha 12, §5 sexies. Detalle: `knowledge/estudios/2026-11-28_motor_condiciones_tc_pc_go1.md`.
+
 **Estudio horario 20/11 13:12 (KB-1 1.15.0, motor 2.0.0-dev17, sin cambios de lógica).**
 - **Temperatura y humedad:** no hay coeficiente publicado en lpm/°C. El calor húmedo sube la FC submáxima (≈ +12 lpm
   a 7 m/s, Hargreaves 1999 [E-r]) sin cambiar la FC de pico (Ebisuda 2023 [E]), así que la V200 baja en calor sin

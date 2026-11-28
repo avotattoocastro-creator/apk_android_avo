@@ -390,7 +390,7 @@ std::string training_summary_to_json(const SessionSummary& s) {
     << ",\"franja_trabajo_pct\":" << num(s.beach_band_pct) << ",\"humedad_suelo_pct\":" << num(s.soil_moisture_pct)
     << ",\"lluvia_48h_mm\":" << num(s.rain_48h_mm) << ",\"nota_suelo\":" << q(s.ground_note) << "}"
     << ",\"tipo_sesion\":" << q(s.session_type)
-    << ",\"condiciones\":{\"temperatura_c\":" << num(s.temperature_c) << ",\"humedad_pct\":" << num(s.humidity_pct) << "}"
+    << ",\"condiciones\":{\"temperatura_c\":" << num(s.temperature_c) << ",\"humedad_pct\":" << num(s.humidity_pct) << ",\"wbgt_c\":" << num(s.wbgt_c) << "}"
     << ",\"pesos\":{\"jinete_kg\":" << num(s.rider_kg) << ",\"caballo_kg\":" << num(s.horse_kg) << "}"
     << ",\"incidencia\":{\"tipo\":" << q(s.incident_type) << ",\"texto\":" << q(s.incident_text) << "}";
   if (s.race.present) {
@@ -569,6 +569,7 @@ void training_read_field_sheet(const json::Value& x, SessionSummary* s) {
   code(m["tipo"], {"BAJAMAR", "PLEAMAR"}, "tipo de marea", &s->tide_type);
   number(x["condiciones"]["temperatura_c"], -30, 55, "temperatura", &s->temperature_c);
   number(x["condiciones"]["humedad_pct"], 0, 100, "humedad", &s->humidity_pct);
+  number(x["condiciones"]["wbgt_c"], -20, 50, "WBGT", &s->wbgt_c);   // TC1 (TRAINING 1.7.0)
   number(x["pesos"]["jinete_kg"], 30, 150, "peso del jinete", &s->rider_kg);
   number(x["pesos"]["caballo_kg"], 150, 1000, "peso del caballo", &s->horse_kg);
   const json::Value& inc = x["incidencia"];
@@ -726,6 +727,34 @@ bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::str
       if (P.min_baseline > P.max_baseline) { if (err) *err = "cinetica_fc: min_comparables no puede superar a max_comparables"; return false; }
       c->kb.v200_warmup_match_pct = P.warmup_match_pct;
     } else { if (err) *err = "«cinetica_fc» debe ser true/false o un objeto"; return false; }
+  }
+  // Comparables por condiciones (TRAINING 1.7.0): «condiciones»: true/false o un objeto
+  if (v.has("condiciones")) {
+    const json::Value& k = v["condiciones"];
+    auto& P = c->cond;
+    if (k.type == json::Value::BOOL) P.enabled = k.b;
+    else if (k.type == json::Value::OBJ) {
+      P.enabled = k["activa"].boolean(true);
+      P.wbgt_estimate = k["wbgt_estimado"].boolean(P.wbgt_estimate);
+      P.prefer_same_rider = k["mismo_jinete"].boolean(P.prefer_same_rider);
+      P.going_strata = k["estrato_going"].boolean(P.going_strata);
+      const D kd[] = {{"temperatura_dif_c", &P.temp_match_c, 0.5, 40}, {"wbgt_calor_c", &P.wbgt_heat_c, 15, 40},
+                      {"calor_temperatura_c", &P.heat_temp_c, 15, 50}, {"calor_humedad_pct", &P.heat_humidity_pct, 0, 100},
+                      {"peso_dif_kg", &P.weight_match_kg, 0.5, 50}, {"peso_cargado_info_pct", &P.cwbw_info_pct, 5, 40}};
+      for (const auto& d : kd) {
+        if (!k.has(d.k)) continue;
+        const json::Value& x = k[d.k];
+        if (x.type != json::Value::NUM || !(x.n >= d.lo && x.n <= d.hi)) { if (err) *err = std::string("opción fuera de rango: condiciones.") + d.k; return false; }
+        *d.p = x.n;
+      }
+      const I ki[] = {{"dias_aclimatacion", &P.acclim_days, 1, 60}, {"dias_corte_calor", &P.heat_gap_days, 1, 120}, {"dias_marcas", &P.marks_days, 1, 120}};
+      for (const auto& d : ki) {
+        if (!k.has(d.k)) continue;
+        const json::Value& x = k[d.k];
+        if (x.type != json::Value::NUM || x.n != std::floor(x.n) || x.n < d.lo || x.n > d.hi) { if (err) *err = std::string("opción fuera de rango: condiciones.") + d.k; return false; }
+        *d.p = (int)x.n;
+      }
+    } else { if (err) *err = "«condiciones» debe ser true/false o un objeto"; return false; }
   }
   // Planificador semanal, capa 2 (TRAINING 1.3.0): «planificador»: true/false o un objeto
   if (v.has("planificador")) {
@@ -1009,18 +1038,34 @@ bool kb_warmup_comparable(double ref_m, double other_m, double pct) {
   return std::fabs(other_m - ref_m) <= pct / 100.0 * ref_m;
 }
 
-void kb_cardio_flags(const std::vector<SessionSummary>& ok, size_t i, const KbRuleConfig& kc, std::vector<KbFlag>* out) {
+void kb_cardio_flags(const std::vector<SessionSummary>& ok, size_t i, const TrainingConfig& tc, std::vector<KbFlag>* out) {
+  const KbRuleConfig& kc = tc.kb;
   const SessionSummary& s = ok[i];
   if (!s.cardio.present) return;
+  // TC3 (TRAINING 1.7.0) [I]: con calor, A9 no juzga la sesión (la V200 baja sin pérdida de forma)
+  CondInfo ci = training_condition_info(s, tc);
+  if (tc.cond.enabled && ci.heat == "CALOR" && (std::isfinite(s.cardio.v200) || std::isfinite(s.cardio.vhrmax))) {
+    char hb[360];
+    if (std::isfinite(ci.wbgt))
+      snprintf(hb, sizeof(hb), "sesión con calor (WBGT %.1f °C, %s): la V200 y la VHRmax de hoy no se comparan con su línea base; el calor sube la "
+               "FC a igual velocidad sin pérdida de forma; sin calibrar", ci.wbgt, ci.wbgt_origin == "MEDIDO" ? "medido" : "estimado");
+    else snprintf(hb, sizeof(hb), "sesión con calor (%.1f °C): la V200 y la VHRmax de hoy no se comparan con su línea base; sin calibrar", s.temperature_c);
+    out->push_back({"A9_NO_COMPARABLE_CALOR", "INFO", "AVISO", hb,
+                    "TC3 [I] (estudio 20/11 13:12): FC submáxima ≈ +12 lpm a 7 m/s con calor (Hargreaves 1999 [E-r]), FC de pico sin cambio "
+                    "(Ebisuda 2023 [E]); WBGT ≥ 28 °C o ≥ 30 °C con humedad ≥ 70 % [I]"});
+  }
   std::string surf = (s.surface.empty() ? "sin anotar" : s.surface) + (s.beach_band.empty() ? "" : " · " + s.beach_band);   // PL5
   char b[520];
   auto a9 = [&](const char* what, std::function<double(const SessionSummary&)> get, std::function<std::string(const SessionSummary&)> method) {
     double last = get(s);
     if (std::isnan(last) || method(s).empty()) return;
+    if (tc.cond.enabled && ci.heat == "CALOR") return;   // TC3
     std::vector<double> x; std::vector<long> days;
-    for (size_t j = 0; j <= i; j++)
-      if (ok[j].cardio.present && ok[j].surface == s.surface && ok[j].beach_band == s.beach_band && method(ok[j]) == method(s) && !std::isnan(get(ok[j])) &&
-          kb_warmup_comparable(s.cardio.warmup_m, ok[j].cardio.warmup_m, kc.v200_warmup_match_pct)) { x.push_back(get(ok[j])); days.push_back(ok[j].day); }
+    // TC2/TC3/GO1 (TRAINING 1.7.0): además, temperatura ±5 °C, misma clase de calor y mismo estrato de going
+    std::vector<size_t> idx = training_comparables(ok, i, CondUse::FC, [&](const SessionSummary& z) {
+      return z.cardio.present && z.surface == s.surface && z.beach_band == s.beach_band && method(z) == method(s) && !std::isnan(get(z)) &&
+             kb_warmup_comparable(s.cardio.warmup_m, z.cardio.warmup_m, kc.v200_warmup_match_pct); }, tc, 0, nullptr);
+    for (size_t j : idx) { x.push_back(get(ok[j])); days.push_back(ok[j].day); }
     // VT2: salto > 5 % frente a la anterior comparable en ≤ 31 días = posible artefacto o condiciones distintas
     if (x.size() >= 2 && s.day - days[days.size() - 2] <= kc.v200_jump_days) {
       double prev = x[x.size() - 2], rel = 100.0 * (last - prev) / prev;
@@ -1059,17 +1104,21 @@ void kb_cardio_flags(const std::vector<SessionSummary>& ok, size_t i, const KbRu
   }
 }
 
-void kb_drift_flags(const std::vector<SessionSummary>& ok, size_t i, const KbRuleConfig& kc, std::vector<KbFlag>* out) {
+void kb_drift_flags(const std::vector<SessionSummary>& ok, size_t i, const TrainingConfig& tc, std::vector<KbFlag>* out) {
+  const KbRuleConfig& kc = tc.kb;
   if (!kc.enabled) return;
-  kb_cardio_flags(ok, i, kc, out);
+  kb_cardio_flags(ok, i, tc, out);
   if (!kc.drift_rules) return;
   const SessionSummary& s = ok[i];
   if (!s.race.present) return;
   std::string surf = (s.surface.empty() ? "sin anotar" : s.surface) + (s.beach_band.empty() ? "" : " · " + s.beach_band);
+  { std::string gs = training_going_stratum(s.going); if (tc.cond.enabled && tc.cond.going_strata && !gs.empty()) surf += " · going " + gs; }
+  // PC2/GO1 (TRAINING 1.7.0): además, peso del jinete ±3 kg, mismo estrato de going y el mismo jinete si hay suficientes
   auto run = [&](std::function<double(const SessionSummary&)> get, double delta) {
     std::vector<double> x;
-    for (size_t j = 0; j <= i; j++)
-      if (ok[j].surface == s.surface && ok[j].beach_band == s.beach_band && ok[j].race.present) x.push_back(get(ok[j]));
+    std::vector<size_t> idx = training_comparables(ok, i, CondUse::MECANICA, [&](const SessionSummary& z) {
+      return z.surface == s.surface && z.beach_band == s.beach_band && z.race.present; }, tc, kc.drift_min_baseline + 3, nullptr);
+    for (size_t j : idx) x.push_back(get(ok[j]));
     KbDriftConfig dc; dc.delta = delta; dc.h = kc.drift_h; dc.warmup = kc.drift_warmup; dc.min_baseline = kc.drift_min_baseline;
     return kb_drift_down(x, dc);
   };
@@ -1272,7 +1321,7 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
     }
     if (!std::isnan(s.rpe) && s.rpe >= 9) R.reasons.push_back("esfuerzo percibido muy alto (RPE " + num(s.rpe) + ")");
     R.kb = kb_evaluate(kbdays, s.day, first_day, c.kb);
-    kb_drift_flags(ok, i, c.kb, &R.kb.flags);
+    kb_drift_flags(ok, i, c, &R.kb.flags);
     kb_apply(R.kb, &R.level, &R.reasons);
     r.sessions.push_back(R);
   }
@@ -1297,12 +1346,13 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
   }
   // base científica a la fecha de referencia (las ventanas avanzan aunque no haya sesión ese día)
   r.kb = kb_evaluate(kbdays, r.reference_day, first_day, c.kb);
-  if (r.days_since_last <= c.acute_days) kb_drift_flags(ok, ok.size() - 1, c.kb, &r.kb.flags);
+  if (r.days_since_last <= c.acute_days) kb_drift_flags(ok, ok.size() - 1, c, &r.kb.flags);
   kb_apply(r.kb, &r.level, &r.reasons);
   r.planner = planner_at(ok, kbdays, r.reference_day, first_day, c.kb);
   r.week = training_plan_week(ok, kbdays, r.reference_day, first_day, r.kb, c);
   r.beach = training_beach_baseline(ok, r.reference_day, c);   // PL2–PL6 (TRAINING 1.5.0)
   r.hrkin = training_hr_kinetics(ok, r.reference_day, c);    // CF2, RC1, FW1, WU3 (TRAINING 1.6.0)
+  r.cond = training_conditions(ok, r.reference_day, c);     // TC1–TC4, PC1–PC3, GO1 (TRAINING 1.7.0)
   if (c.cg.enabled) {
     std::vector<double> per;
     r.cg = cg_evaluate(ok, r.reference_day, first_day, c, &per);
@@ -1439,6 +1489,7 @@ std::string training_to_json(const TrainingResult& r, const TrainingConfig& c) {
   o << ",\"carga_cg\":"; cg_json(o, r.cg, c);
   o << ",\"playa\":" << training_beach_json(r.beach, c);
   o << ",\"cinetica_fc\":" << training_hr_kinetics_json(r.hrkin, c);
+  o << ",\"condiciones\":" << training_conditions_json(r.cond, c);
   o << ",\"nota\":\"orientativo; no es un diagnóstico veterinario\"}";
   o << ",\"carga_diaria\":[";
   for (size_t i = 0; i < r.daily_load.size(); i++) o << (i ? "," : "") << "{\"fecha\":" << q(training_day_text(r.daily_load[i].first)) << ",\"carga\":" << num(r.daily_load[i].second) << "}";
@@ -1455,6 +1506,7 @@ std::string training_to_json(const TrainingResult& r, const TrainingConfig& c) {
     o << (i ? "," : "") << "{\"id\":" << q(R.s.id) << ",\"fecha\":" << q(training_day_text(R.s.day)) << ",\"nivel\":" << q(R.level) << ",\"motivos\":"; strs(o, R.reasons);
     o << ",\"carga\":"; load_json(o, R.load);
     o << ",\"base_cientifica\":" << kb_status_json(R.kb);
+    o << ",\"condiciones\":" << training_condition_info_json(training_condition_info(R.s, c));
     o << ",\"carga_cg\":{\"trimp\":" << num(R.cg_trimp) << ",\"rapido_m\":" << num(R.s.race.present ? R.s.race.kb_hs_m : NAN) << "}";
     o << ",\"desvios\":["; for (size_t k = 0; k < R.deviations.size(); k++) { if (k) o << ","; dev_json(o, R.deviations[k]); } o << "]";
     o << ",\"resumen\":" << training_summary_to_json(R.s) << "}";

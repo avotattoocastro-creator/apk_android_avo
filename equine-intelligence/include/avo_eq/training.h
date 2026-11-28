@@ -9,6 +9,7 @@
 // Determinista: misma entrada y versión dan la misma salida.
 #pragma once
 #include <cmath>
+#include <functional>
 #include <string>
 #include <vector>
 #include "avo_eq/json.h"
@@ -16,7 +17,7 @@
 
 namespace avoeq {
 
-static const char* const TRAINING_VERSION = "1.6.0";   // 1.6.0: cinética de la FC en la historia (CF2, RC1, FW1, WU3; KB 1.33.0); 1.5.0: línea base de la playa por franja PL2–PL6 (AVO BEACH, KB 1.32.0); 1.4.0: planificador en semana natural (lunes–domingo) con lo realizado; 1.1.0: ficha de campo, A4 y base del planificador; 1.2.0: carga CG1–CG3;
+static const char* const TRAINING_VERSION = "1.7.0";   // 1.7.0: comparables por condiciones TC1–TC4, PC1–PC3 y GO1 (KB 1.34.0); 1.6.0: cinética de la FC en la historia (CF2, RC1, FW1, WU3; KB 1.33.0); 1.5.0: línea base de la playa por franja PL2–PL6 (AVO BEACH, KB 1.32.0); 1.4.0: planificador en semana natural (lunes–domingo) con lo realizado; 1.1.0: ficha de campo, A4 y base del planificador; 1.2.0: carga CG1–CG3;
                                                        // 1.3.0: planificador semanal, capa 2 (semana siguiente)
 static const char* const TRAINING_LOAD_ALGORITHM = "AVO_TRAINING_LOAD_V1";
 
@@ -82,6 +83,24 @@ struct TrainingConfig {
     double warmup_match_pct = 20;      // WU3: calentamiento parecido (distancia ±20 %) para comparar τ y THR100 [I]
     int marks_days = 14;               // marcas de las sesiones de los últimos 14 días [I]
   } hrkin;
+  // Comparables por condiciones (TRAINING 1.7.0, KB 1.34.0): temperatura y calor (TC1–TC4), peso cargado y jinete
+  // (PC1–PC3) y estrato de going (GO1). Solo FILTRAN las sesiones comparables de A7, A8, A9 y de la cinética de la FC
+  // (CF2, RC1, FW1); si alguna de las dos sesiones no tiene el dato, se mantiene la comparación. Todo SIN CALIBRAR [I]:
+  // las marcas son INFO y nunca cambian el estado del caballo. Sin coeficiente de corrección (TC5, PC4).
+  struct Conditions {
+    bool enabled = true;
+    double temp_match_c = 5;           // TC2: A9 y recuperación solo con |ΔT| ≤ 5 °C [I]
+    double wbgt_heat_c = 28;           // TC3: WBGT ≥ 28 °C = «no comparable por calor» (Nomura 2019, norma citada [E-r]; corte [I])
+    double heat_temp_c = 30, heat_humidity_pct = 70;   // TC3: o ≥ 30 °C con humedad ≥ 70 % (Geor 1995, Marlin 1996 [E-r]; corte [I])
+    bool wbgt_estimate = true;         // WBGT estimado con la aproximación del Bureau of Meteorology (T y humedad) [E-r/I]
+    int acclim_days = 10;              // TC4: primeros 10 días de un periodo de calor = transición (Geor 1996 [E-r]; 10–14 d [I])
+    int heat_gap_days = 14;            // TC4: 14 días sin sesiones con calor cierran el periodo [I]
+    double weight_match_kg = 3;        // PC2: A7/A8 solo con |Δpeso del jinete con equipo| ≤ 3 kg [I]
+    bool prefer_same_rider = true;     // PC2: mismo jinete si hay comparables suficientes [I]
+    double cwbw_info_pct = 13;         // PC3: peso cargado / peso corporal > 13 % = INFO (límite de Lee & Park 2011 [E]; no es riesgo)
+    bool going_strata = true;          // GO1: mismo estrato de going (FIRME | BUENO | BLANDO | PESADO) [I]
+    int marks_days = 14;               // marcas de las sesiones de los últimos 14 días [I]
+  } cond;
   // Planificador semanal, capa 2 (TRAINING 1.3.0, KB 1.31.0): propuesta orientativa de la semana siguiente con P1, P2,
   // P4–P7, RT1–RT3 y DM1–DM4. Todo SIN CALIBRAR: sale como pautas informativas y nunca cambia el estado del caballo.
   struct Planner {
@@ -212,6 +231,7 @@ struct SessionSummary {
   double rain_48h_mm = NAN;       // lluvia de las 48 h anteriores
   std::string ground_note;        // nota del jinete sobre el suelo: DURO | NORMAL | BLANDO | PROFUNDO
   double temperature_c = NAN, humidity_pct = NAN;
+  double wbgt_c = NAN;            // TC1 (TRAINING 1.7.0): WBGT medido, si la ficha lo trae (condiciones.wbgt_c)
   double rider_kg = NAN, horse_kg = NAN;        // peso del jinete (con equipo) y peso corporal del caballo
   std::string incident_type, incident_text;     // NINGUNA | TROPIEZO | CAIDA | ESPANTADA | COJERA | HERRAJE | EQUIPO | OTRA
   bool counts_as_race() const { return session_type == "CARRERA" || session_type == "TRIAL"; }
@@ -324,6 +344,48 @@ struct HrKinetics {
 HrKinetics training_hr_kinetics(const std::vector<SessionSummary>& ok, long at, const TrainingConfig& c);
 std::string training_hr_kinetics_json(const HrKinetics& k, const TrainingConfig& c);
 
+// Comparables por condiciones (TRAINING 1.7.0): TC1–TC4, PC1–PC3 y GO1.
+enum class CondUse { FC = 0, MECANICA = 1 };   // FC: A9, CF2, RC1, FW1 (temperatura, calor, going); MECANICA: A7, A8 (peso, jinete, going)
+struct CondInfo {
+  double wbgt = NAN;                   // WBGT medido o estimado
+  std::string wbgt_origin;             // MEDIDO | ESTIMADO_T_HR | ""
+  std::string heat;                    // CALOR | NORMAL | "" (sin dato)
+  std::string going_stratum;           // FIRME | BUENO | BLANDO | PESADO | ""
+  double cwbw_pct = NAN;               // peso del jinete con equipo / peso corporal × 100
+};
+struct CondCount {
+  int base = 0, kept = 0;              // comparables con los criterios anteriores (superficie, franja, método…) y con las condiciones
+  int temperature = 0, heat = 0, going = 0, weight = 0, rider = 0;   // excluidas por cada criterio (la primera que falla)
+  bool same_rider = false;             // PC2: se usó solo el mismo jinete
+};
+// Aproximación del WBGT del Bureau of Meteorology de Australia: 0,567·T + 0,393·e + 3,94, con e (hPa) =
+// HR/100 · 6,105 · exp(17,27·T / (237,7 + T)). Supone sol y brisa ligera; tiende a sobrestimar. NaN sin dato.
+double training_wbgt_estimate(double temp_c, double humidity_pct);
+std::string training_going_stratum(const std::string& going);
+CondInfo training_condition_info(const SessionSummary& s, const TrainingConfig& c);
+// true si «z» es comparable con «ref» por condiciones; *why = criterio que falla (TEMPERATURA | CALOR | GOING | PESO).
+bool training_conditions_comparable(const SessionSummary& ref, const SessionSummary& z, CondUse use, const TrainingConfig& c, std::string* why);
+// Índices j ≤ i que cumplen «base» y las condiciones; con MECANICA y rider_min > 0, solo el mismo jinete si hay ≥ rider_min.
+std::vector<size_t> training_comparables(const std::vector<SessionSummary>& ok, size_t i, CondUse use,
+                                         const std::function<bool(const SessionSummary&)>& base, const TrainingConfig& c,
+                                         int rider_min, CondCount* cnt);
+struct CondRule { std::string rule, metric; CondCount count; };
+struct CondMark { long day = 0; std::string id, rule, text, evidence; };
+struct ConditionsStatus {
+  bool available = false;              // hay una última sesión
+  std::string reason, last_id, rider, going;
+  long last_day = -1;
+  double temperature_c = NAN, humidity_pct = NAN, rider_kg = NAN, horse_kg = NAN;
+  CondInfo info;
+  int acclim_day = -1;                 // TC4: día del periodo de calor (1 = primero); -1: no aplica
+  std::vector<CondRule> rules;         // A9 (V200), A7 (zancada), A8 (últimos 600 m), CF2 (τ)
+  std::vector<CondMark> marks;
+  std::vector<std::string> notes;
+};
+ConditionsStatus training_conditions(const std::vector<SessionSummary>& ok, long at, const TrainingConfig& c);
+std::string training_conditions_json(const ConditionsStatus& k, const TrainingConfig& c);
+std::string training_condition_info_json(const CondInfo& ci);
+
 struct SessionResult {
   SessionSummary s;
   SessionLoad load;
@@ -406,6 +468,7 @@ struct TrainingResult {
   WeekPlan week;                                    // capa 2: propuesta de la semana siguiente (TRAINING 1.3.0)
   BeachBaseline beach;                              // PL2–PL6: línea base de la playa por franja (TRAINING 1.5.0)
   HrKinetics hrkin;                                 // CF2, RC1, FW1, WU3: cinética de la FC (TRAINING 1.6.0)
+  ConditionsStatus cond;                            // TC1–TC4, PC1–PC3, GO1: comparables por condiciones (TRAINING 1.7.0)
   CgStatus cg;                                      // CG1–CG3 a la fecha de referencia (solo descriptiva)
   std::string level = "NORMAL";
   std::vector<std::string> reasons, warnings;
